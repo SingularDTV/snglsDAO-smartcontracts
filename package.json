@@ -1,0 +1,28 @@
+{
+  "name": "singular-tokitio-fund",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^2.5.0",
+    "bn.js": "^5.1.1",
+    "solc": "^0.5.15",
+    "truffle-hdwallet-provider": "^1.0.17"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "prettier": "^1.19.1",
+    "prettier-plugin-solidity": "^1.0.0-alpha.40",
+    "solhint": "^2.3.0",
+    "solhint-plugin-prettier": "0.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "solhint": "./node_modules/.bin/solhint - f table contracts/*.sol",
+    "prettier:solidity": "./node_modules/.bin/prettier --write contracts/*.sol"
+  },
+  "author": "",
+  "license": "ISC"
+}
