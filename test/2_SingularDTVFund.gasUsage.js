@@ -36,7 +36,7 @@ contract("SingularDTVFund test withdrawInAll() gas usage", async accounts => {
         const tokensInstances = await createNewTokensInstances(tokensContractsNumber, tokensInitialSupply);
         for (let i = 0; i < tokensInstances.length; i++) {
             const tokenInstance = tokensInstances[i];
-            permitToken(tokenInstance);
+            await permitToken(tokenInstance);
             await tokenInstance.approve(fundInstance.address, tokensInitialSupply);
             await fundInstance.depositRewardInToken(tokenInstance.address, tokensInitialSupply);
         }
@@ -54,7 +54,7 @@ contract("SingularDTVFund test withdrawInAll() gas usage", async accounts => {
     async function createNewSingularDTVInstances(snglsTotalSupply = 0) {
         fundInstance = await SingularDTVFund.new();
         snglsTokenInstance = await SingularDTVToken.new(fundInstance.address, owner, "SingularDTV", "SNGLS", snglsTotalSupply);
-        await fundInstance.setup(snglsTokenInstance.address);
+        await fundInstance.setTokenAddress(snglsTokenInstance.address);
     }
     async function createNewTokensInstances(number, initialSupply = 0) {
         let tokenInstances = [];
@@ -68,11 +68,11 @@ contract("SingularDTVFund test withdrawInAll() gas usage", async accounts => {
             tokenInstance = await ERC20Token.new(initialAmount)
         }
 
-        let event = (await fundInstance.setTokenPermittance(tokenInstance.address, true)).logs[0];
+        let event = (await fundInstance.whitelistToken(tokenInstance.address)).logs[0];
         let tokenAddressInList = await fundInstance.tokensAddresses(event.args.tokenInd.toNumber());
 
         assert.strictEqual(tokenInstance.address, tokenAddressInList, "token address in the list doesn't equal to actual");
-        assert.ok(event.args.permittance, "token isn`t permitted");
+        assert.ok((await fundInstance.tokensRewards(tokenInstance.address)).isPermittedToken, "token isn`t permitted");
 
         return {
             event,
