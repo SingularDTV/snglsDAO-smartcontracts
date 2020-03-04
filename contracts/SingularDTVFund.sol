@@ -293,6 +293,5 @@ contract SingularDTVFund is Ownable {
                         _rewards.rewardAtTimeOfWithdraw[_forAddress]
                     ))
                 .div(singularDTVToken.totalSupply());
-        ;
     }
 }
