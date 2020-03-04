@@ -39,8 +39,30 @@ contract SingularDTVFund is Ownable {
     // Token's address => rewards data
     mapping(address => RewardsData) public tokensRewards;
     address[] public tokensAddresses;
+    uint256 constant MAX_NUMBER_OF_TOKENS = 10;
 
-    /// @dev Getter for ethRewards.owed[userAddress]
+    /*
+     *  Events
+     */
+
+    event BlacklistToken(address tokenAddress, uint256 tokenInd);
+
+    event WhitelistToken(address tokenAddress, uint256 tokenInd);
+
+    /*
+     *  Contract functions
+     */
+
+    /// @dev Fallback function acts as depositReward()
+    function() external payable {
+        if (msg.value == 0) {
+            withdrawRewardInEth();
+        } else {
+            depositRewardInEth();
+        }
+    }
+
+      /// @dev Getter for ethRewards.owed[userAddress]
     /// @param userAddress User's address
     function getEthOwedFor(address userAddress) public view returns (uint256) {
         return ethRewards.owed[userAddress];
@@ -82,89 +104,71 @@ contract SingularDTVFund is Ownable {
         return tokensAddresses.length;
     }
 
-    /*
-     *  Events
-     */
+    /// @dev Only owner can whitelist token
+    /// @param _tokenAddress Token address
+    function whitelistToken(address _tokenAddress)
+        external
+        onlyOwner
+        returns (bool)
+    {
+        require(
+            tokensAddresses.length < MAX_NUMBER_OF_TOKENS,
+            "whitelistToken: Can't add more tokens addresses."
+        );
+        uint256 tokenInd = tokensRewards[_tokenAddress].tokenInd;
+        if (
+            !(tokensRewards[_tokenAddress].isPermittedToken &&
+                tokensAddresses.length > 0 &&
+                tokensAddresses[tokenInd] == _tokenAddress)
+        ) {
+            tokensRewards[_tokenAddress].isPermittedToken = true;
 
-    event SetTokenPermittance(
-        address tokenAddress,
-        uint256 tokenInd,
-        bool permittance
-    );
-
-    /*
-     *  Contract functions
-     */
-
-    /// @dev Fallback function acts as depositReward()
-    function() external payable {
-        if (msg.value == 0) {
-            withdrawRewardInEth();
-        } else {
-            depositRewardInEth();
+            tokenInd = tokensAddresses.length;
+            tokensRewards[_tokenAddress].tokenInd = tokenInd;
+            emit WhitelistToken(
+                _tokenAddress,
+                tokensRewards[_tokenAddress].tokenInd
+            );
+            tokensAddresses.push(_tokenAddress);
+            return true;
         }
+        return false;
     }
 
-    /// @dev Only owner can set token permittance
+    /// @dev Only owner can blacklist token
     /// @param _tokenAddress Token address
-    /// @param _permittance Token permittance
-    function setTokenPermittance(address _tokenAddress, bool _permittance)
+    function blacklistToken(address _tokenAddress)
         external
         onlyOwner
         returns (bool)
     {
         uint256 tokenInd = tokensRewards[_tokenAddress].tokenInd;
-        tokensRewards[_tokenAddress].isPermittedToken = _permittance;
-        if (_permittance) {
-            //if we want to permit token we need this address to exist in list
-            if (
-                tokensAddresses.length > 0 &&
-                tokensAddresses[tokenInd] == _tokenAddress
-            ) {
-                // if token address already exists in list we don't touch it
-                emit SetTokenPermittance(
-                    _tokenAddress,
-                    tokensRewards[_tokenAddress].tokenInd,
-                    _permittance
-                );
+        if (
+            tokensRewards[_tokenAddress].isPermittedToken &&
+            tokensAddresses.length > 0 &&
+            tokensAddresses[tokenInd] == _tokenAddress
+        ) {
+            tokensRewards[_tokenAddress].isPermittedToken = false;
+            //if token address already exists we delete it from the list
+            if (tokenInd == tokensAddresses.length - 1) {
+                //if this address is in the end of list we just pop() it
+                tokensAddresses.pop();
+                tokensRewards[_tokenAddress].tokenInd = 0;
             } else {
-                // if address isn't in the list we add it
-                tokenInd = tokensAddresses.length;
-                tokensRewards[_tokenAddress].tokenInd = tokenInd;
-                emit SetTokenPermittance(
-                    _tokenAddress,
-                    tokensRewards[_tokenAddress].tokenInd,
-                    _permittance
-                );
-                tokensAddresses.push(_tokenAddress);
+                //if it's not in the end we swap it with last element and then pop()
+                tokensAddresses[tokenInd] = tokensAddresses[tokensAddresses
+                    .length -
+                    1];
+                tokensAddresses.pop();
+                tokensRewards[_tokenAddress].tokenInd = 0;
             }
-        } else {
-            //if we want to unpermit token we need to delete it from list
-            if (
-                tokensAddresses.length > 0 &&
-                tokensAddresses[tokenInd] == _tokenAddress
-            ) {
-                //if token address already exists we delete it from the list
-                if (tokenInd == tokensAddresses.length - 1) {
-                    //if this address is in the end of list we just pop() it
-                    tokensAddresses.pop();
-                    tokensRewards[_tokenAddress].tokenInd = 0;
-                } else {
-                    //if it's not in the end we swap it with last element and then pop()
-                    tokensAddresses[tokenInd] = tokensAddresses[tokensAddresses
-                        .length -
-                        1];
-                    tokensAddresses.pop();
-                    tokensRewards[_tokenAddress].tokenInd = 0;
-                }
-            }
-            emit SetTokenPermittance(
+            emit BlacklistToken(
                 _tokenAddress,
-                tokensRewards[_tokenAddress].tokenInd,
-                _permittance
+                tokensRewards[_tokenAddress].tokenInd
             );
+            return true;
         }
-        return true;
+        return false;
     }
 
     /// @dev Credits reward to owed balance.
@@ -194,7 +198,7 @@ contract SingularDTVFund is Ownable {
 
     /// @dev Setup function sets external token address.
     /// @param _singularDTVTokenAddress Token address.
-    function setup(address _singularDTVTokenAddress)
+    function setTokenAddress(address _singularDTVTokenAddress)
         external
         onlyOwner
         returns (bool)
