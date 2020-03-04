@@ -122,7 +122,6 @@ contract SingularDTVFund is Ownable {
                 tokensAddresses[tokenInd] == _tokenAddress)
         ) {
             tokensRewards[_tokenAddress].isPermittedToken = true;
-
             tokenInd = tokensAddresses.length;
             tokensRewards[_tokenAddress].tokenInd = tokenInd;
             emit WhitelistToken(
@@ -156,9 +155,7 @@ contract SingularDTVFund is Ownable {
                 tokensRewards[_tokenAddress].tokenInd = 0;
             } else {
                 //if it's not in the end we swap it with last element and then pop()
-                tokensAddresses[tokenInd] = tokensAddresses[tokensAddresses
-                    .length -
-                    1];
+                tokensAddresses[tokenInd] = tokensAddresses[tokensAddresses.length - 1];
                 tokensAddresses.pop();
                 tokensRewards[_tokenAddress].tokenInd = 0;
             }
@@ -184,9 +181,7 @@ contract SingularDTVFund is Ownable {
 
         //tokens withdraw
         for (uint256 i = 0; i < tokensAddresses.length; i++) {
-
-                RewardsData storage tokenRewards
-             = tokensRewards[tokensAddresses[i]];
+            RewardsData storage tokenRewards = tokensRewards[tokensAddresses[i]];
             value = calcReward(_forAddress, tokenRewards);
             tokenRewards.rewardAtTimeOfWithdraw[_forAddress] = tokenRewards
                 .totalReward;
@@ -239,10 +234,8 @@ contract SingularDTVFund is Ownable {
         uint256 value = calcReward(msg.sender, tokenRewards).add(
             tokenRewards.owed[msg.sender]
         );
-        tokenRewards.rewardAtTimeOfWithdraw[msg.sender] = tokenRewards
-            .totalReward;
+        tokenRewards.rewardAtTimeOfWithdraw[msg.sender] = tokenRewards.totalReward;
         tokenRewards.owed[msg.sender] = 0;
-
         IERC20 tokenContract = IERC20(_tokensAddress);
         if (value > 0 && !tokenContract.transfer(msg.sender, value)) {
             revert();
@@ -294,15 +287,12 @@ contract SingularDTVFund is Ownable {
         view
         returns (uint256)
     {
-        return (
-            (
-                singularDTVToken.balanceOf(_forAddress).mul(
+        return singularDTVToken.balanceOf(_forAddress)
+                .mul(
                     _rewards.totalReward.sub(
                         _rewards.rewardAtTimeOfWithdraw[_forAddress]
-                    )
-                )
-            )
-                .div(singularDTVToken.totalSupply())
-        );
+                    ))
+                .div(singularDTVToken.totalSupply());
+        ;
     }
 }
