@@ -2,25 +2,15 @@ const {
     erc20ContractAddress,
     eventName,
     resultFileName,
-    //name of the truffle build file
     buildFileName,
-    getPastEventsOptions
+    getPastEventsOptions,
+    providerAddress
 } = require('./options');
-// const erc20ContractAddress = "";
-// const eventName = "Transfer";
-// const resultFileName = "./results.json";
-// //name of the truffle build file
-// const buildFileName = './../build/contracts/Token.json';
-// const getPastEventsOptions = {
-//     //options - https://web3js.readthedocs.io/en/v1.2.6/web3-eth-contract.html#getpastevents
-//     fromBlock: 0,
-//     toBlock: "latest"
-// }
 
 const Web3 = require('web3');
 const fs = require('fs');
 
-const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+const web3 = new Web3(providerAddress);
 const BN = web3.utils.BN;
 
 const build = JSON.parse(fs.readFileSync(buildFileName));

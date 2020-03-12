@@ -1,5 +1,7 @@
 module.exports = {
     erc20ContractAddress: '',
+    mnemonic: '',
+    providerAddress: "ws://localhost:8545",
     buildFileName: './build/contracts/Token.json',
     resultFileName: "./results.json",
     eventName: "Transfer",
