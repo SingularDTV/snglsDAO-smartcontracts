@@ -17,14 +17,16 @@
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
-
+require('dotenv').config();
 const HDWalletProvider = require('truffle-hdwallet-provider');
 
 // const fs = require('fs');
-const {
-  mnemonic
-} = require('./script/options');
+// const {
+//   mnemonic
+// } = require('./script/options');
+
 module.exports = {
+
   /**
    * Networks define how you connect to your ethereum client and let you set the
    * defaults web3 uses to send transactions. If you don't specify one truffle
@@ -61,7 +63,15 @@ module.exports = {
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
     ropsten: {
-      provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/a0bb216866fa4c4fa318eaddffc02eb6`),
+      provider: () => {
+        return new HDWalletProvider([
+          process.env.METAMASK_PRIVATE_KEY_1,
+          process.env.METAMASK_PRIVATE_KEY_2,
+          process.env.METAMASK_PRIVATE_KEY_3,
+          process.env.METAMASK_PRIVATE_KEY_4,
+          process.env.METAMASK_PRIVATE_KEY_5
+        ], `https://ropsten.infura.io/v3/a0bb216866fa4c4fa318eaddffc02eb6`, 0, 5)
+      },
       network_id: 3, // Ropsten's id
       gas: 5500000, // Ropsten has a lower block limit than mainnet
       confirmations: 2, // # of confs to wait between deployments. (default: 0)
@@ -71,7 +81,14 @@ module.exports = {
     },
 
     rinkeby: {
-      provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/a0bb216866fa4c4fa318eaddffc02eb6`),
+      // provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/a0bb216866fa4c4fa318eaddffc02eb6`),
+      provider: () => new HDWalletProvider([
+        process.env.METAMASK_PRIVATE_KEY_1,
+        process.env.METAMASK_PRIVATE_KEY_2,
+        process.env.METAMASK_PRIVATE_KEY_3,
+        process.env.METAMASK_PRIVATE_KEY_4,
+        process.env.METAMASK_PRIVATE_KEY_5
+      ], `https://rinkeby.infura.io/v3/a0bb216866fa4c4fa318eaddffc02eb6`, 0, 5),
       network_id: 4,
       gas: 4000000,
       from: '0xd487baC67da1f4956adf9299D3A35DEDF4b54071'
@@ -86,7 +103,7 @@ module.exports = {
 
   // Set default mocha options here, use special reporters etc.
   mocha: {
-    // timeout: 100000
+    timeout: 2000000
   },
 
   // Configure your compilers
