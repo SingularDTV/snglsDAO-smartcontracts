@@ -23,7 +23,7 @@ contract("SingularDTVFund", async accounts => {
      * Tests
      */
 
-    describe('setTokenPermittance()', async () => {
+    describe('blacklistToken()/whitelistToken()', async () => {
         context('Owner is able to set token permittance:', async () => {
             it('Permitted token address is added to the list end if it wasn`t there', async () => {
                 await createNewSingularDTVInstances();
@@ -43,10 +43,8 @@ contract("SingularDTVFund", async accounts => {
                 await permitToken();
 
                 //permit first token second time
-                let {
-                    event
-                } = await permitToken(firstTokenInstance);
-                assert.strictEqual(event.args.tokenInd.toNumber(), 0, "fisrt token added to list again");
+                await permitToken(firstTokenInstance);
+                assert.strictEqual((await fundInstance.tokensRewards(firstTokenInstance.address)).tokenInd.toNumber(), 0, "first token added to list again");
 
             });
             it('Unpermitted token address is deleted from the list if it was there', async () => {
@@ -65,17 +63,17 @@ contract("SingularDTVFund", async accounts => {
                 let tokenListLength = (await fundInstance.getTokensAddressesLength()).toNumber();
 
                 //unpermit
-                let event = (await fundInstance.setTokenPermittance(firstTokenInstance.address, false)).logs[0];
+                let event = (await fundInstance.blacklistToken(firstTokenInstance.address)).logs[0];
 
                 assert.strictEqual((await fundInstance.getTokensAddressesLength()).toNumber(), tokenListLength - 1, "token list has not decreased");
                 assert.strictEqual(event.args.tokenInd.toNumber(), 0, "token address exists in the list");
-                assert.ok(!event.args.permittance, "token is permitted");
+                assert.ok(!(await fundInstance.tokensRewards(firstTokenInstance.address)).isPermittedToken, "token is permitted");
 
                 //now second token address must be in the first (index 0) place
                 let secondTokenAddressInList = await fundInstance.tokensAddresses(0);
                 assert.strictEqual(secondTokenAddressInList, secondTokenInstance.address, "second token isn't in right place or doesn`t exist");
             });
-            it('Unpermitted token address leave list as it is if it wasn`t there', async () => {
+            it(`Unpermitted token address leave list as it is if it wasn't there`, async () => {
                 await createNewSingularDTVInstances();
 
                 //permit first token
@@ -89,23 +87,32 @@ contract("SingularDTVFund", async accounts => {
 
                 let tokenInstance = await ERC20Token.new(0);
                 //unpermit third token
-                let event = (await fundInstance.setTokenPermittance(tokenInstance.address, false)).logs[0];
+                (await fundInstance.blacklistToken(tokenInstance.address)).logs[0];
 
-                let tokenAddressInList = await fundInstance.tokensAddresses(event.args.tokenInd.toNumber());
+                let tokenAddressInList = await fundInstance.tokensAddresses((await fundInstance.tokensRewards(tokenInstance.address)).tokenInd.toNumber());
 
                 assert.strictEqual((await fundInstance.getTokensAddressesLength()).toNumber(), tokenListLength, "token list has decreased");
-                assert.strictEqual(event.args.tokenInd.toNumber(), 0, "token address exists in the list");
+                assert.strictEqual((await fundInstance.tokensRewards(tokenInstance.address)).tokenInd.toNumber(), 0, "token address exists in the list");
                 assert.notStrictEqual(tokenAddressInList, tokenInstance.address, "token address exists in the list");
-                assert.ok(!event.args.permittance, "token is permitted");
+                assert.ok(!(await fundInstance.tokensRewards(tokenInstance.address)).isPermittedToken, "token is permitted");
             });
         });
+        it('Owner is unable to permit more than 10 token addresses', async () => {
+            await createNewSingularDTVInstances();
+            const tokensInstances = await createNewTokensInstances(11);
+            for (let i = 0; i < 10; i++) {
+                const tokenInstance = tokensInstances[i];
+                await permitToken(tokenInstance);
+            }
+            await assert.rejects(permitToken(tokensInstances[tokensInstances.length]), "can add more than 10 token's addresses");
 
+        });
         it('User is unable to set token permittance', async () => {
             await createNewSingularDTVInstances();
             const tokenInstance = await ERC20Token.new(0)
 
-            await assert.rejects(fundInstance.setTokenPermittance(tokenInstance.address, true, fromUser));
-            await assert.rejects(fundInstance.setTokenPermittance(tokenInstance.address, false, fromUser));
+            await assert.rejects(fundInstance.whitelistToken(tokenInstance.address, fromUser));
+            await assert.rejects(fundInstance.blacklistToken(tokenInstance.address, fromUser));
         });
     });
 
@@ -205,7 +212,7 @@ contract("SingularDTVFund", async accounts => {
             await tokenInstance.approve(fundInstance.address, tokenInitialSupply);
             await fundInstance.depositRewardInToken(tokenInstance.address, tokenInitialSupply);
             // unpermit token
-            await fundInstance.setTokenPermittance(tokenInstance.address, false);
+            await fundInstance.blacklistToken(tokenInstance.address);
 
             await assert.rejects(fundInstance.withdrawRewardInToken(tokenInstance.address, fromUser));
         });
@@ -296,11 +303,11 @@ contract("SingularDTVFund", async accounts => {
             tokenInstance = await ERC20Token.new(initialAmount)
         }
 
-        let event = (await fundInstance.setTokenPermittance(tokenInstance.address, true)).logs[0];
-        let tokenAddressInList = await fundInstance.tokensAddresses(event.args.tokenInd.toNumber());
+        let event = (await fundInstance.whitelistToken(tokenInstance.address)).logs[0];
+        let tokenAddressInList = await fundInstance.tokensAddresses((await fundInstance.tokensRewards(tokenInstance.address)).tokenInd.toNumber());
 
         assert.strictEqual(tokenInstance.address, tokenAddressInList, "token address in the list doesn't equal to actual");
-        assert.ok(event.args.permittance, "token isn`t permitted");
+        assert.ok((await fundInstance.tokensRewards(tokenInstance.address)).isPermittedToken, "token isn`t permitted");
 
         return {
             event,
@@ -311,7 +318,7 @@ contract("SingularDTVFund", async accounts => {
     async function createNewSingularDTVInstances(snglsTotalSupply = 0) {
         fundInstance = await SingularDTVFund.new();
         snglsTokenInstance = await SingularDTVToken.new(fundInstance.address, owner, "SingularDTV", "SNGLS", snglsTotalSupply);
-        await fundInstance.setup(snglsTokenInstance.address);
+        await fundInstance.setTokenAddress(snglsTokenInstance.address);
     }
 
     async function createNewTokensInstances(number, initialSupply = 0) {

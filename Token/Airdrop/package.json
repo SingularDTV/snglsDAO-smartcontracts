@@ -1,0 +1,17 @@
+{
+  "name": "events-table-script",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^2.5.0",
+    "dotenv": "^8.2.0",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3": "^1.2.6"
+  }
+}
