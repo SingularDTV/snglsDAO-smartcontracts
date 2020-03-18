@@ -1,0 +1,3552 @@
+{
+  "contractName": "TokenCapGC",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "parameters",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "cap",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "_token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_cap",
+          "type": "uint256"
+        }
+      ],
+      "name": "setParameters",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "_token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_cap",
+          "type": "uint256"
+        }
+      ],
+      "name": "getParametersHash",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "pre",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_paramsHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "post",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "when",
+      "outputs": [
+        {
+          "internalType": "enum GlobalConstraintInterface.CallPhase",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.13+commit.5b0b510c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_cap\",\"type\":\"uint256\"}],\"name\":\"getParametersHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"parameters\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"cap\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_paramsHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"post\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"pre\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_cap\",\"type\":\"uint256\"}],\"name\":\"setParameters\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"when\",\"outputs\":[{\"internalType\":\"enum GlobalConstraintInterface.CallPhase\",\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"A simple global constraint to cap the number of tokens.\",\"methods\":{\"getParametersHash(address,uint256)\":{\"details\":\"calculate and returns the hash of the given parameters\",\"params\":{\"_cap\":\"the cap to check the total supply against.\",\"_token\":\"the token to add to the params.\"},\"return\":\"the calculated parameters hash\"},\"post(address,bytes32,bytes32)\":{\"details\":\"check the total supply cap.\",\"params\":{\"_paramsHash\":\"the parameters hash to check the total supply cap against.\"},\"return\":\"bool which represents a success\"},\"pre(address,bytes32,bytes32)\":{\"details\":\"check the constraint after the action. This global constraint only checks the state after the action, so here we just return true:\",\"return\":\"true\"},\"setParameters(address,uint256)\":{\"details\":\"adding a new set of parameters\",\"params\":{\"_cap\":\"the cap to check the total supply against.\",\"_token\":\"the token to add to the params.\"},\"return\":\"the calculated parameters hash\"},\"when()\":{\"details\":\"when return if this globalConstraints is pre, post or both.\",\"return\":\"CallPhase enum indication  Pre, Post or PreAndPost.\"}},\"title\":\"Token Cap Global Constraint\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/TokenCapGC.sol\":\"TokenCapGC\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/GlobalConstraintInterface.sol\":{\"keccak256\":\"0x2721f2d811720572ce60b59201a2100719c6a327e0a3547a3e4d1dec7888b7d8\",\"urls\":[\"bzz-raw://b42994dda6555d06eb1ef1e13473df6e1727ea52f585f85fb0c6087ef2687e27\",\"dweb:/ipfs/QmZMEXDEdpsyKg8qF8UAp5f8XyLsJ593admaq8pkkcNUyg\"]},\"/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/TokenCapGC.sol\":{\"keccak256\":\"0x145ccd28892b7f2e4d9e1323788fc12cf9557797badcd1ffe0b4c04c336069ac\",\"urls\":[\"bzz-raw://3b8f26767d9ecedba9d0e86f2e6f728d6a4916fcff76a0c71056ce2c27282f70\",\"dweb:/ipfs/QmTzoxt8atRjmm1anEPBHcDtg3dVXJeGP9AYAEU1fZ2saN\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe5bb0f57cff3e299f360052ba50f1ea0fff046df2be070b6943e0e3c3fdad8a9\",\"urls\":[\"bzz-raw://59fd025151435da35faa8093a5c7a17de02de9d08ad27275c5cdf05050820d91\",\"dweb:/ipfs/QmQMvwEcPhoRXzbXyrdoeRtvLoifUW9Qh7Luho7bmUPRkc\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610580806100206000396000f3fe608060405234801561001057600080fd5b50600436106100625760003560e01c8063025068041461006757806378fc063c146100dc5780638043154d1461013e578063c1786ab2146101ae578063c41981611461021e578063e2b0caef14610280575b600080fd5b6100936004803603602081101561007d57600080fd5b81019080803590602001909291905050506102ac565b604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390f35b610128600480360360408110156100f257600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506102f0565b6040518082815260200191505060405180910390f35b6101946004803603606081101561015457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019092919080359060200190929190505050610358565b604051808215151515815260200191505060405180910390f35b610204600480360360608110156101c457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190803590602001909291905050506104ae565b604051808215151515815260200191505060405180910390f35b61026a6004803603604081101561023457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506104bb565b6040518082815260200191505060405180910390f35b610288610542565b6040518082600281111561029857fe5b60ff16815260200191505060405180910390f35b60006020528060005260406000206000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010154905082565b60008282604051602001808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1660601b81526014018281526020019250505060405160208183030381529060405280519060200120905092915050565b60008073ffffffffffffffffffffffffffffffffffffffff1660008085815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415801561049457506000808481526020019081526020016000206001015460008085815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166318160ddd6040518163ffffffff1660e01b815260040160206040518083038186803b15801561045757600080fd5b505afa15801561046b573d6000803e3d6000fd5b505050506040513d602081101561048157600080fd5b8101908080519060200190929190505050115b156104a257600090506104a7565b600190505b9392505050565b6000600190509392505050565b6000806104c884846102f0565b90508360008083815260200190815260200160002060000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555082600080838152602001908152602001600020600101819055508091505092915050565b6000600190509056fea265627a7a723158209f26d71d3e58a385b6cf158c2254eae23c30c261cb6e94e65da4fc7dab0282e864736f6c634300050d0032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100625760003560e01c8063025068041461006757806378fc063c146100dc5780638043154d1461013e578063c1786ab2146101ae578063c41981611461021e578063e2b0caef14610280575b600080fd5b6100936004803603602081101561007d57600080fd5b81019080803590602001909291905050506102ac565b604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390f35b610128600480360360408110156100f257600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506102f0565b6040518082815260200191505060405180910390f35b6101946004803603606081101561015457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019092919080359060200190929190505050610358565b604051808215151515815260200191505060405180910390f35b610204600480360360608110156101c457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190803590602001909291905050506104ae565b604051808215151515815260200191505060405180910390f35b61026a6004803603604081101561023457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506104bb565b6040518082815260200191505060405180910390f35b610288610542565b6040518082600281111561029857fe5b60ff16815260200191505060405180910390f35b60006020528060005260406000206000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010154905082565b60008282604051602001808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1660601b81526014018281526020019250505060405160208183030381529060405280519060200120905092915050565b60008073ffffffffffffffffffffffffffffffffffffffff1660008085815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415801561049457506000808481526020019081526020016000206001015460008085815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166318160ddd6040518163ffffffff1660e01b815260040160206040518083038186803b15801561045757600080fd5b505afa15801561046b573d6000803e3d6000fd5b505050506040513d602081101561048157600080fd5b8101908080519060200190929190505050115b156104a257600090506104a7565b600190505b9392505050565b6000600190509392505050565b6000806104c884846102f0565b90508360008083815260200190815260200160002060000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555082600080838152602001908152602001600020600101819055508091505092915050565b6000600190509056fea265627a7a723158209f26d71d3e58a385b6cf158c2254eae23c30c261cb6e94e65da4fc7dab0282e864736f6c634300050d0032",
+  "sourceMap": "247:2254:4:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;247:2254:4;;;;;;;",
+  "deployedSourceMap": "247:2254:4:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;247:2254:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;486:47;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;486:47:4;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1274:152;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1274:152:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1907:294;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1907:294:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;1618:94;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1618:94:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;761:262;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;761:262:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;2362:137;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;486:47;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;1274:152::-;1350:7;1404:6;1412:4;1387:30;;;;;;;;;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;1387:30:4;;;1377:41;;;;;;1369:50;;1274:152;;;;:::o;1907:294::-;1980:4;2041:1;2001:42;;:10;:23;2012:11;2001:23;;;;;;;;;;;:29;;;;;;;;;;;;:42;;;;2000:135;;;;;2107:10;:23;2118:11;2107:23;;;;;;;;;;;:27;;;2061:10;:23;2072:11;2061:23;;;;;;;;;;;:29;;;;;;;;;;;;:41;;;:43;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2061:43:4;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2061:43:4;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;2061:43:4;;;;;;;;;;;;;;;;:73;2000:135;1996:178;;;2158:5;2151:12;;;;1996:178;2190:4;2183:11;;1907:294;;;;;;:::o;1618:94::-;1678:4;1701;1694:11;;1618:94;;;;;:::o;761:262::-;828:7;847:18;868:31;886:6;894:4;868:17;:31::i;:::-;847:52;;940:6;909:10;:22;920:10;909:22;;;;;;;;;;;:28;;;:37;;;;;;;;;;;;;;;;;;985:4;956:10;:22;967:10;956:22;;;;;;;;;;;:26;;:33;;;;1006:10;999:17;;;761:262;;;;:::o;2362:137::-;2398:35;2452:40;2445:47;;2362:137;:::o",
+  "source": "pragma solidity >=0.5.13;\n\nimport \"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\";\nimport \"./GlobalConstraintInterface.sol\";\n\n\n/**\n * @title Token Cap Global Constraint\n * @dev A simple global constraint to cap the number of tokens.\n */\n\ncontract TokenCapGC {\n    // A set of parameters, on which the cap will be checked:\n    struct Parameters {\n        IERC20 token;\n        uint256 cap;\n    }\n\n    // Mapping from the hash of the parameters to the parameters themselves:\n    mapping (bytes32=>Parameters) public parameters;\n\n    /**\n     * @dev adding a new set of parameters\n     * @param  _token the token to add to the params.\n     * @param _cap the cap to check the total supply against.\n     * @return the calculated parameters hash\n     */\n    function setParameters(IERC20 _token, uint256 _cap) public returns(bytes32) {\n        bytes32 paramsHash = getParametersHash(_token, _cap);\n        parameters[paramsHash].token = _token;\n        parameters[paramsHash].cap = _cap;\n        return paramsHash;\n    }\n\n    /**\n     * @dev calculate and returns the hash of the given parameters\n     * @param  _token the token to add to the params.\n     * @param _cap the cap to check the total supply against.\n     * @return the calculated parameters hash\n     */\n    function getParametersHash(IERC20 _token, uint256 _cap) public pure returns(bytes32) {\n        return (keccak256(abi.encodePacked(_token, _cap)));\n    }\n\n    /**\n     * @dev check the constraint after the action.\n     * This global constraint only checks the state after the action, so here we just return true:\n     * @return true\n     */\n    function pre(address, bytes32, bytes32) public pure returns(bool) {\n        return true;\n    }\n\n    /**\n     * @dev check the total supply cap.\n     * @param  _paramsHash the parameters hash to check the total supply cap against.\n     * @return bool which represents a success\n     */\n    function post(address, bytes32 _paramsHash, bytes32) public view returns(bool) {\n        if ((parameters[_paramsHash].token != IERC20(0)) &&\n            (parameters[_paramsHash].token.totalSupply() > parameters[_paramsHash].cap)) {\n            return false;\n        }\n        return true;\n    }\n\n    /**\n     * @dev when return if this globalConstraints is pre, post or both.\n     * @return CallPhase enum indication  Pre, Post or PreAndPost.\n     */\n    function when() public pure returns(GlobalConstraintInterface.CallPhase) {\n        return GlobalConstraintInterface.CallPhase.Post;\n    }\n}\n",
+  "sourcePath": "/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/TokenCapGC.sol",
+  "ast": {
+    "absolutePath": "/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/TokenCapGC.sol",
+    "exportedSymbols": {
+      "TokenCapGC": [
+        1979
+      ]
+    },
+    "id": 1980,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1851,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:25:4"
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol",
+        "file": "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol",
+        "id": 1852,
+        "nodeType": "ImportDirective",
+        "scope": 1980,
+        "sourceUnit": 3468,
+        "src": "27:64:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/GlobalConstraintInterface.sol",
+        "file": "./GlobalConstraintInterface.sol",
+        "id": 1853,
+        "nodeType": "ImportDirective",
+        "scope": 1980,
+        "sourceUnit": 1850,
+        "src": "92:41:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Token Cap Global Constraint\n@dev A simple global constraint to cap the number of tokens.",
+        "fullyImplemented": true,
+        "id": 1979,
+        "linearizedBaseContracts": [
+          1979
+        ],
+        "name": "TokenCapGC",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "TokenCapGC.Parameters",
+            "id": 1858,
+            "members": [
+              {
+                "constant": false,
+                "id": 1855,
+                "name": "token",
+                "nodeType": "VariableDeclaration",
+                "scope": 1858,
+                "src": "363:12:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_IERC20_$3467",
+                  "typeString": "contract IERC20"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1854,
+                  "name": "IERC20",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 3467,
+                  "src": "363:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$3467",
+                    "typeString": "contract IERC20"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1857,
+                "name": "cap",
+                "nodeType": "VariableDeclaration",
+                "scope": 1858,
+                "src": "385:11:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1856,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "385:7:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Parameters",
+            "nodeType": "StructDefinition",
+            "scope": 1979,
+            "src": "335:68:4",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1862,
+            "name": "parameters",
+            "nodeType": "VariableDeclaration",
+            "scope": 1979,
+            "src": "486:47:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+              "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters)"
+            },
+            "typeName": {
+              "id": 1861,
+              "keyType": {
+                "id": 1859,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "495:7:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "486:29:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 1860,
+                "name": "Parameters",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1858,
+                "src": "504:10:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Parameters_$1858_storage_ptr",
+                  "typeString": "struct TokenCapGC.Parameters"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1894,
+              "nodeType": "Block",
+              "src": "837:186:4",
+              "statements": [
+                {
+                  "assignments": [
+                    1872
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1872,
+                      "name": "paramsHash",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1894,
+                      "src": "847:18:4",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      },
+                      "typeName": {
+                        "id": 1871,
+                        "name": "bytes32",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "847:7:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1877,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1874,
+                        "name": "_token",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1864,
+                        "src": "886:6:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IERC20_$3467",
+                          "typeString": "contract IERC20"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1875,
+                        "name": "_cap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1866,
+                        "src": "894:4:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_IERC20_$3467",
+                          "typeString": "contract IERC20"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 1873,
+                      "name": "getParametersHash",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1914,
+                      "src": "868:17:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_contract$_IERC20_$3467_$_t_uint256_$returns$_t_bytes32_$",
+                        "typeString": "function (contract IERC20,uint256) pure returns (bytes32)"
+                      }
+                    },
+                    "id": 1876,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "868:31:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "847:52:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1883,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 1878,
+                          "name": "parameters",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1862,
+                          "src": "909:10:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                            "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters storage ref)"
+                          }
+                        },
+                        "id": 1880,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 1879,
+                          "name": "paramsHash",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1872,
+                          "src": "920:10:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "909:22:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Parameters_$1858_storage",
+                          "typeString": "struct TokenCapGC.Parameters storage ref"
+                        }
+                      },
+                      "id": 1881,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "token",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1855,
+                      "src": "909:28:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC20_$3467",
+                        "typeString": "contract IERC20"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 1882,
+                      "name": "_token",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1864,
+                      "src": "940:6:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC20_$3467",
+                        "typeString": "contract IERC20"
+                      }
+                    },
+                    "src": "909:37:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$3467",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "id": 1884,
+                  "nodeType": "ExpressionStatement",
+                  "src": "909:37:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1890,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 1885,
+                          "name": "parameters",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1862,
+                          "src": "956:10:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                            "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters storage ref)"
+                          }
+                        },
+                        "id": 1887,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 1886,
+                          "name": "paramsHash",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1872,
+                          "src": "967:10:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "956:22:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Parameters_$1858_storage",
+                          "typeString": "struct TokenCapGC.Parameters storage ref"
+                        }
+                      },
+                      "id": 1888,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "cap",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1857,
+                      "src": "956:26:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 1889,
+                      "name": "_cap",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1866,
+                      "src": "985:4:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "956:33:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1891,
+                  "nodeType": "ExpressionStatement",
+                  "src": "956:33:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1892,
+                    "name": "paramsHash",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 1872,
+                    "src": "1006:10:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 1870,
+                  "id": 1893,
+                  "nodeType": "Return",
+                  "src": "999:17:4"
+                }
+              ]
+            },
+            "documentation": "@dev adding a new set of parameters\n@param  _token the token to add to the params.\n@param _cap the cap to check the total supply against.\n@return the calculated parameters hash",
+            "id": 1895,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setParameters",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1867,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1864,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1895,
+                  "src": "784:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$3467",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1863,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3467,
+                    "src": "784:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$3467",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1866,
+                  "name": "_cap",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1895,
+                  "src": "799:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1865,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "799:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "783:29:4"
+            },
+            "returnParameters": {
+              "id": 1870,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1869,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1895,
+                  "src": "828:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1868,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "828:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "827:9:4"
+            },
+            "scope": 1979,
+            "src": "761:262:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1913,
+              "nodeType": "Block",
+              "src": "1359:67:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 1907,
+                                "name": "_token",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1897,
+                                "src": "1404:6:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_IERC20_$3467",
+                                  "typeString": "contract IERC20"
+                                }
+                              },
+                              {
+                                "argumentTypes": null,
+                                "id": 1908,
+                                "name": "_cap",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1899,
+                                "src": "1412:4:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_IERC20_$3467",
+                                  "typeString": "contract IERC20"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 1905,
+                                "name": "abi",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 3544,
+                                "src": "1387:3:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_magic_abi",
+                                  "typeString": "abi"
+                                }
+                              },
+                              "id": 1906,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "memberName": "encodePacked",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": null,
+                              "src": "1387:16:4",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_abiencodepacked_pure$__$returns$_t_bytes_memory_ptr_$",
+                                "typeString": "function () pure returns (bytes memory)"
+                              }
+                            },
+                            "id": 1909,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1387:30:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          ],
+                          "id": 1904,
+                          "name": "keccak256",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 3551,
+                          "src": "1377:9:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                            "typeString": "function (bytes memory) pure returns (bytes32)"
+                          }
+                        },
+                        "id": 1910,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1377:41:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "id": 1911,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "1376:43:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 1903,
+                  "id": 1912,
+                  "nodeType": "Return",
+                  "src": "1369:50:4"
+                }
+              ]
+            },
+            "documentation": "@dev calculate and returns the hash of the given parameters\n@param  _token the token to add to the params.\n@param _cap the cap to check the total supply against.\n@return the calculated parameters hash",
+            "id": 1914,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getParametersHash",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1900,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1897,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1914,
+                  "src": "1301:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$3467",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1896,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3467,
+                    "src": "1301:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$3467",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1899,
+                  "name": "_cap",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1914,
+                  "src": "1316:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1898,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1316:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1300:29:4"
+            },
+            "returnParameters": {
+              "id": 1903,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1902,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1914,
+                  "src": "1350:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1901,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1350:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1349:9:4"
+            },
+            "scope": 1979,
+            "src": "1274:152:4",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1927,
+              "nodeType": "Block",
+              "src": "1684:28:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 1925,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "1701:4:4",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 1924,
+                  "id": 1926,
+                  "nodeType": "Return",
+                  "src": "1694:11:4"
+                }
+              ]
+            },
+            "documentation": "@dev check the constraint after the action.\nThis global constraint only checks the state after the action, so here we just return true:\n@return true",
+            "id": 1928,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "pre",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1921,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1916,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1928,
+                  "src": "1631:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1915,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1631:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1918,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1928,
+                  "src": "1640:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1917,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1640:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1920,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1928,
+                  "src": "1649:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1919,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1649:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1630:27:4"
+            },
+            "returnParameters": {
+              "id": 1924,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1923,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1928,
+                  "src": "1678:4:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1922,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1678:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1677:6:4"
+            },
+            "scope": 1979,
+            "src": "1618:94:4",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1967,
+              "nodeType": "Block",
+              "src": "1986:215:4",
+              "statements": [
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "id": 1960,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "components": [
+                        {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_contract$_IERC20_$3467",
+                            "typeString": "contract IERC20"
+                          },
+                          "id": 1946,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "baseExpression": {
+                                "argumentTypes": null,
+                                "id": 1939,
+                                "name": "parameters",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1862,
+                                "src": "2001:10:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                                  "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters storage ref)"
+                                }
+                              },
+                              "id": 1941,
+                              "indexExpression": {
+                                "argumentTypes": null,
+                                "id": 1940,
+                                "name": "_paramsHash",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1932,
+                                "src": "2012:11:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bytes32",
+                                  "typeString": "bytes32"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "2001:23:4",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_Parameters_$1858_storage",
+                                "typeString": "struct TokenCapGC.Parameters storage ref"
+                              }
+                            },
+                            "id": 1942,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "token",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 1855,
+                            "src": "2001:29:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$3467",
+                              "typeString": "contract IERC20"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "!=",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "hexValue": "30",
+                                "id": 1944,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "kind": "number",
+                                "lValueRequested": false,
+                                "nodeType": "Literal",
+                                "src": "2041:1:4",
+                                "subdenomination": null,
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_rational_0_by_1",
+                                  "typeString": "int_const 0"
+                                },
+                                "value": "0"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_rational_0_by_1",
+                                  "typeString": "int_const 0"
+                                }
+                              ],
+                              "id": 1943,
+                              "name": "IERC20",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 3467,
+                              "src": "2034:6:4",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_IERC20_$3467_$",
+                                "typeString": "type(contract IERC20)"
+                              }
+                            },
+                            "id": 1945,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "2034:9:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$3467",
+                              "typeString": "contract IERC20"
+                            }
+                          },
+                          "src": "2001:42:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        }
+                      ],
+                      "id": 1947,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "TupleExpression",
+                      "src": "2000:44:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "&&",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "components": [
+                        {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "id": 1958,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "argumentTypes": null,
+                                "expression": {
+                                  "argumentTypes": null,
+                                  "baseExpression": {
+                                    "argumentTypes": null,
+                                    "id": 1948,
+                                    "name": "parameters",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 1862,
+                                    "src": "2061:10:4",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                                      "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters storage ref)"
+                                    }
+                                  },
+                                  "id": 1950,
+                                  "indexExpression": {
+                                    "argumentTypes": null,
+                                    "id": 1949,
+                                    "name": "_paramsHash",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 1932,
+                                    "src": "2072:11:4",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_bytes32",
+                                      "typeString": "bytes32"
+                                    }
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "nodeType": "IndexAccess",
+                                  "src": "2061:23:4",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_struct$_Parameters_$1858_storage",
+                                    "typeString": "struct TokenCapGC.Parameters storage ref"
+                                  }
+                                },
+                                "id": 1951,
+                                "isConstant": false,
+                                "isLValue": true,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "memberName": "token",
+                                "nodeType": "MemberAccess",
+                                "referencedDeclaration": 1855,
+                                "src": "2061:29:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_IERC20_$3467",
+                                  "typeString": "contract IERC20"
+                                }
+                              },
+                              "id": 1952,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "totalSupply",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 3405,
+                              "src": "2061:41:4",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                                "typeString": "function () view external returns (uint256)"
+                              }
+                            },
+                            "id": 1953,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "2061:43:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": ">",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "baseExpression": {
+                                "argumentTypes": null,
+                                "id": 1954,
+                                "name": "parameters",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1862,
+                                "src": "2107:10:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                                  "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters storage ref)"
+                                }
+                              },
+                              "id": 1956,
+                              "indexExpression": {
+                                "argumentTypes": null,
+                                "id": 1955,
+                                "name": "_paramsHash",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1932,
+                                "src": "2118:11:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bytes32",
+                                  "typeString": "bytes32"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "2107:23:4",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_Parameters_$1858_storage",
+                                "typeString": "struct TokenCapGC.Parameters storage ref"
+                              }
+                            },
+                            "id": 1957,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "cap",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 1857,
+                            "src": "2107:27:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "2061:73:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        }
+                      ],
+                      "id": 1959,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "TupleExpression",
+                      "src": "2060:75:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "2000:135:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": null,
+                  "id": 1964,
+                  "nodeType": "IfStatement",
+                  "src": "1996:178:4",
+                  "trueBody": {
+                    "id": 1963,
+                    "nodeType": "Block",
+                    "src": "2137:37:4",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "hexValue": "66616c7365",
+                          "id": 1961,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "bool",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "2158:5:4",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          },
+                          "value": "false"
+                        },
+                        "functionReturnParameters": 1938,
+                        "id": 1962,
+                        "nodeType": "Return",
+                        "src": "2151:12:4"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 1965,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "2190:4:4",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 1938,
+                  "id": 1966,
+                  "nodeType": "Return",
+                  "src": "2183:11:4"
+                }
+              ]
+            },
+            "documentation": "@dev check the total supply cap.\n@param  _paramsHash the parameters hash to check the total supply cap against.\n@return bool which represents a success",
+            "id": 1968,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "post",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1935,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1930,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1968,
+                  "src": "1921:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1929,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1921:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1932,
+                  "name": "_paramsHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1968,
+                  "src": "1930:19:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1931,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1930:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1934,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1968,
+                  "src": "1951:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1933,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1951:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1920:39:4"
+            },
+            "returnParameters": {
+              "id": 1938,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1937,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1968,
+                  "src": "1980:4:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1936,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1980:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1979:6:4"
+            },
+            "scope": 1979,
+            "src": "1907:294:4",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1977,
+              "nodeType": "Block",
+              "src": "2435:64:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1973,
+                        "name": "GlobalConstraintInterface",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1849,
+                        "src": "2452:25:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_GlobalConstraintInterface_$1849_$",
+                          "typeString": "type(contract GlobalConstraintInterface)"
+                        }
+                      },
+                      "id": 1974,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "CallPhase",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1821,
+                      "src": "2452:35:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_enum$_CallPhase_$1821_$",
+                        "typeString": "type(enum GlobalConstraintInterface.CallPhase)"
+                      }
+                    },
+                    "id": 1975,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "lValueRequested": false,
+                    "memberName": "Post",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "2452:40:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_CallPhase_$1821",
+                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                    }
+                  },
+                  "functionReturnParameters": 1972,
+                  "id": 1976,
+                  "nodeType": "Return",
+                  "src": "2445:47:4"
+                }
+              ]
+            },
+            "documentation": "@dev when return if this globalConstraints is pre, post or both.\n@return CallPhase enum indication  Pre, Post or PreAndPost.",
+            "id": 1978,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "when",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1969,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2375:2:4"
+            },
+            "returnParameters": {
+              "id": 1972,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1971,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1978,
+                  "src": "2398:35:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_CallPhase_$1821",
+                    "typeString": "enum GlobalConstraintInterface.CallPhase"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1970,
+                    "name": "GlobalConstraintInterface.CallPhase",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1821,
+                    "src": "2398:35:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_CallPhase_$1821",
+                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2397:37:4"
+            },
+            "scope": 1979,
+            "src": "2362:137:4",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1980,
+        "src": "247:2254:4"
+      }
+    ],
+    "src": "0:2502:4"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/TokenCapGC.sol",
+    "exportedSymbols": {
+      "TokenCapGC": [
+        1979
+      ]
+    },
+    "id": 1980,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1851,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:25:4"
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol",
+        "file": "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol",
+        "id": 1852,
+        "nodeType": "ImportDirective",
+        "scope": 1980,
+        "sourceUnit": 3468,
+        "src": "27:64:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/GlobalConstraintInterface.sol",
+        "file": "./GlobalConstraintInterface.sol",
+        "id": 1853,
+        "nodeType": "ImportDirective",
+        "scope": 1980,
+        "sourceUnit": 1850,
+        "src": "92:41:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Token Cap Global Constraint\n@dev A simple global constraint to cap the number of tokens.",
+        "fullyImplemented": true,
+        "id": 1979,
+        "linearizedBaseContracts": [
+          1979
+        ],
+        "name": "TokenCapGC",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "TokenCapGC.Parameters",
+            "id": 1858,
+            "members": [
+              {
+                "constant": false,
+                "id": 1855,
+                "name": "token",
+                "nodeType": "VariableDeclaration",
+                "scope": 1858,
+                "src": "363:12:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_IERC20_$3467",
+                  "typeString": "contract IERC20"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1854,
+                  "name": "IERC20",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 3467,
+                  "src": "363:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$3467",
+                    "typeString": "contract IERC20"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1857,
+                "name": "cap",
+                "nodeType": "VariableDeclaration",
+                "scope": 1858,
+                "src": "385:11:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1856,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "385:7:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Parameters",
+            "nodeType": "StructDefinition",
+            "scope": 1979,
+            "src": "335:68:4",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1862,
+            "name": "parameters",
+            "nodeType": "VariableDeclaration",
+            "scope": 1979,
+            "src": "486:47:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+              "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters)"
+            },
+            "typeName": {
+              "id": 1861,
+              "keyType": {
+                "id": 1859,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "495:7:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "486:29:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 1860,
+                "name": "Parameters",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1858,
+                "src": "504:10:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Parameters_$1858_storage_ptr",
+                  "typeString": "struct TokenCapGC.Parameters"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1894,
+              "nodeType": "Block",
+              "src": "837:186:4",
+              "statements": [
+                {
+                  "assignments": [
+                    1872
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1872,
+                      "name": "paramsHash",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1894,
+                      "src": "847:18:4",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      },
+                      "typeName": {
+                        "id": 1871,
+                        "name": "bytes32",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "847:7:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1877,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1874,
+                        "name": "_token",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1864,
+                        "src": "886:6:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IERC20_$3467",
+                          "typeString": "contract IERC20"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1875,
+                        "name": "_cap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1866,
+                        "src": "894:4:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_IERC20_$3467",
+                          "typeString": "contract IERC20"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 1873,
+                      "name": "getParametersHash",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1914,
+                      "src": "868:17:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_contract$_IERC20_$3467_$_t_uint256_$returns$_t_bytes32_$",
+                        "typeString": "function (contract IERC20,uint256) pure returns (bytes32)"
+                      }
+                    },
+                    "id": 1876,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "868:31:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "847:52:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1883,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 1878,
+                          "name": "parameters",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1862,
+                          "src": "909:10:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                            "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters storage ref)"
+                          }
+                        },
+                        "id": 1880,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 1879,
+                          "name": "paramsHash",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1872,
+                          "src": "920:10:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "909:22:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Parameters_$1858_storage",
+                          "typeString": "struct TokenCapGC.Parameters storage ref"
+                        }
+                      },
+                      "id": 1881,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "token",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1855,
+                      "src": "909:28:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC20_$3467",
+                        "typeString": "contract IERC20"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 1882,
+                      "name": "_token",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1864,
+                      "src": "940:6:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC20_$3467",
+                        "typeString": "contract IERC20"
+                      }
+                    },
+                    "src": "909:37:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$3467",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "id": 1884,
+                  "nodeType": "ExpressionStatement",
+                  "src": "909:37:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1890,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 1885,
+                          "name": "parameters",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1862,
+                          "src": "956:10:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                            "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters storage ref)"
+                          }
+                        },
+                        "id": 1887,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 1886,
+                          "name": "paramsHash",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1872,
+                          "src": "967:10:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "956:22:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Parameters_$1858_storage",
+                          "typeString": "struct TokenCapGC.Parameters storage ref"
+                        }
+                      },
+                      "id": 1888,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "cap",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1857,
+                      "src": "956:26:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 1889,
+                      "name": "_cap",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1866,
+                      "src": "985:4:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "956:33:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1891,
+                  "nodeType": "ExpressionStatement",
+                  "src": "956:33:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1892,
+                    "name": "paramsHash",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 1872,
+                    "src": "1006:10:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 1870,
+                  "id": 1893,
+                  "nodeType": "Return",
+                  "src": "999:17:4"
+                }
+              ]
+            },
+            "documentation": "@dev adding a new set of parameters\n@param  _token the token to add to the params.\n@param _cap the cap to check the total supply against.\n@return the calculated parameters hash",
+            "id": 1895,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setParameters",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1867,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1864,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1895,
+                  "src": "784:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$3467",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1863,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3467,
+                    "src": "784:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$3467",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1866,
+                  "name": "_cap",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1895,
+                  "src": "799:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1865,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "799:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "783:29:4"
+            },
+            "returnParameters": {
+              "id": 1870,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1869,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1895,
+                  "src": "828:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1868,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "828:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "827:9:4"
+            },
+            "scope": 1979,
+            "src": "761:262:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1913,
+              "nodeType": "Block",
+              "src": "1359:67:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 1907,
+                                "name": "_token",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1897,
+                                "src": "1404:6:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_IERC20_$3467",
+                                  "typeString": "contract IERC20"
+                                }
+                              },
+                              {
+                                "argumentTypes": null,
+                                "id": 1908,
+                                "name": "_cap",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1899,
+                                "src": "1412:4:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_IERC20_$3467",
+                                  "typeString": "contract IERC20"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 1905,
+                                "name": "abi",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 3544,
+                                "src": "1387:3:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_magic_abi",
+                                  "typeString": "abi"
+                                }
+                              },
+                              "id": 1906,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "memberName": "encodePacked",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": null,
+                              "src": "1387:16:4",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_abiencodepacked_pure$__$returns$_t_bytes_memory_ptr_$",
+                                "typeString": "function () pure returns (bytes memory)"
+                              }
+                            },
+                            "id": 1909,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1387:30:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          ],
+                          "id": 1904,
+                          "name": "keccak256",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 3551,
+                          "src": "1377:9:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                            "typeString": "function (bytes memory) pure returns (bytes32)"
+                          }
+                        },
+                        "id": 1910,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1377:41:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "id": 1911,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "1376:43:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 1903,
+                  "id": 1912,
+                  "nodeType": "Return",
+                  "src": "1369:50:4"
+                }
+              ]
+            },
+            "documentation": "@dev calculate and returns the hash of the given parameters\n@param  _token the token to add to the params.\n@param _cap the cap to check the total supply against.\n@return the calculated parameters hash",
+            "id": 1914,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getParametersHash",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1900,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1897,
+                  "name": "_token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1914,
+                  "src": "1301:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$3467",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1896,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3467,
+                    "src": "1301:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$3467",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1899,
+                  "name": "_cap",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1914,
+                  "src": "1316:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1898,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1316:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1300:29:4"
+            },
+            "returnParameters": {
+              "id": 1903,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1902,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1914,
+                  "src": "1350:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1901,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1350:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1349:9:4"
+            },
+            "scope": 1979,
+            "src": "1274:152:4",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1927,
+              "nodeType": "Block",
+              "src": "1684:28:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 1925,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "1701:4:4",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 1924,
+                  "id": 1926,
+                  "nodeType": "Return",
+                  "src": "1694:11:4"
+                }
+              ]
+            },
+            "documentation": "@dev check the constraint after the action.\nThis global constraint only checks the state after the action, so here we just return true:\n@return true",
+            "id": 1928,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "pre",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1921,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1916,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1928,
+                  "src": "1631:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1915,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1631:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1918,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1928,
+                  "src": "1640:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1917,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1640:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1920,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1928,
+                  "src": "1649:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1919,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1649:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1630:27:4"
+            },
+            "returnParameters": {
+              "id": 1924,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1923,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1928,
+                  "src": "1678:4:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1922,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1678:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1677:6:4"
+            },
+            "scope": 1979,
+            "src": "1618:94:4",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1967,
+              "nodeType": "Block",
+              "src": "1986:215:4",
+              "statements": [
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "id": 1960,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "components": [
+                        {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_contract$_IERC20_$3467",
+                            "typeString": "contract IERC20"
+                          },
+                          "id": 1946,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "baseExpression": {
+                                "argumentTypes": null,
+                                "id": 1939,
+                                "name": "parameters",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1862,
+                                "src": "2001:10:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                                  "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters storage ref)"
+                                }
+                              },
+                              "id": 1941,
+                              "indexExpression": {
+                                "argumentTypes": null,
+                                "id": 1940,
+                                "name": "_paramsHash",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1932,
+                                "src": "2012:11:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bytes32",
+                                  "typeString": "bytes32"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "2001:23:4",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_Parameters_$1858_storage",
+                                "typeString": "struct TokenCapGC.Parameters storage ref"
+                              }
+                            },
+                            "id": 1942,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "token",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 1855,
+                            "src": "2001:29:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$3467",
+                              "typeString": "contract IERC20"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "!=",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "hexValue": "30",
+                                "id": 1944,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "kind": "number",
+                                "lValueRequested": false,
+                                "nodeType": "Literal",
+                                "src": "2041:1:4",
+                                "subdenomination": null,
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_rational_0_by_1",
+                                  "typeString": "int_const 0"
+                                },
+                                "value": "0"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_rational_0_by_1",
+                                  "typeString": "int_const 0"
+                                }
+                              ],
+                              "id": 1943,
+                              "name": "IERC20",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 3467,
+                              "src": "2034:6:4",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_IERC20_$3467_$",
+                                "typeString": "type(contract IERC20)"
+                              }
+                            },
+                            "id": 1945,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "2034:9:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$3467",
+                              "typeString": "contract IERC20"
+                            }
+                          },
+                          "src": "2001:42:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        }
+                      ],
+                      "id": 1947,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "TupleExpression",
+                      "src": "2000:44:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "&&",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "components": [
+                        {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "id": 1958,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "argumentTypes": null,
+                                "expression": {
+                                  "argumentTypes": null,
+                                  "baseExpression": {
+                                    "argumentTypes": null,
+                                    "id": 1948,
+                                    "name": "parameters",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 1862,
+                                    "src": "2061:10:4",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                                      "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters storage ref)"
+                                    }
+                                  },
+                                  "id": 1950,
+                                  "indexExpression": {
+                                    "argumentTypes": null,
+                                    "id": 1949,
+                                    "name": "_paramsHash",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 1932,
+                                    "src": "2072:11:4",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_bytes32",
+                                      "typeString": "bytes32"
+                                    }
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "nodeType": "IndexAccess",
+                                  "src": "2061:23:4",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_struct$_Parameters_$1858_storage",
+                                    "typeString": "struct TokenCapGC.Parameters storage ref"
+                                  }
+                                },
+                                "id": 1951,
+                                "isConstant": false,
+                                "isLValue": true,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "memberName": "token",
+                                "nodeType": "MemberAccess",
+                                "referencedDeclaration": 1855,
+                                "src": "2061:29:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_IERC20_$3467",
+                                  "typeString": "contract IERC20"
+                                }
+                              },
+                              "id": 1952,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "totalSupply",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 3405,
+                              "src": "2061:41:4",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                                "typeString": "function () view external returns (uint256)"
+                              }
+                            },
+                            "id": 1953,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "2061:43:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": ">",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "baseExpression": {
+                                "argumentTypes": null,
+                                "id": 1954,
+                                "name": "parameters",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1862,
+                                "src": "2107:10:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Parameters_$1858_storage_$",
+                                  "typeString": "mapping(bytes32 => struct TokenCapGC.Parameters storage ref)"
+                                }
+                              },
+                              "id": 1956,
+                              "indexExpression": {
+                                "argumentTypes": null,
+                                "id": 1955,
+                                "name": "_paramsHash",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 1932,
+                                "src": "2118:11:4",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bytes32",
+                                  "typeString": "bytes32"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "2107:23:4",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_Parameters_$1858_storage",
+                                "typeString": "struct TokenCapGC.Parameters storage ref"
+                              }
+                            },
+                            "id": 1957,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "cap",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 1857,
+                            "src": "2107:27:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "2061:73:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        }
+                      ],
+                      "id": 1959,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "TupleExpression",
+                      "src": "2060:75:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "2000:135:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": null,
+                  "id": 1964,
+                  "nodeType": "IfStatement",
+                  "src": "1996:178:4",
+                  "trueBody": {
+                    "id": 1963,
+                    "nodeType": "Block",
+                    "src": "2137:37:4",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "hexValue": "66616c7365",
+                          "id": 1961,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "bool",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "2158:5:4",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          },
+                          "value": "false"
+                        },
+                        "functionReturnParameters": 1938,
+                        "id": 1962,
+                        "nodeType": "Return",
+                        "src": "2151:12:4"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 1965,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "2190:4:4",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 1938,
+                  "id": 1966,
+                  "nodeType": "Return",
+                  "src": "2183:11:4"
+                }
+              ]
+            },
+            "documentation": "@dev check the total supply cap.\n@param  _paramsHash the parameters hash to check the total supply cap against.\n@return bool which represents a success",
+            "id": 1968,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "post",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1935,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1930,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1968,
+                  "src": "1921:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1929,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1921:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1932,
+                  "name": "_paramsHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1968,
+                  "src": "1930:19:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1931,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1930:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1934,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1968,
+                  "src": "1951:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1933,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1951:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1920:39:4"
+            },
+            "returnParameters": {
+              "id": 1938,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1937,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1968,
+                  "src": "1980:4:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1936,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1980:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1979:6:4"
+            },
+            "scope": 1979,
+            "src": "1907:294:4",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1977,
+              "nodeType": "Block",
+              "src": "2435:64:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1973,
+                        "name": "GlobalConstraintInterface",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1849,
+                        "src": "2452:25:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_GlobalConstraintInterface_$1849_$",
+                          "typeString": "type(contract GlobalConstraintInterface)"
+                        }
+                      },
+                      "id": 1974,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "CallPhase",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1821,
+                      "src": "2452:35:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_enum$_CallPhase_$1821_$",
+                        "typeString": "type(enum GlobalConstraintInterface.CallPhase)"
+                      }
+                    },
+                    "id": 1975,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "lValueRequested": false,
+                    "memberName": "Post",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "2452:40:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_CallPhase_$1821",
+                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                    }
+                  },
+                  "functionReturnParameters": 1972,
+                  "id": 1976,
+                  "nodeType": "Return",
+                  "src": "2445:47:4"
+                }
+              ]
+            },
+            "documentation": "@dev when return if this globalConstraints is pre, post or both.\n@return CallPhase enum indication  Pre, Post or PreAndPost.",
+            "id": 1978,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "when",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1969,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2375:2:4"
+            },
+            "returnParameters": {
+              "id": 1972,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1971,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1978,
+                  "src": "2398:35:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_CallPhase_$1821",
+                    "typeString": "enum GlobalConstraintInterface.CallPhase"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1970,
+                    "name": "GlobalConstraintInterface.CallPhase",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1821,
+                    "src": "2398:35:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_CallPhase_$1821",
+                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2397:37:4"
+            },
+            "scope": 1979,
+            "src": "2362:137:4",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1980,
+        "src": "247:2254:4"
+      }
+    ],
+    "src": "0:2502:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.13+commit.5b0b510c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-03-18T13:31:05.870Z",
+  "devdoc": {
+    "details": "A simple global constraint to cap the number of tokens.",
+    "methods": {
+      "getParametersHash(address,uint256)": {
+        "details": "calculate and returns the hash of the given parameters",
+        "params": {
+          "_cap": "the cap to check the total supply against.",
+          "_token": "the token to add to the params."
+        },
+        "return": "the calculated parameters hash"
+      },
+      "post(address,bytes32,bytes32)": {
+        "details": "check the total supply cap.",
+        "params": {
+          "_paramsHash": "the parameters hash to check the total supply cap against."
+        },
+        "return": "bool which represents a success"
+      },
+      "pre(address,bytes32,bytes32)": {
+        "details": "check the constraint after the action. This global constraint only checks the state after the action, so here we just return true:",
+        "return": "true"
+      },
+      "setParameters(address,uint256)": {
+        "details": "adding a new set of parameters",
+        "params": {
+          "_cap": "the cap to check the total supply against.",
+          "_token": "the token to add to the params."
+        },
+        "return": "the calculated parameters hash"
+      },
+      "when()": {
+        "details": "when return if this globalConstraints is pre, post or both.",
+        "return": "CallPhase enum indication  Pre, Post or PreAndPost."
+      }
+    },
+    "title": "Token Cap Global Constraint"
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
