@@ -1193,7 +1193,7 @@
         "arcVersion": "0.0.1-rc.38"
       },
       "0.0.1-rc.39": {
-        "name": "PeepDAO",
+        "name": "SnglsDAO",
         "Avatar": "0x8b91b2b5055B815a4ce3e7492064D7A3EF061A25",
         "DAOToken": "0x07904519fc5f88d4Aa5b90C47Ed2B2091bd6074C",
         "Reputation": "0xd35c820ea236bca41017AE4a1852922C814292bd",
@@ -1201,8 +1201,18 @@
         "Schemes": [],
         "StandAloneContracts": [
           {
-            "name": "Controller",
+            "name": "DAOToken",
             "address": "0x89B7FA9a1f6e4b0dcCd8FC373E408C97f4a718E0",
+            "arcVersion": "0.0.1-rc.39"
+          },
+          {
+            "name": "Avatar",
+            "address": "0x58e21c4cdd56bC676D91A7157A62A1070669c997",
+            "arcVersion": "0.0.1-rc.39"
+          },
+          {
+            "name": "Controller",
+            "address": "0xD681ED86eBa1b64086BF532e8b88c5bE3b74cb93",
             "arcVersion": "0.0.1-rc.39"
           }
         ],

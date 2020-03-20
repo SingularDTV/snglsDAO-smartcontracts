@@ -1,7 +1,7 @@
 {
     "orgName":"SnglsDAO",
     "tokenName":"Singularity Governance Token",
-    "tokenSymbol":"FST",
+    "tokenSymbol":"SGT",
      "ContributionReward": [
        {
          "voteParams": 0
@@ -20,10 +20,33 @@
     ],
     "StandAloneContracts": [
       {
+        "name":"DAOToken",
+        "fromArc": false,
+        "constructor": true,
+        "params": [
+          "Singularity Governance Token",
+          "SGT",
+          10000
+        ]
+      },
+      {
+        "name":"Avatar",
+        "fromArc": false,
+        "constructor": true,
+        "params": [
+          "Singularity",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000"
+        ]
+      },
+      {
         "name":"Controller",
-        "fromArc": false
+        "fromArc": false,
+        "constructor": true,
+        "params": [
+          {"StandAloneContract": 1}
+        ]
       }
-      
     ],
     "VotingMachinesParams":[
        {

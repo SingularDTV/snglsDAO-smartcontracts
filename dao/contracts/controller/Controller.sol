@@ -64,7 +64,7 @@ contract Controller {
 
     event RemoveGlobalConstraint(address indexed _globalConstraint, uint256 _index, bool _isPre);
 
-    constructor( /*Avatar _avatar*/) public {
+    constructor( Avatar _avatar) public {
         // avatar = _avatar;
         // nativeToken = avatar.nativeToken();
         // nativeReputation = avatar.nativeReputation();
