@@ -3,7 +3,7 @@ const migrationSpec =  require('../data/snglDAOspec.json')
 require('dotenv').config();
 
 async function migrate() {
-  const DEFAULT_GAS = 3.5
+  const DEFAULT_GAS = 100
 
   const options = {
     provider: process.env.PROVIDER,
@@ -12,7 +12,7 @@ async function migrate() {
     force: true,
     restart: true,
     output: process.env.OUTPUT_FILE,
-    privateKey: process.env.PRIVATE_KEY,
+    // privateKey: process.env.PRIVATE_KEY,
     customAbisLocation: process.env.CUSTOM_ABI_LOCATION,
     params: {
       private: migrationSpec,

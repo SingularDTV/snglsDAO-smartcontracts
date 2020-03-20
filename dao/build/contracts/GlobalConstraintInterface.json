@@ -79,15 +79,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.13+commit.5b0b510c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_scheme\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_params\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_method\",\"type\":\"bytes32\"}],\"name\":\"post\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_scheme\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_params\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_method\",\"type\":\"bytes32\"}],\"name\":\"pre\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"when\",\"outputs\":[{\"internalType\":\"enum GlobalConstraintInterface.CallPhase\",\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"when()\":{\"details\":\"when return if this globalConstraints is pre, post or both.\",\"return\":\"CallPhase enum indication  Pre, Post or PreAndPost.\"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/GlobalConstraintInterface.sol\":\"GlobalConstraintInterface\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/GlobalConstraintInterface.sol\":{\"keccak256\":\"0x2721f2d811720572ce60b59201a2100719c6a327e0a3547a3e4d1dec7888b7d8\",\"urls\":[\"bzz-raw://b42994dda6555d06eb1ef1e13473df6e1727ea52f585f85fb0c6087ef2687e27\",\"dweb:/ipfs/QmZMEXDEdpsyKg8qF8UAp5f8XyLsJ593admaq8pkkcNUyg\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.13+commit.5b0b510c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_scheme\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_params\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_method\",\"type\":\"bytes32\"}],\"name\":\"post\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_scheme\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_params\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_method\",\"type\":\"bytes32\"}],\"name\":\"pre\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"when\",\"outputs\":[{\"internalType\":\"enum GlobalConstraintInterface.CallPhase\",\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"when()\":{\"details\":\"when return if this globalConstraints is pre, post or both.\",\"return\":\"CallPhase enum indication  Pre, Post or PreAndPost.\"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/obaranni/blaize/snglsDAO-smartcontracts/dao/contracts/globalConstraints/GlobalConstraintInterface.sol\":\"GlobalConstraintInterface\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/obaranni/blaize/snglsDAO-smartcontracts/dao/contracts/globalConstraints/GlobalConstraintInterface.sol\":{\"keccak256\":\"0x2721f2d811720572ce60b59201a2100719c6a327e0a3547a3e4d1dec7888b7d8\",\"urls\":[\"bzz-raw://b42994dda6555d06eb1ef1e13473df6e1727ea52f585f85fb0c6087ef2687e27\",\"dweb:/ipfs/QmZMEXDEdpsyKg8qF8UAp5f8XyLsJ593admaq8pkkcNUyg\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity >=0.5.13;\n\n\ncontract GlobalConstraintInterface {\n\n    enum CallPhase { Pre, Post, PreAndPost }\n\n    function pre( address _scheme, bytes32 _params, bytes32 _method ) public returns(bool);\n    function post( address _scheme, bytes32 _params, bytes32 _method ) public returns(bool);\n    /**\n     * @dev when return if this globalConstraints is pre, post or both.\n     * @return CallPhase enum indication  Pre, Post or PreAndPost.\n     */\n    function when() public returns(CallPhase);\n}\n",
-  "sourcePath": "/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/GlobalConstraintInterface.sol",
+  "sourcePath": "/home/obaranni/blaize/snglsDAO-smartcontracts/dao/contracts/globalConstraints/GlobalConstraintInterface.sol",
   "ast": {
-    "absolutePath": "/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/GlobalConstraintInterface.sol",
+    "absolutePath": "/home/obaranni/blaize/snglsDAO-smartcontracts/dao/contracts/globalConstraints/GlobalConstraintInterface.sol",
     "exportedSymbols": {
       "GlobalConstraintInterface": [
         1849
@@ -479,7 +479,7 @@
     "src": "0:501:3"
   },
   "legacyAST": {
-    "absolutePath": "/home/obaranni/blaize/arc/myproject/contracts/globalConstraints/GlobalConstraintInterface.sol",
+    "absolutePath": "/home/obaranni/blaize/snglsDAO-smartcontracts/dao/contracts/globalConstraints/GlobalConstraintInterface.sol",
     "exportedSymbols": {
       "GlobalConstraintInterface": [
         1849
@@ -876,7 +876,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-03-18T13:31:05.870Z",
+  "updatedAt": "2020-03-19T16:29:31.929Z",
   "devdoc": {
     "methods": {
       "when()": {
