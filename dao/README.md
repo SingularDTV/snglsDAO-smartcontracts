@@ -25,6 +25,11 @@ npm run start
 
 Access errors on `npm install`
 
+```sh
 sudo chown -R $(whoami) ~/.npm
+```
 
-npm cache clean / npm cache verify
+```sh
+npm cache clean # or 
+npm cache verify # for npm@5 version and up
+```
