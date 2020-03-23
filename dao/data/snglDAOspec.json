@@ -35,8 +35,8 @@
         "constructor": true,
         "params": [
           "Singularity",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000"
+          {"StandAloneContract": 0},
+          {"StandAloneContract": 0}
         ]
       },
       {

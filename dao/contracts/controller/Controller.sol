@@ -65,11 +65,11 @@ contract Controller {
     event RemoveGlobalConstraint(address indexed _globalConstraint, uint256 _index, bool _isPre);
 
     constructor( Avatar _avatar) public {
-        // avatar = _avatar;
-        // nativeToken = avatar.nativeToken();
-        // nativeReputation = avatar.nativeReputation();
-        // schemes[msg.sender] = Scheme({paramsHash: bytes32(0), permissions: bytes4(0x0000001F)});
-        // emit RegisterScheme (msg.sender, msg.sender);
+        avatar = _avatar;
+        nativeToken = avatar.nativeToken();
+        nativeReputation = avatar.nativeReputation();
+        schemes[msg.sender] = Scheme({paramsHash: bytes32(0), permissions: bytes4(0x0000001F)});
+        emit RegisterScheme (msg.sender, msg.sender);
     }
 
   // Do not allow mistaken calls:
@@ -449,38 +449,38 @@ contract Controller {
         return avatar.externalTokenTransferFrom(_externalToken, _from, _to, _value);
     }
 
-    // /**
-    // * @dev externalTokenApproval approve the spender address to spend a specified amount of tokens
-    // *      on behalf of msg.sender.
-    // * @param _externalToken the address of the Token Contract
-    // * @param _spender address
-    // * @param _value the amount of ether (in Wei) which the approval is referring to.
-    // * @return bool which represents a success
-    // */
-    // function externalTokenApproval(IERC20 _externalToken, address _spender, uint256 _value, Avatar _avatar)
-    // external
-    // onlyRegisteredScheme
-    // onlySubjectToConstraint("externalTokenIncreaseApproval")
-    // isAvatarValid(address(_avatar))
-    // returns(bool)
-    // {
-    //     return avatar.externalTokenApproval(_externalToken, _spender, _value);
-    // }
+    /**
+    * @dev externalTokenApproval approve the spender address to spend a specified amount of tokens
+    *      on behalf of msg.sender.
+    * @param _externalToken the address of the Token Contract
+    * @param _spender address
+    * @param _value the amount of ether (in Wei) which the approval is referring to.
+    * @return bool which represents a success
+    */
+    function externalTokenApproval(IERC20 _externalToken, address _spender, uint256 _value, Avatar _avatar)
+    external
+    onlyRegisteredScheme
+    onlySubjectToConstraint("externalTokenIncreaseApproval")
+    isAvatarValid(address(_avatar))
+    returns(bool)
+    {
+        return avatar.externalTokenApproval(_externalToken, _spender, _value);
+    }
 
-    // /**
-    // * @dev metaData emits an event with a string, should contain the hash of some meta data.
-    // * @param _metaData a string representing a hash of the meta data
-    // * @param _avatar Avatar
-    // * @return bool which represents a success
-    // */
-    // function metaData(string calldata _metaData, Avatar _avatar)
-    //     external
-    //     onlyMetaDataScheme
-    //     isAvatarValid(address(_avatar))
-    //     returns(bool)
-    //     {
-    //     return avatar.metaData(_metaData);
-    // }
+    /**
+    * @dev metaData emits an event with a string, should contain the hash of some meta data.
+    * @param _metaData a string representing a hash of the meta data
+    * @param _avatar Avatar
+    * @return bool which represents a success
+    */
+    function metaData(string calldata _metaData, Avatar _avatar)
+        external
+        onlyMetaDataScheme
+        isAvatarValid(address(_avatar))
+        returns(bool)
+        {
+        return avatar.metaData(_metaData);
+    }
 
     /**
      * @dev getNativeReputation
@@ -513,20 +513,20 @@ contract Controller {
         return schemes[_scheme].permissions;
     }
 
-    // function getGlobalConstraintParameters(address _globalConstraint, address) external view returns(bytes32) {
+    function getGlobalConstraintParameters(address _globalConstraint, address) external view returns(bytes32) {
 
-        // GlobalConstraintRegister memory register = globalConstraintsRegisterPre[_globalConstraint];
+        GlobalConstraintRegister memory register = globalConstraintsRegisterPre[_globalConstraint];
 
-        // if (register.isRegistered) {
-        //     return globalConstraintsPre[register.index].params;
-        // }
+        if (register.isRegistered) {
+            return globalConstraintsPre[register.index].params;
+        }
 
-        // register = globalConstraintsRegisterPost[_globalConstraint];
+        register = globalConstraintsRegisterPost[_globalConstraint];
 
-        // if (register.isRegistered) {
-        //     return globalConstraintsPost[register.index].params;
-        // }
-    // }
+        if (register.isRegistered) {
+            return globalConstraintsPost[register.index].params;
+        }
+    }
 
    /**
     * @dev globalConstraintsCount return the global constraint pre and post count
