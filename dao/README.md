@@ -23,7 +23,7 @@ npm run start
 
 ## Trouble shootings
 
-Access errors on `npm install`
+### Access errors on `npm install`
 
 ```sh
 sudo chown -R $(whoami) ~/.npm
@@ -33,3 +33,11 @@ sudo chown -R $(whoami) ~/.npm
 npm cache clean # or 
 npm cache verify # for npm@5 version and up
 ```
+
+### Deploy errors
+
+`✖ Transaction failed: Error: Returned error: VM Exception while processing transaction: revert` often occurs if the contract is already deployed on the network, do not forget to run 
+```sh 
+    npm run stop
+``` 
+before a new launch
