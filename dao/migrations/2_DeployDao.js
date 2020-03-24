@@ -20,25 +20,15 @@ async function migrate() {
     },
   };
 
-  // TODO: If not using ganache docker image by DAOstack un-comment this portion
-  // to migrate base contracts
-  /*
-    switch (process.env.NETWORK) {
-      case "private":
-        const migrationBaseResult = await DAOstackMigration.migrateBase(options);
-        options.prevmigration = options.output;
-        break;
-    }
-  */
-  // const migrationDAOResult = await DAOstackMigration.migrateDAO(options);
-
   let SGTContract = artifacts.require("DAOToken");
-  let AvatarContract = artifacts.require("Avatar")
-  let ControllerContract = artifacts.require("Controller")
-  let GlobalConstraintContract = artifacts.require("TokenCapGC")
+  let AvatarContract = artifacts.require("Avatar");
+  let ControllerContract = artifacts.require("Controller");
+  let GlobalConstraintContract = artifacts.require("TokenCapGC");
+  // let VotingContract = artifacts.require("AbsoluteVote");
+  let ReputationContract = artifacts.require("Reputation")
 
-  module.exports = async function (deployer) {
-    // deployment steps
+  module.exports = async function(deployer) {
+
     let SGTInstance = await deployer.deploy(SGTContract,
       "Singularity Governance Token",
       "SGT",
@@ -48,10 +38,12 @@ async function migrate() {
       // } //todo find good value
     );
 
-    let AvatarInstance = await deployer.deploy(AvatarContract,
+    let ReputationInstance = await deployer.deploy(ReputationContract);
+
+    let AvatarInstance = await deployer.deploy(AvatarContract, 
       "Singularity",
       SGTContract.address,
-      SGTContract.address, // replace with reputation contract address
+      ReputationContract.address,
       // {
       //   gas: 300000
       // } //todo find good value
@@ -65,15 +57,24 @@ async function migrate() {
       // } //todo find good value
     );
 
-    let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract)
+    let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract);    
 
-    ControllerInstance.addGlobalConstraint(
-      GlobalConstraintContract.address,
-      '0x0',
-      AvatarContract.address
-    );
+    // ControllerInstance.addGlobalConstraint(
+    //   GlobalConstraintContract.address,
+    //   0x0,
+    //   AvatarContract.address  
+    // );
 
-    console.log(await ControllerInstance.globalConstraintsCount(AvatarContract.address));
+
+    
+    // let VotingInstance = await deployer.deploy(VotingContract,
+    
+    // );
+  
+
+
+
+    // console.log(await ControllerInstance.globalConstraintsCount(AvatarContract.address));
   };
 }
 
