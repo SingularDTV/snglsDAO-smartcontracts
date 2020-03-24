@@ -24,10 +24,11 @@ async function migrate() {
   let AvatarContract = artifacts.require("Avatar");
   let ControllerContract = artifacts.require("Controller");
   let GlobalConstraintContract = artifacts.require("TokenCapGC");
-  // let VotingContract = artifacts.require("AbsoluteVote");
-  let ReputationContract = artifacts.require("Reputation")
+  let ReputationContract = artifacts.require("Reputation");
 
-  module.exports = async function(deployer) {
+  let ContributionRewardExtContract = artifacts.require("ContributionRewardExt");
+  let VotingContract = artifacts.require("AbsoluteVote");
+  module.exports = async function (deployer) {
 
     let SGTInstance = await deployer.deploy(SGTContract,
       "Singularity Governance Token",
@@ -40,7 +41,7 @@ async function migrate() {
 
     let ReputationInstance = await deployer.deploy(ReputationContract);
 
-    let AvatarInstance = await deployer.deploy(AvatarContract, 
+    let AvatarInstance = await deployer.deploy(AvatarContract,
       "Singularity",
       SGTContract.address,
       ReputationContract.address,
@@ -57,8 +58,11 @@ async function migrate() {
       // } //todo find good value
     );
 
-    let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract);    
-
+    let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract);
+    let ContributionRewardExtInstance = await deployer.deploy(ContributionRewardExtContract);
+    let VotingInstance = await deployer.deploy(VotingContract);
+    await ContributionRewardExtInstance.initialize(AvatarContract.address, VotingInstance.address, await VotingInstance.getParametersHash(51, '0x0000000000000000000000000000000000000000'), '0x0000000000000000000000000000000000000000');
+    await VotingInstance.setParameters(51, '0x0000000000000000000000000000000000000000');
     // ControllerInstance.addGlobalConstraint(
     //   GlobalConstraintContract.address,
     //   0x0,
@@ -66,11 +70,11 @@ async function migrate() {
     // );
 
 
-    
+
     // let VotingInstance = await deployer.deploy(VotingContract,
-    
+
     // );
-  
+
 
 
 
