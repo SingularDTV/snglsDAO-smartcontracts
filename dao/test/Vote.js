@@ -19,13 +19,15 @@ contract("Absolute vote", async accounts => {
         console.log(proposalId);
 
         await ContributionRewardExtInstance.proposeContributionReward("Some description", 1, [2, 3, 4], SGTContractInstance.address, accounts[2], master);
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i <= 3; i++) {
             const acc = accounts[i];
             await AbsoluteVoteInstance.vote(proposalId, 1, 0, acc, {
                 from: acc
             });
         }
-        
+        console.log(await AvatarInstance.owner.call());
+        console.log(ControllerInstance.address);
+        await ContributionRewardExtInstance.redeemReputation(proposalId);
         assert(false);
     });
 })
