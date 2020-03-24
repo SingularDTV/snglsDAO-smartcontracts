@@ -17,8 +17,16 @@ npm install
 ```
 
 ## Deploy DAO
+
+Run truffle developer network
+
 ```sh
-npm run start
+npm run network
+```
+
+Run migrations (in another tab)
+```sh
+npm run migrate
 ```
 
 ## Trouble shootings
