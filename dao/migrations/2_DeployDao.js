@@ -1,5 +1,5 @@
 // const DAOstackMigration = require('@daostack/migration');
-const migrationSpec =  require('../data/snglDAOspec.json')
+const migrationSpec = require('../data/snglDAOspec.json')
 require('dotenv').config();
 
 async function migrate() {
@@ -37,7 +37,7 @@ async function migrate() {
   let ControllerContract = artifacts.require("Controller")
   let GlobalConstraintContract = artifacts.require("TokenCapGC")
 
-  module.exports = async function(deployer) {
+  module.exports = async function (deployer) {
     // deployment steps
     let SGTInstance = await deployer.deploy(SGTContract,
       "Singularity Governance Token",
@@ -48,7 +48,7 @@ async function migrate() {
       // } //todo find good value
     );
 
-    let AvatarInstance = await deployer.deploy(AvatarContract, 
+    let AvatarInstance = await deployer.deploy(AvatarContract,
       "Singularity",
       SGTContract.address,
       SGTContract.address, // replace with reputation contract address
@@ -61,16 +61,16 @@ async function migrate() {
     let ControllerInstance = await deployer.deploy(ControllerContract,
       AvatarContract.address,
       // {
-        // gas: 1352796, 
+      // gas: 1352796, 
       // } //todo find good value
     );
 
-    let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract) 
+    let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract)
 
     ControllerInstance.addGlobalConstraint(
       GlobalConstraintContract.address,
-      0x0,
-      AvatarContract.address  
+      '0x0',
+      AvatarContract.address
     );
 
     console.log(await ControllerInstance.globalConstraintsCount(AvatarContract.address));
