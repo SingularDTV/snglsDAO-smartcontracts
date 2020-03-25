@@ -25,7 +25,8 @@ async function migrate() {
   let ControllerContract = artifacts.require("Controller");
   let GlobalConstraintContract = artifacts.require("TokenCapGC");
   // let VotingContract = artifacts.require("AbsoluteVote");
-  let ReputationContract = artifacts.require("Reputation")
+  let ReputationContract = artifacts.require("Reputation");
+  let LockingToken4ReputationContract = artifacts.require("LockingToken4Reputation");
 
   module.exports = async function(deployer) {
 
@@ -59,11 +60,39 @@ async function migrate() {
 
     let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract);    
 
-    // ControllerInstance.addGlobalConstraint(
-    //   GlobalConstraintContract.address,
-    //   0x0,
-    //   AvatarContract.address  
-    // );
+    ControllerInstance.addGlobalConstraint(
+      GlobalConstraintContract.address,
+      0x0,
+      AvatarContract.address  
+    );
+
+    // Avatar _avatar,
+    // uint256 _reputationReward,
+    // uint256 _lockingStartTime,
+    // uint256 _lockingEndTime,
+    // uint256 _redeemEnableTime,
+    // uint256 _maxLockingPeriod,
+    // bytes32 _agreementHash
+    let LockingToken4ReputationInstance = await deployer.deploy(LockingToken4ReputationContract,
+      AvatarContract.address,
+      10,
+      0,
+      2147483647, // max unix timestamp
+      2419200, // 4 weeks
+      2147483647, // max unix timestamp
+      0x0 // WATT?
+    );
+
+    // address _scheme, 
+    // bytes32 _paramsHash, 
+    // bytes4 _permissions,
+    // address _avatar
+    ControllerInstance.registerScheme(
+      LockingToken4ReputationContract.address,
+      0x0,
+      0x0,
+      AvatarContract.address
+    );
 
 
     
