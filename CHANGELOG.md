@@ -11,10 +11,22 @@
 - Proposal voting test script.
 - Configured contracts list:    
 
-part  | name
-------------- | -------------
-controller | Avatar
-- | Controller
+Part                | Contract name
+-------------       | -------------
+ DAO core           | Avatar
+ _                  | Controller
+ _                  | DAOToken
+ _                  | Reputation
+ Voting             | AbsoluteVote
+ _                  | VotingMachineCallbacks
+ Schemes            | Agreement
+ _                  | ContributionRewardExt
+ _                  | Locking4Reputation
+ _                  | LockingToken4Reputation
+Global constraints  | TokenCapGC
+
+
+
 
 
 
