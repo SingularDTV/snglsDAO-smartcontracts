@@ -27,8 +27,8 @@ async function migrate() {
   let ReputationContract = artifacts.require("Reputation");
   let LockingToken4ReputationContract = artifacts.require("LockingToken4Reputation");
   let ContributionRewardExtContract = artifacts.require("ContributionRewardExt");
-  let VotingContract = artifacts.require("AbsoluteVote");
-  
+  let VotingContract = artifacts.require("GenesisProtocol");
+  let GENContract = artifacts.require("GENToken");
   module.exports = async function (deployer, network, accounts) {
 
     let SGTInstance = await deployer.deploy(SGTContract,
@@ -54,9 +54,38 @@ async function migrate() {
 
     let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract);
     let ContributionRewardExtInstance = await deployer.deploy(ContributionRewardExtContract);
-    let VotingInstance = await deployer.deploy(VotingContract);
-    await ContributionRewardExtInstance.initialize(AvatarContract.address, VotingInstance.address, await VotingInstance.getParametersHash(51, '0x0000000000000000000000000000000000000000'), '0x0000000000000000000000000000000000000000');
-    await VotingInstance.setParameters(51, '0x0000000000000000000000000000000000000000');
+    let GENInstance = await deployer.deploy(GENContract, "GENToken", "GEN", 0);
+    let VotingInstance = await deployer.deploy(VotingContract, GENInstance.address);
+
+    //genesisProtocolParameters a parameters array
+    //genesisProtocolParameters[0] - _queuedVoteRequiredPercentage,
+    //genesisProtocolParameters[1] - _queuedVotePeriodLimit, //the time limit for a proposal to be in an absolute voting mode.
+    //genesisProtocolParameters[2] - _boostedVotePeriodLimit, //the time limit for a proposal to be in an relative voting mode.
+    //genesisProtocolParameters[3] - _preBoostedVotePeriodLimit, //the time limit for a proposal to be in an preparation
+    //                                                             state (stable) before boosted.
+    //genesisProtocolParameters[4] -_thresholdConst
+    //genesisProtocolParameters[5] -_quietEndingPeriod
+    //genesisProtocolParameters[6] -_proposingRepReward
+    //genesisProtocolParameters[7] -_votersReputationLossRatio
+    //genesisProtocolParameters[8] -_minimumDaoBounty
+    //genesisProtocolParameters[9] -_daoBountyConst
+    //genesisProtocolParameters[10] -_activationTime
+    let genesisProtocolParameters = [
+      51, //  -  _queuedVoteRequiredPercentage,
+      100, // -  _queuedVotePeriodLimit, //the time limit for a proposal to be in an absolute voting mode.
+      100, // -  _boostedVotePeriodLimit, //the time limit for a proposal to be in an relative voting mode.
+      50, //  -  _preBoostedVotePeriodLimit, //the time limit for a proposal to be in an preparation
+      //                                       state (stable) before boosted.
+      2000, //   - _thresholdConst
+      20, //  - _quietEndingPeriod
+      10, //  - _proposingRepReward
+      10, //  - _votersReputationLossRatio
+      1, //   - _minimumDaoBounty
+      10, //  - _daoBountyConst
+      10 //   -_activationTime
+    ];
+    await ContributionRewardExtInstance.initialize(AvatarContract.address, VotingInstance.address, await VotingInstance.getParametersHash(genesisProtocolParameters, '0x0000000000000000000000000000000000000000'), '0x0000000000000000000000000000000000000000');
+    await VotingInstance.setParameters(genesisProtocolParameters, '0x0000000000000000000000000000000000000000');
     await ControllerInstance.registerScheme(ContributionRewardExtInstance.address, "0x0", "0xFFFFF", AvatarInstance.address);
     await AvatarInstance.transferOwnership(ControllerInstance.address);
     await ReputationInstance.transferOwnership(ControllerInstance.address);

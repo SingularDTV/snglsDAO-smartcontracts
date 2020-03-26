@@ -1,5 +1,5 @@
 const ContributionRewardExt = artifacts.require("ContributionRewardExt");
-const AbsoluteVote = artifacts.require("AbsoluteVote");
+const AbsoluteVote = artifacts.require("GenesisProtocol");
 const Controller = artifacts.require("Controller");
 const Avatar = artifacts.require("Avatar");
 const SGTContract = artifacts.require("DAOToken");
@@ -28,6 +28,6 @@ contract("Absolute vote", async accounts => {
         console.log(await AvatarInstance.owner.call());
         console.log(ControllerInstance.address);
         await ContributionRewardExtInstance.redeemReputation(proposalId);
-        // assert(false);
+        assert(false);
     });
 })
