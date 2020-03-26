@@ -34,14 +34,11 @@ async function migrate() {
     let SGTInstance = await deployer.deploy(SGTContract,
       "Singularity Governance Token",
       "SGT",
-      1000000, //todo change
-      // {
-      //   gas: 300000
-      // } //todo find good value
+      1000000, // todo: use SNGLS cap
     );
 
     let ReputationInstance = await deployer.deploy(ReputationContract);
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i <= 5; i++) {
       await ReputationInstance.mint(accounts[i], 100);
     }
 
@@ -49,17 +46,10 @@ async function migrate() {
       "Singularity",
       SGTContract.address,
       ReputationContract.address,
-      // {
-      //   gas: 300000
-      // } //todo find good value
-
     );
 
     let ControllerInstance = await deployer.deploy(ControllerContract,
       AvatarContract.address,
-      // {
-      // gas: 1352796, 
-      // } //todo find good value
     );
 
     let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract);
@@ -67,13 +57,22 @@ async function migrate() {
     let VotingInstance = await deployer.deploy(VotingContract);
     await ContributionRewardExtInstance.initialize(AvatarContract.address, VotingInstance.address, await VotingInstance.getParametersHash(51, '0x0000000000000000000000000000000000000000'), '0x0000000000000000000000000000000000000000');
     await VotingInstance.setParameters(51, '0x0000000000000000000000000000000000000000');
-    await ControllerInstance.registerScheme(ContributionRewardExtInstance.address, "0x0", "0xF", AvatarInstance.address);
+    await ControllerInstance.registerScheme(ContributionRewardExtInstance.address, "0x0", "0xFFFFF", AvatarInstance.address);
+    await AvatarInstance.transferOwnership(ControllerInstance.address);
+    await ReputationInstance.transferOwnership(ControllerInstance.address);
+    // ControllerInstance.addGlobalConstraint(
+    //   GlobalConstraintContract.address,
+    //   "0x0",
+    //   AvatarContract.address
+    // );
 
-    ControllerInstance.addGlobalConstraint(
-      GlobalConstraintContract.address,
-      "0x0",
-      AvatarContract.address  
-    );
+
+
+    // let VotingInstance = await deployer.deploy(VotingContract,
+
+    // );
+
+
 
     // Avatar _avatar,
     // uint256 _reputationReward,
