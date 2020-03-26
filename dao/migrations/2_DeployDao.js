@@ -1,5 +1,5 @@
 // const DAOstackMigration = require('@daostack/migration');
-const migrationSpec =  require('../data/snglDAOspec.json')
+const migrationSpec = require('../data/snglDAOspec.json')
 require('dotenv').config();
 
 async function migrate() {
@@ -24,11 +24,12 @@ async function migrate() {
   let AvatarContract = artifacts.require("Avatar");
   let ControllerContract = artifacts.require("Controller");
   let GlobalConstraintContract = artifacts.require("TokenCapGC");
-  // let VotingContract = artifacts.require("AbsoluteVote");
   let ReputationContract = artifacts.require("Reputation");
   let LockingToken4ReputationContract = artifacts.require("LockingToken4Reputation");
-
-  module.exports = async function(deployer) {
+  let ContributionRewardExtContract = artifacts.require("ContributionRewardExt");
+  let VotingContract = artifacts.require("AbsoluteVote");
+  
+  module.exports = async function (deployer, network, accounts) {
 
     let SGTInstance = await deployer.deploy(SGTContract,
       "Singularity Governance Token",
@@ -40,8 +41,11 @@ async function migrate() {
     );
 
     let ReputationInstance = await deployer.deploy(ReputationContract);
+    for (let i = 0; i < 10; i++) {
+      await ReputationInstance.mint(accounts[i], 100);
+    }
 
-    let AvatarInstance = await deployer.deploy(AvatarContract, 
+    let AvatarInstance = await deployer.deploy(AvatarContract,
       "Singularity",
       SGTContract.address,
       ReputationContract.address,
@@ -54,15 +58,20 @@ async function migrate() {
     let ControllerInstance = await deployer.deploy(ControllerContract,
       AvatarContract.address,
       // {
-        // gas: 1352796, 
+      // gas: 1352796, 
       // } //todo find good value
     );
 
-    let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract);    
+    let GlobalConstraintInstance = await deployer.deploy(GlobalConstraintContract);
+    let ContributionRewardExtInstance = await deployer.deploy(ContributionRewardExtContract);
+    let VotingInstance = await deployer.deploy(VotingContract);
+    await ContributionRewardExtInstance.initialize(AvatarContract.address, VotingInstance.address, await VotingInstance.getParametersHash(51, '0x0000000000000000000000000000000000000000'), '0x0000000000000000000000000000000000000000');
+    await VotingInstance.setParameters(51, '0x0000000000000000000000000000000000000000');
+    await ControllerInstance.registerScheme(ContributionRewardExtInstance.address, "0x0", "0xF", AvatarInstance.address);
 
     ControllerInstance.addGlobalConstraint(
       GlobalConstraintContract.address,
-      0x0,
+      "0x0",
       AvatarContract.address  
     );
 
@@ -80,7 +89,7 @@ async function migrate() {
       2147483647, // max unix timestamp
       2419200, // 4 weeks
       2147483647, // max unix timestamp
-      0x0 // WATT?
+      "0x0" // WATT?
     );
 
     // address _scheme, 
@@ -89,30 +98,11 @@ async function migrate() {
     // address _avatar
     ControllerInstance.registerScheme(
       LockingToken4ReputationContract.address,
-      0x0,
-      0x0,
+      "0x0",
+      "0x0",
       AvatarContract.address
     );
-
-
-    
-    // let VotingInstance = await deployer.deploy(VotingContract,
-    
-    // );
-  
-
-
-
-    // console.log(await ControllerInstance.globalConstraintsCount(AvatarContract.address));
   };
 }
 
-//     constructor(string memory _orgName, DAOToken _nativeToken, Reputation _nativeReputation) public {
-
-
-// Deploy A, then deploy B, passing in A's newly deployed address
-// deployer.deploy(A).then(function() {
-//   return deployer.deploy(B, A.address);
-// });
-
-migrate()
+migrate();

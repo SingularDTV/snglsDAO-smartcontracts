@@ -5,7 +5,7 @@
   "scripts": {
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
-    "network": "truffle develop" 
+    "network": "ganache-cli" 
   },
   "keywords": [
     "DAO",
