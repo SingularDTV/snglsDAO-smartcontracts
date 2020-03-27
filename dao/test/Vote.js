@@ -28,6 +28,6 @@ contract("Absolute vote", async accounts => {
         console.log(await AvatarInstance.owner.call());
         console.log(ControllerInstance.address);
         await ContributionRewardExtInstance.redeemReputation(proposalId);
-        assert(false);
+        // assert(false);
     });
 })
