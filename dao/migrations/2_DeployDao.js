@@ -29,6 +29,8 @@ async function migrate() {
   let ContributionRewardExtContract = artifacts.require("ContributionRewardExt");
   let VotingContract = artifacts.require("GenesisProtocol");
   let GENContract = artifacts.require("GENToken");
+  let FeeContract = artifacts.require("Fee");
+  let GenericSchemeContract = artifacts.require("GenericScheme");
   module.exports = async function (deployer, network, accounts) {
 
     let SGTInstance = await deployer.deploy(SGTContract,
@@ -56,7 +58,12 @@ async function migrate() {
     let ContributionRewardExtInstance = await deployer.deploy(ContributionRewardExtContract);
     let GENInstance = await deployer.deploy(GENContract, "GENToken", "GEN", 0);
     let VotingInstance = await deployer.deploy(VotingContract, GENInstance.address);
-
+    let FeeSchemeInstance = await deployer.deploy(GenericSchemeContract);
+    let FeeInstance = await deployer.deploy(FeeContract,
+      100, //listing fee
+      10, //transaction fee
+      1000 //validation fee
+    );
     //genesisProtocolParameters a parameters array
     //genesisProtocolParameters[0] - _queuedVoteRequiredPercentage,
     //genesisProtocolParameters[1] - _queuedVotePeriodLimit, //the time limit for a proposal to be in an absolute voting mode.
@@ -85,15 +92,22 @@ async function migrate() {
       10 //   -_activationTime
     ];
     await ContributionRewardExtInstance.initialize(AvatarContract.address, VotingInstance.address, await VotingInstance.getParametersHash(genesisProtocolParameters, '0x0000000000000000000000000000000000000000'), '0x0000000000000000000000000000000000000000');
+    await FeeSchemeInstance.initialize(
+      AvatarInstance.address,
+      VotingInstance.address,
+      await VotingInstance.getParametersHash(genesisProtocolParameters, '0x0000000000000000000000000000000000000000'),
+      FeeInstance.address
+    )
     await VotingInstance.setParameters(genesisProtocolParameters, '0x0000000000000000000000000000000000000000');
-    await ControllerInstance.registerScheme(ContributionRewardExtInstance.address, "0x0", "0xFFFFF", AvatarInstance.address);
     await AvatarInstance.transferOwnership(ControllerInstance.address);
     await ReputationInstance.transferOwnership(ControllerInstance.address);
+    await FeeInstance.transferOwnership(AvatarInstance.address);
     // ControllerInstance.addGlobalConstraint(
     //   GlobalConstraintContract.address,
     //   "0x0",
     //   AvatarContract.address
     // );
+
 
 
 
@@ -130,6 +144,9 @@ async function migrate() {
       "0x0",
       AvatarContract.address
     );
+
+    ControllerInstance.registerScheme(ContributionRewardExtInstance.address, "0x0", "0xFFFFFFFF", AvatarInstance.address);
+    ControllerInstance.registerScheme(FeeSchemeInstance.address, "0x0", "0xFFFFFFFF", AvatarInstance.address);
   };
 }
 
