@@ -40,8 +40,8 @@ async function migrate() {
     );
 
     let ReputationInstance = await deployer.deploy(ReputationContract);
-    for (let i = 0; i <= 5; i++) {
-      await ReputationInstance.mint(accounts[i], 100);
+    for (let i = 0; i <= 3; i++) {
+      await ReputationInstance.mint(accounts[i], 1000);
     }
 
     let AvatarInstance = await deployer.deploy(AvatarContract,
