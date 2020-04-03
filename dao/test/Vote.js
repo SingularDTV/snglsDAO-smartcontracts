@@ -16,7 +16,6 @@ contract("Absolute vote", async accounts => {
         let AvatarInstance = await Avatar.deployed();
         let SGTContractInstance = await SGTContract.deployed();
         let proposalId = await ContributionRewardExtInstance.proposeContributionReward.call("Some description", 1, [2, 3, 4], SGTContractInstance.address, accounts[2], masterAccount);
-        console.log(proposalId);
 
         await ContributionRewardExtInstance.proposeContributionReward("Some description", 1, [2, 3, 4], SGTContractInstance.address, accounts[2], masterAccount);
 
@@ -31,8 +30,6 @@ contract("Absolute vote", async accounts => {
                 from: acc
             });
         }
-        console.log(await AvatarInstance.owner.call());
-        console.log(ControllerInstance.address);
         await ContributionRewardExtInstance.redeemReputation(proposalId);
         // assert(false);
     });

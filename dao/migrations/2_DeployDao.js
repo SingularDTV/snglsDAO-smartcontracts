@@ -31,6 +31,8 @@ async function migrate() {
   let GENContract = artifacts.require("GENToken");
   let FeeContract = artifacts.require("Fee");
   let GenericSchemeContract = artifacts.require("GenericScheme");
+  let PriceOracle = artifacts.require("TokenLockingOracle");
+  const MembershipFeeStakingContract = artifacts.require("MembershipFeeStaking");
   module.exports = async function (deployer, network, accounts) {
 
     let SGTInstance = await deployer.deploy(SGTContract,
@@ -64,6 +66,8 @@ async function migrate() {
       10, //transaction fee
       1000 //validation fee
     );
+    let PriceOracleInstance = await deployer.deploy(PriceOracle, SGTContract.address);
+    let MembershipFeeStakingInstance = await deployer.deploy(MembershipFeeStakingContract, SGTContract.address);
     //genesisProtocolParameters a parameters array
     //genesisProtocolParameters[0] - _queuedVoteRequiredPercentage,
     //genesisProtocolParameters[1] - _queuedVotePeriodLimit, //the time limit for a proposal to be in an absolute voting mode.
@@ -124,16 +128,17 @@ async function migrate() {
     // uint256 _redeemEnableTime,
     // uint256 _maxLockingPeriod,
     // bytes32 _agreementHash
-    let LockingToken4ReputationInstance = await deployer.deploy(LockingToken4ReputationContract,
-      AvatarContract.address,
-      10,
+    console.log(PriceOracleInstance.address);
+    let LockingToken4ReputationInstance = await deployer.deploy(LockingToken4ReputationContract);
+    LockingToken4ReputationInstance.initialize(AvatarContract.address,
+      10000000000,
       0,
-      2147483647, // max unix timestamp
-      2419200, // 4 weeks
-      2147483647, // max unix timestamp
+      2147483646, // max unix timestamp
+      0, // 4 weeks
+      2147483647, // max unix timestamp,
+      PriceOracleInstance.address,
       "0x0" // WATT?
     );
-
     // address _scheme, 
     // bytes32 _paramsHash, 
     // bytes4 _permissions,
