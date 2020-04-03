@@ -66,9 +66,7 @@ contract LockingToken4Reputation is Locking4Reputation {
 
         return true;
     }
-    event here1();
-    event here2();
-    event here3();
+
     /**
      * @dev lock function
      * @param _amount the amount to lock
@@ -81,17 +79,17 @@ contract LockingToken4Reputation is Locking4Reputation {
         address _token,
         bytes32 _agreementHash)
     public returns(bytes32 lockingId) {
-        emit here1();
+
         uint256 numerator;
         uint256 denominator;
 
         (numerator, denominator) = priceOracleContract.getPrice(_token);
-        emit here2();
+
         require(numerator > 0, "numerator should be > 0");
         require(denominator > 0, "denominator should be > 0");
 
         _token.safeTransferFrom(msg.sender, address(this), _amount);
-        emit here3();
+
         lockingId = super._lock(_amount, _period, msg.sender, numerator, denominator, _agreementHash);
 
         lockedTokens[lockingId] = _token;

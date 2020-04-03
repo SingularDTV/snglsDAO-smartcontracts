@@ -29,10 +29,6 @@ async function migrate() {
   let ContributionRewardExtContract = artifacts.require("ContributionRewardExt");
   let VotingContract = artifacts.require("GenesisProtocol");
   let GENContract = artifacts.require("GENToken");
-  let FeeContract = artifacts.require("Fee");
-  let GenericSchemeContract = artifacts.require("GenericScheme");
-  let PriceOracle = artifacts.require("TokenLockingOracle");
-  const MembershipFeeStakingContract = artifacts.require("MembershipFeeStaking");
   module.exports = async function (deployer, network, accounts) {
 
     let SGTInstance = await deployer.deploy(SGTContract,
@@ -42,8 +38,8 @@ async function migrate() {
     );
 
     let ReputationInstance = await deployer.deploy(ReputationContract);
-    for (let i = 0; i <= 3; i++) {
-      await ReputationInstance.mint(accounts[i], 1000);
+    for (let i = 0; i <= 5; i++) {
+      await ReputationInstance.mint(accounts[i], 100);
     }
 
     let AvatarInstance = await deployer.deploy(AvatarContract,
@@ -60,14 +56,7 @@ async function migrate() {
     let ContributionRewardExtInstance = await deployer.deploy(ContributionRewardExtContract);
     let GENInstance = await deployer.deploy(GENContract, "GENToken", "GEN", 0);
     let VotingInstance = await deployer.deploy(VotingContract, GENInstance.address);
-    let FeeSchemeInstance = await deployer.deploy(GenericSchemeContract);
-    let FeeInstance = await deployer.deploy(FeeContract,
-      100, //listing fee
-      10, //transaction fee
-      1000 //validation fee
-    );
-    let PriceOracleInstance = await deployer.deploy(PriceOracle, SGTContract.address);
-    let MembershipFeeStakingInstance = await deployer.deploy(MembershipFeeStakingContract, SGTContract.address);
+
     //genesisProtocolParameters a parameters array
     //genesisProtocolParameters[0] - _queuedVoteRequiredPercentage,
     //genesisProtocolParameters[1] - _queuedVotePeriodLimit, //the time limit for a proposal to be in an absolute voting mode.
@@ -96,22 +85,15 @@ async function migrate() {
       10 //   -_activationTime
     ];
     await ContributionRewardExtInstance.initialize(AvatarContract.address, VotingInstance.address, await VotingInstance.getParametersHash(genesisProtocolParameters, '0x0000000000000000000000000000000000000000'), '0x0000000000000000000000000000000000000000');
-    await FeeSchemeInstance.initialize(
-      AvatarInstance.address,
-      VotingInstance.address,
-      await VotingInstance.getParametersHash(genesisProtocolParameters, '0x0000000000000000000000000000000000000000'),
-      FeeInstance.address
-    )
     await VotingInstance.setParameters(genesisProtocolParameters, '0x0000000000000000000000000000000000000000');
+    await ControllerInstance.registerScheme(ContributionRewardExtInstance.address, "0x0", "0xFFFFF", AvatarInstance.address);
     await AvatarInstance.transferOwnership(ControllerInstance.address);
     await ReputationInstance.transferOwnership(ControllerInstance.address);
-    await FeeInstance.transferOwnership(AvatarInstance.address);
     // ControllerInstance.addGlobalConstraint(
     //   GlobalConstraintContract.address,
     //   "0x0",
     //   AvatarContract.address
     // );
-
 
 
 
@@ -128,17 +110,16 @@ async function migrate() {
     // uint256 _redeemEnableTime,
     // uint256 _maxLockingPeriod,
     // bytes32 _agreementHash
-    console.log(PriceOracleInstance.address);
-    let LockingToken4ReputationInstance = await deployer.deploy(LockingToken4ReputationContract);
-    LockingToken4ReputationInstance.initialize(AvatarContract.address,
-      10000000000,
+    let LockingToken4ReputationInstance = await deployer.deploy(LockingToken4ReputationContract,
+      AvatarContract.address,
+      10,
       0,
-      2147483646, // max unix timestamp
-      0, // 4 weeks
-      2147483647, // max unix timestamp,
-      PriceOracleInstance.address,
+      2147483647, // max unix timestamp
+      2419200, // 4 weeks
+      2147483647, // max unix timestamp
       "0x0" // WATT?
     );
+
     // address _scheme, 
     // bytes32 _paramsHash, 
     // bytes4 _permissions,
@@ -149,9 +130,6 @@ async function migrate() {
       "0x0",
       AvatarContract.address
     );
-
-    ControllerInstance.registerScheme(ContributionRewardExtInstance.address, "0x0", "0xFFFFFFFF", AvatarInstance.address);
-    ControllerInstance.registerScheme(FeeSchemeInstance.address, "0x0", "0xFFFFFFFF", AvatarInstance.address);
   };
 }
 
