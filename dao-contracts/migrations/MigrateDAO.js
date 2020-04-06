@@ -36,22 +36,8 @@ async function migrate() {
     //   }
     // }
   };
-  console.log("1");
   const migrationDAOResult = await DAOstackMigration.migrateDAO(options);
-  console.log("2");
   migrationDAOResult.dao.Avatar; // DAO avatar address
-  // migrate an demo test scenario (requires an existing `output` file with a base migration)
-  console.log("3");
-  const migrationDemoResult = await DAOstackMigration.migrateDemoTest(options);
-  console.log("4");
-  migrationDemoResult.test.Avatar; // Test DAO avatar address
-  // migrate base, example DAO and demo test contracts
-  // const migrationResult = await DAOstackMigration.migrate(options); // migrate
-
-  // run the cli
-  // DAOstackMigration.cli();
 
 }
-console.log("0");
 migrate()
-console.log("9");

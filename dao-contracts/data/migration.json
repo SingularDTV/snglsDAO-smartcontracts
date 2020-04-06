@@ -920,40 +920,59 @@
         "arcVersion": "0.0.1-rc.31"
       },
       "0.0.1-rc.32": {
-        "name": "Precipitate Cupcake",
-        "Avatar": "0x98CcB5051fD767e2E89567bCCCA4Efc532250544",
-        "DAOToken": "0x30dB4905b474aff3e1EAfc60394ece85dC524A92",
-        "Reputation": "0x4992595a747d772bF291f64112735064BFc8878f",
-        "Controller": "0x5294fd6B7ee619548598ab1Ca24ED49064AaCf4c",
+        "name": "Singularity DAO",
+        "Avatar": "0x455d04D30303Cf0d6ED9a8c3184304Fff90A6575",
+        "DAOToken": "0x6Bba45372Bfc72dDe807179DDa78801DfFD88eeC",
+        "Reputation": "0x8Db92176FC434e44954C9E5c157149D5c005A1fE",
+        "Controller": "0xE204BD69396Afe198805fD0D1aC8160762b44fad",
         "Schemes": [
           {
             "name": "GenericScheme",
-            "alias": "GenericSchemeAlias",
-            "address": "0x353B67029c2B8D94E0a89Bfacd18B2e41152B661",
+            "alias": "GenericSchemeENSPublicResolver",
+            "address": "0x5392ffFec3b6b39eb6Af8f9A6e7C218eF2Ca571b",
             "arcVersion": "0.0.1-rc.32"
           },
           {
-            "name": "ContributionRewardExt",
-            "alias": "ContributionRewardExt",
-            "address": "0x5023deB3F76D484102c9650933541a90B528CBFF",
-            "arcVersion": "0.0.1-rc.39"
+            "name": "GenericScheme",
+            "alias": "GenericSchemeENSRegistry",
+            "address": "0x5838c6FF596a257Ee2D6C87eB25335D150FF110b",
+            "arcVersion": "0.0.1-rc.32"
+          },
+          {
+            "name": "GenericScheme",
+            "alias": "GenericSchemeRegistryLookup",
+            "address": "0xfe40BB8ED531b92cb9a57f1ccADf86eE5114D8df",
+            "arcVersion": "0.0.1-rc.32"
+          },
+          {
+            "name": "ContinuousLocking4Reputation",
+            "alias": "InfiniteReputation4Token",
+            "address": "0xf5aAeD69F3E435b20a1c33279C1Ba79d59fc46D5",
+            "arcVersion": "0.0.1-rc.32"
+          },
+          {
+            "name": "Auction4Reputation",
+            "alias": "GENAuction",
+            "address": "0xbA3Eb4f35C4e17a875B3d48CB20E847ecC16c851",
+            "arcVersion": "0.0.1-rc.32"
+          },
+          {
+            "name": "ReputationFromToken",
+            "alias": "ReputationFromToken",
+            "address": "0xDFfcaD76bd78E6DE90b549707a42916d0D9aFF2C",
+            "arcVersion": "0.0.1-rc.32"
           }
         ],
         "StandAloneContracts": [
           {
-            "name": "Wallet",
-            "address": "0xbe74Dd781E1A3fAb6554A4934132649A5b858541",
+            "name": "Reputation",
+            "address": "0xdFa57387812b4F8742076fa6283b3bAecde0cF3E",
             "arcVersion": "0.0.1-rc.32"
           },
           {
-            "name": "ContributionRewardExt",
-            "address": "0x5023deB3F76D484102c9650933541a90B528CBFF",
-            "arcVersion": "0.0.1-rc.39"
-          },
-          {
-            "name": "Competition",
-            "address": "0xCb7126eC611fab65A1Fbd1253fd947634A4623Fa",
-            "arcVersion": "0.0.1-rc.39"
+            "name": "Wallet",
+            "address": "0x574c4Ef15671627ebacd6616916b2C558Cd49c72",
+            "arcVersion": "0.0.1-rc.32"
           }
         ],
         "arcVersion": "0.0.1-rc.32"
