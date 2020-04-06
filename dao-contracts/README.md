@@ -52,7 +52,8 @@ Access it on http://127.0.0.1:3000
 Run migrations (in another tab)
 ```sh
 cd ../dao-contracts
-daostack-migrate dao --params ./data/snglDAOspec.json
+nvm use 8.10.0
+node migrations/MigrateDAO.js
 ```
 
 ## Testing
