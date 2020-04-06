@@ -53,7 +53,7 @@ Run migrations (in another tab)
 ```sh
 cd ../dao-contracts
 nvm use 8.10.0
-node migrations/MigrateDAO.js
+npm run start
 ```
 
 ## Testing
@@ -80,8 +80,8 @@ npm cache verify # for npm@5 version and up
 
 Ensure that you use correct Node.js version in each window
 
-`✖ Transaction failed: Error: Returned error: VM Exception while processing transaction: revert` often occurs if the contract is already deployed on the network, do not forget to run 
+`✖ Transaction failed: Error: Returned error: VM Exception while processing transaction: revert` often occurs if the contract is already deployed on the network, do not forget to terminate docker-compose (in dao-web-app terminal window) and run 
 ```sh 
-    npm run stop
+    docker-compose down
 ``` 
 before a new launch

@@ -4,11 +4,11 @@
   "description": "DAO for sngl",
   "scripts": {
     "compile": "truffle compile",
-    "migrate": "truffle migrate --network development",
+    "migrate": "node migrations/MigrateDAO.js",
     "deploy-graph": "bash ops/hackyDeploy.sh",
     "network": "ganache-cli",
     "test": "truffle test",
-    "start": "npm run compile && npm run migrate && npm run deploy-graph"
+    "start": "npm run compile && npm run migrate"
   },
   "keywords": [
     "DAO",
