@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.3] - 2020-04-06
+
+### Added
+
+- DAO configuration file.
+- Scenario of migration of DAO to a private network.
+- Description of migration error prevention in README.
+
+### Changed
+
+- Alchemy web application 10.3
+- Migrations using standard DAOstack tools
+
 ## [1.0.2] - 2020-03-26
 
 ### Added
