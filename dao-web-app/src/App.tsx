@@ -98,6 +98,7 @@ export class App extends React.Component<{}, {
   }
 
   public render(): RenderOutput {
+    console.log("-====================> ", this.state.error);
     if (this.state.error) {
       return <ErrorUncaught errorMessage={this.state.error} />;
 
