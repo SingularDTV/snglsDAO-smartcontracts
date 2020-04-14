@@ -1,4 +1,3 @@
-
 {
   "orgName": "Singularity DAO",
   "tokenName": "Singularity governance token",
@@ -17,11 +16,45 @@
   "StandAloneContracts": [
     {
       "name": "Reputation",
-      "fromArc": true
+      "fromArc": false
     },
     {
       "name": "Wallet",
-      "fromArc": true
+      "fromArc": false
+    },
+    {
+      "name": "Fee",
+      "fromArc": false,
+      "runFunctions": [
+        {
+          "functionName": "transferOwnership",
+          "params": [
+            "AvatarAddress"
+          ]
+        }
+      ],
+      "constructor": true,
+      "params": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "TokenLockingOracle",
+      "fromArc": false,
+      "constructor": true,
+      "params": [
+        "TokenAddress"
+      ]
+    },
+    {
+      "name": "MembershipFeeStaking",
+      "fromArc": false,
+      "constructor": true,
+      "params": [
+        "TokenAddress"
+      ]
     }
   ],
   "CustomSchemes": [
@@ -37,7 +70,7 @@
       ],
       "permissions": "0x00000010",
       "alias": "GenericSchemeENSPublicResolver",
-      "fromArc": true
+      "fromArc": false
     },
     {
       "name": "GenericScheme",
@@ -54,7 +87,7 @@
       ],
       "permissions": "0x00000010",
       "alias": "GenericSchemeENSRegistry",
-      "fromArc": true
+      "fromArc": false
     },
     {
       "name": "GenericScheme",
@@ -71,7 +104,25 @@
       ],
       "permissions": "0x00000010",
       "alias": "GenericSchemeRegistryLookup",
-      "fromArc": true
+      "fromArc": false
+    },
+    ,
+    {
+      "name": "LockingToken4Reputation",
+      "fromArc": false,
+      "constructor": false,
+      "params": [
+        "AvatarAddress",
+        10000000000,
+        0,
+        2147483646,
+        2147483646,
+        10000,
+        {
+          "StandAloneContract": 3
+        },
+        "0x0"
+      ]
     },
     {
       "name": "ContinuousLocking4Reputation",
@@ -91,7 +142,7 @@
       ],
       "permissions": "0x00000010",
       "alias": "InfiniteReputation4Token",
-      "fromArc": true
+      "fromArc": false
     },
     {
       "name": "Auction4Reputation",
@@ -109,7 +160,7 @@
       ],
       "permissions": "0x00000010",
       "alias": "GENAuction",
-      "fromArc": true
+      "fromArc": false
     },
     {
       "name": "ReputationFromToken",
@@ -121,7 +172,7 @@
         "0x0000000000000000000000000000000000000001"
       ],
       "alias": "ReputationFromToken",
-      "fromArc": true,
+      "fromArc": false,
       "permissions": "0x00000000"
     }
   ],
@@ -189,6 +240,21 @@
     },
     {
       "address": "0x22d491bde2303f2f43325b2108d26f1eaba1e32b",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xe11ba2b4d45eaed5996cd0823791e0c93114882d",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xd03ea8624c8c5987235048901fb614fdca89b117",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0x95ced938f7991cd0dfcb48f0a06a40fa1af46ebc",
       "tokens": 1000,
       "reputation": 1000
     }
