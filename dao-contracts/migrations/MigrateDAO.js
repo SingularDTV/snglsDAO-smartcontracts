@@ -1,7 +1,7 @@
 require('dotenv').config();
 async function migrate() {
   const fs = require("fs");
-  const DAOstackMigration = require('@daostack/migration');
+  const DAOstackMigration = require('./migration');
 
   const options = {
     // arc version
