@@ -106,7 +106,6 @@
       "alias": "GenericSchemeRegistryLookup",
       "fromArc": false
     },
-    ,
     {
       "name": "LockingToken4Reputation",
       "fromArc": false,
