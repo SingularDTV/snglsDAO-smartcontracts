@@ -44,7 +44,7 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress: ownProps.match.params.daoAvatarAddress,
+    daoAvatarAddress:  ownProps.match.params.daoAvatarAddress, //"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", //
   };
 };
 
@@ -58,6 +58,8 @@ class DaoContainer extends React.Component<IProps, null> {
   public subscription: Subscription;
 
   public async componentDidMount() {
+
+    console.log("Hallo niggas")
     // TODO: use this once 3box fixes Box.getProfiles
     //this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
@@ -81,9 +83,13 @@ class DaoContainer extends React.Component<IProps, null> {
   private schemeRoute = (routeProps: any) => <SchemeContainer {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoSchemesRoute = (routeProps: any) => <DaoSchemesPage {...routeProps} daoState={this.props.data[0]} />;
   private modalRoute = (route: any) => `/dao/${route.params.daoAvatarAddress}/scheme/${route.params.schemeId}/`;
+  
 
   public render(): RenderOutput {
     const daoState = this.props.data[0];
+    console.log(daoState);
+
+    console.log("Hallo niggas222")
 
     return (
       <div className={css.outer}>
@@ -146,8 +152,8 @@ const SubscribedDaoContainer = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    const daoAddress = props.match.params.daoAvatarAddress;
-    const dao = arc.dao(daoAddress);
+    const daoAddress = props.match.params.daoAvatarAddress; // "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"; // 
+    const dao =  arc.dao(daoAddress);
     const observable = combineLatest(
       dao.state({ subscribe: true, fetchAllData: true }), // DAO state
       dao.members()

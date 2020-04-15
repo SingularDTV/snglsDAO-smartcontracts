@@ -74,7 +74,8 @@ class DaosPage extends React.Component<IProps, IState> {
         arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString.charAt(0).toUpperCase() + searchString.slice(1) } }, { fetchAllData: true }),
         (data1, data2) => data1.concat(data2),
       ).pipe(first()).toPromise();
-      this.setState({ searchDaos: foundDaos });
+      const snglsDao = [foundDaos.find(element => element.id = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d")];
+      this.setState({ searchDaos: snglsDao });
     } else {
       this.setState({ searchDaos: [] });
     }
@@ -83,7 +84,7 @@ class DaosPage extends React.Component<IProps, IState> {
   public render(): RenderOutput {
     const { currentAccountProfile, data, fetchMore } = this.props;
     const search = this.state.search.length > 2 ? this.state.search.toLowerCase() : "";
-
+    console.log(data);
     let allDAOs = data[0];
 
     // Add any DAOs found from searching the server to the list
@@ -112,6 +113,8 @@ class DaosPage extends React.Component<IProps, IState> {
                   memberOfDAOs.includes(d.staticState.address));
       }));
     }
+
+    finalDAOList = [finalDAOList.find(element => element.id = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d")]
 
     const daoNodes = finalDAOList.map((dao: DAO) => {
       return (

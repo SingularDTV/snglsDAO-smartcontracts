@@ -42,7 +42,8 @@ docker-compose up graph-node
 Now, in a separate terminal run the following command to run web application:
 
 ```sh
-npm run start
+npm run start-staging-rinkeby # rinkeby web version
+npm run start-private # ganache (private net)web version
 ```
 Access it on http://127.0.0.1:3000
 

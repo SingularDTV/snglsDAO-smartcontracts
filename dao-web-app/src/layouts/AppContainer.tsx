@@ -5,7 +5,6 @@ import DaosPage from "components/Daos/DaosPage";
 import Notification, { NotificationViewStatus } from "components/Notification/Notification";
 import DaoCreator from "components/DaoCreator";
 import DaoContainer from "components/Dao/DaoContainer";
-import FeedPage from "components/Feed/FeedPage";
 import RedemptionsPage from "components/Redemptions/RedemptionsPage";
 import Analytics from "lib/analytics";
 import Header from "layouts/Header";
@@ -209,8 +208,7 @@ class AppContainer extends React.Component<IProps, IState> {
                 <Route path="/dao/:daoAvatarAddress" component={DaoContainer} />
                 <Route path="/profile/:accountAddress" component={AccountProfilePage} />
                 <Route path="/redemptions" component={RedemptionsPage} />
-                <Route path="/daos" component={DaosPage} />
-                <Route path="/" component={FeedPage} />
+                <Route path="/" component={DaosPage} />``
               </Switch>
             </div>
 
