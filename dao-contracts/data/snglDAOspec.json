@@ -55,6 +55,25 @@
       "params": [
         "TokenAddress"
       ]
+    },
+    {
+      "name": "LockingToken4Reputation",
+      "fromArc": false,
+      "constructor": false,
+      "params": [
+        "AvatarAddress",
+        10000000000,
+        0,
+        2147483646,
+        2147483646,
+        10000,
+        {
+          "StandAloneContract": 3
+        },
+        "0x0"
+      ],
+      "alias": "LockingToken4Reputation",
+      "permissions": "0x00000010"
     }
   ],
   "CustomSchemes": [
@@ -105,74 +124,6 @@
       "permissions": "0x00000010",
       "alias": "GenericSchemeRegistryLookup",
       "fromArc": false
-    },
-    {
-      "name": "LockingToken4Reputation",
-      "fromArc": false,
-      "constructor": false,
-      "params": [
-        "AvatarAddress",
-        10000000000,
-        0,
-        2147483646,
-        2147483646,
-        10000,
-        {
-          "StandAloneContract": 3
-        },
-        "0x0"
-      ]
-    },
-    {
-      "name": "ContinuousLocking4Reputation",
-      "schemeName": "ContinuousLocking4Reputation",
-      "isUniversal": false,
-      "params": [
-        850000,
-        1569963600,
-        7200,
-        1570014000,
-        12,
-        85000,
-        900,
-        100,
-        "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
-        "0x0000000000000000000000000000000000000000"
-      ],
-      "permissions": "0x00000010",
-      "alias": "InfiniteReputation4Token",
-      "fromArc": false
-    },
-    {
-      "name": "Auction4Reputation",
-      "schemeName": "Auction4Reputation",
-      "isUniversal": false,
-      "params": [
-        50000,
-        1569963600,
-        720,
-        10,
-        1570014000,
-        "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
-        "AvatarAddress",
-        "0x0000000000000000000000000000000000000000"
-      ],
-      "permissions": "0x00000010",
-      "alias": "GENAuction",
-      "fromArc": false
-    },
-    {
-      "name": "ReputationFromToken",
-      "isUniversal": false,
-      "params": [
-        {
-          "StandAloneContract": 1
-        },
-        "0x0000000000000000000000000000000000000001"
-      ],
-      "alias": "ReputationFromToken",
-      "fromArc": false,
-      "permissions": "0x00000000"
     }
   ],
   "VotingMachinesParams": [

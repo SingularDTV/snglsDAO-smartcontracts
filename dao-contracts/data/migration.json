@@ -2220,57 +2220,60 @@
       },
       "0.0.1-rc.32": {
         "name": "Singularity DAO",
-        "Avatar": "0x5de00a6aF66F8e6838e3028c7325b4bdFE5d329D",
-        "DAOToken": "0x2167eD58cEa46dB2a72c1F6144D0Fde14549Cc6a",
-        "Reputation": "0x3b03Fe0FEa54B9F9594D42e9985bCa0d4A504267",
-        "Controller": "0x0C4ED451791DfD620FE20b2f4321666Bc200Ffba",
+        "Avatar": "0xE676DF21Cb1435AB35eDBA2fA2ebbBb5F87eDd85",
+        "DAOToken": "0x2d2988AB3dac775f6bAbfB4111acb8AFAf7F447D",
+        "Reputation": "0x93271BE1f736d900D7a6235655153D7B559B2a5E",
+        "Controller": "0x4f8301E7cBecc853116c46591EEF1772d6918E1D",
         "Schemes": [
           {
             "name": "GenericScheme",
             "alias": "GenericSchemeENSPublicResolver",
-            "address": "0x28C9bBDdAe39567119FdCa8457F7BeB004B50442",
+            "address": "0xB5A8C323b7bE1218A69F0Ce2CD03190bc1beD258",
             "arcVersion": "0.0.1-rc.32"
           },
           {
             "name": "GenericScheme",
             "alias": "GenericSchemeENSRegistry",
-            "address": "0x0ba3c6Eb6736b3d46DAf2902D3F5aDa7952e156b",
+            "address": "0x54df4721eeD3BFD34D79495D459a89eF48d2aE7A",
             "arcVersion": "0.0.1-rc.32"
           },
           {
             "name": "GenericScheme",
             "alias": "GenericSchemeRegistryLookup",
-            "address": "0x8d3696E8887Bb1eFc4668A6932Dd54dDdFfa28a8",
-            "arcVersion": "0.0.1-rc.32"
-          },
-          {
-            "name": "ContinuousLocking4Reputation",
-            "alias": "InfiniteReputation4Token",
-            "address": "0x5cAF02ceaC3D9576ea04a1F5a83D8879d674B507",
-            "arcVersion": "0.0.1-rc.32"
-          },
-          {
-            "name": "Auction4Reputation",
-            "alias": "GENAuction",
-            "address": "0x1606222BE3eB67eb32E3BDF6517118c787356b3c",
-            "arcVersion": "0.0.1-rc.32"
-          },
-          {
-            "name": "ReputationFromToken",
-            "alias": "ReputationFromToken",
-            "address": "0x68438d366478990B4c7c87D29baaB0F5f54d4036",
+            "address": "0x1E3e9388AB9F2cD026aD578428C4f062A694E332",
             "arcVersion": "0.0.1-rc.32"
           }
         ],
         "StandAloneContracts": [
           {
             "name": "Reputation",
-            "address": "0x4a579D8B578D0fEAe80b6Bf116b64E73E263a05a",
+            "address": "0xc83B1165fb0AFEcd552e1370000941D3bEBd9201",
             "arcVersion": "0.0.1-rc.32"
           },
           {
             "name": "Wallet",
-            "address": "0x509ca39e47d07bcF0e4E97A982e7A33007832E41",
+            "address": "0x9D88c57DbfDb1dd137Dee7a3E260E1C79fEfe521",
+            "arcVersion": "0.0.1-rc.32"
+          },
+          {
+            "name": "Fee",
+            "address": "0xa46B9cbe3f9c60d75De69305aDc2335B33a75877",
+            "arcVersion": "0.0.1-rc.32"
+          },
+          {
+            "name": "TokenLockingOracle",
+            "address": "0x9a0a6d9525E46b6b634a5CB4C54b875C1a34d880",
+            "arcVersion": "0.0.1-rc.32"
+          },
+          {
+            "name": "MembershipFeeStaking",
+            "address": "0x240331eb95B0c38648E9E11C67b913ba2240398c",
+            "arcVersion": "0.0.1-rc.32"
+          },
+          {
+            "name": "LockingToken4Reputation",
+            "alias": "LockingToken4Reputation",
+            "address": "0x78765F39DE7191b9797321fA655364B5Bb4C8e73",
             "arcVersion": "0.0.1-rc.32"
           }
         ],
