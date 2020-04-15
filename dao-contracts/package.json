@@ -27,6 +27,8 @@
     "dotenv": "^8.2.0",
     "node": "^8.10.0",
     "openzeppelin-solidity": "^2.1.3",
+    "prettier": "^2.0.4",
+    "prettier-plugin-solidity": "^1.0.0-alpha.48",
     "truffle": "^5.1.13",
     "websocket": "^1.0.31"
   },
