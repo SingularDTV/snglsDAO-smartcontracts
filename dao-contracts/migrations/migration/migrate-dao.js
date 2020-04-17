@@ -816,6 +816,8 @@ async function migrateDAO({
             schemeParams.push(deploymentState.votingMachinesParams[customeScheme.params[i].voteParams])
           } else if (customeScheme.params[i] === 'GenesisProtocolAddress') {
             schemeParams.push(GenesisProtocol)
+          } else if (customeScheme.params[i] === 'TokenAddress') {
+            schemeParams.push(daoToken.options.address)
           } else {
             schemeParams.push(customeScheme.params[i])
           }
@@ -839,6 +841,8 @@ async function migrateDAO({
             schemeParams.push(deploymentState.StandAloneContracts[customeScheme.params[i].StandAloneContract].address)
           } else if (customeScheme.params[i] === 'AvatarAddress') {
             schemeParams.push(avatar.options.address)
+          } else if (customeScheme.params[i] === 'TokenAddress') {
+            schemeParams.push(daoToken.options.address)
           } else {
             schemeParams.push(customeScheme.params[i])
           }

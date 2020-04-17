@@ -56,42 +56,9 @@
       "params": [
         "TokenAddress"
       ]
-    },
-    {
-      "name": "LockingToken4Reputation",
-      "fromArc": false,
-      "constructor": false,
-      "params": [
-        "AvatarAddress",
-        10000000000,
-        0,
-        2147483646,
-        2147483646,
-        10000,
-        {
-          "StandAloneContract": 3
-        },
-        "0x0"
-      ],
-      "alias": "LockingToken4Reputation",
-      "permissions": "0x00000010"
     }
   ],
   "CustomSchemes": [
-    {
-      "name": "GenericScheme",
-      "schemeName": "GenericScheme",
-      "params": [
-        "GenesisProtocolAddress",
-        {
-          "voteParams": 1
-        },
-        "0xe7410170f87102DF0055eB195163A03B7F2Bff4A"
-      ],
-      "permissions": "0x00000010",
-      "alias": "GenericSchemeENSPublicResolver",
-      "fromArc": false
-    },
     {
       "name": "GenericScheme",
       "schemeName": "GenericScheme",
@@ -106,7 +73,7 @@
         }
       ],
       "permissions": "0x00000010",
-      "alias": "GenericSchemeENSRegistry",
+      "alias": "GenericSchemeReputation",
       "fromArc": false
     },
     {
@@ -123,7 +90,44 @@
         }
       ],
       "permissions": "0x00000010",
-      "alias": "GenericSchemeRegistryLookup",
+      "alias": "GenericSchemeWallet",
+      "fromArc": false
+    },
+    {
+      "name": "GenericScheme",
+      "schemeName": "GenericScheme",
+      "isUniversal": false,
+      "params": [
+        "GenesisProtocolAddress",
+        {
+          "voteParams": 2
+        },
+        {
+          "StandAloneContract": 2
+        }
+      ],
+      "permissions": "0x00000010",
+      "alias": "GenericSchemeFeeChange",
+      "fromArc": false
+    },
+    {
+      "name": "ContinuousLocking4Reputation",
+      "schemeName": "ContinuousLocking4Reputation",
+      "isUniversal": false,
+      "params": [
+        "100000000",
+        "0",
+        "60",
+        "100",
+        "10",
+        "1",
+        "1",
+        "5",
+        "TokenAddress",
+        "0x0"
+      ],
+      "permissions": "0x00000010",
+      "alias": "ContinuousLocking4Reputation",
       "fromArc": false
     }
   ],
