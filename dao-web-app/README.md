@@ -1,3 +1,12 @@
+```sh
+cp config/rinkeby.env .env
+npm run start-staging-rinkeby # rinkeby connected webapp or
+
+cp config/private.env .env
+npm run start-private         # ganache connected webapp only local running
+```
+
+
 # DAOStack Alchemy
 
 [![Build Status](https://travis-ci.org/daostack/alchemy.svg?branch=dev)](https://travis-ci.org/daostack/alchemy)
