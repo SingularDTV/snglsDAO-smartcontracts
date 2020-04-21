@@ -44,7 +44,7 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress:  ownProps.match.params.daoAvatarAddress, //"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", //
+    daoAvatarAddress:  "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // ownProps.match.params.daoAvatarAddress, //"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", //
   };
 };
 
@@ -58,8 +58,39 @@ class DaoContainer extends React.Component<IProps, null> {
   public subscription: Subscription;
 
   public async componentDidMount() {
+    const { data } = this.props;
+    // const search = this.state.search.length > 2 ? this.state.search.toLowerCase() : "";
+    console.log("daos render func  ", data);
+    let allDAOs = data[0];
+    // Add any DAOs found from searching the server to the list
+    // if (this.state.searchDaos.length > 0) {
+    //   // make sure we don't add duplicate DAOs to the list
+    //   const extraFoundDaos = this.state.searchDaos.filter((dao) => {
+    //     return !allDAOs.find((d) => d.id === dao.id);
+    //   });
+    //   allDAOs = allDAOs.concat(extraFoundDaos);
+    // }
+
+    // Always show Genesis Alpha first
+    // let finalDAOList = allDAOs.filter((d: DAO) => d.staticState.name === "Genesis Alpha" && d.staticState.name.toLowerCase().includes(search));
+
+    // if (process.env.NODE_ENV === "staging") {
+    //   // on staging we show all daos (registered or not)
+    //   finalDAOList = finalDAOList.concat(allDAOs.filter((d: DAO) => d.staticState.name !== "Genesis Alpha" && d.staticState.name.toLowerCase().includes(search)));
+    // } else {
+    //   // Otherwise show registered DAOs or DAOs that the person follows or is a member of
+    //   const memberOfDAOs = data[1];
+    //   finalDAOList = finalDAOList.concat(allDAOs.filter((d: DAO) => {
+    //     return d.staticState.name !== "Genesis Alpha" &&
+    //           d.staticState.name.toLowerCase().includes(search) &&
+    //           (d.staticState.register === "registered" ||
+    //               (currentAccountProfile && currentAccountProfile.follows.daos.includes(d.staticState.address)) ||
+    //               memberOfDAOs.includes(d.staticState.address));
+    //   }));
+    // }
 
     console.log("Hallo niggas")
+    console.log(allDAOs)
     // TODO: use this once 3box fixes Box.getProfiles
     //this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
@@ -82,19 +113,32 @@ class DaoContainer extends React.Component<IProps, null> {
 
   private schemeRoute = (routeProps: any) => <SchemeContainer {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoSchemesRoute = (routeProps: any) => <DaoSchemesPage {...routeProps} daoState={this.props.data[0]} />;
-  private modalRoute = (route: any) => `/dao/${route.params.daoAvatarAddress}/scheme/${route.params.schemeId}/`;
   
+  // private modalRoute = (route: any) => `/${route.params.schemeId}/`;
+  // private modalRoute = (route: any) => `/dao/0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d/scheme/0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d/`;
+
 
   public render(): RenderOutput {
+    let searchString = "";    
+    const arc = getArc();
+
+    const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
+    
+    // const snglsDao = [foundDaos.find(element => element.id = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d")];
+
+    console.log("MEMEME ", foundDaos);
+
     const daoState = this.props.data[0];
     console.log(daoState);
 
     console.log("Hallo niggas222")
 
+    console.log(daoState.name)
+    
     return (
       <div className={css.outer}>
         <BreadcrumbsItem to="/daos/">All DAOs</BreadcrumbsItem>
-        <BreadcrumbsItem to={"/dao/" + daoState.address}>{daoState.name}</BreadcrumbsItem>
+        <BreadcrumbsItem to={"/" /*daoState.address*/}>{daoState.name}</BreadcrumbsItem>
         <Helmet>
           <meta name="description" content={daoState.name + " | Managed on Alchemy by DAOstack"} />
           <meta name="og:description" content={daoState.name + " | Managed on Alchemy by DAOstack"} />
@@ -112,30 +156,30 @@ class DaoContainer extends React.Component<IProps, null> {
             </div>
           </div>
           <Switch>
-            <Route exact path="/dao/:daoAvatarAddress/history"
+            <Route exact path="/history"
               render={this.daoHistoryRoute} />
-            <Route exact path="/dao/:daoAvatarAddress/members"
+            <Route exact path="/members"
               render={this.daoMembersRoute} />
-            <Route exact path="/dao/:daoAvatarAddress/discussion"
+            <Route exact path="/discussion"
               render={this.daoDiscussionRoute} />
 
-            <Route exact path="/dao/:daoAvatarAddress/proposal/:proposalId"
+            <Route exact path="/proposal/:proposalId"
               render={this.daoProposalRoute}
             />
 
-            <Route path="/dao/:daoAvatarAddress/crx/proposal/:proposalId"
+            <Route path="/crx/proposal/:proposalId"
               render={this.daoCrxProposalRoute} />
 
-            <Route path="/dao/:daoAvatarAddress/scheme/:schemeId"
+            <Route path="/scheme/:schemeId"
               render={this.schemeRoute} />
 
-            <Route path="/dao/:daoAvatarAddress" render={this.daoSchemesRoute} />
+            <Route path="/" render={this.daoSchemesRoute} />
 
           </Switch>
 
           <ModalRoute
-            path="/dao/:daoAvatarAddress/scheme/:schemeId/proposals/create"
-            parentPath={this.modalRoute}
+            path="/scheme/:schemeId/proposals/create"
+            parentPath={"/"}
             component={CreateProposalPage}
           />
 
@@ -152,7 +196,7 @@ const SubscribedDaoContainer = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    const daoAddress = props.match.params.daoAvatarAddress; // "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"; // 
+    const daoAddress = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";//props.match.params.daoAvatarAddress; // "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"; // 
     const dao =  arc.dao(daoAddress);
     const observable = combineLatest(
       dao.state({ subscribe: true, fetchAllData: true }), // DAO state

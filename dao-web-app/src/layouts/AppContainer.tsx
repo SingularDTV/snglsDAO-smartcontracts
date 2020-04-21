@@ -3,7 +3,7 @@ import { setCurrentAccount } from "actions/web3Actions";
 import AccountProfilePage from "components/Account/AccountProfilePage";
 import DaosPage from "components/Daos/DaosPage";
 import Notification, { NotificationViewStatus } from "components/Notification/Notification";
-import DaoCreator from "components/DaoCreator";
+// import DaoCreator from "components/DaoCreator";
 import DaoContainer from "components/Dao/DaoContainer";
 import RedemptionsPage from "components/Redemptions/RedemptionsPage";
 import Analytics from "lib/analytics";
@@ -204,11 +204,11 @@ class AppContainer extends React.Component<IProps, IState> {
 
             <div className={css.contentWrapper}>
               <Switch>
-                <Route path="/daos/create" component={DaoCreator} />
+                <Route path="/daos/create" component={DaosPage} />
                 <Route path="/dao/:daoAvatarAddress" component={DaoContainer} />
                 <Route path="/profile/:accountAddress" component={AccountProfilePage} />
                 <Route path="/redemptions" component={RedemptionsPage} />
-                <Route path="/" component={DaosPage} />``
+                <Route path="/" component={DaoContainer} />``
               </Switch>
             </div>
 

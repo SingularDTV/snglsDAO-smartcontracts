@@ -85,7 +85,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
 
   public daoMenu() {
     const [ dao, { hasNewPosts } ] = this.props.data ;
-
+    console.log("HELLO FROM SIDEBAR ", dao, dao.address)
     const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
     const bgPattern = generate(dao.address + dao.name);
 
@@ -220,10 +220,13 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
       clearfix: true,
     });
 
+    console.log("SIDEBAR RENDER: ", this.props);
+    console.log("Data ", this.props.data);
+
     return (
       <div className={sidebarClass}>
         <div className={css.menuContent}>
-          { this.props.daoAvatarAddress && this.props.data ? this.daoMenu() : ""}
+          { "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d" && this.props.data ? this.daoMenu() : ""}
 
           <div className={css.siteLinksWrapper}>
             <ul>
@@ -257,7 +260,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               <li><Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</Link></li>
               <li className={css.daoStack}>
                 <a className="externalLink" href="http://daostack.io" target="_blank" rel="noopener noreferrer">
-                  <img src={this.props.daoAvatarAddress ? "/assets/images/Icon/dao-logo.svg" : "/assets/images/Icon/dao-logo-gray.svg"} /> DAOstack
+                  <img src={"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d" ? "/assets/images/Icon/dao-logo.svg" : "/assets/images/Icon/dao-logo-gray.svg"} /> DAOstack
                 </a>
               </li>
             </ul>
