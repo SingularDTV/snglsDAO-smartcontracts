@@ -67,7 +67,6 @@ contract ContinuousLocking4Reputation is Agreement {
      * @param _avatar the avatar to mint reputation from
      * @param _reputationReward the total amount of reputation that can be minted by this contract
      * @param _startTime locking period start time, in seconds since epoch
-     * @param _redeemEnableTime redeem enable time
      * @param _batchTime batch time (in seconds)
      * @param _redeemEnableTime redeem enable time, in seconds since epoch
      *        redeem reputation can be done after this time.
