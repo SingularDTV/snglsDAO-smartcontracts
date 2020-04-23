@@ -19,7 +19,8 @@
     "solhint-plugin-prettier": "0.0.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "truffle migrate",
+    "test": "truffle test",
     "solhint": "./node_modules/.bin/solhint - f table contracts/*.sol",
     "prettier:solidity": "./node_modules/.bin/prettier --write contracts/*.sol"
   },
