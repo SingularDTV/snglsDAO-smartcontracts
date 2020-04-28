@@ -1,6 +1,7 @@
 const GenesisProtocol = artifacts.require("GenesisProtocol");
 const GenericSchemeContract = artifacts.require("GenericScheme");
 const FeeContract = artifacts.require("Fee");
+const getDeployedAddress = require("./getDeployedAddress");
 
 const assert = require('assert').strict;
 
@@ -15,13 +16,13 @@ contract("Fee", async accounts => {
     let GenericSchemeInstance;
     let FeeInstance;
     before(async () => {
-        GenesisProtocolInstance = await GenesisProtocol.deployed();
-        GenericSchemeInstance = await GenericSchemeContract.deployed();
-        FeeInstance = await FeeContract.deployed();
+        GenericSchemeInstance = await GenericSchemeContract.at(getDeployedAddress("GenericSchemeFee"));
+        FeeInstance = await FeeContract.at(getDeployedAddress("Fee"));
+        GenesisProtocolInstance = await GenesisProtocol.at(await GenericSchemeInstance.votingMachine.call());
     });
     for (const fee in feesAndTestValues) {
         if (feesAndTestValues.hasOwnProperty(fee)) {
-            let k = 2;
+            let k = 0;
             let testValue = feesAndTestValues[fee];
             it(`Set ${fee} fee`, async () => {
                 const proposalId = await GenericSchemeInstance.proposeCall.call(encodeFeeChangeCall(fee, testValue), 0, `Change ${fee} fee`);
