@@ -27,15 +27,19 @@ type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
 class DaoHistoryPage extends React.Component<IProps, null> {
 
   public componentDidMount() {
+    console.log("HISTORY componentDidMount <<<<<<<<<<<==============================")
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
-      "DAO Address": this.props.daoState.address,
+      "DAO Address": "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d",
       "DAO Name": this.props.daoState.name,
     });
   }
 
   public render(): RenderOutput {
     const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
+
+    console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
+
 
     const proposals = data;
 
@@ -45,7 +49,7 @@ class DaoHistoryPage extends React.Component<IProps, null> {
 
     return(
       <div>
-        <BreadcrumbsItem to={"/dao/" + daoState.address + "/history"}>History</BreadcrumbsItem>
+        <BreadcrumbsItem to={"/dao/" + "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d" + "/history"}>History</BreadcrumbsItem>
 
         <Sticky enabled top={50} innerZ={10000}>
           <div className={css.daoHistoryHeader}>

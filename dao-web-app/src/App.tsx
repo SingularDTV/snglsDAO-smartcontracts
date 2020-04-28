@@ -119,8 +119,8 @@ export class App extends React.Component<{}, {
               <Switch>
                 <Route path="/cookie-policy" component={this.CookiePolicy}/>
                 <Route path="/privacy-policy" component={this.PrivacyPolicy}/>
-                {/* <Route path="/" exact component={AppContainer}/> */}
-                <Route path="/dao" component={AppContainer}/>
+                <Route path="/" exact component={AppContainer}/>
+                <Route path="/dashboard" component={AppContainer}/>
                 <Route path="/" component={AppContainer}/>
                 <Route path="/profile" component={AppContainer}/>
                 <Route path="/redemptions" component={AppContainer}/>
