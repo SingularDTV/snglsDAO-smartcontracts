@@ -70,7 +70,7 @@ module.exports = async function airdrop(web3 = optionsWeb3, oldContractAddress =
     const newTokensSupply = new BN(8);
     //check if we have enough tokens to airdrop
     if (newTokensSupply.lt(sum)) throw new Error(`Not enough new tokens to airdrop. Required number of tokens: ${sum.toString()}, available number of tokens: ${newTokensSupply.toString()}`);
-    console.log("Enough new tokens to airdrop. Required - " + sum.toString());
+    console.log("Enough new tokens to airdrop.");
     console.log("Check if estimated balances equals to values on chain.");
     for (const addr in balancesOld) {
         if (balancesOld.hasOwnProperty(addr) && !!addr) {
