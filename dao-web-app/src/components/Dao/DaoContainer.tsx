@@ -22,6 +22,7 @@ import DaoDiscussionPage from "./DaoDiscussionPage";
 import DaoSchemesPage from "./DaoSchemesPage";
 import DaoHistoryPage from "./DaoHistoryPage";
 import DaoMembersPage from "./DaoMembersPage";
+import DaoDashboard from "./DaoDashboard";
 import * as css from "./Dao.scss";
 
 type IExternalProps = RouteComponentProps<any>;
@@ -40,11 +41,16 @@ interface IDispatchProps {
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, Member[]]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
+  console.log("mapStateToProps =========> ", ownProps);
+  // ownProps.match.path = "/dao/:daoAvatarAddress";
+  // ownProps.match.path = "/dao/0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";
+  ownProps.location.pathname = "/dao/" + "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";
+
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress:  "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // ownProps.match.params.daoAvatarAddress, //"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", //
+    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // ownProps.match.params.daoAvatarAddress, //"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", //
   };
 };
 
@@ -98,6 +104,7 @@ class DaoContainer extends React.Component<IProps, null> {
   private daoHistoryRoute = (routeProps: any) => <DaoHistoryPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} />;
   private daoDiscussionRoute = (routeProps: any) => <DaoDiscussionPage {...routeProps} dao={this.props.data[0]} />;
+  private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} daoState={this.props.data[0]} />;
   private daoProposalRoute = (routeProps: any) =>
     <ProposalDetailsPage {...routeProps}
       currentAccountAddress={this.props.currentAccountAddress}
@@ -114,9 +121,7 @@ class DaoContainer extends React.Component<IProps, null> {
   private schemeRoute = (routeProps: any) => <SchemeContainer {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoSchemesRoute = (routeProps: any) => <DaoSchemesPage {...routeProps} daoState={this.props.data[0]} />;
   
-  // private modalRoute = (route: any) => `/${route.params.schemeId}/`;
-  // private modalRoute = (route: any) => `/dao/0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d/scheme/0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d/`;
-
+  private modalRoute = (route: any) => `/dao/0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d/scheme/${route.params.schemeId}/`;
 
   public render(): RenderOutput {
     let searchString = "";    
@@ -129,12 +134,10 @@ class DaoContainer extends React.Component<IProps, null> {
     console.log("MEMEME ", foundDaos);
 
     const daoState = this.props.data[0];
-    console.log(daoState);
-
-    console.log("Hallo niggas222")
 
     console.log(daoState.name)
-    
+    console.log("DaoContainer render: ", this.modalRoute, this.props);
+
     return (
       <div className={css.outer}>
         <BreadcrumbsItem to="/daos/">All DAOs</BreadcrumbsItem>
@@ -173,13 +176,19 @@ class DaoContainer extends React.Component<IProps, null> {
             <Route path="/scheme/:schemeId"
               render={this.schemeRoute} />
 
-            <Route path="/" render={this.daoSchemesRoute} />
+
+            <Route exact path="/plugins" 
+              render={this.daoSchemesRoute} />
+            
+            <Route path="/"
+              render={this.daoDashboardRoute} />
+            
 
           </Switch>
 
           <ModalRoute
-            path="/scheme/:schemeId/proposals/create"
-            parentPath={"/"}
+            path="/dao/:daoAvatarAddress/scheme/:schemeId/proposals/create"
+            parentPath={"/" || this.modalRoute}
             component={CreateProposalPage}
           />
 

@@ -11,9 +11,9 @@ import withSubscription, { ISubscriptionProps } from "components/Shared/withSubs
 import { generate } from "geopattern";
 import Analytics from "lib/analytics";
 import { baseTokenName, ethErrorHandler, formatTokens, genName, getExchangesList, supportedTokens, fromWei } from "lib/util";
-import { parse } from "query-string";
+// import { parse } from "query-string";
 import * as React from "react";
-import { matchPath, Link, RouteComponentProps } from "react-router-dom";
+import { /* matchPath,*/ Link, RouteComponentProps } from "react-router-dom";
 import { first } from "rxjs/operators";
 import { IRootState } from "reducers";
 import { connect } from "react-redux";
@@ -44,15 +44,21 @@ const mapDispatchToProps = {
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, IHasNewPosts]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
-  const match = matchPath(ownProps.location.pathname, {
-    path: "/dao/:daoAvatarAddress",
-    strict: false,
-  });
-  const queryValues = parse(ownProps.location.search);
-
+  // const match = matchPath(ownProps.location.pathname, {
+  //   path: "/dao/:daoAvatarAddress",
+  //   strict: false,
+  // });
+  // const queryValues = parse(ownProps.location.search);
+  console.log("SIDEBAR mapStateTotProps: ", ownProps, " *", 
+  {
+    ...ownProps,
+    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    menuOpen: state.ui.menuOpen,
+  }
+  );
   return {
     ...ownProps,
-    daoAvatarAddress: match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     menuOpen: state.ui.menuOpen,
   };
 };
@@ -124,7 +130,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
           <span className={css.daoNavHeading}><b>Menu</b></span>
           <ul>
             <li>
-              <Link to={"/dao/" + dao.address} onClick={this.handleCloseMenu}>
+              <Link to={"/dashboard/"} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -133,12 +139,38 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   })
                 }></span>
                 <img src="/assets/images/Icon/menu/home.svg" />
-                Home
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to={"/membership/"} onClick={this.handleCloseMenu}>
+                <span className={css.menuDot} />
+                <span className={
+                  classNames({
+                    [css.notification]: true,
+                    [css.homeNotification]: true,
+                  })
+                }></span>
+                <img src="/assets/images/Icon/menu/home.svg" />
+                Membership Fee
+              </Link>
+            </li>
+            <li>
+              <Link to={"/plugins/"} onClick={this.handleCloseMenu}>
+                <span className={css.menuDot} />
+                <span className={
+                  classNames({
+                    [css.notification]: true,
+                    [css.homeNotification]: true,
+                  })
+                }></span>
+                <img src="/assets/images/Icon/menu/home.svg" />
+                Apps
               </Link>
             </li>
             <li>
               <TrainingTooltip placement="right" overlay={"List of entities (DAOs and individuals) that have voting power in the DAO"}>
-                <Link to={"/dao/" + dao.address + "/members/"} onClick={this.handleCloseMenu}>
+                <Link to={"/members/"} onClick={this.handleCloseMenu}>
                   <span className={css.menuDot} />
                   <span className={
                     classNames({
@@ -152,7 +184,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               </TrainingTooltip>
             </li>
             <li>
-              <Link to={"/dao/" + dao.address + "/history/"} onClick={this.handleCloseMenu}>
+              <Link to={"/history/"} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -166,7 +198,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             </li>
             <li>
               <TrainingTooltip placement="right" overlay={"Space designated for general questions, statements and comments"}>
-                <Link to={"/dao/" + dao.address + "/discussion/"} onClick={this.handleCloseMenu}>
+                <Link to={"/discussion/"} onClick={this.handleCloseMenu}>
                   <span className={
                     classNames({
                       [css.menuDot]: true,
@@ -183,6 +215,29 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </Link>
               </TrainingTooltip>
             </li>
+          </ul>
+        </div>
+        <div className={css.daoHoldings}>
+          <span className={css.daoNavHeading}>
+            <b>DAO Treasury</b>
+            <a className="externalLink" href={daoHoldingsAddress}>
+              <img src="/assets/images/Icon/link-white.svg" />
+            </a>
+          </span>
+          <ul>
+            <li key={"0x0"}>
+              <Tooltip overlay={`${
+                fromWei(dao.reputationTotalSupply).toLocaleString(
+                  undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP`} placement="right">
+                <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
+              </Tooltip>
+            </li>            
+
+            <SubscribedEthBalance dao={dao} />
+
+            {Object.keys(supportedTokens()).map((tokenAddress) => {
+              return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
+            })}
           </ul>
         </div>
         <div className={css.daoHoldings}>
@@ -232,11 +287,6 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             <ul>
               <li><Link to="/" onClick={this.handleCloseMenu}>Home</Link></li>
               <li>
-                <TrainingTooltip overlay="List of all DAOs accessible by Alchemy" placement="right">
-                  <Link to="/daos" onClick={this.handleCloseMenu}>All DAOs</Link>
-                </TrainingTooltip>
-              </li>
-              <li>
                 <a>$ Buy GEN</a>
                 <ul>
                   <div className={css.diamond}></div>
@@ -254,13 +304,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   }
                 </ul>
               </li>
-              <li><a className="externalLink" href="https://daostack.zendesk.com/hc" target="_blank" rel="noopener noreferrer">Help Center</a></li>
-              <li><a className="externalLink" href="https://hub.gendao.org/" target="_blank" rel="noopener noreferrer">Get Involved</a></li>
-              <li><Link to="/daos/create" onClick={this.handleCloseMenu}>Create A DAO</Link></li>
               <li><Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</Link></li>
               <li className={css.daoStack}>
-                <a className="externalLink" href="http://daostack.io" target="_blank" rel="noopener noreferrer">
-                  <img src={"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d" ? "/assets/images/Icon/dao-logo.svg" : "/assets/images/Icon/dao-logo-gray.svg"} /> DAOstack
+                <a className="externalLink" href="https://snglsdao.io/" target="_blank" rel="noopener noreferrer">
+                  <img src={"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d" ? "/assets/images/Icon/dao-logo.svg" : "/assets/images/Icon/dao-logo-gray.svg"} /> Singularity DAO
                 </a>
               </li>
             </ul>
@@ -338,7 +385,7 @@ const SubscribedSidebarMenu = withSubscription({
   loadingComponent: <div></div>,
   createObservable: (props: IProps) => {
     if (props.daoAvatarAddress) {
-      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_${props.daoAvatarAddress}`) || "0";
+      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d") || "0";
 
       const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
         .then((response: AxiosResponse<any>): IHasNewPosts => {
@@ -358,7 +405,7 @@ const SubscribedSidebarMenu = withSubscription({
         });
 
       const arc = getArc();
-      return combineLatest(arc.dao(props.daoAvatarAddress).state({ subscribe: true }), from(promise));
+      return combineLatest(arc.dao("0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d").state({ subscribe: true }), from(promise));
     } else {
       return of(null);
     }

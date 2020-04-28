@@ -8,7 +8,12 @@
     "deploy-graph": "bash ops/hackyDeploy.sh",
     "network": "ganache-cli",
     "test": "truffle migrate && truffle test",
-    "start": "npm run compile && npm run migrate"
+    "start": "npm run compile && npm run migrate && npm run deploy-singular",
+    "deploy-singular": "cd ../token/contracts && npm run migrate",
+    "airdrop": "cd ../token/airdrop && truffle test ./script/doAirdropFromOptions.js",
+    "docker": "cd ../dao-web-app && docker-compose up graph-node",
+    "docker-down": "cd ../dao-web-app && docker-compose down",
+    "show-balances": "truffle exec ./scripts/showBalances.js"
   },
   "keywords": [
     "DAO",

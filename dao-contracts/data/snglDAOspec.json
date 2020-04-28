@@ -115,16 +115,16 @@
       "schemeName": "ContinuousLocking4Reputation",
       "isUniversal": false,
       "params": [
-        "100000000",
-        "0",
-        "60",
-        "100",
-        "10",
-        "1",
-        "1",
-        "5",
+        "850000000000000000000000",
+        1587649364,
+        10000,
+        1587659364,
+        12,
+        "85000000000000000000000",
+        900,
+        100,
         "TokenAddress",
-        "0x0"
+        "0x0000000000000000000000000000000000000000"
       ],
       "permissions": "0x00000010",
       "alias": "ContinuousLocking4Reputation",
@@ -185,53 +185,8 @@
   "founders": [
     {
       "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
-      "tokens": 1000,
-      "reputation": 1000
-    },
-    {
-      "address": "0xffcf8fdee72ac11b5c542428b35eef5769c409f0",
-      "tokens": 1000,
-      "reputation": 1000
-    },
-    {
-      "address": "0x22d491bde2303f2f43325b2108d26f1eaba1e32b",
-      "tokens": 1000,
-      "reputation": 1000
-    },
-    {
-      "address": "0xe11ba2b4d45eaed5996cd0823791e0c93114882d",
-      "tokens": 1000,
-      "reputation": 1000
-    },
-    {
-      "address": "0xd03ea8624c8c5987235048901fb614fdca89b117",
-      "tokens": 1000,
-      "reputation": 1000
-    },
-    {
-      "address": "0x95ced938f7991cd0dfcb48f0a06a40fa1af46ebc",
-      "tokens": 1000,
-      "reputation": 1000
-    },
-    {
-      "address": "0x3E5e9111Ae8eB78Fe1CC3bb8915d5D461F3Ef9A9",
-      "tokens": 1000,
-      "reputation": 1000
-    },
-    {
-      "address": "0x28a8746e75304c0780E011BEd21C72cD78cd535E",
-      "tokens": 1000,
-      "reputation": 1000
-    },
-    {
-      "address": "0xACa94ef8bD5ffEE41947b4585a84BdA5a3d3DA6E",
-      "tokens": 1000,
-      "reputation": 1000
-    },
-    {
-      "address": "0x1dF62f291b2E969fB0849d99D9Ce41e2F137006e",
-      "tokens": 1000,
-      "reputation": 1000
+      "tokens": 10000,
+      "reputation": 10000
     }
   ]
 }
