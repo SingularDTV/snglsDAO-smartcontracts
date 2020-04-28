@@ -1,5 +1,5 @@
 const {
-    oldContractAddress: erc20ContractAddress,
+    oldContractAddress: erc20ContractAddressOpt,
     eventName,
     resultFileName,
     oldContractBuildFileName: buildFileName,
@@ -17,7 +17,7 @@ const build = JSON.parse(fs.readFileSync(buildFileName));
 
 const abi = build.abi;
 
-module.exports = async function (erc20ContractAddress = erc20ContractAddress) {
+module.exports = async function (erc20ContractAddress = erc20ContractAddressOpt) {
     const contract = new web3.eth.Contract(abi, erc20ContractAddress);
     let gotEvents;
     let blnBN;
@@ -49,15 +49,19 @@ module.exports = async function (erc20ContractAddress = erc20ContractAddress) {
         const balancesBN = {};
         events.map(event => {
             const eventValues = event.returnValues;
-            const {
-                _from,
-                _to
-            } = eventValues;
-            const value = new BN(eventValues._value);
-            if (!(_from in balancesBN)) balancesBN[_from] = new BN(`0`);
-            if (!(_to in balancesBN)) balancesBN[_to] = new BN(`0`);
-            balancesBN[_from].isub(value);
-            balancesBN[_to].iadd(value);
+            // console.log(eventValues);
+
+            // const {
+            //     _from,
+            //     _to
+            // } = eventValues;
+            const from = eventValues[0];
+            const to = eventValues[1];
+            const value = new BN(eventValues[2]);
+            if (!(from in balancesBN)) balancesBN[from] = new BN(`0`);
+            if (!(to in balancesBN)) balancesBN[to] = new BN(`0`);
+            balancesBN[from].isub(value);
+            balancesBN[to].iadd(value);
         });
         return balancesBN;
     }
