@@ -1,6 +1,7 @@
 const getDeployedAddress = require("../../../dao-contracts/test/getDeployedAddress");
+const singularContractAddress = require("../../contracts/build/contracts/SingularDTVToken.json").networks[1512051714758].address
 module.exports = {
-    oldContractAddress: '0x00aBc5cb6B7b15a2DE2F8455e1c9e4Bd1f841661',
+    oldContractAddress: singularContractAddress,
     //name of the truffle build file
     oldContractBuildFileName: './script/ERC20.json',
 
