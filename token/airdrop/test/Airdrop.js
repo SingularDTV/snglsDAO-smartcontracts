@@ -13,14 +13,14 @@ contract("Airdrop script", async accounts => {
     let snglsTokenInstance;
     let sgTokenInstance;
     it(`Airdrop script works.`, async () => {
-        
+
 
         await createNewInstances();
         let tokens = 1000;
         let delta = 10;
         let balances = {};
         const accsNumber = 5;
-        
+
 
         for (let i = 0; i < accsNumber - 1; i++) {
             const acc = accounts[i];
@@ -35,8 +35,8 @@ contract("Airdrop script", async accounts => {
         const lastAcc = accounts[accsNumber - 1]
         balances[lastAcc] = (await snglsTokenInstance.balanceOf(lastAcc)).toString();
         const balanceBeforeAirdrop = new BN(await web3.eth.getBalance(master));
-        const estimatedGasCost = await airdrop(snglsTokenInstance.address, sgTokenInstance.address, web3, accounts);
-        
+        const estimatedGasCost = await airdrop(web3,snglsTokenInstance.address, sgTokenInstance.address);
+
 
         const balanceAfterAirdrop = new BN(await web3.eth.getBalance(master));
         assert.strictEqual(balanceBeforeAirdrop.sub(balanceAfterAirdrop).toString(), estimatedGasCost.toString(), "Wrong gas estimation");

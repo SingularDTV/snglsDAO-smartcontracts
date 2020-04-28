@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.0.5] - 2020-04-28
+
+### Added
+
+- Dashboard page added
+
+### Changed
+
+- Application routing rules changed
+
+## [1.0.4] - 2020-04-21
+
+### Added
+
+- Added reputation contract in migration script
+
+### Changed
+
+- DAO opening immediately in a detailed form
+
 ## [1.0.3] - 2020-04-06
 
 ### Added

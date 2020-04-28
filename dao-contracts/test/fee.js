@@ -1,35 +1,21 @@
-const ContributionRewardExt = artifacts.require("ContributionRewardExt");
 const GenesisProtocol = artifacts.require("GenesisProtocol");
-const Controller = artifacts.require("Controller");
-const Avatar = artifacts.require("Avatar");
-const SGTContract = artifacts.require("DAOToken");
 const GenericSchemeContract = artifacts.require("GenericScheme");
 const FeeContract = artifacts.require("Fee");
 
 const assert = require('assert').strict;
-const BN = web3.utils.BN;
 
 contract("Fee", async accounts => {
     const feesAndTestValues = {
         "validation": 9,
         "listing": 7,
         "transaction": 8,
+        "membership": 11
     };
-    let masterAccount;
-    let ContributionRewardExtInstance;
     let GenesisProtocolInstance;
-    let ControllerInstance;
-    let AvatarInstance;
-    let SGTContractInstance;
     let GenericSchemeInstance;
     let FeeInstance;
     before(async () => {
-        masterAccount = accounts[0];
-        ContributionRewardExtInstance = await ContributionRewardExt.deployed();
         GenesisProtocolInstance = await GenesisProtocol.deployed();
-        ControllerInstance = await Controller.deployed();
-        AvatarInstance = await Avatar.deployed();
-        SGTContractInstance = await SGTContract.deployed();
         GenericSchemeInstance = await GenericSchemeContract.deployed();
         FeeInstance = await FeeContract.deployed();
     });

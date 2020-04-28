@@ -3,9 +3,8 @@ import { setCurrentAccount } from "actions/web3Actions";
 import AccountProfilePage from "components/Account/AccountProfilePage";
 import DaosPage from "components/Daos/DaosPage";
 import Notification, { NotificationViewStatus } from "components/Notification/Notification";
-import DaoCreator from "components/DaoCreator";
+// import DaoCreator from "components/DaoCreator";
 import DaoContainer from "components/Dao/DaoContainer";
-import FeedPage from "components/Feed/FeedPage";
 import RedemptionsPage from "components/Redemptions/RedemptionsPage";
 import Analytics from "lib/analytics";
 import Header from "layouts/Header";
@@ -18,7 +17,7 @@ import { parse } from "query-string";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
-import { matchPath,Link, Route, RouteComponentProps, Switch } from "react-router-dom";
+import { matchPath, Link, Route, RouteComponentProps, Switch, Redirect } from "react-router-dom";
 import { ModalContainer } from "react-router-modal";
 import { History } from "history";
 import classNames from "classnames";
@@ -40,15 +39,17 @@ interface IStateProps {
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IStateProps & IExternalProps => {
   const match = matchPath(ownProps.location.pathname, {
-    path: "/dao/:daoAvatarAddress",
+    path: "/",
     strict: false,
   });
   const queryValues = parse(ownProps.location.search);
+  console.log("lalala: ", ownProps, match, queryValues)
 
+  console.log("map state to props: ", state.web3.currentAccountAddress)
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
-    daoAvatarAddress: match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d",
     sortedNotifications: sortedNotifications()(state),
     threeBox: state.profiles.threeBox,
   };
@@ -176,12 +177,11 @@ class AppContainer extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
-
+    console.log("APP CONTANER: ", this.props);
     const {
-      daoAvatarAddress,
+      /*daoAvatarAddress,*/
       sortedNotifications,
     } = this.props;
-
     if (this.state.error) {
       // Render error fallback UI
       // eslint-disable-next-line no-console
@@ -193,7 +193,7 @@ class AppContainer extends React.Component<IProps, IState> {
       const hasAcceptedCookies = !!localStorage.getItem(AppContainer.hasAcceptedCookiesKey);
 
       return (
-        <div className={classNames({[css.outer]: true, [css.withDAO]: !!daoAvatarAddress})}>
+        <div className={classNames({[css.outer]: true, [css.withDAO]: !!"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"})}>
           <BreadcrumbsItem to="/">Alchemy</BreadcrumbsItem>
 
           <div className={css.container}>
@@ -204,13 +204,14 @@ class AppContainer extends React.Component<IProps, IState> {
             </div>
 
             <div className={css.contentWrapper}>
+            <Redirect exact from="/" to="/dashboard"></Redirect>
               <Switch>
-                <Route path="/daos/create" component={DaoCreator} />
-                <Route path="/dao/:daoAvatarAddress" component={DaoContainer} />
+                <Route path="/daos/create" component={DaosPage} />
+                {/* <Route path="/dao/:daoAvatarAddress" component={DaoContainer} /> */}
                 <Route path="/profile/:accountAddress" component={AccountProfilePage} />
                 <Route path="/redemptions" component={RedemptionsPage} />
-                <Route path="/daos" component={DaosPage} />
-                <Route path="/" component={FeedPage} />
+                <Route path="/dashboard" component={DaoContainer} />
+                <Route path="/history" component={RedemptionsPage} />
               </Switch>
             </div>
 
