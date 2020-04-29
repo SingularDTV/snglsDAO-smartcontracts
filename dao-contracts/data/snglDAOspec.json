@@ -107,7 +107,7 @@
         }
       ],
       "permissions": "0x00000010",
-      "alias": "GenericSchemeFeeChange",
+      "alias": "GenericSchemeFee",
       "fromArc": false
     },
     {
@@ -116,9 +116,9 @@
       "isUniversal": false,
       "params": [
         "850000000000000000000000",
-        1587649364,
+        1588111861,
         10000,
-        1587659364,
+        1588121861,
         12,
         "85000000000000000000000",
         900,
@@ -128,7 +128,7 @@
       ],
       "permissions": "0x00000010",
       "alias": "ContinuousLocking4Reputation",
-      "fromArc": false
+      "fromArc": true
     }
   ],
   "VotingMachinesParams": [

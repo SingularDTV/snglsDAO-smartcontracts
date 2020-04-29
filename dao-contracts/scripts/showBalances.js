@@ -1,6 +1,6 @@
 module.exports = async function (callback) {
     const DAOToken = artifacts.require("DAOToken");
-
+    const getDeployedAddress = require("./../test/getDeployedAddress")
     const accounts = [
         "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
         "0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0",
@@ -13,7 +13,7 @@ module.exports = async function (callback) {
         "0xACa94ef8bD5ffEE41947b4585a84BdA5a3d3DA6E",
         "0x1dF62f291b2E969fB0849d99D9Ce41e2F137006e"
     ];
-    const tokenInstance = await DAOToken.at("0x6Bba45372Bfc72dDe807179DDa78801DfFD88eeC");
+    const tokenInstance = await DAOToken.at(getDeployedAddress("DAOToken"));
     for (let i = 0; i < accounts.length; i++) {
         const acc = accounts[i];
         console.log((await tokenInstance.balanceOf.call(acc)).toString());
