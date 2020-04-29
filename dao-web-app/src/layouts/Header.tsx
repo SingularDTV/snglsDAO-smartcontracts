@@ -39,7 +39,7 @@ interface IStateProps {
 
 const mapStateToProps = (state: IRootState & IStateProps, ownProps: IExternalProps): IExternalProps & IStateProps => {
   const match = matchPath(ownProps.location.pathname, {
-    path: "/dao/:daoAvatarAddress",
+    path: "/dao",
     strict: false,
   });
   const queryValues = parse(ownProps.location.search);
