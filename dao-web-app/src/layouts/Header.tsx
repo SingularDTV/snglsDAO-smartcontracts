@@ -190,7 +190,8 @@ class Header extends React.Component<IProps, null> {
           <TrainingTooltip overlay="View your personal feed" placement="bottomRight">
             <div className={css.menu}>
               <Link to="/">
-                <img src="/assets/images/alchemy-logo-white.svg"/>
+                {/* <img src="/assets/images/alchemy-logo-white.svg" /> */}
+                <img src="/assets/images/new_logo.png" />
               </Link>
             </div>
           </TrainingTooltip>

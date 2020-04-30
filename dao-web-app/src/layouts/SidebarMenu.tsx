@@ -138,8 +138,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                     [css.homeNotification]: true,
                   })
                 }></span>
-                <img src="/assets/images/Icon/menu/home.svg" />
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_home.svg" />
                 Dashboard
+                </span>
               </Link>
             </li>
             <li>
@@ -151,8 +153,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                     [css.homeNotification]: true,
                   })
                 }></span>
-                <img src="/assets/images/Icon/menu/home.svg" />
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_membership.svg" />
                 Membership Fee
+                </span>
               </Link>
             </li>
             <li>
@@ -164,8 +168,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                     [css.homeNotification]: true,
                   })
                 }></span>
-                <img src="/assets/images/Icon/menu/home.svg" />
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_apps.svg" />
                 Apps
+                </span>
               </Link>
             </li>
             <li>
@@ -178,8 +184,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                       [css.holdersNotification]: true,
                     })
                   }></span>
-                  <img src="/assets/images/Icon/menu/holders.svg" />
+                  <span className={css.menuIcon}>
+                  <img src="/assets/images/Icon/menu/_members.svg" />
                   DAO Members
+                  </span>
                 </Link>
               </TrainingTooltip>
             </li>
@@ -192,8 +200,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                     [css.historyNotification]: true,
                   })
                 }></span>
-                <img src="/assets/images/Icon/menu/history.svg" />
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_history.svg" />
                 History
+                </span>
               </Link>
             </li>
             <li>
@@ -210,8 +220,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                       [css.discussionNotification]: true,
                     })
                   }></span>
-                  <img src="/assets/images/Icon/menu/chat.svg" />
-                DAO Wall
+                  <span className={css.menuIcon}>
+                  <img src="/assets/images/Icon/menu/_wall.svg" />
+                  DAO Wall
+                  </span>
                 </Link>
               </TrainingTooltip>
             </li>

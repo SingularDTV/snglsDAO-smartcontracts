@@ -1,5 +1,12 @@
 $header-height: 100px;
 
+
+// Add google fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+
 @font-face {
   font-family: "AccordBold";
   src: url("/assets/fonts/Accord-Bold.ttf");
@@ -44,7 +51,7 @@ body {
 
 .contentWrapper {
   position: relative;
-  max-width: $max-width;
+  // max-width: $max-width;
   margin: 0 auto;
 }
 
@@ -108,6 +115,7 @@ body {
   vertical-align: middle;
   background-color: $navy;
   height: 50px;
+  height: 93px;
   z-index: 100000;
   top: 0;
   color: rgba(255, 255, 255, 1);
@@ -137,12 +145,17 @@ body {
     height: 50px;
     transition: all 0.25s ease;
 
+    top: 50%;
+    transform: translateY(-50%);
+
     img {
       position: absolute;
       z-index: 100;
       left: 15px;
-      top: 10px;
-      height: 30px;
+      // top: 10px;
+      top: 0;
+      // height: 30px;
+      height: 46px;
       transition: all 0.25s ease;
     }
   }
@@ -566,8 +579,11 @@ body {
 
 .topInfo {
   position: absolute;
-  left: 70px;
-  top: 16px;
+  // left: 70px;
+  left: 230px;
+  // top: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 14px;
 
   span span b {
@@ -689,6 +705,7 @@ body {
 @media only screen and (max-width: 1580px) {
   .withDAO {
     .contentWrapper {
+      // margin: 0 0 0 470px;
       margin: 0 0 0 250px;
     }
   }
