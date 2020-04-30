@@ -24,6 +24,12 @@ $accent-4: rgba(46, 168, 122, 1.000);
 $accent-4-halftone: rgba(46, 168, 122, .5);
 $accent-4-transparent: rgba(46, 168, 122, 0);
 
+// new styles by Alex.O
+$dark_blue: rgba(1, 11, 43, 1.000);
+$white_bg: rgba(255, 255, 255, 1.000);
+$links_color: rgb(1, 11, 43);
+// new styles by Alex.O
+
 $body-font: "Open Sans";
 $heading-1-font: "AccordBold";
 
@@ -52,7 +58,8 @@ $max-width: 1080px;
 
 /* Alchemy Earth styles */
 
-$navy: rgba(18, 46, 91, 1.000);
+// $navy: rgba(18, 46, 91, 1.000);
+$navy: rgba(1, 11, 43, 1.000);
 $sky: rgba(49, 120, 202, 1.000);
 $accent-1: rgba(3, 118, 255, 1.000); /* Bright blue */
 $accent-2: rgba(246, 80, 80, 1.000); /* Red */
