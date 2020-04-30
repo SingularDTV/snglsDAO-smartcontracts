@@ -73,9 +73,43 @@ class DaoMembersPage extends React.Component<IProps, null> {
       <div className={css.membersContainer}>
         <BreadcrumbsItem to={"/dao/" + daoState.address + "/members"}>DAO Members</BreadcrumbsItem>
         <Sticky enabled top={50} innerZ={10000}>
-          <h2>Dashboard</h2>
+          <h1>DASHBOARD</h1>
         </Sticky>
-        {/* <table className={css.memberHeaderTable}>
+
+        {/* Key parameters div */}
+          <div> 
+            <h2>KEY PARAMETERS</h2>
+            <div>
+              <p> Listing rate: </p>
+            </div>
+            <div>
+              <p> Transaction fee: </p>
+            </div>
+            <div>
+              <p> Validation fee: </p>
+            </div>
+            <div>
+              <p> DAO TRESUARY: </p>
+              <li>
+                1
+              </li>
+              <li>
+                2
+              </li>
+            </div>
+            <div>
+              <p> DAO HOLDINGS: </p>
+              <li>
+                1
+              </li>
+              <li>
+                2
+              </li>
+            </div>
+          </div>
+
+          <h2>TOP PROPOUSALS</h2>
+          <table className={css.memberHeaderTable}>
           <tbody className={css.memberTable + " " + css.memberTableHeading}>
             <tr>
               <td className={css.memberAvatar}></td>
@@ -85,7 +119,37 @@ class DaoMembersPage extends React.Component<IProps, null> {
               <td className={css.memberSocial}>Social Verification</td>
             </tr>
           </tbody>
-        </table> */}
+        </table>
+        <InfiniteScroll
+          dataLength={members.length} //This is important field to render the next data
+          next={this.props.fetchMore}
+          hasMore={members.length < this.props.daoState.memberCount}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <p style={{textAlign: "center"}}>
+              <b>&mdash;</b>
+            </p>
+          }
+          
+        >
+          {membersHTML}
+        </InfiniteScroll>
+
+
+
+          <h2>TOP MEMBERS</h2>
+
+          <table className={css.memberHeaderTable}>
+          <tbody className={css.memberTable + " " + css.memberTableHeading}>
+            <tr>
+              <td className={css.memberAvatar}></td>
+              <td className={css.memberName}>Name</td>
+              <td className={css.memberAddress}>Address</td>
+              <td className={css.memberReputation}>Reputation</td>
+              <td className={css.memberSocial}>Social Verification</td>
+            </tr>
+          </tbody>
+        </table>
         <InfiniteScroll
           dataLength={members.length} //This is important field to render the next data
           next={this.props.fetchMore}
