@@ -1,7 +1,6 @@
 import { IDAOState, Member } from "@daostack/client";
 import { getProfilesForAddresses } from "actions/profilesActions";
 import { getArc } from "arc";
-import CreateProposalPage from "components/Proposal/Create/CreateProposalPage";
 import ProposalDetailsPage from "components/Proposal/ProposalDetailsPage";
 import SchemeContainer from "components/Scheme/SchemeContainer";
 import Loading from "components/Shared/Loading";
@@ -10,7 +9,7 @@ import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
-import { Route, RouteComponentProps, Switch } from "react-router-dom";
+import { Route, RouteComponentProps, Switch, Redirect } from "react-router-dom";
 //@ts-ignore
 import { ModalRoute } from "react-router-modal";
 import { IRootState } from "reducers";
@@ -44,7 +43,7 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   console.log("mapStateToProps =========> ", ownProps);
   // ownProps.match.path = "/dao/:daoAvatarAddress";
   // ownProps.match.path = "/dao/0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";
-  ownProps.location.pathname = "/dao/" + "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";
+  // ownProps.location.pathname = "/dao/" + "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";
 
   return {
     ...ownProps,
@@ -159,38 +158,34 @@ class DaoContainer extends React.Component<IProps, null> {
             </div>
           </div>
           <Switch>
-            <Route exact path="/history"
+            <Route exact path="/dao/history"
               render={this.daoHistoryRoute} />
-            <Route exact path="/members"
+            <Route exact path="/dao/members"
               render={this.daoMembersRoute} />
-            <Route exact path="/discussion"
+            <Route exact path="/dao/discussion"
               render={this.daoDiscussionRoute} />
 
-            <Route exact path="/proposal/:proposalId"
+            <Route exact path="/dao/proposal/:proposalId"
               render={this.daoProposalRoute}
             />
 
-            <Route path="/crx/proposal/:proposalId"
+            <Route path="/dao/crx/proposal/:proposalId"
               render={this.daoCrxProposalRoute} />
 
-            <Route path="/scheme/:schemeId"
+            <Route path="/dao/scheme/:schemeId"
               render={this.schemeRoute} />
 
 
-            <Route exact path="/plugins" 
+            <Route exact path="/dao/plugins" 
               render={this.daoSchemesRoute} />
             
-            <Route path="/"
+            <Route exact path="/dao/dashboard"
               render={this.daoDashboardRoute} />
-            
+
+            <Redirect exact from="/dao" to="/dao/dashboard"></Redirect>
 
           </Switch>
 
-          <ModalRoute
-            path="/dao/:daoAvatarAddress/scheme/:schemeId/proposals/create"
-            parentPath={"/" || this.modalRoute}
-            component={CreateProposalPage}
-          />
 
         </div>
       </div>

@@ -54,7 +54,7 @@ class DaoMembersPage extends React.Component<IProps, null> {
 
     Analytics.track("Page View", {
       "Page Name": Page.DAOMembers,
-      "DAO Address": this.props.daoState.address,
+      "DAO Address": "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d",
       "DAO Name": this.props.daoState.name,
     });
   }
