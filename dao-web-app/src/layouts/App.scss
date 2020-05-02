@@ -30,7 +30,7 @@ body {
 .outer {
   width: 100%;
   height: 100%;
-  padding-top: 50px;
+  // padding-top: 50px;
 }
 
 .container {
@@ -46,13 +46,17 @@ body {
 }
 
 .withDAO .sidebarWrapper {
-  width: 250px;
+  // width: 250px;
+  width: 100%;
 }
 
 .contentWrapper {
   position: relative;
   // max-width: $max-width;
   margin: 0 auto;
+  background: #010c2c url(/assets/images/bg_content.jpg);
+  background-size: cover;
+  margin: 0;
 }
 
 .background {
@@ -603,6 +607,20 @@ body {
   display: none;
 }
 
+
+
+
+.pageWrapper {
+  position: relative;
+  top: 93px;
+  line-height: normal;
+  display: grid;
+  grid-template-columns: 470px 1fr;
+}
+
+
+
+
 @media only screen and (max-device-width: 1024px) {
   .modalBody {
     position: fixed;
@@ -706,7 +724,8 @@ body {
   .withDAO {
     .contentWrapper {
       // margin: 0 0 0 470px;
-      margin: 0 0 0 250px;
+      // margin: 0 0 0 250px;
+      margin: 0;
     }
   }
 }
