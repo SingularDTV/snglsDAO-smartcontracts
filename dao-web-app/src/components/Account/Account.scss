@@ -23,7 +23,7 @@ a.detailView {
 }
 
 .accountImage {
-  border-radius: 15%;
+  // border-radius: 15%;
   vertical-align: middle;
 }
 
@@ -144,6 +144,11 @@ a.detailView {
 a.accountName {
   vertical-align: middle;
   white-space: nowrap;
+  color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 32px;
 }
 
 .targetAccount:hover {
@@ -174,29 +179,63 @@ a.accountName {
 
 .profileData {
   flex-grow: 2;
+  color: #fff;
 }
 
 .profileContainer {
-  max-width: 700px;
-  width: 100%;
-  border-radius: 15px;
+  // max-width: 700px;
+  width: calc(100% - 160px);
+  padding: 0 80px;
+  // border-radius: 15px;
   margin: 0 auto;
   margin-top: 40px;
   display: flex;
   flex-direction: column;
 
   form {
-    padding: 40px;
-    background-color: $white;
-    border-radius: 15px;
+    // padding: 40px;
+    // background-color: $white;
+    // border-radius: 15px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 35%;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      height: 100%;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      opacity: 0.8;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-sizing: border-box;
+      backdrop-filter: blur(40px);
+    }
   }
 
   .profileContent {
     display: block;
     position: relative;
+    padding: 40px;
 
     .followButton {
       margin-top: 10px;
+      button {
+        border: 0;
+        background: #D40D26;
+        box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
+        border-radius: 100px;
+        color: #fff;
+        letter-spacing: 1.2px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        font-family: 'Montserrat', sans-serif;
+        padding: 14px 33px;
+        text-transform: uppercase;
+      }
     }
   }
 
@@ -229,16 +268,30 @@ a.accountName {
 
   .otherInfoContainer {
     width: 100%;
+    background: #010B2B;
+    position: relative;
+    padding: 40px;
+
+    strong {
+      font-weight: bold;
+      font-size: 22px;
+      line-height: 32px;
+      color: #fff;
+    }
 
     span {
-      color: #76c9de;
+      // color: #76c9de;
       font-weight: bold;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      color: #fff;
     }
 
     .tokens {
       > div {
         display: block;
-        width: 33%;
+        // width: 33%;
       }
     }
 

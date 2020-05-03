@@ -1,14 +1,30 @@
 .wrapper {
-  background: white;
+  // background: white;
   width: 47.5%;
   margin: 0 2.5% 40px 0;
   position: relative;
   float: left;
   border-radius: 20px 20px 0 0;
 
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 0.8;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+    backdrop-filter: blur(40px);
+  }
+
   h2 {
     display: block;
-    color: #001d34;
+    // color: #001d34;
+    color: #fff;
+    text-transform: uppercase;
     font-weight: bold;
     font-size: 21px;
     padding: 0;
@@ -19,16 +35,18 @@
   .body {
     margin: 25px;
     margin-bottom: 0;
+    position: relative;
   }
 
   table {
     width: 100%;
     border-spacing: 0;
+    position: relative;
 
     td {
       vertical-align: middle;
-      border: 1px solid white;
-      border-top: 1px solid #e0e8f1;
+      // border: 1px solid white;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       padding-top: 12px;
       padding-bottom: 12px;
       font-size: 11px;

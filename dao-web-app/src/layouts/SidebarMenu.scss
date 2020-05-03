@@ -1,16 +1,19 @@
 .sidebarWrapper {
   min-width: 48px;
   // max-width: 470px;
-  max-width: 250px;
-  width: 100%;
+  // max-width: 250px;
+  // position: fixed;
+  // width: 100%;
+  // top: 93px;
+  max-width: 100%;
   height: 100%;
   color: $white;
   flex-grow: 1;
   overflow: visible;
-  position: fixed;
-  top: 93px;
-  z-index: 1000;
-
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  padding: 0 70px;
   color: $links_color;
 
   &:hover {
@@ -89,6 +92,7 @@
 
   .daoNavigation {
     font-family: "Open Sans";
+    margin-bottom: 60px;
 
     ul {
       margin-top: 15px;
@@ -197,9 +201,9 @@
     // background-color: #3178ca;
     margin-right: 10px;
     position: relative;
-    left: 15px;
+    left: 11px;
     top: 17px;
-    padding: 0 10px 10px 10px;
+    padding: 0 10px 22px 10px;
     font-weight: normal;
     // color: rgba(255, 255, 255, 0.5);
     color: #010B2B;
@@ -211,6 +215,7 @@
 
 .daoHoldings {
   display: block;
+  margin-bottom: 60px;
 
   .daoNavHeading b {
     padding: 10px 25px 10px 10px;
@@ -413,7 +418,7 @@
     max-width: 100%;
     height: auto;
     flex-grow: unset;
-    z-index: 100000;
+    // z-index: 100000;
     background-color: rgba(49, 120, 202, 0);
     transition: height 0.25s ease, width 0s 0.25s;
 
@@ -458,7 +463,7 @@
   }
 
   .sidebarWrapper.menuOpen {
-    z-index: 1000000;
+    // z-index: 1000000;
     width: 100%;
     background-color: rgba(49, 120, 202, 1);
     padding-bottom: 50px;

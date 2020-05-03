@@ -30,7 +30,7 @@ body {
 .outer {
   width: 100%;
   height: 100%;
-  padding-top: 50px;
+  // padding-top: 50px;
 }
 
 .container {
@@ -46,13 +46,17 @@ body {
 }
 
 .withDAO .sidebarWrapper {
-  width: 250px;
+  // width: 250px;
+  width: 100%;
 }
 
 .contentWrapper {
   position: relative;
   // max-width: $max-width;
   margin: 0 auto;
+  background: #010c2c url(/assets/images/bg_content.jpg);
+  background-size: cover;
+  margin: 0;
 }
 
 .background {
@@ -110,16 +114,20 @@ body {
 }
 
 .header {
-  width: 100%;
+  width: calc(100% - 140px);
   position: fixed;
   vertical-align: middle;
   background-color: $navy;
-  height: 50px;
+//   height: 50px;
   height: 93px;
   z-index: 100000;
   top: 0;
   color: rgba(255, 255, 255, 1);
-  display: flex;
+//   display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    align-items: center;
+    padding: 0 70px;
 
   /** the following is only meant to apply to the toggle button in the header **/
   :global {
@@ -140,23 +148,28 @@ body {
   }
 
   .menu {
-    position: absolute;
-    width: 50px;
-    height: 50px;
+    // position: absolute;
+    // width: 50px;
+    // height: 50px;
+    position: relative;
     transition: all 0.25s ease;
 
-    top: 50%;
-    transform: translateY(-50%);
+    // top: 50%;
+    // transform: translateY(-50%);
 
-    img {
-      position: absolute;
-      z-index: 100;
-      left: 15px;
-      // top: 10px;
-      top: 0;
-      // height: 30px;
-      height: 46px;
-      transition: all 0.25s ease;
+    a {
+        display: inline-block;
+        img {
+        //   position: absolute;
+        //   left: 15px;
+        // top: 10px;
+        //   top: 0;
+        // height: 30px;
+            z-index: 100;
+            height: 46px;
+            transition: all 0.25s ease;
+            display: block;
+        }
     }
   }
 
@@ -536,11 +549,11 @@ body {
   }
 }
 
-.header:after {
-  clear: both;
-  content: "";
-  display: table;
-}
+// .header:after {
+//   clear: both;
+//   content: "";
+//   display: table;
+// }
 
 .pendingTransactions {
   z-index: 1000000;
@@ -578,13 +591,47 @@ body {
 }
 
 .topInfo {
-  position: absolute;
+//   position: absolute;
   // left: 70px;
-  left: 230px;
+//   left: 230px;
   // top: 16px;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
+//   top: 50%;
+//   transform: translateY(-50%);
   font-size: 14px;
+  text-align: right;
+
+  & > div {
+    &.breadcrumbs {
+      display: none;
+    }
+
+    &.navigation {
+        text-align: left;
+        display: inline-block;
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                display: inline-block;
+                float: left;
+                padding: 0 25px;
+
+                a {
+                    font-weight: 500;
+                    font-size: 17px;
+                    line-height: 24px;
+                }
+
+                ul {
+                    display: none;
+                }
+            }
+        }
+    }
+  }
 
   span span b {
     font-weight: normal;
@@ -602,6 +649,20 @@ body {
 .menuToggle {
   display: none;
 }
+
+
+
+
+.pageWrapper {
+  position: relative;
+  top: 93px;
+  line-height: normal;
+  display: grid;
+  grid-template-columns: 470px 1fr;
+}
+
+
+
 
 @media only screen and (max-device-width: 1024px) {
   .modalBody {
@@ -706,7 +767,10 @@ body {
   .withDAO {
     .contentWrapper {
       // margin: 0 0 0 470px;
-      margin: 0 0 0 250px;
+      // margin: 0 0 0 250px;
+      margin: 0;
+      position: relative;
+      z-index: 3;
     }
   }
 }
