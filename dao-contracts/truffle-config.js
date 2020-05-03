@@ -18,7 +18,7 @@
  *
  */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 // const infuraKey = "fj4jll3k.....";
 //
 // const fs = require('fs');
@@ -50,7 +50,11 @@ module.exports = {
       gas: 0 // 4543760
       // gasPrice: 20000000000,  // 20 gwei (in wei) (default: 100 gwei)
     },
-
+    rinkeby: {
+      provider: () => new HDWalletProvider("dumb denial cover ski deer local chaos recipe remove old time copper", 'https://rinkeby.infura.io/v3/ef306a43234747eb9c087e5301ed9363'),
+      network_id: 4,
+      gas: 10000000
+    },
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
@@ -60,7 +64,7 @@ module.exports = {
     // from: <address>,        // Account to send txs from (default: accounts[0])
     // websockets: true        // Enable EventEmitter interface for web3 (default: false)
     // },
-    
+
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
     // kovan: {
