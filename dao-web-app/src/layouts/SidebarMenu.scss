@@ -2,19 +2,18 @@
   min-width: 48px;
   // max-width: 470px;
   // max-width: 250px;
-  max-width: 100%;
+  // position: fixed;
   // width: 100%;
+  // top: 93px;
+  max-width: 100%;
   height: 100%;
   color: $white;
   flex-grow: 1;
   overflow: visible;
-  // position: fixed;
   position: relative;
-  // top: 93px;
-  z-index: 1000;
+  z-index: 1;
   background: #fff;
   padding: 0 70px;
-
   color: $links_color;
 
   &:hover {
@@ -419,7 +418,7 @@
     max-width: 100%;
     height: auto;
     flex-grow: unset;
-    z-index: 100000;
+    // z-index: 100000;
     background-color: rgba(49, 120, 202, 0);
     transition: height 0.25s ease, width 0s 0.25s;
 
@@ -464,7 +463,7 @@
   }
 
   .sidebarWrapper.menuOpen {
-    z-index: 1000000;
+    // z-index: 1000000;
     width: 100%;
     background-color: rgba(49, 120, 202, 1);
     padding-bottom: 50px;

@@ -769,6 +769,8 @@ body {
       // margin: 0 0 0 470px;
       // margin: 0 0 0 250px;
       margin: 0;
+      position: relative;
+      z-index: 3;
     }
   }
 }
