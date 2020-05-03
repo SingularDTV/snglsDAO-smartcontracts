@@ -195,14 +195,34 @@ class Header extends React.Component<IProps, null> {
               </Link>
             </div>
           </TrainingTooltip>
+
+          
           <div className={css.topInfo}>
-            <Breadcrumbs
-              separator={<b> &gt;   </b>}
-              item={NavLink}
-              finalItem={"b"}
-              compare={this.breadCrumbCompare}
-            />
+            <div className={css.breadcrumbs}>
+              <Breadcrumbs
+                separator={<b> &gt;   </b>}
+                item={NavLink}
+                finalItem={"b"}
+                compare={this.breadCrumbCompare}
+              />
+            </div>
+            <div className={css.navigation}>
+              <ul>
+                <li><a href="#">Dao</a></li>
+                <li><a href="#">Forum</a></li>
+                <li><a href="#">Consumer protection</a>
+                    <ul>
+                        <li><a href="#">Sublink</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Subscribe</a></li>
+                <li><a href="#">Github</a></li>
+              </ul>
+            </div>
           </div>
+
+
           <TrainingTooltip placement="left" overlay={"Show / hide tooltips on hover"} alwaysAvailable>
             <div className={css.toggleButton} ref={this.toggleDiv}>
               <Toggle
