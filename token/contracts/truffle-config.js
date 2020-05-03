@@ -18,7 +18,7 @@
  *
  */
 
-// const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require('truffle-hdwallet-provider');
 
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
@@ -46,6 +46,12 @@ module.exports = {
       port: 8545, // Standard Ethereum port (default: none)
       network_id: "*", // Any network (default: none)
       networkCheckTimeout: 10000000
+    },
+    rinkeby: {
+      // provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/a0bb216866fa4c4fa318eaddffc02eb6`),
+      provider: () => new HDWalletProvider("dumb denial cover ski deer local chaos recipe remove old time copper", 'https://rinkeby.infura.io/v3/ef306a43234747eb9c087e5301ed9363'),
+      network_id: 4,
+      gas: 10000000
     },
 
     // Another network with more advanced options...
