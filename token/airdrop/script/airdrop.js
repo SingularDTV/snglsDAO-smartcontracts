@@ -20,7 +20,7 @@ const optionsNewContractAddress = newContractAddress;
 
 const provider = new HDWalletProvider(mnemonic, providerAddress);
 const optionsWeb3 = new Web3(provider);
-const BN = optionsWeb3.utils.BN;
+const BN = Web3.utils.BN;
 
 const oldBuild = JSON.parse(fs.readFileSync(oldContractBuildFileName));
 const oldAbi = oldBuild.abi;
@@ -92,6 +92,7 @@ module.exports = async function airdrop(web3 = optionsWeb3, oldContractAddress =
             const oldValue = balancesOld[addr];
             const newValue = oldValue.mul(decimalsCoefficient)
             if (newValue.isNeg()) continue;
+            console.log(`Estimate transfer -- address:${addr}`);
 
             balancesNew[addr] = newValue;
             estimatedGas.iadd(new BN(await newToken.methods.transfer(addr, newValue.toString()).estimateGas({
