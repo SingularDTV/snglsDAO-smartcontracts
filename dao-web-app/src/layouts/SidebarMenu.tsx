@@ -6,9 +6,9 @@ import TrainingTooltip from "components/Shared/TrainingTooltip";
 
 import BN = require("bn.js");
 import classNames from "classnames";
-import FollowButton from "components/Shared/FollowButton";
+// import FollowButton from "components/Shared/FollowButton";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
-import { generate } from "geopattern";
+// import { generate } from "geopattern";
 import Analytics from "lib/analytics";
 import { baseTokenName, ethErrorHandler, formatTokens, genName, getExchangesList, supportedTokens, fromWei } from "lib/util";
 // import { parse } from "query-string";
@@ -93,18 +93,18 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     const [ dao, { hasNewPosts } ] = this.props.data ;
     console.log("HELLO FROM SIDEBAR ", dao, dao.address)
     const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
-    const bgPattern = generate(dao.address + dao.name);
+    // const bgPattern = generate(dao.address + dao.name);
 
     return (
       <div>
-        <div className={css.daoName}>
+        {/* <div className={css.daoName}>
           <Link to={"/dao/" + dao.address} onClick={this.handleCloseMenu}>
             <b className={css.daoIcon} style={{ backgroundImage: bgPattern.toDataUrl() }}></b>
             <em></em>
             <span>{dao.name}</span>
           </Link>
-        </div>
-        <div className={css.daoDescription}>
+        </div> */}
+        {/* <div className={css.daoDescription}>
           {dao.name === "dxDAO" ?
             <p>
               By submitting a proposal, you agree to be bound by the&nbsp;
@@ -125,7 +125,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   : <p>New to DAOstack? Visit the <a href="https://daostack.zendesk.com/hc" target="_blank" rel="noopener noreferrer">help center</a> to get started.</p>
           }
         </div>
-        <div className={css.followButton}><FollowButton id={dao.address} type="daos" style="default" /></div>
+        <div className={css.followButton}><FollowButton id={dao.address} type="daos" style="default" /></div> */}
         <div className={css.daoNavigation}>
           <span className={css.daoNavHeading}><b>Menu</b></span>
           <ul>
