@@ -56,8 +56,8 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
   }
 
   public doClose = () => {
-    const { daoAvatarAddress, history, schemeId } = this.props;
-    history.push("/dao/" + daoAvatarAddress + "/scheme/" + schemeId);
+    const { history, schemeId } = this.props;
+    history.push("/dao/scheme/" + schemeId);
   }
 
   public async componentDidMount() {
@@ -139,7 +139,7 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
     return (
       <div className={css.createProposalWrapper}>
-        <BreadcrumbsItem to={`/dao/${daoAvatarAddress}/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem>
         <h2 className={css.header}>
           <span>+ New proposal <b>| {schemeTitle}</b></span>
           <button className={css.closeButton} aria-label="Close Create Proposal Modal" onClick={this.handleClose}>&times;</button>

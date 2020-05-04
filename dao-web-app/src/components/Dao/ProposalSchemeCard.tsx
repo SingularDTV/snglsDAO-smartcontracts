@@ -45,7 +45,7 @@ const ProposalSchemeCard = (props: IProps) => {
 
   return (
     <div className={css.wrapper} data-test-id={`schemeCard-${schemeState.name}`}>
-      <Link className={css.headerLink} to={`/dao/${dao.address}/scheme/${schemeState.id}`}>
+      <Link className={css.headerLink} to={`/dao/scheme/${schemeState.id}`}>
         { trainingTooltipMessage ?
           <TrainingTooltip placement="topLeft" overlay={trainingTooltipMessage}>
             {headerHtml}
@@ -71,7 +71,7 @@ const ProposalSchemeCard = (props: IProps) => {
         <div>
           {proposalsHTML}
           <div className={css.numProposals}>
-            <Link to={`/dao/${dao.address}/scheme/${schemeState.id}/proposals`}>View all {numProposals} &gt;</Link>
+            <Link to={`/dao/scheme/${schemeState.id}/proposals`}>View all {numProposals} &gt;</Link>
           </div>
         </div>
         : " "

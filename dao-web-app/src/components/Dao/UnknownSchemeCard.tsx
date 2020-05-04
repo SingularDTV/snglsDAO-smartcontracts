@@ -36,7 +36,7 @@ const UnknownSchemeRow = (props: IRowProps) => {
     <td className={css.left}>&nbsp;</td>
     <td>
       <img className={css.attention} src="/assets/images/Icon/Alert-red.svg" />
-      <Link className={css.schemeLink} to={`/dao/${schemeState.dao}/scheme/${schemeState.id}`}>
+      <Link className={css.schemeLink} to={`/dao/scheme/${schemeState.id}`}>
         {schemeState.name ?
           splitByCamelCase(schemeState.name) :
           schemeState.address

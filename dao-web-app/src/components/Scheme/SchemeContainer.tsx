@@ -151,21 +151,21 @@ class SchemeContainer extends React.Component<IProps, IState> {
 
           <div className={css.schemeMenu}>
             {isProposalScheme
-              ? <Link className={proposalsTabClass} to={`/dao/${daoAvatarAddress}/scheme/${schemeId}/proposals/`}>Proposals</Link>
+              ? <Link className={proposalsTabClass} to={`/dao/scheme/${schemeId}/proposals/`}>Proposals</Link>
               : ""}
 
             { // if Bounties Scheme, create new tab
               (schemeName(schemeState, schemeState.address) === "Standard Bounties") &&
-              <Link className={openBountiesTabClass} to={`/dao/${daoAvatarAddress}/scheme/${schemeId}/openbounties/`}>Open Bounties</Link>
+              <Link className={openBountiesTabClass} to={`/dao/scheme/${schemeId}/openbounties/`}>Open Bounties</Link>
             }
 
             <TrainingTooltip placement="top" overlay={"Learn about the protocol parameters for this scheme"}>
-              <Link className={infoTabClass} to={`/dao/${daoAvatarAddress}/scheme/${schemeId}/info/`}>Information</Link>
+              <Link className={infoTabClass} to={`/dao/scheme/${schemeId}/info/`}>Information</Link>
             </TrainingTooltip>
             {
               this.state.crxRewarderProps ?
                 <TrainingTooltip placement="top" overlay={this.state.crxRewarderProps.shortDescription}>
-                  <Link className={crxTabClass} to={`/dao/${daoAvatarAddress}/scheme/${schemeId}/crx/`}>{this.state.crxRewarderProps.friendlyName} ({approvedProposals.length})</Link>
+                  <Link className={crxTabClass} to={`/dao/scheme/${schemeId}/crx/`}>{this.state.crxRewarderProps.friendlyName} ({approvedProposals.length})</Link>
                 </TrainingTooltip>
                 : ""
             }

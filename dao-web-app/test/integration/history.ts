@@ -10,7 +10,7 @@ describe("History page", () => {
   });
 
   it("should exist", async () => {
-    await browser.url(`http://127.0.0.1:3000/dao/${daoAddress}/history`);
+    await browser.url(`http://127.0.0.1:3000/dao/history`);
     const title = await browser.getTitle();
     title.should.be.equal("Alchemy | DAOstack");
   });

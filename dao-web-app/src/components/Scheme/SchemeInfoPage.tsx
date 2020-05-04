@@ -34,8 +34,8 @@ class SchemeInfo extends React.Component<IProps, null> {
   };
 
   public render(): RenderOutput {
-    const { daoState, scheme } = this.props;
-    const daoAvatarAddress = daoState.address;
+    const { /*daoState,*/ scheme } = this.props;
+    // const daoAvatarAddress = daoState.address;
 
     const duration = (durationSeconds: number): any => {
       if (!durationSeconds) {
@@ -118,7 +118,7 @@ class SchemeInfo extends React.Component<IProps, null> {
       (scheme.schemeRegistrarParams && scheme.schemeRegistrarParams.votingMachine)
     );
     return <div>
-      <BreadcrumbsItem to={`/dao/${daoAvatarAddress}/scheme/${scheme.id}/info`}>Info</BreadcrumbsItem>
+      <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/info`}>Info</BreadcrumbsItem>
 
       <div className={css.schemeInfoContainer}>
         <h3>{schemeName(scheme, scheme.address)}</h3>

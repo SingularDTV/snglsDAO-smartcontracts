@@ -44,11 +44,6 @@ const mapDispatchToProps = {
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, IHasNewPosts]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
-  // const match = matchPath(ownProps.location.pathname, {
-  //   path: "/dao/:daoAvatarAddress",
-  //   strict: false,
-  // });
-  // const queryValues = parse(ownProps.location.search);
   console.log("SIDEBAR mapStateTotProps: ", ownProps, " *", 
   {
     ...ownProps,

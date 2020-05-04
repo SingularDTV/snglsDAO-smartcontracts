@@ -144,7 +144,7 @@ export default class ProposalCard extends React.Component<IProps, null> {
         return <div className={proposalClass + " clearfix"} data-test-id={"proposal-" + proposal.id}>
           <div className={css.proposalInfo}>
             <div className={css.cardTop + " clearfix"}>
-              <Link to={"/dao/" + daoState.address + "/proposal/" + proposal.id}>
+              <Link to={"/dao/proposal/" + proposal.id}>
                 <div className={css.timer}>
                   <span className={css.content}>
                     {!expired
@@ -215,7 +215,7 @@ export default class ProposalCard extends React.Component<IProps, null> {
               <AccountProfileName accountAddress={proposal.proposer} accountProfile={creatorProfile} daoAvatarAddress={daoState.address} detailView={false} />
             </div>
 
-            <Link to={"/dao/" + daoState.address + "/proposal/" + proposal.id}>
+            <Link to={"/dao/proposal/" + proposal.id}>
               <div className={css.description}>
                 {proposal.description}
               </div>
@@ -235,7 +235,7 @@ export default class ProposalCard extends React.Component<IProps, null> {
 
           </div>
 
-          <Link to={"/dao/" + daoState.address + "/proposal/" + proposal.id}>
+          <Link to={"/dao/proposal/" + proposal.id}>
             <div className={css.proposalActions + " clearfix"}>
               { this.props.suppressTrainingTooltips ? votingHtml :
                 (<TrainingTooltip placement="topLeft" overlay={"Percentage of voting power currently voting for and against"}>

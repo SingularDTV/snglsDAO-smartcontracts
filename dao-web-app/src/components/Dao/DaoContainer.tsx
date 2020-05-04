@@ -40,11 +40,6 @@ interface IDispatchProps {
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, Member[]]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
-  console.log("mapStateToProps =========> ", ownProps);
-  // ownProps.match.path = "/dao/:daoAvatarAddress";
-  // ownProps.match.path = "/dao/0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";
-  // ownProps.location.pathname = "/dao/" + "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";
-
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,

@@ -143,12 +143,12 @@ class CompetitionDetails extends React.Component<IProps, IStateProps> {
   }
 
   private openSubmissionDetailsModal = (suggestion: ICompetitionSuggestionState) => async (): Promise<void> => {
-    this.props.history.replace(`/dao/${this.props.daoState.address}/crx/proposal/${this.props.proposalState.id}/competition/submission/${suggestion.id}`);
+    this.props.history.replace(`/dao/crx/proposal/${this.props.proposalState.id}/competition/submission/${suggestion.id}`);
     this.setState({ showingSubmissionDetails: suggestion });
   }
 
   private closeSubmissionDetailsModal = async (): Promise<void> => {
-    this.props.history.replace(`/dao/${this.props.daoState.address}/crx/proposal/${this.props.proposalState.id}`);
+    this.props.history.replace(`/dao/crx/proposal/${this.props.proposalState.id}`);
     this.setState({ showingSubmissionDetails: null });
   }
 
@@ -266,15 +266,15 @@ class CompetitionDetails extends React.Component<IProps, IStateProps> {
     this.disqusConfig.identifier = `competition-${proposalState.id}`;
 
     return <React.Fragment>
-      <BreadcrumbsItem weight={1} to={`/dao/${daoState.address}/scheme/${proposalState.scheme.id}/crx`}>{schemeName(proposalState.scheme, proposalState.scheme.address)}</BreadcrumbsItem>
-      <BreadcrumbsItem weight={2} to={`/dao/${daoState.address}/crx/proposal/${proposalState.id}`}>{humanProposalTitle(proposalState, 40)}</BreadcrumbsItem>
+      <BreadcrumbsItem weight={1} to={`/dao/scheme/${proposalState.scheme.id}/crx`}>{schemeName(proposalState.scheme, proposalState.scheme.address)}</BreadcrumbsItem>
+      <BreadcrumbsItem weight={2} to={`/dao/crx/proposal/${proposalState.id}`}>{humanProposalTitle(proposalState, 40)}</BreadcrumbsItem>
 
       <div className={css.competitionDetailsContainer}>
 
         <div className={css.topSection}>
           <div className={css.header}>
             <StatusBlob competition={competition}></StatusBlob>
-            <div className={css.gotoProposal}><Link to={`/dao/${daoState.address}/proposal/${proposalState.id}`}>Go to Proposal&nbsp;&gt;</Link></div>
+            <div className={css.gotoProposal}><Link to={`/dao/proposal/${proposalState.id}`}>Go to Proposal&nbsp;&gt;</Link></div>
             { status.now.isBefore(status.competition.suggestionsEndTime) ?
               <div className={css.newSubmission}>
                 {

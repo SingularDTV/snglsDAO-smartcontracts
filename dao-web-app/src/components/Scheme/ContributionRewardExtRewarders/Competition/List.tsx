@@ -84,10 +84,10 @@ class CompetitionsList extends React.Component<IProps, IStateProps> {
   public render(): RenderOutput {
 
     const { daoState, scheme, proposals} = this.props;
-    const daoAvatarAddress = daoState.address;
+    // const daoAvatarAddress = daoState.address;
 
     return <React.Fragment>
-      <BreadcrumbsItem to={`/dao/${daoAvatarAddress}/scheme/${scheme.id}/crx`}>Competitions</BreadcrumbsItem>
+      <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/crx`}>Competitions</BreadcrumbsItem>
       <div className={css.competitionCards}>
         {
           proposals

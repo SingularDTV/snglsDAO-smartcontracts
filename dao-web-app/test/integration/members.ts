@@ -12,7 +12,7 @@ describe("Members page", () => {
   });
 
   it("should exist", async () => {
-    await browser.url(`http://127.0.0.1:3000/dao/${daoAddress}/members`);
+    await browser.url(`http://127.0.0.1:3000/dao/members`);
     const title = await browser.getTitle();
     title.should.be.equal("Alchemy | DAOstack");
 
