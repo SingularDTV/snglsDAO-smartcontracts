@@ -12,6 +12,7 @@ import { RouteComponentProps } from "react-router-dom";
 import * as Sticky from "react-stickynode";
 import { IRootState } from "reducers";
 import { IProfilesState } from "reducers/profilesReducer";
+// import Web3 from 'web3'  
 
 import DaoMember from "./DaoMember";
 import * as css from "./Dao.scss";
@@ -46,6 +47,7 @@ const PAGE_SIZE = 100;
 class DaoMembersPage extends React.Component<IProps, null> {
 
   public componentDidMount() {
+    console.log("%%%: ", this.props)
     this.props.data.forEach((member) => {
       if (!this.props.profiles[member.staticState.address]) {
         this.props.getProfile(member.staticState.address);

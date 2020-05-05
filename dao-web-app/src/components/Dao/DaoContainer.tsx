@@ -40,6 +40,8 @@ interface IDispatchProps {
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, Member[]]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
+  console.log('ffeeffee', ownProps, state);
+  
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
@@ -62,34 +64,85 @@ class DaoContainer extends React.Component<IProps, null> {
     // const search = this.state.search.length > 2 ? this.state.search.toLowerCase() : "";
     console.log("daos render func  ", data);
     let allDAOs = data[0];
-    // Add any DAOs found from searching the server to the list
-    // if (this.state.searchDaos.length > 0) {
-    //   // make sure we don't add duplicate DAOs to the list
-    //   const extraFoundDaos = this.state.searchDaos.filter((dao) => {
-    //     return !allDAOs.find((d) => d.id === dao.id);
-    //   });
-    //   allDAOs = allDAOs.concat(extraFoundDaos);
-    // }
-
-    // Always show Genesis Alpha first
-    // let finalDAOList = allDAOs.filter((d: DAO) => d.staticState.name === "Genesis Alpha" && d.staticState.name.toLowerCase().includes(search));
-
-    // if (process.env.NODE_ENV === "staging") {
-    //   // on staging we show all daos (registered or not)
-    //   finalDAOList = finalDAOList.concat(allDAOs.filter((d: DAO) => d.staticState.name !== "Genesis Alpha" && d.staticState.name.toLowerCase().includes(search)));
-    // } else {
-    //   // Otherwise show registered DAOs or DAOs that the person follows or is a member of
-    //   const memberOfDAOs = data[1];
-    //   finalDAOList = finalDAOList.concat(allDAOs.filter((d: DAO) => {
-    //     return d.staticState.name !== "Genesis Alpha" &&
-    //           d.staticState.name.toLowerCase().includes(search) &&
-    //           (d.staticState.register === "registered" ||
-    //               (currentAccountProfile && currentAccountProfile.follows.daos.includes(d.staticState.address)) ||
-    //               memberOfDAOs.includes(d.staticState.address));
-    //   }));
-    // }
+    
+    const arc = getArc();
+    const feeContract = new arc.web3.eth.Contract(
+        [
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "listingFee",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "membershipFee",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "transactionFee",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "validationFee",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          }
+        ],
+      "0x0fbc1939BFF4550b8596c668cb2B8fdcA1C73305"
+    );
 
     console.log("Hallo niggas")
+
+    console.log("oooooooooooooooooooooo: ", await feeContract.methods.transactionFee().call());
+    console.log("oooooooooooooooooooooo: ", await feeContract.methods.listingFee().call());
+    console.log("oooooooooooooooooooooo: ", await feeContract.methods.transactionFee().call());
+    console.log("oooooooooooooooooooooo: ", await feeContract.methods.validationFee().call());
+
+    feeContract.methods.transactionFee().call().then((res: any) => {
+      console.log("ooo: ", res)
+    })
+
     console.log(allDAOs)
     // TODO: use this once 3box fixes Box.getProfiles
     //this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
