@@ -54,8 +54,10 @@ body {
   position: relative;
   // max-width: $max-width;
   margin: 0 auto;
-  background: #010c2c url(/assets/images/bg_content.jpg);
-  background-size: cover;
+  background: #01052a url(/assets/images/bg_content.jpg);
+  background-size: contain;
+  background-position: top left;
+  background-repeat: no-repeat;
   margin: 0;
 }
 
