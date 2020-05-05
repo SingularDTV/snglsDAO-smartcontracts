@@ -11,21 +11,27 @@ contract("ContinuousLocking4Reputation", async accounts => {
     it(`User can stake`, async () => {
 
 
-        let SGTContractInstance = await SGTContract.at(getDeployedAddress("DAOToken"));
-        let LT4RInstance = await ContinuousLocking4Reputation.at(getDeployedAddress("ContinuousLocking4Reputation"));
-        let ReputationInstance = await ReputationContract.at(getDeployedAddress("Reputation"));
+        let SGTContractInstance = await SGTContract.at(await getDeployedAddress("DAOToken"));
+        let LT4RInstance = await ContinuousLocking4Reputation.at(await getDeployedAddress("ContinuousLocking4Reputation"));
+        let ReputationInstance = await ReputationContract.at(await getDeployedAddress("Reputation"));
 
         const amount = 1000;
-        await SGTContractInstance.approve(LT4RInstance.address, amount);
-        //!!! you must specify that before testing
-        const batchIndexToLockIn = 0;
-        let id = await LT4RInstance.lock.call(amount, 1, batchIndexToLockIn, "0x0");
-        await LT4RInstance.lock(amount, 1, batchIndexToLockIn, "0x0");
-        await increaseTime(20000);
-        console.log((await LT4RInstance.redeem.call(masterAccount, id)).toString());
-        LT4RInstance.redeem(masterAccount, id);
-        console.log(await ReputationInstance.balanceOf.call(masterAccount));
-
+        //don't test staking on rinkeby - can't increase time to redeem;
+        if ((await web3.eth.net.getId()) !== 4) {
+            await SGTContractInstance.approve(LT4RInstance.address, amount);
+            //! it  won't work on second run in one deploy in test network because of increaseTime function: on-chain time and real time will be different
+            const startTime = await LT4RInstance.startTime();
+            const batchTime = await LT4RInstance.batchTime();
+            const unixTimestamp = Math.floor(Date.now() / 1000);
+            const batchIndexToLockIn = Math.floor((unixTimestamp - startTime) / batchTime);
+            let id = await LT4RInstance.lock.call(amount, 1, batchIndexToLockIn, "0x0");
+            await LT4RInstance.lock(amount, 1, batchIndexToLockIn, "0x0");
+            await increaseTime(20000);
+            LT4RInstance.redeem(masterAccount, id);
+        } else {
+            //set yellow background and black font on warning message
+            console.warn("\x1b[43m\x1b[30m" + "Can`t test locking tokens on the test net - increase time available only on ganache." + "\x1b[0m");
+        }
     });
 })
 
