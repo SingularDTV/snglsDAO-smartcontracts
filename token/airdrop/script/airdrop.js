@@ -14,6 +14,8 @@ const {
     oldDecimals,
     newDecimals
 } = require('./options');
+console.log(`old address: ${oldContractAddress}`);
+console.log(`new address: ${newContractAddress}`);
 
 const optionsOldContractAddress = oldContractAddress;
 const optionsNewContractAddress = newContractAddress;

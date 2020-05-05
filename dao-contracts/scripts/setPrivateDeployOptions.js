@@ -14,8 +14,10 @@ const spec = require(specFile);
 spec.founders[0].address = founderAddress;
 fs.writeFileSync(path.resolve(__dirname, specFile), JSON.stringify(spec));
 
-//set rinkeby .env file
+//set private .env file
 fs.copyFileSync(path.resolve(__dirname, rinkebyEnv), path.resolve(__dirname, destEnv));
 
-//set rinkeby options.js in airdrop
+//set private options.js in airdrop
 fs.copyFileSync(path.resolve(__dirname, rinkebyAirdropOptions), path.resolve(__dirname, destAirdropOptions));
+
+console.log("Successfully set private deploy options.\n");

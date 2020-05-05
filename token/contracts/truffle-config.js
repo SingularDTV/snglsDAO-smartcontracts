@@ -49,9 +49,9 @@ module.exports = {
     },
     rinkeby: {
       // provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/a0bb216866fa4c4fa318eaddffc02eb6`),
-      provider: () => new HDWalletProvider("dumb denial cover ski deer local chaos recipe remove old time copper", 'https://rinkeby.infura.io/v3/ef306a43234747eb9c087e5301ed9363'),
+      provider: () => new HDWalletProvider("dumb denial cover ski deer local chaos recipe remove old time copper", 'https://rinkeby.infura.io/v3/ef306a43234747eb9c087e5301ed9363', 0, 10),
       network_id: 4,
-      gas: 10000000
+      gas: 4000000
     },
 
     // Another network with more advanced options...

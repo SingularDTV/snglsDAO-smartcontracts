@@ -19,3 +19,5 @@ fs.copyFileSync(path.resolve(__dirname, rinkebyEnv), path.resolve(__dirname, des
 
 //set rinkeby options.js in airdrop
 fs.copyFileSync(path.resolve(__dirname, rinkebyAirdropOptions), path.resolve(__dirname, destAirdropOptions));
+
+console.log("Successfully set rinkeby deploy options.\n");
