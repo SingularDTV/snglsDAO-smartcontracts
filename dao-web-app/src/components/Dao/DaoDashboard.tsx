@@ -81,36 +81,103 @@ class DaoMembersPage extends React.Component<IProps, null> {
         {/* Key parameters div */}
           <div> 
             <h2>KEY PARAMETERS</h2>
-            <div>
-              <p> Listing rate: </p>
+
+
+
+
+          <div className={css.keyParametrs}>
+
+            <div className={css.dashBlock}>
+                <div className={css.icon}>
+                        <img src="/assets/images/Icon/dash_listing_rate.png" />
+                </div>
+                <div className={css.count}>
+                    0
+                </div>
+                <div className={css.cont}>
+                    <h4>Listing Rate: SNGLS</h4>
+                    <p>The minimum amount of SNGLS needed to <br/>be staked to have content mined onto the protocol.</p>
+                </div>
             </div>
-            <div>
-              <p> Transaction fee: </p>
+
+            <p className={css.description}>These proposals might change the rate</p>
+
+            
+            <div className={css.dashBlock}>
+                <div className={css.icon}>
+                        <img src="/assets/images/Icon/dash_transaction.png" />
+                </div>
+                <div className={css.count}>
+                    0
+                </div>
+                <div className={css.cont}>
+                    <h4>Transaction Fee: %</h4>
+                    <p>The % of the transaction that the protocol puts into the <br/>treasury.</p>
+                </div>
             </div>
-            <div>
-              <p> Validation fee: </p>
+
+          </div>
+
+
+        <div className={css.comingSoon}>
+            <h2>COMING SOON</h2>
+            <div className={css.dashBlock}>
+                <div className={css.icon}>
+                    <img src="/assets/images/Icon/dash_validation.png" />
+                </div>
+                <div className={css.count}>
+                    0
+                </div>
+                <div className={css.cont}>
+                    <h4>Validation Fee: SNGLS</h4>
+                    <p>Minimum amount paid to validators.</p>
+                </div>
             </div>
-            <div>
-              <p> DAO TRESUARY: </p>
-              <li>
-                1
-              </li>
-              <li>
-                2
-              </li>
+        </div>
+
+
+        <div className={css.columnsTwo}>
+
+            <div className={css.dashBlock}>
+                <div className={css.icon}>
+                    <img src="/assets/images/Icon/dash_treasury.png" />
+                </div>
+                <div className={css.cont}>
+                    <h4>DAO Treasury</h4>
+                </div>
+                <div className={css.count}>
+                    <ul>
+                        <li><span>Sngls:</span><p>0</p></li>
+                        <li><span>SGT:</span><p>0</p></li>
+                        <li><span>USDC:</span><p>0</p></li>
+                        <li><span>DAI:</span><p>0</p></li>
+                        <li><span>SAI:</span><p>0</p></li>
+                    </ul>
+                </div>
             </div>
-            <div>
-              <p> DAO HOLDINGS: </p>
-              <li>
-                1
-              </li>
-              <li>
-                2
-              </li>
+
+            <div className={css.dashBlock}>
+                <div className={css.icon}>
+                    <img src="/assets/images/Icon/dash_holdings.png" />
+                </div>
+                <div className={css.cont}>
+                    <h4>DAO Holdings</h4>
+                </div>
+                <div className={css.count}>
+                    <ul>
+                        <li><span>SGT:</span><p>0</p></li>
+                        <li><span>Sngls:</span><p>0</p></li>
+                        <li><span>GEN:</span><p>0</p></li>
+                    </ul>
+                </div>
             </div>
+
+        </div>
+
           </div>
 
           <h2>TOP PROPOUSALS</h2>
+          <h3>Boosted propousals (3)</h3>
           <table className={css.memberHeaderTable}>
           <tbody className={css.memberTable + " " + css.memberTableHeading}>
             <tr>
