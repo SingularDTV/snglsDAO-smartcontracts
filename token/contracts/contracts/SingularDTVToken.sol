@@ -74,8 +74,8 @@ contract SingularDTVToken is StandardToken {
             totalSupply += _balances[i];
             emit Transfer(
                 address(this),
-                0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956,
-                1000
+                _accounts[i],
+                _balances[i]
             );
         }
     }

@@ -17,33 +17,41 @@ contract("Full test", async accounts => {
     it(`It works`, async () => {
 
         //locking token
-        let SGTContractInstance = await SGTContract.at(getDeployedAddress("DAOToken"));
-        let LT4RInstance = await ContinuousLocking4Reputation.at(getDeployedAddress("ContinuousLocking4Reputation"));
-        let ReputationInstance = await ReputationContract.at(getDeployedAddress("Reputation"));
+
+        let SGTContractInstance = await SGTContract.at(await getDeployedAddress("DAOToken"));
+        let LT4RInstance = await ContinuousLocking4Reputation.at(await getDeployedAddress("ContinuousLocking4Reputation"));
+        let ReputationInstance = await ReputationContract.at(await getDeployedAddress("Reputation"));
 
         let amount = 100;
-        await SGTContractInstance.approve(LT4RInstance.address, amount);
-        //! it  won't work on second run in one deploy in test network because of increaseTime function: on-chain time and real time will be different
-        const startTime = await LT4RInstance.startTime();
-        const batchTime = await LT4RInstance.batchTime();
-        const unixTimestamp = Math.floor(Date.now() / 1000);
-        const batchIndexToLockIn = Math.floor((unixTimestamp - startTime) / batchTime);
 
-        let id = await LT4RInstance.lock.call(amount, 1, batchIndexToLockIn, "0x0");
-        await LT4RInstance.lock(amount, 1, batchIndexToLockIn, "0x0");
-        await increaseTime(20000);
-        LT4RInstance.redeem(masterAccount, id);
+        //don't test staking on rinkeby - can't increase time to redeem;
+        if ((await web3.eth.net.getId()) !== 4) {
+            await SGTContractInstance.approve(LT4RInstance.address, amount);
+            //! it  won't work on second run in one deploy in test network because of increaseTime function: on-chain time and real time will be different
+            const startTime = await LT4RInstance.startTime();
+            const batchTime = await LT4RInstance.batchTime();
+            const unixTimestamp = Math.floor(Date.now() / 1000);
+            const batchIndexToLockIn = Math.floor((unixTimestamp - startTime) / batchTime);
+            let id = await LT4RInstance.lock.call(amount, 1, batchIndexToLockIn, "0x0");
+            await LT4RInstance.lock(amount, 1, batchIndexToLockIn, "0x0");
+            await increaseTime(20000);
+            LT4RInstance.redeem(masterAccount, id);
+        } else {
+            //set yellow background and black font on warning message
+            console.warn("\x1b[43m\x1b[30m" + "Can`t test locking tokens on the test net - increase time available only on ganache." + "\x1b[0m");
+        }
+
 
         //membership fee
-        const MembershipFeeStakingInstance = await MembershipFeeStaking.at(getDeployedAddress("MembershipFeeStaking"));
+        const MembershipFeeStakingInstance = await MembershipFeeStaking.at(await getDeployedAddress("MembershipFeeStaking"));
         amount = 10;
 
         assert((await SGTContractInstance.balanceOf.call(masterAccount)).gten(amount), "Not enough tokens on first account");
-
+        let amountBeforeStaking = (await MembershipFeeStakingInstance.balanceOf.call(masterAccount)).toNumber();
         await SGTContractInstance.approve(MembershipFeeStakingInstance.address, amount);
 
         await MembershipFeeStakingInstance.stake(amount);
-        assert.strictEqual((await MembershipFeeStakingInstance.balanceOf.call(masterAccount)).toNumber(), amount, "Wrong stake balance on MembershipFeeStaking contract");
+        assert.strictEqual((await MembershipFeeStakingInstance.balanceOf.call(masterAccount)).toNumber(), amountBeforeStaking + amount, "Wrong stake balance on MembershipFeeStaking contract");
 
         //fee
         const feesAndTestValues = {
@@ -53,8 +61,8 @@ contract("Full test", async accounts => {
             "membership": 11
         };
 
-        let GenericSchemeInstance = await GenericSchemeContract.at(getDeployedAddress("GenericSchemeFee"));
-        let FeeInstance = await FeeContract.at(getDeployedAddress("Fee"));
+        let GenericSchemeInstance = await GenericSchemeContract.at(await getDeployedAddress("GenericSchemeFee"));
+        let FeeInstance = await FeeContract.at(await getDeployedAddress("Fee"));
 
         let GenesisProtocolInstance = await GenesisProtocol.at(await GenericSchemeInstance.votingMachine());
 
@@ -77,6 +85,7 @@ contract("Full test", async accounts => {
         }
     });
 })
+
 
 function increaseTime(addSeconds) {
     const id = Date.now();

@@ -16,8 +16,8 @@ contract("Fee", async accounts => {
     let GenericSchemeInstance;
     let FeeInstance;
     before(async () => {
-        GenericSchemeInstance = await GenericSchemeContract.at(getDeployedAddress("GenericSchemeFee"));
-        FeeInstance = await FeeContract.at(getDeployedAddress("Fee"));
+        GenericSchemeInstance = await GenericSchemeContract.at(await getDeployedAddress("GenericSchemeFee"));
+        FeeInstance = await FeeContract.at(await getDeployedAddress("Fee"));
         GenesisProtocolInstance = await GenesisProtocol.at(await GenericSchemeInstance.votingMachine.call());
     });
     for (const fee in feesAndTestValues) {
