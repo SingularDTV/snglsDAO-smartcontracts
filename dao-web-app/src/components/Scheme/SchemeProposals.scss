@@ -95,7 +95,7 @@
 .boostedContainer,
 .regularContainer {
   position: relative;
-  margin-top: 20px;
+  // margin-top: 20px;
 }
 
 .proposalsContainer.boostedProposalsContainer {
@@ -112,8 +112,10 @@
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
-  border-top: $gray-border-2;
-  color: $gray-1;
+  // border-top: $gray-border-2;
+  border-top: 1px solid #bfcbd514;
+  // color: $gray-1;
+  color: #fff;
   font-weight: $bold;
 
   img {

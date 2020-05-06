@@ -8,7 +8,7 @@ import { Page } from "pages";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { RouteComponentProps } from "react-router-dom";
-import * as Sticky from "react-stickynode";
+// import * as Sticky from "react-stickynode";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import * as css from "./DaoSchemesPage.scss";
 import ProposalSchemeCard from "./ProposalSchemeCard";

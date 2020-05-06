@@ -9,7 +9,7 @@ import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as InfiniteScroll from "react-infinite-scroll-component";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import * as Sticky from "react-stickynode";
+// import * as Sticky from "react-stickynode";
 import { IRootState } from "reducers";
 import { IProfilesState } from "reducers/profilesReducer";
 
