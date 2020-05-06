@@ -178,7 +178,7 @@ class DaoMembersPage extends React.Component<IProps, null> {
           </div>
 
           <h2>TOP PROPOUSALS</h2>
-          <h3>Boosted propousals (3)</h3>
+          <h3>Boosted proposals (3)</h3>
           <table className={css.memberHeaderTable}>
           <tbody className={css.memberTable + " " + css.memberTableHeading}>
             <tr>
