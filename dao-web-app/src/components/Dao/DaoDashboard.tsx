@@ -12,6 +12,10 @@ import { RouteComponentProps } from "react-router-dom";
 // import * as Sticky from "react-stickynode";
 import { IRootState } from "reducers";
 import { IProfilesState } from "reducers/profilesReducer";
+// import Web3 from 'web3'  
+
+import { getArc } from "arc";
+
 
 import DaoMember from "./DaoMember";
 import * as css from "./Dao.scss";
@@ -24,7 +28,15 @@ interface IStateProps {
   profiles: IProfilesState;
 }
 
+interface IState {
+  transactionFee: string;
+  listingFee: string;
+  validationFee: string;
+  membershipFee: string;
+}
+
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
+
   return {
     ...ownProps,
     profiles: state.profiles,
@@ -39,18 +51,113 @@ const mapDispatchToProps = {
   getProfile,
 };
 
-type IProps = IExternalProps & IStateProps & ISubscriptionProps<Member[]> & IDispatchProps;
+type IProps = IExternalProps & IStateProps & ISubscriptionProps<Member[]> & IDispatchProps & IState;
 
 const PAGE_SIZE = 100; 
 
-class DaoMembersPage extends React.Component<IProps, null> {
+class DaoMembersPage extends React.Component<IProps, IState> {
+  
+  constructor(props: IProps) {
+    super(props);
 
-  public componentDidMount() {
+    this.state = {
+      transactionFee: "0",
+      listingFee: "0",
+      validationFee: "0",
+      membershipFee: "0"
+    };
+  }
+
+  public async componentDidMount() {
+    console.log("%%%: ", this.props)
     this.props.data.forEach((member) => {
       if (!this.props.profiles[member.staticState.address]) {
         this.props.getProfile(member.staticState.address);
       }
     });
+    
+    const arc = getArc();
+    const feeContract = new arc.web3.eth.Contract(
+        [
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "listingFee",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "membershipFee",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "transactionFee",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [],
+            "name": "validationFee",
+            "outputs": [
+              {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          }
+        ],
+      "0x0fbc1939BFF4550b8596c668cb2B8fdcA1C73305"
+    );
+  
+    console.log("Hallo niggas")
+  
+    console.log("oooooooooooooooooooooo: ", await feeContract.methods.transactionFee().call());
+    console.log("oooooooooooooooooooooo: ", await feeContract.methods.listingFee().call());
+    console.log("oooooooooooooooooooooo: ", await feeContract.methods.transactionFee().call());
+    console.log("oooooooooooooooooooooo: ", await feeContract.methods.validationFee().call());
+    // this.props.ff = "hallo";
+    this.setState( 
+      { 
+        transactionFee: await feeContract.methods.transactionFee().call(),
+        listingFee: await feeContract.methods.listingFee().call(),
+        validationFee: await feeContract.methods.validationFee().call(),
+        membershipFee:  await feeContract.methods.membershipFee().call()
+      }
+    );
 
     Analytics.track("Page View", {
       "Page Name": Page.DAOMembers,
@@ -61,7 +168,7 @@ class DaoMembersPage extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
     const { data } = this.props;
-
+    console.log("FDSJKLFJSDLKFJDSKLJFKLSDJFLKSDJFLKSDJFKLSDJFLKSDJFLKSDJFLKS", this.props, this.state);
     const members = data;
     const daoTotalReputation = this.props.daoState.reputationTotalSupply;
     const { daoState, profiles } = this.props;
@@ -71,10 +178,8 @@ class DaoMembersPage extends React.Component<IProps, null> {
 
     return (
       <div className={css.membersContainer}>
-        <BreadcrumbsItem to={"/dao/" + daoState.address + "/members"}>DAO Members</BreadcrumbsItem>
-        {/* <Sticky enabled top={50} innerZ={10000}>
 
-        </Sticky> */}
+        <BreadcrumbsItem to={"/dao/members"}>DAO Members</BreadcrumbsItem>
         <div className={css.pageHead}>
           <h1>DASHBOARD</h1>
           <div><button>Join</button></div>
@@ -93,7 +198,7 @@ class DaoMembersPage extends React.Component<IProps, null> {
                         <img src="/assets/images/Icon/dash_listing_rate.png" />
                 </div>
                 <div className={css.count}>
-                    0
+                    { this.state.listingFee }
                 </div>
                 <div className={css.cont}>
                     <h4>Listing Rate: SNGLS</h4>
@@ -109,7 +214,7 @@ class DaoMembersPage extends React.Component<IProps, null> {
                         <img src="/assets/images/Icon/dash_transaction.png" />
                 </div>
                 <div className={css.count}>
-                    0
+                    { this.state.transactionFee }
                 </div>
                 <div className={css.cont}>
                     <h4>Transaction Fee: %</h4>
@@ -127,7 +232,7 @@ class DaoMembersPage extends React.Component<IProps, null> {
                     <img src="/assets/images/Icon/dash_validation.png" />
                 </div>
                 <div className={css.count}>
-                    0
+                    { this.state.validationFee }
                 </div>
                 <div className={css.cont}>
                     <h4>Validation Fee: SNGLS</h4>
