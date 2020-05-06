@@ -153,10 +153,11 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
     return(
        <div className={css.membersContainer}>
          <BreadcrumbsItem to={"/dao/members"}>DAO Members</BreadcrumbsItem>
-         <Sticky enabled top={50} innerZ={10000}>
-           <h1>DASHBOARD</h1>
-         </Sticky>
-
+        
+         <div className={css.pageHead}>
+          <h1>DASHBOARD</h1>
+          <div><button>Join</button></div>
+        </div>
          {/* Key parameters div */}
            <div> 
              <h2>KEY PARAMETERS</h2>
@@ -358,7 +359,45 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
         >
           {membersHTML}
         </InfiniteScroll> */}
+
+
+
+{/* <div className={css.daoModalBlock}>
+
+
+        <div className={css.daoModal}>
+
+          <div className={css.head}>
+            <h4>DAO Reputation</h4>
+            <a href="#"><img src="/assets/images/close.svg" alt=""/></a>
+          </div>
+
+          <div className={css.subhead}>
+            <p>You need to stake tokens to become a member of the DAO</p>
+            <div><a className={css.btn} href="#">LEAVE</a></div>
+          </div>
+
+          <div className={css.content}>
+            <p>The amount you have staked will be your reputation <br/>in the DAO</p>
+            <div className={css.bigInput}>
+              <form action="">
+                <label>SGT</label>
+                <input type="text" value="0.00"/>
+              </form>
+              <span>Holdings <strong>0.00% Rep.</strong></span>
+            </div>
+            <button className={css.submit}>Join</button>
+            <button className={css.remove}>remove</button>
+          </div>
+
+        </div>
+
+
+</div>  */}
+
+
       </div>
+
     );
   }
 }
