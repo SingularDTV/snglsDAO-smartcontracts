@@ -92,7 +92,7 @@ class CompetitionCard extends React.Component<IProps, IStateProps> {
         </div>
       </div>
       <div className={css.description}>
-        <Link className={css.detailLink} to={"/dao/" + daoState.address +  "/crx/proposal/" + proposalState.id} data-test-id="proposal-title">
+        <Link className={css.detailLink} to={"/dao/crx/proposal/" + proposalState.id} data-test-id="proposal-title">
           <div className={css.name}>{humanProposalTitle(proposalState)}</div>
         </Link>
       </div>

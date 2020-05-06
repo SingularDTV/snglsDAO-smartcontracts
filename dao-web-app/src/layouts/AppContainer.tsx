@@ -199,22 +199,23 @@ class AppContainer extends React.Component<IProps, IState> {
           <div className={css.container}>
             <Route path="/" render={this.headerHtml} />
 
-            <div className={css.sidebarWrapper}>
-              <Route path="/" render={this.sidebarHtml} />
-            </div>
+            <div className={css.pageWrapper}>
+              <div className={css.sidebarWrapper}>
+                <Route path="/" render={this.sidebarHtml} />
+              </div>
 
-            <div className={css.contentWrapper}>
-            <Redirect exact from="/" to="/dashboard"></Redirect>
-              <Switch>
-                <Route path="/daos/create" component={DaosPage} />
-                {/* <Route path="/dao/:daoAvatarAddress" component={DaoContainer} /> */}
-                <Route path="/profile/:accountAddress" component={AccountProfilePage} />
-                <Route path="/redemptions" component={RedemptionsPage} />
-                <Route path="/dashboard" component={DaoContainer} />
-                <Route path="/history" component={RedemptionsPage} />
-              </Switch>
+              <div className={css.contentWrapper}>
+                <Switch>
+                  <Route path="/daos/create" component={DaosPage} />
+                  {/* <Route path="/dao/:daoAvatarAddress" component={DaoContainer} /> */}
+                  <Route path="/profile/:accountAddress" component={AccountProfilePage} />
+                  <Route path="/redemptions" component={RedemptionsPage} />
+                  <Route path="/dao" component={DaoContainer} />
+                  <Route path="/history" component={RedemptionsPage} />
+                  <Redirect exact from="/" to="/dao"></Redirect>
+                </Switch>
+              </div>
             </div>
-
             <ModalContainer
               backdropClassName={css.backdrop}
               containerClassName={css.modalContainer}

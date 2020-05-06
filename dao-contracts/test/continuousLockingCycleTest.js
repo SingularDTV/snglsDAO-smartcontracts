@@ -1,35 +1,37 @@
-// const Controller = artifacts.require("Controller");
-// const Avatar = artifacts.require("Avatar");
-const migration = require("../data/migration.json");
 const SGTContract = artifacts.require("DAOToken");
 const ContinuousLocking4Reputation = artifacts.require("ContinuousLocking4Reputation");
 const ReputationContract = artifacts.require("Reputation");
+
+const getDeployedAddress = require("./getDeployedAddress");
 const assert = require('assert').strict;
 const BN = web3.utils.BN;
 
 contract("ContinuousLocking4Reputation", async accounts => {
     const masterAccount = accounts[0];
-    it(`It works`, async () => {
-        // let ControllerInstance = await Controller.deployed();
-        // let AvatarInstance = await Avatar.deployed();
+    it(`User can stake`, async () => {
 
-        const singularMigration = migration.private.dao["0.0.1-rc.32"];
 
-        let SGTContractInstance = await SGTContract.at(singularMigration.DAOToken);
-        let LT4RInstance = await ContinuousLocking4Reputation.at(singularMigration.Schemes[3].address);
-        let ReputationInstance = await ReputationContract.at(singularMigration.Reputation);
+        let SGTContractInstance = await SGTContract.at(await getDeployedAddress("DAOToken"));
+        let LT4RInstance = await ContinuousLocking4Reputation.at(await getDeployedAddress("ContinuousLocking4Reputation"));
+        let ReputationInstance = await ReputationContract.at(await getDeployedAddress("Reputation"));
 
         const amount = 1000;
-        // await SGTContractInstance.mint(masterAccount, amount);
-        await SGTContractInstance.approve(LT4RInstance.address, amount);
-        let id = await LT4RInstance.lock.call(amount, 1, 0, "0x0");
-        await LT4RInstance.lock(amount, 1, 0, "0x0");
-        await increaseTime(20000);
-        // assert.strictEqual((await LT4RInstance.redeem.call(masterAccount)).toNumber(), amount, "Wrong redeem reputation");
-        console.log((await LT4RInstance.redeem.call(masterAccount, id)).toString());
-        await assert.doesNotReject(LT4RInstance.redeem(masterAccount, id));
-        console.log(await ReputationInstance.balanceOf.call(masterAccount));
-
+        //don't test staking on rinkeby - can't increase time to redeem;
+        if ((await web3.eth.net.getId()) !== 4) {
+            await SGTContractInstance.approve(LT4RInstance.address, amount);
+            //! it  won't work on second run in one deploy in test network because of increaseTime function: on-chain time and real time will be different
+            const startTime = await LT4RInstance.startTime();
+            const batchTime = await LT4RInstance.batchTime();
+            const unixTimestamp = Math.floor(Date.now() / 1000);
+            const batchIndexToLockIn = Math.floor((unixTimestamp - startTime) / batchTime);
+            let id = await LT4RInstance.lock.call(amount, 1, batchIndexToLockIn, "0x0");
+            await LT4RInstance.lock(amount, 1, batchIndexToLockIn, "0x0");
+            await increaseTime(20000);
+            LT4RInstance.redeem(masterAccount, id);
+        } else {
+            //set yellow background and black font on warning message
+            console.warn("\x1b[43m\x1b[30m" + "Can`t test locking tokens on the test net - increase time available only on ganache." + "\x1b[0m");
+        }
     });
 })
 

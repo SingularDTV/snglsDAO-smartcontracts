@@ -39,7 +39,7 @@ interface IStateProps {
 
 const mapStateToProps = (state: IRootState & IStateProps, ownProps: IExternalProps): IExternalProps & IStateProps => {
   const match = matchPath(ownProps.location.pathname, {
-    path: "/dao/:daoAvatarAddress",
+    path: "/dao",
     strict: false,
   });
   const queryValues = parse(ownProps.location.search);
@@ -190,18 +190,39 @@ class Header extends React.Component<IProps, null> {
           <TrainingTooltip overlay="View your personal feed" placement="bottomRight">
             <div className={css.menu}>
               <Link to="/">
-                <img src="/assets/images/alchemy-logo-white.svg"/>
+                {/* <img src="/assets/images/alchemy-logo-white.svg" /> */}
+                <img src="/assets/images/new_logo.png" />
               </Link>
             </div>
           </TrainingTooltip>
+
+          
           <div className={css.topInfo}>
-            <Breadcrumbs
-              separator={<b> &gt;   </b>}
-              item={NavLink}
-              finalItem={"b"}
-              compare={this.breadCrumbCompare}
-            />
+            <div className={css.breadcrumbs}>
+              <Breadcrumbs
+                separator={<b> &gt;   </b>}
+                item={NavLink}
+                finalItem={"b"}
+                compare={this.breadCrumbCompare}
+              />
+            </div>
+            <div className={css.navigation}>
+              <ul>
+                <li><a href="#">Dao</a></li>
+                <li><a href="#">Forum</a></li>
+                <li><a href="#">Consumer protection</a>
+                    <ul>
+                        <li><a href="#">Sublink</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Subscribe</a></li>
+                <li><a href="#">Github</a></li>
+              </ul>
+            </div>
           </div>
+
+
           <TrainingTooltip placement="left" overlay={"Show / hide tooltips on hover"} alwaysAvailable>
             <div className={css.toggleButton} ref={this.toggleDiv}>
               <Toggle
@@ -272,7 +293,7 @@ class Header extends React.Component<IProps, null> {
               <div className={css.web3ProviderLogin}>
                 <TrainingTooltip placement="bottomLeft" overlay={"Click here to connect your wallet provider"}>
                   <button onClick={this.handleClickLogin} data-test-id="loginButton">
-                    Log in <img src="/assets/images/Icon/login-white.svg"/>
+                    Log in <img src="/assets/images/Icon/login-black.svg"/>
                   </button>
                 </TrainingTooltip>
               </div>
@@ -280,7 +301,7 @@ class Header extends React.Component<IProps, null> {
                 <div className={css.web3ProviderLogin}>
                   <TrainingTooltip placement="bottomLeft" overlay={"Click here to connect your wallet provider"}>
                     <button onClick={this.handleConnect} data-test-id="connectButton">
-                      <span className={css.connectButtonText}>Connect</span><img src="/assets/images/Icon/login-white.svg"/>
+                      <span className={css.connectButtonText}>Connect</span><img src="/assets/images/Icon/login-black.svg"/>
                     </button>
                   </TrainingTooltip>
                 </div>

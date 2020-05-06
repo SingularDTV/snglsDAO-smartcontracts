@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.6] - 2020-05-06
+
+### Added
+
+- Pulling commission information from contracts
+- Blocks with information about commissions
+
+### Changed
+
+- General page style
+- Fixed bug in the functionality of creating new offers
+
 ## [1.0.5] - 2020-04-28
 
 ### Added

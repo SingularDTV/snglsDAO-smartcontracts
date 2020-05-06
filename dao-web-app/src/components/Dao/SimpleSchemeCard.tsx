@@ -10,11 +10,11 @@ interface IProps {
 }
 
 const SimpleSchemeCard = (props: IProps) => {
-  const { dao, scheme } = props;
+  const { /*dao,*/ scheme } = props;
 
   return (
     <div className={css.wrapper} data-test-id={`schemeCard-${scheme.staticState.name}`}>
-      <Link className={css.headerLink} to={`/dao/${dao.address}/scheme/${scheme.id}`}>
+      <Link className={css.headerLink} to={`/dao/scheme/${scheme.id}`}>
         {/* TODO: schemeName should be able to accept an ISchemeStaticState once the client exports that */}
         <h2>{schemeName(scheme.staticState as ISchemeState, "[Unknown]")}</h2>
       </Link>

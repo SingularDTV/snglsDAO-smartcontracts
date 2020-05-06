@@ -68,12 +68,11 @@ class SchemeContainer extends React.Component<IProps, IState> {
   }
 
   public handleNewProposal = async (): Promise<void> => {
-    const { schemeId, showNotification, daoState } = this.props;
-    const daoAvatarAddress = daoState.address;
+    const { schemeId, showNotification, /*daoState*/ } = this.props;
 
     if (!await enableWalletProvider({ showNotification })) { return; }
 
-    this.props.history.push(`/dao/${daoAvatarAddress}/scheme/${schemeId}/proposals/create/`);
+    this.props.history.push(`/dao/scheme/${schemeId}/proposals/create/`);
   };
 
   private schemeInfoPageHtml = (props: any) => <SchemeInfoPage {...props} daoState={this.props.daoState} scheme={this.props.data[0]} />;
@@ -138,7 +137,7 @@ class SchemeContainer extends React.Component<IProps, IState> {
     return (
       <div className={css.schemeContainer}>
 
-        <BreadcrumbsItem to={`/dao/${daoAvatarAddress}/scheme/${schemeId}`}>{schemeFriendlyName}</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/dao/scheme/${schemeId}`}>{schemeFriendlyName}</BreadcrumbsItem>
         <Helmet>
           <meta name="description" content={daoState.name + " | " + schemeState.name + " proposals | Managed on Alchemy by DAOstack"} />
           <meta name="og:description" content={daoState.name + " | " + schemeState.name + " proposals | Managed on Alchemy by DAOstack"} />
@@ -152,21 +151,21 @@ class SchemeContainer extends React.Component<IProps, IState> {
 
           <div className={css.schemeMenu}>
             {isProposalScheme
-              ? <Link className={proposalsTabClass} to={`/dao/${daoAvatarAddress}/scheme/${schemeId}/proposals/`}>Proposals</Link>
+              ? <Link className={proposalsTabClass} to={`/dao/scheme/${schemeId}/proposals/`}>Proposals</Link>
               : ""}
 
             { // if Bounties Scheme, create new tab
               (schemeName(schemeState, schemeState.address) === "Standard Bounties") &&
-              <Link className={openBountiesTabClass} to={`/dao/${daoAvatarAddress}/scheme/${schemeId}/openbounties/`}>Open Bounties</Link>
+              <Link className={openBountiesTabClass} to={`/dao/scheme/${schemeId}/openbounties/`}>Open Bounties</Link>
             }
 
             <TrainingTooltip placement="top" overlay={"Learn about the protocol parameters for this scheme"}>
-              <Link className={infoTabClass} to={`/dao/${daoAvatarAddress}/scheme/${schemeId}/info/`}>Information</Link>
+              <Link className={infoTabClass} to={`/dao/scheme/${schemeId}/info/`}>Information</Link>
             </TrainingTooltip>
             {
               this.state.crxRewarderProps ?
                 <TrainingTooltip placement="top" overlay={this.state.crxRewarderProps.shortDescription}>
-                  <Link className={crxTabClass} to={`/dao/${daoAvatarAddress}/scheme/${schemeId}/crx/`}>{this.state.crxRewarderProps.friendlyName} ({approvedProposals.length})</Link>
+                  <Link className={crxTabClass} to={`/dao/scheme/${schemeId}/crx/`}>{this.state.crxRewarderProps.friendlyName} ({approvedProposals.length})</Link>
                 </TrainingTooltip>
                 : ""
             }
@@ -192,15 +191,15 @@ class SchemeContainer extends React.Component<IProps, IState> {
 
         <Switch>
 
-          <Route exact path="/dao/:daoAvatarAddress/scheme/:schemeId/openbounties"
+          <Route exact path="/dao/scheme/:schemeId/openbounties"
             render={(props) => <SchemeOpenBountyPage {...props} daoAvatarAddress={daoAvatarAddress} scheme={schemeState} />} />
-          <Route exact path="/dao/:daoAvatarAddress/scheme/:schemeId/info" render={this.schemeInfoPageHtml} />
+          <Route exact path="/dao/scheme/:schemeId/info" render={this.schemeInfoPageHtml} />
           {
             this.state.crxRewarderProps ?
-              <Route exact path="/dao/:daoAvatarAddress/scheme/:schemeId/crx" render={this.contributionsRewardExtTabHtml()} />
+              <Route exact path="/dao/scheme/:schemeId/crx" render={this.contributionsRewardExtTabHtml()} />
               : ""
           }
-          <Route path="/dao/:daoAvatarAddress/scheme/:schemeId" render={isProposalScheme ? this.schemeProposalsPageHtml(isActive) : this.schemeInfoPageHtml} />
+          <Route path="/dao/scheme/:schemeId" render={isProposalScheme ? this.schemeProposalsPageHtml(isActive) : this.schemeInfoPageHtml} />
         </Switch>
       </div>
     );

@@ -14,13 +14,15 @@ const {
     oldDecimals,
     newDecimals
 } = require('./options');
+console.log(`old address: ${oldContractAddress}`);
+console.log(`new address: ${newContractAddress}`);
 
 const optionsOldContractAddress = oldContractAddress;
 const optionsNewContractAddress = newContractAddress;
 
 const provider = new HDWalletProvider(mnemonic, providerAddress);
 const optionsWeb3 = new Web3(provider);
-const BN = optionsWeb3.utils.BN;
+const BN = Web3.utils.BN;
 
 const oldBuild = JSON.parse(fs.readFileSync(oldContractBuildFileName));
 const oldAbi = oldBuild.abi;
@@ -70,7 +72,7 @@ module.exports = async function airdrop(web3 = optionsWeb3, oldContractAddress =
     const newTokensSupply = new BN(8);
     //check if we have enough tokens to airdrop
     if (newTokensSupply.lt(sum)) throw new Error(`Not enough new tokens to airdrop. Required number of tokens: ${sum.toString()}, available number of tokens: ${newTokensSupply.toString()}`);
-    console.log("Enough new tokens to airdrop. Required - " + sum.toString());
+    console.log("Enough new tokens to airdrop.");
     console.log("Check if estimated balances equals to values on chain.");
     for (const addr in balancesOld) {
         if (balancesOld.hasOwnProperty(addr) && !!addr) {
@@ -92,6 +94,7 @@ module.exports = async function airdrop(web3 = optionsWeb3, oldContractAddress =
             const oldValue = balancesOld[addr];
             const newValue = oldValue.mul(decimalsCoefficient)
             if (newValue.isNeg()) continue;
+            console.log(`Estimate transfer -- address:${addr}`);
 
             balancesNew[addr] = newValue;
             estimatedGas.iadd(new BN(await newToken.methods.transfer(addr, newValue.toString()).estimateGas({

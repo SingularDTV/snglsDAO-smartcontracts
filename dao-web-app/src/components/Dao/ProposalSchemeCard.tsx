@@ -45,18 +45,20 @@ const ProposalSchemeCard = (props: IProps) => {
 
   return (
     <div className={css.wrapper} data-test-id={`schemeCard-${schemeState.name}`}>
-      <Link className={css.headerLink} to={`/dao/${dao.address}/scheme/${schemeState.id}`}>
+      <Link className={css.headerLink} to={`/dao/scheme/${schemeState.id}`}>
         { trainingTooltipMessage ?
           <TrainingTooltip placement="topLeft" overlay={trainingTooltipMessage}>
             {headerHtml}
           </TrainingTooltip> : headerHtml
         }
-        <div>
-          <b>{schemeState.numberOfBoostedProposals}</b> <span>Boosted</span> <b>{schemeState.numberOfPreBoostedProposals}</b> <span>Pending Boosting</span> <b>{schemeState.numberOfQueuedProposals}</b> <span>Regular</span>
+        <div className={css.headerItems}>
+          <div><span>Boosted</span> <b>{schemeState.numberOfBoostedProposals}</b> </div>
+          <div><span>Pending Boosting</span> <b>{schemeState.numberOfPreBoostedProposals}</b> </div>
+          <div><span>Regular</span> <b>{schemeState.numberOfQueuedProposals}</b></div>
         </div>
         {proposals.length === 0 ?
           <div className={css.loading}>
-            <img src="/assets/images/meditate.svg" />
+            <img src="/assets/images/meditate_white.svg" />
             <div>
               No upcoming proposals
             </div>
@@ -69,7 +71,7 @@ const ProposalSchemeCard = (props: IProps) => {
         <div>
           {proposalsHTML}
           <div className={css.numProposals}>
-            <Link to={`/dao/${dao.address}/scheme/${schemeState.id}/proposals`}>View all {numProposals} &gt;</Link>
+            <Link to={`/dao/scheme/${schemeState.id}/proposals`}>View all {numProposals} &gt;</Link>
           </div>
         </div>
         : " "

@@ -286,19 +286,19 @@ class AccountProfilePage extends React.Component<IProps, IState> {
                         </a>
                       </div>
                     }
-                    <div className={css.otherInfoContainer}>
-                      <div className={css.tokens}>
-                        {accountInfo
-                          ? <div><strong>Rep. Score</strong><br /><Reputation reputation={accountInfo.reputation} totalReputation={dao.reputationTotalSupply} daoName={dao.name} /> </div>
-                          : ""}
-                        <div><strong>{genName()}:</strong><br /><span>{formatTokens(genBalance)}</span></div>
+                  </div>
+                  <div className={css.otherInfoContainer}>
+                    <div className={css.tokens}>
+                      {accountInfo
+                        ? <div><strong>Rep. Score</strong><br /><Reputation reputation={accountInfo.reputation} totalReputation={dao.reputationTotalSupply} daoName={dao.name} /> </div>
+                        : ""}
+                      <div><strong>{genName()}:</strong><br /><span>{formatTokens(genBalance)}</span></div>
                         - <div><strong>{baseTokenName()}:</strong><br /><span>{formatTokens(ethBalance)}</span></div>
-                      </div>
-                      <div>
-                        <strong>ETH Address:</strong><br />
-                        <span>{accountAddress.substr(0, 20)}...</span>
-                        <button className={css.copyButton} onClick={this.copyAddress}><img src="/assets/images/Icon/Copy-black.svg" /></button>
-                      </div>
+                    </div>
+                    <div>
+                      <strong>ETH Address:</strong><br />
+                      <span>{accountAddress.substr(0, 20)}...</span>
+                      <button className={css.copyButton} onClick={this.copyAddress}><img src="/assets/images/Icon/Copy-black.svg" /></button>
                     </div>
                   </div>
                 </form>

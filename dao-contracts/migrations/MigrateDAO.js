@@ -17,7 +17,7 @@ async function migrate() {
     // delete previous deployment state and starts with clean state
     restart: true,
 
-    mnemonic: '',
+    mnemonic: process.env.MNEMONIC,
     // migration parameters
     output: process.env.OUTPUT_FILE,
     privateKey: process.env.PRIVATE_KEY,

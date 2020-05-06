@@ -14,13 +14,15 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "prettier": "^1.19.1",
-    "prettier-plugin-solidity": "^1.0.0-alpha.40",
+    "prettier-plugin-solidity": "^1.0.0-alpha.49",
     "solhint": "^2.3.0",
     "solhint-plugin-prettier": "0.0.4"
   },
   "scripts": {
-    "migrate": "truffle migrate",
+    "migrate": "truffle migrate --reset",
     "test": "truffle test",
+    "migrate-rinkeby": "truffle migrate --reset --network rinkeby",
+    "test-rinkeby": "truffle test --network rinkeby",
     "solhint": "./node_modules/.bin/solhint - f table contracts/*.sol",
     "prettier:solidity": "./node_modules/.bin/prettier --write contracts/*.sol"
   },
