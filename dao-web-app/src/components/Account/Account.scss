@@ -180,6 +180,30 @@ a.accountName {
 .profileData {
   flex-grow: 2;
   color: #fff;
+
+  div {
+    display: inline-block;
+  }
+}
+
+.profileDescription {
+  color: #fff;
+  font-family: Montserrat;
+  margin-bottom: 25px;
+
+  label {
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  div {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
 }
 
 .profileContainer {
@@ -233,8 +257,13 @@ a.accountName {
         font-size: 14px;
         line-height: 18px;
         font-family: 'Montserrat', sans-serif;
-        padding: 14px 33px;
+        padding: 18px 42px;
         text-transform: uppercase;
+        transition: 0.1s all;
+
+        &:hover {
+          box-shadow: none;
+        }
       }
     }
   }
@@ -251,13 +280,16 @@ a.accountName {
   .profileDataContainer {
     width: 100%;
     display: flex;
+    align-items: center;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 32px;
+    margin-bottom: 20px;
 
     label {
-      font-weight: normal;
-      font-size: 12px;
-      opacity: 0.7;
-      margin-bottom: 5px;
-      display: block;
+      padding-right: 10px;
     }
 
     .charLimit {

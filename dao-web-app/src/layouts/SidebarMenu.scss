@@ -13,7 +13,7 @@
   position: relative;
   z-index: 1;
   background: #fff;
-  padding: 0 70px;
+  padding: 50px 70px 0 70px;
   color: $links_color;
 
   &:hover {
@@ -108,7 +108,7 @@
         &.menuIcon {
           display: grid;
           grid-template-columns: 25px 1fr;
-          grid-gap: 9px;
+          grid-gap: 12px;
           align-items: center;
           img {
             position: relative;
@@ -150,7 +150,8 @@
       padding: 8px 23px 8px 8px;
       background-color: rgba(32, 104, 188, 0);
       transition: all 0.25s ease;
-      font-family: 'Source Sans Pro', sans-serif;
+      // font-family: 'Source Sans Pro', sans-serif;
+      font-family: 'TransatBold';
       font-size: 19px;
       line-height: 24px;
       font-weight: normal;

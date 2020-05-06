@@ -8,6 +8,23 @@ $header-height: 100px;
 
 
 @font-face {
+  font-family: 'TransatBold';
+  src: url("/assets/fonts/TransatBold.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/TransatBold.otf") format("opentype"), url("/assets/fonts/TransatBold.woff") format("woff"), url("/assets/fonts/TransatBold.ttf") format("truetype"), url("/assets/fonts/TransatBold.svg#TransatBold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'TransatStandard';
+  src: url("/assets/fonts/TransatStandard.otf");
+}
+
+@font-face {
+  font-family: 'TransatMedium';
+  src: url("/assets/fonts/TransatMedium.otf");
+}
+
+
+@font-face {
   font-family: "AccordBold";
   src: url("/assets/fonts/Accord-Bold.ttf");
   font-weight: regular;
@@ -626,6 +643,8 @@ body {
                     font-weight: 500;
                     font-size: 17px;
                     line-height: 24px;
+                    font-family: 'TransatStandard'
+                    
                 }
 
                 ul {
