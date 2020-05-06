@@ -227,9 +227,9 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                  </div>
                  <div className={css.count}>
                      <ul>
-                         <li><span>Sngls:</span><p>0</p></li>
-                         <li><span>SGT:</span><p>0</p></li>
-                         <li><span>USDC:</span><p>0</p></li>
+                         <li><span>Sngls:</span><p>2960</p></li>
+                         <li><span>SGT:</span><p>543</p></li>
+                         <li><span>USDC:</span><p>103</p></li>
                          <li><span>DAI:</span><p>0</p></li>
                          <li><span>SAI:</span><p>0</p></li>
                      </ul>
@@ -245,9 +245,9 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                  </div>
                  <div className={css.count}>
                      <ul>
-                         <li><span>SGT:</span><p>0</p></li>
-                         <li><span>Sngls:</span><p>0</p></li>
-                         <li><span>GEN:</span><p>0</p></li>
+                         <li><span>SGT:</span><p>2960</p></li>
+                         <li><span>Sngls:</span><p>140000</p></li>
+                         <li><span>GEN:</span><p>10000000</p></li>
                      </ul>
                  </div>
              </div>
