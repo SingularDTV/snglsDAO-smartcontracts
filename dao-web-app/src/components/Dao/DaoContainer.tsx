@@ -1,6 +1,7 @@
 import { IDAOState, Member } from "@daostack/client";
 import { getProfilesForAddresses } from "actions/profilesActions";
 import { getArc } from "arc";
+import CreateProposalPage from "components/Proposal/Create/CreateProposalPage";
 import ProposalDetailsPage from "components/Proposal/ProposalDetailsPage";
 import SchemeContainer from "components/Scheme/SchemeContainer";
 import Loading from "components/Shared/Loading";
@@ -64,7 +65,7 @@ class DaoContainer extends React.Component<IProps, null> {
     // const search = this.state.search.length > 2 ? this.state.search.toLowerCase() : "";
     console.log("daos render func  ", data);
     let allDAOs = data[0];
-    
+
     const arc = getArc();
     const feeContract = new arc.web3.eth.Contract(
         [
@@ -138,10 +139,7 @@ class DaoContainer extends React.Component<IProps, null> {
     console.log("oooooooooooooooooooooo: ", await feeContract.methods.listingFee().call());
     console.log("oooooooooooooooooooooo: ", await feeContract.methods.transactionFee().call());
     console.log("oooooooooooooooooooooo: ", await feeContract.methods.validationFee().call());
-
-    feeContract.methods.transactionFee().call().then((res: any) => {
-      console.log("ooo: ", res)
-    })
+    
 
     console.log(allDAOs)
     // TODO: use this once 3box fixes Box.getProfiles
@@ -151,7 +149,7 @@ class DaoContainer extends React.Component<IProps, null> {
   private daoHistoryRoute = (routeProps: any) => <DaoHistoryPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} />;
   private daoDiscussionRoute = (routeProps: any) => <DaoDiscussionPage {...routeProps} dao={this.props.data[0]} />;
-  private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} daoState={this.props.data[0]} />;
+  private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} ff={"15"} daoState={this.props.data[0]} />;
   private daoProposalRoute = (routeProps: any) =>
     <ProposalDetailsPage {...routeProps}
       currentAccountAddress={this.props.currentAccountAddress}
@@ -168,7 +166,7 @@ class DaoContainer extends React.Component<IProps, null> {
   private schemeRoute = (routeProps: any) => <SchemeContainer {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoSchemesRoute = (routeProps: any) => <DaoSchemesPage {...routeProps} daoState={this.props.data[0]} />;
   
-  private modalRoute = (route: any) => `/dao/0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d/scheme/${route.params.schemeId}/`;
+  private modalRoute = (route: any) => `/dao/scheme/${route.params.schemeId}/`;
 
   public render(): RenderOutput {
     let searchString = "";    
@@ -234,6 +232,11 @@ class DaoContainer extends React.Component<IProps, null> {
 
           </Switch>
 
+          <ModalRoute
+            path="/dao/scheme/:schemeId/proposals/create"
+            parentPath={this.modalRoute}
+            component={CreateProposalPage}
+          />
 
         </div>
       </div>
