@@ -6,9 +6,9 @@ import TrainingTooltip from "components/Shared/TrainingTooltip";
 
 import BN = require("bn.js");
 import classNames from "classnames";
-import FollowButton from "components/Shared/FollowButton";
+// import FollowButton from "components/Shared/FollowButton";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
-import { generate } from "geopattern";
+// import { generate } from "geopattern";
 import Analytics from "lib/analytics";
 import { baseTokenName, ethErrorHandler, formatTokens, genName, getExchangesList, supportedTokens, fromWei } from "lib/util";
 // import { parse } from "query-string";
@@ -44,11 +44,6 @@ const mapDispatchToProps = {
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, IHasNewPosts]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
-  // const match = matchPath(ownProps.location.pathname, {
-  //   path: "/dao/:daoAvatarAddress",
-  //   strict: false,
-  // });
-  // const queryValues = parse(ownProps.location.search);
   console.log("SIDEBAR mapStateTotProps: ", ownProps, " *", 
   {
     ...ownProps,
@@ -93,18 +88,18 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     const [ dao, { hasNewPosts } ] = this.props.data ;
     console.log("HELLO FROM SIDEBAR ", dao, dao.address)
     const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
-    const bgPattern = generate(dao.address + dao.name);
+    // const bgPattern = generate(dao.address + dao.name);
 
     return (
       <div>
-        <div className={css.daoName}>
+        {/* <div className={css.daoName}>
           <Link to={"/dao/" + dao.address} onClick={this.handleCloseMenu}>
             <b className={css.daoIcon} style={{ backgroundImage: bgPattern.toDataUrl() }}></b>
             <em></em>
             <span>{dao.name}</span>
           </Link>
-        </div>
-        <div className={css.daoDescription}>
+        </div> */}
+        {/* <div className={css.daoDescription}>
           {dao.name === "dxDAO" ?
             <p>
               By submitting a proposal, you agree to be bound by the&nbsp;
@@ -125,12 +120,12 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   : <p>New to DAOstack? Visit the <a href="https://daostack.zendesk.com/hc" target="_blank" rel="noopener noreferrer">help center</a> to get started.</p>
           }
         </div>
-        <div className={css.followButton}><FollowButton id={dao.address} type="daos" style="white" /></div>
+        <div className={css.followButton}><FollowButton id={dao.address} type="daos" style="default" /></div> */}
         <div className={css.daoNavigation}>
           <span className={css.daoNavHeading}><b>Menu</b></span>
           <ul>
             <li>
-              <Link to={"/dashboard/"} onClick={this.handleCloseMenu}>
+              <Link to={"/dao/dashboard/"} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -138,12 +133,14 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                     [css.homeNotification]: true,
                   })
                 }></span>
-                <img src="/assets/images/Icon/menu/home.svg" />
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_home.svg" />
                 Dashboard
+                </span>
               </Link>
             </li>
             <li>
-              <Link to={"/membership/"} onClick={this.handleCloseMenu}>
+              <Link to={"/dao/membership/"} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -151,12 +148,14 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                     [css.homeNotification]: true,
                   })
                 }></span>
-                <img src="/assets/images/Icon/menu/home.svg" />
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_membership.svg" />
                 Membership Fee
+                </span>
               </Link>
             </li>
             <li>
-              <Link to={"/plugins/"} onClick={this.handleCloseMenu}>
+              <Link to={"/dao/plugins/"} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -164,13 +163,15 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                     [css.homeNotification]: true,
                   })
                 }></span>
-                <img src="/assets/images/Icon/menu/home.svg" />
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_apps.svg" />
                 Apps
+                </span>
               </Link>
             </li>
             <li>
               <TrainingTooltip placement="right" overlay={"List of entities (DAOs and individuals) that have voting power in the DAO"}>
-                <Link to={"/members/"} onClick={this.handleCloseMenu}>
+                <Link to={"/dao/members/"} onClick={this.handleCloseMenu}>
                   <span className={css.menuDot} />
                   <span className={
                     classNames({
@@ -178,13 +179,15 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                       [css.holdersNotification]: true,
                     })
                   }></span>
-                  <img src="/assets/images/Icon/menu/holders.svg" />
+                  <span className={css.menuIcon}>
+                  <img src="/assets/images/Icon/menu/_members.svg" />
                   DAO Members
+                  </span>
                 </Link>
               </TrainingTooltip>
             </li>
             <li>
-              <Link to={"/history/"} onClick={this.handleCloseMenu}>
+              <Link to={"/dao/history/"} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -192,13 +195,15 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                     [css.historyNotification]: true,
                   })
                 }></span>
-                <img src="/assets/images/Icon/menu/history.svg" />
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_history.svg" />
                 History
+                </span>
               </Link>
             </li>
             <li>
               <TrainingTooltip placement="right" overlay={"Space designated for general questions, statements and comments"}>
-                <Link to={"/discussion/"} onClick={this.handleCloseMenu}>
+                <Link to={"/dao/discussion/"} onClick={this.handleCloseMenu}>
                   <span className={
                     classNames({
                       [css.menuDot]: true,
@@ -210,8 +215,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                       [css.discussionNotification]: true,
                     })
                   }></span>
-                  <img src="/assets/images/Icon/menu/chat.svg" />
-                DAO Wall
+                  <span className={css.menuIcon}>
+                  <img src="/assets/images/Icon/menu/_wall.svg" />
+                  DAO Wall
+                  </span>
                 </Link>
               </TrainingTooltip>
             </li>

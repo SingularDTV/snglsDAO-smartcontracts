@@ -61,7 +61,7 @@ class DaoMembersPage extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
     const { data } = this.props;
-
+    console.log("HAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", this.props);
     const members = data;
     const daoTotalReputation = this.props.daoState.reputationTotalSupply;
     const { daoState, profiles } = this.props;

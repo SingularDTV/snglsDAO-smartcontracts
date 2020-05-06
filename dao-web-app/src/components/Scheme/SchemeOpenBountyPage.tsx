@@ -79,7 +79,7 @@ export default class SchemeOpenBounty extends React.Component<IProps, IState> {
   }
 
   public render() {
-    const { daoAvatarAddress, scheme } = this.props;
+    const { /*daoAvatarAddress,*/ scheme } = this.props;
     const createCard = () => {
 
       // Shows open bounty with bounty details if API returns bounty, else, shows "no open bounty" message
@@ -109,7 +109,7 @@ export default class SchemeOpenBounty extends React.Component<IProps, IState> {
 
     return (
       <div>
-        <BreadcrumbsItem to={`/dao/${daoAvatarAddress}/scheme/${scheme.id}/info`}>{schemeName(scheme, scheme.address)}</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/info`}>{schemeName(scheme, scheme.address)}</BreadcrumbsItem>
         {
           createCard()
         }

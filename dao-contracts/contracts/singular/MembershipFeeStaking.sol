@@ -7,7 +7,7 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 contract MembershipFeeStaking {
     using SafeMath for uint256;
     IERC20 public token;
-    mapping(address => uint256) balances;
+    mapping(address => uint256) public balances;
 
     constructor(IERC20 _token) public {
         token = _token;

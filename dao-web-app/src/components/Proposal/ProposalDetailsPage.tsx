@@ -141,8 +141,8 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
 
     return (
       <div className={css.wrapper}>
-        <BreadcrumbsItem weight={1} to={`/dao/${daoState.address}/scheme/${proposal.scheme.id}`}>{schemeName(proposal.scheme, proposal.scheme.address)}</BreadcrumbsItem>
-        <BreadcrumbsItem weight={2} to={`/dao/${daoState.address}/proposal/${proposal.id}`}>{humanProposalTitle(proposal, 40)}</BreadcrumbsItem>
+        <BreadcrumbsItem weight={1} to={`/dao/scheme/${proposal.scheme.id}`}>{schemeName(proposal.scheme, proposal.scheme.address)}</BreadcrumbsItem>
+        <BreadcrumbsItem weight={2} to={`/dao/proposal/${proposal.id}`}>{humanProposalTitle(proposal, 40)}</BreadcrumbsItem>
         <div className={this.proposalClass} data-test-id={"proposal-" + proposal.id}>
           <div className={css.proposalInfo}>
             <div>
@@ -165,13 +165,13 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
               {
                 (crxContractName) ? <div className={css.gotoCompetition}>
                   {
-                    <Link to={`/dao/${daoState.address}/crx/proposal/${proposal.id}`}>Go to {crxContractName}&nbsp;&gt;</Link>
+                    <Link to={`/dao/crx/proposal/${proposal.id}`}>Go to {crxContractName}&nbsp;&gt;</Link>
                   }
                 </div> : ""
               }
             </div>
             <h3 className={css.proposalTitleTop}>
-              <Link to={"/dao/" + daoState.address + "/proposal/" + proposal.id} data-test-id="proposal-title">{humanProposalTitle(proposal)}</Link>
+              <Link to={"/dao/proposal/" + proposal.id} data-test-id="proposal-title">{humanProposalTitle(proposal)}</Link>
             </h3>
 
             <div className={css.timer + " clearfix"}>
@@ -335,7 +335,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
         {this.state.showShareModal ?
           <SocialShareModal
             closeHandler={this.closeShareModal}
-            url={`https://alchemy.daostack.io/dao/${daoState.address}/proposal/${proposal.id}`}
+            url={`https://alchemy.daostack.io/dao/proposal/${proposal.id}`}
           /> : ""
         }
       </div>

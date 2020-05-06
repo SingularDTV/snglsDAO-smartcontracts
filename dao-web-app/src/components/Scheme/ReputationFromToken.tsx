@@ -268,14 +268,14 @@ class ReputationFromToken extends React.Component<IProps, IState> {
   private onSubmitClick = (setFieldValue: any) => ()=>{ setFieldValue("useTxSenderService",false); }
 
   public render(): RenderOutput {
-    const { daoAvatarAddress, schemeState, currentAccountAddress } = this.props;
+    const { /*daoAvatarAddress,*/ schemeState, currentAccountAddress } = this.props;
     const redeemerAddress = this.state.redeemerAddress;
 
     const arc = getArc();
 
     return (
       <div className={schemeCss.schemeContainer}>
-        <BreadcrumbsItem to={`/dao/${daoAvatarAddress}/scheme/${schemeState.id}`}>{schemeName(schemeState, schemeState.address)}</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/dao/scheme/${schemeState.id}`}>{schemeName(schemeState, schemeState.address)}</BreadcrumbsItem>
 
         <Sticky enabled top={50} innerZ={10000}>
           <h2 className={schemeCss.schemeName}>

@@ -72,7 +72,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
   private async handleNewProposal(daoAvatarAddress: Address, schemeId: any): Promise<void> {
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
 
-    this.props.history.push(`/dao/${daoAvatarAddress}/scheme/${schemeId}/proposals/create/`);
+    this.props.history.push(`/dao/scheme/${schemeId}/proposals/create/`);
   }
 
   private _handleNewProposal = (e: any): void => {
@@ -125,7 +125,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
 
     return (
       <div>
-        <BreadcrumbsItem to={`/dao/${daoState.address}/scheme/${scheme.id}`}>{schemeFriendlyName}</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/dao/scheme/${scheme.id}`}>{schemeFriendlyName}</BreadcrumbsItem>
 
         { proposalsQueued.length === 0 && proposalsPreBoosted.length === 0 && proposalsBoosted.length === 0
           ?
@@ -136,7 +136,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
             </div>
             <p>You can be the first one to create a {schemeFriendlyName} proposal today! :)</p>
             <div className={css.cta}>
-              <Link to={"/dao/" + daoState.address}>
+              <Link to={"/dao/plugins"}>
                 <img className={css.relax} src="/assets/images/lt.svg"/> Back to schemes
               </Link>
               <a className={classNames({

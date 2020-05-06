@@ -2,11 +2,13 @@
   width: 100%;
 
   h1 {
-    color: rgba(104, 155, 214, 1);
-    border-bottom: 1px solid rgba(195, 212, 231, 1);
+    font-size: 50px;
+    text-transform: uppercase;
+    color: #fff;
+    // border-bottom: 1px solid rgba(195, 212, 231, 1);
     width: 100%;
-    padding-top: 30px;
-    background-color: rgba(229, 235, 242, 1);
+    // padding-top: 30px;
+    // background-color: rgba(229, 235, 242, 1);
     margin: 0;
   }
 }
