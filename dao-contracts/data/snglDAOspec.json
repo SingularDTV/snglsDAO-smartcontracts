@@ -1,1 +1,142 @@
-{"orgName":"Singularity DAO","tokenName":"Singularity governance token","tokenSymbol":"SGT","ContributionReward":[{"voteParams":0}],"SchemeRegistrar":[{"voteRegisterParams":1,"voteRemoveParams":1}],"StandAloneContracts":[{"name":"Fee","fromArc":false,"runFunctions":[{"functionName":"transferOwnership","params":["AvatarAddress"]}],"constructor":true,"params":[1,1,1,1]},{"name":"MembershipFeeStaking","fromArc":false,"constructor":true,"params":["TokenAddress"]}],"CustomSchemes":[{"name":"GenericScheme","schemeName":"GenericScheme","isUniversal":false,"params":["GenesisProtocolAddress",{"voteParams":2},{"StandAloneContract":0}],"permissions":"0x00000010","alias":"GenericSchemeFee","fromArc":false},{"name":"ContinuousLocking4Reputation","schemeName":"ContinuousLocking4Reputation","isUniversal":false,"params":["850000000000000000000000",1588862971,10000,1588872971,12,"85000000000000000000000",900,100,"TokenAddress","0x0000000000000000000000000000000000000000"],"permissions":"0x00000010","alias":"ContinuousLocking4Reputation","fromArc":true}],"VotingMachinesParams":[{"boostedVotePeriodLimit":1800,"daoBountyConst":10,"minimumDaoBounty":150,"queuedVotePeriodLimit":3600,"queuedVoteRequiredPercentage":50,"preBoostedVotePeriodLimit":600,"proposingRepReward":5000,"quietEndingPeriod":1800,"thresholdConst":1200,"voteOnBehalf":"0x0000000000000000000000000000000000000000","votersReputationLossRatio":4,"activationTime":1570021200},{"boostedVotePeriodLimit":1800,"daoBountyConst":10,"minimumDaoBounty":500,"queuedVotePeriodLimit":3600,"queuedVoteRequiredPercentage":50,"preBoostedVotePeriodLimit":600,"proposingRepReward":10000,"quietEndingPeriod":1800,"thresholdConst":1300,"voteOnBehalf":"0x0000000000000000000000000000000000000000","votersReputationLossRatio":4,"activationTime":1570021200},{"boostedVotePeriodLimit":1800,"daoBountyConst":10,"minimumDaoBounty":50,"queuedVotePeriodLimit":3600,"queuedVoteRequiredPercentage":50,"preBoostedVotePeriodLimit":600,"proposingRepReward":100,"quietEndingPeriod":1800,"thresholdConst":1200,"voteOnBehalf":"0x0000000000000000000000000000000000000000","votersReputationLossRatio":4,"activationTime":1570021200}],"schemes":{"ContributionReward":true,"SchemeRegistrar":true},"unregisterOwner":true,"useUController":false,"useDaoCreator":true,"founders":[{"address":"0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956","tokens":10000,"reputation":10000}]}
+{
+    "orgName": "Singularity DAO",
+    "tokenName": "Singularity governance token",
+    "tokenSymbol": "SGT",
+    "ContributionReward": [
+        {
+            "voteParams": 0
+        }
+    ],
+    "SchemeRegistrar": [
+        {
+            "voteRegisterParams": 1,
+            "voteRemoveParams": 1
+        }
+    ],
+    "StandAloneContracts": [
+        {
+            "name": "Fee",
+            "fromArc": false,
+            "runFunctions": [
+                {
+                    "functionName": "transferOwnership",
+                    "params": [
+                        "AvatarAddress"
+                    ]
+                }
+            ],
+            "constructor": true,
+            "params": [
+                1,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "name": "MembershipFeeStaking",
+            "fromArc": false,
+            "constructor": true,
+            "params": [
+                "TokenAddress"
+            ]
+        }
+    ],
+    "CustomSchemes": [
+        {
+            "name": "GenericScheme",
+            "schemeName": "GenericScheme",
+            "isUniversal": false,
+            "params": [
+                "GenesisProtocolAddress",
+                {
+                    "voteParams": 2
+                },
+                {
+                    "StandAloneContract": 0
+                }
+            ],
+            "permissions": "0x00000010",
+            "alias": "GenericSchemeFee",
+            "fromArc": false
+        },
+        {
+            "name": "ContinuousLocking4Reputation",
+            "schemeName": "ContinuousLocking4Reputation",
+            "isUniversal": false,
+            "params": [
+                "850000000000000000000000",
+                1588883199,
+                120,
+                1588883319,
+                12,
+                "85000000000000000000000",
+                900,
+                100,
+                "TokenAddress",
+                "0x0000000000000000000000000000000000000000"
+            ],
+            "permissions": "0x00000010",
+            "alias": "ContinuousLocking4Reputation",
+            "fromArc": true
+        }
+    ],
+    "VotingMachinesParams": [
+        {
+            "boostedVotePeriodLimit": 1800,
+            "daoBountyConst": 10,
+            "minimumDaoBounty": 150,
+            "queuedVotePeriodLimit": 3600,
+            "queuedVoteRequiredPercentage": 50,
+            "preBoostedVotePeriodLimit": 600,
+            "proposingRepReward": 5000,
+            "quietEndingPeriod": 1800,
+            "thresholdConst": 1200,
+            "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+            "votersReputationLossRatio": 4,
+            "activationTime": 1570021200
+        },
+        {
+            "boostedVotePeriodLimit": 1800,
+            "daoBountyConst": 10,
+            "minimumDaoBounty": 500,
+            "queuedVotePeriodLimit": 3600,
+            "queuedVoteRequiredPercentage": 50,
+            "preBoostedVotePeriodLimit": 600,
+            "proposingRepReward": 10000,
+            "quietEndingPeriod": 1800,
+            "thresholdConst": 1300,
+            "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+            "votersReputationLossRatio": 4,
+            "activationTime": 1570021200
+        },
+        {
+            "boostedVotePeriodLimit": 1800,
+            "daoBountyConst": 10,
+            "minimumDaoBounty": 50,
+            "queuedVotePeriodLimit": 3600,
+            "queuedVoteRequiredPercentage": 50,
+            "preBoostedVotePeriodLimit": 600,
+            "proposingRepReward": 100,
+            "quietEndingPeriod": 1800,
+            "thresholdConst": 1200,
+            "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+            "votersReputationLossRatio": 4,
+            "activationTime": 1570021200
+        }
+    ],
+    "schemes": {
+        "ContributionReward": true,
+        "SchemeRegistrar": true
+    },
+    "unregisterOwner": true,
+    "useUController": false,
+    "useDaoCreator": true,
+    "founders": [
+        {
+            "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
+            "tokens": 10000,
+            "reputation": 10000
+        }
+    ]
+}

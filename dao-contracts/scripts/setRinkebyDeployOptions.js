@@ -12,7 +12,7 @@ const founderAddress = "0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956";
 //set founder's address in spec file to current first account
 const spec = require(specFile);
 spec.founders[0].address = founderAddress;
-fs.writeFileSync(path.resolve(__dirname, specFile), JSON.stringify(spec));
+fs.writeFileSync(path.resolve(__dirname, specFile), JSON.stringify(spec, null, 4));
 
 //set rinkeby .env file
 fs.copyFileSync(path.resolve(__dirname, rinkebyEnv), path.resolve(__dirname, destEnv));
