@@ -1,5 +1,5 @@
 import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake/*, Member*/ } from "@daostack/client";
-import { /* enableWalletProvider, */ getArc } from "arc";
+import { enableWalletProvider,  getArc } from "arc";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
@@ -13,7 +13,7 @@ import * as Sticky from "react-stickynode";
 import { first } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
-// import classNames from "classnames";
+import classNames from "classnames";
 
 // import { IProfilesState } from "reducers/profilesReducer";
 
@@ -51,16 +51,17 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
     };
   }
 
-  // private async handleNewProposal(): Promise<void> {
-  //   if (!await enableWalletProvider({ showNotification: true })) { return; }
+  private async handleNewProposal(): Promise<void> {
+    if (!await enableWalletProvider({ showNotification: true })) { return; }
 
-  //   this.props.history.push(`/dao/dashboard/join`);
-  // }
+    this.props.history.push(`/dao/scheme/${"0x9998c70f34c7cb64401ed47487703abee1ca2300b009680a6e3b4080d67ab3a9"}/proposals/create/`);
+    // this.props.history.push(`/dao/dashboard/join`);
+  }
 
-  // private _handleNewProposal = (e: any): void => {
-  //   this.handleNewProposal();
-  //   e.preventDefault();
-  // };
+  private _handleNewProposal = (e: any): void => {
+    this.handleNewProposal();
+    e.preventDefault();
+  };
 
   public async componentDidMount() {
     const arc = getArc();
@@ -171,14 +172,14 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
           <h1>DASHBOARD</h1>
           <div>
             <button>Join</button>
-            {/* <a className={classNames({
+            <a className={classNames({
                 [css.blueButton]: true,
-                [css.disabled]: !isActive,
+                // [css.disabled]: !isActive,
               })}
               href="#!"
-              onClick={isActive ? this._handleNewProposal : null}
-              data-test-id="createProposal"
-              > Join </a> */}
+              onClick={/*isActive*/ true ? this._handleNewProposal : null}
+              data-test-id="openJoin"
+              > Join </a>
           </div>
         </div>
          {/* Key parameters div */}
