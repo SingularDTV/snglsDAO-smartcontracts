@@ -23,6 +23,11 @@ $header-height: 100px;
   src: url("/assets/fonts/TransatMedium.otf");
 }
 
+@font-face {
+  font-family: 'TransatLight';
+  src: url("/assets/fonts/TransatLight.otf");
+}
+
 
 @font-face {
   font-family: "AccordBold";
@@ -55,6 +60,7 @@ body {
   z-index: 100;
   position: relative;
   height: 100%;
+  overflow: hidden;
 }
 
 .sidebarWrapper {
@@ -575,6 +581,108 @@ body {
 //   display: table;
 // }
 
+
+
+
+
+.footer {
+  line-height: normal;
+  // height: 165px;
+  background: url(/assets/images/bg_footer.png) center no-repeat;
+  background-size: cover;
+  color: #fff;
+  padding: 0px 93px;
+  position: relative;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 1fr 460px 1fr;
+  align-items: center;
+
+  &Descr {
+    font-family: Montserrat;
+    padding: 50px 0;
+    h4 {
+      font-size: 22px;
+      line-height: 27px;
+      color: #FEFEFE;
+      padding: 0;
+      margin: 0 0 20px 0;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-family: Montserrat;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 25px;
+      color: #D8D8D8;
+      opacity: 0.8;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  &Img {
+    align-self: end;
+
+    img {
+      position: relative;
+      display: block;
+    }
+  }
+
+  &Links {
+    line-height: normal;
+    text-align: right;
+    padding: 50px 0;
+
+    &Logo {
+      line-height: normal;
+      margin-bottom: 40px;
+
+      img {
+        display: inline-block;
+        height: 48px;
+      }
+    }
+
+    &Socials {
+      ul {
+        display: inline-block;
+        overflow: hidden;
+        margin: 0;
+
+        & > li {
+          display: block;
+          float: left;
+          padding: 0 16px;
+
+          &:first-child {
+            padding-left: 0;
+          }
+
+          &:last-child {
+            padding-right: 0;
+          }
+
+          a {
+            img {
+              display: block;
+              width: 28px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
 .pendingTransactions {
   z-index: 1000000;
   position: fixed;
@@ -677,7 +785,8 @@ body {
 
 .pageWrapper {
   position: relative;
-  top: 93px;
+  // top: 93px;
+  padding-top: 93px;
   line-height: normal;
   display: grid;
   grid-template-columns: 470px 1fr;

@@ -7,9 +7,9 @@
   span {
     text-align: left;
     display: inline-block;
-    color: rgba(104, 154, 214, 1);
+    // color: rgba(104, 154, 214, 1);
     min-width: 3%;
-    font-size: 13px;
+    // font-size: 13px;
 
     b {
       font-weight: normal;
@@ -22,10 +22,10 @@
     }
   }
 
-  .disabledPredictions {
-    font-size: 11px;
-    color: $gray-1;
-  }
+  // .disabledPredictions {
+  //   font-size: 14px;
+  //   color: $gray-1;
+  // }
 
   button {
     font-weight: $bold;
@@ -176,7 +176,7 @@
     background-color: #0076ff;
     color: white;
     font-weight: normal;
-    font-family: LucidaGrande;
+    // font-family: LucidaGrande;
   }
 
   span {
@@ -219,7 +219,7 @@
 
   .disabledPredictions {
     position: relative;
-    top: 3px;
+    // top: 3px;
   }
 
   .enablePredictions {

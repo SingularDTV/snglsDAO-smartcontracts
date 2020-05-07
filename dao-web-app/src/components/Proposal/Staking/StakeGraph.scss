@@ -54,10 +54,10 @@
 
     span {
       display: block;
-      position: absolute;
+      // position: absolute;
       width: 100%;
       bottom: 0;
-      height: 2px;
+      height: 4px;
       background-color: rgba(208, 214, 220, 1.000);
     }
   }
@@ -113,6 +113,12 @@
    .forBar, .againstBar {
      position: relative;
      width: auto;
+
+     & > div {
+      width: 100%;
+      height: 4px;
+      background: #ffffff20;
+     }
 
      b {
        color: $gray-1;
