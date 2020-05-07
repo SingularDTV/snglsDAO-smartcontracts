@@ -23,6 +23,7 @@ import DaoSchemesPage from "./DaoSchemesPage";
 import DaoHistoryPage from "./DaoHistoryPage";
 import DaoMembersPage from "./DaoMembersPage";
 import DaoDashboard from "./DaoDashboard";
+import DaoMembershipPage from "./DaoMembershipPage"
 import * as css from "./Dao.scss";
 
 type IExternalProps = RouteComponentProps<any>;
@@ -145,7 +146,8 @@ class DaoContainer extends React.Component<IProps, null> {
     // TODO: use this once 3box fixes Box.getProfiles
     //this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
-
+  
+  private daoMembershipRoute = (routeProps: any) => <DaoMembershipPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoHistoryRoute = (routeProps: any) => <DaoHistoryPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} />;
   private daoDiscussionRoute = (routeProps: any) => <DaoDiscussionPage {...routeProps} dao={this.props.data[0]} />;
@@ -227,6 +229,9 @@ class DaoContainer extends React.Component<IProps, null> {
             
             <Route exact path="/dao/dashboard"
               render={this.daoDashboardRoute} />
+
+            <Route exact path="/dao/membership"
+              render={this.daoMembershipRoute} />
 
             <Redirect exact from="/dao" to="/dao/dashboard"></Redirect>
 

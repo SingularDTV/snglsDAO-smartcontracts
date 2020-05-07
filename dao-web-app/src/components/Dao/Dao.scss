@@ -409,11 +409,10 @@ button:hover {
       }
 
 
-
 .daoModalBlock {
     background: #0d1a46;
     padding: 50px 0;
-    display: none;
+    // display: none;
 }
 
 
@@ -813,4 +812,53 @@ a {
 
 :global .infinite-scroll-component {
   overflow: visible !important; // to avoid clipping of for user account popup in regular proposals list
+}
+
+
+
+
+
+
+/* tmp styles for pop-up calling button */
+
+.cta {
+  padding-top: 50px;
+
+  a {
+    color: rgba(6, 118, 255, 1);
+    font-size: 11px;
+    font-family: "Open Sans";
+    display: inline-block;
+    margin-right: 20px;
+
+    img {
+      height: 8px;
+      display: inline-block;
+      width: 8px;
+    }
+  }
+
+  a.blueButton {
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    color: white;
+    background-color: rgba(5, 118, 255, 1);
+    transition: all 0.25s ease;
+    border-radius: 15px;
+    display: inline-block;
+    padding: 0 30px;
+
+    &:hover {
+      background-color: rgba(19, 46, 91, 1);
+      color: $white;
+    }
+
+    &.disabled,
+    &disabled:hover {
+      background-color: rgba(200, 200, 200, 0.5);
+      border: 1px solid rgba(200, 200, 200, 1);
+      cursor: not-allowed;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake/*, Member*/ } from "@daostack/client";
-import { getArc } from "arc";
+import { enableWalletProvider,  getArc } from "arc";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
@@ -13,6 +13,8 @@ import * as Sticky from "react-stickynode";
 import { first } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
+import classNames from "classnames";
+
 // import { IProfilesState } from "reducers/profilesReducer";
 
 // import DaoMember from "./DaoMember";
@@ -48,6 +50,18 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
       membershipFee: "0"
     };
   }
+
+  private async handleNewProposal(): Promise<void> {
+    if (!await enableWalletProvider({ showNotification: true })) { return; }
+
+    this.props.history.push(`/dao/scheme/${"0x9998c70f34c7cb64401ed47487703abee1ca2300b009680a6e3b4080d67ab3a9"}/proposals/create/`);
+    // this.props.history.push(`/dao/dashboard/join`);
+  }
+
+  private _handleNewProposal = (e: any): void => {
+    this.handleNewProposal();
+    e.preventDefault();
+  };
 
   public async componentDidMount() {
     const arc = getArc();
@@ -156,7 +170,17 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
         
          <div className={css.pageHead}>
           <h1>DASHBOARD</h1>
-          <div><button>Join</button></div>
+          <div>
+            <button>Join</button>
+            <a className={classNames({
+                [css.blueButton]: true,
+                // [css.disabled]: !isActive,
+              })}
+              href="#!"
+              onClick={/*isActive*/ true ? this._handleNewProposal : null}
+              data-test-id="openJoin"
+              > Join </a>
+          </div>
         </div>
          {/* Key parameters div */}
            <div> 
@@ -176,7 +200,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                  </div>
                  <div className={css.cont}>
                      <h4>Listing Rate: SNGLS</h4>
-                     <p>The minimum amount of SNGLS needed to <br/>be staked to have content mined onto the protocol.</p>
+                     <p>The amount of SNGLS needed to be paid to the treasury <br/>to add content to the protocol.</p>
                  </div>
              </div>
 
@@ -362,7 +386,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
 
 
 
-{/* <div className={css.daoModalBlock}>
+<div className={css.daoModalBlock}>
 
 
         <div className={css.daoModal}>
@@ -393,7 +417,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
         </div>
 
 
-</div>  */}
+</div> 
 
 
       </div>
