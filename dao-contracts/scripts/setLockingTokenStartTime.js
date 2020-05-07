@@ -12,5 +12,5 @@ else if (tokenLockingSchemeSearch.length === 1) {
     tokenLockingScheme.params[1] = Math.floor(Date.now() / 1000);
     //    redeem start time      =          start time          +           batch time
     tokenLockingScheme.params[3] = tokenLockingScheme.params[1] + tokenLockingScheme.params[2];
-    fs.writeFileSync(path.resolve(__dirname, specFile), JSON.stringify(spec));
+    fs.writeFileSync(path.resolve(__dirname, specFile), JSON.stringify(spec, null, 4));
 }
