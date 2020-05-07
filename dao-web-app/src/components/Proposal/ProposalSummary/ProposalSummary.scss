@@ -9,12 +9,12 @@
   text-align: center;
   font-family: "Open Sans";
 
-  strong {
-    font-weight: normal;
-  }
+  // strong {
+  //   font-weight: normal;
+  // }
 
   a {
-    color: rgba(104, 154, 214, 1.000);
+    color: #010B2B;
   }
 }
 
@@ -43,6 +43,11 @@
   padding: 15px;
   margin: 0 0 0 0;
   width: 100%;
+  color: #010B2B;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 32px;
+  font-family: Montserrat;
 }
 
 
@@ -132,10 +137,10 @@
 
 .transferType {
   display: inline-block;
-  color: rgba(80, 97, 118, 1.000);
+  color: #010B2B;
 
   strong {
-    color: rgba(80, 97, 118, 1.000);
+    // color: rgba(80, 97, 118, 1.000);
 
     em {
       color: rgba(80, 97, 118, 1.000);

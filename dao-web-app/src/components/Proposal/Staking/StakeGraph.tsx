@@ -43,19 +43,23 @@ export default class StakeGraph extends React.Component<IProps, null> {
         <div className={css.stakeGraph}>
           <div className={css.leftColumn}>
             <div className={css.stakesFor}>
+              <div className={css.stakesForTitle}>
               <img className={css.defaultIcon} src="/assets/images/Icon/v-small-line.svg"/>
               <img className={css.detailIcon} src="/assets/images/Icon/v-small.svg"/>
-              {formatTokens(proposal.stakesFor)} <b>Pass</b>
-              <div><span style={{ width: passWidth + "%" }}></span></div>
+                <b>{formatTokens(proposal.stakesFor)} Pass</b>
+              </div>
+              <div className={css.stakesForLine}><span style={{ width: passWidth + "%" }}></span></div>
             </div>
             <div className={css.stakesAgainst}>
+              <div className={css.stakesAgainstTitle}>
               <img className={css.defaultIcon} src="/assets/images/Icon/x-small-line.svg"/>
               <img className={css.detailIcon} src="/assets/images/Icon/x-small.svg"/>
-              {formatTokens(proposal.stakesAgainst)} <b>Fail</b>
-              <div><span style={{ width: failWidth + "%" }}></span></div>
+                <b>{formatTokens(proposal.stakesAgainst)} Fail</b>
+              </div>
+              <div className={css.stakesAgainstLine}><span style={{ width: failWidth + "%" }}></span></div>
             </div>
           </div>
-          <div className={css.rightColumn}>
+          {/* <div className={css.rightColumn}>
             <div className={css.forBar}>
               <b>Pass</b>
               <div><span style={{width: passWidth + "%"}}></span></div>
@@ -64,7 +68,7 @@ export default class StakeGraph extends React.Component<IProps, null> {
               <b>Fail</b>
               <div><span style={{width: failWidth + "%"}}></span></div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
