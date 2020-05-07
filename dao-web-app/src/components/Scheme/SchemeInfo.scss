@@ -25,29 +25,35 @@
 }
 
 .schemeInfoContainer {
-  background-color: rgba(252, 253, 255, 1);
-  color: rgba(78, 97, 118, 1);
+  // background-color: rgba(252, 253, 255, 1);
+  color: #fff;
   font-size: 11px;
   font-family: "Open Sans";
   font-weight: normal;
-  border-radius: 0 14px 14px 14px;
+  // border-radius: 0 14px 14px 14px;
   min-width: 340px;
 
   h3 {
     margin: 0;
     font-size: 16px;
     font-family: "AccordBold";
-    border-bottom: 1px solid #e9eef4;
-    padding: 15px;
+    // border-bottom: 1px solid #e9eef4;
+    border-bottom: 1px solid #ffffff17;
+    padding: 15px 0;
   }
 
   .infoCardContent {
-    padding: 15px;
+    padding: 15px 0;
     width: 100%;
+
+    td {
+      padding: 7px 0;
+    }
   }
 
   th {
     text-align: left;
+    font-weight: normal;
     min-width: 75px;
   }
 }

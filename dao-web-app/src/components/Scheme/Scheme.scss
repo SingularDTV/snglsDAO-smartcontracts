@@ -5,27 +5,27 @@
 
 .schemeName {
   font-size: 28px;
-  color: #689ad6;
+  color: #fff;
   padding: 0;
   margin: 0;
   padding-bottom: 15px;
-  background-color: #e5ebf2;
-  padding-top: 10px;
+  // background-color: #e5ebf2;
+  // padding-top: 10px;
 }
 
 .createProposal {
   z-index: 100;
-  width: 100%;
+  // width: 100%;
   text-align: right;
 
   a {
-    padding: 8px 15px;
+    padding: 6px 15px;
     color: $white;
     background-color: rgba(3, 118, 255, 1);
-    border-radius: 15px;
+    border-radius: 30px;
     height: 30px;
     line-height: 30px;
-    font-size: 13px;
+    font-size: 13px !important;
     white-space: nowrap;
 
     &:hover {
@@ -42,24 +42,55 @@
   }
 }
 
+
+
+.blockCont {
+  line-height: normal;
+  position: relative;
+  padding: 20px 40px;
+
+  & > div {
+    position: relative;
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 0.8;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+    backdrop-filter: blur(40px);
+  }
+}
+
+
 .schemeMenu {
+  color: #fff;
   width: 100%;
-  background-color: rgba(229, 235, 242, 1);
-  border-bottom: 1px solid rgba(212, 220, 228, 1);
+  // background-color: rgba(229, 235, 242, 1);
+  // border-bottom: 1px solid rgba(212, 220, 228, 1);
   padding-top: 15px;
   position: relative;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
+
+    display: grid;
+    grid-template-columns: auto auto 1fr;
 
   a {
-    color: rgba(0, 29, 53, 1);
+    color: #fff;
     display: inline-block;
     font-size: 16px;
     transition: all 0.25s ease;
   }
 
-  a:visited {
-    color: rgba(0, 29, 53, 1);
-  }
+  // a:visited {
+  //   color: rgba(0, 29, 53, 1);
+  // }
 
   .createProposal a:visited,
   a.createProposal {
@@ -72,7 +103,7 @@
   .openbounty {
     border-bottom: 2px solid rgba(34, 128, 254, 0);
     /* TODO: for .crx this left/right padding may not be appropriate for all CrX rewarder contracts. */
-    padding: 10px 24px;
+    padding: 15px 24px;
   }
 
   .proposals.active,
