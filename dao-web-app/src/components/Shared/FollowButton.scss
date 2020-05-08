@@ -1,15 +1,25 @@
 .followButton {
-  // font-family: LucidaGrande;
-  font-size: 11px;
-  text-align: center;
-  color: #0076ff;
-  border-radius: 11px;
-  border: solid 1px #0076ff;
-  padding: 4px 12px;
-  cursor: pointer;
-  position: relative;
-  background-color: transparent;
-  outline: none;
+  color: #fff;
+    font-family: Montserrat;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 1.61455px;
+    text-transform: uppercase;
+    padding: 14px 70px;
+    border: 1px solid #D40D26;
+    border-radius: 50px;
+    background: #D40D26;
+    outline: none;
+    position: relative;
+    transition: 0.1s all;
+    display: block;
+    font-size: 14px;
+    box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
+    cursor: pointer;
+
+    &:hover {
+          box-shadow: none;
+    }
 
   .spinner {
     content: '';

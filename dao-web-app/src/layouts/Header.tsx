@@ -210,12 +210,18 @@ class Header extends React.Component<IProps, null> {
               <ul>
                 <li><a href="#">Dao</a></li>
                 <li><a href="#">Forum</a></li>
-                <li><a href="#">Consumer protection</a>
+                <li className={css.submenu}><a href="#">Consumer protection</a>
                     <ul>
-                        <li><a href="#">Sublink</a></li>
+                      <li><a href="#">Sublink</a></li>
+                      <li><a href="#">Sublink</a></li>
+                      <li><a href="#">Sublink</a></li>
                     </ul>
                 </li>
-                <li><a href="#">News</a></li>
+                <li className={css.submenu}><a href="#">News</a>
+                  <ul>
+                    <li><a href="#">Sublink</a></li>
+                  </ul>
+                </li>
                 <li><a href="#">Subscribe</a></li>
                 <li><a href="#">Github</a></li>
               </ul>
