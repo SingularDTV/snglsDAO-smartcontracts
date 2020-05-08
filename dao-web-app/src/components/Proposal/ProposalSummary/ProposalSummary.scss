@@ -1,7 +1,7 @@
 .proposalSummary {
   position: relative;
-  border: 1px solid rgba(229, 235, 242, 1.000);
-  border-radius: 2px;
+  // border: 1px solid rgba(229, 235, 242, 1.000);
+  // border-radius: 2px;
   font-size: 12px;
   display: inline-block;
   padding: 5px;
@@ -9,12 +9,12 @@
   text-align: center;
   font-family: "Open Sans";
 
-  strong {
-    font-weight: normal;
-  }
+  // strong {
+  //   font-weight: normal;
+  // }
 
   a {
-    color: rgba(104, 154, 214, 1.000);
+    color: #010B2B;
   }
 }
 
@@ -40,9 +40,15 @@
   box-shadow: 0 1px 12px 0 rgba(26, 60, 88, 0.09);
   background-color: $white;
   font-size: 16px;
-  padding: 15px;
+  padding: 15px 20px;
   margin: 0 0 0 0;
-  width: 100%;
+  // width: 100%;
+  display: inline-block;
+  color: #010B2B;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 32px;
+  font-family: Montserrat;
 }
 
 
@@ -132,10 +138,10 @@
 
 .transferType {
   display: inline-block;
-  color: rgba(80, 97, 118, 1.000);
+  color: #010B2B;
 
   strong {
-    color: rgba(80, 97, 118, 1.000);
+    // color: rgba(80, 97, 118, 1.000);
 
     em {
       color: rgba(80, 97, 118, 1.000);

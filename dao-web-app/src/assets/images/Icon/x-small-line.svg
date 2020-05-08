@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
-    <title>vote/ x small copy</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="vote/-x-small-copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group" transform="translate(3.650000, 4.200000)" fill="#9AA9B5" fill-rule="nonzero" stroke="#9AA9B5" stroke-width="0.2">
-            <polygon id="Path-2" points="0.922096783 1.01539524 1.6089368 0.333284696 7.05626489 5.82600921 6.36942487 6.50811976"></polygon>
-            <path d="M6.36942487,0.333284696 L7.05626489,1.01539524 L1.6089368,6.50811976 L0.922096783,5.82600921 L6.36942487,0.333284696 Z M7.05626489,1.01539524 L1.6089368,6.50811976 L0.922096783,5.82600921 L6.36942487,0.333284696 L7.05626489,1.01539524 Z" id="Path-2"></path>
-        </g>
-        <path d="M7.5,13.8973684 C11.033169,13.8973684 13.8973684,11.033169 13.8973684,7.5 C13.8973684,3.96683098 11.033169,1.10263158 7.5,1.10263158 C3.96683098,1.10263158 1.10263158,3.96683098 1.10263158,7.5 C1.10263158,11.033169 3.96683098,13.8973684 7.5,13.8973684 Z M7.5,14.65 C3.55116404,14.65 0.35,11.448836 0.35,7.5 C0.35,3.55116404 3.55116404,0.35 7.5,0.35 C11.448836,0.35 14.65,3.55116404 14.65,7.5 C14.65,11.448836 11.448836,14.65 7.5,14.65 Z" id="Oval" stroke="#9AA9B5" stroke-width="0.2" fill="#9AA9B5" fill-rule="nonzero"></path>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 15 15" style="enable-background:new 0 0 15 15;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#9AA9B5;}
+</style>
+<path class="st0" d="M13.3,0c0.4,0,0.8,0.2,1.1,0.5c0.3,0.3,0.5,0.7,0.5,1.1v11.7c0,0.5-0.2,0.8-0.5,1.1c-0.3,0.3-0.7,0.5-1.1,0.5
+	H1.6c-0.5,0-0.8-0.1-1.1-0.5C0.1,14.1,0,13.7,0,13.3V1.6c0-0.4,0.1-0.8,0.5-1.1C0.8,0.2,1.1,0,1.6,0H13.3z M13.3,13.3V1.6H1.6v11.7
+	H13.3z"/>
+<path class="st0" d="M5.5,4.5c-0.3-0.3-0.8-0.3-1.1,0c-0.3,0.3-0.3,0.8,0,1.1L5.5,4.5z M9.5,10.5c0.3,0.3,0.8,0.3,1.1,0
+	c0.3-0.3,0.3-0.8,0-1.1L9.5,10.5z M4.5,5.5l5,5l1.1-1.1l-5-5L4.5,5.5z"/>
+<path class="st0" d="M10.5,5.5c0.3-0.3,0.3-0.8,0-1.1c-0.3-0.3-0.8-0.3-1.1,0L10.5,5.5z M4.5,9.5c-0.3,0.3-0.3,0.8,0,1.1
+	c0.3,0.3,0.8,0.3,1.1,0L4.5,9.5z M9.5,4.5l-5,5l1.1,1.1l5-5L9.5,4.5z"/>
 </svg>

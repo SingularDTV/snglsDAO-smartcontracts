@@ -80,7 +80,7 @@ class AccountPopup extends React.Component<IProps, null> {
         </div>
         <div className={css.accountInfo}>
           <div className={css.name}><AccountProfileName accountAddress={accountAddress} accountProfile={profile} daoAvatarAddress={daoState.address} /></div>
-          <div>
+          <div className={css.socials}>
             {!profile || Object.keys(profile.socialURLs).length === 0 ? "No social profiles" :
               <span>
                 { profile.socialURLs.twitter ?
@@ -95,11 +95,13 @@ class AccountPopup extends React.Component<IProps, null> {
             }
           </div>
           <div className={css.beneficiaryAddress}>
-            <span>{accountAddress}</span>
-            <button onClick={this.copyAddress}><img src="/assets/images/Icon/Copy-black.svg"/></button>
+            <div>
+              <span>{accountAddress}</span>
+              <button onClick={this.copyAddress}><img src="/assets/images/Icon/copy.svg"/></button>
+            </div>
           </div>
 
-          <div>
+          <div className={css.button}>
             <FollowButton type="users" id={this.props.accountAddress} />
           </div>
 
