@@ -47,10 +47,21 @@
 .blockCont {
   line-height: normal;
   position: relative;
-  padding: 20px 40px;
+  // padding: 20px 40px;
 
   & > div {
     position: relative;
+
+
+    h3 {
+      background: rgba(196, 196, 196, 0.1);
+      font-family: TransatStandard;
+      font-size: 32px;
+      line-height: 42px;
+      letter-spacing: 0.02em;
+      padding: 20px 35px;
+    }
+
   }
 
   &:before {
@@ -82,10 +93,17 @@
     grid-template-columns: auto auto 1fr;
 
   a {
-    color: #fff;
+    color: #ffffff52;
     display: inline-block;
     font-size: 16px;
     transition: all 0.25s ease;
+
+    font-family: TransatBold;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   // a:visited {
@@ -101,24 +119,42 @@
   .info,
   .crx,
   .openbounty {
-    border-bottom: 2px solid rgba(34, 128, 254, 0);
+    // border-bottom: 2px solid rgba(34, 128, 254, 0);
     /* TODO: for .crx this left/right padding may not be appropriate for all CrX rewarder contracts. */
-    padding: 15px 24px;
+    padding: 20px 40px;
   }
 
   .proposals.active,
   .info.active,
   .crx.active,
   .openbounty.active {
-    border-bottom: 2px solid rgba(34, 128, 254, 1);
+    // border-bottom: 2px solid rgba(34, 128, 254, 1);
+    position: relative;
+    color: #fff;
+
+    &::before {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      opacity: 0.8;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 0;
+      box-sizing: border-box;
+      backdrop-filter: blur(40px);
+      z-index: -1;
+    }
   }
 
-  .proposals:hover,
-  .info:hover,
-  .crx:hover,
-  .openbounty:hover {
-    border-bottom: 2px solid rgba(34, 128, 254, 0.5);
-  }
+  // .proposals:hover,
+  // .info:hover,
+  // .crx:hover,
+  // .openbounty:hover {
+  //   border-bottom: 2px solid rgba(34, 128, 254, 0.5);
+  // }
 }
 
 .schemeRedemptionContainer {

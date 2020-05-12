@@ -962,6 +962,12 @@ body {
 /* This allow us to center content until screen is too small to
    center content with width 1080 with DAO sidebar of width 250px */
 @media only screen and (max-width: 1580px) {
+
+
+  .pageWrapper {
+    grid-template-columns: 400px 1fr;
+  }
+
   .withDAO {
     .contentWrapper {
       // margin: 0 0 0 470px;
