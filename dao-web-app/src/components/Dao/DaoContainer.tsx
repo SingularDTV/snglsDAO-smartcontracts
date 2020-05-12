@@ -24,6 +24,7 @@ import DaoHistoryPage from "./DaoHistoryPage";
 import DaoMembersPage from "./DaoMembersPage";
 import DaoDashboard from "./DaoDashboard";
 import DaoMembershipPage from "./DaoMembershipPage"
+import DaoJoinPage from "./DaoJoin"
 import * as css from "./Dao.scss";
 
 type IExternalProps = RouteComponentProps<any>;
@@ -147,6 +148,7 @@ class DaoContainer extends React.Component<IProps, null> {
     //this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
   
+  private daoJoinRoute = (routeProps: any) => <DaoJoinPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembershipRoute = (routeProps: any) => <DaoMembershipPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoHistoryRoute = (routeProps: any) => <DaoHistoryPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} />;
@@ -168,7 +170,9 @@ class DaoContainer extends React.Component<IProps, null> {
   private schemeRoute = (routeProps: any) => <SchemeContainer {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoSchemesRoute = (routeProps: any) => <DaoSchemesPage {...routeProps} daoState={this.props.data[0]} />;
   
-  private modalRoute = (route: any) => `/dao/scheme/${route.params.schemeId}/`;
+  private createProposalModalRoute = (route: any) => `/dao/scheme/${route.params.schemeId}/`;
+  private daoJoinModalRoute = (route: any) => `/dao/dashboard/`;
+
 
   public render(): RenderOutput {
     let searchString = "";    
@@ -183,7 +187,7 @@ class DaoContainer extends React.Component<IProps, null> {
     const daoState = this.props.data[0];
 
     console.log(daoState.name)
-    console.log("DaoContainer render: ", this.modalRoute, this.props);
+    console.log("DaoContainer render: ", this.createProposalModalRoute, this.props);
 
     return (
       <div className={css.outer}>
@@ -233,13 +237,22 @@ class DaoContainer extends React.Component<IProps, null> {
             <Route exact path="/dao/membership"
               render={this.daoMembershipRoute} />
 
+            <Route exact path="/dao/dashboard/join"
+              render={this.daoJoinRoute} />
+
             <Redirect exact from="/dao" to="/dao/dashboard"></Redirect>
 
           </Switch>
 
           <ModalRoute
+            path="/dao/dashboard/join"
+            parentPath={this.daoJoinModalRoute}
+            component={DaoJoinPage}
+          />
+
+          <ModalRoute
             path="/dao/scheme/:schemeId/proposals/create"
-            parentPath={this.modalRoute}
+            parentPath={this.createProposalModalRoute}
             component={CreateProposalPage}
           />
 
