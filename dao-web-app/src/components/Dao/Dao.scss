@@ -171,8 +171,8 @@ a {
 }
 
 .noticeBuffer {
-  min-width: 470px;
-  max-width: 470px;
+  min-width: 350px;
+  max-width: 350px;
   flex-grow: 1;
   height: 100%;
 }
@@ -1017,8 +1017,8 @@ a {
 
 @media only screen and (max-width: 1580px) {
   .noticeBuffer {
-    min-width: 400px;
-    max-width: 400px;
+    min-width: 300px;
+    max-width: 300px;
   }
 }
 
