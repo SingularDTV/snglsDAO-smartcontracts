@@ -2,6 +2,10 @@
   text-align: right;
 }
 
+.setupProfile {
+  color: #fff;
+}
+
 a.historyView {
   display: inline-block;
   color: #506176;
@@ -386,6 +390,7 @@ a.accountName {
     .copyButton {
       border: none;
       vertical-align: middle;
+      background: none;
     }
 
     p {

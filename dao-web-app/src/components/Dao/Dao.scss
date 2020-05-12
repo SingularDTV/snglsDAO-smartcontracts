@@ -2,9 +2,44 @@ button:hover {
   cursor: pointer;
 }
 
+
+
+
+a {
+        &.redButton {
+            color: #fff;
+            font-family: Montserrat;
+            font-weight: 500;
+            line-height: 24px;
+            letter-spacing: 1.61455px;
+            text-transform: uppercase; 
+            padding: 14px 70px;
+            border: 1px solid #D40D26;
+            border-radius: 50px;
+            background: #D40D26;
+            outline: none;
+            position: relative;
+            transition: 0.1s all;
+            display: block;
+            font-size: 14px;
+            box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
+
+            &:hover {
+                box-shadow: none;
+            }
+      }
+}
+
+
+
+
+
+
+
+
 .wrapper {
   flex-grow: 2;
-  padding: 30px 50px 100px 50px;
+  padding: 30px 50px 60px 50px;
   overflow: visible;
   z-index: 0;
   position: relative;
@@ -136,8 +171,8 @@ button:hover {
 }
 
 .noticeBuffer {
-  min-width: 470px;
-  max-width: 470px;
+  min-width: 350px;
+  max-width: 350px;
   flex-grow: 1;
   height: 100%;
 }
@@ -190,29 +225,6 @@ button:hover {
       align-items: center;
       grid-gap: 50px;
       margin-bottom: 30px;
-
-      button {
-            color: #fff;
-            font-family: Montserrat;
-            font-weight: 500;
-            line-height: 24px;
-            letter-spacing: 1.61455px;
-            text-transform: uppercase; 
-            padding: 14px 70px;
-            border: 1px solid #D40D26;
-            border-radius: 50px;
-            background: #D40D26;
-            outline: none;
-            position: relative;
-            transition: 0.1s all;
-            display: block;
-            font-size: 14px;
-            box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
-
-                &:hover {
-                    box-shadow: none;
-                }
-      }
   }
 
 
@@ -728,7 +740,7 @@ a {
         // background: #FFFFFF;
         box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
-        width: 100%;
+        width: calc(100% - 100px);
         max-width: 660px;
         margin: 0 auto;
         position: relative;
@@ -1001,6 +1013,16 @@ a {
   // background-color: rgba(229, 235, 242, 1);
   // padding-top: 10px;
 }
+
+
+@media only screen and (max-width: 1580px) {
+  .noticeBuffer {
+    min-width: 300px;
+    max-width: 300px;
+  }
+}
+
+
 
 @media only screen and (max-width: 425px) {
   .outer {

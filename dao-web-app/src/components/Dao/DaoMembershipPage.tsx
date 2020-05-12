@@ -52,9 +52,9 @@ class DaoHistoryPage extends React.Component<IProps, null> {
         <BreadcrumbsItem to={"/dao/history"}>History</BreadcrumbsItem>
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
-          <h2 className={css.daoHistoryHeader}>
+          {/* <h2 className={css.daoHistoryHeader}>
             Membership
-          </h2>
+          </h2> */}
         {/* </Sticky> */}
 
         <div>
@@ -109,7 +109,7 @@ class DaoHistoryPage extends React.Component<IProps, null> {
                     <img src="/assets/images/Icon/dash_holdings.png" />
                 </div>
                 <div>
-                    <h2>DAO Reputation</h2>
+                    <h2>Membership fee</h2>
                     <p>The amount of SNGLS needed to stake in the DAO <br />so you don't have to pay the transaction fee.</p>
 
                     <p>Min amount required: <strong>9.85</strong></p>

@@ -171,9 +171,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
          <div className={css.pageHead}>
           <h1>DASHBOARD</h1>
           <div>
-            <button>Join</button>
             <a className={classNames({
-                [css.blueButton]: true,
+                [css.redButton]: true,
                 // [css.disabled]: !isActive,
               })}
               href="#!"

@@ -33,6 +33,10 @@
   // border-radius: 0 14px 14px 14px;
   min-width: 340px;
 
+  &Table {
+        padding: 15px 35px;
+  }
+
   h3 {
     margin: 0;
     font-size: 16px;
@@ -45,9 +49,43 @@
   .infoCardContent {
     padding: 15px 0;
     width: 100%;
+    border-spacing: 0px;
+
+    td, th {
+      position: relative;
+      font-family: Montserrat;
+      font-weight: 300;
+      // font-size: 13px;
+
+      a {
+        color: #fff;
+      }
+
+      & > span {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+      }
+
+      &:before {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 100%;
+        content: '';
+        height: calc(100% - 8px);
+        background: #010b2b60;
+        z-index: 0;
+      }
+    }
+
+    th {
+      padding-left: 15px;
+    }
 
     td {
-      padding: 7px 0;
+      padding: 11px 15px 11px 0;
+      text-align: right;
     }
   }
 
@@ -96,6 +134,18 @@
 
 .copyButton {
   cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 16px;
+
+  img {
+    position: absolute;
+    display: block;
+    top: 0%;
+    transform: translateY(-75%);
+  }
+  // top: 50%;
+  // transform: translateY(-50%);
 }
 
 @media only screen and (max-width: 425px) {
