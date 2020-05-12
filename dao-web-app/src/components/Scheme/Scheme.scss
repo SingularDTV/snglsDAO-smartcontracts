@@ -20,18 +20,21 @@
 
   a {
     padding: 6px 15px;
-    color: $white;
-    background-color: rgba(3, 118, 255, 1);
+    font-family: Montserrat !important;
+    font-weight: 400 !important;
+    color: #D40D26 !important;
+    letter-spacing: 1.2px;
+    background: #FFFFFF;
     border-radius: 30px;
-    height: 30px;
+    // height: 30px;
     line-height: 30px;
     font-size: 13px !important;
     white-space: nowrap;
 
-    &:hover {
-      background-color: $accent-1;
-      color: $white;
-    }
+    // &:hover {
+    //   background-color: $accent-1;
+    //   color: $white;
+    // }
 
     &.disabled,
     &.disabled:hover {
@@ -91,6 +94,7 @@
 
     display: grid;
     grid-template-columns: auto auto 1fr;
+    align-items: center;
 
   a {
     color: #ffffff52;
@@ -112,7 +116,8 @@
 
   .createProposal a:visited,
   a.createProposal {
-    color: white;
+    // color: white;
+    color: #D40D26;
   }
 
   .proposals,
