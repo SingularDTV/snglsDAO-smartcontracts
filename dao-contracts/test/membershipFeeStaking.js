@@ -16,7 +16,7 @@ contract("MembershipFeeStaking", async accounts => {
         let amountBeforeStaking = (await MembershipFeeStakingInstance.balanceOf.call(masterAccount)).toNumber();
         await SGTContractInstance.approve(MembershipFeeStakingInstance.address, amount);
 
-        await MembershipFeeStakingInstance.stake(amount);
+        await MembershipFeeStakingInstance.lock(amount);
         assert.strictEqual((await MembershipFeeStakingInstance.balanceOf.call(masterAccount)).toNumber(), amountBeforeStaking + amount, "Wrong stake balance on MembershipFeeStaking contract");
     });
 });

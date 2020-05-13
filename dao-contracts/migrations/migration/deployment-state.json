@@ -13,5 +13,6 @@
     "permissions": [],
     "votingMachinesParams": [],
     "registeredGenesisProtocolParamsCount": 0
-  }
+  },
+  "private": {}
 }

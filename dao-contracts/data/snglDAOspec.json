@@ -38,7 +38,8 @@
             "fromArc": false,
             "constructor": true,
             "params": [
-                "TokenAddress"
+                "TokenAddress",
+                "0"
             ]
         }
     ],
@@ -61,24 +62,16 @@
             "fromArc": false
         },
         {
-            "name": "ContinuousLocking4Reputation",
-            "schemeName": "ContinuousLocking4Reputation",
+            "name": "LockingSGT4Reputation",
+            "schemeName": "LockingSGT4Reputation",
             "isUniversal": false,
             "params": [
-                "850000000000000000000000",
-                1588883199,
-                120,
-                1588883319,
-                12,
-                "85000000000000000000000",
-                900,
-                100,
                 "TokenAddress",
-                "0x0000000000000000000000000000000000000000"
+                "0"
             ],
             "permissions": "0x00000010",
-            "alias": "ContinuousLocking4Reputation",
-            "fromArc": true
+            "alias": "LockingSGT4Reputation",
+            "fromArc": false
         }
     ],
     "VotingMachinesParams": [
@@ -130,13 +123,13 @@
         "SchemeRegistrar": true
     },
     "unregisterOwner": true,
-    "useUController": false,
     "useDaoCreator": true,
+    "useUController": false,
     "founders": [
         {
             "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
-            "tokens": 10000,
-            "reputation": 10000
+            "tokens": 1000,
+            "reputation": 1000
         }
     ]
 }
