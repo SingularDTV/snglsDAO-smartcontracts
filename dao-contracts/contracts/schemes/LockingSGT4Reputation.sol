@@ -40,7 +40,7 @@ contract LockingSGT4Reputation {
             "MembershipFeeStaking: amount should be > 0"
         );
         require(
-            block.timestamp > locker.releaseTime,
+            block.timestamp >= locker.releaseTime,
             "MembershipFeeStaking: check the lock period pass"
         );
         amount = locker.amount;

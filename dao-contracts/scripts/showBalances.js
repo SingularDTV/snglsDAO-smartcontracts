@@ -14,8 +14,8 @@ contract("Show-balances script", async accounts => {
         //reset font color
         console.log("\x1b[0m");
 
-        console.log(await tokenInstance.getPastEvents("allEvents", {
-            fromBlock: 0
-        }));
+        // console.log(await tokenInstance.getPastEvents("allEvents", {
+        //     fromBlock: 0
+        // }));
     })
 })

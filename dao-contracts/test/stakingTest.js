@@ -17,20 +17,21 @@ contract("LockingToken4Reputation", async accounts => {
 
         const amount = 1000;
 
-        console.log((await ReputationInstance.balanceOf.call(masterAccount)).toString());
-
         await SGTContractInstance.approve(LT4RInstance.address, amount);
+
+        const reputationBeforeLock = await ReputationInstance.balanceOf.call(masterAccount);
 
         await LT4RInstance.lock(amount, 0);
 
-        console.log((await ReputationInstance.balanceOf.call(masterAccount)).toString());
+        const reputationAfterLock = await ReputationInstance.balanceOf.call(masterAccount);
 
-        // console.log(
-        //     await LT4RInstance.release.call(masterAccount)
-        // );
-        // await LT4RInstance.release(masterAccount);
+        assert.strictEqual(reputationAfterLock.sub(reputationBeforeLock).toNumber(), amount, "Wrong reputation balance after locking.")
 
-        // console.log((await ReputationInstance.balanceOf.call(masterAccount)).toString());
+        await LT4RInstance.release(masterAccount);
+
+        const reputationAfterRelease = await ReputationInstance.balanceOf.call(masterAccount);
+
+        assert.strictEqual(reputationAfterRelease.toString(), reputationBeforeLock.toString(), "Wrong reputation balance after release");
 
     });
 })
