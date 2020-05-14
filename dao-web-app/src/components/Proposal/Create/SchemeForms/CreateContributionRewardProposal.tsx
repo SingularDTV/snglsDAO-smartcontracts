@@ -326,21 +326,6 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
                 </div>
 
                 <div className={css.reward}>
-                  <label htmlFor="reputationRewardInput">
-                    Reputation Reward
-                    <ErrorMessage name="reputationReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
-                  </label>
-                  <Field
-                    id="reputationRewardInput"
-                    placeholder="How much reputation to reward"
-                    name="reputationReward"
-                    type="number"
-                    className={touched.reputationReward && errors.reputationReward ? css.error : null}
-                    step={0.1}
-                  />
-                </div>
-
-                <div className={css.reward}>
                   <label htmlFor="externalRewardInput">
                     External Token Reward
                     <ErrorMessage name="externalTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
@@ -369,21 +354,6 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
                       />
                     </div>
                   </div>
-                </div>
-
-                <div className={css.reward}>
-                  <label htmlFor="nativeTokenRewardInput">
-                    DAO token ({dao.tokenSymbol}) Reward
-                    <ErrorMessage name="nativeTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
-                  </label>
-                  <Field
-                    id="nativeTokenRewardInput"
-                    maxLength={10}
-                    placeholder="How many tokens to reward"
-                    name="nativeTokenReward"
-                    type="number"
-                    className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
-                  />
                 </div>
 
                 {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)

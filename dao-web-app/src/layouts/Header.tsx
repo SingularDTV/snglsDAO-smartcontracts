@@ -203,7 +203,7 @@ class Header extends React.Component<IProps, null> {
             </div>
             <div className={css.navigation}>
               <ul>
-                <li><a href="#">Dao</a></li>
+                <li><a href="#">DAO</a></li>
                 <li><a href="#">Forum</a></li>
                 <li className={css.submenu}><a href="#">Consumer protection</a>
                     <ul>

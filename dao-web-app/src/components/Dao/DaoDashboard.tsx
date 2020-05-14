@@ -254,7 +254,6 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                          <li><span>SGT:</span><p>543</p></li>
                          <li><span>USDC:</span><p>103</p></li>
                          <li><span>DAI:</span><p>0</p></li>
-                         <li><span>SAI:</span><p>0</p></li>
                      </ul>
                  </div>
              </div>
