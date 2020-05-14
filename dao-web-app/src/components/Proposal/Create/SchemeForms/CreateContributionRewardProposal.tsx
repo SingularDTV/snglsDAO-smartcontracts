@@ -168,7 +168,6 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
     if (!data) {
       return null;
     }
-    const dao = data;
     const arc = getArc();
 
     return (
