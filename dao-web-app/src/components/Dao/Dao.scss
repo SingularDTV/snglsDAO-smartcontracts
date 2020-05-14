@@ -22,6 +22,7 @@ a {
             transition: 0.1s all;
             display: block;
             font-size: 14px;
+            text-align: center;
             box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
 
             &:hover {
@@ -39,6 +40,7 @@ a {
 
 .wrapper {
   flex-grow: 2;
+  width: calc(100% - 100px);
   padding: 30px 50px 60px 50px;
   overflow: visible;
   z-index: 0;
@@ -1023,6 +1025,65 @@ a {
 }
 
 
+@media (max-width: 1440px) {
+    .membersContainer {
+        .dashBlock {
+            grid-template-columns: 90px auto 1fr;
+            grid-gap: 50px;
+
+            .icon {
+                width: 90px;
+                height: 90px;
+
+                img {
+                    display: block;
+                    width: 100%;
+                }
+            }
+
+            .cont {
+                h4 {
+                    font-size: 24px;
+                    line-height: 26px;
+                }
+            }
+        }
+
+        .columnsTwo {
+            .dashBlock {
+                grid-template-columns: 90px 1fr;
+            }
+            // grid-template-columns: 1fr;
+        }
+    }
+}
+
+
+
+@media (max-width: 992px) {
+    .noticeBuffer {
+        min-width: 0;
+    }
+    .membersContainer {
+        .columnsTwo {
+            grid-template-columns: 1fr;
+            // grid-template-columns: 1fr;
+        }
+
+        .pageHead {
+            grid-template-columns: 1fr;
+            grid-gap: 30px;
+        }
+    }
+
+        .membersContainer {
+            table {
+                // overflow-x: scroll !important;
+                min-width: 800px;
+            }
+        }
+}
+
 
 @media only screen and (max-width: 425px) {
   .outer {
@@ -1113,9 +1174,9 @@ a {
   }
 }
 
-:global .infinite-scroll-component {
-  overflow: visible !important; // to avoid clipping of for user account popup in regular proposals list
-}
+// :global .infinite-scroll-component {
+//   overflow: visible !important; 
+// }
 
 
 

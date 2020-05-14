@@ -422,6 +422,17 @@
   }
 }
 
+@media (max-width: 992px) {
+    .sidebarWrapper {
+        display: none;
+        position: absolute;
+
+        &.menuOpen {
+            display: block;
+        }
+    }
+}
+
 @media only screen and (max-width: 425px) {
   .sidebarWrapper {
     width: 48px;
@@ -475,7 +486,7 @@
   .sidebarWrapper.menuOpen {
     // z-index: 1000000;
     width: 100%;
-    background-color: rgba(49, 120, 202, 1);
+    // background-color: rgba(49, 120, 202, 1);
     padding-bottom: 50px;
     transition: width 0s 0s, height 0.25s ease;
 
