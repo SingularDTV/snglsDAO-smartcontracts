@@ -1061,6 +1061,9 @@ a {
 
 
 @media (max-width: 992px) {
+    .noticeBuffer {
+        min-width: 0;
+    }
     .membersContainer {
         .columnsTwo {
             grid-template-columns: 1fr;
@@ -1072,6 +1075,13 @@ a {
             grid-gap: 30px;
         }
     }
+
+        .membersContainer {
+            table {
+                // overflow-x: scroll !important;
+                min-width: 800px;
+            }
+        }
 }
 
 
@@ -1164,9 +1174,9 @@ a {
   }
 }
 
-:global .infinite-scroll-component {
-  overflow: visible !important; // to avoid clipping of for user account popup in regular proposals list
-}
+// :global .infinite-scroll-component {
+//   overflow: visible !important; 
+// }
 
 
 

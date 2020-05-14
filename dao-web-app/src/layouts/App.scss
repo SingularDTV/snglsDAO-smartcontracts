@@ -904,7 +904,7 @@ body {
 
 
   .pageWrapper {
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 300px minmax(0, 1fr);
   }
 
   .withDAO {
@@ -1058,6 +1058,7 @@ body {
 
             img {
                 margin: 0 auto;
+                max-width: 100%;
             }
         }
 
