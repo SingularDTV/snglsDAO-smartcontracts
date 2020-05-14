@@ -182,11 +182,6 @@ class Header extends React.Component<IProps, null> {
     return(
       <div className={css.headerContainer}>
         <nav className={css.header}>
-          <div className={css.menuToggle} onClick={this.handleToggleMenu}>
-            {this.props.menuOpen ?
-              <img src="/assets/images/Icon/Close.svg"/> :
-              <img src="/assets/images/Icon/Menu.svg"/>}
-          </div>
           <TrainingTooltip overlay="View your personal feed" placement="bottomRight">
             <div className={css.menu}>
               <Link to="/">
@@ -314,6 +309,13 @@ class Header extends React.Component<IProps, null> {
                 : ""
             }
           </div>
+
+          <div className={css.menuToggle} onClick={this.handleToggleMenu}>
+            {this.props.menuOpen ?
+              <img src="/assets/images/Icon/Close.svg" /> :
+              <img src="/assets/images/Icon/Menu.svg" />}
+          </div>
+
         </nav>
       </div>
     );

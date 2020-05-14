@@ -422,6 +422,17 @@
   }
 }
 
+@media (max-width: 992px) {
+    .sidebarWrapper {
+        display: none;
+        position: absolute;
+
+        &.menuOpen {
+            display: block;
+        }
+    }
+}
+
 @media only screen and (max-width: 425px) {
   .sidebarWrapper {
     width: 48px;
