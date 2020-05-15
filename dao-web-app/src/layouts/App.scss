@@ -747,21 +747,22 @@ body {
             li {
                 display: block;
                 float: left;
-                padding: 10px 25px;
+                padding: 10px 20px;
                 position: relative;
 
                 a {
-                    font-weight: 500;
-                    font-size: 17px;
+                    // font-weight: 500;
+                    font-size: 16px;
                     line-height: 24px;
-                    font-family: 'TransatStandard'
-                    
+                    font-family: 'TransatBold';
+                    padding: 3px 10px;
+                    transition: 0.2s;
                 }
 
                 ul {
                     display: none;
                     position: absolute;
-                    background: #fff;
+                    background-color: #19264B;
                     width: 100%;
                     min-width: 200px;
                     max-width: 200px;
@@ -772,28 +773,17 @@ body {
                     top: 100%;
                     transition: 0.1s all;
 
-                    &:before {
-                        position: absolute;
-                        content: '';
-                        width: 12px;
-                        height: 8px;
-                        top: -6px;
-                        left: 50%;
-                        transform: translateX(-50%) rotate(180deg);
-                        background: url(/assets/images/Icon/nav_arrow.svg) no-repeat;
-                        background-size: contain;
-                    }
-
                     & > li {
-                      padding: 10px 25px;
+                      padding: 4px 25px !important;
                       display: block;
-                      border-bottom: 1px solid #f5f5f5;
+                      border-bottom: 1px solid #ffffff1a;
+                      text-align: center;
                       a {
-                        color: #120E2D;
+                        color: #fff;
                         font-family: 'TransatBold';
 
                         &:hover {
-                          opacity: 0.5;
+                          color: #fff9;
                         }
                       }
 
@@ -1038,6 +1028,9 @@ body {
 
     .withDAO .sidebarWrapper {
         z-index: 1000;
+        // height: 100%;
+        width: 100%;
+        // position: fixed;
     }
 
 
