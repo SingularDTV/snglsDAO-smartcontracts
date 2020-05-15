@@ -920,40 +920,41 @@
         "arcVersion": "0.0.1-rc.31"
       },
       "0.0.1-rc.32": {
-        "name": "Precipitate Cupcake",
-        "Avatar": "0x98CcB5051fD767e2E89567bCCCA4Efc532250544",
-        "DAOToken": "0x30dB4905b474aff3e1EAfc60394ece85dC524A92",
-        "Reputation": "0x4992595a747d772bF291f64112735064BFc8878f",
-        "Controller": "0x5294fd6B7ee619548598ab1Ca24ED49064AaCf4c",
+        "name": "Singularity DAO",
+        "Avatar": "0x6461F306BA15Be0D8b14B158c0976E14fbB99c2d",
+        "DAOToken": "0x082606FFC7B1421E891EA276Dc62a0Df0c4FAbb0",
+        "Reputation": "0x8448FfAD0917478C8c9D63Aa6400c4e10995a425",
+        "Controller": "0xEFc33c4616DB3FfaEe888534A526892763Af8d26",
         "Schemes": [
           {
             "name": "GenericScheme",
-            "alias": "GenericSchemeAlias",
-            "address": "0x353B67029c2B8D94E0a89Bfacd18B2e41152B661",
+            "alias": "GenericSchemeFee",
+            "address": "0x592c129085b61A3110Ebd1DCD99F3Cfe97A54dF3",
             "arcVersion": "0.0.1-rc.32"
           },
           {
-            "name": "ContributionRewardExt",
-            "alias": "ContributionRewardExt",
-            "address": "0x5023deB3F76D484102c9650933541a90B528CBFF",
-            "arcVersion": "0.0.1-rc.39"
+            "name": "LockingSGT4Reputation",
+            "alias": "LockingSGT4Reputation",
+            "address": "0x718A681EC5ECc2533532e070a65F2172F4c13074",
+            "arcVersion": "0.0.1-rc.32"
+          },
+          {
+            "name": "ContributionReward",
+            "alias": "ContributionReward",
+            "address": "0x5088Fc39c95f3c83C0179B8109d016Cf86aa0979",
+            "arcVersion": "0.0.1-rc.32"
           }
         ],
         "StandAloneContracts": [
           {
-            "name": "Wallet",
-            "address": "0xbe74Dd781E1A3fAb6554A4934132649A5b858541",
+            "name": "Fee",
+            "address": "0xD681ED86eBa1b64086BF532e8b88c5bE3b74cb93",
             "arcVersion": "0.0.1-rc.32"
           },
           {
-            "name": "ContributionRewardExt",
-            "address": "0x5023deB3F76D484102c9650933541a90B528CBFF",
-            "arcVersion": "0.0.1-rc.39"
-          },
-          {
-            "name": "Competition",
-            "address": "0xCb7126eC611fab65A1Fbd1253fd947634A4623Fa",
-            "arcVersion": "0.0.1-rc.39"
+            "name": "MembershipFeeStaking",
+            "address": "0x4A20880C5B9f37Eb7A1AB8437A719a4acDfb1372",
+            "arcVersion": "0.0.1-rc.32"
           }
         ],
         "arcVersion": "0.0.1-rc.32"
@@ -2217,40 +2218,6 @@
           }
         ],
         "arcVersion": "0.0.1-rc.38"
-      },
-      "0.0.1-rc.32": {
-        "name": "Singularity DAO",
-        "Avatar": "0x628444a5648803748b3927CDBf9a7323e2789255",
-        "DAOToken": "0x66285214C63CBD52b395A07ED8e444fFB6facA9d",
-        "Reputation": "0x73563D378895A1BD1E87770b34E51Cd68a139723",
-        "Controller": "0xAfC3dcCB02a68367587DD05879D8E27c37d8AA29",
-        "Schemes": [
-          {
-            "name": "GenericScheme",
-            "alias": "GenericSchemeFee",
-            "address": "0xe11542F75Dd39ca64614A87A56c3e70C6Ef3Fe04",
-            "arcVersion": "0.0.1-rc.32"
-          },
-          {
-            "name": "LockingSGT4Reputation",
-            "alias": "LockingSGT4Reputation",
-            "address": "0x47C479e9a6C348430Ac31124b624673d87B9df19",
-            "arcVersion": "0.0.1-rc.32"
-          }
-        ],
-        "StandAloneContracts": [
-          {
-            "name": "Fee",
-            "address": "0x09ae9692D75763C4fEF853d1B86Ec76BBDAd193F",
-            "arcVersion": "0.0.1-rc.32"
-          },
-          {
-            "name": "MembershipFeeStaking",
-            "address": "0xA86B0786995D041B32FAFe10d19B12dB037f1D2e",
-            "arcVersion": "0.0.1-rc.32"
-          }
-        ],
-        "arcVersion": "0.0.1-rc.32"
       }
     }
   },

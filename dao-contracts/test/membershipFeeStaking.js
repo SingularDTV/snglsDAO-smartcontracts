@@ -9,15 +9,22 @@ contract("MembershipFeeStaking", async accounts => {
     it(`User is able to stake`, async () => {
         const SGTContractInstance = await SGTContract.at(await getDeployedAddress("DAOToken"));
         const MembershipFeeStakingInstance = await MembershipFeeStaking.at(await getDeployedAddress("MembershipFeeStaking"));
-        const amount = 10;
 
-        assert((await SGTContractInstance.balanceOf.call(masterAccount)).gten(amount), "Not enough tokens on first account");
-
-        // let amountBeforeStaking = (await MembershipFeeStakingInstance.balanceOf.call(masterAccount)).toNumber();
+        const amount = 1000;
+        const tokensBeforeLock = await SGTContractInstance.balanceOf.call(masterAccount);
         await SGTContractInstance.approve(MembershipFeeStakingInstance.address, amount);
 
+
         await MembershipFeeStakingInstance.lock(amount, 0);
-        // assert.strictEqual((await MembershipFeeStakingInstance.balanceOf.call(masterAccount)).toNumber(), amountBeforeStaking + amount, "Wrong stake balance on MembershipFeeStaking contract");
-        console.log(await MembershipFeeStakingInstance.lockers(masterAccount));
+
+        const tokensAfterLock = await SGTContractInstance.balanceOf.call(masterAccount);
+
+        assert.strictEqual(tokensAfterLock.sub(tokensBeforeLock).toNumber(), -amount, "Wrong tokens balance after locking.")
+
+        await MembershipFeeStakingInstance.release(masterAccount);
+
+        const tokensAfterRelease = await SGTContractInstance.balanceOf.call(masterAccount);
+
+        assert(tokensAfterRelease.eq(tokensBeforeLock), "Wrong tokens balance after release");
     });
 });

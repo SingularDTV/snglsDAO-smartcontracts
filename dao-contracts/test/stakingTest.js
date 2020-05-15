@@ -16,22 +16,27 @@ contract("LockingToken4Reputation", async accounts => {
         let ReputationInstance = await ReputationContract.at(await getDeployedAddress("Reputation"));
 
         const amount = 1000;
-
+        const tokensBeforeLock = await SGTContractInstance.balanceOf.call(masterAccount);
         await SGTContractInstance.approve(LT4RInstance.address, amount);
 
         const reputationBeforeLock = await ReputationInstance.balanceOf.call(masterAccount);
 
         await LT4RInstance.lock(amount, 0);
 
+        const tokensAfterLock = await SGTContractInstance.balanceOf.call(masterAccount);
         const reputationAfterLock = await ReputationInstance.balanceOf.call(masterAccount);
 
+        assert.strictEqual(tokensAfterLock.sub(tokensBeforeLock).toNumber(), -amount, "Wrong tokens balance after locking.")
         assert.strictEqual(reputationAfterLock.sub(reputationBeforeLock).toNumber(), amount, "Wrong reputation balance after locking.")
 
         await LT4RInstance.release(masterAccount);
 
+        const tokensAfterRelease = await SGTContractInstance.balanceOf.call(masterAccount);
         const reputationAfterRelease = await ReputationInstance.balanceOf.call(masterAccount);
 
-        assert.strictEqual(reputationAfterRelease.toString(), reputationBeforeLock.toString(), "Wrong reputation balance after release");
+        assert(tokensAfterRelease.eq(tokensBeforeLock), "Wrong tokens balance after release");
+        assert(reputationAfterRelease.eq(reputationBeforeLock), "Wrong reputation balance after release");
+
 
     });
 })

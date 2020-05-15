@@ -2,11 +2,6 @@
     "orgName": "Singularity DAO",
     "tokenName": "Singularity governance token",
     "tokenSymbol": "SGT",
-    "ContributionReward": [
-        {
-            "voteParams": 0
-        }
-    ],
     "SchemeRegistrar": [
         {
             "voteRegisterParams": 1,
@@ -36,7 +31,7 @@
         {
             "name": "MembershipFeeStaking",
             "fromArc": false,
-            "constructor": true,
+            "constructor": false,
             "params": [
                 "TokenAddress",
                 "0"
@@ -72,6 +67,20 @@
             "permissions": "0x00000010",
             "alias": "LockingSGT4Reputation",
             "fromArc": false
+        },
+        {
+            "name": "ContributionReward",
+            "schemeName": "ContributionReward",
+            "isUniversal": true,
+            "params": [
+                {
+                    "voteParams": 0
+                },
+                "GenesisProtocolAddress"
+            ],
+            "permissions": "0x00000010",
+            "alias": "ContributionReward",
+            "fromArc": false
         }
     ],
     "VotingMachinesParams": [
@@ -86,7 +95,7 @@
             "quietEndingPeriod": 1800,
             "thresholdConst": 1200,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
-            "votersReputationLossRatio": 4,
+            "votersReputationLossRatio": 0,
             "activationTime": 1570021200
         },
         {
@@ -100,7 +109,7 @@
             "quietEndingPeriod": 1800,
             "thresholdConst": 1300,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
-            "votersReputationLossRatio": 4,
+            "votersReputationLossRatio": 0,
             "activationTime": 1570021200
         },
         {
@@ -114,12 +123,12 @@
             "quietEndingPeriod": 1800,
             "thresholdConst": 1200,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
-            "votersReputationLossRatio": 4,
+            "votersReputationLossRatio": 0,
             "activationTime": 1570021200
         }
     ],
     "schemes": {
-        "ContributionReward": true,
+        "ContributionReward": false,
         "SchemeRegistrar": true
     },
     "unregisterOwner": true,
@@ -127,7 +136,7 @@
     "useUController": false,
     "founders": [
         {
-            "address": "0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956",
+            "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
             "tokens": 1000,
             "reputation": 0
         },
