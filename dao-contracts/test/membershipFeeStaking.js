@@ -27,4 +27,5 @@ contract("MembershipFeeStaking", async accounts => {
 
         assert(tokensAfterRelease.eq(tokensBeforeLock), "Wrong tokens balance after release");
     });
+    
 });
