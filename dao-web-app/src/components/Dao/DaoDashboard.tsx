@@ -183,7 +183,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
         </div>
          {/* Key parameters div */}
            <div> 
-             <h2>KEY PARAMETERS</h2>
+             <h3>KEY PARAMETERS</h3>
 
 
 
@@ -223,7 +223,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
 
 
          <div className={css.comingSoon}>
-             <h2>COMING SOON</h2>
+             <h3>COMING SOON</h3>
              <div className={css.dashBlock}>
                  <div className={css.icon}>
                      <img src="/assets/images/Icon/dash_validation.png" />
@@ -278,8 +278,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
 
            </div>
 
-           <h2>TOP PROPOSALS</h2>
-           <h3>Boosted proposals (3)</h3>
+           <h3>TOP PROPOSALS</h3>
+           <h4>Boosted proposals (3)</h4>
            <InfiniteScroll
           dataLength={proposals.length} //This is important field to render the next data
           next={fetchMore}

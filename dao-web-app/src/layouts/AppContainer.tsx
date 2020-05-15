@@ -224,7 +224,7 @@ class AppContainer extends React.Component<IProps, IState> {
 
           </div>
 
-          <div className={css.footer}>
+          <div id="footer" className={css.footer}>
             <div className={css.footerDescr}>
               <h4>DISCLAIMER</h4>
               <p>This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.</p>

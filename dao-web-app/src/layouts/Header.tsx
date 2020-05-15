@@ -186,7 +186,8 @@ class Header extends React.Component<IProps, null> {
             <div className={css.menu}>
               <Link to="/">
                 {/* <img src="/assets/images/alchemy-logo-white.svg" /> */}
-                <img src="/assets/images/logo.svg" />
+                <img className={css.desktop} src="/assets/images/logo.svg" />
+                <img className={css.mobile} src="/assets/images/logo_mobile.svg" />
               </Link>
             </div>
           </TrainingTooltip>

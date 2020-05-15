@@ -16,10 +16,10 @@
 .header {
   padding-top: 30px;
   padding-bottom: 5px;
-  color: rgba(104, 155, 214, 1);
+  color: #fff;
   font-weight: bold;
-  background-color: rgba(229, 235, 242, 1);
-  border-bottom: 1px solid rgba(195, 212, 231, 1);
+  // background-color: rgba(229, 235, 242, 1);
+  // border-bottom: 1px solid rgba(195, 212, 231, 1);
   display: flex;
   width: 100%;
 
@@ -77,7 +77,7 @@
   h2 {
     line-height: 55px;
     font-size: 45px;
-    color: rgba(104, 155, 214, 1);
+    color: #fff;
   }
 
   p {
@@ -106,6 +106,14 @@
 
   &:not(:first-child) .daoHeader {
     border-top: $gray-border-2;
+  }
+}
+
+@media (max-width: 768px) {
+  .empty {
+    h2 {
+      font-size: 30px;
+    }
   }
 }
 

@@ -124,7 +124,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         <div className={css.followButton}><FollowButton id={dao.address} type="daos" style="default" /></div> */}
 
 
-        {/* <Sticky enabled top={150} innerZ={10000}> */}
+        {/* <Sticky enabled={true} top={113} bottomBoundary={280} innerZ={10000}> */}
 
         <div className={css.daoNavigation}>
           <span className={css.daoNavHeading}><b>Menu</b></span>

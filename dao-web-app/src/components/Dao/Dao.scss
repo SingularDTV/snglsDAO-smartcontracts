@@ -217,9 +217,13 @@ a {
 
 .membersContainer {
   margin: 10px auto;
-  // max-width: 980px;
   max-width: 1230px;
 
+
+  h4 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
 
   .pageHead {
       display: grid;
@@ -254,14 +258,7 @@ a {
   }
 
   h3 {
-      text-align: center;
       color: #fff;
-      line-height: 31px;
-    //   font-size: 19px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-weight: 100;
-      font-family: Arial;
       padding: 0 0 20px 0;
   }
 
@@ -734,10 +731,6 @@ a {
 .Membership {
     line-height: normal;
 
-
-
-
-
     .MembershipBlock {
         // background: #FFFFFF;
         box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
@@ -790,11 +783,6 @@ a {
         }
 
         h2 {
-            font-family: TransatBold;
-            font-size: 50px;
-            line-height: 60px;
-            letter-spacing: 0.2px;
-            text-transform: uppercase;
             color: #FFFFFF;
             margin: 0;
         }
@@ -1006,14 +994,9 @@ a {
 
 .daoHistoryHeader {
   font-size: 28px;
-  // color: rgba(104, 155, 214, 1);
   color: #fff;
-  // border-bottom: 1px solid rgba(45, 109, 181, 0.2);
   padding-bottom: 5px;
   font-weight: bold;
-  // margin-bottom: 30px;
-  // background-color: rgba(229, 235, 242, 1);
-  // padding-top: 10px;
 }
 
 
@@ -1034,11 +1017,16 @@ a {
             .icon {
                 width: 90px;
                 height: 90px;
+                margin: 0 auto;
 
                 img {
                     display: block;
                     width: 100%;
                 }
+            }
+
+            .count {
+              text-align: center;
             }
 
             .cont {
@@ -1065,6 +1053,9 @@ a {
         min-width: 0;
     }
     .membersContainer {
+      h1 {
+        font-size: 32px;
+      }
         .columnsTwo {
             grid-template-columns: 1fr;
             // grid-template-columns: 1fr;
@@ -1102,6 +1093,45 @@ a {
             grid-template-columns: 1fr;
         }
     }
+
+    .Membership {
+        .MembershipBlock{
+            padding: 30px;
+            width: calc(100% - 60px);
+
+            hr {
+                margin-bottom: 20px;
+            }
+
+            &Head {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                .bigInput {
+                    form {
+                        label {
+                            padding: 0 15px;
+                            font-size: 16px;
+                        }
+                        input {
+                            padding: 0 80px 0 31px;
+                        }
+                        button {
+                            font-size: 14px;
+                            right: 15px;
+                        }
+                    }
+
+                    &Foot {
+                        grid-template-columns: 1fr;
+                        margin: 25px 0 20px 0;
+                            grid-gap: 0;
+                    }
+                }
+            }
+        }
+    }
 }
 
 
@@ -1133,7 +1163,7 @@ a {
   }
 
   .wrapper {
-    padding: 50px 15px 100px 15px;
+    padding: 20px 15px 100px 15px;
     width: calc(100% - 30px);
   }
 
