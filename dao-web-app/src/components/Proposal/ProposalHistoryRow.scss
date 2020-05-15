@@ -162,13 +162,29 @@
 
 @media only screen and (max-width: 425px) {
   .wrapper {
-    height: 110px;
-    padding: 10px;
+    // height: 110px;
+    padding: 30px 10px;
     display: block;
     width: auto;
+    border-top: 1px solid;
+    height: auto;
 
     td {
       display: inline-block;
+      padding-top: 0;
+      padding-bottom: 0;
+
+      &.title {
+        padding: 5px 0 5px 8px;
+      }
+
+      img {
+        max-width: 16px;
+      }
+
+      &:before {
+        display: none;
+      }
     }
 
     .scheme {

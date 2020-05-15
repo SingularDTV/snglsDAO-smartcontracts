@@ -1057,15 +1057,32 @@ a {
       h1 {
         font-size: 32px;
       }
+
         .columnsTwo {
             grid-template-columns: 1fr;
-            // grid-template-columns: 1fr;
+            padding-top: 50px;
 
             .dashBlock {
                 grid-template-columns: minmax(0, 1fr);
+                grid-gap: 30px;
+                padding: 35px 30px;
 
                 .count {
                     grid-column: 1/2;
+
+                    ul {
+                      & > li {
+                        padding: 0 10px;
+                        font-size: 14px;
+                        text-align: left;
+
+                        span {
+                          font-size: 14px;
+                          line-height: normal;
+                          padding-bottom: 5px;
+                        }
+                      }
+                    }
                 }
             }
         }
@@ -1077,21 +1094,22 @@ a {
 
         .dashBlock {
             grid-template-columns: minmax(0, 1fr);
-        }
-    }
+            padding: 35px 30px;
 
-        .membersContainer {
-            table {
-                // overflow-x: scroll !important;
-                min-width: 800px;
+            .cont {
+              p {
+                margin-bottom: 0;
+              }
             }
         }
+    }
 }
 
 @media (max-width: 768px) {
     .membersContainer {
         .dashBlock {
             grid-template-columns: 1fr;
+            grid-gap: 30px;
         }
         .daoModal {
             .subhead {
@@ -1122,6 +1140,7 @@ a {
                         }
                         input {
                             padding: 0 80px 0 31px;
+                            font-size: 24px;
                         }
                         button {
                             font-size: 14px;
@@ -1169,7 +1188,7 @@ a {
   }
 
   .wrapper {
-    padding: 20px 15px 100px 15px;
+    padding: 30px 15px 30px 15px;
     width: calc(100% - 30px);
   }
 
@@ -1203,9 +1222,9 @@ a {
   }
 
   .reputationAmounts {
-    position: absolute;
-    right: 10px;
-    top: 21px;
+    // position: absolute;
+    // right: 10px;
+    // top: 21px;
     font-size: 12px;
     font-weight: normal;
   }
@@ -1218,8 +1237,49 @@ a {
     position: relative;
   }
 
-  .membersContainer h2 {
-    padding-left: 10px;
+  .membersContainer {
+    h2 {
+      padding: 0;
+    }
+
+    .daoModal {
+      .head {
+        h4 {
+          font-size: 18px;
+        }
+      }
+
+      .subhead {
+            padding: 20px 35px;
+            grid-gap: 20px;
+      }
+
+      .content {
+        padding: 20px 35px;
+                  .bigInput {
+                    form {
+                        label {
+                            padding: 0 15px;
+                            font-size: 16px;
+                        }
+                        input {
+                            padding: 0 21px;
+                            font-size: 24px;
+                        }
+                        button {
+                            font-size: 14px;
+                            right: 15px;
+                        }
+                    }
+
+                    &Foot {
+                        grid-template-columns: 1fr;
+                        margin: 25px 0 20px 0;
+                            grid-gap: 0;
+                    }
+                }
+      }
+    }
   }
 
   .daoHistoryHeader {

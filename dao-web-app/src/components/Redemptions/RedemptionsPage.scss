@@ -76,14 +76,16 @@
 
   h2 {
     line-height: 55px;
+    padding: 20px 0;
     font-size: 45px;
     color: #fff;
   }
 
   p {
-    color: $gray-1;
+    // color: $gray-1;
     font-size: 21px;
-    font-family: "AccordBold", sans-serif;
+    // font-family: "AccordBold", sans-serif;
+    color: #D8D8D8;
     max-width: 602px;
     margin: 0 auto;
   }
@@ -122,6 +124,20 @@
     width: auto;
     padding: 0;
     text-align: center;
+    padding: 0 30px;
+  }
+
+  .empty {
+    padding: 50px 0;
+
+    h2 {
+      padding: 10px 0;
+    }
+    p {
+      font-size: 16px;
+      font-family: Montserrat;
+      line-height: 25px;
+    }
   }
 
   .header {
