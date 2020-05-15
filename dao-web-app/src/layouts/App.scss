@@ -788,7 +788,7 @@ h4 {
                     position: absolute;
                     background-color: #19264B;
                     width: 100%;
-                    min-width: 200px;
+                    // min-width: 200px;
                     max-width: 200px;
                     left: 50%;
                     transform: translateX(-50%);
@@ -798,7 +798,7 @@ h4 {
                     transition: 0.1s all;
 
                     & > li {
-                      padding: 4px 25px !important;
+                      padding: 4px 0 !important;
                       display: block;
                       border-bottom: 1px solid #ffffff1a;
                       text-align: center;
