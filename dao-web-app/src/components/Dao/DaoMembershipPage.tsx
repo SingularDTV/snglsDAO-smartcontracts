@@ -136,23 +136,6 @@ class DaoHistoryPage extends React.Component<IProps, null> {
             </div>
 
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
         
       </div>

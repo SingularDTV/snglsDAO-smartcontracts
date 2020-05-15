@@ -1,6 +1,6 @@
 @import "./react-mde.css";
 :global {
-  @import "../../../../node_modules/react-datetime/css/react-datetime";
+  @import "../../../node_modules/react-datetime/css/react-datetime";
 }
 
 .hidden {
@@ -15,7 +15,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: $shadow-3;
-  // height: calc(100% - 100px);
+  height: calc(100% - 100px);
   z-index: 99999;
 
   .header {

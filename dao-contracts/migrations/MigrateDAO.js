@@ -5,7 +5,7 @@ async function migrate() {
 
   const options = {
     // arc version
-    arcVersion: '0.0.1-rc.39',
+    arcVersion: '0.0.1-rc.32',
     // web3 provider url
     provider: process.env.PROVIDER,
     // gas price in GWei. If not specified, will use an automatically suggested price.

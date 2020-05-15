@@ -17,7 +17,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { CrxRewarderComponentType, getCrxRewarderComponent, rewarderContractName } from "components/Scheme/ContributionRewardExtRewarders/rewardersProps";
 import CreateContributionRewardProposal from "components/Proposal/Create/SchemeForms/CreateContributionRewardProposal";
 import { schemeName } from "lib/schemeUtils";
-import * as css from "./CreateProposal.scss";
+import * as css from "./DaoJoin.scss";
 
 type IExternalProps = RouteComponentProps<any>;
 
@@ -41,11 +41,11 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   };
 };
 
-class CreateProposalPage extends React.Component<IProps, IStateProps> {
+class DaoJoinPage extends React.Component<IProps, IStateProps> {
 
   constructor(props: IProps) {
     super(props);
-    console.log("CREATE PROPOSAL PAGE ====================================<<<<<<<<<<<<<");
+    console.log("DAO JOIN PAGE ====================================<<<<<<<<<<<<<");
 
     this.state = {
       createCrxProposalComponent: null,
@@ -152,8 +152,8 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
   }
 }
 
-const SubscribedCreateProposalPage = withSubscription({
-  wrappedComponent: CreateProposalPage,
+const SubscribedDaoJoinPage = withSubscription({
+  wrappedComponent: DaoJoinPage,
   loadingComponent: <Loading/>,
   errorComponent: null,
   checkForUpdate: ["daoAvatarAddress"],
@@ -164,4 +164,4 @@ const SubscribedCreateProposalPage = withSubscription({
   },
 });
 
-export default connect(mapStateToProps)(SubscribedCreateProposalPage);
+export default connect(mapStateToProps)(SubscribedDaoJoinPage);

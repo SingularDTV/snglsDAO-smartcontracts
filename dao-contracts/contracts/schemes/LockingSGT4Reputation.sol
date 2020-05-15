@@ -2,13 +2,14 @@ pragma solidity 0.5.13;
 
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "../controller/Controller.sol";
 
 
 /**
  * @title A locker contract
  */
 
-contract MembershipFeeStaking {
+contract LockingSGT4Reputation {
     using SafeMath for uint256;
 
     event Release(address indexed _beneficiary, uint256 _amount);
@@ -18,7 +19,7 @@ contract MembershipFeeStaking {
         uint256 amount;
         uint256 releaseTime;
     }
-
+    Avatar avatar;
     IERC20 public sgtToken;
 
     // A mapping from lockers addresses their lock balances.
@@ -26,10 +27,6 @@ contract MembershipFeeStaking {
 
     uint256 public totalLocked;
     uint256 public minLockingPeriod;
-
-    /**
-     * @dev getter for locker's locked tokens
-     */
 
     /**
      * @dev release function
@@ -42,12 +39,20 @@ contract MembershipFeeStaking {
             locker.amount > 0,
             "MembershipFeeStaking: amount should be > 0"
         );
+        require(
+            block.timestamp >= locker.releaseTime,
+            "MembershipFeeStaking: check the lock period pass"
+        );
         amount = locker.amount;
         locker.amount = 0;
         // solhint-disable-next-line not-rely-on-time
         require(
-            block.timestamp >= locker.releaseTime,
-            "MembershipFeeStaking: check the lock period pass"
+            Controller(avatar.owner()).burnReputation(
+                amount,
+                _beneficiary,
+                address(avatar)
+            ),
+            "burn reputation should succeed"
         );
         require(
             sgtToken.transfer(_beneficiary, amount),
@@ -76,9 +81,17 @@ contract MembershipFeeStaking {
             sgtToken.transferFrom(msg.sender, address(this), _amount),
             "MembershipFeeStaking: can't transfer tokens to staking address"
         );
+        require(
+            Controller(avatar.owner()).mintReputation(
+                _amount,
+                msg.sender,
+                address(avatar)
+            ),
+            "mint reputation should succeed"
+        );
 
         Locker storage locker = lockers[msg.sender];
-        locker.amount = _amount;
+        locker.amount = locker.amount.add(_amount);
 
         // solhint-disable-next-line not-rely-on-time
         locker.releaseTime = now + _period;
@@ -92,10 +105,14 @@ contract MembershipFeeStaking {
      * @param _sgtToken the SGT token address to stake on
      * @param _minLockingPeriod minimum locking period allowed.
      */
-    function initialize(IERC20 _sgtToken, uint256 _minLockingPeriod) public {
+    function initialize(
+        Avatar _avatar,
+        IERC20 _sgtToken,
+        uint256 _minLockingPeriod
+    ) public {
         require(sgtToken == IERC20(0), "can be called only one time");
         require(_sgtToken != IERC20(0), "token cannot be zero");
-
+        avatar = _avatar;
         minLockingPeriod = _minLockingPeriod;
         sgtToken = _sgtToken;
     }

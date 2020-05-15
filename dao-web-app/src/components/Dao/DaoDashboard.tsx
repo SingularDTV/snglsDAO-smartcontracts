@@ -54,7 +54,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   private async handleNewProposal(): Promise<void> {
     if (!await enableWalletProvider({ showNotification: true })) { return; }
 
-    this.props.history.push(`/dao/scheme/${"0x9998c70f34c7cb64401ed47487703abee1ca2300b009680a6e3b4080d67ab3a9"}/proposals/create/`);
+    this.props.history.push(`/dao/dashboard/join/`);
     // this.props.history.push(`/dao/dashboard/join`);
   }
 
@@ -254,7 +254,6 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                          <li><span>SGT:</span><p>543</p></li>
                          <li><span>USDC:</span><p>103</p></li>
                          <li><span>DAI:</span><p>0</p></li>
-                         <li><span>SAI:</span><p>0</p></li>
                      </ul>
                  </div>
              </div>

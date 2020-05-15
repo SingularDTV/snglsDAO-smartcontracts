@@ -6,7 +6,7 @@
     "compile": "truffle compile",
     "deploy-graph": "bash ops/hackyDeploy.sh",
     "network": "ganache-cli",
-    "set-migration-settings": "node ./scripts/setLockingTokenStartTime.js",
+    "set-migration-settings": "",
     "set-rinkeby": "node ./scripts/setRinkebyDeployOptions.js",
     "set-private": "node ./scripts/setPrivateDeployOptions.js",
     "migrate": "npm run set-migration-settings && node migrations/MigrateDAO.js",

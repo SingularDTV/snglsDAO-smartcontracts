@@ -2220,33 +2220,33 @@
       },
       "0.0.1-rc.32": {
         "name": "Singularity DAO",
-        "Avatar": "0xa8767D1421C7b52579d676D9a85cbfDB6B7a2073",
-        "DAOToken": "0x8a1a0e1da2Cde4BcCa1Ddd7331C7E2CcA1999CEC",
-        "Reputation": "0xf22b75225341850a3E612E162DC4a4d100684A07",
-        "Controller": "0x9fCD747033Ac2CeEc7370352E6112434dc27B75d",
+        "Avatar": "0x628444a5648803748b3927CDBf9a7323e2789255",
+        "DAOToken": "0x66285214C63CBD52b395A07ED8e444fFB6facA9d",
+        "Reputation": "0x73563D378895A1BD1E87770b34E51Cd68a139723",
+        "Controller": "0xAfC3dcCB02a68367587DD05879D8E27c37d8AA29",
         "Schemes": [
           {
             "name": "GenericScheme",
             "alias": "GenericSchemeFee",
-            "address": "0xe8815c4ec666D5eD712ED82512Ae15Ca29daA825",
+            "address": "0xe11542F75Dd39ca64614A87A56c3e70C6Ef3Fe04",
             "arcVersion": "0.0.1-rc.32"
           },
           {
-            "name": "ContinuousLocking4Reputation",
-            "alias": "ContinuousLocking4Reputation",
-            "address": "0x14DfB090c875a2adFd1E74E973AFA9DA6cc16e97",
+            "name": "LockingSGT4Reputation",
+            "alias": "LockingSGT4Reputation",
+            "address": "0x47C479e9a6C348430Ac31124b624673d87B9df19",
             "arcVersion": "0.0.1-rc.32"
           }
         ],
         "StandAloneContracts": [
           {
             "name": "Fee",
-            "address": "0x96d287ccc10576A016cE51BD4A887C7905d00073",
+            "address": "0x09ae9692D75763C4fEF853d1B86Ec76BBDAd193F",
             "arcVersion": "0.0.1-rc.32"
           },
           {
             "name": "MembershipFeeStaking",
-            "address": "0x77A163d4E6873dbF8ECeBD9327eAD4d5C1067589",
+            "address": "0xA86B0786995D041B32FAFe10d19B12dB037f1D2e",
             "arcVersion": "0.0.1-rc.32"
           }
         ],
