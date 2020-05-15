@@ -1084,6 +1084,14 @@ a {
         }
 }
 
+@media (max-width: 768px) {
+    .membersContainer {
+        .dashBlock {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
 
 @media only screen and (max-width: 425px) {
   .outer {
