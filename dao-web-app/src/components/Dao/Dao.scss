@@ -452,6 +452,7 @@ a {
             padding: 20px 60px;
             font-family: Arial;
             margin: 0;
+            color: #010B2B;
         }
 
         a {
@@ -1091,6 +1092,11 @@ a {
     .membersContainer {
         .dashBlock {
             grid-template-columns: 1fr;
+        }
+        .daoModal {
+            .subhead {
+                grid-template-columns: 1fr;
+            }
         }
     }
 

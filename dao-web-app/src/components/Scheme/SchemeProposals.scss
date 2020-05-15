@@ -122,3 +122,11 @@
     margin-top: 8px;
   }
 }
+
+@media (max-width: 768px) {
+  .noDecisions {
+    .proposalsHeader {
+      font-size: 32px;
+    }
+  }
+}
