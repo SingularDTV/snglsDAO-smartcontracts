@@ -19,7 +19,7 @@ contract MembershipFeeStaking {
         uint256 amount;
         uint256 releaseTime;
     }
-    Avatar avatar;
+    Avatar public avatar;
     IERC20 public sgtToken;
 
     // A mapping from lockers addresses their lock balances.
