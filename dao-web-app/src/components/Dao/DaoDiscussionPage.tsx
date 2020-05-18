@@ -4,6 +4,7 @@ import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as Sticky from "react-stickynode";
 import * as css from "./Dao.scss";
+// import Box = require("3box");
 
 import moment = require("moment");
 
@@ -14,6 +15,9 @@ interface IProps {
 export default class DaoDiscussionPage extends React.Component<IProps, null> {
 
   public async componentDidMount() {
+    // const provider = await Box.get3idConnectProvider() // recomended provider
+    // const box = await Box.openBox('0x12345...abcde', provider)
+    // const space = await box.openSpace('myApp')
     localStorage.setItem(`daoWallEntryDate_${this.props.dao.address}`, moment().toISOString());
   }
 
