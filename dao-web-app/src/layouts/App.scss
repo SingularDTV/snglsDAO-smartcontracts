@@ -1123,8 +1123,17 @@ h4 {
 
     .header {
         height: 64px;
-        padding: 0 20px;
-        width: calc(100% - 40px);
+        padding: 0 15px;
+        width: calc(100% - 30px);
+        grid-gap: 15px;
+    }
+
+    .web3ProviderLogin {
+      button {
+        padding: 0;
+        width: 30px;
+        text-align: center;
+      }
     }
 
     .pageWrapper {

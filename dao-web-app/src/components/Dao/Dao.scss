@@ -1119,6 +1119,11 @@ a {
         }
     }
 
+  .wrapper {
+    padding: 30px 15px 30px 15px;
+    width: calc(100% - 30px);
+  }
+
     .Membership {
         .MembershipBlock{
             padding: 30px;
@@ -1190,11 +1195,6 @@ a {
 
   .memberTable.memberTableHeading {
     display: none;
-  }
-
-  .wrapper {
-    padding: 30px 15px 30px 15px;
-    width: calc(100% - 30px);
   }
 
   .noticeWrapper {
