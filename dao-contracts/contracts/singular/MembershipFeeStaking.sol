@@ -11,7 +11,7 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 contract MembershipFeeStaking {
     using SafeMath for uint256;
 
-    event Release(address indexed _beneficiary, uint256 _amount);
+    event Release(address indexed msg.sender, uint256 _amount);
     event Lock(address indexed sender, uint256 _amount, uint256 _period);
 
     struct Locker {
@@ -28,11 +28,11 @@ contract MembershipFeeStaking {
 
     /**
      * @dev release function
-     * @param _beneficiary the beneficiary for the release
+     * @param msg.sender the beneficiary for the release
      * @return bool
      */
-    function release(address _beneficiary) public returns (uint256 amount) {
-        Locker storage locker = lockers[_beneficiary];
+    function release() public returns (uint256 amount) {
+        Locker storage locker = lockers[msg.sender];
 
         require(
             locker.amount > 0,
@@ -48,11 +48,11 @@ contract MembershipFeeStaking {
         locker.amount = 0;
 
         require(
-            sgtToken.transfer(_beneficiary, amount),
+            sgtToken.transfer(msg.sender, amount),
             "MembershipFeeStaking: can't transfer tokens to staking address"
         );
 
-        emit Release(_beneficiary, amount);
+        emit Release(msg.sender, amount);
     }
 
     /**
@@ -121,7 +121,7 @@ contract MembershipFeeStaking {
 // contract MembershipFeeStaking {
 //     using SafeMath for uint256;
 
-//     event Release(address indexed _beneficiary, uint256 _amount);
+//     event Release(address indexed msg.sender, uint256 _amount);
 //     event Lock(address indexed sender, uint256 _amount, uint256 _period);
 
 //     struct Locker {
@@ -139,18 +139,18 @@ contract MembershipFeeStaking {
 
 //     /**
 //      * @dev release function
-//      * @param _beneficiary the beneficiary for the release
+//      * @param msg.sender the beneficiary for the release
 //      * @return bool
 //      */
-//     function release(address _beneficiary) internal returns(uint256 amount) {
-//         Locker storage locker = lockers[_beneficiary];
+//     function release(address msg.sender) internal returns(uint256 amount) {
+//         Locker storage locker = lockers[msg.sender];
 //         require(locker.amount > 0, "amount should be > 0");
 //         amount = locker.amount;
 //         locker.amount = 0;
 //         // solhint-disable-next-line not-rely-on-time
 //         require(now > locker.releaseTime, "check the lock period pass");
 
-//         emit Release(_beneficiary, amount);
+//         emit Release(msg.sender, amount);
 //     }
 
 //     /**
