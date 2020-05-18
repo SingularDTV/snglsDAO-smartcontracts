@@ -2,6 +2,13 @@
 
 ## [1.0.7] - 2020-05-18
 
+### Added
+
+- Profile page styles
+- Proposal page styles
+- Scheme page styles
+- Membeship fee page 
+
 ### Changed
 
 - Changed the functionality of staking in MembershipFee contract
