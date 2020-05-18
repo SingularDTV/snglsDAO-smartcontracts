@@ -34,18 +34,33 @@
 }
 
 .proposal {
-  width: 418px;
-  border-radius: 15px;
-  background-color: $white;
-  margin-right: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  // width: 418px;
+  width: calc(100% - 40px);
+  // border-radius: 15px;
+  // background-color: $white;
+  margin: 20px;
   display: inline-block;
   position: relative;
-  box-shadow: 0 0 15px 0 rgba(133,168,208,.15);
+  // box-shadow: 0 0 15px 0 rgba(133,168,208,.15);
   transition: all .25s ease;
   vertical-align: top;
   z-index: 0;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  // &:before {
+  // position: absolute;
+  //   content: '';
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background: rgba(255, 255, 255, 0.05);
+  //   opacity: 0.8;
+  //   border: 1px solid rgba(255, 255, 255, 0.05);
+  //   box-sizing: border-box;
+  //   backdrop-filter: blur(40px);
+  // }
   // border: 1px solid #FFFFFF;
 
   .description, .url {
@@ -59,13 +74,13 @@
   z-index: 1000000;
   padding-bottom: 20px;
 
-  a {
-    color: $black;
-  }
+  // a {
+  //   color: $black;
+  // }
 
-  strong a {
-    color: rgba(80, 97, 118, 1.000);
-  }
+  // strong a {
+  //   color: rgba(80, 97, 118, 1.000);
+  // }
 
   h3 {
     font-size: $body;
@@ -82,12 +97,20 @@
 }
 
 .detailLink {
-  color: $black;
+  // color: $black;
+  padding: 7px 18px !important;
+  margin: 12px 0 !important;
+  line-height: normal !important;
+  color: #fff;
+
+  // h3 {
+  //   padding: 7px 18px;
+  // }
 
   span {
     text-overflow: ellipsis;
     overflow: hidden;
-    display: inline-block;
+    display: block;
     white-space: nowrap;
     max-width: 350px;
   }
@@ -107,44 +130,54 @@
 
 .proposal:hover {
   z-index: 9000;
-  box-shadow: 0 0 15px 0 rgba(49, 120, 202, .300);
+  // box-shadow: 0 0 15px 0 rgba(49, 120, 202, .300);
   overflow: visible;
 }
 
 .voteBox {
   position: relative;
   float: left;
-  border-right: 1px solid rgba(215, 225, 237, 1.000);
-  width: 49%;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  width: calc(49% - 12px);
+  padding: 12px 12px 7px 0;
+  display: grid;
+    grid-template-columns: auto 1fr;
 }
 
 .voteButtons {
   padding-top: 9px;
   text-align: center;
   padding-bottom: 10px;
+  color: #fff;
 }
 
 .voteControls {
   width: 100%;
   text-align: center;
   position: relative;
-  height: 70px;
+  // height: 70px;
   z-index: 100;
+  color: #fff;
 
   .voteDivider {
     width: 40%;
     float: left;
     text-align: right;
-    padding-top: 12px;
+    // padding-top: 12px;
     margin-right: 5px;
   }
 }
 
 .predictions {
   position: relative;
-  float: right;
+  // float: right;
   width: 49%;
   padding-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  grid-gap: 12px;
+  
 }
 
 .predictionButtons {
@@ -196,11 +229,11 @@
     }
 
     .menu {
-      width: 116px;
-      border-radius: 0 8px 8px 8px;
+      width: 218px;
+      border-radius: 8px;
       background-color: white;
-      padding: 5px 0;
-      box-shadow: 2px 2px 9px 0 rgba(12, 0, 51, 0.1);
+      padding: 10px;
+      // box-shadow: 2px 2px 9px 0 rgba(12, 0, 51, 0.1);
       position: absolute;
       top: -7px;
       left: 24px;
@@ -209,8 +242,14 @@
       z-index: 100;
       visibility: hidden;
 
+      button {
+        &.FollowButton {
+          padding: 0;
+        }
+      }
+
       &.leftMenu {
-        left: -118px;
+        left: -240px;
       }
     }
 
@@ -240,9 +279,11 @@
 .proposalActions {
   position: relative;
   transition: all .25s ease;
-  border-top: 1px solid rgba(215, 225, 237, 1.000);
-  height: 64px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  // height: 64px;
   overflow: hidden;
+
+
 }
 
 .createdBy {
