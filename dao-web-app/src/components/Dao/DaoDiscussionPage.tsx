@@ -4,20 +4,37 @@ import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as Sticky from "react-stickynode";
 import * as css from "./Dao.scss";
-// import Box = require("3box");
+import Box = require("3box");
+import { IProfileState } from "reducers/profilesReducer";
+// import { getWeb3Provider } from "arc";
 
 import moment = require("moment");
 
 interface IProps {
   dao: IDAOState;
+  currentAccountAddress: string;
+  currentAccountProfile: IProfileState;
 }
 
 export default class DaoDiscussionPage extends React.Component<IProps, null> {
 
   public async componentDidMount() {
-    // const provider = await Box.get3idConnectProvider() // recomended provider
-    // const box = await Box.openBox('0x12345...abcde', provider)
-    // const space = await box.openSpace('myApp')
+    console.log("Discuss props ", this.props);
+    const provider = await  Box.get3idConnectProvider(); // recomended provider
+    const box = await Box.openBox(this.props.currentAccountAddress, provider)
+    const space = await box.openSpace('snglsGeneral')
+    const thread = await space.joinThread('myThread', {
+      firstModerator: "0x4699f05bF35Ba6820F8393C44F780fBe00fe7aa9",
+      members: true
+    });
+    await thread.addMember(this.props.currentAccountAddress);
+
+    await thread.post('hello world')
+
+    console.log("Thread posts: ", await thread.getPosts());
+
+    await space.syncDone
+
     localStorage.setItem(`daoWallEntryDate_${this.props.dao.address}`, moment().toISOString());
   }
 
