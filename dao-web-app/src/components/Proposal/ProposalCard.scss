@@ -216,7 +216,9 @@
       width: 18px;
       height: 18px;
       border-radius: 11px;
-      border: solid 1px #0076ff;
+      border: solid 1px #fff;
+      opacity: 0.3;
+      transition: 0.2s all;
 
       img {
         height: 11px;
@@ -226,6 +228,7 @@
 
       &:hover {
         cursor: pointer;
+        opacity: 0.6;
       }
     }
 
