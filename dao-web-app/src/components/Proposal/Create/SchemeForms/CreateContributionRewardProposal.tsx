@@ -168,7 +168,6 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
     if (!data) {
       return null;
     }
-    const dao = data;
     const arc = getArc();
 
     return (
@@ -231,7 +230,7 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
           }: FormikProps<IFormValues>) =>
             <Form noValidate>
               <label className={css.description}>What to Expect</label>
-              <div className={css.description}>This proposal can send eth / erc20 token, mint new DAO tokens ({dao.tokenSymbol}) and mint / slash reputation in the DAO. Each proposal can have one of each of these actions. e.g. 100 rep for completing a project + 0.05 ETH for covering expenses.</div>
+              <div className={css.description}>This proposal can send eth / erc20 token. Each proposal can have one of each of these actions. e.g. 20 SNGLS for completing a project + 0.05 ETH for covering expenses.</div>
               <TrainingTooltip overlay="The title is the header of the proposal card and will be the first visible information about your proposal" placement="right">
                 <label htmlFor="titleInput">
                   <div className={css.requiredMarker}>*</div>
@@ -326,21 +325,6 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
                 </div>
 
                 <div className={css.reward}>
-                  <label htmlFor="reputationRewardInput">
-                    Reputation Reward
-                    <ErrorMessage name="reputationReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
-                  </label>
-                  <Field
-                    id="reputationRewardInput"
-                    placeholder="How much reputation to reward"
-                    name="reputationReward"
-                    type="number"
-                    className={touched.reputationReward && errors.reputationReward ? css.error : null}
-                    step={0.1}
-                  />
-                </div>
-
-                <div className={css.reward}>
                   <label htmlFor="externalRewardInput">
                     External Token Reward
                     <ErrorMessage name="externalTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
@@ -369,21 +353,6 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
                       />
                     </div>
                   </div>
-                </div>
-
-                <div className={css.reward}>
-                  <label htmlFor="nativeTokenRewardInput">
-                    DAO token ({dao.tokenSymbol}) Reward
-                    <ErrorMessage name="nativeTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
-                  </label>
-                  <Field
-                    id="nativeTokenRewardInput"
-                    maxLength={10}
-                    placeholder="How many tokens to reward"
-                    name="nativeTokenReward"
-                    type="number"
-                    className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
-                  />
                 </div>
 
                 {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)

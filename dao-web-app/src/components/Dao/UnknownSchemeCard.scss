@@ -33,7 +33,7 @@
   }
 
   .body {
-    margin: 25px;
+    margin: 0 25px;
     margin-bottom: 0;
     position: relative;
   }
@@ -98,5 +98,13 @@
         width:6rem;
       }
     }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+    margin-right: 0;
   }
 }

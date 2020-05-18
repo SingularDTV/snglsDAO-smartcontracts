@@ -218,7 +218,7 @@ class AccountProfilePage extends React.Component<IProps, IState> {
                       </div>
                       <div className={css.profileData}>
                         <label htmlFor="nameInput">
-                          Name:&nbsp;
+                          Name:
                         </label>
                         {editing ?
                           <div>
@@ -235,35 +235,36 @@ class AccountProfilePage extends React.Component<IProps, IState> {
                           </div>
                           : <div>{accountProfile.name}</div>
                         }
-                        <br />
-                        <label htmlFor="descriptionInput">
-                          Description:&nbsp;
+                      </div>
+                    </div>
+                    <div className={css.profileDescription}>
+                      <label htmlFor="descriptionInput">
+                        Description:&nbsp;
                         </label>
-                        {editing ?
+                      {editing ?
+                        <div>
                           <div>
-                            <div>
-                              <Field
-                                id="descriptionInput"
-                                placeholder="Tell the DAO a bit about yourself"
-                                name="description"
-                                component="textarea"
-                                maxLength="150"
-                                rows="7"
-                                className={touched.description && errors.description ? css.error : null}
-                              />
-                              <div className={css.charLimit}>Limit 150 characters</div>
-                            </div>
-                            <div className={css.saveProfile}>
-                              <button className={css.submitButton} type="submit" disabled={isSubmitting}>
-                                <img className={css.loading} src="/assets/images/Icon/Loading-black.svg" />
+                            <Field
+                              id="descriptionInput"
+                              placeholder="Tell the DAO a bit about yourself"
+                              name="description"
+                              component="textarea"
+                              maxLength="150"
+                              rows="7"
+                              className={touched.description && errors.description ? css.error : null}
+                            />
+                            <div className={css.charLimit}>Limit 150 characters</div>
+                          </div>
+                          <div className={css.saveProfile}>
+                            <button className={css.submitButton} type="submit" disabled={isSubmitting}>
+                              <img className={css.loading} src="/assets/images/Icon/Loading-black.svg" />
                                 SUBMIT
                               </button>
-                            </div>
                           </div>
+                        </div>
 
-                          : <div>{accountProfile.description}</div>
-                        }
-                      </div>
+                        : <div>{accountProfile.description}</div>
+                      }
                     </div>
                     { editing ? "" : <div className={css.followButton}><FollowButton id={accountAddress} type="users" /></div> }
                     {Object.keys(accountProfile.socialURLs).length === 0 ? " " :

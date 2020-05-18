@@ -12,7 +12,7 @@ import { Page } from "pages";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
-import * as Sticky from "react-stickynode";
+// import * as Sticky from "react-stickynode";
 import { IRootState } from "reducers";
 import { showNotification } from "reducers/notifications";
 import { of } from "rxjs";
@@ -123,7 +123,7 @@ class RedemptionsPage extends React.Component<IProps, null> {
     return (
       <div className={css.wrapper}>
         <BreadcrumbsItem to="/redemptions">Redemptions</BreadcrumbsItem>
-        <Sticky enabled top={50} innerZ={10000}>
+        {/* <Sticky enabled top={50} innerZ={10000}> */}
           <div className={css.header}>
             <div className={css.title}>
               <div className={css.caption}>Redemptions</div>
@@ -145,7 +145,7 @@ class RedemptionsPage extends React.Component<IProps, null> {
               : ""
             }
           </div>
-        </Sticky>
+        {/* </Sticky> */}
         <div>
           {proposals.length > 0 ?
             <div>{this.renderProposalsPerDAO()}</div>

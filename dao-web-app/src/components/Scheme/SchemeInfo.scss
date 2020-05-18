@@ -25,29 +25,74 @@
 }
 
 .schemeInfoContainer {
-  background-color: rgba(252, 253, 255, 1);
-  color: rgba(78, 97, 118, 1);
+  // background-color: rgba(252, 253, 255, 1);
+  color: #fff;
   font-size: 11px;
   font-family: "Open Sans";
   font-weight: normal;
-  border-radius: 0 14px 14px 14px;
+  // border-radius: 0 14px 14px 14px;
   min-width: 340px;
+
+  &Table {
+        padding: 15px 35px;
+  }
 
   h3 {
     margin: 0;
     font-size: 16px;
     font-family: "AccordBold";
-    border-bottom: 1px solid #e9eef4;
-    padding: 15px;
+    // border-bottom: 1px solid #e9eef4;
+    border-bottom: 1px solid #ffffff17;
+    padding: 15px 0;
   }
 
   .infoCardContent {
-    padding: 15px;
+    padding: 15px 0;
     width: 100%;
+    border-spacing: 0px;
+
+    td, th {
+      position: relative;
+      font-family: Montserrat;
+      font-weight: 300;
+      // font-size: 13px;
+
+      a {
+        color: #fff;
+      }
+
+      & > span {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        
+      }
+
+      &:before {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 100%;
+        content: '';
+        height: calc(100% - 8px);
+        background: #010b2b60;
+        z-index: 0;
+      }
+    }
+
+    th {
+      padding-left: 15px;
+    }
+
+    td {
+      padding: 11px 15px 11px 0;
+      text-align: right;
+    }
   }
 
   th {
     text-align: left;
+    font-weight: normal;
     min-width: 75px;
   }
 }
@@ -90,6 +135,43 @@
 
 .copyButton {
   cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 16px;
+
+  img {
+    position: absolute;
+    display: block;
+    top: 0%;
+    transform: translateY(-75%);
+  }
+  // top: 50%;
+  // transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+
+  .schemeInfoContainer {
+
+    &Table {
+      padding: 10px;
+    }
+
+    .infoCardContent {
+      td, th {
+        & > span {
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    display: inline-block;
+          
+        }
+      }
+    }
+  }
+
 }
 
 @media only screen and (max-width: 425px) {

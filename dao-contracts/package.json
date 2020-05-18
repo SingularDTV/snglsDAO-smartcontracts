@@ -6,7 +6,7 @@
     "compile": "truffle compile",
     "deploy-graph": "bash ops/hackyDeploy.sh",
     "network": "ganache-cli",
-    "set-migration-settings": "node ./scripts/setLockingTokenStartTime.js",
+    "set-migration-settings": "",
     "set-rinkeby": "node ./scripts/setRinkebyDeployOptions.js",
     "set-private": "node ./scripts/setPrivateDeployOptions.js",
     "migrate": "npm run set-migration-settings && node migrations/MigrateDAO.js",
@@ -48,7 +48,8 @@
     "openzeppelin-solidity": "^2.1.3",
     "prettier": "^2.0.4",
     "prettier-plugin-solidity": "^1.0.0-alpha.48",
-    "truffle": "^5.1.13",
+    "truffle": "^5.1.24",
+    "truffle-hdwallet-provider": "^1.0.17",
     "websocket": "^1.0.31"
   },
   "devDependencies": {

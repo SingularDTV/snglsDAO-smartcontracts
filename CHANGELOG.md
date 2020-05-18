@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.0.7] - 2020-05-18
+
+### Added
+
+- Profile page styles
+- Proposal page styles
+- Scheme page styles
+- Membeship fee page 
+
+### Changed
+
+- Changed the functionality of staking in MembershipFee contract
+- Сhanged the principle of distribution of reputation in the scheme of issuing reputation
+
 ## [1.0.6] - 2020-05-06
 
 ### Added

@@ -23,6 +23,8 @@ import DaoSchemesPage from "./DaoSchemesPage";
 import DaoHistoryPage from "./DaoHistoryPage";
 import DaoMembersPage from "./DaoMembersPage";
 import DaoDashboard from "./DaoDashboard";
+import DaoMembershipPage from "./DaoMembershipPage"
+import DaoJoinPage from "./DaoJoin"
 import * as css from "./Dao.scss";
 
 type IExternalProps = RouteComponentProps<any>;
@@ -145,11 +147,13 @@ class DaoContainer extends React.Component<IProps, null> {
     // TODO: use this once 3box fixes Box.getProfiles
     //this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
-
+  
+  private daoJoinRoute = (routeProps: any) => <DaoJoinPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
+  private daoMembershipRoute = (routeProps: any) => <DaoMembershipPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoHistoryRoute = (routeProps: any) => <DaoHistoryPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} />;
-  private daoDiscussionRoute = (routeProps: any) => <DaoDiscussionPage {...routeProps} dao={this.props.data[0]} />;
-  private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} ff={"15"} daoState={this.props.data[0]} />;
+  private daoDiscussionRoute = (routeProps: any) => <DaoDiscussionPage {...routeProps} dao={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} currentAccountProfile={this.props.currentAccountProfile} />;
+  private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} daoState={this.props.data[0]} />;
   private daoProposalRoute = (routeProps: any) =>
     <ProposalDetailsPage {...routeProps}
       currentAccountAddress={this.props.currentAccountAddress}
@@ -166,7 +170,9 @@ class DaoContainer extends React.Component<IProps, null> {
   private schemeRoute = (routeProps: any) => <SchemeContainer {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoSchemesRoute = (routeProps: any) => <DaoSchemesPage {...routeProps} daoState={this.props.data[0]} />;
   
-  private modalRoute = (route: any) => `/dao/scheme/${route.params.schemeId}/`;
+  private createProposalModalRoute = (route: any) => `/dao/scheme/${route.params.schemeId}/`;
+  private daoJoinModalRoute = (route: any) => `/dao/dashboard/`;
+
 
   public render(): RenderOutput {
     let searchString = "";    
@@ -181,7 +187,7 @@ class DaoContainer extends React.Component<IProps, null> {
     const daoState = this.props.data[0];
 
     console.log(daoState.name)
-    console.log("DaoContainer render: ", this.modalRoute, this.props);
+    console.log("DaoContainer render: ", this.createProposalModalRoute, this.props);
 
     return (
       <div className={css.outer}>
@@ -194,15 +200,6 @@ class DaoContainer extends React.Component<IProps, null> {
         </Helmet>
 
         <div className={css.wrapper}>
-          <div className={css.noticeWrapper}>
-            <div className={css.noticeBuffer}></div>
-            <div className={css.notice}>
-              <div>
-                <img src="/assets/images/Icon/notice.svg" />
-                Alchemy and Arc are in Alpha. There will be BUGS! We don&apos;t guarantee complete security. *Play at your own risk*
-              </div>
-            </div>
-          </div>
           <Switch>
             <Route exact path="/dao/history"
               render={this.daoHistoryRoute} />
@@ -228,13 +225,25 @@ class DaoContainer extends React.Component<IProps, null> {
             <Route exact path="/dao/dashboard"
               render={this.daoDashboardRoute} />
 
+            <Route exact path="/dao/membership"
+              render={this.daoMembershipRoute} />
+
+            <Route exact path="/dao/dashboard/join"
+              render={this.daoJoinRoute} />
+
             <Redirect exact from="/dao" to="/dao/dashboard"></Redirect>
 
           </Switch>
 
           <ModalRoute
+            path="/dao/dashboard/join"
+            parentPath={this.daoJoinModalRoute}
+            component={DaoJoinPage}
+          />
+
+          <ModalRoute
             path="/dao/scheme/:schemeId/proposals/create"
-            parentPath={this.modalRoute}
+            parentPath={this.createProposalModalRoute}
             component={CreateProposalPage}
           />
 

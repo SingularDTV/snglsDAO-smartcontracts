@@ -182,16 +182,12 @@ class Header extends React.Component<IProps, null> {
     return(
       <div className={css.headerContainer}>
         <nav className={css.header}>
-          <div className={css.menuToggle} onClick={this.handleToggleMenu}>
-            {this.props.menuOpen ?
-              <img src="/assets/images/Icon/Close.svg"/> :
-              <img src="/assets/images/Icon/Menu.svg"/>}
-          </div>
           <TrainingTooltip overlay="View your personal feed" placement="bottomRight">
             <div className={css.menu}>
               <Link to="/">
                 {/* <img src="/assets/images/alchemy-logo-white.svg" /> */}
-                <img src="/assets/images/new_logo.png" />
+                <img className={css.desktop} src="/assets/images/logo.svg" />
+                <img className={css.mobile} src="/assets/images/logo_mobile.svg" />
               </Link>
             </div>
           </TrainingTooltip>
@@ -208,14 +204,20 @@ class Header extends React.Component<IProps, null> {
             </div>
             <div className={css.navigation}>
               <ul>
-                <li><a href="#">Dao</a></li>
+                <li><a href="#">DAO</a></li>
                 <li><a href="#">Forum</a></li>
-                <li><a href="#">Consumer protection</a>
+                <li className={css.submenu}><a href="#">Consumer protection</a>
                     <ul>
-                        <li><a href="#">Sublink</a></li>
+                      <li><a href="#">Sublink</a></li>
+                      <li><a href="#">Sublink</a></li>
+                      <li><a href="#">Sublink</a></li>
                     </ul>
                 </li>
-                <li><a href="#">News</a></li>
+                <li className={css.submenu}><a href="#">News</a>
+                  <ul>
+                    <li><a href="#">Sublink</a></li>
+                  </ul>
+                </li>
                 <li><a href="#">Subscribe</a></li>
                 <li><a href="#">Github</a></li>
               </ul>
@@ -308,6 +310,13 @@ class Header extends React.Component<IProps, null> {
                 : ""
             }
           </div>
+
+          <div className={css.menuToggle} onClick={this.handleToggleMenu}>
+            {this.props.menuOpen ?
+              <img src="/assets/images/Icon/Close.svg" /> :
+              <img src="/assets/images/Icon/Menu.svg" />}
+          </div>
+
         </nav>
       </div>
     );

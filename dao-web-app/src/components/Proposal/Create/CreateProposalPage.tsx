@@ -45,6 +45,8 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
   constructor(props: IProps) {
     super(props);
+    console.log("CREATE PROPOSAL PAGE ====================================<<<<<<<<<<<<<");
+
     this.state = {
       createCrxProposalComponent: null,
     };

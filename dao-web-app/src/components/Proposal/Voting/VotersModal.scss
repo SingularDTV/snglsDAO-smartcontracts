@@ -180,18 +180,28 @@
 }
 
 .footer {
-  text-align: right;
+  // text-align: right;
 
-  button {
-    border-radius: 15px;
-    height: 30px;
-    background-color: rgba(5, 118, 255, 1.000);
-    border: 0;
-    font-size: 13px;
-    outline: none;
-    margin-right: 10px;
-    line-height: 30px;
-    padding: 0 30px;
-    color: white;
-  }
+    button {
+      color: #fff;
+      font-family: Montserrat;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: 1.61455px;
+      text-transform: uppercase;
+      padding: 14px 70px;
+      border: 1px solid #D40D26;
+      border-radius: 50px;
+      background: #D40D26;
+      outline: none;
+      position: relative;
+      transition: 0.1s all;
+      display: inline-block;
+      font-size: 14px;
+      box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
 }
