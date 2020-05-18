@@ -1168,6 +1168,12 @@ a {
                             grid-gap: 0;
                     }
                 }
+
+                button {
+                  &.submit {
+                    padding: 14px 45px;
+                  }
+                }
             }
         }
     }
