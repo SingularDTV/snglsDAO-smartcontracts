@@ -252,6 +252,29 @@
   }
 }
 
+@media (max-width: 768px) {
+  .schemeMenu {
+    a {
+      font-size: 14px;
+      padding: 10px 15px !important;
+    }
+  }
+
+  .createProposal {
+    grid-column: 1/4;
+    grid-row: 1;
+    margin-bottom: 15px;
+  }
+    .blockCont {
+      & > div {
+        h3 {
+          font-size: 16px;
+          padding: 10px 15px;
+        }
+      }
+    }
+}
+
 @media only screen and (max-width: 425px) {
   .createProposal {
     text-align: center;

@@ -429,6 +429,7 @@
         // top: 0;
         overflow: scroll;
         height: 100%;
+        padding: 0;
         // min-height: 900px;
 
         &.menuOpen {
@@ -450,6 +451,14 @@
                     float: left;
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebarWrapper.menuOpen {
+        .menuContent {
+            min-height: 800px;
         }
     }
 }
@@ -534,12 +543,7 @@
 
       a {
         padding: 3px 0 3px 30px;
-        color: #c4d7ec !important;
       }
-    }
-
-    ul li:hover a {
-      color: #4f6176 !important;
     }
 
     ul li:hover ul {

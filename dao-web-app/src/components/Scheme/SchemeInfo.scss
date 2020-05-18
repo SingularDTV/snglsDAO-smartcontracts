@@ -65,6 +65,7 @@
         position: relative;
         z-index: 1;
         display: inline-block;
+        
       }
 
       &:before {
@@ -146,6 +147,31 @@
   }
   // top: 50%;
   // transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+
+  .schemeInfoContainer {
+
+    &Table {
+      padding: 10px;
+    }
+
+    .infoCardContent {
+      td, th {
+        & > span {
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    display: inline-block;
+          
+        }
+      }
+    }
+  }
+
 }
 
 @media only screen and (max-width: 425px) {

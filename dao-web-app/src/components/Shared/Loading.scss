@@ -7,3 +7,14 @@
     z-index: 9999;
   }
 }
+
+
+@media (max-width: 992px) {
+    .loading {
+        &.global {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
