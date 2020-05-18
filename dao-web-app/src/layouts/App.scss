@@ -591,7 +591,7 @@ h4 {
       color: white;
       font-size: 13px;
       position: relative;
-      right: 12px;
+      padding-right: 12px;
     }
 
     &.noAccount {
@@ -874,12 +874,16 @@ h4 {
   grid-template-columns: 350px 1fr;
 }
 
+@media (max-width: 1580px) {
+  .header {
+    padding: 0 48px;
+    width: calc(100% - 96px);
+  }
+}
 
 @media (max-width: 1440px) {
 // @media only screen and (max-device-width: 1440px) {
     .header {
-        padding: 0 48px;
-        width: calc(100% - 96px);
         .topInfo {
             & > div {
                 &.navigation {
@@ -1047,6 +1051,10 @@ h4 {
     .header {
         .menuToggle {
             display: block;
+
+            img {
+              display: block;
+            }
         }
 
         .menu {
@@ -1123,8 +1131,29 @@ h4 {
 
     .header {
         height: 64px;
-        padding: 0 20px;
-        width: calc(100% - 40px);
+        padding: 0 15px;
+        width: calc(100% - 30px);
+        grid-gap: 15px;
+
+        .accountInfo {
+          .wallet {
+            right: -8px;
+          }
+        }
+
+        .accountInfoContainer {
+          &:hover {
+            background: none;
+          }
+        }
+    }
+
+    .web3ProviderLogin {
+      button {
+        padding: 0;
+        width: 30px;
+        text-align: center;
+      }
     }
 
     .pageWrapper {

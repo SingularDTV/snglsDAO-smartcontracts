@@ -1117,7 +1117,16 @@ a {
                 grid-template-columns: 1fr;
             }
         }
+
+        h4 {
+          text-align: left;
+        }
     }
+
+  .wrapper {
+    padding: 30px 15px 30px 15px;
+    width: calc(100% - 30px);
+  }
 
     .Membership {
         .MembershipBlock{
@@ -1159,6 +1168,12 @@ a {
                             grid-gap: 0;
                     }
                 }
+
+                button {
+                  &.submit {
+                    padding: 14px 45px;
+                  }
+                }
             }
         }
     }
@@ -1190,11 +1205,6 @@ a {
 
   .memberTable.memberTableHeading {
     display: none;
-  }
-
-  .wrapper {
-    padding: 30px 15px 30px 15px;
-    width: calc(100% - 30px);
   }
 
   .noticeWrapper {

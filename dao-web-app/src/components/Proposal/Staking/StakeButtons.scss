@@ -159,7 +159,7 @@
   display: block;
   width: 100%;
   text-align: center;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
 
   button {
     width: auto;
@@ -168,10 +168,7 @@
     position: relative;
     top: 3px;
     height: auto;
-    padding-left: 5px;
-    padding-right: 6px;
-    padding-top: 5px;
-    padding-bottom: 7px;
+    padding: 5px;
     margin: 0 auto;
     background-color: #0076ff;
     color: white;
