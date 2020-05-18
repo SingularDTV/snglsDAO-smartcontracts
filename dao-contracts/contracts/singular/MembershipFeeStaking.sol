@@ -11,7 +11,7 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 contract MembershipFeeStaking {
     using SafeMath for uint256;
 
-    event Release(address indexed msg.sender, uint256 _amount);
+    event Release(address indexed _beneficiary, uint256 _amount);
     event Lock(address indexed sender, uint256 _amount, uint256 _period);
 
     struct Locker {
@@ -28,7 +28,6 @@ contract MembershipFeeStaking {
 
     /**
      * @dev release function
-     * @param msg.sender the beneficiary for the release
      * @return bool
      */
     function release() public returns (uint256 amount) {
