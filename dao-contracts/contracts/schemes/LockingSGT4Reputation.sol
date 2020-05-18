@@ -30,11 +30,10 @@ contract MembershipFeeStaking {
 
     /**
      * @dev release function
-     * @param _beneficiary the beneficiary for the release
      * @return bool
      */
-    function release(address _beneficiary) public returns (uint256 amount) {
-        Locker storage locker = lockers[_beneficiary];
+    function release() public returns (uint256 amount) {
+        Locker storage locker = lockers[msg.sender];
 
         require(
             locker.amount > 0,
@@ -52,17 +51,17 @@ contract MembershipFeeStaking {
         require(
             Controller(avatar.owner()).burnReputation(
                 amount,
-                _beneficiary,
+                msg.sender,
                 address(avatar)
             ),
             "LockingSGT4Reputation:burn reputation should succeed"
         );
         require(
-            sgtToken.transfer(_beneficiary, amount),
+            sgtToken.transfer(msg.sender, amount),
             "LockingSGT4Reputation: can't transfer tokens to staking address"
         );
 
-        emit Release(_beneficiary, amount);
+        emit Release(msg.sender, amount);
     }
 
     /**
