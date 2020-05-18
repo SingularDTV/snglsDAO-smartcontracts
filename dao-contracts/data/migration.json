@@ -933,21 +933,27 @@
             "arcVersion": "0.0.1-rc.32"
           },
           {
-            "name": "ContinuousLocking4Reputation",
-            "alias": "ContinuousLocking4Reputation",
+            "name": "LockingSGT4Reputation",
+            "alias": "LockingSGT4Reputation",
             "address": "0x718A681EC5ECc2533532e070a65F2172F4c13074",
+            "arcVersion": "0.0.1-rc.32"
+          },
+          {
+            "name": "ContributionReward",
+            "alias": "ContributionReward",
+            "address": "0x5088Fc39c95f3c83C0179B8109d016Cf86aa0979",
             "arcVersion": "0.0.1-rc.32"
           }
         ],
         "StandAloneContracts": [
           {
             "name": "Fee",
-            "address": "0x255bE5A388bcE4733F087f4F8a23a60eFbd49919",
+            "address": "0xD681ED86eBa1b64086BF532e8b88c5bE3b74cb93",
             "arcVersion": "0.0.1-rc.32"
           },
           {
             "name": "MembershipFeeStaking",
-            "address": "0x05dda20E48BCF6c617Af1953Cb54da5c69Ae1D9E",
+            "address": "0x4A20880C5B9f37Eb7A1AB8437A719a4acDfb1372",
             "arcVersion": "0.0.1-rc.32"
           }
         ],

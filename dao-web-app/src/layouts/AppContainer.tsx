@@ -221,6 +221,30 @@ class AppContainer extends React.Component<IProps, IState> {
               containerClassName={css.modalContainer}
               bodyModalClassName={css.modalBody}
             />
+
+          </div>
+
+          <div id="footer" className={css.footer}>
+            <div className={css.footerDescr}>
+              <h4>DISCLAIMER</h4>
+              <p>This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.</p>
+            </div>
+            <div className={css.footerImg}>
+              <img src="/assets/images/foot_img.png" alt=""/>
+            </div>
+            <div className={css.footerLinks}>
+              <div className={css.footerLinksLogo}>
+                <Link to="/"><img src="/assets/images/logo.svg" alt="" /></Link>
+              </div>
+              <div className={css.footerLinksSocials}>
+                <ul>
+                  <li><a href="#"><img src="/assets/images/Icon/icon_git.svg" alt="" /></a></li>
+                  <li><a href="#"><img src="/assets/images/Icon/soc_icon.svg" alt="" /></a></li>
+                  <li><a href="#"><img src="/assets/images/Icon/icon_twitter.svg" alt="" /></a></li>
+                  <li><a href="#"><img src="/assets/images/Icon/icon_medium.svg" alt=""/></a></li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           <div className={css.pendingTransactions}>

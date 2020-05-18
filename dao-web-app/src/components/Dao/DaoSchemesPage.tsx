@@ -8,7 +8,7 @@ import { Page } from "pages";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { RouteComponentProps } from "react-router-dom";
-import * as Sticky from "react-stickynode";
+// import * as Sticky from "react-stickynode";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import * as css from "./DaoSchemesPage.scss";
 import ProposalSchemeCard from "./ProposalSchemeCard";
@@ -80,9 +80,9 @@ class DaoSchemesPage extends React.Component<IProps, null> {
       <div className={css.wrapper}>
         <BreadcrumbsItem to={"/dao/" + dao.address}>{dao.name}</BreadcrumbsItem>
 
-        <Sticky enabled top={50} innerZ={10000}>
-          <h1>All Plugins</h1>
-        </Sticky>
+        {/* <Sticky enabled top={50} innerZ={10000}> */}
+        <h2>Applications</h2>
+        {/* </Sticky> */}
         {(allKnownSchemes.length + unknownSchemes.length) === 0
           ? <div>
             <img src="/assets/images/meditate.svg" />

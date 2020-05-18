@@ -10,7 +10,7 @@ import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { Helmet } from "react-helmet";
 import { Link, Route, RouteComponentProps, Switch } from "react-router-dom";
-import * as Sticky from "react-stickynode";
+// import * as Sticky from "react-stickynode";
 import { showNotification } from "reducers/notifications";
 import { IRootState } from "reducers";
 import { connect } from "react-redux";
@@ -144,7 +144,7 @@ class SchemeContainer extends React.Component<IProps, IState> {
           <meta name="twitter:description" content={daoState.name + " | " + schemeState.name + " proposals | Managed on Alchemy by DAOstack"} />
         </Helmet>
 
-        <Sticky enabled top={50} innerZ={10000}>
+        {/* <Sticky enabled top={50} innerZ={10000}> */}
           <h2 className={css.schemeName}>
             {schemeFriendlyName}
           </h2>
@@ -169,9 +169,8 @@ class SchemeContainer extends React.Component<IProps, IState> {
                 </TrainingTooltip>
                 : ""
             }
-          </div>
 
-          { isProposalScheme ?
+          {isProposalScheme ?
             <div className={css.createProposal}>
               <TrainingTooltip placement="topRight" overlay={"A small amount of ETH is necessary to submit a proposal in order to pay gas costs"}>
                 <a className={
@@ -179,16 +178,23 @@ class SchemeContainer extends React.Component<IProps, IState> {
                     [css.createProposal]: true,
                     [css.disabled]: !isActive,
                   })}
-                data-test-id="createProposal"
-                href="#!"
-                onClick={isActive ? this.handleNewProposal : null}
+                  data-test-id="createProposal"
+                  href="#!"
+                  onClick={isActive ? this.handleNewProposal : null}
                 >
-              + New { `${this.state.crxRewarderProps ? this.state.crxRewarderProps.contractName : schemeFriendlyName } `}Proposal</a>
+                  + New {`${this.state.crxRewarderProps ? this.state.crxRewarderProps.contractName : schemeFriendlyName} `}Proposal</a>
               </TrainingTooltip>
             </div>
             : ""}
-        </Sticky>
 
+
+          </div>
+
+
+        {/* </Sticky> */}
+
+        <div className={css.blockCont}>
+        <div>
         <Switch>
 
           <Route exact path="/dao/scheme/:schemeId/openbounties"
@@ -201,6 +207,8 @@ class SchemeContainer extends React.Component<IProps, IState> {
           }
           <Route path="/dao/scheme/:schemeId" render={isProposalScheme ? this.schemeProposalsPageHtml(isActive) : this.schemeInfoPageHtml} />
         </Switch>
+          </div>
+        </div>
       </div>
     );
   }

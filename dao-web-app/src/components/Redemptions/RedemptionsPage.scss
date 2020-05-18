@@ -16,10 +16,10 @@
 .header {
   padding-top: 30px;
   padding-bottom: 5px;
-  color: rgba(104, 155, 214, 1);
+  color: #fff;
   font-weight: bold;
-  background-color: rgba(229, 235, 242, 1);
-  border-bottom: 1px solid rgba(195, 212, 231, 1);
+  // background-color: rgba(229, 235, 242, 1);
+  // border-bottom: 1px solid rgba(195, 212, 231, 1);
   display: flex;
   width: 100%;
 
@@ -76,14 +76,16 @@
 
   h2 {
     line-height: 55px;
+    padding: 20px 0;
     font-size: 45px;
-    color: rgba(104, 155, 214, 1);
+    color: #fff;
   }
 
   p {
-    color: $gray-1;
+    // color: $gray-1;
     font-size: 21px;
-    font-family: "AccordBold", sans-serif;
+    // font-family: "AccordBold", sans-serif;
+    color: #D8D8D8;
     max-width: 602px;
     margin: 0 auto;
   }
@@ -109,11 +111,33 @@
   }
 }
 
+@media (max-width: 768px) {
+  .empty {
+    h2 {
+      font-size: 30px;
+    }
+  }
+}
+
 @media only screen and (max-width: 425px) {
   .wrapper {
     width: auto;
     padding: 0;
     text-align: center;
+    padding: 0 30px;
+  }
+
+  .empty {
+    padding: 50px 0;
+
+    h2 {
+      padding: 10px 0;
+    }
+    p {
+      font-size: 16px;
+      font-family: Montserrat;
+      line-height: 25px;
+    }
   }
 
   .header {

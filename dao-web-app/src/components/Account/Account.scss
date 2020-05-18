@@ -2,6 +2,10 @@
   text-align: right;
 }
 
+.setupProfile {
+  color: #fff;
+}
+
 a.historyView {
   display: inline-block;
   color: #506176;
@@ -64,43 +68,85 @@ a.detailView {
     left: 50%;
     top: -150px;
     padding: 40px 0 0 0;
-    width: 190px;
+    width: 360px;
     font-size: $caption;
     color: $black;
     z-index: 0;
     transform: translateX(-50%) scale(0);
     background-color: $white;
-    border-radius: 3px;
+    border-radius: 10px;
     transition: all 0.25s ease;
-    box-shadow: $shadow-3;
+    // box-shadow: $shadow-3;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
     text-align: center;
+        overflow: hidden;
+
+      .socials {
+        line-height: normal; 
+        padding-bottom: 20px;
+      }
 
     .name {
       font-size: 14px;
+      padding-bottom: 10px;
+
+      a {
+          font-family: Montserrat;
+          font-weight: 500;
+          font-size: 26px;
+          line-height: 36px;
+          text-align: center;
+          letter-spacing: 1px;
+          color: #020A28;
+      }
+    }
+
+    .button {
+      padding: 20px 0;
+      text-align: center;
+
+      button {
+        display: inline-block;
+      }
     }
 
     .beneficiaryAddress {
       overflow: hidden;
-      width: 140px;
-      padding: 10px 30px 5px 10px;
+      width: calc(100% - 60px);
+      padding: 10px 30px;
       position: relative;
       text-align: left;
-      border-radius: 3px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: #010B2B;
+      color: #fff;
+
+      & > div {
+        display: grid;
+        margin: 0 auto;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        grid-gap: 15px;
+        max-width: 253px;
+      }
 
       span {
         display: inline-block;
-        width: 115px;
-        padding-left: 10px;
+        width: 199px;
+        // padding-left: 10px;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
       }
 
       button {
-        position: absolute;
-        top: 0;
-        right: 0;
+        // position: absolute;
+        // top: 0;
+        // right: 0;
         border: none;
         outline: none;
         background-color: transparent;
@@ -120,13 +166,23 @@ a.detailView {
 
     .holdings {
       padding: 20px 0;
-      margin-top: 10px;
+      // margin-top: 10px;
       text-align: center;
       background-color: rgba(242, 242, 242, 1);
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      color: #2C2C2C;
+      font-family: TransatMedium;
 
       & > span {
-        font-size: $small;
+        // font-size: $small;
         color: $black-halftone;
+        padding-right: 20px;
+      }
+
+      & > div {
+        display: inline-block;
       }
     }
 
@@ -180,6 +236,30 @@ a.accountName {
 .profileData {
   flex-grow: 2;
   color: #fff;
+
+  div {
+    display: inline-block;
+  }
+}
+
+.profileDescription {
+  color: #fff;
+  font-family: Montserrat;
+  margin-bottom: 25px;
+
+  label {
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  div {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
 }
 
 .profileContainer {
@@ -233,8 +313,13 @@ a.accountName {
         font-size: 14px;
         line-height: 18px;
         font-family: 'Montserrat', sans-serif;
-        padding: 14px 33px;
+        padding: 18px 42px;
         text-transform: uppercase;
+        transition: 0.1s all;
+
+        &:hover {
+          box-shadow: none;
+        }
       }
     }
   }
@@ -251,13 +336,16 @@ a.accountName {
   .profileDataContainer {
     width: 100%;
     display: flex;
+    align-items: center;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 32px;
+    margin-bottom: 20px;
 
     label {
-      font-weight: normal;
-      font-size: 12px;
-      opacity: 0.7;
-      margin-bottom: 5px;
-      display: block;
+      padding-right: 10px;
     }
 
     .charLimit {
@@ -302,6 +390,7 @@ a.accountName {
     .copyButton {
       border: none;
       vertical-align: middle;
+      background: none;
     }
 
     p {

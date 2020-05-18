@@ -1,37 +1,40 @@
 .schemeContainer {
-  padding-bottom: 150px;
+  // padding-bottom: 50px;
   position: relative;
 }
 
 .schemeName {
   font-size: 28px;
-  color: #689ad6;
+  color: #fff;
   padding: 0;
   margin: 0;
   padding-bottom: 15px;
-  background-color: #e5ebf2;
-  padding-top: 10px;
+  // background-color: #e5ebf2;
+  // padding-top: 10px;
 }
 
 .createProposal {
   z-index: 100;
-  width: 100%;
+  // width: 100%;
   text-align: right;
 
   a {
-    padding: 8px 15px;
-    color: $white;
-    background-color: rgba(3, 118, 255, 1);
-    border-radius: 15px;
-    height: 30px;
+    padding: 6px 15px;
+    font-family: Montserrat !important;
+    font-weight: 400 !important;
+    color: #D40D26 !important;
+    letter-spacing: 1.2px;
+    background: #FFFFFF;
+    border-radius: 30px;
+    // height: 30px;
     line-height: 30px;
-    font-size: 13px;
+    font-size: 13px !important;
     white-space: nowrap;
 
-    &:hover {
-      background-color: $accent-1;
-      color: $white;
-    }
+    // &:hover {
+    //   background-color: $accent-1;
+    //   color: $white;
+    // }
 
     &.disabled,
     &.disabled:hover {
@@ -42,52 +45,121 @@
   }
 }
 
+
+
+.blockCont {
+  line-height: normal;
+  position: relative;
+  // padding: 20px 40px;
+
+  & > div {
+    position: relative;
+
+
+    h3 {
+      background: rgba(196, 196, 196, 0.1);
+      font-family: TransatStandard;
+      font-size: 32px;
+      line-height: 42px;
+      letter-spacing: 0.02em;
+      padding: 20px 35px;
+    }
+
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 0.8;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+    backdrop-filter: blur(40px);
+  }
+}
+
+
 .schemeMenu {
+  color: #fff;
   width: 100%;
-  background-color: rgba(229, 235, 242, 1);
-  border-bottom: 1px solid rgba(212, 220, 228, 1);
+  // background-color: rgba(229, 235, 242, 1);
+  // border-bottom: 1px solid rgba(212, 220, 228, 1);
   padding-top: 15px;
   position: relative;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
+
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
 
   a {
-    color: rgba(0, 29, 53, 1);
+    color: #ffffff52;
     display: inline-block;
     font-size: 16px;
     transition: all 0.25s ease;
+
+    font-family: TransatBold;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
-  a:visited {
-    color: rgba(0, 29, 53, 1);
-  }
+  // a:visited {
+  //   color: rgba(0, 29, 53, 1);
+  // }
 
   .createProposal a:visited,
   a.createProposal {
-    color: white;
+    // color: white;
+    color: #D40D26;
   }
 
   .proposals,
   .info,
   .crx,
   .openbounty {
-    border-bottom: 2px solid rgba(34, 128, 254, 0);
+    // border-bottom: 2px solid rgba(34, 128, 254, 0);
     /* TODO: for .crx this left/right padding may not be appropriate for all CrX rewarder contracts. */
-    padding: 10px 24px;
+    padding: 20px 40px;
   }
 
   .proposals.active,
   .info.active,
   .crx.active,
   .openbounty.active {
-    border-bottom: 2px solid rgba(34, 128, 254, 1);
+    // border-bottom: 2px solid rgba(34, 128, 254, 1);
+    position: relative;
+    color: #fff;
+
+    &::before {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      opacity: 0.8;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 0;
+      box-sizing: border-box;
+      backdrop-filter: blur(40px);
+      z-index: -1;
+    }
   }
 
-  .proposals:hover,
-  .info:hover,
-  .crx:hover,
-  .openbounty:hover {
-    border-bottom: 2px solid rgba(34, 128, 254, 0.5);
-  }
+  // .proposals:hover,
+  // .info:hover,
+  // .crx:hover,
+  // .openbounty:hover {
+  //   border-bottom: 2px solid rgba(34, 128, 254, 0.5);
+  // }
 }
 
 .schemeRedemptionContainer {
@@ -178,6 +250,29 @@
       margin-right: 5px;
     }
   }
+}
+
+@media (max-width: 768px) {
+  .schemeMenu {
+    a {
+      font-size: 14px;
+      padding: 10px 15px !important;
+    }
+  }
+
+  .createProposal {
+    grid-column: 1/4;
+    grid-row: 1;
+    margin-bottom: 15px;
+  }
+    .blockCont {
+      & > div {
+        h3 {
+          font-size: 16px;
+          padding: 10px 15px;
+        }
+      }
+    }
 }
 
 @media only screen and (max-width: 425px) {

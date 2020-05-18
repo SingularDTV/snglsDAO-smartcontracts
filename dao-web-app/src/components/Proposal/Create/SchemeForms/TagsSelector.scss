@@ -49,8 +49,22 @@
       cursor: pointer;
   }
   div.darkTheme .ReactTags__selected span.ReactTags__tag {
-    border: 1px solid #bfcbd5;
+    // border: 1px solid #bfcbd5;
     background-color: transparent;
+
+
+border: 1px solid #c4c4c450;
+box-sizing: border-box;
+border-radius: 100px;
+color: #ffffff50;
+font-family: TransatStandard;
+font-weight: 500;
+font-size: 14px;
+// line-height: 32px;
+    padding: 6px 15px;
+display: inline-block;
+font-family: TransatLight;
+
   }
 
   div.ReactTags__suggestions li .count {

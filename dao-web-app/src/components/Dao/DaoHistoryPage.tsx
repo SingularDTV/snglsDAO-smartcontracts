@@ -9,7 +9,7 @@ import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as InfiniteScroll from "react-infinite-scroll-component";
 import { Link, RouteComponentProps } from "react-router-dom";
-import * as Sticky from "react-stickynode";
+// import * as Sticky from "react-stickynode";
 import { first } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
@@ -49,13 +49,13 @@ class DaoHistoryPage extends React.Component<IProps, null> {
 
     return(
       <div>
-        <BreadcrumbsItem to={"/dao/" + "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d" + "/history"}>History</BreadcrumbsItem>
+        <BreadcrumbsItem to={"/dao/history"}>History</BreadcrumbsItem>
 
-        <Sticky enabled top={50} innerZ={10000}>
+        {/* <Sticky enabled top={50} innerZ={10000}> */}
           <div className={css.daoHistoryHeader}>
             History
           </div>
-        </Sticky>
+        {/* </Sticky> */}
 
         <InfiniteScroll
           dataLength={proposals.length} //This is important field to render the next data
@@ -124,7 +124,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${dao.id}"
+            dao: "${"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",

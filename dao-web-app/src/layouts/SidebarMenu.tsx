@@ -18,6 +18,7 @@ import { first } from "rxjs/operators";
 import { IRootState } from "reducers";
 import { connect } from "react-redux";
 import { combineLatest, of, from } from "rxjs";
+// import * as Sticky from "react-stickynode";
 
 import Tooltip from "rc-tooltip";
 import * as css from "./SidebarMenu.scss";
@@ -121,6 +122,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
           }
         </div>
         <div className={css.followButton}><FollowButton id={dao.address} type="daos" style="default" /></div> */}
+
+
+        {/* <Sticky enabled={true} top={113} bottomBoundary={280} innerZ={10000}> */}
+
         <div className={css.daoNavigation}>
           <span className={css.daoNavHeading}><b>Menu</b></span>
           <ul>
@@ -224,6 +229,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             </li>
           </ul>
         </div>
+
+        
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
             <b>DAO Treasury</b>
@@ -270,6 +277,9 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             })}
           </ul>
         </div>
+
+        {/* </Sticky> */}
+
       </div>
     );
   }
@@ -294,7 +304,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             <ul>
               <li><Link to="/" onClick={this.handleCloseMenu}>Home</Link></li>
               <li>
-                <a>$ Buy GEN</a>
+                <a>$ Buy SNGLS</a>
                 <ul>
                   <div className={css.diamond}></div>
                   {
@@ -311,10 +321,19 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   }
                 </ul>
               </li>
+              <li>
+                <a>$ Buy SGT</a>
+                <ul>
+                  <div className={css.diamond}></div>
+                  {
+                    "  Comming soon!"
+                  }
+                </ul>
+              </li>
               <li><Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</Link></li>
               <li className={css.daoStack}>
                 <a className="externalLink" href="https://snglsdao.io/" target="_blank" rel="noopener noreferrer">
-                  <img src={"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d" ? "/assets/images/Icon/dao-logo.svg" : "/assets/images/Icon/dao-logo-gray.svg"} /> Singularity DAO
+                  <img src={"/assets/images/yoga.svg"} /> snglsDAO
                 </a>
               </li>
             </ul>

@@ -15,7 +15,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: $shadow-3;
-  height: calc(100% - 100px);
+  // height: calc(100% - 100px);
+  z-index: 99999;
 
   .header {
     background-color: $navy;
@@ -24,7 +25,9 @@
     margin: 0;
     padding: 0;
     color: $white;
+    font-size: 24px;
     height: 40px;
+    line-height: normal;
     opacity: 1;
     font-family: $body-font;
     font-weight: $normal;

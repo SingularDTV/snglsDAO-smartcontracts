@@ -1,5 +1,5 @@
 .wrapper {
-  display: inline-block;
+  // display: inline-block;
   position: relative;
   z-index: 0;
 }
@@ -163,16 +163,16 @@
 }
 
 .votingDisabled {
-  font-size: 11px;
-  color: $gray-1;
+  // font-size: 11px;
+  // color: $gray-1;
   padding-top: 0px;
   position: relative;
-  text-align: center;
+  // text-align: center;
 }
 
 .detailView .votingDisabled {
   top: 0;
-  padding-top: 7px;
+  // padding-top: 7px;
 }
 
 button.disabled {

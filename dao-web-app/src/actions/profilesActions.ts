@@ -38,7 +38,7 @@ export function getProfile(accountAddress: string, currentAccount = false) {
       if (profile) {
         profile.ethereumAccountAddress = accountAddress;
         profile.socialURLs = await Box.getVerifiedAccounts(profile);
-        const space = await Box.getSpace(accountAddress, "DAOstack");
+        const space = await Box.getSpace(accountAddress, "snglsDAO");
         await space.syncDone;
 
         if (space.follows) {
@@ -180,7 +180,7 @@ export function toggleFollow(accountAddress: string, type: FollowType, id: strin
       if (state.profiles.threeBoxSpace) {
         threeBoxSpace = state.profiles.threeBoxSpace;
       } else {
-        threeBoxSpace = await threeBox.openSpace("DAOstack") ;
+        threeBoxSpace = await threeBox.openSpace("snglsDAO") ;
       }
       await threeBoxSpace.syncDone;
     } catch (e) {
