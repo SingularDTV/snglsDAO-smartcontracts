@@ -39,8 +39,8 @@ button.disabled {
     h2 {
       display: inline-block;
       padding-right: 27px;
-      font-size: 50px;
-      line-height: 60px;
+      // font-size: 50px;
+      // line-height: 60px;
       margin: 0;
     }
 
@@ -482,10 +482,58 @@ button.disabled {
   }
 }
 
-@media only screen and (max-width: 425px) {
+@media (max-width: 768px) {
+  .wrapperTitle {
+    margin-bottom: 10px;
+  }
   .proposal {
     display: block;
+
+    &Actions {
+      max-width: calc(100% - 40px);
+    }
+
+    &TitleTop {
+      padding: 15px;
+    }
+
+    &Info {
+      &Cont {
+        padding: 15px 0;
+      }
+    }
+
+    &SummaryContainer {
+      left: -15px;
+    }
   }
+
+  .proposalActions {
+    width: calc(100% - 40px);
+  }
+
+  .buttonBar {
+    button {
+      &.shareButton {
+        line-height: normal;
+        margin-right: 10px;
+      }
+    }
+    .followButton {
+      margin: 10px 0 0 0;
+    }
+  }
+
+  .statusTitle {
+    padding: 15px 20px;
+    h3 {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+}
+
+@media only screen and (max-width: 425px) {
 
   .proposalInfo {
 	  padding: 15px;
@@ -497,7 +545,7 @@ button.disabled {
   }
 
   .voteBox {
-    margin: 0 0 0 0;
+    margin: 0 0 20px 0;
     border-radius: 0;
   }
 
