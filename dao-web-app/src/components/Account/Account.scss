@@ -288,11 +288,13 @@ a.accountName {
       content: '';
       height: 100%;
       width: 100%;
-      background: rgba(255, 255, 255, 0.05);
+      // background: rgba(255, 255, 255, 0.05);
       opacity: 0.8;
       border: 1px solid rgba(255, 255, 255, 0.05);
       box-sizing: border-box;
-      backdrop-filter: blur(40px);
+      // backdrop-filter: blur(40px);
+      background: url(/assets/images/bg_blur.png) repeat;
+      background-size: cover;
     }
   }
 
@@ -445,6 +447,16 @@ a.accountName {
   position: relative;
   padding-bottom: 20px;
   width: 100%;
+  color: #fff;
+
+  h3 {
+    padding-bottom: 20px;
+  }
+
+  a {
+    color: #fff;
+    padding: 3px 0;
+  }
 }
 
 .socialButtonAuthenticated {
@@ -476,6 +488,7 @@ input {
   border: none;
   font-size: 14px;
   padding: 0 15px;
+  outline: none;
   // margin-right: 45px;
   // margin-top: 30px;
 
