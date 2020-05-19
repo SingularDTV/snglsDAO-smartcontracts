@@ -264,7 +264,7 @@ class Header extends React.Component<IProps, null> {
                     </div>
                     <div className={css.copyAddress} style={{cursor: "pointer"}} onClick={this.copyAddress}>
                       <span>{currentAccountAddress ? currentAccountAddress.slice(0, 40) : "No account known"}</span>
-                      <img src="/assets/images/Icon/Copy-blue.svg"/>
+                      <img src="/assets/images/Icon/Copy-gray.svg"/>
                     </div>
                     <div className={css.fullProfile}>
                       <Link className={css.profileLink} to={"/profile/" + currentAccountAddress + (daoAvatarAddress ? "?daoAvatarAddress=" + daoAvatarAddress : "")}>

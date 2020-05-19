@@ -256,8 +256,9 @@ a.accountName {
   }
 
   div {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 20px;
+    padding-top: 7px;
   }
 
 }
@@ -403,10 +404,18 @@ a.accountName {
   input,
   textarea {
     display: block;
-    border: 1px solid #d0d9e1;
+    border: 1px solid #ffffff0d;
     padding: 15px;
     width: 95%;
     font-size: 14px;
+    background: #ffffff0a;
+    color: #fff;
+    font-family: "Open Sans";
+    outline: none;
+
+    &::placeholder {
+      color: #ffffff4d;
+    }
   }
 
   .socialButton {
@@ -467,8 +476,8 @@ input {
   border: none;
   font-size: 14px;
   padding: 0 15px;
-  margin-right: 45px;
-  margin-top: 30px;
+  // margin-right: 45px;
+  // margin-top: 30px;
 
   &:hover {
     cursor: pointer;
@@ -513,7 +522,61 @@ input {
   }
 }
 
+@media (max-width: 768px) {
+    .targetAccount:hover {
+    .avatar {
+        width: 80px;
+        height: 80px;
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    .accountInfo {
+        opacity: 1;
+        top: 0px;
+        transform: translateX(-5%) scale(1);
+        width: 260px;
+        padding-top: 20px;
+
+        .name {
+            a {
+                font-size: 16px;
+                font-weight: 800;
+            }
+        }
+
+        .beneficiaryAddress {
+
+            & > div {
+                max-width: 183px;
+            }
+            span {
+                width: 140px;
+                font-weight: 300;
+                text-transform: none;
+            }
+        }
+
+        .button {
+            button {
+                padding: 7px 45px;
+            }
+        }
+
+        .holdings {
+            font-size: 16px;
+        }
+    }
+    }
+}
+
 @media only screen and (max-width: 425px) {
+    .targetAccount {
+        width: 12px !important;
+    }
   .profileWrapper {
     display: block;
   }
