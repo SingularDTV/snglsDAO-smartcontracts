@@ -560,19 +560,23 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                   </div>
                 </div> */}
 
+
+
                 <div className={css.reward}>
-                  <label htmlFor="nativeTokenRewardInput">
-                    DAO token ({dao.tokenSymbol}) Reward to split
-                    <ErrorMessage name="nativeTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
-                  </label>
-                  <Field
-                    id="nativeTokenRewardInput"
-                    maxLength={10}
-                    placeholder="How many tokens to reward"
-                    name="nativeTokenReward"
-                    type="number"
-                    className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
-                  />
+                  <div className={css.newInput}>
+                    <label htmlFor="nativeTokenRewardInput">
+                      DAO token ({dao.tokenSymbol}) Reward to split
+                      <ErrorMessage name="nativeTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
+                    </label>
+                    <Field
+                      id="nativeTokenRewardInput"
+                      maxLength={10}
+                      placeholder="How many tokens to reward"
+                      name="nativeTokenReward"
+                      type="number"
+                      className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
+                    />
+                  </div>
                 </div>
               </div>
 
