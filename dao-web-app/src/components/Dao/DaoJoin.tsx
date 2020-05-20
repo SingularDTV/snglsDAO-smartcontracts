@@ -206,10 +206,10 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
     return (
       <div className={css.createProposalWrapper}>
       {/* <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem> */}
-      <h2 className={css.header}>
-        <span>+ New proposal <b>| {"schemeTitle"}</b></span>
-        <button className={css.closeButton} aria-label="Close Create Proposal Modal" /* onClick={this.handleClose} */ >&times;</button>
-      </h2>
+      <div className={css.header}>
+        <h2><span>+ New proposal <b>| {"schemeTitle"}</b></span></h2>
+        <button className={css.closeButton} aria-label="Close Create Proposal Modal" /* onClick={this.handleClose} */ ><img src="/assets/images/close.svg" alt=""/></button>
+      </div>
       <div className={css.contributionReward}>
         <Formik
           // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -358,9 +358,14 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
             setFieldValue,
           }: FormikProps<IFormValues>) =>
             <Form noValidate>
+              <div className={css.subhead}>
               <label className={css.description}>What to Expect</label>
               <div className={css.description}>This competition proposal can distribute funds, mint new DAO tokens, or assign Reputation. Additionally, you may determine how many winners are rewarded, as well as their proportional distribution.
                   Each proposal may specify one of each action, e.g. &quot;3 ETH and 100 Reputation in total rewards, 3 total winners, 50/25/25% reward distribution&quot;.</div>
+              </div>
+
+              <div className={css.content}>
+
 
               <TrainingTooltip overlay="The title is the header of the proposal card and will be the first visible information about your proposal" placement="right">
                 <label htmlFor="titleInput">
@@ -639,6 +644,9 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                   </button>
                 </TrainingTooltip>
               </div>
+
+            </div>
+
             </Form>
           }
         />
