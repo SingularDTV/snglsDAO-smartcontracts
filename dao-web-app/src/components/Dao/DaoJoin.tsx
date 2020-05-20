@@ -163,7 +163,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
     }
     // Parameters to be passed to client
     const proposalOptions: IProposalCreateOptionsCompetition  = {
-      dao: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d",
+      dao: "0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB",
       description: values.description,
       endTime: values.compEndTimeInput.toDate(),
       ethReward: toWei(Number(values.ethReward)),
@@ -666,7 +666,7 @@ const SubscribedCreateContributionRewardExProposal = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    return arc.dao("0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d").state();
+    return arc.dao("0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB").state();
   },
 });
 
