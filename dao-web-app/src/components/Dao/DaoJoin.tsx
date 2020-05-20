@@ -367,6 +367,37 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
               <div className={css.content}>
 
 
+              <div className={css.newInput}>
+                  <div className={css.reward}>
+                    <label htmlFor="ethRewardInput">Name</label>
+                    <Field
+                      id="ethRewardInput"
+                      placeholder={`How much ${baseTokenName()} to reward`}
+                      name="ethReward"
+                      type="number"
+                      className={touched.ethReward && errors.ethReward ? css.error : null}
+                      min={0}
+                      step={0.1}
+                    />
+                  </div>
+              </div>
+
+              <div className={css.newInputTwo}>
+                  <div className={css.reward}>
+                    <label htmlFor="ethRewardInput">Name</label>
+                    <Field
+                      id="ethRewardInput"
+                      placeholder={`How much ${baseTokenName()} to reward`}
+                      name="ethReward"
+                      type="number"
+                      className={touched.ethReward && errors.ethReward ? css.error : null}
+                      min={0}
+                      step={0.1}
+                    />
+                  </div>
+              </div>
+
+
               <TrainingTooltip overlay="The title is the header of the proposal card and will be the first visible information about your proposal" placement="right">
                 <label htmlFor="titleInput">
                   <div className={css.requiredMarker}>*</div>
@@ -635,14 +666,18 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                 <span className={css.errorMessage + " " + css.someReward}><br/> {errors.rewards}</span>
               }
               <div className={css.createProposalActions}>
-                <button className={css.exitProposalCreation} type="button" onClick={handleClose}>
-                  Cancel
-                </button>
+                <div>
                 <TrainingTooltip overlay="Once the proposal is submitted it cannot be edited or deleted" placement="top">
                   <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
                   Submit proposal
                   </button>
                 </TrainingTooltip>
+                </div>
+                <div>
+                  <button className={css.exitProposalCreation} type="button" onClick={handleClose}>
+                    Cancel
+                  </button>
+                </div>
               </div>
 
             </div>
