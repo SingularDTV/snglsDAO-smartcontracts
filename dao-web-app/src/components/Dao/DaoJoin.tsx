@@ -3,17 +3,17 @@ import * as arcActions from "../../actions/arcActions";
 import { enableWalletProvider, getArc } from "../../arc";
 import withSubscription, { ISubscriptionProps } from "../../components/Shared/withSubscription";
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
-import { baseTokenName, supportedTokens, toBaseUnit, tokenDetails, toWei, isValidUrl, getLocalTimezone } from "lib/util";
+import { /* baseTokenName, supportedTokens, */ toBaseUnit, tokenDetails, toWei, isValidUrl/*, getLocalTimezone */ } from "lib/util";
 import * as React from "react";
 import { connect } from "react-redux";
 import Select from "react-select";
 import { showNotification } from "../../reducers/notifications";
-import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
+// import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "../../components/Shared/TrainingTooltip";
 import * as css from "./DaoJoin.scss";
-import MarkdownField from "../../components/Proposal/Create/SchemeForms/MarkdownField";
+// import MarkdownField from "../../components/Proposal/Create/SchemeForms/MarkdownField";
 import { checkTotalPercent } from "../../lib/util";
-import * as Datetime from "react-datetime";
+// import * as Datetime from "react-datetime";
 
 import moment = require("moment");
 import BN = require("bn.js");
@@ -78,22 +78,22 @@ const customStyles = {
   }),
 };
 
-const CustomDateInput: React.SFC<any> = ({ field, form }) => {
-  const onChange = (date: moment.Moment) => {
-    form.setFieldValue(field.name, date);
-    return true;
-  };
+// const CustomDateInput: React.SFC<any> = ({ field, form }) => {
+//   const onChange = (date: moment.Moment) => {
+//     form.setFieldValue(field.name, date);
+//     return true;
+//   };
 
-  return <Datetime
-    value={field.value}
-    onChange={onChange}
-    dateFormat="MMMM D, YYYY"
-    timeFormat="HH:mm"
-    viewDate={moment()}
-    // used by tests
-    inputProps={{ name: field.name }}
-  />;
-};
+//   return <Datetime
+//     value={field.value}
+//     onChange={onChange}
+//     dateFormat="MMMM D, YYYY"
+//     timeFormat="HH:mm"
+//     viewDate={moment()}
+//     // used by tests
+//     inputProps={{ name: field.name }}
+//   />;
+// };
 
 export const SelectField: React.SFC<any> = ({options, field, form, _value }) => {
   // value={options ? options.find((option: any) => option.value === field.value) : ""}
@@ -186,11 +186,11 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
     this.props.handleClose();
   }
 
-  private onTagsChange = (tags: string[]): void => {
-    this.setState({tags});
-  }
+  // private onTagsChange = (tags: string[]): void => {
+  //   this.setState({tags});
+  // }
 
-  private fnDescription = (<span>Short description of the proposal.<ul><li>What are you proposing to do?</li><li>Why is it important?</li><li>How much will it cost the DAO?</li><li>When do you plan to deliver the work?</li></ul></span>);
+  // private fnDescription = (<span>Short description of the proposal.<ul><li>What are you proposing to do?</li><li>Why is it important?</li><li>How much will it cost the DAO?</li><li>When do you plan to deliver the work?</li></ul></span>);
 
   public render(): RenderOutput {
     const { data, handleClose } = this.props;
@@ -200,7 +200,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
     }
     const dao = data;
     const arc = getArc();
-    const localTimezone = getLocalTimezone();
+    // const localTimezone = getLocalTimezone();
     const now = moment();
 
     return (
@@ -367,7 +367,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
               <div className={css.content}>
 
 
-              <TrainingTooltip overlay="The title is the header of the proposal card and will be the first visible information about your proposal" placement="right">
+              {/* <TrainingTooltip overlay="The title is the header of the proposal card and will be the first visible information about your proposal" placement="right">
                 <label htmlFor="titleInput">
                   <div className={css.requiredMarker}>*</div>
                   Title
@@ -382,9 +382,9 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                 name="title"
                 type="text"
                 className={touched.title && errors.title ? css.error : null}
-              />
+              /> */}
 
-              <TrainingTooltip overlay={this.fnDescription} placement="right">
+              {/* <TrainingTooltip overlay={this.fnDescription} placement="right">
                 <label htmlFor="descriptionInput">
                   <div className={css.requiredMarker}>*</div>
                   Description
@@ -398,9 +398,9 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                 id="descriptionInput"
                 placeholder="Describe your proposal in greater detail"
                 name="description"
-              />
+              /> */}
 
-              <TrainingTooltip overlay="Add some tags to give context about your proposal e.g. idea, signal, bounty, research, etc" placement="right">
+              {/* <TrainingTooltip overlay="Add some tags to give context about your proposal e.g. idea, signal, bounty, research, etc" placement="right">
                 <label className={css.tagSelectorLabel}>
                 Tags
                 </label>
@@ -408,9 +408,9 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
 
               <div className={css.tagSelectorContainer}>
                 <TagsSelector onChange={this.onTagsChange}></TagsSelector>
-              </div>
+              </div> */}
 
-              <TrainingTooltip overlay="Link to the fully detailed description of your proposal" placement="right">
+              {/* <TrainingTooltip overlay="Link to the fully detailed description of your proposal" placement="right">
                 <label htmlFor="urlInput">
                 URL
                   <ErrorMessage name="url">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
@@ -423,9 +423,9 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                 name="url"
                 type="text"
                 className={touched.url && errors.url ? css.error : null}
-              />
+              /> */}
 
-              <div>
+              {/* <div>
                 <TrainingTooltip overlay="The anticipated number of winning Submissions for this competition" placement="right">
                   <label htmlFor="numWinnersInput">
                     <div className={css.requiredMarker}>*</div>
@@ -442,9 +442,9 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                   type="number"
                   className={touched.numWinners && errors.numWinners ? css.error : null}
                 />
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <TrainingTooltip overlay="Percentage distribution of rewards to beneficiaries" placement="right">
                   <label htmlFor="rewardSplitInput">
                   Winner reward distribution (%)
@@ -460,9 +460,9 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                   type="number[]"
                   className={touched.rewardSplit && errors.rewardSplit ? css.error : null}
                 />
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <TrainingTooltip overlay="Number of Submissions for which each member can vote" placement="right">
                   <label htmlFor="numVotesInput">
                     <div className={css.requiredMarker}>*</div>
@@ -479,9 +479,9 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                   type="number"
                   className={touched.numberOfVotesPerVoter && errors.numberOfVotesPerVoter ? css.error : null}
                 />
-              </div>
+              </div> */}
 
-              <div className={css.proposerIsAdminCheckbox}>
+              {/* <div className={css.proposerIsAdminCheckbox}>
                 <TrainingTooltip overlay="You are the only account that will be able to create submissions" placement="right">
                   <label htmlFor="proposerIsAdmin">
                     <div className={css.requiredMarker}>*</div>
@@ -495,10 +495,10 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                   type="checkbox"
                   className={touched.proposerIsAdmin && errors.proposerIsAdmin ? css.error : null}
                 />
-              </div>
+              </div> */}
 
               <div className={css.rewards}>
-                <div className={css.reward}>
+                {/* <div className={css.reward}>
                   <label htmlFor="ethRewardInput">
                     {baseTokenName()} Reward to split
                     <ErrorMessage name="ethReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
@@ -558,7 +558,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <div className={css.reward}>
                   <label htmlFor="nativeTokenRewardInput">
@@ -576,7 +576,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                 </div>
               </div>
 
-              <div className={css.dates}>
+              {/* <div className={css.dates}>
                 <div className={css.date}>
                   <label htmlFor="compStartTimeInput">
                     <div className={css.requiredMarker}>*</div>
@@ -626,9 +626,9 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                     name="compEndTimeInput"
                     component={CustomDateInput}
                     className={touched.compEndTimeInput && errors.compEndTimeInput ? css.error : null}
-                  />
-                </div>
-              </div>
+              />
+                </div> 
+              </div> */}
 
               {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)
                     && touched.reputationReward && errors.rewards &&
