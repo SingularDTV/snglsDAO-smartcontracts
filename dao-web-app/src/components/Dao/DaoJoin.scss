@@ -167,53 +167,7 @@
             }
         }
 
-        .newInput {
-          & > div {
-                display: grid;
-                grid-template-columns: 120px 1fr;
-                border: 1px solid rgba(43, 43, 43, 0.95);
-                align-items: center;
-                background: #E6E7EA;
-                margin-bottom: 20px;
-
-                label {
-                    background: #E6E7EA;
-                    border-right: 1px solid rgba(43, 43, 43, 0.95);
-                    padding: 0 45px;
-                    color: #2C2C2C;
-                    font-weight: bold;
-                    font-size: 18px;
-                    line-height: 28px;
-                    font-family: Montserrat;
-                    display: grid;
-                    height: 100%;
-                    align-items: center;
-                }
-
-                input {
-                    // color: #D40D26;
-                    text-transform: uppercase;
-                    font-family: Montserrat;
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 32px;
-                    line-height: 54px;
-                    padding: 30px 45px;
-                    background: #fff;
-                    border: 0;
-                    width: 100%;
-                    box-sizing: border-box;
-                    margin: 0;
-                }
-          }
-        }
-
-
-
-
-
-      .newInputTwo {
-          & > div {
+      .newInput {
                 display: grid;
                 align-items: center;
                 margin-bottom: 20px;
@@ -248,7 +202,6 @@
                     box-sizing: border-box;
                     margin: 0;
                 }
-          }
         }
 
 
@@ -440,10 +393,10 @@
     }
 
     .rewards {
-      display: grid;
-      grid-column-gap: 12px;
-      grid-row-gap: 0;
-      grid-template-columns: 1fr 1fr;
+      // display: grid;
+      // grid-column-gap: 12px;
+      // grid-row-gap: 0;
+      // grid-template-columns: 1fr 1fr;
       align-items: end;
 
       .reward {
@@ -631,10 +584,13 @@
     padding: 0 25px 2px 25px;
     font-family: $body-font;
     transition: all 0.25s ease;
-    border: none;
+    border: 1px solid;
     // background-color: rgba(225, 235, 247, 1);
     border-radius: 15px;
     color: #8a8a8a;
+    background: none;
+    border-color: #f0f0f0;
+    outline: none;
   }
 
   .submitProposal {
@@ -657,7 +613,7 @@
     background: #fff;
     color: #4E5469;
     outline: none;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 
 
     &:hover {
@@ -698,6 +654,7 @@
     text-align: center;
     margin-top: 20px;
     display: grid;
+    grid-gap: 20px;
   }
 }
 
