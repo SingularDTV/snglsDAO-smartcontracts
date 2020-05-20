@@ -635,14 +635,18 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                 <span className={css.errorMessage + " " + css.someReward}><br/> {errors.rewards}</span>
               }
               <div className={css.createProposalActions}>
-                <button className={css.exitProposalCreation} type="button" onClick={handleClose}>
-                  Cancel
-                </button>
+                <div>
                 <TrainingTooltip overlay="Once the proposal is submitted it cannot be edited or deleted" placement="top">
                   <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
                   Submit proposal
                   </button>
                 </TrainingTooltip>
+                </div>
+                <div>
+                  <button className={css.exitProposalCreation} type="button" onClick={handleClose}>
+                    Cancel
+                  </button>
+                </div>
               </div>
 
             </div>

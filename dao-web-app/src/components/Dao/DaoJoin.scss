@@ -111,7 +111,7 @@
     }
 
     .content {
-        padding: 47px 57px;
+        padding: 47px 57px 0 57px;
 
         .bigInput {
             form {
@@ -166,6 +166,95 @@
                 }
             }
         }
+
+        .newInput {
+          & > div {
+                display: grid;
+                grid-template-columns: 120px 1fr;
+                border: 1px solid rgba(43, 43, 43, 0.95);
+                align-items: center;
+                background: #E6E7EA;
+                margin-bottom: 20px;
+
+                label {
+                    background: #E6E7EA;
+                    border-right: 1px solid rgba(43, 43, 43, 0.95);
+                    padding: 0 45px;
+                    color: #2C2C2C;
+                    font-weight: bold;
+                    font-size: 18px;
+                    line-height: 28px;
+                    font-family: Montserrat;
+                    display: grid;
+                    height: 100%;
+                    align-items: center;
+                }
+
+                input {
+                    // color: #D40D26;
+                    text-transform: uppercase;
+                    font-family: Montserrat;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 32px;
+                    line-height: 54px;
+                    padding: 30px 45px;
+                    background: #fff;
+                    border: 0;
+                    width: 100%;
+                    box-sizing: border-box;
+                    margin: 0;
+                }
+          }
+        }
+
+
+
+
+
+      .newInputTwo {
+          & > div {
+                display: grid;
+                align-items: center;
+                margin-bottom: 20px;
+
+                label {
+                    background: #E6E7EA;
+                    border: 1px solid rgba(43, 43, 43, 0.95);
+                    // border-bottom: 0;
+                    padding: 0px 20px;
+                    color: #2C2C2C;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 28px;
+                    font-family: Montserrat;
+                    display: inline-block;
+                    height: 100%;
+                    align-items: center;
+                }
+
+                input {
+                    // color: #D40D26;
+                    text-transform: uppercase;
+                    font-family: Montserrat;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 32px;
+                    line-height: 54px;
+                    padding: 30px 20px;
+                    background: #fff;
+                    border: 1px solid rgba(43, 43, 43, 0.95);
+                    width: 100%;
+                    box-sizing: border-box;
+                    margin: 0;
+                }
+          }
+        }
+
+
+
+
+
 
         button {
             &.submit {
@@ -567,6 +656,8 @@
     border: 1px solid #4E5469;
     background: #fff;
     color: #4E5469;
+    outline: none;
+    margin-bottom: 20px;
 
 
     &:hover {
@@ -604,8 +695,9 @@
   }
 
   .createProposalActions {
-    text-align: right;
+    text-align: center;
     margin-top: 20px;
+    display: grid;
   }
 }
 
