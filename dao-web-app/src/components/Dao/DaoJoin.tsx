@@ -10,7 +10,7 @@ import Select from "react-select";
 import { showNotification } from "../../reducers/notifications";
 import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "../../components/Shared/TrainingTooltip";
-import * as css from "../../components/Proposal/Create/CreateProposal.scss";
+import * as css from "./DaoJoin.scss";
 import MarkdownField from "../../components/Proposal/Create/SchemeForms/MarkdownField";
 import { checkTotalPercent } from "../../lib/util";
 import * as Datetime from "react-datetime";
@@ -21,6 +21,8 @@ import BN = require("bn.js");
 interface IExternalProps {
   scheme: ISchemeState;
   daoAvatarAddress: string;
+  history: History;
+
   handleClose: () => any;
 }
 
@@ -113,9 +115,19 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      tags: new Array<string>(),
+      tags: new Array<string>()
     };
   }
+
+  // public handleClose = (e: any) => {
+  //   e.preventDefault();
+  //   this.doClose();
+  // }
+
+  // public doClose = () => {
+  //   const history = this.props;
+  //   history.push("/dao/dashboard/");
+  // }  
 
   public handleSubmit = async (values: IFormValues, { _setSubmitting }: any ): Promise<void> => {
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
@@ -192,6 +204,12 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
     const now = moment();
 
     return (
+      <div className={css.createProposalWrapper}>
+      {/* <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem> */}
+      <h2 className={css.header}>
+        <span>+ New proposal <b>| {"schemeTitle"}</b></span>
+        <button className={css.closeButton} aria-label="Close Create Proposal Modal" /* onClick={this.handleClose} */ >&times;</button>
+      </h2>
       <div className={css.contributionReward}>
         <Formik
           // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -625,6 +643,8 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
           }
         />
       </div>
+      </div>
+
     );
   }
 }

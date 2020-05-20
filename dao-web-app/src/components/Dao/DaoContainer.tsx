@@ -148,7 +148,7 @@ class DaoContainer extends React.Component<IProps, null> {
     //this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
   
-  private daoJoinRoute = (routeProps: any) => <DaoJoinPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
+  // private daoJoinRoute = (routeProps: any) => <DaoJoinPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembershipRoute = (routeProps: any) => <DaoMembershipPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoHistoryRoute = (routeProps: any) => <DaoHistoryPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} />;
@@ -228,8 +228,8 @@ class DaoContainer extends React.Component<IProps, null> {
             <Route exact path="/dao/membership"
               render={this.daoMembershipRoute} />
 
-            <Route exact path="/dao/dashboard/join"
-              render={this.daoJoinRoute} />
+            {/* <Route exact path="/dao/dashboard/join"
+              render={this.daoJoinRoute} /> */}
 
             <Redirect exact from="/dao" to="/dao/dashboard"></Redirect>
 

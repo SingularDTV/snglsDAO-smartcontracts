@@ -99,12 +99,18 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
     const scheme = this.props.data;
 
     let createSchemeComponent = <div />;
+    
+
+
     const props = {
       daoAvatarAddress,
       handleClose: this.doClose,
       scheme,
     };
     const schemeTitle = this.state.createCrxProposalComponent ? rewarderContractName(scheme) : schemeName(scheme);
+
+    console.log(" <<<<<<<<<<CreateProposalPage>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>: ", this.state, this.props);
+
 
     if (this.state.createCrxProposalComponent) {
       createSchemeComponent = <this.state.createCrxProposalComponent {...props} />;
