@@ -336,7 +336,7 @@ a {
   }
 
   .comingSoon {
-        border: 1px solid rgba(255, 255, 255, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.14);
         padding: 35px 35px 10px 35px;
 
         h2 {
@@ -376,11 +376,13 @@ a {
             width: 100%;
             height: 100%;
             content: '';
-            background: rgba(255, 255, 255, 0.05);
+            // background: rgba(255, 255, 255, 0.05);
             opacity: 0.8;
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-sizing: border-box;
-            backdrop-filter: blur(40px);
+            // backdrop-filter: blur(40px);
+            background: url(/assets/images/bg_blur.png) repeat;
+            background-size: cover;
           }
 
           .icon {
@@ -662,10 +664,12 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(40px);
+    // background: rgba(255, 255, 255, 0.05);
+    // backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     opacity: 0.8;
+    background: url(/assets/images/bg_blur.png) repeat;
+      background-size: cover;
   }
 
   & > a {
@@ -752,12 +756,14 @@ a {
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.05);
+            // background: rgba(255, 255, 255, 0.05);
             opacity: 0.8;
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-sizing: border-box;
-            backdrop-filter: blur(40px);
+            // backdrop-filter: blur(40px);
             z-index: -1;
+            background: url(/assets/images/bg_blur.png) repeat;
+            background-size: cover;
         }
 
         &Head {
@@ -858,11 +864,13 @@ a {
                         display: grid;
                         height: 100%;
                         align-items: center;
-                        background: rgba(255, 255, 255, 0.05);
+                        // background: rgba(255, 255, 255, 0.05);
                         opacity: 0.8;
                         border-right: 1px solid rgba(255, 255, 255, 0.5);
                         box-sizing: border-box;
-                        backdrop-filter: blur(40px);
+                        // backdrop-filter: blur(40px);
+                        background: url(/assets/images/bg_blur.png) repeat;
+                        background-size: cover;
                     }
 
                     input {
@@ -1110,7 +1118,12 @@ a {
     .membersContainer {
         .dashBlock {
             grid-template-columns: 1fr;
-            grid-gap: 30px;
+            grid-gap: 20px;
+
+            .count {
+              font-size: 48px;
+              line-height: 51px;
+            }
         }
         .daoModal {
             .subhead {
@@ -1120,6 +1133,10 @@ a {
 
         h4 {
           text-align: left;
+        }
+
+        .comingSoon {
+          padding: 25px 25px 0 25px;
         }
     }
 
@@ -1145,6 +1162,15 @@ a {
                 }
             }
 
+            .icon {
+              width: 90px;
+              height: 90px;
+
+              img {
+                max-width: 100%;
+              }
+            }
+
             .content {
                 .bigInput {
                     form {
@@ -1157,8 +1183,9 @@ a {
                             font-size: 24px;
                         }
                         button {
-                            font-size: 14px;
+                            font-size: 12px;
                             right: 15px;
+                            padding: 4px 9px;
                         }
                     }
 
@@ -1181,6 +1208,27 @@ a {
 
 
 @media only screen and (max-width: 425px) {
+  .membersContainer {
+    table {
+      position: relative;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: '';
+        // background: rgba(255, 255, 255, 0.05);
+        opacity: 0.8;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-sizing: border-box;
+        // backdrop-filter: blur(40px);
+        background: url(/assets/images/bg_blur.png) repeat;
+        background-size: cover;
+      }
+    }
+  }
   .outer {
     display: block;
     position: relative;
@@ -1260,7 +1308,9 @@ a {
     .daoModal {
       .head {
         h4 {
-          font-size: 18px;
+          font-size: 16px;
+          padding: 15px 40px;
+          text-align: center;
         }
         a {
           img {

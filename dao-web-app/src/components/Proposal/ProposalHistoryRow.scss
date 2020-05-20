@@ -21,13 +21,15 @@
             height: calc(100% - 14px);
             top: 7px;
             left: 0;
-            background: rgba(255, 255, 255, 0.05);
+            // background: rgba(255, 255, 255, 0.05);
             opacity: 0.8;
             box-sizing: border-box;
-            backdrop-filter: blur(40px);
+            // backdrop-filter: blur(40px);
             z-index: -1;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: url(/assets/images/bg_blur.png) repeat;
+            background-size: cover;
       }
 
       &.proposalCreator {
@@ -84,7 +86,8 @@
 }
 
 .title {
-  color: rgba(80, 97, 118, 1.000);
+  // color: rgba(80, 97, 118, 1.000);
+  color: #fff;
 
   a {
     color: rgba(80, 97, 118, 1.000);

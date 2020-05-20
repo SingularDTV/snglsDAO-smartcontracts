@@ -329,7 +329,7 @@ h4 {
       z-index: 100;
       color: rgba(78, 97, 118, 1);
       background-color: rgba(252, 253, 255, 1);
-      border-radius: 0 0 8px 8px;
+      border-radius: 4px;
       box-shadow: 0 2px 16px 0 rgba(133, 168, 208, 0.27);
 
       .walletImage {
@@ -350,7 +350,7 @@ h4 {
         position: relative;
         padding-bottom: 5px;
         border-bottom: 1px solid rgba(229, 235, 242, 1);
-        padding: 25px;
+        padding: 15px;
 
         .walletImage {
           &.greyscale img {
@@ -363,7 +363,7 @@ h4 {
 
           a {
             padding: 5px 0 0 15px;
-            color: rgba(1, 112, 255, 1);
+            color: #010b2b;
             font-size: 11px;
             font-weight: bold;
             font-family: "Open Sans";
@@ -432,7 +432,7 @@ h4 {
       }
 
       .copyAddress {
-        padding: 2px 0 0 15px;
+        padding: 2px 0 0 18px;
         position: relative;
         overflow: hidden;
 
@@ -487,7 +487,7 @@ h4 {
 
       .logoutButtonContainer {
         padding-left: 2px;
-        padding-right: 17px;
+        padding-right: 15px;
         padding-top: 15px;
         padding-bottom: 18px;
         text-align: right;
@@ -531,7 +531,8 @@ h4 {
         display: inline-block;
 
         .text {
-          color: $accent-1;
+          // color: $accent-1;
+          color: #010b2b;
           white-space: nowrap;
           cursor: pointer;
           display: inline-block;
@@ -548,8 +549,6 @@ h4 {
   }
 
   .accountInfoContainer:hover {
-    background-color: rgba(10, 28, 61, 1);
-
     + .wallet {
       transform: scaleY(1);
     }
@@ -596,7 +595,11 @@ h4 {
 
     &.noAccount {
       margin-right: 20px;
-      opacity: 0.5;
+      opacity: 0.7;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
@@ -1150,8 +1153,8 @@ h4 {
 
     .web3ProviderLogin {
       button {
-        padding: 0;
-        width: 30px;
+        padding: 0 11px;
+        // width: 30px;
         text-align: center;
       }
     }

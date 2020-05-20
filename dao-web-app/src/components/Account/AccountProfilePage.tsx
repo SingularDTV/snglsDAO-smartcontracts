@@ -299,7 +299,7 @@ class AccountProfilePage extends React.Component<IProps, IState> {
                     <div>
                       <strong>ETH Address:</strong><br />
                       <span>{accountAddress.substr(0, 20)}...</span>
-                      <button className={css.copyButton} onClick={this.copyAddress}><img src="/assets/images/Icon/Copy-black.svg" /></button>
+                      <button className={css.copyButton} onClick={this.copyAddress}><img src="/assets/images/Icon/Copy-white_nobg.svg" /></button>
                     </div>
                   </div>
                 </form>

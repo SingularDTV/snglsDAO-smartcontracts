@@ -92,7 +92,7 @@
 
   .daoNavigation {
     font-family: "Open Sans";
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 
     ul {
       margin-top: 15px;
@@ -216,7 +216,7 @@
 
 .daoHoldings {
   display: block;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 
   .daoNavHeading b {
     padding: 10px 25px 10px 10px;
@@ -229,8 +229,8 @@
   .daoNavHeading a {
     display: inline-block;
     position: relative;
-    top: 19px;
-    left: -14px;
+    top: 16px;
+    left: -15px;
   }
 
   ul {
@@ -247,7 +247,7 @@
 
 .siteLinksWrapper {
   // display: none;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   // position: absolute;
   // height: 270px;
   left: 0;
@@ -354,12 +354,17 @@
     }
 
     li.daoStack {
-      padding-top: 10px;
+      // padding-top: 10px;
+      height: auto;
 
       a {
         // color: white;
         font-family: "AccordBold";
         font-size: 13px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        grid-gap: 7px;
       }
 
       img {
@@ -458,7 +463,7 @@
 @media (max-width: 768px) {
     .sidebarWrapper.menuOpen {
         .menuContent {
-            min-height: 800px;
+            min-height: 720px;
         }
     }
 }
