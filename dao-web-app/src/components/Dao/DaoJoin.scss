@@ -23,7 +23,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 99999;
-    height: calc(100% - 100px);
+    // height: calc(100% - 100px);
 
     .header {
         line-height: normal;
@@ -111,7 +111,7 @@
     }
 
     .content {
-        padding: 47px 57px 0 57px;
+        padding: 47px 57px;
 
         .bigInput {
             form {
@@ -189,11 +189,11 @@
 
                 input {
                     // color: #D40D26;
-                    text-transform: uppercase;
+                    // text-transform: uppercase;
                     font-family: Montserrat;
                     font-style: normal;
                     font-weight: 500;
-                    font-size: 32px;
+                    font-size: 24px;
                     line-height: 54px;
                     padding: 30px 20px;
                     background: #fff;
