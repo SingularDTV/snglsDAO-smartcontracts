@@ -49,7 +49,7 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress: "0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB", // ownProps.match.params.daoAvatarAddress, //"0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB", //
+    daoAvatarAddress: "0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2", // ownProps.match.params.daoAvatarAddress, //"0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2", //
   };
 };
 
@@ -180,8 +180,6 @@ class DaoContainer extends React.Component<IProps, null> {
 
     const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
     
-    // const snglsDao = [foundDaos.find(element => element.id = "0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB")];
-
     console.log("MEMEME ", foundDaos);
 
     const daoState = this.props.data[0];
@@ -260,7 +258,7 @@ const SubscribedDaoContainer = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    const daoAddress = "0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB";//props.match.params.daoAvatarAddress; // "0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB"; // 
+    const daoAddress = "0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2";//props.match.params.daoAvatarAddress; // "0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2"; // 
     const dao =  arc.dao(daoAddress);
     const observable = combineLatest(
       dao.state({ subscribe: true, fetchAllData: true }), // DAO state

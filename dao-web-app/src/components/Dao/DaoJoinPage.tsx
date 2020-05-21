@@ -67,7 +67,7 @@ class DaoJoinPage extends React.Component<IProps, IStateProps> {
 
     Analytics.track("Page View", {
       "Page Name": Page.CreateProposal,
-      "DAO Address": "0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB",
+      "DAO Address": "0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2",
       "Scheme Address": this.props.schemeId,
     });
     const newState = {};
@@ -95,7 +95,7 @@ class DaoJoinPage extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
-    const daoAvatarAddress = "0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB";
+    const daoAvatarAddress = "0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2";
     const scheme = this.props.data;
 
     let createSchemeComponent = <div />;

@@ -38,6 +38,8 @@ export const operationNotifierObserver = (dispatch: Redux.Dispatch<any, any>, tx
   ];
 };
 
+
+
 export function createProposal(proposalOptions: IProposalCreateOptions): ThunkAction<any, IRootState, null> {
   return async (dispatch: Redux.Dispatch<any, any>, _getState: () => IRootState) => {
     try {

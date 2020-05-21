@@ -163,7 +163,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
     }
     // Parameters to be passed to client
     const proposalOptions: IProposalCreateOptionsCompetition  = {
-      dao: "0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB",
+      dao: "0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2",
       description: values.description,
       endTime: values.compEndTimeInput.toDate(),
       ethReward: toWei(Number(values.ethReward)),
@@ -207,7 +207,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
       <div className={css.createProposalWrapper}>
       {/* <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem> */}
       <div className={css.header}>
-        <h2><span>+ New proposal <b>| {"schemeTitle"}</b></span></h2>
+        <h2><span> DAO REPUTATION </span></h2>
         <button className={css.closeButton} aria-label="Close Create Proposal Modal" /* onClick={this.handleClose} */ ><img src="/assets/images/close.svg" alt=""/></button>
       </div>
       <div className={css.contributionReward}>
@@ -565,7 +565,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                 <div className={css.reward}>
                   <div className={css.newInput}>
                     <label htmlFor="nativeTokenRewardInput">
-                      DAO token ({dao.tokenSymbol}) Reward to split
+                      DAO token ({dao.tokenSymbol})
                       <ErrorMessage name="nativeTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                     </label>
                     <Field
@@ -670,7 +670,7 @@ const SubscribedCreateContributionRewardExProposal = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    return arc.dao("0xf1deC7B9F2F755E5f83D2bad1E2Ffb98B9E073cB").state();
+    return arc.dao("0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2").state();
   },
 });
 
