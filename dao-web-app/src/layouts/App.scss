@@ -77,6 +77,11 @@ h4 {
     margin: 0;
 }
 
+
+.menuOpen {
+  line-height: normal;
+}
+
 .outer {
   width: 100%;
   height: 100%;
@@ -865,6 +870,33 @@ h4 {
   display: none;
 }
 
+.sidebarToggle {
+  display: none;
+  z-index: 999999;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  color: #fff;
+  background: #101e42d6;
+  width: 42px;
+  height: 42px;
+  line-height: 42px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &.open {
+    background: #EFEFEF;
+  }
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 
 
 
@@ -944,11 +976,53 @@ h4 {
 @media (max-width: 1024px) {
     .header {
         .topInfo {
-            & > div {
+              position: initial;
+            
+              & > div {
                 &.navigation {
-                    display: none;
-                }
-            }
+                  position: absolute;
+                  right: 0;
+                  left: 0;
+                  top: 100%;
+                  background-color: #010B2B;
+                  padding: 15px;
+                  transform: translateX(100%);
+                  opacity: 0;
+                      transition: 0.2s;
+
+                  & > ul {
+                    & > li {
+                      float: none;
+                      padding-left: 0;
+                      padding-right: 0;
+
+                      & > a {
+                        color: #fff;
+                        padding-left: 0;
+
+                        &:hover {
+                          color: #D40D26;
+
+                          &:before {
+                              background: url(/assets/images/Icon/nav_arrow_hover.svg) no-repeat;
+                          }
+                        }
+                      }
+
+                      & > ul {
+                        position: relative;
+                        margin-top: 5px;
+                        max-width: 100%;
+                      }
+                    }
+                  }
+
+                  &.menuOpen {
+                    transform: translateX(0%);
+                    opacity: 1;
+                  }
+              }
+              }
         }
     }
   .modalBody {
@@ -1051,6 +1125,13 @@ h4 {
 
 
 @media (max-width: 992px) {
+    .sidebarToggle {
+        display: block;
+
+      img {
+          display: block;
+      }
+    }
     .header {
         .menuToggle {
             display: block;

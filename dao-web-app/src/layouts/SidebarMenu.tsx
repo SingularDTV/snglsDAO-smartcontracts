@@ -27,7 +27,7 @@ type IExternalProps = RouteComponentProps<any>;
 
 interface IStateProps {
   daoAvatarAddress: string;
-  menuOpen: boolean;
+  sidebarOpen: boolean;
 }
 
 interface IHasNewPosts {
@@ -49,13 +49,13 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   {
     ...ownProps,
     daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
-    menuOpen: state.ui.menuOpen,
+    sidebarOpen: state.ui.sidebarOpen,
   }
   );
   return {
     ...ownProps,
     daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
-    menuOpen: state.ui.menuOpen,
+    sidebarOpen: state.ui.sidebarOpen,
   };
 };
 
@@ -286,7 +286,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
 
   public render(): RenderOutput {
     const sidebarClass = classNames({
-      [css.menuOpen]: this.props.menuOpen,
+      [css.menuOpen]: this.props.sidebarOpen,
       [css.sidebarWrapper]: true,
       [css.noDAO]: !this.props.daoAvatarAddress,
       clearfix: true,

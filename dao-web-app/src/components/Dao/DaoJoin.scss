@@ -912,6 +912,52 @@ div.description {
   margin-top: 4px;
 }
 
+
+@media(max-width: 768px) {
+  .createProposalWrapper {
+    width: calc(100% - 30px);
+    box-shadow: none;
+    top: calc(50% - 64px);
+    // left: 15px;
+
+    .header {
+      text-align: left;
+      h2 {
+        padding: 12px 20px;
+        font-size: 16px;
+      }
+
+      .closeButton {
+        img {
+          width: 14px;
+        }
+      }
+    }
+
+    .subhead {
+          padding: 20px;
+
+          .description {
+                line-height: 20px;
+          }
+    }
+
+    .content {
+      padding: 20px;
+
+      .newInput {
+        label {
+          padding: 0 15px;
+        }
+        input {
+          font-size: 18px;
+              padding: 20px 15px;
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 475px) {
   .createWrapperWithSidebar {
     width: 100%;
@@ -935,17 +981,17 @@ div.description {
   }
 
   .createProposalWrapper {
-    top: 0;
-    left: 0;
-    transform: translate(0, 0);
-    height: 100%;
+    // top: 0;
+    // left: 0;
+    // transform: translate(0, 0);
+    // height: 100%;
 
     .header {
       border-radius: 0 0 0 0;
     }
 
     form {
-      padding: 15px 15px 155px 15px;
+      // padding: 15px 15px 155px 15px;
 
       textarea {
         border: none;
