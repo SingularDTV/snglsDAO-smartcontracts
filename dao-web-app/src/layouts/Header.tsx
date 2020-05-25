@@ -224,11 +224,38 @@ class Header extends React.Component<IProps, null> {
                 <li><a href="#">Forum</a></li>
                 <li className={css.submenu}><a href="#">Consumer protection</a>
                     <ul>
-                      <li><a href="#">Source Code</a></li>
-                      <li><a href="#">Transaction History</a></li>
                       <li><a href="#">Token Economics</a></li>
                       <li><a href="#">Roadmap</a></li>
-                      <li><a href="#">History of Past Token Sales</a></li>
+                      <li className={css.submenu}><a href="#">Source Code</a>
+                        <ul>
+                          <li><a href="#">SNGLS</a></li>
+                          <li><a href="#">SGT</a></li>
+                          <li><a href="#">snglsDAO</a></li>
+                        </ul>
+                      </li>
+                      <li className={css.submenu}><a href="#">Transaction History</a>
+                        <ul>
+                          <li><a href="#">SNGLS</a></li>
+                          <li><a href="#">SGT</a></li>
+                        </ul>
+                      </li>
+                      <li className={css.submenu}><a href="#">History of Past Token Sales</a>
+                        <ul>
+                          <li><a href="#">SNGLS</a></li>
+                          <li><a href="#">SGT</a></li>
+                        </ul>
+                      </li>
+                      <li className={css.submenu}><a href="#">Token Holders</a>
+                        <ul>
+                          <li><a href="#">SNGLS</a></li>
+                          <li><a href="#">SGT</a></li>
+                        </ul>
+                      </li>
+                      <li className={css.submenu}><a href="#">Security Audit</a>
+                        <ul>
+                          <li><a href="#">snglsDAO</a></li>
+                        </ul>
+                      </li>
                     </ul>
                 </li>
                 <li className={css.submenu}><a href="#">News</a>
