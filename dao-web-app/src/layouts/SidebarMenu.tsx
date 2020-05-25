@@ -49,13 +49,13 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   {
     ...ownProps,
     daoAvatarAddress: "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
-    menuOpen: state.ui.menuOpen,
+    sidebarOpen: state.ui.sidebarOpen,
   }
   );
   return {
     ...ownProps,
     daoAvatarAddress: "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
-    menuOpen: state.ui.menuOpen,
+    sidebarOpen: state.ui.sidebarOpen,
   };
 };
 
