@@ -1,9 +1,9 @@
-import { IDAOState, ISchemeState, IProposalCreateOptionsCompetition } from "@daostack/client";
+import { IDAOState, ISchemeState /*, IProposalCreateOptionsCompetition */ } from "@daostack/client";
 import * as arcActions from "../../actions/arcActions";
 import { enableWalletProvider, getArc } from "../../arc";
 import withSubscription, { ISubscriptionProps } from "../../components/Shared/withSubscription";
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
-import { /* baseTokenName, supportedTokens, */ toBaseUnit, tokenDetails, toWei, isValidUrl/*, getLocalTimezone */ } from "lib/util";
+import { /* baseTokenName, supportedTokens,  toBaseUnit, tokenDetails, */ toWei,  isValidUrl/*, getLocalTimezone */ } from "lib/util";
 import * as React from "react";
 import { connect } from "react-redux";
 import Select from "react-select";
@@ -12,11 +12,11 @@ import { showNotification } from "../../reducers/notifications";
 import TrainingTooltip from "../../components/Shared/TrainingTooltip";
 import * as css from "./DaoJoin.scss";
 // import MarkdownField from "../../components/Proposal/Create/SchemeForms/MarkdownField";
-import { checkTotalPercent } from "../../lib/util";
+// import { checkTotalPercent } from "../../lib/util";
 // import * as Datetime from "react-datetime";
 
-import moment = require("moment");
-import BN = require("bn.js");
+// imporsst moment = require("moment");
+// import BN = require("bn.js");
 
 interface IExternalProps {
   scheme: ISchemeState;
@@ -35,7 +35,7 @@ interface IDispatchProps {
   showNotification: typeof showNotification;
 }
 
-const MAX_NUMBER_OF_WINNERS=100;
+// const MAX_NUMBER_OF_WINNERS=100;
 
 const mapDispatchToProps = {
   createProposal: arcActions.createProposal,
@@ -45,23 +45,7 @@ const mapDispatchToProps = {
 type IProps = IExternalProps & IDispatchProps & ISubscriptionProps<IDAOState>;
 
 interface IFormValues {
-  rewardSplit: string;
-  description: string;
-  ethReward: number;
-  externalTokenAddress: string;
-  externalTokenReward: number;
   nativeTokenReward: number;
-  numWinners: number;
-  numberOfVotesPerVoter: number;
-  reputationReward: number;
-  title: string;
-  url: string;
-  compStartTimeInput: moment.Moment;
-  compEndTimeInput: moment.Moment;
-  suggestionEndTimeInput: moment.Moment;
-  votingStartTimeInput: moment.Moment;
-  proposerIsAdmin: boolean;
-
   [key: string]: any;
 }
 
@@ -114,6 +98,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
 
   constructor(props: IProps) {
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       tags: new Array<string>()
     };
@@ -130,60 +115,100 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
   // }  
 
   public handleSubmit = async (values: IFormValues, { _setSubmitting }: any ): Promise<void> => {
+    console.log("SUBMIT PROPOSAL ===========================__)_)_)_)_====================")
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
       return;
     }
+    console.log("SUBMIT PROPOSAL ===========================__)_)_)_)_====================")
+    const arc = getArc();
 
-    const externalTokenDetails = tokenDetails(values.externalTokenAddress);
-    let externalTokenReward;
+    const memfeeContract = new arc.web3.eth.Contract(
+      [ { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "Lock", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "_beneficiary", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "Release", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "", "type": "address" } ], "name": "lockers", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "releaseTime", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "minLockingPeriod", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "sgtToken", "outputs": [ { "internalType": "contract IERC20", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalLocked", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "release", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "lock", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "contract IERC20", "name": "_sgtToken", "type": "address" }, { "internalType": "uint256", "name": "_minLockingPeriod", "type": "uint256" } ], "name": "initialize", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" } ],
+    "0x4F999d00b201603FDDB543F26B483ab024DC3aaf"
+  );
 
-    // If we know the decimals for the token then multiply by that
-    if (externalTokenDetails) {
-      externalTokenReward = toBaseUnit(values.externalTokenReward.toString(), externalTokenDetails.decimals);
-    // Otherwise just convert to Wei and hope for the best
-    } else {
-      externalTokenReward = toWei(Number(values.externalTokenReward));
-    }
+    console.log(memfeeContract);
+
+    // Get the contract ABI from compiled smart contract json
+    const erc20TokenContractAbi = [ { "inputs": [ { "internalType": "string", "name": "_name", "type": "string" }, { "internalType": "string", "name": "_symbol", "type": "string" }, { "internalType": "uint256", "name": "_cap", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "spender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" } ], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "Transfer", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "spender", "type": "address" } ], "name": "allowance", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "approve", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "account", "type": "address" } ], "name": "balanceOf", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "burn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "account", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "burnFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "cap", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [ { "internalType": "uint8", "name": "", "type": "uint8" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "subtractedValue", "type": "uint256" } ], "name": "decreaseAllowance", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "addedValue", "type": "uint256" } ], "name": "increaseAllowance", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "isOwner", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "renounceOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "transfer", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "transferFrom", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "newOwner", "type": "address" } ], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "mint", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
+
+    // Create contract object
+    const tokenContract = new arc.web3.eth.Contract(erc20TokenContractAbi, '0x591C82da1AedCF0c9Ce29112483D4c4969CFc053');
+
+    // Instantiate contract    
+    const toAddress = '0x4F999d00b201603FDDB543F26B483ab024DC3aaf';
+
+    // Calculate contract compatible value for approve with proper decimal points using BigNumber
+    const tokenDecimals = arc.web3.utils.toBN(18);
+    const tokenAmountToApprove = arc.web3.utils.toBN(1);
+    const calculatedApproveValue = arc.web3.utils.toHex(tokenAmountToApprove.mul(arc.web3.utils.toBN(10).pow(tokenDecimals)));
+
+    // Get user account wallet address first
+    arc.web3.eth.getAccounts(function(error: any, accounts: any) {
+      console.log(error)
+      if (error) throw error;
+      // Send ERC20 transaction with web3
+      tokenContract.methods.approve(toAddress, calculatedApproveValue).send({from: accounts[0]}, function(error: any, txnHash: any) {
+        if (error) throw error;
+        console.log(txnHash);
+        console.log(values.nativeTokenReward, Number(values.nativeTokenReward), toWei(Number(values.nativeTokenReward)))
+        memfeeContract.methods.lock(toWei(Number(values.nativeTokenReward)), /* min locking period */ 604800).send({from: accounts[0]}, function(error: any, txnHash: any) {
+          if (error) throw error;
+          console.log(txnHash);
+        });
+      });
+    });
+
+    // const externalTokenDetails = tokenDetails(values.externalTokenAddress);
+    // let externalTokenReward;
+
+    // // If we know the decimals for the token then multiply by that
+    // if (externalTokenDetails) {
+    //   externalTokenReward = toBaseUnit(values.externalTokenReward.toString(), externalTokenDetails.decimals);
+    // // Otherwise just convert to Wei and hope for the best
+    // } else {
+    //   externalTokenReward = toWei(Number(values.externalTokenReward));
+    // }
 
 
-    // TODO: reward split should be fixed in client for now split here
-    let rewardSplit = [];
-    if (values.rewardSplit === "") {
-      const unit = 100.0 / Number(values.numWinners);
-      rewardSplit = Array(values.numWinners).fill(unit);
-    } else {
-      rewardSplit = values.rewardSplit.split(",").map((s: string) => Number(s));
-    }
-    let reputationReward = toWei(Number(values.reputationReward));
+    // // TODO: reward split should be fixed in client for now split here
+    // let rewardSplit = [];
+    // if (values.rewardSplit === "") {
+    //   const unit = 100.0 / Number(values.numWinners);
+    //   rewardSplit = Array(values.numWinners).fill(unit);
+    // } else {
+    //   rewardSplit = values.rewardSplit.split(",").map((s: string) => Number(s));
+    // }
+    // let reputationReward = toWei(Number(values.reputationReward));
 
-    // This is a workaround around https://github.com/daostack/arc/issues/712
-    // which was for contract versions rc.40. It is resolved in rc.41
-    if (reputationReward.isZero()) {
-      reputationReward = new BN(1);
-    }
-    // Parameters to be passed to client
-    const proposalOptions: IProposalCreateOptionsCompetition  = {
-      dao: "0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2",
-      description: values.description,
-      endTime: values.compEndTimeInput.toDate(),
-      ethReward: toWei(Number(values.ethReward)),
-      externalTokenReward,
-      nativeTokenReward: toWei(Number(values.nativeTokenReward)),
-      numberOfVotesPerVoter:  Number(values.numberOfVotesPerVoter),
-      proposalType: "competition", // this makes `createPRoposal` create a competition rather then a 'normal' contributionRewardExt
-      proposerIsAdmin: values.proposerIsAdmin,
-      reputationReward,
-      rewardSplit,
-      scheme: "0x9998c70f34c7cb64401ed47487703abee1ca2300b009680a6e3b4080d67ab3a9",
-      startTime: values.compStartTimeInput.toDate(),
-      suggestionsEndTime: values.suggestionEndTimeInput.toDate(),
-      tags: this.state.tags,
-      title: values.title,
-      votingStartTime: values.votingStartTimeInput.toDate(),
-    };
+    // // This is a workaround around https://github.com/daostack/arc/issues/712
+    // // which was for contract versions rc.40. It is resolved in rc.41
+    // if (reputationReward.isZero()) {
+    //   reputationReward = new BN(1);
+    // }
+    // // Parameters to be passed to client
+    // const proposalOptions: IProposalCreateOptionsCompetition  = {
+    //   dao: "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829",
+    //   description: values.description,
+    //   endTime: values.compEndTimeInput.toDate(),
+    //   ethReward: toWei(Number(values.ethReward)),
+    //   externalTokenReward,
+    //   nativeTokenReward: toWei(Number(values.nativeTokenReward)),
+    //   numberOfVotesPerVoter:  Number(values.numberOfVotesPerVoter),
+    //   proposalType: "competition", // this makes `createPRoposal` create a competition rather then a 'normal' contributionRewardExt
+    //   proposerIsAdmin: values.proposerIsAdmin,
+    //   reputationReward,
+    //   rewardSplit,
+    //   scheme: "0x9998c70f34c7cb64401ed47487703abee1ca2300b009680a6e3b4080d67ab3a9",
+    //   startTime: values.compStartTimeInput.toDate(),
+    //   suggestionsEndTime: values.suggestionEndTimeInput.toDate(),
+    //   tags: this.state.tags,
+    //   title: values.title,
+    //   votingStartTime: values.votingStartTimeInput.toDate(),
+    // };
 
-    await this.props.createProposal(proposalOptions);
-    this.props.handleClose();
+    // await this.props.createProposal(proposalOptions);
+    // this.props.handleClose();
   }
 
   // private onTagsChange = (tags: string[]): void => {
@@ -199,10 +224,10 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
       return null;
     }
     const dao = data;
-    const arc = getArc();
+    // const arc = getArc();
     // const localTimezone = getLocalTimezone();
-    const now = moment();
-
+    // const now = moment();
+    console.log("DAO JOIN RENDER FUNC <<<<<<<<<<<<<<<<<,,")
     return (
       <div className={css.createProposalWrapper}>
       {/* <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem> */}
@@ -214,32 +239,17 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
         <Formik
           // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
           initialValues={{
-            rewardSplit: "",
-            description: "",
-            ethReward: 0,
-            externalTokenAddress: arc.GENToken().address,
-            externalTokenReward: 0,
             nativeTokenReward: 0,
-            numWinners: 0,
-            numberOfVotesPerVoter: 0,
-            proposerIsAdmin: false,
-            reputationReward: 0,
-            compStartTimeInput: now, // testing ? undefined : now,
-            suggestionEndTimeInput: now, // testing ? undefined : now,
-            votingStartTimeInput: now, // testing ? undefined : now,
-            compEndTimeInput: now, // testing ? undefined : now,
-            title: "",
-            url: "",
           } as IFormValues}
           // eslint-disable-next-line react/jsx-no-bind
           validate={(values: IFormValues): void => {
             const errors: any = {};
 
-            const require = (name: string): void => {
-              if (!(values as any)[name]) {
-                errors[name] = "Required";
-              }
-            };
+            // const require = (name: string): void => {
+            //   if (!(values as any)[name]) {
+            //     errors[name] = "Required";
+            //   }
+            // };
 
             const nonNegative = (name: string): void => {
               if ((values as any)[name] < 0) {
@@ -247,97 +257,97 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
               }
             };
 
-            const nonZero = (name: string): void => {
-              if ((values as any)[name] === 0) {
-                errors[name] = "Please enter a non-zero value";
-              }
-            };
+            // const nonZero = (name: string): void => {
+            //   if ((values as any)[name] === 0) {
+            //     errors[name] = "Please enter a non-zero value";
+            //   }
+            // };
 
-            if (values.title.length > 120) {
-              errors.title = "Title is too long (max 120 characters)";
-            }
+            // if (values.title.length > 120) {
+            //   errors.title = "Title is too long (max 120 characters)";
+            // }
 
             // Check rewardSplit add upto 100 and number of winners match the winner distribution
-            if (values.rewardSplit !== "") {
-              const split = values.rewardSplit.split(",");
+            // if (values.rewardSplit !== "") {
+            //   const split = values.rewardSplit.split(",");
 
-              if (split.length !== values.numWinners) {
-                errors.numWinners = "Number of winners should match the winner distribution";
-              }
+            //   if (split.length !== values.numWinners) {
+            //     errors.numWinners = "Number of winners should match the winner distribution";
+            //   }
 
-              if (!checkTotalPercent(split))
-                errors.rewardSplit = "Please provide reward split summing upto 100";
-            } else {
-              const unit = (100.0 / Number(values.numWinners)).toFixed(4);
-              if((Number(unit)) * values.numWinners !== 100.0)
-                errors.rewardSplit = "Please provide reward split summing upto 100 or use num winner that can have equal split";
-            }
+            //   if (!checkTotalPercent(split))
+            //     errors.rewardSplit = "Please provide reward split summing upto 100";
+            // } else {
+            //   const unit = (100.0 / Number(values.numWinners)).toFixed(4);
+            //   if((Number(unit)) * values.numWinners !== 100.0)
+            //     errors.rewardSplit = "Please provide reward split summing upto 100 or use num winner that can have equal split";
+            // }
 
-            // Number of winners less than MAX_NUMBER_OF_WINNERS
-            if ( values.numWinners > MAX_NUMBER_OF_WINNERS) {
-              errors.numWinners = "Number of winners should be max 100";
-            }
+            // // Number of winners less than MAX_NUMBER_OF_WINNERS
+            // if ( values.numWinners > MAX_NUMBER_OF_WINNERS) {
+            //   errors.numWinners = "Number of winners should be max 100";
+            // }
 
-            const now = moment();
-            // Check valid time
-            const compStartTimeInput = values.compStartTimeInput;
-            const compEndTimeInput = values.compEndTimeInput;
-            const votingStartTimeInput = values.votingStartTimeInput;
-            const suggestionEndTimeInput = values.suggestionEndTimeInput;
+            // const now = moment();
+            // // Check valid time
+            // const compStartTimeInput = values.compStartTimeInput;
+            // const compEndTimeInput = values.compEndTimeInput;
+            // const votingStartTimeInput = values.votingStartTimeInput;
+            // const suggestionEndTimeInput = values.suggestionEndTimeInput;
 
-            if (!(compStartTimeInput instanceof moment)) {
-              errors.compStartTimeInput = "Invalid datetime format";
-            } else {
-              if (compStartTimeInput && compStartTimeInput.isSameOrBefore(now)) {
-                errors.compStartTimeInput = "Competition must start in the future";
-              }
-            }
+            // if (!(compStartTimeInput instanceof moment)) {
+            //   errors.compStartTimeInput = "Invalid datetime format";
+            // } else {
+            //   if (compStartTimeInput && compStartTimeInput.isSameOrBefore(now)) {
+            //     errors.compStartTimeInput = "Competition must start in the future";
+            //   }
+            // }
 
-            if (!(suggestionEndTimeInput instanceof moment)) {
-              errors.suggestionEndTimeInput = "Invalid datetime format";
-            } else {
-              if (suggestionEndTimeInput && (suggestionEndTimeInput.isSameOrBefore(compStartTimeInput))) {
-                errors.suggestionEndTimeInput = "Submission period must end after competition starts";
-              }
-            }
+            // if (!(suggestionEndTimeInput instanceof moment)) {
+            //   errors.suggestionEndTimeInput = "Invalid datetime format";
+            // } else {
+            //   if (suggestionEndTimeInput && (suggestionEndTimeInput.isSameOrBefore(compStartTimeInput))) {
+            //     errors.suggestionEndTimeInput = "Submission period must end after competition starts";
+            //   }
+            // }
 
-            if (!(votingStartTimeInput instanceof moment)) {
-              errors.votingStartTimeInput = "Invalid datetime format";
-            } else {
-              if (votingStartTimeInput && suggestionEndTimeInput && (votingStartTimeInput.isBefore(suggestionEndTimeInput))) {
-                errors.votingStartTimeInput = "Voting must start on or after submission period ends";
-              }
-            }
+            // if (!(votingStartTimeInput instanceof moment)) {
+            //   errors.votingStartTimeInput = "Invalid datetime format";
+            // } else {
+            //   if (votingStartTimeInput && suggestionEndTimeInput && (votingStartTimeInput.isBefore(suggestionEndTimeInput))) {
+            //     errors.votingStartTimeInput = "Voting must start on or after submission period ends";
+            //   }
+            // }
 
-            if (!(compEndTimeInput instanceof moment)) {
-              errors.compEndTimeInput = "Invalid datetime format";
-            } else {
-              if (compEndTimeInput && compEndTimeInput.isSameOrBefore(votingStartTimeInput)) {
-                errors.compEndTimeInput = "Competion must end after voting starts";
-              }
-            }
+            // if (!(compEndTimeInput instanceof moment)) {
+            //   errors.compEndTimeInput = "Invalid datetime format";
+            // } else {
+            //   if (compEndTimeInput && compEndTimeInput.isSameOrBefore(votingStartTimeInput)) {
+            //     errors.compEndTimeInput = "Competion must end after voting starts";
+            //   }
+            // }
 
             if (!isValidUrl(values.url)) {
               errors.url = "Invalid URL";
             }
 
             nonNegative("ethReward");
-            nonNegative("externalTokenReward");
-            nonNegative("nativeTokenReward");
-            nonNegative("numWinners");
-            nonNegative("numberOfVotesPerVoter");
+            // nonNegative("externalTokenReward");
+            // nonNegative("nativeTokenReward");
+            // nonNegative("numWinners");
+            // nonNegative("numberOfVotesPerVoter");
 
-            nonZero("numWinners");
-            nonZero("numberOfVotesPerVoter");
+            // nonZero("numWinners");
+            // nonZero("numberOfVotesPerVoter");
 
-            require("description");
-            require("title");
-            require("numWinners");
-            require("numberOfVotesPerVoter");
-            require("compStartTimeInput");
-            require("compEndTimeInput");
-            require("votingStartTimeInput");
-            require("suggestionEndTimeInput");
+            // require("description");
+            // require("title");
+            // require("numWinners");
+            // require("numberOfVotesPerVoter");
+            // require("compStartTimeInput");
+            // require("compEndTimeInput");
+            // require("votingStartTimeInput");
+            // require("suggestionEndTimeInput");
 
             if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.nativeTokenReward) {
               errors.rewards = "Please select at least some reward";
@@ -641,8 +651,8 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
               <div className={css.createProposalActions}>
                 <div>
                 <TrainingTooltip overlay="Once the proposal is submitted it cannot be edited or deleted" placement="top">
-                  <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
-                  Submit proposal
+                  <button className={css.submitProposal} type="submit" disabled={isSubmitting} onClick={handleClose}>
+                  GET REPUTATION
                   </button>
                 </TrainingTooltip>
                 </div>
@@ -670,7 +680,7 @@ const SubscribedCreateContributionRewardExProposal = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    return arc.dao("0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2").state();
+    return arc.dao("0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829").state();
   },
 });
 

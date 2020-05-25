@@ -49,7 +49,7 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IStatePro
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
-    daoAvatarAddress: "0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2",
+    daoAvatarAddress: "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829",
     sortedNotifications: sortedNotifications()(state),
     threeBox: state.profiles.threeBox,
   };
@@ -193,7 +193,7 @@ class AppContainer extends React.Component<IProps, IState> {
       const hasAcceptedCookies = !!localStorage.getItem(AppContainer.hasAcceptedCookiesKey);
 
       return (
-        <div className={classNames({[css.outer]: true, [css.withDAO]: !!"0x230A3F13c0ee6de0A0B3B8b4e7cf4E2C8b6a48E2"})}>
+        <div className={classNames({[css.outer]: true, [css.withDAO]: !!"0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829"})}>
           <BreadcrumbsItem to="/">Alchemy</BreadcrumbsItem>
 
           <div className={css.container}>
