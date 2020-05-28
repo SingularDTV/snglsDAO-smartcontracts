@@ -14,7 +14,6 @@ import "./assets/styles/global.scss";
 async function renderApp() {
   // Add icons we want to use from FontAwesome
   library.add(faGithub, faTwitter);
-
   if (process.env.NODE_ENV === "production") {
     sentryInit({
       dsn: "https://748c6f9811fe407ca2853b64bf638690@sentry.io/1419793",

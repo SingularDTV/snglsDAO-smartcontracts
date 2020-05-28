@@ -13,6 +13,8 @@ interface IExternalProps {
 export default (props: IExternalProps) => {
   const { schemes } = props;
 
+  console.log("Unsupported Plugins: ", schemes)
+
   return !schemes.length ? <span></span> :
     (
       <div className={css.wrapper} data-test-id={"schemeCard-unknown"}>

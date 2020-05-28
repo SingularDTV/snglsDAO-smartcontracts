@@ -45,11 +45,13 @@ type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
   console.log('ffeeffee', ownProps, state);
   
+  console.log(process, process.env)
+
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // ownProps.match.params.daoAvatarAddress, //"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", //
+    daoAvatarAddress: "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829", // ownProps.match.params.daoAvatarAddress,
   };
 };
 
@@ -132,7 +134,7 @@ class DaoContainer extends React.Component<IProps, null> {
             "type": "function"
           }
         ],
-      "0x0fbc1939BFF4550b8596c668cb2B8fdcA1C73305"
+      "0xa4a539c9c6882F4B1f235058A3c86a470D7ddcF2"
     );
 
     console.log("Hallo niggas")
@@ -180,8 +182,6 @@ class DaoContainer extends React.Component<IProps, null> {
 
     const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
     
-    // const snglsDao = [foundDaos.find(element => element.id = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d")];
-
     console.log("MEMEME ", foundDaos);
 
     const daoState = this.props.data[0];
@@ -260,7 +260,7 @@ const SubscribedDaoContainer = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    const daoAddress = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";//props.match.params.daoAvatarAddress; // "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"; // 
+    const daoAddress = "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829";//props.match.params.daoAvatarAddress;
     const dao =  arc.dao(daoAddress);
     const observable = combineLatest(
       dao.state({ subscribe: true, fetchAllData: true }), // DAO state

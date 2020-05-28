@@ -77,6 +77,11 @@ h4 {
     margin: 0;
 }
 
+
+.menuOpen {
+  line-height: normal;
+}
+
 .outer {
   width: 100%;
   height: 100%;
@@ -786,13 +791,13 @@ h4 {
                     transition: 0.2s;
                 }
 
-                ul {
+                & > ul {
                     display: none;
                     position: absolute;
                     background-color: #19264B;
                     width: 100%;
                     // min-width: 200px;
-                    max-width: 200px;
+                    max-width: 220px;
                     left: 50%;
                     transform: translateX(-50%);
                     border-radius: 5px;
@@ -808,9 +813,47 @@ h4 {
                       a {
                         color: #fff;
                         font-family: 'TransatBold';
+                        padding: 1px 7px;
 
                         &:hover {
                           color: #fff9;
+                        }
+                        
+                        & > ul {
+                          position: absolute;
+                          display: none;
+                        }
+
+                      }
+
+                      &.submenu {
+                        & > a {
+                          display: block;
+                          &:before {
+                            content: '';
+                            position: absolute;
+                            right: 4px;
+                            top: 14px;
+                            display: block;
+                            border-left: 4px solid #ffffffbd;
+                            border-bottom: 3px solid #fff0;
+                            border-top: 3px solid #fff0;
+                            background: none;
+                            width: auto;
+                            height: auto;
+                          }
+                        }
+
+                        ul {
+                          left: 100%;
+                          transform: translateX(0);
+                          top: 0;
+                          border-radius: 0 8px 8px 8px;
+                          padding: 0;
+                          background: #2e3c63;
+                          min-width: 120px;
+                          width: auto;
+                          box-shadow: none;
                         }
                       }
 
@@ -821,6 +864,7 @@ h4 {
                 }
 
                 &.submenu {
+                  position: relative;
                   & > a {
                     position: relative;
                     padding-right: 18px;
@@ -838,7 +882,7 @@ h4 {
                   }
 
                   &:hover {
-                    ul {
+                    & > ul {
                       display: grid;
                     }
                   }
@@ -863,6 +907,33 @@ h4 {
 
 .menuToggle {
   display: none;
+}
+
+.sidebarToggle {
+  display: none;
+  z-index: 999999;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  color: #fff;
+  background: #101e42d6;
+  width: 42px;
+  height: 42px;
+  line-height: 42px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &.open {
+    background: #EFEFEF;
+  }
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 
@@ -944,11 +1015,71 @@ h4 {
 @media (max-width: 1024px) {
     .header {
         .topInfo {
-            & > div {
+              position: initial;
+            
+              & > div {
                 &.navigation {
-                    display: none;
-                }
-            }
+                  position: absolute;
+                  right: 0;
+                  left: 0;
+                  top: 100%;
+                  background-color: #010B2B;
+                  padding: 15px;
+                  transform: translateX(100%);
+                  opacity: 0;
+                      transition: 0.2s;
+
+                  & > ul {
+                    & > li {
+                      float: none;
+                      padding-left: 0;
+                      padding-right: 0;
+
+                      & > a {
+                        color: #fff;
+                        padding-left: 0;
+
+                        &:hover {
+                          color: #D40D26;
+
+                          &:before {
+                              background: url(/assets/images/Icon/nav_arrow_hover.svg) no-repeat;
+                          }
+                        }
+                      }
+
+                      & > ul {
+                        position: relative;
+                        margin-top: 5px;
+                        max-width: 100%;
+
+                        & > li {
+                          &.submenu {
+                            & > a {
+                              &:before {
+                                   transform: rotate(90deg);
+                              }
+                            }
+                          }
+                          & > ul {
+                            position: relative;
+                            margin-top: 5px;
+                            max-width: 100%;
+                            left: 0;
+                            border-radius: 0;
+                            margin-bottom: -4px;
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  &.menuOpen {
+                    transform: translateX(0%);
+                    opacity: 1;
+                  }
+              }
+              }
         }
     }
   .modalBody {
@@ -1051,6 +1182,13 @@ h4 {
 
 
 @media (max-width: 992px) {
+    .sidebarToggle {
+        display: block;
+
+      img {
+          display: block;
+      }
+    }
     .header {
         .menuToggle {
             display: block;

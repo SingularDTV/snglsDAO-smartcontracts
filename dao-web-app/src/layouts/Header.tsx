@@ -34,6 +34,7 @@ interface IStateProps {
   currentAccountAddress: string | null;
   daoAvatarAddress: Address;
   menuOpen: boolean;
+  sidebarOpen: boolean;
   threeBox: any;
 }
 
@@ -60,6 +61,7 @@ const mapStateToProps = (state: IRootState & IStateProps, ownProps: IExternalPro
     currentAccountAddress: state.web3.currentAccountAddress,
     daoAvatarAddress: match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     menuOpen: state.ui.menuOpen,
+    sidebarOpen: state.ui.sidebarOpen,
     threeBox: state.profiles.threeBox,
   };
 };
@@ -67,6 +69,7 @@ const mapStateToProps = (state: IRootState & IStateProps, ownProps: IExternalPro
 interface IDispatchProps {
   showNotification: typeof showNotification;
   toggleMenu: typeof uiActions.toggleMenu;
+  toggleSidebar: typeof uiActions.toggleSidebar;
   toggleTrainingTooltipsOnHover: typeof uiActions.toggleTrainingTooltipsOnHover;
   enableTrainingTooltipsOnHover: typeof uiActions.enableTrainingTooltipsOnHover;
   disableTrainingTooltipsOnHover: typeof uiActions.disableTrainingTooltipsOnHover;
@@ -78,6 +81,7 @@ interface IDispatchProps {
 const mapDispatchToProps = {
   showNotification,
   toggleMenu: uiActions.toggleMenu,
+  toggleSidebar: uiActions.toggleSidebar,
   toggleTrainingTooltipsOnHover: uiActions.toggleTrainingTooltipsOnHover,
   enableTrainingTooltipsOnHover: uiActions.enableTrainingTooltipsOnHover,
   disableTrainingTooltipsOnHover: uiActions.disableTrainingTooltipsOnHover,
@@ -139,6 +143,10 @@ class Header extends React.Component<IProps, null> {
     this.props.toggleMenu();
   }
 
+  private handleToggleSidebar = (_event: any): void => {
+    this.props.toggleSidebar();
+  }
+
   private handleTrainingTooltipsEnabled = (event: any): void => {
     /**
      * maybe making this asynchronous can address reports of the button responding very slowly
@@ -167,6 +175,14 @@ class Header extends React.Component<IProps, null> {
   private breadCrumbCompare = (a: any, b: any): number => a.weight ? a.weight - b.weight : a.to.length - b.to.length;
 
   public render(): RenderOutput {
+    const navigationClass = classNames({
+      [css.menuOpen]: this.props.menuOpen,
+      [css.navigation]: true
+    });
+    const menuClass = classNames({
+      [css.open]: this.props.sidebarOpen,
+      [css.sidebarToggle]: true
+    });
     const {
       currentAccountProfile,
       currentAccountAddress,
@@ -202,20 +218,51 @@ class Header extends React.Component<IProps, null> {
                 compare={this.breadCrumbCompare}
               />
             </div>
-            <div className={css.navigation}>
+            <div className={navigationClass}>
               <ul>
                 <li><a href="#">DAO</a></li>
                 <li><a href="#">Forum</a></li>
                 <li className={css.submenu}><a href="#">Consumer protection</a>
                     <ul>
-                      <li><a href="#">Sublink</a></li>
-                      <li><a href="#">Sublink</a></li>
-                      <li><a href="#">Sublink</a></li>
+                      <li><a href="#">Token Economics</a></li>
+                      <li><a href="#">Roadmap</a></li>
+                      <li className={css.submenu}><a href="#">Source Code</a>
+                        <ul>
+                          <li><a href="#">SNGLS</a></li>
+                          <li><a href="#">SGT</a></li>
+                          <li><a href="#">snglsDAO</a></li>
+                        </ul>
+                      </li>
+                      <li className={css.submenu}><a href="#">Transaction History</a>
+                        <ul>
+                          <li><a href="#">SNGLS</a></li>
+                          <li><a href="#">SGT</a></li>
+                        </ul>
+                      </li>
+                      <li className={css.submenu}><a href="#">History of Past Token Sales</a>
+                        <ul>
+                          <li><a href="#">SNGLS</a></li>
+                          <li><a href="#">SGT</a></li>
+                        </ul>
+                      </li>
+                      <li className={css.submenu}><a href="#">Token Holders</a>
+                        <ul>
+                          <li><a href="#">SNGLS</a></li>
+                          <li><a href="#">SGT</a></li>
+                        </ul>
+                      </li>
+                      <li className={css.submenu}><a href="#">Security Audit</a>
+                        <ul>
+                          <li><a href="#">snglsDAO</a></li>
+                        </ul>
+                      </li>
                     </ul>
                 </li>
                 <li className={css.submenu}><a href="#">News</a>
                   <ul>
-                    <li><a href="#">Sublink</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Medium</a></li>
+                    <li><a href="#">WeiBo</a></li>
                   </ul>
                 </li>
                 <li><a href="#">Subscribe</a></li>
@@ -318,6 +365,18 @@ class Header extends React.Component<IProps, null> {
           </div>
 
         </nav>
+
+
+
+        <div className={menuClass} onClick={this.handleToggleSidebar}>
+          {this.props.sidebarOpen ?
+            <img src="/assets/images/Icon/close-grey.svg" /> :
+            <span>DAO</span>}
+        </div>
+
+
+
+
       </div>
     );
   }

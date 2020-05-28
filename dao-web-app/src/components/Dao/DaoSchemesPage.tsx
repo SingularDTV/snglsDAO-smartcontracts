@@ -50,10 +50,18 @@ class DaoSchemesPage extends React.Component<IProps, null> {
     const dao = this.props.daoState;
     const allSchemes = data;
 
+    // /* DOG NAIL */
+    // console.log("MYSCHEME==========> ", allSchemes.find(scheme => scheme.staticState.address === "0xb585047812955a06a0d92f5bedc438754c2ef7d3"));
+    
+    // let OurGenericScheme = (allSchemes.find(scheme => scheme.staticState.address === "0xb585047812955a06a0d92f5bedc438754c2ef7d3"));
+    // OurGenericScheme.staticState.name = "GenericScheme"
+
     const contributionReward = allSchemes.filter((scheme: Scheme) => scheme.staticState.name === "ContributionReward");
     const knownSchemes = allSchemes.filter((scheme: Scheme) => scheme.staticState.name !== "ContributionReward" && KNOWN_SCHEME_NAMES.indexOf(scheme.staticState.name) >= 0);
     const unknownSchemes = allSchemes.filter((scheme: Scheme) =>  KNOWN_SCHEME_NAMES.indexOf(scheme.staticState.name) === -1 );
     const allKnownSchemes = [...contributionReward, ...knownSchemes];
+
+    console.log("SHEMES PAGE ================++> ", allKnownSchemes, this.props);
 
     const schemeCardsHTML = (
       <TransitionGroup>

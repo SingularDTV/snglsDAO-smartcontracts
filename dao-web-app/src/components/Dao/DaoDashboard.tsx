@@ -128,7 +128,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
             "type": "function"
           }
         ],
-      "0x0fbc1939BFF4550b8596c668cb2B8fdcA1C73305"
+      "0xa4a539c9c6882F4B1f235058A3c86a470D7ddcF2"
     );
     
     this.setState( 
@@ -141,7 +141,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
     );
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
-      "DAO Address": "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d",
+      "DAO Address": "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829",
       "DAO Name": this.props.daoState.name,
     });
   }
@@ -178,7 +178,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
               href="#!"
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
-              > Join </a>
+              > Get rep </a>
           </div>
         </div>
          {/* Key parameters div */}
@@ -263,7 +263,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                      <img src="/assets/images/Icon/dash_holdings.png" />
                  </div>
                  <div className={css.cont}>
-                     <h4>DAO Holdings</h4>
+                     <h4>DAO Stakes</h4>
                  </div>
                  <div className={css.count}>
                      <ul>
@@ -381,43 +381,6 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
         >
           {membersHTML}
         </InfiniteScroll> */}
-
-
-
-<div className={css.daoModalBlock}>
-
-
-        <div className={css.daoModal}>
-
-          <div className={css.head}>
-            <h4>DAO Reputation</h4>
-            <a href="#"><img src="/assets/images/close.svg" alt=""/></a>
-          </div>
-
-          <div className={css.subhead}>
-            <p>You need to stake tokens to become a member of the DAO</p>
-            <div><a className={css.btn} href="#">LEAVE</a></div>
-          </div>
-
-          <div className={css.content}>
-            <p>The amount you have staked will be your reputation <br/>in the DAO</p>
-            <div className={css.bigInput}>
-              <form action="">
-                <label>SGT</label>
-                <input type="text" value="0.00"/>
-              </form>
-              <span>Holdings <strong>0.00% Rep.</strong></span>
-            </div>
-            <button className={css.submit}>Join</button>
-            <button className={css.remove}>remove</button>
-          </div>
-
-        </div>
-
-
-</div> 
-
-
       </div>
 
     );
@@ -452,7 +415,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"}"
+            dao: "${"0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829"}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",
