@@ -8,7 +8,7 @@ const destEnv = "../.env";
 const rinkebyAirdropOptions = "../../token/airdrop/script/config/options.rinkeby.js";
 const destAirdropOptions = "../../token/airdrop/script/options.js";
 const foundersAddresses = ["0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956", "0x3819a7547B9eC89B74bE1035BfE33c1fDD871EC0", "0x1D21686ae41be46f34eCDC0879577FC3781EB433"];
-const foundersTokens = [1000, 900, 800];
+const foundersTokens = [1000000, 900000, 800000];
 const foundersReputation = [0, 0, 0];
 
 //set founder's address in spec file to current first account
