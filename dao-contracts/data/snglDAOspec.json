@@ -8,24 +8,22 @@
             "voteRemoveParams": 1
         }
     ],
+    "UGenericScheme": [
+        {
+            "targetContract": "0xa4a539c9c6882F4B1f235058A3c86a470D7ddcF2",
+            "voteParams": 2
+        }
+    ],
     "StandAloneContracts": [
         {
             "name": "Fee",
             "fromArc": false,
-            "runFunctions": [
-                {
-                    "functionName": "transferOwnership",
-                    "params": [
-                        "AvatarAddress"
-                    ]
-                }
-            ],
             "constructor": true,
             "params": [
                 1,
-                1,
-                1,
-                1
+                2,
+                3,
+                4
             ]
         },
         {
@@ -39,23 +37,6 @@
         }
     ],
     "CustomSchemes": [
-        {
-            "name": "GenericScheme",
-            "schemeName": "GenericScheme",
-            "isUniversal": false,
-            "params": [
-                "GenesisProtocolAddress",
-                {
-                    "voteParams": 2
-                },
-                {
-                    "StandAloneContract": 0
-                }
-            ],
-            "permissions": "0x00000010",
-            "alias": "GenericSchemeFee",
-            "fromArc": false
-        },
         {
             "name": "LockingSGT4Reputation",
             "schemeName": "LockingSGT4Reputation",
@@ -129,7 +110,8 @@
     ],
     "schemes": {
         "ContributionReward": false,
-        "SchemeRegistrar": true
+        "SchemeRegistrar": true,
+        "UGenericScheme": true
     },
     "unregisterOwner": true,
     "useDaoCreator": true,
@@ -137,17 +119,17 @@
     "founders": [
         {
             "address": "0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956",
-            "tokens": 1000,
+            "tokens": 1000000,
             "reputation": 0
         },
         {
             "address": "0x3819a7547B9eC89B74bE1035BfE33c1fDD871EC0",
-            "tokens": 900,
+            "tokens": 900000,
             "reputation": 0
         },
         {
             "address": "0x1D21686ae41be46f34eCDC0879577FC3781EB433",
-            "tokens": 800,
+            "tokens": 800000,
             "reputation": 0
         }
     ]
