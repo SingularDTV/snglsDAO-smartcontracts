@@ -78,7 +78,7 @@ export class App extends React.Component<{}, {
       }
     }
     
-    console.log("-0000000000000000000--------------0000000000000000---------------", process);
+    console.log("-0000000000000000000--------------0000000000000000---------------", process.env);
     let GOOGLE_ANALYTICS_ID: string;
     switch (process.env.NODE_ENV) {
       case "production": {
