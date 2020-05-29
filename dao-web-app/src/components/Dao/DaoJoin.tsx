@@ -127,14 +127,14 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
       if (error) throw error;
       // Send ERC20 transaction with web3
       console.log("PARAMSSSSS: ", toAddress, calculatedApproveValue);
-      tokenContract.methods.approve(toAddress, calculatedApproveValue).send({from: "0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956"}, function(error: any, txnHash: any) {
+      tokenContract.methods.approve(toAddress, calculatedApproveValue).send({from: accounts[0]}, function(error: any, txnHash: any) {
         if (error) throw error;
         console.log(txnHash);
         console.log(calculatedApproveValue);
         console.log(calculatedApproveValue, Number(values.nativeTokenReward), toWei(Number(values.nativeTokenReward)))
       }).then(function () {
         console.log("REP CONTRACT", reputationContract);
-        reputationContract.methods.lock(calculatedApproveValue, /* min locking period */ 700000).send({from: "0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956", gas: 1000000}, function(error: any, txnHash: any) {
+        reputationContract.methods.lock(calculatedApproveValue, /* min locking period */ 700000).send({from: accounts[0]}, function(error: any, txnHash: any) {
           if (error) throw error;
           console.log
           console.log("TX2", txnHash);
