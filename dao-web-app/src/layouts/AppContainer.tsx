@@ -25,6 +25,7 @@ import { captureException, withScope } from "@sentry/browser";
 import { Address } from "@daostack/client";
 import { sortedNotifications } from "../selectors/notifications";
 import * as css from "./App.scss";
+import * as Sticky from "react-stickynode";
 
 interface IExternalProps extends RouteComponentProps<any> {
   history: History;
@@ -199,9 +200,13 @@ class AppContainer extends React.Component<IProps, IState> {
           <div className={css.container}>
             <Route path="/" render={this.headerHtml} />
 
-            <div className={css.pageWrapper}>
+            <div id="wrapper" className={css.pageWrapper}>
               <div className={css.sidebarWrapper}>
+
+                
+                <Sticky enabled={true} top='#header' bottomBoundary='#wrapper' innerZ={10000}>
                 <Route path="/" render={this.sidebarHtml} />
+                </Sticky>
               </div>
 
               <div className={css.contentWrapper}>

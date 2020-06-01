@@ -197,7 +197,7 @@ class Header extends React.Component<IProps, null> {
 
     return(
       <div className={css.headerContainer}>
-        <nav className={css.header}>
+        <nav id="header" className={css.header}>
           <TrainingTooltip overlay="View your personal feed" placement="bottomRight">
             <div className={css.menu}>
               <Link to="/">

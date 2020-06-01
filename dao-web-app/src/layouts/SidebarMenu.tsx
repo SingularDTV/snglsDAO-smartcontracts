@@ -18,7 +18,6 @@ import { first } from "rxjs/operators";
 import { IRootState } from "reducers";
 import { connect } from "react-redux";
 import { combineLatest, of, from } from "rxjs";
-// import * as Sticky from "react-stickynode";
 
 import Tooltip from "rc-tooltip";
 import * as css from "./SidebarMenu.scss";
@@ -124,7 +123,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         <div className={css.followButton}><FollowButton id={dao.address} type="daos" style="default" /></div> */}
 
 
-        {/* <Sticky enabled={true} top={113} bottomBoundary={280} innerZ={10000}> */}
+        
 
         <div className={css.daoNavigation}>
           <span className={css.daoNavHeading}><b>Menu</b></span>
@@ -256,7 +255,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         </div>
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
-            <b>DAO Stakes</b>
+            <b>DAO Holdings</b>
             <a className="externalLink" href={daoHoldingsAddress}>
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
@@ -278,7 +277,6 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
           </ul>
         </div>
 
-        {/* </Sticky> */}
 
       </div>
     );
