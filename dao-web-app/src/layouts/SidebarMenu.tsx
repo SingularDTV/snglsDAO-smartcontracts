@@ -18,7 +18,6 @@ import { first } from "rxjs/operators";
 import { IRootState } from "reducers";
 import { connect } from "react-redux";
 import { combineLatest, of, from } from "rxjs";
-import * as Sticky from "react-stickynode";
 
 import Tooltip from "rc-tooltip";
 import * as css from "./SidebarMenu.scss";
@@ -48,13 +47,13 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   console.log("SIDEBAR mapStateTotProps: ", ownProps, " *", 
   {
     ...ownProps,
-    daoAvatarAddress: "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   }
   );
   return {
     ...ownProps,
-    daoAvatarAddress: "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   };
 };
@@ -124,7 +123,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         <div className={css.followButton}><FollowButton id={dao.address} type="daos" style="default" /></div> */}
 
 
-        <Sticky enabled={true} top={113} bottomBoundary={3000} innerZ={10000}>
+        
 
         <div className={css.daoNavigation}>
           <span className={css.daoNavHeading}><b>Menu</b></span>
@@ -256,7 +255,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         </div>
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
-            <b>DAO Stakes</b>
+            <b>DAO Holdings</b>
             <a className="externalLink" href={daoHoldingsAddress}>
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
@@ -278,7 +277,6 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
           </ul>
         </div>
 
-        </Sticky>
 
       </div>
     );
@@ -298,7 +296,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     return (
       <div className={sidebarClass}>
         <div className={css.menuContent}>
-          { "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829" && this.props.data ? this.daoMenu() : ""}
+          { "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d" && this.props.data ? this.daoMenu() : ""}
 
           <div className={css.siteLinksWrapper}>
             <ul>
@@ -411,7 +409,7 @@ const SubscribedSidebarMenu = withSubscription({
   loadingComponent: <div></div>,
   createObservable: (props: IProps) => {
     if (props.daoAvatarAddress) {
-      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829") || "0";
+      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d") || "0";
 
       const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
         .then((response: AxiosResponse<any>): IHasNewPosts => {
@@ -431,7 +429,7 @@ const SubscribedSidebarMenu = withSubscription({
         });
 
       const arc = getArc();
-      return combineLatest(arc.dao("0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829").state({ subscribe: true }), from(promise));
+      return combineLatest(arc.dao("0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d").state({ subscribe: true }), from(promise));
     } else {
       return of(null);
     }
