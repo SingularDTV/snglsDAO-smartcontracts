@@ -1,0 +1,54 @@
+{
+  "rinkeby": {
+    "orgName": "Singularity DAO",
+    "Schemes": [
+      {
+        "name": "GenericScheme",
+        "alias": "GenericSchemeFee",
+        "address": "0xB01ed77fE9BC8A9B040C0168e9fCc478DAD5aFB3",
+        "arcVersion": "0.0.1-rc.32"
+      }
+    ],
+    "StandAloneContracts": [
+      {
+        "name": "Fee",
+        "address": "0x308398eA30F1B2337990fC6dF49B6E15B4dF83B4",
+        "arcVersion": "0.0.1-rc.32"
+      },
+      {
+        "name": "MembershipFeeStaking",
+        "address": "0x7150312106d68C828809445FcA4a2e938014Aa37",
+        "arcVersion": "0.0.1-rc.32"
+      }
+    ],
+    "Avatar": "0xAC6BF1Cf3b8CcC9CdAc79a04BAc3e51749C9e2dE",
+    "foundersToAddCount": -17,
+    "foundersAdditionCounter": 0,
+    "Controller": "0xE9f8477918E9c265C0Fa843e28147964581f6ce9",
+    "schemeNames": [
+      "Scheme Registrar",
+      "GenericScheme"
+    ],
+    "schemes": [
+      "0xCe77Cb61fbF2600F0e29Bb50Be3a5B32Fc61a0a4",
+      "0xB01ed77fE9BC8A9B040C0168e9fCc478DAD5aFB3"
+    ],
+    "params": [
+      "0xe9fa78e63e372e16ba8869ce6821c709aa7431ad4d1792cc837d5dc7c94d12f0",
+      "0x0000000000000000000000000000000000000000000000000000000000000000"
+    ],
+    "permissions": [
+      "0x0000001F",
+      "0x00000010"
+    ],
+    "votingMachinesParams": [
+      "0x7c0a3549e93e05d1c28902c6bdceef49681331d3e8f618ab470130bb645ef134",
+      "0xff0374d9d19123fc378b15f9ca423fed9f4fcfcdf07c70b744a1574d35696e4e",
+      "0x05703fbbc99e768a132ceb05567868cf716788d90bc7a4b37c47d18e5e06b2ff"
+    ],
+    "registeredGenesisProtocolParamsCount": 4,
+    "SchemeRegistrarParamsCount": 2,
+    "standAloneContractsCounter": 3,
+    "CustomSchemeCounter": 1
+  }
+}
