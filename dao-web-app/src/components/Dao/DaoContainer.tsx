@@ -45,11 +45,13 @@ type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
   console.log('ffeeffee', ownProps, state);
   
+  console.log(process, process.env)
+
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // ownProps.match.params.daoAvatarAddress, //"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", //
+    daoAvatarAddress: "0x97f0a184aea5a64E5F0Ee6367613e458450C0D15", // ownProps.match.params.daoAvatarAddress,
   };
 };
 
@@ -67,85 +69,9 @@ class DaoContainer extends React.Component<IProps, null> {
     // const search = this.state.search.length > 2 ? this.state.search.toLowerCase() : "";
     console.log("daos render func  ", data);
     let allDAOs = data[0];
-
-    const arc = getArc();
-    const feeContract = new arc.web3.eth.Contract(
-        [
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "listingFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "membershipFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "transactionFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "validationFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          }
-        ],
-      "0x0fbc1939BFF4550b8596c668cb2B8fdcA1C73305"
-    );
-
-    console.log("Hallo niggas")
-
-    console.log("oooooooooooooooooooooo: ", await feeContract.methods.transactionFee().call());
-    console.log("oooooooooooooooooooooo: ", await feeContract.methods.listingFee().call());
-    console.log("oooooooooooooooooooooo: ", await feeContract.methods.transactionFee().call());
-    console.log("oooooooooooooooooooooo: ", await feeContract.methods.validationFee().call());
-    
-
     console.log(allDAOs)
     // TODO: use this once 3box fixes Box.getProfiles
-    //this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
+    this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
   
   // private daoJoinRoute = (routeProps: any) => <DaoJoinPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
@@ -180,8 +106,6 @@ class DaoContainer extends React.Component<IProps, null> {
 
     const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
     
-    // const snglsDao = [foundDaos.find(element => element.id = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d")];
-
     console.log("MEMEME ", foundDaos);
 
     const daoState = this.props.data[0];
@@ -260,7 +184,7 @@ const SubscribedDaoContainer = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    const daoAddress = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";//props.match.params.daoAvatarAddress; // "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"; // 
+    const daoAddress = "0x97f0a184aea5a64E5F0Ee6367613e458450C0D15";//props.match.params.daoAvatarAddress;
     const dao =  arc.dao(daoAddress);
     const observable = combineLatest(
       dao.state({ subscribe: true, fetchAllData: true }), // DAO state
