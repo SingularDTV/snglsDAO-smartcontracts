@@ -128,7 +128,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
             "type": "function"
           }
         ],
-      "0x8dedb4c0B1fEf53da80BB7907404EC9258EE6A7B"
+      "0x3326Cc7d9A63DA0b508A6DfAEBE0B0a82Ad92E27"
     );
     
     this.setState( 
@@ -141,7 +141,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
     );
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
-      "DAO Address": "0x22EC9ecE5CcD92e94f161b98B3914027b42550B4",
+      "DAO Address": "0xF51773c2b907317E29C7a091a3a3F6F444135D12",
       "DAO Name": this.props.daoState.name,
     });
   }
@@ -415,7 +415,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0x97f0a184aea5a64E5F0Ee6367613e458450C0D15"}"
+            dao: "${"0xF51773c2b907317E29C7a091a3a3F6F444135D12"}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",
