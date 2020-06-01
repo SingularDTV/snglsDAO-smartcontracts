@@ -1,10 +1,8 @@
 import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake/*, Member*/ } from "@daostack/client";
-import { enableWalletProvider,  getArc } from "arc";
+import { enableWalletProvider,  getArc, getArcSettings } from "arc";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
-import Analytics from "lib/analytics";
-import { Page } from "pages";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as InfiniteScroll from "react-infinite-scroll-component";
@@ -66,69 +64,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   public async componentDidMount() {
     const arc = getArc();
     const feeContract = new arc.web3.eth.Contract(
-        [
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "listingFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "membershipFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "transactionFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "validationFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          }
-        ],
-      "0x8dedb4c0B1fEf53da80BB7907404EC9258EE6A7B"
+      getArcSettings().feesContractABI,
+      getArcSettings().feesContractAddress
     );
     
     this.setState( 
@@ -139,11 +76,6 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
         membershipFee:  await feeContract.methods.membershipFee().call()
       }
     );
-    Analytics.track("Page View", {
-      "Page Name": Page.DAOHistory,
-      "DAO Address": "0x22EC9ecE5CcD92e94f161b98B3914027b42550B4",
-      "DAO Name": this.props.daoState.name,
-    });
   }
 
   public render(): RenderOutput {
@@ -415,7 +347,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0x97f0a184aea5a64E5F0Ee6367613e458450C0D15"}"
+            dao: "${getArcSettings().daoAvatarContractAddress}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",

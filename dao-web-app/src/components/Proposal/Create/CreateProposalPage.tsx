@@ -1,5 +1,5 @@
 import { ISchemeState } from "@daostack/client";
-import { getArc } from "arc";
+import { getArc, getArcSettings } from "arc";
 import CreateKnownGenericSchemeProposal from "components/Proposal/Create/SchemeForms/CreateKnownGenericSchemeProposal";
 import CreateSchemeRegistrarProposal from "components/Proposal/Create/SchemeForms/CreateSchemeRegistrarProposal";
 import CreateUnknownGenericSchemeProposal from "components/Proposal/Create/SchemeForms/CreateUnknownGenericSchemeProposal";
@@ -67,7 +67,7 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
     Analytics.track("Page View", {
       "Page Name": Page.CreateProposal,
-      "DAO Address": "0x97f0a184aea5a64E5F0Ee6367613e458450C0D15",
+      "DAO Address": getArcSettings().daoAvatarContractAddress,
       "Scheme Address": this.props.schemeId,
     });
     const newState = {};
@@ -95,7 +95,7 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
-    const daoAvatarAddress = "0x97f0a184aea5a64E5F0Ee6367613e458450C0D15";
+    const daoAvatarAddress = getArcSettings().daoAvatarContractAddress;
     const scheme = this.props.data;
 
     let createSchemeComponent = <div />;

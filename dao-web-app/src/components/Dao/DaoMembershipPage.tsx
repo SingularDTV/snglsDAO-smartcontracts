@@ -1,5 +1,5 @@
 import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake } from "@daostack/client";
-import { getArc } from "arc";
+import { getArc, getArcSettings } from "arc";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
@@ -24,13 +24,13 @@ interface IExternalProps extends RouteComponentProps<any> {
 type SubscriptionData = Proposal[];
 type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
 
-class DaoHistoryPage extends React.Component<IProps, null> {
+class DaoMembershipFeePage extends React.Component<IProps, null> {
 
   public componentDidMount() {
     console.log("HISTORY componentDidMount <<<<<<<<<<<==============================")
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
-      "DAO Address": "0x97f0a184aea5a64E5F0Ee6367613e458450C0D15",
+      "DAO Address": getArcSettings().daoAvatarContractAddress,
       "DAO Name": this.props.daoState.name,
     });
   }
@@ -144,7 +144,7 @@ class DaoHistoryPage extends React.Component<IProps, null> {
 }
 
 export default withSubscription({
-  wrappedComponent: DaoHistoryPage,
+  wrappedComponent: DaoMembershipFeePage,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
 
@@ -171,7 +171,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0x97f0a184aea5a64E5F0Ee6367613e458450C0D15"}"
+            dao: "${getArcSettings().daoAvatarContractAddress}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",

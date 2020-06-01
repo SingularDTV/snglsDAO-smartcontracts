@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { IDAOState, Token } from "@daostack/client";
 import { hideMenu } from "actions/uiActions";
-import { getArc } from "arc";
+import { getArc, getArcSettings } from "arc";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 
 import BN = require("bn.js");
@@ -48,13 +48,13 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   console.log("SIDEBAR mapStateTotProps: ", ownProps, " *", 
   {
     ...ownProps,
-    daoAvatarAddress: "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: getArcSettings().daoAvatarContractAddress, // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   }
   );
   return {
     ...ownProps,
-    daoAvatarAddress: "0x886e0Ec6e601c0013b025e2e6f38C52c79D3a829", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: getArcSettings().daoAvatarContractAddress, // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   };
 };

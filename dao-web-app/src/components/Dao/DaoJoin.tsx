@@ -1,6 +1,6 @@
 import { IDAOState, ISchemeState /*, IProposalCreateOptionsCompetition */ } from "@daostack/client";
 import * as arcActions from "../../actions/arcActions";
-import { enableWalletProvider, getArc } from "../../arc";
+import { enableWalletProvider, getArc, getArcSettings } from "../../arc";
 import withSubscription, { ISubscriptionProps } from "../../components/Shared/withSubscription";
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import { /* baseTokenName, supportedTokens,  toBaseUnit, tokenDetails, */ toWei,  isValidUrl/*, getLocalTimezone */ } from "lib/util";
@@ -321,7 +321,7 @@ const SubscribedCreateContributionRewardExProposal = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    return arc.dao("0x97f0a184aea5a64E5F0Ee6367613e458450C0D15").state();
+    return arc.dao(getArcSettings().daoAvatarContractAddress).state();
   },
 });
 

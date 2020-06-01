@@ -183,6 +183,21 @@ export const settings = {
     ipfsProvider: process.env.ARC_IPFSPROVIDER || "https://api.thegraph.com:443/ipfs-daostack/api/v0",
     txSenderServiceUrl: "https://tx-sender-service.herokuapp.com/send-tx",
     web3ConnectProviderOptions: getWeb3ConnectProviderOptions("rinkeby"),
+    
+    daoAvatarContractAddress: "0xeF94b25C0685124B6acFf65dfd72c7D8799B8d48",
+    sgtTokenContractAddress: "0x688f78c123D1d0cE8e0326F91Cdd8E66b0eaeaA6",
+    reputationContractAddress: "0x77B80e9E828D9f6EE1EeB54604cabbd5E4b51984",
+    controllerContractAddress: "0x8F8F145DBdb606F4F883C23333E213C095b80980",
+    lockingSGT4ReputationContractAddress: "0x446a8A5676030C44c14b313135F4566df299C1D7",
+    contributionRewardContractAddress: "0xB3b7b5f7602cC5ac25f5EE375C6dB8659948E4dD",
+    feesContractAddress: "0xfbA4f76237E37bC66cFC2f692E1a80a7F6CFd5F4",
+    membershipFeeStakingContractAddress: "0x097cAfb3Bd6CcB41BEb5bdb01607fa5266287bA4",
+    snglsTokenContractAddress: "0xd12eC26c3A8604D972403a18e425cA374F980601",
+
+    erc20TokenContractABI: {},
+    membershipFeeStakingContractABI: {},
+    lockingSGT4ReputationContractABI: {},
+    feesContractABI: [{"inputs":[{"internalType":"uint256","name":"_listingFee","type":"uint256"},{"internalType":"uint256","name":"_transactionFee","type":"uint256"},{"internalType":"uint256","name":"_validationFee","type":"uint256"},{"internalType":"uint256","name":"_membershipFee","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":true,"inputs":[] as any,"name":"isOwner","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"listingFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"membershipFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"transactionFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"validationFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_listingFee","type":"uint256"}],"name":"setListingFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_transactionFee","type":"uint256"}],"name":"setTransactionFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_validationFee","type":"uint256"}],"name":"setValidationFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_membershipFee","type":"uint256"}],"name":"setMembershipFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
   },
   kovan: {
     graphqlHttpProvider: process.env.ARC_GRAPHQLHTTPPROVIDER || "https://api.thegraph.com/subgraphs-daostack/name/daostack/v39_1_kovan",
