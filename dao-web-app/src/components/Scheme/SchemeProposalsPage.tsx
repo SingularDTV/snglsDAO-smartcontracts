@@ -130,7 +130,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
         { proposalsQueued.length === 0 && proposalsPreBoosted.length === 0 && proposalsBoosted.length === 0
           ?
           <div className={css.noDecisions}>
-            <img className={css.relax} src="/assets/images/yogaman.svg"/>
+            <img className={css.relax} src="/assets/images/logo_white.svg"/>
             <div className={css.proposalsHeader}>
               No upcoming proposals
             </div>
@@ -159,7 +159,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
                 {proposalsBoosted.length === 0
                   ?
                   <div>
-                    <img src="/assets/images/yoga.svg"/>
+                    <img src="/assets/images/logo_icon.svg"/>
                   </div>
                   : " "
                 }
@@ -177,7 +177,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
                 {proposalsPreBoosted.length === 0
                   ?
                   <div>
-                    <img src="/assets/images/yoga.svg"/>
+                    <img src="/assets/images/logo_icon.svg"/>
                   </div>
                   : " "
                 }
@@ -194,7 +194,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
                 {proposalsQueued.length === 0
                   ?
                   <div>
-                    <img src="/assets/images/yoga.svg"/>
+                    <img src="/assets/images/logo_icon.svg"/>
                   </div>
                   : " "
                 }
