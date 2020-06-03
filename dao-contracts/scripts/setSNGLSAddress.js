@@ -1,7 +1,7 @@
 const singularContractAddress = require("../../token/contracts/build/contracts/SingularDTVToken.json");
 contract("setSNGLSAddress script", accounts => {
     it(``, async () => {
-        singularContractAddress = singularContractAddress.networks[await web3.eth.net.getId].address;
+        singularContractAddress = singularContractAddress.networks[await web3.eth.net.getId()].address;
         const specFile = "../data/snglDAOspec.json";
 
         const fs = require("fs")
