@@ -233,7 +233,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
             <b>DAO Treasury</b>
-            <a className="externalLink" href={daoHoldingsAddress}>
+            <a className="externalLink" href={daoHoldingsAddress} target="_blank">
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
@@ -256,7 +256,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
             <b>DAO Stakes</b>
-            <a className="externalLink" href={daoHoldingsAddress}>
+            <a className="externalLink" href={daoHoldingsAddress} target="_blank">
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
