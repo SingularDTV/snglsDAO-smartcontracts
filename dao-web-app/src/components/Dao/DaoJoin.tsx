@@ -260,17 +260,20 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
           }: FormikProps<IFormValues>) =>
             <Form noValidate>
               <div className={css.subhead}>
-              <label className={css.description}>What to Expect</label>
-              <div className={css.description}>This competition proposal can distribute funds, mint new DAO tokens, or assign Reputation. Additionally, you may determine how many winners are rewarded, as well as their proportional distribution.
-                  Each proposal may specify one of each action, e.g. &quot;3 ETH and 100 Reputation in total rewards, 3 total winners, 50/25/25% reward distribution&quot;.</div>
+                <div className={css.description}>
+                    <p>You need to stake tokens to become a member of the DAO</p>
+                </div>
+                  <div>
+                  <a href="#" className={css.btn}>LEAVE</a>
+                  </div>
               </div>
 
               <div className={css.content}>
+                <p>The amount you have staked will be your reputation in the DAO</p>
               <div className={css.rewards}>
                 <div className={css.reward}>
-                  <div className={css.newInput}>
-                    <label htmlFor="nativeTokenRewardInput">
-                      DAO token ({dao.tokenSymbol})
+                  <div className={css.bigInput}>
+                    <label htmlFor="nativeTokenRewardInput">{dao.tokenSymbol}
                       <ErrorMessage name="nativeTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                     </label>
                     <Field
@@ -282,6 +285,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                       className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
                     />
                   </div>
+                  <span className={css.holdings}>Holdings<strong>0.00% Rep.</strong></span>
                 </div>
               </div>
 
