@@ -92,7 +92,8 @@
     display: block;
     font-weight: $normal;
     font-size: 11px;
-    color: $black-halftone;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
 

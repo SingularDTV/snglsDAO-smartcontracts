@@ -110,14 +110,15 @@ button.disabled {
   background-color: transparent;
   margin-right: 20px;
   margin-bottom: 0px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   position: relative;
   overflow: hidden;
   transition: all .25s ease;
   vertical-align: top;
   height: auto;
   overflow: visible;
-  justify-content: center;
+  // justify-content: center;
   width: 100%;
 }
 
@@ -385,7 +386,7 @@ button.disabled {
   flex-grow: 1;
   // min-width: 320px;
   max-width: 465px;
-  width: 100%;
+  width: calc(100% - 40px);
   min-width: 300px;
 }
 
