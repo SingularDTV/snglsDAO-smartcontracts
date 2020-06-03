@@ -62,7 +62,7 @@ class RedemptionsMenu extends React.Component<IProps, null> {
           ))
           : <div className={css.empty}>
             <h2>Nothing to redeem</h2>
-            <img src="/assets/images/empty-redemptions.svg"/>
+            <img src="/assets/images/Icon/menu/Airdrop-waporwave-icon.png"/>
           </div>}
       </div>
       <div className={css.actions}>
