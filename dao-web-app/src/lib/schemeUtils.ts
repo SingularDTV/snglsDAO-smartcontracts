@@ -102,7 +102,7 @@ export function schemeName(scheme: ISchemeState|IContractInfo, fallback?: string
       } else {
         // Adding the address is a bit long for a title
         // name = `Blockchain Interaction (${contractToCall})`;
-        name = "Blockchain Interaction";
+        name = "Fee changing application";
       }
     } else {
       // this should never happen...
@@ -111,7 +111,7 @@ export function schemeName(scheme: ISchemeState|IContractInfo, fallback?: string
   } else if (scheme.name === "ContributionReward") {
     name ="Funding and Voting Power";
   } else if (scheme.name === "SchemeRegistrar") {
-    name ="Scheme Manager";
+    name ="Apps Manager";
   } else if (scheme.name) {
     if (scheme.name === "ContributionRewardExt") {
       name = rewarderContractName(scheme as ISchemeState);

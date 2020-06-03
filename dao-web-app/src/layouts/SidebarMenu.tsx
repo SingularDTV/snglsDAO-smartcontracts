@@ -47,13 +47,13 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   console.log("SIDEBAR mapStateTotProps: ", ownProps, " *", 
   {
     ...ownProps,
-    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0xF51773c2b907317E29C7a091a3a3F6F444135D12", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   }
   );
   return {
     ...ownProps,
-    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0xF51773c2b907317E29C7a091a3a3F6F444135D12", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   };
 };
@@ -238,13 +238,13 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             </a>
           </span>
           <ul>
-            <li key={"0x0"}>
+            {/* <li key={"0x0"}>
               <Tooltip overlay={`${
                 fromWei(dao.reputationTotalSupply).toLocaleString(
                   undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP`} placement="right">
                 <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
               </Tooltip>
-            </li>            
+            </li>             */}
 
             <SubscribedEthBalance dao={dao} />
 
@@ -255,7 +255,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         </div>
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
-            <b>DAO Holdings</b>
+            <b>DAO Stakes</b>
             <a className="externalLink" href={daoHoldingsAddress}>
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
@@ -296,11 +296,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     return (
       <div className={sidebarClass}>
         <div className={css.menuContent}>
-          { "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d" && this.props.data ? this.daoMenu() : ""}
+          { "0xF51773c2b907317E29C7a091a3a3F6F444135D12" && this.props.data ? this.daoMenu() : ""}
 
           <div className={css.siteLinksWrapper}>
             <ul>
-              <li><Link to="/" onClick={this.handleCloseMenu}>Home</Link></li>
               <li>
                 <a>$ Buy SNGLS</a>
                 <ul>
@@ -328,7 +327,24 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   }
                 </ul>
               </li>
-              <li><Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</Link></li>
+              <li>
+                <a>$ Buy GEN</a>
+                <ul>
+                  <div className={css.diamond}></div>
+                  {
+                    getExchangesList().map((item: any) => {
+                      return (
+                        <li key={item.name}>
+                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="buyGenLink">
+                            <b><img src={item.logo} /></b>
+                            <span>{item.name}</span>
+                          </a>
+                        </li>
+                      );
+                    })
+                  }
+                </ul>
+              </li>
               <li className={css.daoStack}>
                 <a className="externalLink" href="https://snglsdao.io/" target="_blank" rel="noopener noreferrer">
                   <img src={"/assets/images/logo_icon.svg"} /> snglsDAO
@@ -409,7 +425,7 @@ const SubscribedSidebarMenu = withSubscription({
   loadingComponent: <div></div>,
   createObservable: (props: IProps) => {
     if (props.daoAvatarAddress) {
-      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d") || "0";
+      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0xF51773c2b907317E29C7a091a3a3F6F444135D12") || "0";
 
       const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
         .then((response: AxiosResponse<any>): IHasNewPosts => {
@@ -429,7 +445,7 @@ const SubscribedSidebarMenu = withSubscription({
         });
 
       const arc = getArc();
-      return combineLatest(arc.dao("0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d").state({ subscribe: true }), from(promise));
+      return combineLatest(arc.dao("0xF51773c2b907317E29C7a091a3a3F6F444135D12").state({ subscribe: true }), from(promise));
     } else {
       return of(null);
     }

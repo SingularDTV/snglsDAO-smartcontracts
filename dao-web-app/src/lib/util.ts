@@ -170,11 +170,13 @@ export function genName() {
 }
 
 export function supportedTokens() {
-  return { [getArc().GENToken().address]:  {
-    decimals: 18,
-    name: "DAOstack GEN",
-    symbol: genName(),
-  }, ...tokens[targetedNetwork()]["tokens"]};
+  return { 
+  //   [getArc().GENToken().address]:  {
+  //   decimals: 18,
+  //   name: "DAOstack GEN",
+  //   symbol: genName(),
+  // }, 
+  ...tokens[targetedNetwork()]["tokens"]};
 }
 
 export function formatTokens(amountWei: BN|null, symbol?: string, decimals = 18): string {
