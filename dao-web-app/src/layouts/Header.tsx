@@ -222,7 +222,7 @@ class Header extends React.Component<IProps, null> {
               <ul>
                 <li><a href="#">DAO</a></li>
                 <li><a href="#">Forum</a></li>
-                <li className={css.submenu}><a href="#">Consumer protection</a>
+                <li className={css.submenu}><a href="#">Consumer Protection</a>
                     <ul>
                       <li><a href="#">Token Economics</a></li>
                       <li><a href="#">Roadmap</a></li>
@@ -266,7 +266,7 @@ class Header extends React.Component<IProps, null> {
                   </ul>
                 </li>
                 <li><a href="#">Subscribe</a></li>
-                <li><a href="#">Github</a></li>
+                <li><a href="#">GitHub</a></li>
               </ul>
             </div>
           </div>

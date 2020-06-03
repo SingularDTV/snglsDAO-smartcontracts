@@ -238,13 +238,13 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             </a>
           </span>
           <ul>
-            <li key={"0x0"}>
+            {/* <li key={"0x0"}>
               <Tooltip overlay={`${
                 fromWei(dao.reputationTotalSupply).toLocaleString(
                   undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP`} placement="right">
                 <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
               </Tooltip>
-            </li>            
+            </li>             */}
 
             <SubscribedEthBalance dao={dao} />
 
@@ -255,7 +255,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         </div>
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
-            <b>DAO Holdings</b>
+            <b>DAO Stakes</b>
             <a className="externalLink" href={daoHoldingsAddress}>
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
@@ -300,7 +300,6 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
 
           <div className={css.siteLinksWrapper}>
             <ul>
-              <li><Link to="/" onClick={this.handleCloseMenu}>Home</Link></li>
               <li>
                 <a>$ Buy SNGLS</a>
                 <ul>
@@ -328,7 +327,24 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   }
                 </ul>
               </li>
-              <li><Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</Link></li>
+              <li>
+                <a>$ Buy GEN</a>
+                <ul>
+                  <div className={css.diamond}></div>
+                  {
+                    getExchangesList().map((item: any) => {
+                      return (
+                        <li key={item.name}>
+                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="buyGenLink">
+                            <b><img src={item.logo} /></b>
+                            <span>{item.name}</span>
+                          </a>
+                        </li>
+                      );
+                    })
+                  }
+                </ul>
+              </li>
               <li className={css.daoStack}>
                 <a className="externalLink" href="https://snglsdao.io/" target="_blank" rel="noopener noreferrer">
                   <img src={"/assets/images/yoga.svg"} /> snglsDAO

@@ -178,7 +178,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
               href="#!"
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
-              > Get rep </a>
+              > Get reputation </a>
           </div>
         </div>
          {/* Key parameters div */}
@@ -269,7 +269,6 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                      <ul>
                          <li><span>SGT:</span><p>2960</p></li>
                          <li><span>Sngls:</span><p>140000</p></li>
-                         <li><span>GEN:</span><p>10000000</p></li>
                      </ul>
                  </div>
              </div>
