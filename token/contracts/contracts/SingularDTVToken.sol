@@ -27,8 +27,8 @@ contract SingularDTVToken is StandardToken {
     /// @param value Number of tokens to transfer.
     function transfer(address to, uint256 value) public returns (bool) {
         // Both parties withdraw their reward first
-        singularDTVFund.softWithdrawRewardFor(msg.sender);
-        singularDTVFund.softWithdrawRewardFor(to);
+        // singularDTVFund.softWithdrawRewardFor(msg.sender);
+        // singularDTVFund.softWithdrawRewardFor(to);
         return super.transfer(to, value);
     }
 

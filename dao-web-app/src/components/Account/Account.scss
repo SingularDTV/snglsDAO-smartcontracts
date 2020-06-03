@@ -245,18 +245,18 @@ a.accountName {
 .profileDescription {
   color: #fff;
   font-family: Montserrat;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 
   label {
     margin-bottom: 5px;
     display: block;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 22px;
     line-height: 32px;
   }
 
   div {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 20px;
     padding-top: 7px;
   }
@@ -304,7 +304,8 @@ a.accountName {
     padding: 40px;
 
     .followButton {
-      margin-top: 10px;
+      margin-top: 0px;
+      margin-bottom: 20px;
       button {
         border: 0;
         background: #D40D26;
@@ -328,7 +329,13 @@ a.accountName {
   }
 
   .userAvatarContainer {
-    width: 100px;
+    // width: 46px;
+    margin-right: 20px;
+
+    img {
+      max-width: 100%;
+      
+    }
   }
 
   .saveProfile {
@@ -342,7 +349,7 @@ a.accountName {
     align-items: center;
     font-family: Montserrat;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 22px;
     line-height: 32px;
     margin-bottom: 20px;
@@ -359,7 +366,7 @@ a.accountName {
 
   .otherInfoContainer {
     width: 100%;
-    background: #010B2B;
+    background: #010b2b7a;
     position: relative;
     padding: 40px;
 
@@ -447,21 +454,34 @@ a.accountName {
   position: relative;
   padding-bottom: 20px;
   width: 100%;
+
+
   color: #fff;
 
-  h3 {
-    padding-bottom: 20px;
+  strong {
+    padding-bottom: 10px;
+    display: block;
   }
 
-  a {
+  & > a {
     color: #fff;
-    padding: 3px 0;
+    margin: 0 7px;
+    display: inline-block;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 
 .socialButtonAuthenticated {
   .icon {
-    color: #76c9de;
+    color: #fff;
+    font-size: 26px;
   }
 }
 
