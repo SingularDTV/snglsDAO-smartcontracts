@@ -106,7 +106,7 @@ button.disabled {
 }
 
 .proposal {
-  border-radius: 15px;
+  // border-radius: 15px;
   background-color: transparent;
   margin-right: 20px;
   margin-bottom: 0px;
@@ -278,7 +278,7 @@ button.disabled {
 .voteButtons {
   position: relative;
   background: rgba(196, 196, 196, 0.1);
-  padding: 7px 33px;
+  padding: 10px 33px;
   font-family: Montserrat;
   font-weight: normal;
   font-size: 14px;
@@ -332,10 +332,10 @@ button.disabled {
 .stakeButtons {
   position: relative;
   background: rgba(196, 196, 196, 0.1);
-  padding: 7px 33px;
+  padding: 10px 33px;
   font-family: TransatStandard;
   font-weight: normal;
-  font-size: 14зчpx;
+  font-size: 14px;
   // line-height: 31px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -408,7 +408,7 @@ button.disabled {
 
 .proposalSummaryContainer {
   position: relative;
-  left: -45px;
+  // left: -45px;
   &.hasTags {
     margin-bottom: 18px;
   }

@@ -95,14 +95,14 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
                         </th>
                         <td>
                           <span>{schemeRegistrar.schemeToRegister}</span>
-                          <img src="/assets/images/Icon/Copy-blue.svg" onClick={this.copySchemeAddressOnClick(schemeRegistrar)} />
+                          <img src="/assets/images/Icon/Copy-white_nobg.svg" onClick={this.copySchemeAddressOnClick(schemeRegistrar)} />
                         </td>
                       </tr>
                       <tr>
                         <th>Param Hash:</th>
                         <td>
                           <span>{schemeRegistrar.schemeToRegisterParamsHash.slice(0, 43)}</span>
-                          <img src="/assets/images/Icon/Copy-blue.svg" onClick={this.copySchemeParamsHashOnClick(schemeRegistrar)} />
+                          <img src="/assets/images/Icon/Copy-white_nobg.svg" onClick={this.copySchemeParamsHashOnClick(schemeRegistrar)} />
                         </td>
                       </tr>
                       <tr>

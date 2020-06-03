@@ -267,9 +267,13 @@ class AccountProfilePage extends React.Component<IProps, IState> {
                       }
                     </div>
                     { editing ? "" : <div className={css.followButton}><FollowButton id={accountAddress} type="users" /></div> }
+                  </div>
+                  <div className={css.otherInfoContainer}>
+
+
                     {Object.keys(accountProfile.socialURLs).length === 0 ? " " :
                       <div className={css.socialLogins}>
-                        <h3>Social Verification</h3>
+                        <strong>Social Verification</strong>
 
                         {editing
                           ? <div className={css.socialProof}>
@@ -279,16 +283,15 @@ class AccountProfilePage extends React.Component<IProps, IState> {
                         }
 
                         <a href={accountProfile.socialURLs.twitter ? "https://twitter.com/" + accountProfile.socialURLs.twitter.username : "https://3box.io/" + accountAddress} className={css.socialButtonAuthenticated} target="_blank" rel="noopener noreferrer">
-                          <FontAwesomeIcon icon={["fab", "twitter"]} className={css.icon} /> {accountProfile.socialURLs.twitter ? "Verified as https://twitter.com/" + accountProfile.socialURLs.twitter.username : "Verify Twitter through 3box"}
+                          <FontAwesomeIcon icon={["fab", "twitter"]} className={css.icon} title={accountProfile.socialURLs.twitter ? "Verified as https://twitter.com/" + accountProfile.socialURLs.twitter.username : "Verify Twitter through 3box"} />
                         </a>
-                        <br/>
                         <a href={accountProfile.socialURLs.github ? "https://github.com/" + accountProfile.socialURLs.github.username : "https://3box.io/" + accountAddress} className={css.socialButtonAuthenticated} target="_blank" rel="noopener noreferrer">
-                          <FontAwesomeIcon icon={["fab", "github"]} className={css.icon} /> {accountProfile.socialURLs.github ? "Verified as https://github.com/" + accountProfile.socialURLs.github.username : "Verify Github through 3box"}
+                          <FontAwesomeIcon icon={["fab", "github"]} className={css.icon} title={accountProfile.socialURLs.github ? "Verified as https://github.com/" + accountProfile.socialURLs.github.username : "Verify Github through 3box"} />
                         </a>
                       </div>
                     }
-                  </div>
-                  <div className={css.otherInfoContainer}>
+
+
                     <div className={css.tokens}>
                       {accountInfo
                         ? <div><strong>Rep. Score</strong><br /><Reputation reputation={accountInfo.reputation} totalReputation={dao.reputationTotalSupply} daoName={dao.name} /> </div>
