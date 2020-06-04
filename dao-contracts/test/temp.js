@@ -25,7 +25,6 @@ contract("Fee", async accounts => {
         const GenericSchemeAddress = migration[network].base["0.0.1-rc.32"].UGenericScheme;
         GenericSchemeInstance = await GenericSchemeContract.at(GenericSchemeAddress);
         FeeInstance = await FeeContract.at(await getDeployedAddress("Fee"));
-        GenesisProtocolInstance = await GenesisProtocol.at(await GenericSchemeInstance.votingMachine.call());
     });
     for (const fee in feesAndTestValues) {
         if (feesAndTestValues.hasOwnProperty(fee)) {
