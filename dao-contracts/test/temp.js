@@ -2,7 +2,7 @@ const GenesisProtocol = artifacts.require("GenesisProtocol");
 const GenericSchemeContract = artifacts.require("GenericScheme");
 const FeeContract = artifacts.require("Fee");
 const getDeployedAddress = require("./getDeployedAddress");
-
+const Avatar = artifacts.require("Avatar");
 const migration = require("../data/migration.json");
 const assert = require('assert').strict;
 
@@ -25,13 +25,14 @@ contract("Fee", async accounts => {
         const GenericSchemeAddress = migration[network].base["0.0.1-rc.32"].UGenericScheme;
         GenericSchemeInstance = await GenericSchemeContract.at(GenericSchemeAddress);
         FeeInstance = await FeeContract.at(await getDeployedAddress("Fee"));
+        AvatarInstance = await Avatar.at(await getDeployedAddress("Avatar"));
     });
     for (const fee in feesAndTestValues) {
         if (feesAndTestValues.hasOwnProperty(fee)) {
             let k = 0;
             let testValue = feesAndTestValues[fee];
             it(`Set ${fee} fee`, async () => {
-                const proposalId = await GenericSchemeInstance.proposeCall.call(encodeFeeChangeCall(fee, testValue), 0, `Change ${fee} fee`);
+                const proposalId = await GenericSchemeInstance.proposeCall.call(AvatarInstance.address, encodeFeeChangeCall(fee, testValue), 0, `Change ${fee} fee`);
                 await GenericSchemeInstance.proposeCall(encodeFeeChangeCall(fee, testValue), 0, `Change ${fee} fee`);
             });
         }
