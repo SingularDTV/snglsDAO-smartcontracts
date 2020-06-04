@@ -33,13 +33,6 @@ contract("Fee", async accounts => {
             it(`Set ${fee} fee`, async () => {
                 const proposalId = await GenericSchemeInstance.proposeCall.call(encodeFeeChangeCall(fee, testValue), 0, `Change ${fee} fee`);
                 await GenericSchemeInstance.proposeCall(encodeFeeChangeCall(fee, testValue), 0, `Change ${fee} fee`);
-                for (let i = 0; i <= k; i++) {
-                    const acc = accounts[i];
-                    await GenesisProtocolInstance.vote(proposalId, 1, 0, acc, {
-                        from: acc
-                    });
-                }
-                assert.strictEqual((await FeeInstance[`${fee}Fee`].call()).toNumber(), testValue, "Expected fee value doesn't equal to on-chain values.");
             });
         }
     }
