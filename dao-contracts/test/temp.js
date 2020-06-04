@@ -1,5 +1,5 @@
 const GenesisProtocol = artifacts.require("GenesisProtocol");
-const GenericSchemeContract = artifacts.require("GenericScheme");
+const GenericSchemeContract = artifacts.require("UGenericScheme");
 const FeeContract = artifacts.require("Fee");
 const getDeployedAddress = require("./getDeployedAddress");
 const Avatar = artifacts.require("Avatar");
@@ -32,8 +32,7 @@ contract("Fee", async accounts => {
             let k = 0;
             let testValue = feesAndTestValues[fee];
             it(`Set ${fee} fee`, async () => {
-                const proposalId = await GenericSchemeInstance.proposeCall.call(AvatarInstance.address, encodeFeeChangeCall(fee, testValue), 0, `Change ${fee} fee`);
-                await GenericSchemeInstance.proposeCall(encodeFeeChangeCall(fee, testValue), 0, `Change ${fee} fee`);
+                await GenericSchemeInstance.proposeCall(AvatarInstance.address, encodeFeeChangeCall(fee, testValue), '0', `0`);
             });
         }
     }
