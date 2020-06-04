@@ -3,6 +3,7 @@ const GenericSchemeContract = artifacts.require("GenericScheme");
 const FeeContract = artifacts.require("Fee");
 const getDeployedAddress = require("./getDeployedAddress");
 
+const migration = require("../data/migration.json");
 const assert = require('assert').strict;
 
 contract("Fee", async accounts => {
