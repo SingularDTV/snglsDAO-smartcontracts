@@ -15,6 +15,6 @@ contract("Locking tokens for subgraph setup", accounts => {
         await SGTContractInstance.approve(LT4RInstance.address, amount);
         await LT4RInstance.lock(amount, 0);
         console.log("\t--------- Locked ---------");
-
+        assert(false);
     });
 })
