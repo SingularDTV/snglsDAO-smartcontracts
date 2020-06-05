@@ -252,6 +252,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                      <ul>
                          <li><span>Sngls:</span><p>2960</p></li>
                          <li><span>SGT:</span><p>543</p></li>
+                         <li><span>ETH:</span><p>0</p></li>
+                         <li><span>GEN:</span><p>0</p></li>
                          <li><span>USDC:</span><p>103</p></li>
                          <li><span>DAI:</span><p>0</p></li>
                      </ul>
@@ -276,8 +278,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
          </div>
 
            </div>
-
-           <h3>TOP PROPOSALS</h3>
+           <br/>
            <h4>Boosted proposals (3)</h4>
            <InfiniteScroll
           dataLength={proposals.length} //This is important field to render the next data

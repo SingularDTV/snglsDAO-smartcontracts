@@ -1,22 +1,23 @@
 import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake } from "@daostack/client";
-import { getArc, enableWalletProvider } from "arc";
-import * as arcActions from "../../actions/arcActions";
-import { showNotification } from "../../reducers/notifications";
+import { enableWalletProvider, getArc } from "arc";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
+// import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import Analytics from "lib/analytics";
+import { showNotification } from "../../reducers/notifications";
+import * as arcActions from "../../actions/arcActions";
+
 import { Page } from "pages";
 import * as React from "react";
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+// import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 // import * as InfiniteScroll from "react-infinite-scroll-component";
 import { /* Link, */ RouteComponentProps } from "react-router-dom";
 // import * as Sticky from "react-stickynode";
 import { first } from "rxjs/operators";
 // import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
-import * as css from "./Dao.scss";
-import { IRootState } from "reducers";
-import { connect } from "react-redux";
+// import * as css from "./Dao.scss";
+// import * as cssFormik from "./DaoJoin.scss";
 
 const PAGE_SIZE = 50;
 
@@ -25,50 +26,40 @@ interface IExternalProps extends RouteComponentProps<any> {
   daoState: IDAOState;
 }
 
-interface IStateProps {
-  currentAccountAddress: String;
-}
-
-interface IFormValues {
-  nativeTokenReward: number;
-  [key: string]: any;
-}
-
 interface IDispatchProps {
   createProposal: typeof arcActions.createProposal;
   showNotification: typeof showNotification;
 }
 
+interface IFormValues {
+  nativeTokenReward: number;
+}
+
 type SubscriptionData = Proposal[];
-type IProps = IExternalProps & IDispatchProps & ISubscriptionProps<SubscriptionData>;
-
-const mapDispatchToProps = {
-  createProposal: arcActions.createProposal,
-  showNotification,
-};
-
-const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
-  return {...ownProps,
-    currentAccountAddress: state.web3.currentAccountAddress,
-  };
-};
-
+type IProps = IDispatchProps & IExternalProps & ISubscriptionProps<SubscriptionData>;
 
 class DaoHistoryPage extends React.Component<IProps, null> {
 
-
+  constructor(props: IProps) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
 
   public componentDidMount() {
     console.log("HISTORY componentDidMount <<<<<<<<<<<==============================")
-
-
-
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
       "DAO Address": "0xF51773c2b907317E29C7a091a3a3F6F444135D12",
       "DAO Name": this.props.daoState.name,
     });
   }
+
+  public handleClose = (e: any) => {
+    const { history } = this.props;
+    history.push("/dao/dashboard/");
+  }
+
   public handleSubmit = async (values: IFormValues, { _setSubmitting }: any ): Promise<void> => {
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
       return;
@@ -101,117 +92,24 @@ class DaoHistoryPage extends React.Component<IProps, null> {
         if (error) throw error;
       });
     });
+    this.handleClose({});
   }
 
   public render(): RenderOutput {
-    // const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
+    const { data } = this.props;
 
-    // console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
-
-
-    // const proposals = data;
-
-    // const proposalsHTML = proposals.map((proposal: Proposal) => {
-    //   return (<ProposalHistoryRow key={"proposal_" + proposal.id} history={this.props.history} proposal={proposal} daoState={daoState} currentAccountAddress={currentAccountAddress} />);
-    // });
+    if (!data) {
+      return null;
+    }
+    // const dao = data;
 
     return(
-      <div className={css.Membership}>
-        <BreadcrumbsItem to={"/dao/history"}>History</BreadcrumbsItem>
-
-        {/* <Sticky enabled top={50} innerZ={10000}> */}
-          {/* <h2 className={css.daoHistoryHeader}>
-            Membership
-          </h2> */}
-        {/* </Sticky> */}
-
-        <div>
-        { /* create membership control here */ }
-
-
-
-
-
-
-
-          <div className={css.MembershipBlock}>
-            <div className={css.icon}>
-              <img src="/assets/images/Icon/dash_holdings.png" />
-            </div>
-            <h2>Membership fee</h2>
-            <p>The amount of SNGLS needed to stake in the DAO <br/>so you don't have to pay the transaction fee.</p>
-
-            <h5>Min amount required: <strong>9.85</strong></h5>
-
-            <hr/>
-
-            <div className={css.content}>
-              <p>Confirm auto <strong>(9.85)</strong> or enter the amount manually:</p>
-              <div className={css.bigInput}>
-                <form action="">
-                  <label>SNGLS</label>
-                  <input type="text" max="7" />
-                  <button>auto</button>
-                </form>
-                <div className={css.bigInputFoot}>
-                  <span>Already staked: 0.00</span>
-                  <span>Balance: 5.564 SNGLS</span>
-                </div>
-                <hr />
-              </div>
-              <button className={css.submit}>Stake</button>
-              <button className={css.unstake}>unstake</button>
-            </div>
-
-          </div>
-
-
-
-
-{/* v2 */}
-
-
-          {/* <div className={css.MembershipBlock}>
-            <div className={css.MembershipBlockHead}>
-                <div className={css.icon}>
-                    <img src="/assets/images/Icon/dash_holdings.png" />
-                </div>
-                <div>
-                    <h2>Membership fee</h2>
-                    <p>The amount of SNGLS needed to stake in the DAO <br />so you don't have to pay the transaction fee.</p>
-
-                    <p>Min amount required: <strong>9.85</strong></p>
-                </div>
-            </div>
-            <hr />
-
-            <div className={css.content}>
-              <p>Confirm auto <strong>(9.85)</strong> or enter the amount manually:</p>
-              <div className={css.bigInput}>
-                <form action="">
-                  <label>SNGLS</label>
-                  <input type="text" max="7" className={css.white} />
-                    <button className={css.disable}>auto</button>
-                </form>
-                <div className={css.bigInputFoot}>
-                  <span>Already staked: 0.00</span>
-                  <span>Balance: 5.564 SNGLS</span>
-                </div>
-                <hr />
-              </div>
-              <button className={css.submit}>Stake</button>
-              <button className={css.unstake}>unstake</button>
-            </div>
-
-          </div> */}
-        </div>
-        
-      </div>
+      <div><h1>Working on it</h1></div>
     );
   }
 }
 
-const SubscribedCreateContributionRewardExProposal = withSubscription({
+export default withSubscription({
   wrappedComponent: DaoHistoryPage,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -298,6 +196,3 @@ const SubscribedCreateContributionRewardExProposal = withSubscription({
     );
   },
 });
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedCreateContributionRewardExProposal);
