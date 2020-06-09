@@ -211,7 +211,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
       {/* <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem> */}
       <div className={css.header}>
         <h2><span> DAO REPUTATION </span></h2>
-        <button className={css.closeButton} aria-label="Close Create Proposal Modal" /* onClick={this.handleClose} */ ><img src="/assets/images/close.svg" alt=""/></button>
+        <button className={css.closeButton} aria-label="Close Create Proposal Modal"  onClick={this.handleClose}  ><img src="/assets/images/close.svg" alt=""/></button>
       </div>
       <div className={css.contributionReward}>
         <Formik
