@@ -291,9 +291,9 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                   { (currentTab === "addScheme") ?
                     <div className={css.description}>Propose to add a new application to the DAO. If this application is a universal scheme, you must also supply its param hash configuration.</div> :
                     (currentTab === "editScheme") ?
-                      <div className={css.description}>Propose to edit param hash configuration of a application.</div> :
+                      <div className={css.description}>Propose to edit param hash configuration of an application.</div> :
                       (currentTab === "removeScheme") ?
-                        <div className={css.description}>Propose to remove a application from the DAO.</div> : ""
+                        <div className={css.description}>Propose to remove an application from the DAO.</div> : ""
                   }
                   <TrainingTooltip overlay="The title is the header of the proposal card and will be the first visible information about your proposal" placement="right">
                     <label htmlFor="titleInput">

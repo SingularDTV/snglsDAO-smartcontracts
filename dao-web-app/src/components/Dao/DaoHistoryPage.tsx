@@ -30,7 +30,7 @@ class DaoHistoryPage extends React.Component<IProps, null> {
     console.log("HISTORY componentDidMount <<<<<<<<<<<==============================")
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
-      "DAO Address": "0xF51773c2b907317E29C7a091a3a3F6F444135D12",
+      "DAO Address": "0x2F250C487F5213659E8BD29DfB4B9f4c6FA079A7",
       "DAO Name": this.props.daoState.name,
     });
   }
@@ -124,7 +124,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0xF51773c2b907317E29C7a091a3a3F6F444135D12"}"
+            dao: "${"0x2F250C487F5213659E8BD29DfB4B9f4c6FA079A7"}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",

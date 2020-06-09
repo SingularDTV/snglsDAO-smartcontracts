@@ -6,7 +6,7 @@ import Analytics from "lib/analytics";
 import * as React from "react";
 import { connect } from "react-redux";
 import { showNotification, NotificationStatus } from "reducers/notifications";
-import { baseTokenName, isValidUrl } from "lib/util";
+import { /*baseTokenName,*/ isValidUrl } from "lib/util";
 import { exportUrl, importUrlValues } from "lib/proposalUtils";
 import TagsSelector from "components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
@@ -228,7 +228,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                 <div>
                   <label htmlFor="callData">
                     <div className={css.requiredMarker}>*</div>
-                    Encoded function call data
+                    Which fee do you want to change?
                     <ErrorMessage name="callData">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
 
@@ -262,7 +262,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
 
                   <label htmlFor="callDataInput">
                     <div className={css.requiredMarker}>*</div>
-                    Value
+                    Enter new fee value
                     <ErrorMessage name="callDataInput">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
 
@@ -287,7 +287,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
 
                 </div>
 
-                <div>
+                {/* <div>
                   <label htmlFor="value">
                     <div className={css.requiredMarker}>*</div>
                     {baseTokenName()} Value
@@ -302,7 +302,9 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                     min={0}
                     step={0.1}
                   />
-                </div>
+                </div> */}
+
+                
               </div>
 
               <div className={css.createProposalActions}>
