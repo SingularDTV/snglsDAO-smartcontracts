@@ -229,6 +229,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                 }: FormikProps<IFormValues>) =>
                 <div className={css.bigInput}>
                   <Form noValidate>
+
+                    <div className={css.formLabel}>
                     <label>SNGLS</label>
                     <Field
                       id="snglsToSendInput"
@@ -238,15 +240,23 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                       type="number"
                       className={touched.nativeTokenReward && errors.nativeTokenReward ? errCss.error : null}
                     />
-                    <button onClick={this.autoAmount}>auto</button>
-                    <button type="submit" className={css.submit}>Stake</button>
+                    <button className={css.auto} onClick={this.autoAmount}>auto</button>
+                    </div>
+
+                      <div className={css.bigInputFoot}>
+                        <span>Already staked: {parseFloat(this.state.alreadyStaked).toPrecision(4)} </span>
+                        <span>Balance: {parseFloat(this.state.snglsBalance).toPrecision(4)} SNGLS</span>
+                      </div>
+                      <hr />
+
+                      <button type="submit" className={css.stakeSubmit}>Stake</button>
+                      <hr />
+
+                      <button className={css.unstake}>unstake</button>
+
+
+
                   </Form>
-                  <div className={css.bigInputFoot}>
-                    <span>Already staked: { parseFloat(this.state.alreadyStaked).toPrecision(4) } </span>
-                    <span>Balance: { parseFloat(this.state.snglsBalance).toPrecision(4) } SNGLS</span>
-                  </div>
-                  <hr />  
-                  <button className={css.unstake}>unstake</button>
                 </div>
                 }
               />
