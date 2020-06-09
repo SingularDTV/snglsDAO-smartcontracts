@@ -51,7 +51,7 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress: "0x2F250C487F5213659E8BD29DfB4B9f4c6FA079A7", // ownProps.match.params.daoAvatarAddress,
+    daoAvatarAddress: "0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2", // ownProps.match.params.daoAvatarAddress,
   };
 };
 
@@ -184,7 +184,7 @@ const SubscribedDaoContainer = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    const daoAddress = "0x2F250C487F5213659E8BD29DfB4B9f4c6FA079A7";//props.match.params.daoAvatarAddress;
+    const daoAddress = "0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2";//props.match.params.daoAvatarAddress;
     const dao =  arc.dao(daoAddress);
     const observable = combineLatest(
       dao.state({ subscribe: true, fetchAllData: true }), // DAO state

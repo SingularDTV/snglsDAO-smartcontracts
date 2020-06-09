@@ -66,20 +66,20 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   public async componentDidMount() {
     const arc = getArc();
     const feeContract = new arc.web3.eth.Contract([ { "constant": true, "inputs": [], "name": "listingFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "membershipFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "transactionFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "validationFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" } ],
-      "0x82262ba46949be4306df98B0160460a9b0260a31"
+      "0x24020638d5bd2F5B86D3440F4FC40b1bEa25139d"
     );
     
     this.setState( 
       { 
-        transactionFee: await feeContract.methods.transactionFee().call(),
-        listingFee: await feeContract.methods.listingFee().call(),
-        validationFee: await feeContract.methods.validationFee().call(),
-        membershipFee:  await feeContract.methods.membershipFee().call()
+        transactionFee: arc.web3.utils.fromWei(await feeContract.methods.transactionFee().call()),
+        listingFee: arc.web3.utils.fromWei(await feeContract.methods.listingFee().call()),
+        validationFee: arc.web3.utils.fromWei(await feeContract.methods.validationFee().call()),
+        membershipFee:  arc.web3.utils.fromWei(await feeContract.methods.membershipFee().call())
       }
     );
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
-      "DAO Address": "0x2F250C487F5213659E8BD29DfB4B9f4c6FA079A7",
+      "DAO Address": "0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2",
       "DAO Name": this.props.daoState.name,
     });
   }
@@ -353,7 +353,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0x2F250C487F5213659E8BD29DfB4B9f4c6FA079A7"}"
+            dao: "${"0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2"}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",
