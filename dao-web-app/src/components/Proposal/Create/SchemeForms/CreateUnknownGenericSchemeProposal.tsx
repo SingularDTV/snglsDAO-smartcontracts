@@ -231,13 +231,60 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                     Encoded function call data
                     <ErrorMessage name="callData">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
+
+                  <label className={css.radio}>
+                    <input
+                      type="radio"
+                      name="test"
+                      value="Transaction fee"
+                      checked={values.test === "Transactionfee"}
+                      onChange={() => setFieldValue("test", "Transactionfee")}
+                    />Transaction fee
+                  </label>
+                  <label className={css.radio}>
+                    <input
+                      type="radio"
+                      name="test"
+                      value="Listing fee"
+                      checked={values.test === "Listingfee"}
+                      onChange={() => setFieldValue("test", "Listingfee")}
+                    />Listing fee
+                  </label>
+                  <label className={css.radio}>
+                    <input
+                      type="radio"
+                      name="test"
+                      value="Validation fee"
+                      checked={values.test === "Validationfee"}
+                      onChange={() => setFieldValue("test", "Validationfee")}
+                    />Validation fee
+                  </label>
+
+                  <label htmlFor="callDataInput">
+                    <div className={css.requiredMarker}>*</div>
+                    Value
+                    <ErrorMessage name="callDataInput">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
+                  </label>
+
                   <Field
+                    id="callDataInput"
+                    placeholder="Value"
+                    name="callDataInput"
+                    type="number"
+                    className={touched.callData && errors.callData ? css.error : null}
+                    min={0}
+                    step={0.1}
+                  />
+
+
+                  {/* <Field
                     id="callDataInput"
                     component="textarea"
                     placeholder="The encoded function call data of the contract function call"
                     name="callData"
                     className={touched.callData && errors.callData ? css.error : null}
-                  />
+                  /> */}
+
                 </div>
 
                 <div>
