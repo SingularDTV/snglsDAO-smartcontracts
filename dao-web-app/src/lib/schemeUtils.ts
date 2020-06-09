@@ -102,7 +102,7 @@ export function schemeName(scheme: ISchemeState|IContractInfo, fallback?: string
       } else {
         // Adding the address is a bit long for a title
         // name = `Blockchain Interaction (${contractToCall})`;
-        name = "Fee changing application";
+        name = "Protocol Upgrade";
       }
     } else {
       // this should never happen...

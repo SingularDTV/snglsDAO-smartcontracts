@@ -154,7 +154,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 }></span>
                 <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_membership.svg" />
-                Membership Fee
+                Protocol Membership
                 </span>
               </Link>
             </li>
@@ -169,7 +169,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 }></span>
                 <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_apps.svg" />
-                Apps
+                Applications
                 </span>
               </Link>
             </li>
@@ -233,7 +233,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
             <b>DAO Treasury</b>
-            <a className="externalLink" href={daoHoldingsAddress}>
+            <a className="externalLink" href={daoHoldingsAddress} target="_blank">
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
@@ -256,7 +256,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
             <b>DAO Stakes</b>
-            <a className="externalLink" href={daoHoldingsAddress}>
+            <a className="externalLink" href={daoHoldingsAddress} target="_blank">
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
@@ -271,9 +271,9 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
 
             <SubscribedEthBalance dao={dao} />
 
-            {Object.keys(supportedTokens()).map((tokenAddress) => {
+            {/* {Object.keys(supportedTokens()).map((tokenAddress) => {
               return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
-            })}
+            })} */} {/* todo: update token parser */}
           </ul>
         </div>
 
