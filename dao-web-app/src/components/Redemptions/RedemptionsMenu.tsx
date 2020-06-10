@@ -54,11 +54,13 @@ class RedemptionsMenu extends React.Component<IProps, null> {
       <div className={css.proposals}>
         {redeemableProposals.length > 0 ?
           redeemableProposals.map(proposal => (
+            <div className={css.proposalsItem}>
             <MenuItem
               key={proposal.id}
               proposal={proposal}
               currentAccountAddress={currentAccountAddress}
             />
+            </div>
           ))
           : <div className={css.empty}>
             <h2>Nothing to redeem</h2>
