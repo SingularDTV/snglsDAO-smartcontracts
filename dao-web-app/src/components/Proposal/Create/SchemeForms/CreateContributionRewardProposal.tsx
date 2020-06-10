@@ -310,7 +310,7 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
               <div className={css.rewards}>
                 <div className={css.reward}>
                   <label htmlFor="ethRewardInput">
-                    {baseTokenName()} Reward
+                    {baseTokenName()} Treasury Allocation
                     <ErrorMessage name="ethReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
                   <Field
@@ -326,7 +326,7 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
 
                 <div className={css.reward}>
                   <label htmlFor="externalRewardInput">
-                    Token Reward
+                    Token Treasury Allocation
                     <ErrorMessage name="externalTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
                   <div className={css.externalTokenInput}>

@@ -229,50 +229,51 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                 <div>
                   <label htmlFor="callData">
                     <div className={css.requiredMarker}>*</div>
-                    Parametrs you want to change:
+                    Parameters you want to change:
                     <ErrorMessage name="callData">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
 
 
                   <div className={css.labelInput}>
-                    <label htmlFor="Transactionfee">Transaction fee</label>
+                    <label htmlFor="Transactionfee">Transaction Fee</label>
                     <Field
                       id="Transactionfee"
                       maxLength={120}
-                      placeholder="New value"
+                      placeholder="New value (%)"
                       name="Transactionfee"
                       type="text"
                     />
                   </div>
 
                   <div className={css.labelInput}>
-                    <label htmlFor="Listingfee">Listing fee</label>
+                    <label htmlFor="Listingfee">Listing Fee</label>
                     <Field
                       id="Listingfee"
                       maxLength={120}
-                      placeholder="New value"
+                      placeholder="New value (SNGLS)"
                       name="Listingfee"
                       type="text"
                     />
                   </div>
 
                   <div className={css.labelInput}>
-                    <label htmlFor="Validationfee">Validation fee</label>
+                    <label htmlFor="Validationfee">Validation Fee</label>
                     <Field
                       id="Validationfee"
                       maxLength={120}
-                      placeholder="New value"
+                      placeholder="New value (SNGLS)"
                       name="Validationfee"
                       type="text"
+                      disabled={true}
                     />
                   </div>
 
                   <div className={css.labelInput}>
-                    <label htmlFor="Membershipfee">Membership fee</label>
+                    <label htmlFor="Membershipfee">Membership Fee</label>
                     <Field
                       id="Membershipfee"
                       maxLength={120}
-                      placeholder="New value"
+                      placeholder="New value (SNGLS)"
                       name="Membershipfee"
                       type="text"
                     />
