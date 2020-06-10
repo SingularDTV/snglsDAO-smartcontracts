@@ -782,6 +782,15 @@ h4 {
                 padding: 10px 20px;
                 position: relative;
 
+                span {
+                  font-size: 16px;
+                  line-height: 24px;
+                  font-family: 'TransatBold';
+                  padding: 0px 10px;
+                  transition: 0.2s;
+                  cursor: pointer;
+                }
+
                 a {
                     // font-weight: 500;
                     font-size: 16px;
@@ -841,7 +850,7 @@ h4 {
                       }
 
                       &.submenu {
-                        & > a {
+                        & > a, & > span {
                           display: block;
                           &:before {
                             content: '';

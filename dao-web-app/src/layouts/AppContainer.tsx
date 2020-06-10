@@ -243,10 +243,10 @@ class AppContainer extends React.Component<IProps, IState> {
               </div>
               <div className={css.footerLinksSocials}>
                 <ul>
-                  <li><a href="#"><img src="/assets/images/Icon/icon_git.svg" alt="" /></a></li>
-                  <li><a href="#"><img src="/assets/images/Icon/soc_icon.svg" alt="" /></a></li>
-                  <li><a href="#"><img src="/assets/images/Icon/icon_twitter.svg" alt="" /></a></li>
-                  <li><a href="#"><img src="/assets/images/Icon/icon_medium.svg" alt=""/></a></li>
+                  <li><a href="https://github.com/SingularDTV/snglsdao-pm" target="_blank"><img src="/assets/images/Icon/icon_git.svg" alt="" /></a></li>
+                  <li><a href="https://weibo.com/snglsdao" target="_blank"><img src="/assets/images/Icon/soc_icon.svg" alt="" /></a></li>
+                  <li><a href="https://twitter.com/snglsdao" target="_blank"><img src="/assets/images/Icon/icon_twitter.svg" alt="" /></a></li>
+                  <li><a href="https://medium.com/singulardtv/" target="_blank"><img src="/assets/images/Icon/icon_medium.svg" alt=""/></a></li>
                 </ul>
               </div>
             </div>
