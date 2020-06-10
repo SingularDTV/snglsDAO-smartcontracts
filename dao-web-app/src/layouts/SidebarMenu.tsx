@@ -47,13 +47,13 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   console.log("SIDEBAR mapStateTotProps: ", ownProps, " *", 
   {
     ...ownProps,
-    daoAvatarAddress: "0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   }
   );
   return {
     ...ownProps,
-    daoAvatarAddress: "0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   };
 };
@@ -296,7 +296,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     return (
       <div className={sidebarClass}>
         <div className={css.menuContent}>
-          { "0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2" && this.props.data ? this.daoMenu() : ""}
+          { "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9" && this.props.data ? this.daoMenu() : ""}
 
           <div className={css.siteLinksWrapper}>
             <ul>
@@ -425,7 +425,7 @@ const SubscribedSidebarMenu = withSubscription({
   loadingComponent: <div></div>,
   createObservable: (props: IProps) => {
     if (props.daoAvatarAddress) {
-      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2") || "0";
+      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9") || "0";
 
       const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
         .then((response: AxiosResponse<any>): IHasNewPosts => {
@@ -445,7 +445,7 @@ const SubscribedSidebarMenu = withSubscription({
         });
 
       const arc = getArc();
-      return combineLatest(arc.dao("0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2").state({ subscribe: true }), from(promise));
+      return combineLatest(arc.dao("0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9").state({ subscribe: true }), from(promise));
     } else {
       return of(null);
     }

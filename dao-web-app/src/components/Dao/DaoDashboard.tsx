@@ -66,7 +66,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   public async componentDidMount() {
     const arc = getArc();
     const feeContract = new arc.web3.eth.Contract([ { "constant": true, "inputs": [], "name": "listingFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "membershipFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "transactionFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "validationFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" } ],
-      "0x24020638d5bd2F5B86D3440F4FC40b1bEa25139d"
+      "0x58dC7440A7D37F200aFf06060DebedA2998d5B60"
     );
     
     this.setState( 
@@ -79,7 +79,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
     );
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
-      "DAO Address": "0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2",
+      "DAO Address": "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9",
       "DAO Name": this.props.daoState.name,
     });
   }
@@ -353,7 +353,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2"}"
+            dao: "${"0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9"}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",

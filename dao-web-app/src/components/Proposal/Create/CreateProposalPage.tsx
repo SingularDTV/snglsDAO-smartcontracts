@@ -67,7 +67,7 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
     Analytics.track("Page View", {
       "Page Name": Page.CreateProposal,
-      "DAO Address": "0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2",
+      "DAO Address": "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9",
       "Scheme Address": this.props.schemeId,
     });
     const newState = {};
@@ -95,7 +95,7 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
-    const daoAvatarAddress = "0x6C3903C0d77E5F03F27793Eb40E5F67B9B4503b2";
+    const daoAvatarAddress = "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9";
     const scheme = this.props.data;
 
     let createSchemeComponent = <div />;
