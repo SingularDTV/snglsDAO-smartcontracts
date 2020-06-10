@@ -6,7 +6,8 @@ import Analytics from "lib/analytics";
 import * as React from "react";
 import { connect } from "react-redux";
 import { showNotification, NotificationStatus } from "reducers/notifications";
-import { /*baseTokenName,*/ isValidUrl } from "lib/util";
+// import { baseTokenName, isValidUrl } from "lib/util";
+import { isValidUrl } from "lib/util";
 import { exportUrl, importUrlValues } from "lib/proposalUtils";
 import TagsSelector from "components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
@@ -228,11 +229,56 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                 <div>
                   <label htmlFor="callData">
                     <div className={css.requiredMarker}>*</div>
-                    Which fee do you want to change?
+                    Parametrs you want to change:
                     <ErrorMessage name="callData">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
 
-                  <label className={css.radio}>
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Transactionfee">Transaction fee</label>
+                    <Field
+                      id="Transactionfee"
+                      maxLength={120}
+                      placeholder="New value"
+                      name="Transactionfee"
+                      type="text"
+                    />
+                  </div>
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Listingfee">Listing fee</label>
+                    <Field
+                      id="Listingfee"
+                      maxLength={120}
+                      placeholder="New value"
+                      name="Listingfee"
+                      type="text"
+                    />
+                  </div>
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Validationfee">Validation fee</label>
+                    <Field
+                      id="Validationfee"
+                      maxLength={120}
+                      placeholder="New value"
+                      name="Validationfee"
+                      type="text"
+                    />
+                  </div>
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Membershipfee">Membership fee</label>
+                    <Field
+                      id="Membershipfee"
+                      maxLength={120}
+                      placeholder="New value"
+                      name="Membershipfee"
+                      type="text"
+                    />
+                  </div>
+
+                  {/* <label className={css.radio}>
                     <input
                       type="radio"
                       name="test"
@@ -258,9 +304,9 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                       checked={values.test === "Validationfee"}
                       onChange={() => setFieldValue("test", "Validationfee")}
                     />Validation fee
-                  </label>
+                  </label> */}
 
-                  <label htmlFor="callDataInput">
+                  {/* <label htmlFor="callDataInput">
                     <div className={css.requiredMarker}>*</div>
                     Enter new fee value
                     <ErrorMessage name="callDataInput">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
@@ -274,7 +320,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                     className={touched.callData && errors.callData ? css.error : null}
                     min={0}
                     step={0.1}
-                  />
+                  /> */}
 
 
                   {/* <Field
@@ -303,8 +349,6 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                     step={0.1}
                   />
                 </div> */}
-
-                
               </div>
 
               <div className={css.createProposalActions}>

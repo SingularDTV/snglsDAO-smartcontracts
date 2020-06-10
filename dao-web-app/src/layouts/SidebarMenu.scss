@@ -264,7 +264,7 @@
     position: relative;
 
     li {
-      position: initial;
+      position: relative;
       list-style: none;
       margin: 0;
       width: 100%;
@@ -293,10 +293,10 @@
 
       ul {
         left: 50px;
-        top: -80px;
-        width: 120px;
+        top: calc(50% - 26px);
+        width: 130px;
         opacity: 0;
-        transform: scale(0);
+        transform: scale(0) translate(0, -50%);
         transition: all 0.25s ease;
         padding: 10px 0 10px 0;
         background-color: rgba(255, 255, 255, 1);
@@ -312,6 +312,14 @@
           top: 50%;
           transform: translateY(-5px) rotate(45deg);
           left: -5px;
+        }
+
+        span {
+          &.soon {
+            padding: 0 10px;
+            margin: 0;
+            display: block;
+          }
         }
 
         li {
@@ -347,8 +355,8 @@
       &:hover ul {
         left: -8px;
         opacity: 1;
-        top: -160px;
-        transform: translateX(100%) scale(1);
+        // top: -160px;
+        transform: translate(100%, -50%) scale(1);
         background-color: rgba(255, 255, 255, 1);
       }
     }

@@ -1,0 +1,37 @@
+[
+    {
+      "name": "Binance",
+      "url": "https://www.binance.com/",
+      "logo": "/assets/images/Exchanges/Binance.png"
+    },
+    {
+      "name": "CoinDCX",
+      "url": "https://coindcx.com/",
+      "logo": "/assets/images/Exchanges/CoinDCX.png"
+    },
+    {
+      "name": "Bitfinex",
+      "url": "https://www.bitfinex.com/",
+      "logo": "/assets/images/Exchanges/bitfinex.png"
+    },
+    {
+      "name": "Livecoin",
+      "url": "https://www.livecoin.net/",
+      "logo": "/assets/images/Exchanges/Livecoin.png"
+    },
+    {
+      "name": "HitBTC",
+      "url": "https://hitbtc.com/",
+      "logo": "/assets/images/Exchanges/HitBTC.png"
+    },
+    {
+      "name": "CHAOEX",
+      "url": "https://www.chaoex.com",
+      "logo": "/assets/images/Exchanges/CHAOEX.png"
+    },
+    {
+      "name": "Braziliex",
+      "url": "https://braziliex.com",
+      "logo": "/assets/images/Exchanges/Braziliex.png"
+    }
+]

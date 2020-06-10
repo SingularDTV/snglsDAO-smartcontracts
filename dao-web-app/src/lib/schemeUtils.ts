@@ -109,7 +109,7 @@ export function schemeName(scheme: ISchemeState|IContractInfo, fallback?: string
       name = "Blockchain Interaction";
     }
   } else if (scheme.name === "ContributionReward") {
-    name ="Funding and Voting Power";
+    name ="Grants";
   } else if (scheme.name === "SchemeRegistrar") {
     name ="Apps Manager";
   } else if (scheme.name) {

@@ -10,7 +10,7 @@ import classNames from "classnames";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 // import { generate } from "geopattern";
 import Analytics from "lib/analytics";
-import { baseTokenName, ethErrorHandler, formatTokens, genName, getExchangesList, supportedTokens, fromWei } from "lib/util";
+import { baseTokenName, ethErrorHandler, formatTokens, genName, getExchangesList, getExchangesListSNGLS, supportedTokens, fromWei } from "lib/util";
 // import { parse } from "query-string";
 import * as React from "react";
 import { /* matchPath,*/ Link, RouteComponentProps } from "react-router-dom";
@@ -305,7 +305,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 <ul>
                   <div className={css.diamond}></div>
                   {
-                    getExchangesList().map((item: any) => {
+                    getExchangesListSNGLS().map((item: any) => {
                       return (
                         <li key={item.name}>
                           <a href={item.url} target="_blank" rel="noopener noreferrer" className="buyGenLink">
@@ -322,9 +322,9 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 <a>$ Buy SGT</a>
                 <ul>
                   <div className={css.diamond}></div>
-                  {
+                  <span className={css.soon}>{
                     "  Comming soon!"
-                  }
+                  }</span>
                 </ul>
               </li>
               <li>

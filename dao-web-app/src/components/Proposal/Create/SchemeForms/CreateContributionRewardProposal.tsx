@@ -326,7 +326,7 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
 
                 <div className={css.reward}>
                   <label htmlFor="externalRewardInput">
-                    External Token Reward
+                    Token Reward
                     <ErrorMessage name="externalTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
                   <div className={css.externalTokenInput}>

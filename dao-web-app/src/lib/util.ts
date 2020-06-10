@@ -18,10 +18,15 @@ import { getArc } from "../arc";
 
 const tokens = require("data/tokens.json");
 const exchangesList = require("data/exchangesList.json");
+const exchangesListSNGLS = require("data/exchangesListSNGLS.json");
 const Web3 = require("web3");
 
 export function getExchangesList() {
   return exchangesList;
+}
+
+export function getExchangesListSNGLS() {
+  return exchangesListSNGLS;
 }
 
 export function checkTotalPercent(split: any) {
