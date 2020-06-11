@@ -26,8 +26,8 @@
     "show-balances-rinkeby": "npm run set-rinkeby && truffle test ./scripts/showBalances.js --network rinkeby ",
     "start-rinkeby": "npm run set-rinkeby && npm run deploy-singular-rinkeby && npm run set-sngls-rinkeby && npm run migrate && npm run airdrop-rinkeby",
     "start-test-rinkeby": "npm run set-rinkeby && npm run compile && npm run migrate && npm run deploy-singular-rinkeby && npm run airdrop-rinkeby && npm run test-rinkeby",
-    "docker": "docker-compose up -d graph-node",
-    "docker-down": "docker-compose down",
+    "docker": "sudo docker-compose up -d graph-node",
+    "docker-down": "sudo docker-compose down",
     "docker-restart": "npm run docker-down && npm run docker"
   },
   "keywords": [
