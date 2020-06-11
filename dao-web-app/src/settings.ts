@@ -36,7 +36,7 @@ function getWeb3ConnectProviderOptions(network: string) {
         walletconnect: {
           package: isMobileBrowser() ? null : WalletConnectProvider,
           options: {
-            infuraId: "e0cdf3bfda9b468fa908aa6ab03d5ba2",
+            infuraId: "ef306a43234747eb9c087e5301ed9363",
           },
         },
         burnerconnect: {
