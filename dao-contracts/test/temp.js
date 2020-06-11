@@ -1,8 +1,9 @@
 const GenesisProtocol = artifacts.require("GenesisProtocol");
-const GenericSchemeContract = artifacts.require("GenericScheme");
+const GenericSchemeContract = artifacts.require("UGenericScheme");
 const FeeContract = artifacts.require("Fee");
 const getDeployedAddress = require("./getDeployedAddress");
-
+const Avatar = artifacts.require("Avatar");
+const migration = require("../data/migration.json");
 const assert = require('assert').strict;
 
 contract("Fee", async accounts => {
@@ -24,22 +25,14 @@ contract("Fee", async accounts => {
         const GenericSchemeAddress = migration[network].base["0.0.1-rc.32"].UGenericScheme;
         GenericSchemeInstance = await GenericSchemeContract.at(GenericSchemeAddress);
         FeeInstance = await FeeContract.at(await getDeployedAddress("Fee"));
-        GenesisProtocolInstance = await GenesisProtocol.at(await GenericSchemeInstance.votingMachine.call());
+        AvatarInstance = await Avatar.at(await getDeployedAddress("Avatar"));
     });
     for (const fee in feesAndTestValues) {
         if (feesAndTestValues.hasOwnProperty(fee)) {
             let k = 0;
             let testValue = feesAndTestValues[fee];
             it(`Set ${fee} fee`, async () => {
-                const proposalId = await GenericSchemeInstance.proposeCall.call(encodeFeeChangeCall(fee, testValue), 0, `Change ${fee} fee`);
-                await GenericSchemeInstance.proposeCall(encodeFeeChangeCall(fee, testValue), 0, `Change ${fee} fee`);
-                for (let i = 0; i <= k; i++) {
-                    const acc = accounts[i];
-                    await GenesisProtocolInstance.vote(proposalId, 1, 0, acc, {
-                        from: acc
-                    });
-                }
-                assert.strictEqual((await FeeInstance[`${fee}Fee`].call()).toNumber(), testValue, "Expected fee value doesn't equal to on-chain values.");
+                await GenericSchemeInstance.proposeCall(AvatarInstance.address, encodeFeeChangeCall(fee, testValue), '0', `0`);
             });
         }
     }
