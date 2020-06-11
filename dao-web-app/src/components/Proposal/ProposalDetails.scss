@@ -106,18 +106,19 @@ button.disabled {
 }
 
 .proposal {
-  border-radius: 15px;
+  // border-radius: 15px;
   background-color: transparent;
   margin-right: 20px;
   margin-bottom: 0px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   position: relative;
   overflow: hidden;
   transition: all .25s ease;
   vertical-align: top;
   height: auto;
   overflow: visible;
-  justify-content: center;
+  // justify-content: center;
   width: 100%;
 }
 
@@ -278,7 +279,7 @@ button.disabled {
 .voteButtons {
   position: relative;
   background: rgba(196, 196, 196, 0.1);
-  padding: 7px 33px;
+  padding: 10px 33px;
   font-family: Montserrat;
   font-weight: normal;
   font-size: 14px;
@@ -332,10 +333,10 @@ button.disabled {
 .stakeButtons {
   position: relative;
   background: rgba(196, 196, 196, 0.1);
-  padding: 7px 33px;
+  padding: 10px 33px;
   font-family: TransatStandard;
   font-weight: normal;
-  font-size: 14зчpx;
+  font-size: 14px;
   // line-height: 31px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -385,7 +386,7 @@ button.disabled {
   flex-grow: 1;
   // min-width: 320px;
   max-width: 465px;
-  width: 100%;
+  width: calc(100% - 40px);
   min-width: 300px;
 }
 
@@ -408,7 +409,7 @@ button.disabled {
 
 .proposalSummaryContainer {
   position: relative;
-  left: -45px;
+  // left: -45px;
   &.hasTags {
     margin-bottom: 18px;
   }

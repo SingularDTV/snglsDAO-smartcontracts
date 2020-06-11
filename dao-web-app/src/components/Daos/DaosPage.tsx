@@ -1,5 +1,5 @@
 import { DAO } from "@daostack/client";
-import { getArc, getArcSettings } from "arc";
+import { getArc } from "arc";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
@@ -74,7 +74,7 @@ class DaosPage extends React.Component<IProps, IState> {
         arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString.charAt(0).toUpperCase() + searchString.slice(1) } }, { fetchAllData: true }),
         (data1, data2) => data1.concat(data2),
       ).pipe(first()).toPromise();
-      const snglsDao = [foundDaos.find(element => element.id = getArcSettings().daoAvatarContractAddress)];
+      const snglsDao = [foundDaos.find(element => element.id = "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9")];
       this.setState({ searchDaos: snglsDao });
     } else {
       this.setState({ searchDaos: [] });
@@ -114,7 +114,7 @@ class DaosPage extends React.Component<IProps, IState> {
       }));
     }
 
-    finalDAOList = [finalDAOList.find(element => element.id = getArcSettings().daoAvatarContractAddress), finalDAOList.find(element => element.id = getArcSettings().daoAvatarContractAddress)]
+    finalDAOList = [finalDAOList.find(element => element.id = "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9"), finalDAOList.find(element => element.id = "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9")]
 
     const daoNodes = finalDAOList.map((dao: DAO) => {
       return (

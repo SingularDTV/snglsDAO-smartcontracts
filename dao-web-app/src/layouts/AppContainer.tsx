@@ -25,6 +25,7 @@ import { captureException, withScope } from "@sentry/browser";
 import { Address } from "@daostack/client";
 import { sortedNotifications } from "../selectors/notifications";
 import * as css from "./App.scss";
+import * as Sticky from "react-stickynode";
 
 interface IExternalProps extends RouteComponentProps<any> {
   history: History;
@@ -200,9 +201,13 @@ class AppContainer extends React.Component<IProps, IState> {
           <div className={css.container}>
             <Route path="/" render={this.headerHtml} />
 
-            <div className={css.pageWrapper}>
+            <div id="wrapper" className={css.pageWrapper}>
               <div className={css.sidebarWrapper}>
+
+                
+                <Sticky enabled={true} top='#header' bottomBoundary='#wrapper' innerZ={10000}>
                 <Route path="/" render={this.sidebarHtml} />
+                </Sticky>
               </div>
 
               <div className={css.contentWrapper}>
@@ -239,10 +244,10 @@ class AppContainer extends React.Component<IProps, IState> {
               </div>
               <div className={css.footerLinksSocials}>
                 <ul>
-                  <li><a href="#"><img src="/assets/images/Icon/icon_git.svg" alt="" /></a></li>
-                  <li><a href="#"><img src="/assets/images/Icon/soc_icon.svg" alt="" /></a></li>
-                  <li><a href="#"><img src="/assets/images/Icon/icon_twitter.svg" alt="" /></a></li>
-                  <li><a href="#"><img src="/assets/images/Icon/icon_medium.svg" alt=""/></a></li>
+                  <li><a href="https://github.com/SingularDTV/snglsdao-pm" target="_blank"><img src="/assets/images/Icon/icon_git.svg" alt="" /></a></li>
+                  <li><a href="https://weibo.com/snglsdao" target="_blank"><img src="/assets/images/Icon/soc_icon.svg" alt="" /></a></li>
+                  <li><a href="https://twitter.com/snglsdao" target="_blank"><img src="/assets/images/Icon/icon_twitter.svg" alt="" /></a></li>
+                  <li><a href="https://medium.com/singulardtv/" target="_blank"><img src="/assets/images/Icon/icon_medium.svg" alt=""/></a></li>
                 </ul>
               </div>
             </div>

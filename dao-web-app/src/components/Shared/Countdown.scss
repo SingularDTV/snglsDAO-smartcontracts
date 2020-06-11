@@ -1,6 +1,9 @@
 .container {
   white-space: nowrap;
   display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 6px;
+  border-radius: 3px;
 }
 
 .detailView {
@@ -8,7 +11,7 @@
 
   .label {
     margin-right: 8px;
-		color: $black-halftone;
+		color: #fff;
   }
 
 	.timeSection {
@@ -29,7 +32,8 @@
 
 .timeSection {
   display: inline-block;
-  color: rgba(104, 155, 214, 1.000);
+  color: #fff;
+
 
   strong {
   	font-weight: normal;

@@ -26,32 +26,44 @@
 }
 
 .schemeRegisterIcon {
-  color: rgba(0, 118, 255, 1.000);
+  color: #fff;
   font-weight: bold;
+
+  a {
+    color: #fff !important;
+        font-weight: 600;
+  }
 }
 
 .proposalSummary.withDetails {
   margin: 0 11px;
   font-size: 14px;
   padding: 6px 15px;
+  color: #fff !important;
+
+  a {
+    color: #fff !important;
+    font-weight: 600;
+  }
 }
 
 .detailView.proposalSummary, .transactionModal.proposalSummary {
-  box-shadow: 0 1px 12px 0 rgba(26, 60, 88, 0.09);
-  background-color: $white;
+  // box-shadow: 0 1px 12px 0 rgba(26, 60, 88, 0.09);
+  background: rgba(196, 196, 196, 0.1);
+  border: 1px solid #ffffff12;
   font-size: 16px;
   padding: 15px 20px;
   margin: 0 0 0 0;
   // width: 100%;
   display: inline-block;
-  color: #010B2B;
+  color: #fff;
   font-weight: bold;
   font-size: 22px;
   line-height: 32px;
   font-family: Montserrat;
 
   a {
-    color: #010B2B !important;
+    color: #fff !important;
   }
 }
 
@@ -64,7 +76,7 @@
     padding: 20px;
     display: block;
     font-family: "AccordBold";
-    border-bottom: 1px solid rgba(233, 238, 244, 1.000);
+    border-bottom: 1px solid #ffffff12;
 
     b {
       display: inline-block;
@@ -86,7 +98,7 @@
     margin: 0;
 
     th {
-      color: rgba(78, 97, 118, 1.000);
+      color: #fff;
       font-weight: normal;
       vertical-align: top;
 
@@ -98,7 +110,7 @@
     }
 
     td {
-      color: $gray-1;
+      // color: $gray-1;
 
       span {
         display: inline-block;
@@ -110,9 +122,10 @@
 
       img {
         position: relative;
-        top: -2px;
+        top: -9px;
         left: 2px;
         height: 14px;
+
       }
     }
   }
@@ -167,6 +180,8 @@
   table {
     font-size: 13px;
     border-top: 1px solid gray;
+    font-weight: normal;
+    position: relative;
   }
 }
 

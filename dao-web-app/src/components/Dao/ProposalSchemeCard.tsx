@@ -58,7 +58,7 @@ const ProposalSchemeCard = (props: IProps) => {
         </div>
         {proposals.length === 0 ?
           <div className={css.loading}>
-            <img src="/assets/images/meditate_white.svg" />
+            <img src="/assets/images/logo_white.svg" />
             <div>
               No upcoming proposals
             </div>
