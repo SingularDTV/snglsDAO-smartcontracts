@@ -132,68 +132,13 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
     tokenContract.methods.approve(toAddress, calculatedApproveValue).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
       if (error) throw error;
     }).then(function () {
-      reputationContract.methods.lock(calculatedApproveValue, /* min locking period */ 700000).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
+      reputationContract.methods.lock(1, /* min locking period */ 700000).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
         if (error) throw error;
       });
     });
 
-    // const externalTokenDetails = tokenDetails(values.externalTokenAddress);
-    // let externalTokenReward;
-
-    // // If we know the decimals for the token then multiply by that
-    // if (externalTokenDetails) {
-    //   externalTokenReward = toBaseUnit(values.externalTokenReward.toString(), externalTokenDetails.decimals);
-    // // Otherwise just convert to Wei and hope for the best
-    // } else {
-    //   externalTokenReward = toWei(Number(values.externalTokenReward));
-    // }
-
-
-    // // TODO: reward split should be fixed in client for now split here
-    // let rewardSplit = [];
-    // if (values.rewardSplit === "") {
-    //   const unit = 100.0 / Number(values.numWinners);
-    //   rewardSplit = Array(values.numWinners).fill(unit);
-    // } else {
-    //   rewardSplit = values.rewardSplit.split(",").map((s: string) => Number(s));
-    // }
-    // let reputationReward = toWei(Number(values.reputationReward));
-
-    // // This is a workaround around https://github.com/daostack/arc/issues/712
-    // // which was for contract versions rc.40. It is resolved in rc.41
-    // if (reputationReward.isZero()) {
-    //   reputationReward = new BN(1);
-    // }
-    // // Parameters to be passed to client
-    // const proposalOptions: IProposalCreateOptionsCompetition  = {
-    //   dao: "0xeF94b25C0685124B6acFf65dfd72c7D8799B8d48",
-    //   description: values.description,
-    //   endTime: values.compEndTimeInput.toDate(),
-    //   ethReward: toWei(Number(values.ethReward)),
-    //   externalTokenReward,
-    //   nativeTokenReward: toWei(Number(values.nativeTokenReward)),
-    //   numberOfVotesPerVoter:  Number(values.numberOfVotesPerVoter),
-    //   proposalType: "competition", // this makes `createPRoposal` create a competition rather then a 'normal' contributionRewardExt
-    //   proposerIsAdmin: values.proposerIsAdmin,
-    //   reputationReward,
-    //   rewardSplit,
-    //   scheme: "0x9998c70f34c7cb64401ed47487703abee1ca2300b009680a6e3b4080d67ab3a9",
-    //   startTime: values.compStartTimeInput.toDate(),
-    //   suggestionsEndTime: values.suggestionEndTimeInput.toDate(),
-    //   tags: this.state.tags,
-    //   title: values.title,
-    //   votingStartTime: values.votingStartTimeInput.toDate(),
-    // };
-
-    // await this.props.createProposal(proposalOptions);
     this.handleClose({});
   }
-
-  // private onTagsChange = (tags: string[]): void => {
-  //   this.setState({tags});
-  // }
-
-  // private fnDescription = (<span>Short description of the proposal.<ul><li>What are you proposing to do?</li><li>Why is it important?</li><li>How much will it cost the DAO?</li><li>When do you plan to deliver the work?</li></ul></span>);
 
   public render(): RenderOutput {
     const { data } = this.props;

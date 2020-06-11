@@ -1,5 +1,6 @@
 import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake/*, Member*/ } from "@daostack/client";
 import { enableWalletProvider,  getArc } from "arc";
+import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
@@ -7,11 +8,13 @@ import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as InfiniteScroll from "react-infinite-scroll-component";
 import { Link, RouteComponentProps } from "react-router-dom";
+import { showNotification } from "reducers/notifications";
 // import * as Sticky from "react-stickynode";
 import { first } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
 import classNames from "classnames";
+import { connect } from "react-redux";
 
 // import { IProfilesState } from "reducers/profilesReducer";
 
@@ -25,9 +28,19 @@ interface IExternalProps extends RouteComponentProps<any> {
   daoState: IDAOState;
 }
 
+interface IDispatchProps {
+  createProposal: typeof arcActions.createProposal;
+  showNotification: typeof showNotification;
+}
+
+const mapDispatchToProps = {
+  createProposal: arcActions.createProposal,
+  showNotification,
+};
+
 type SubscriptionData = Proposal[];
 
-type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
+type IProps = IExternalProps & IDispatchProps & ISubscriptionProps<SubscriptionData>;
 
 interface IState {
   transactionFee: string;
@@ -50,7 +63,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   }
 
   private async handleNewProposal(): Promise<void> {
-    if (!await enableWalletProvider({ showNotification: true })) { return; }
+    if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
 
     this.props.history.push(`/dao/dashboard/join/`);
     // this.props.history.push(`/dao/dashboard/join`);
@@ -64,7 +77,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   public async componentDidMount() {
     const arc = getArc();
     const feeContract = new arc.web3.eth.Contract([ { "constant": true, "inputs": [], "name": "listingFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "membershipFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "transactionFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "validationFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" } ],
-      "0x58dC7440A7D37F200aFf06060DebedA2998d5B60"
+      "0xc7F243ccEEC5d8bD325cF159dbe7ad7a2B9384D9"
     );
     
     this.setState( 
@@ -284,41 +297,12 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
             </table>
           }
         </InfiniteScroll>
-
-
-
-        {/* <h2>TOP MEMBERS</h2>
-           <table className={css.memberHeaderTable}>
-           <tbody className={css.memberTable + " " + css.memberTableHeading}>
-             <tr>
-               <td className={css.memberAvatar}></td>
-               <td className={css.memberName}>Name</td>
-               <td className={css.memberAddress}>Address</td>
-               <td className={css.memberReputation}>Reputation</td>
-               <td className={css.memberSocial}>Social Verification</td>
-             </tr>
-           </tbody>
-         </table>
-         <InfiniteScroll
-          dataLength={members.length} //This is important field to render the next data
-          next={this.props.fetchMore}
-          hasMore={members.length < this.props.daoState.memberCount}
-          loader={<h4>Loading...</h4>}
-          endMessage={
-            <p style={{textAlign: "center"}}>
-              <b>&mdash;</b>
-            </p>
-          }
-        >
-          {membersHTML}
-        </InfiniteScroll> */}
       </div>
-
     );
   }
 }
 
-export default withSubscription({
+const SubscribedGetRep = withSubscription({
   wrappedComponent: DaoHistoryPage,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -346,7 +330,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9"}"
+            dao: "${"0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f"}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",
@@ -419,3 +403,5 @@ export default withSubscription({
     return proposals
   },
 });
+
+export default connect(null, mapDispatchToProps)(SubscribedGetRep);
