@@ -1,19 +1,20 @@
 import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake/*, Member*/ } from "@daostack/client";
 import { enableWalletProvider,  getArc } from "arc";
+import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
-import Analytics from "lib/analytics";
-import { Page } from "pages";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as InfiniteScroll from "react-infinite-scroll-component";
 import { Link, RouteComponentProps } from "react-router-dom";
+import { showNotification } from "reducers/notifications";
 // import * as Sticky from "react-stickynode";
 import { first } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
 import classNames from "classnames";
+import { connect } from "react-redux";
 
 // import { IProfilesState } from "reducers/profilesReducer";
 
@@ -27,15 +28,32 @@ interface IExternalProps extends RouteComponentProps<any> {
   daoState: IDAOState;
 }
 
+interface IDispatchProps {
+  createProposal: typeof arcActions.createProposal;
+  showNotification: typeof showNotification;
+}
+
+const mapDispatchToProps = {
+  createProposal: arcActions.createProposal,
+  showNotification,
+};
+
 type SubscriptionData = Proposal[];
 
-type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
+type IProps = IExternalProps & IDispatchProps & ISubscriptionProps<SubscriptionData>;
 
 interface IState {
   transactionFee: string;
   listingFee: string;
   validationFee: string;
   membershipFee: string;
+
+  // snglsBalance: string;
+  // sgtBalance: string;
+  // ethBalance: string;
+  // genBalance: string;
+  // usdcBalance: string;
+  // daiBalance: string;
 }
 
 class DaoHistoryPage extends React.Component<IProps, IState> {
@@ -52,7 +70,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   }
 
   private async handleNewProposal(): Promise<void> {
-    if (!await enableWalletProvider({ showNotification: true })) { return; }
+    if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
 
     this.props.history.push(`/dao/dashboard/join/`);
     // this.props.history.push(`/dao/dashboard/join`);
@@ -65,85 +83,18 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
 
   public async componentDidMount() {
     const arc = getArc();
-    const feeContract = new arc.web3.eth.Contract(
-        [
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "listingFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "membershipFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "transactionFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "validationFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          }
-        ],
-      "0x8dedb4c0B1fEf53da80BB7907404EC9258EE6A7B"
+    const feeContract = new arc.web3.eth.Contract([ { "constant": true, "inputs": [], "name": "listingFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "membershipFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "transactionFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "validationFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" } ],
+      "0xc7F243ccEEC5d8bD325cF159dbe7ad7a2B9384D9"
     );
     
     this.setState( 
       { 
-        transactionFee: await feeContract.methods.transactionFee().call(),
-        listingFee: await feeContract.methods.listingFee().call(),
-        validationFee: await feeContract.methods.validationFee().call(),
-        membershipFee:  await feeContract.methods.membershipFee().call()
+        transactionFee: arc.web3.utils.fromWei(await feeContract.methods.transactionFee().call()),
+        listingFee: arc.web3.utils.fromWei(await feeContract.methods.listingFee().call()),
+        validationFee: arc.web3.utils.fromWei(await feeContract.methods.validationFee().call()),
+        membershipFee:  arc.web3.utils.fromWei(await feeContract.methods.membershipFee().call())
       }
     );
-    Analytics.track("Page View", {
-      "Page Name": Page.DAOHistory,
-      "DAO Address": "0x22EC9ecE5CcD92e94f161b98B3914027b42550B4",
-      "DAO Name": this.props.daoState.name,
-    });
   }
 
   public render(): RenderOutput {
@@ -178,7 +129,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
               href="#!"
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
-              > Get rep </a>
+              > Get reputation </a>
           </div>
         </div>
          {/* Key parameters div */}
@@ -252,6 +203,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                      <ul>
                          <li><span>Sngls:</span><p>2960</p></li>
                          <li><span>SGT:</span><p>543</p></li>
+                         <li><span>ETH:</span><p>0</p></li>
+                         <li><span>GEN:</span><p>0</p></li>
                          <li><span>USDC:</span><p>103</p></li>
                          <li><span>DAI:</span><p>0</p></li>
                      </ul>
@@ -269,7 +222,6 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                      <ul>
                          <li><span>SGT:</span><p>2960</p></li>
                          <li><span>Sngls:</span><p>140000</p></li>
-                         <li><span>GEN:</span><p>10000000</p></li>
                      </ul>
                  </div>
              </div>
@@ -277,8 +229,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
          </div>
 
            </div>
-
-           <h3>TOP PROPOSALS</h3>
+           <br/>
            <h4>Boosted proposals (3)</h4>
            <InfiniteScroll
           dataLength={proposals.length} //This is important field to render the next data
@@ -353,41 +304,12 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
             </table>
           }
         </InfiniteScroll>
-
-
-
-        {/* <h2>TOP MEMBERS</h2>
-           <table className={css.memberHeaderTable}>
-           <tbody className={css.memberTable + " " + css.memberTableHeading}>
-             <tr>
-               <td className={css.memberAvatar}></td>
-               <td className={css.memberName}>Name</td>
-               <td className={css.memberAddress}>Address</td>
-               <td className={css.memberReputation}>Reputation</td>
-               <td className={css.memberSocial}>Social Verification</td>
-             </tr>
-           </tbody>
-         </table>
-         <InfiniteScroll
-          dataLength={members.length} //This is important field to render the next data
-          next={this.props.fetchMore}
-          hasMore={members.length < this.props.daoState.memberCount}
-          loader={<h4>Loading...</h4>}
-          endMessage={
-            <p style={{textAlign: "center"}}>
-              <b>&mdash;</b>
-            </p>
-          }
-        >
-          {membersHTML}
-        </InfiniteScroll> */}
       </div>
-
     );
   }
 }
 
-export default withSubscription({
+const SubscribedGetRep = withSubscription({
   wrappedComponent: DaoHistoryPage,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -415,7 +337,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0x97f0a184aea5a64E5F0Ee6367613e458450C0D15"}"
+            dao: "${"0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f"}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",
@@ -488,3 +410,5 @@ export default withSubscription({
     return proposals
   },
 });
+
+export default connect(null, mapDispatchToProps)(SubscribedGetRep);

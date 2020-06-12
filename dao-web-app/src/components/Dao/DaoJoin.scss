@@ -24,6 +24,7 @@
     transform: translate(-50%, -50%);
     z-index: 99999;
     // height: calc(100% - 100px);
+        padding-bottom: 1px;
 
     .header {
         line-height: normal;
@@ -66,10 +67,14 @@
         font-size: 18px;
         line-height: 27px;
         font-family: Montserrat;
-        // display: grid;
-        // grid-template-columns: 1fr auto;
-        // grid-gap: 50px;
-        // align-items: center;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-gap: 50px;
+        align-items: center;
+        
+        .description {
+          font-size: 18px;
+        }
 
         label {
           color: #D8D8D8;
@@ -113,13 +118,21 @@
     .content {
         padding: 47px 57px;
 
+        & > p {
+          padding-top: 0;
+          margin-top: 0;
+          font-size: 16px;
+          text-align: center;
+          max-width: 420px;
+          margin: 0 auto 20px auto;
+        }
+
         .bigInput {
-            form {
                 display: grid;
                 grid-template-columns: auto 1fr;
                 border: 1px solid rgba(43, 43, 43, 0.95);
                 align-items: center;
-                background: #E6E7EA;
+                background: #fff;
                 margin-bottom: 15px;
 
                 label {
@@ -144,15 +157,16 @@
                     font-weight: 500;
                     font-size: 44px;
                     line-height: 54px;
-                    padding: 21px 45px;
+                    padding: 46px 45px;
                     background: #fff;
                     border: 0;
                     width: 100%;
                     box-sizing: border-box;
                 }
-            }
+        }
 
-            span {
+        span {
+            &.holdings {
                 text-align: right;
                 color: #969696;
                 font-weight: 500;
@@ -163,9 +177,10 @@
                 strong {
                     font-weight: bold;
                     color: #000;
+                    padding-left: 14px;
                 }
             }
-        }
+          }
 
       .newInput {
                 display: grid;
@@ -914,6 +929,7 @@ div.description {
 
 
 @media(max-width: 768px) {
+
   .createProposalWrapper {
     width: calc(100% - 30px);
     box-shadow: none;
@@ -935,7 +951,9 @@ div.description {
     }
 
     .subhead {
+        grid-template-columns: 1fr;
           padding: 20px;
+          grid-gap: 10px;
 
           .description {
                 line-height: 20px;
@@ -944,6 +962,16 @@ div.description {
 
     .content {
       padding: 20px;
+
+      .bigInput {
+        label {
+          padding: 0 15px;
+        }
+        input {
+          font-size: 18px;
+              padding: 20px 15px;
+        }
+      }
 
       .newInput {
         label {
