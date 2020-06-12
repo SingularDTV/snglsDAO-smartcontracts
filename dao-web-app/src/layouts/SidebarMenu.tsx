@@ -237,20 +237,13 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
-          <ul>
-            {/* <li key={"0x0"}>
-              <Tooltip overlay={`${
-                fromWei(dao.reputationTotalSupply).toLocaleString(
-                  undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP`} placement="right">
-                <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
-              </Tooltip>
-            </li>             */}
-
+          <ul>        
             <SubscribedEthBalance dao={dao} />
 
             {Object.keys(supportedTokens()).map((tokenAddress) => {
               return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
             })}
+d
           </ul>
         </div>
         <div className={css.daoHoldings}>
@@ -268,9 +261,6 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
               </Tooltip>
             </li>            
-
-            <SubscribedEthBalance dao={dao} />
-
             {/* {Object.keys(supportedTokens()).map((tokenAddress) => {
               return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
             })} */} {/* todo: update token parser */}

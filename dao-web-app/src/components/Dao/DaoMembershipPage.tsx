@@ -67,6 +67,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.autoAmount = this.autoAmount.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
     this.state = {
       membershipFee: "0.00",
       alreadyStaked: "0.00",
@@ -79,6 +80,10 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
     this.setState({
       fieldValue: parseFloat(this.state.membershipFee) - parseFloat(this.state.alreadyStaked)
     });
+  }
+
+  public onChangeHandler(e: any) {
+    console.log("ONCHANGE: +==-===->>>>>", e, e.target)
   }
 
   public async componentDidMount() {
@@ -116,6 +121,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
     });
   }
   public handleSubmit = async (values: IFormValues, { _setSubmitting }: any ): Promise<void> => {
+    console.log("MEMFEESTAKE", this.props, values)
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
       return;
     }
@@ -138,7 +144,6 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
     const calculatedApproveValue = arc.web3.utils.toHex(tokenAmountToApprove.mul(arc.web3.utils.toBN(10).pow(tokenDecimals)));
 
     const currentAccountAddress = this.props.currentAccountAddress;
-    console.log("REVERTTTT ", this.state, this.props, calculatedApproveValue, values.snglsToSend)
     tokenContract.methods.approve(toAddress, calculatedApproveValue).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
       if (error) throw error;
     }).then(function () {
@@ -190,7 +195,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
             <hr/>
 
             <div className={css.content}>
-              <p>Confirm auto <strong>( { parseFloat(this.state.membershipFee) - parseFloat(this.state.alreadyStaked) } )</strong> or enter the amount manually:</p>
+              <p>Confirm auto <strong>( { parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) } )</strong> or enter the amount manually:</p>
               <Formik
                 
                 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -199,19 +204,20 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                 } as IFormValues}
                 
                 validate={(values: IFormValues): void => {
-                  const errors: any = {};
-                  const nonNegative = (name: string): void => {
-                    if ((values as any)[name] < 0) {
-                      errors[name] = "Please enter a non-negative value";
-                    }
-                  };
+                  // const errors: any = {};
+                  // const nonNegative = (name: string): void => {
+                  //   if ((values as any)[name] < 0) {
+                  //     console.log("Please enter a non-negative value")
+                  //     errors[name] = "Please enter a non-negative value";
+                  //   }
+                  // };
    
-                  nonNegative("ethReward");
-                  if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.snglsToSend) {
-                    errors.rewards = "Please select at least some reward";
-                  }
+                  // nonNegative("ethReward");
+                  // if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.snglsToSend) {
+                  //   errors.rewards = "Please select at least some reward";
+                  // }
       
-                  return errors;
+                  // return errors;
                 }}
 
                 onSubmit={this.handleSubmit}
@@ -229,34 +235,28 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                 }: FormikProps<IFormValues>) =>
                 <div className={css.bigInput}>
                   <Form noValidate>
-
                     <div className={css.formLabel}>
-                    <label>SNGLS</label>
-                    <Field
-                      id="snglsToSendInput"
-                      value={this.state.fieldValue}
-                      maxLength={10}
-                      placeholder=""
-                      name="snglsToSend"
-                      type="number"
-                      className={touched.snglsToSend && errors.nativeTokenReward ? errCss.error : null}
-                    />
-                    <button type="button" className={css.auto} onClick={this.autoAmount}>auto</button>
+                      <label>SNGLS</label>
+                      <Field
+                        id="snglsToSendInput"
+                        maxLength={10}
+                        placeholder=""
+                        name="snglsToSend"
+                        type="number"
+                        className={touched.snglsToSend && errors.nativeTokenReward ? errCss.error : null}
+                      />
+                      <button type="button" className={css.auto} onClick= { () => { setFieldValue("snglsToSend", parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked)) } } >
+                        auto
+                      </button>
                     </div>
-
-                      <div className={css.bigInputFoot}>
-                        <span>Already staked: {parseFloat(this.state.alreadyStaked).toPrecision(4)} </span>
-                        <span>Balance: {parseFloat(this.state.snglsBalance).toPrecision(4)} SNGLS</span>
-                      </div>
-                      <hr />
-
-                      <button type="submit" className={css.stakeSubmit}>Stake</button>
-                      <hr />
-
-                      <button type="button" className={css.unstake}>unstake</button>
-
-
-
+                    <div className={css.bigInputFoot}>
+                      <span>Already staked: {parseInt(this.state.alreadyStaked)} </span>
+                      <span>Balance: {parseInt(this.state.snglsBalance)} SNGLS</span>
+                    </div>
+                    <hr />
+                    <button type="submit" className={css.stakeSubmit}>Stake</button>
+                    <hr />
+                    <button type="button" className={css.unstake}>unstake</button>
                   </Form>
                 </div>
                 }

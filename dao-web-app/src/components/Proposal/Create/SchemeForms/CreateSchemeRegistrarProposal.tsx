@@ -465,13 +465,6 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                           Call genericCall on behalf of
                         </label>
                       </div>
-
-                      <div className={css.permissionCheckbox}>
-                        <Field id="mintBurnReputation" type="checkbox" name="mintBurnReputation" disabled="disabled" checked="checked" />
-                        <label htmlFor="mintBurnReputation">
-                          Mint or burn reputation
-                        </label>
-                      </div>
                     </div>
                   </div>
 

@@ -47,6 +47,13 @@ interface IState {
   listingFee: string;
   validationFee: string;
   membershipFee: string;
+
+  // snglsBalance: string;
+  // sgtBalance: string;
+  // ethBalance: string;
+  // genBalance: string;
+  // usdcBalance: string;
+  // daiBalance: string;
 }
 
 class DaoHistoryPage extends React.Component<IProps, IState> {
