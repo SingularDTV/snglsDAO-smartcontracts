@@ -6,7 +6,8 @@ import Analytics from "lib/analytics";
 import * as React from "react";
 import { connect } from "react-redux";
 import { showNotification, NotificationStatus } from "reducers/notifications";
-import { baseTokenName, isValidUrl } from "lib/util";
+// import { baseTokenName, isValidUrl } from "lib/util";
+import { isValidUrl } from "lib/util";
 import { exportUrl, importUrlValues } from "lib/proposalUtils";
 import TagsSelector from "components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
@@ -228,19 +229,112 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                 <div>
                   <label htmlFor="callData">
                     <div className={css.requiredMarker}>*</div>
-                    Encoded function call data
+                    Parameters you want to change:
                     <ErrorMessage name="callData">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
+
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Transactionfee">Transaction Fee</label>
+                    <Field
+                      id="Transactionfee"
+                      maxLength={120}
+                      placeholder="New value (%)"
+                      name="Transactionfee"
+                      type="text"
+                    />
+                  </div>
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Listingfee">Listing Fee</label>
+                    <Field
+                      id="Listingfee"
+                      maxLength={120}
+                      placeholder="New value (SNGLS)"
+                      name="Listingfee"
+                      type="text"
+                    />
+                  </div>
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Validationfee">Validation Fee</label>
+                    <Field
+                      id="Validationfee"
+                      maxLength={120}
+                      placeholder="New value (SNGLS)"
+                      name="Validationfee"
+                      type="text"
+                      disabled={true}
+                    />
+                  </div>
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Membershipfee">Membership Fee</label>
+                    <Field
+                      id="Membershipfee"
+                      maxLength={120}
+                      placeholder="New value (SNGLS)"
+                      name="Membershipfee"
+                      type="text"
+                    />
+                  </div>
+
+                  {/* <label className={css.radio}>
+                    <input
+                      type="radio"
+                      name="test"
+                      value="Transaction fee"
+                      checked={values.test === "Transactionfee"}
+                      onChange={() => setFieldValue("test", "Transactionfee")}
+                    />Transaction fee
+                  </label>
+                  <label className={css.radio}>
+                    <input
+                      type="radio"
+                      name="test"
+                      value="Listing fee"
+                      checked={values.test === "Listingfee"}
+                      onChange={() => setFieldValue("test", "Listingfee")}
+                    />Listing fee
+                  </label>
+                  <label className={css.radio}>
+                    <input
+                      type="radio"
+                      name="test"
+                      value="Validation fee"
+                      checked={values.test === "Validationfee"}
+                      onChange={() => setFieldValue("test", "Validationfee")}
+                    />Validation fee
+                  </label> */}
+
+                  {/* <label htmlFor="callDataInput">
+                    <div className={css.requiredMarker}>*</div>
+                    Enter new fee value
+                    <ErrorMessage name="callDataInput">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
+                  </label>
+
                   <Field
+                    id="callDataInput"
+                    placeholder="Value"
+                    name="callDataInput"
+                    type="number"
+                    className={touched.callData && errors.callData ? css.error : null}
+                    min={0}
+                    step={0.1}
+                  /> */}
+
+
+                  {/* <Field
                     id="callDataInput"
                     component="textarea"
                     placeholder="The encoded function call data of the contract function call"
                     name="callData"
                     className={touched.callData && errors.callData ? css.error : null}
-                  />
+                  /> */}
+
                 </div>
 
-                <div>
+                {/* <div>
                   <label htmlFor="value">
                     <div className={css.requiredMarker}>*</div>
                     {baseTokenName()} Value
@@ -255,7 +349,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                     min={0}
                     step={0.1}
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className={css.createProposalActions}>

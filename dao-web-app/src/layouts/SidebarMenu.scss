@@ -92,7 +92,7 @@
 
   .daoNavigation {
     font-family: "Open Sans";
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 
     ul {
       margin-top: 15px;
@@ -216,7 +216,7 @@
 
 .daoHoldings {
   display: block;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 
   .daoNavHeading b {
     padding: 10px 25px 10px 10px;
@@ -229,8 +229,8 @@
   .daoNavHeading a {
     display: inline-block;
     position: relative;
-    top: 19px;
-    left: -14px;
+    top: 16px;
+    left: -15px;
   }
 
   ul {
@@ -247,7 +247,7 @@
 
 .siteLinksWrapper {
   // display: none;
-  margin-bottom: 60px;
+  // margin-bottom: 40px;
   // position: absolute;
   // height: 270px;
   left: 0;
@@ -264,7 +264,7 @@
     position: relative;
 
     li {
-      position: initial;
+      position: relative;
       list-style: none;
       margin: 0;
       width: 100%;
@@ -293,10 +293,10 @@
 
       ul {
         left: 50px;
-        top: -80px;
-        width: 120px;
+        top: calc(50% - 26px);
+        width: 130px;
         opacity: 0;
-        transform: scale(0);
+        transform: scale(0) translate(0, -50%);
         transition: all 0.25s ease;
         padding: 10px 0 10px 0;
         background-color: rgba(255, 255, 255, 1);
@@ -312,6 +312,14 @@
           top: 50%;
           transform: translateY(-5px) rotate(45deg);
           left: -5px;
+        }
+
+        span {
+          &.soon {
+            padding: 0 10px;
+            margin: 0;
+            display: block;
+          }
         }
 
         li {
@@ -347,23 +355,28 @@
       &:hover ul {
         left: -8px;
         opacity: 1;
-        top: -160px;
-        transform: translateX(100%) scale(1);
+        // top: -160px;
+        transform: translate(100%, -50%) scale(1);
         background-color: rgba(255, 255, 255, 1);
       }
     }
 
     li.daoStack {
-      padding-top: 10px;
+      // padding-top: 10px;
+      height: auto;
 
       a {
         // color: white;
         font-family: "AccordBold";
         font-size: 13px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        grid-gap: 7px;
       }
 
       img {
-        margin-top: -3px;
+        margin-top: -6px;
         top: 5px;
         position: relative;
       }
@@ -424,19 +437,27 @@
 
 @media (max-width: 992px) {
     .sidebarWrapper {
-        display: none;
+        // display: block;
         position: fixed;
         // top: 0;
         overflow: scroll;
+        right: 0;
+        left: 0;
+        top: 64px;
         height: 100%;
         padding: 0;
+        transform: translateX(-100%);
+        opacity: 0;
+        transition: 0.2s;
         // min-height: 900px;
 
         &.menuOpen {
-            display: block;
+            // display: block;
             height: 100%;
             z-index: 1000;
             width: 100%;
+            transform: translateX(0%);
+            opacity: 1;
 
             .menuContent {
                 min-height: 900px;
@@ -458,7 +479,7 @@
 @media (max-width: 768px) {
     .sidebarWrapper.menuOpen {
         .menuContent {
-            min-height: 800px;
+            min-height: 720px;
         }
     }
 }

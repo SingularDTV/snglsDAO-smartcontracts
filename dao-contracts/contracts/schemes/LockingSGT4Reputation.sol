@@ -9,7 +9,7 @@ import "../controller/Controller.sol";
  * @title A locker contract
  */
 
-contract MembershipFeeStaking {
+contract LockingSGT4Reputation {
     using SafeMath for uint256;
 
     event Release(address indexed _beneficiary, uint256 _amount);

@@ -245,12 +245,12 @@ a.accountName {
 .profileDescription {
   color: #fff;
   font-family: Montserrat;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 
   label {
     margin-bottom: 5px;
     display: block;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 22px;
     line-height: 32px;
   }
@@ -258,6 +258,7 @@ a.accountName {
   div {
     font-size: 14px;
     line-height: 20px;
+    padding-top: 7px;
   }
 
 }
@@ -287,11 +288,13 @@ a.accountName {
       content: '';
       height: 100%;
       width: 100%;
-      background: rgba(255, 255, 255, 0.05);
+      // background: rgba(255, 255, 255, 0.05);
       opacity: 0.8;
       border: 1px solid rgba(255, 255, 255, 0.05);
       box-sizing: border-box;
-      backdrop-filter: blur(40px);
+      // backdrop-filter: blur(40px);
+      background: url(/assets/images/bg_blur.png) repeat;
+      background-size: cover;
     }
   }
 
@@ -301,7 +304,8 @@ a.accountName {
     padding: 40px;
 
     .followButton {
-      margin-top: 10px;
+      margin-top: 0px;
+      margin-bottom: 20px;
       button {
         border: 0;
         background: #D40D26;
@@ -325,7 +329,13 @@ a.accountName {
   }
 
   .userAvatarContainer {
-    width: 100px;
+    // width: 46px;
+    margin-right: 20px;
+
+    img {
+      max-width: 100%;
+      
+    }
   }
 
   .saveProfile {
@@ -339,7 +349,7 @@ a.accountName {
     align-items: center;
     font-family: Montserrat;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 22px;
     line-height: 32px;
     margin-bottom: 20px;
@@ -356,7 +366,7 @@ a.accountName {
 
   .otherInfoContainer {
     width: 100%;
-    background: #010B2B;
+    background: #010b2b7a;
     position: relative;
     padding: 40px;
 
@@ -403,10 +413,18 @@ a.accountName {
   input,
   textarea {
     display: block;
-    border: 1px solid #d0d9e1;
+    border: 1px solid #ffffff0d;
     padding: 15px;
     width: 95%;
     font-size: 14px;
+    background: #ffffff0a;
+    color: #fff;
+    font-family: "Open Sans";
+    outline: none;
+
+    &::placeholder {
+      color: #ffffff4d;
+    }
   }
 
   .socialButton {
@@ -436,11 +454,34 @@ a.accountName {
   position: relative;
   padding-bottom: 20px;
   width: 100%;
+
+
+  color: #fff;
+
+  strong {
+    padding-bottom: 10px;
+    display: block;
+  }
+
+  & > a {
+    color: #fff;
+    margin: 0 7px;
+    display: inline-block;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 .socialButtonAuthenticated {
   .icon {
-    color: #76c9de;
+    color: #fff;
+    font-size: 26px;
   }
 }
 
@@ -467,8 +508,9 @@ input {
   border: none;
   font-size: 14px;
   padding: 0 15px;
-  margin-right: 45px;
-  margin-top: 30px;
+  outline: none;
+  // margin-right: 45px;
+  // margin-top: 30px;
 
   &:hover {
     cursor: pointer;
@@ -513,7 +555,61 @@ input {
   }
 }
 
+@media (max-width: 768px) {
+    .targetAccount:hover {
+    .avatar {
+        width: 80px;
+        height: 80px;
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    .accountInfo {
+        opacity: 1;
+        top: 0px;
+        transform: translateX(-5%) scale(1);
+        width: 260px;
+        padding-top: 20px;
+
+        .name {
+            a {
+                font-size: 16px;
+                font-weight: 800;
+            }
+        }
+
+        .beneficiaryAddress {
+
+            & > div {
+                max-width: 183px;
+            }
+            span {
+                width: 140px;
+                font-weight: 300;
+                text-transform: none;
+            }
+        }
+
+        .button {
+            button {
+                padding: 7px 45px;
+            }
+        }
+
+        .holdings {
+            font-size: 16px;
+        }
+    }
+    }
+}
+
 @media only screen and (max-width: 425px) {
+    // .targetAccount {
+    //     width: 12px !important;
+    // }
   .profileWrapper {
     display: block;
   }

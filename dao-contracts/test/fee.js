@@ -16,7 +16,13 @@ contract("Fee", async accounts => {
     let GenericSchemeInstance;
     let FeeInstance;
     before(async () => {
-        GenericSchemeInstance = await GenericSchemeContract.at(await getDeployedAddress("GenericSchemeFee"));
+        let chainId = await web3.eth.net.getId();
+        let network;
+        if (chainId === 4) network = "rinkeby";
+        else network = "private";
+        //"0.0.1-rc.32" - this property can be changed in future
+        const GenericSchemeAddress = migration[network].base["0.0.1-rc.32"].UGenericScheme;
+        GenericSchemeInstance = await GenericSchemeContract.at(GenericSchemeAddress);
         FeeInstance = await FeeContract.at(await getDeployedAddress("Fee"));
         GenesisProtocolInstance = await GenesisProtocol.at(await GenericSchemeInstance.votingMachine.call());
     });

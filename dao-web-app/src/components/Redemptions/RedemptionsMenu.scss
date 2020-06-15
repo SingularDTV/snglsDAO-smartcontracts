@@ -67,15 +67,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: #010b2b;
 
     h2 {
       font-size: 21px;
       // color: rgba(104, 155, 214, 1);
+      color: #010b2b;
     }
 
     img {
       width: 140px;
-      margin-right: -22px;
+      // margin-right: -22px;
     }
   }
 
@@ -93,6 +95,7 @@
 
     a {
       margin: 10px;
+      color: #000;
 
       &.disabled {
         pointer-events: none;

@@ -67,7 +67,7 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
     Analytics.track("Page View", {
       "Page Name": Page.CreateProposal,
-      "DAO Address": "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d",
+      "DAO Address": "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f",
       "Scheme Address": this.props.schemeId,
     });
     const newState = {};
@@ -95,16 +95,22 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
-    const daoAvatarAddress = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";
+    const daoAvatarAddress = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f";
     const scheme = this.props.data;
 
     let createSchemeComponent = <div />;
+    
+
+
     const props = {
       daoAvatarAddress,
       handleClose: this.doClose,
       scheme,
     };
     const schemeTitle = this.state.createCrxProposalComponent ? rewarderContractName(scheme) : schemeName(scheme);
+
+    console.log(" <<<<<<<<<<CreateProposalPage>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>: ", this.state, this.props);
+
 
     if (this.state.createCrxProposalComponent) {
       createSchemeComponent = <this.state.createCrxProposalComponent {...props} />;

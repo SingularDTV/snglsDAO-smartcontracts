@@ -74,7 +74,7 @@ class DaosPage extends React.Component<IProps, IState> {
         arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString.charAt(0).toUpperCase() + searchString.slice(1) } }, { fetchAllData: true }),
         (data1, data2) => data1.concat(data2),
       ).pipe(first()).toPromise();
-      const snglsDao = [foundDaos.find(element => element.id = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d")];
+      const snglsDao = [foundDaos.find(element => element.id = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f")];
       this.setState({ searchDaos: snglsDao });
     } else {
       this.setState({ searchDaos: [] });
@@ -114,10 +114,9 @@ class DaosPage extends React.Component<IProps, IState> {
       }));
     }
 
-    finalDAOList = [finalDAOList.find(element => element.id = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"), finalDAOList.find(element => element.id = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d")]
+    finalDAOList = [finalDAOList.find(element => element.id = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f"), finalDAOList.find(element => element.id = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f")]
 
     const daoNodes = finalDAOList.map((dao: DAO) => {
-      console.log("HEEELOO ", dao);
       return (
         <DaoCard
           key={dao.id}

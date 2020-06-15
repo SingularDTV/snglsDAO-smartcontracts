@@ -49,11 +49,12 @@ class DaoSchemesPage extends React.Component<IProps, null> {
     const { data } = this.props;
     const dao = this.props.daoState;
     const allSchemes = data;
-
     const contributionReward = allSchemes.filter((scheme: Scheme) => scheme.staticState.name === "ContributionReward");
     const knownSchemes = allSchemes.filter((scheme: Scheme) => scheme.staticState.name !== "ContributionReward" && KNOWN_SCHEME_NAMES.indexOf(scheme.staticState.name) >= 0);
     const unknownSchemes = allSchemes.filter((scheme: Scheme) =>  KNOWN_SCHEME_NAMES.indexOf(scheme.staticState.name) === -1 );
     const allKnownSchemes = [...contributionReward, ...knownSchemes];
+
+    console.log("SHEMES PAGE ================++> ", allKnownSchemes, this.props);
 
     const schemeCardsHTML = (
       <TransitionGroup>

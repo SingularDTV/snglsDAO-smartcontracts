@@ -39,8 +39,8 @@ button.disabled {
     h2 {
       display: inline-block;
       padding-right: 27px;
-      font-size: 50px;
-      line-height: 60px;
+      // font-size: 50px;
+      // line-height: 60px;
       margin: 0;
     }
 
@@ -80,11 +80,13 @@ button.disabled {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.05);
+      // background: rgba(255, 255, 255, 0.05);
       opacity: 0.8;
       border: 1px solid rgba(255, 255, 255, 0.05);
       box-sizing: border-box;
-      backdrop-filter: blur(40px);
+      // backdrop-filter: blur(40px);
+      background: url(/assets/images/bg_blur.png) repeat;
+      background-size: cover;
     }
   }
 }
@@ -104,18 +106,19 @@ button.disabled {
 }
 
 .proposal {
-  border-radius: 15px;
+  // border-radius: 15px;
   background-color: transparent;
   margin-right: 20px;
   margin-bottom: 0px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   position: relative;
   overflow: hidden;
   transition: all .25s ease;
   vertical-align: top;
   height: auto;
   overflow: visible;
-  justify-content: center;
+  // justify-content: center;
   width: 100%;
 }
 
@@ -276,7 +279,7 @@ button.disabled {
 .voteButtons {
   position: relative;
   background: rgba(196, 196, 196, 0.1);
-  padding: 7px 33px;
+  padding: 10px 33px;
   font-family: Montserrat;
   font-weight: normal;
   font-size: 14px;
@@ -330,10 +333,10 @@ button.disabled {
 .stakeButtons {
   position: relative;
   background: rgba(196, 196, 196, 0.1);
-  padding: 7px 33px;
+  padding: 10px 33px;
   font-family: TransatStandard;
   font-weight: normal;
-  font-size: 14зчpx;
+  font-size: 14px;
   // line-height: 31px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -383,7 +386,7 @@ button.disabled {
   flex-grow: 1;
   // min-width: 320px;
   max-width: 465px;
-  width: 100%;
+  width: calc(100% - 40px);
   min-width: 300px;
 }
 
@@ -406,7 +409,7 @@ button.disabled {
 
 .proposalSummaryContainer {
   position: relative;
-  left: -45px;
+  // left: -45px;
   &.hasTags {
     margin-bottom: 18px;
   }
@@ -480,10 +483,58 @@ button.disabled {
   }
 }
 
-@media only screen and (max-width: 425px) {
+@media (max-width: 768px) {
+  .wrapperTitle {
+    margin-bottom: 10px;
+  }
   .proposal {
     display: block;
+
+    &Actions {
+      max-width: calc(100% - 40px);
+    }
+
+    &TitleTop {
+      padding: 15px;
+    }
+
+    &Info {
+      &Cont {
+        padding: 15px 0;
+      }
+    }
+
+    &SummaryContainer {
+      left: -15px;
+    }
   }
+
+  .proposalActions {
+    width: calc(100% - 40px);
+  }
+
+  .buttonBar {
+    button {
+      &.shareButton {
+        line-height: normal;
+        margin-right: 10px;
+      }
+    }
+    .followButton {
+      margin: 10px 0 0 0;
+    }
+  }
+
+  .statusTitle {
+    padding: 15px 20px;
+    h3 {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+}
+
+@media only screen and (max-width: 425px) {
 
   .proposalInfo {
 	  padding: 15px;
@@ -495,7 +546,7 @@ button.disabled {
   }
 
   .voteBox {
-    margin: 0 0 0 0;
+    margin: 0 0 20px 0;
     border-radius: 0;
   }
 

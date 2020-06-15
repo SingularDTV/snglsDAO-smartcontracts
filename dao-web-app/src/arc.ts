@@ -144,6 +144,7 @@ export async function initializeArc(provider?: any): Promise<boolean> {
     let contractInfos;
     if (USE_CONTRACTINFOS_CACHE) {
       contractInfos = require(`data/contractInfos-${targetedNetwork()}.json`);
+      console.log("contractInfos: ", contractInfos)
       arc.setContractInfos(contractInfos);
     } else {
       try {
@@ -153,6 +154,7 @@ export async function initializeArc(provider?: any): Promise<boolean> {
         console.error(`Error fetching contractinfos: ${err.message}`);
       }
     }
+    console.log("Contracts info: ", contractInfos)
     success = !!contractInfos;
 
     if (success) {

@@ -92,7 +92,8 @@
     display: block;
     font-weight: $normal;
     font-size: 11px;
-    color: $black-halftone;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
 
@@ -293,7 +294,7 @@
 .createdBy {
   font-size: $small;
   color: $black-thirdtone;
-  margin: 15px 10px 5px 13px;
+  margin: 24px 10px 5px 13px;
   position: relative;
   left: 7px;
 }

@@ -74,11 +74,13 @@
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(255, 255, 255, 0.05);
+    // background: rgba(255, 255, 255, 0.05);
     opacity: 0.8;
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-sizing: border-box;
-    backdrop-filter: blur(40px);
+    // backdrop-filter: blur(40px);
+    background: url(/assets/images/bg_blur.png) repeat;
+    background-size: cover;
   }
 }
 
@@ -144,13 +146,15 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.05);
+      // background: rgba(255, 255, 255, 0.05);
       opacity: 0.8;
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-bottom: 0;
       box-sizing: border-box;
-      backdrop-filter: blur(40px);
+      // backdrop-filter: blur(40px);
       z-index: -1;
+      background: url(/assets/images/bg_blur.png) repeat;
+      background-size: cover;
     }
   }
 
@@ -301,4 +305,12 @@
 :global .sticky-inner-wrapper {
   // background-color: #e5ebf2 !important;
   padding-bottom: 16px;
+}
+
+
+@media (max-width: 992px) {
+  :global .sticky-inner-wrapper {
+    // background-color: #e5ebf2 !important;
+    padding-bottom: 0px;
+  }
 }
