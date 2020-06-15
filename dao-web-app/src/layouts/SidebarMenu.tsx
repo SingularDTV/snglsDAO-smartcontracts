@@ -9,8 +9,7 @@ import classNames from "classnames";
 // import FollowButton from "components/Shared/FollowButton";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 // import { generate } from "geopattern";
-import Analytics from "lib/analytics";
-import { baseTokenName, ethErrorHandler, formatTokens, genName, getExchangesList, getExchangesListSNGLS, supportedTokens, fromWei } from "lib/util";
+import { baseTokenName, ethErrorHandler, formatTokens, genName, getExchangesList, getExchangesListSNGLS, supportedTokens/*, fromWei*/ } from "lib/util";
 // import { parse } from "query-string";
 import * as React from "react";
 import { /* matchPath,*/ Link, RouteComponentProps } from "react-router-dom";
@@ -19,7 +18,7 @@ import { IRootState } from "reducers";
 import { connect } from "react-redux";
 import { combineLatest, of, from } from "rxjs";
 
-import Tooltip from "rc-tooltip";
+// import Tooltip from "rc-tooltip";
 import * as css from "./SidebarMenu.scss";
 
 type IExternalProps = RouteComponentProps<any>;
@@ -58,6 +57,12 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   };
 };
 
+// const stakingContracts = () => {
+//   return [
+//     ["0x498EE93981A2453a3F8b8939458977DF86dCce42", "0x1E44072256F56527F22134604C9c633eC4cEc86B", "SGT", 18],
+//     ["0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab", "0x877fF27181f814a6249285f312ed708EEaC961b5", "SNGLS", 18]
+//   ]
+// }
 class SidebarMenu extends React.Component<IProps, IStateProps> {
 
   constructor(props: IProps) {
@@ -65,19 +70,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
   }
 
   public componentDidMount() {
-    Analytics.trackLinks(".externalLink", "Clicked External Link", (link: any) => {
-      return {
-        Page: link.innerText,
-        URL: link.getAttribute("href"),
-      };
-    });
-
-    Analytics.trackLinks(".buyGenLink", "Clicked Buy Gen Link", (link: any) => {
-      return {
-        Origin: "Side Bar",
-        URL: link.getAttribute("href"),
-      };
-    });
+  
   }
 
   private handleCloseMenu = (_event: any): void => {
@@ -89,6 +82,16 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     console.log("HELLO FROM SIDEBAR ", dao, dao.address)
     const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
     // const bgPattern = generate(dao.address + dao.name);
+    
+    // const sgtTokenContractAddress = "0x498EE93981A2453a3F8b8939458977DF86dCce42"
+    // const snglsTokenContractAddress = "0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab";
+
+    // const reputationStakingContractAddress = "0x1E44072256F56527F22134604C9c633eC4cEc86B";
+    // const memFeeStakingContractAddress = "0x877fF27181f814a6249285f312ed708EEaC961b5";
+    // const tokenSGT = new Token(sgtTokenContractAddress, arc);
+    // const tokenSNGLS = new Token(snglsTokenContractAddress, arc);
+    // const totalStakedSGT = tokenSGT.balanceOf(reputationStakingContractAddress).pipe(ethErrorHandler());
+    // const totalStakedSNGLS = tokenSNGLS.balanceOf(memFeeStakingContractAddress).pipe(ethErrorHandler());
 
     return (
       <div>
@@ -243,27 +246,26 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             {Object.keys(supportedTokens()).map((tokenAddress) => {
               return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
             })}
-d
           </ul>
         </div>
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
             <b>DAO Stakes</b>
-            <a className="externalLink" href={daoHoldingsAddress} target="_blank">
-              <img src="/assets/images/Icon/link-white.svg" />
-            </a>
           </span>
           <ul>
-            <li key={"0x0"}>
+            {/* <li key={"0x0"}>
               <Tooltip overlay={`${
                 fromWei(dao.reputationTotalSupply).toLocaleString(
                   undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP`} placement="right">
                 <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
               </Tooltip>
-            </li>            
-            {/* {Object.keys(supportedTokens()).map((tokenAddress) => {
-              return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
-            })} */} {/* todo: update token parser */}
+            </li>             */}
+            
+            {/* {stakingContracts().forEach((info) => {
+              return <li key={"token_" + info[1]}><SubscribedTotalStakedBalance   stakingContractInfo={info}  /></li>; {/* todo: create normal structure with addresses 
+            })} */}
+            <SubscribedTotalStakedBalance   stakingContractAddress={"0x498EE93981A2453a3F8b8939458977DF86dCce42"} tokenAddress={"0x1E44072256F56527F22134604C9c633eC4cEc86B"} />
+            <SubscribedTotalStakedBalance   stakingContractAddress={"0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} tokenAddress={"0x877fF27181f814a6249285f312ed708EEaC961b5"} />
           </ul>
         </div>
 
@@ -368,6 +370,44 @@ const SubscribedEthBalance = withSubscription({
   createObservable: (props: IEthProps) => {
     const arc = getArc();
     return arc.dao(props.dao.address).ethBalance().pipe(ethErrorHandler());
+  },
+});
+
+/***** Total Staked Balance *****/
+
+interface IStakedProps extends ISubscriptionProps<any> {
+  stakingContractAddress: string;
+  tokenAddress: string;
+}
+const TotalStakedBalance = (props: IStakedProps) => {
+  const { data, error, isLoading, tokenAddress } = props;
+
+  const tokenData = supportedTokens()[tokenAddress];
+  if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
+    return null;
+  }
+
+  return (
+    <li key={tokenAddress}>
+      <strong>{formatTokens(data, tokenData["symbol"], tokenData["decimals"])}</strong>
+    </li>
+  );
+};
+
+const SubscribedTotalStakedBalance = withSubscription({
+  wrappedComponent: TotalStakedBalance,
+  checkForUpdate: (oldProps: IStakedProps, newProps: IStakedProps) => {
+    return oldProps.stakingContractAddress !== newProps.stakingContractAddress;
+  },
+  createObservable: async (props: IStakedProps) => {
+    console.log("TOTAL STAKED createObservable ", props);
+
+    // General cache priming for the DAO we do here
+    // prime the cache: get all members fo this DAO -
+
+    const arc = getArc();
+    const token = new Token(props.tokenAddress, arc);
+    return token.balanceOf((props.stakingContractAddress)).pipe(ethErrorHandler());
   },
 });
 
