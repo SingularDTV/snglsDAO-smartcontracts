@@ -1,5 +1,5 @@
 {
-    "orgName": "Singularity DAO",
+    "orgName": "snglsDAO",
     "tokenName": "Singularity governance token",
     "tokenSymbol": "SGT",
     "SchemeRegistrar": [
@@ -20,10 +20,10 @@
             "fromArc": false,
             "constructor": true,
             "params": [
-                1,
-                2,
-                3,
-                4
+                "100000000000000000000",
+                "1000000000000000000",
+                "100000000000000000000",
+                "5000000000000000000"
             ]
         },
         {
@@ -31,8 +31,8 @@
             "fromArc": false,
             "constructor": false,
             "params": [
-                "0xd12eC26c3A8604D972403a18e425cA374F980601",
-                "0"
+                "0x067166f4960A612B5aF2B75afF638627cEb7fB4f",
+                "300"
             ]
         }
     ],
@@ -43,7 +43,7 @@
             "isUniversal": false,
             "params": [
                 "TokenAddress",
-                "0"
+                "300"
             ],
             "permissions": "0x00000010",
             "alias": "LockingSGT4Reputation",
@@ -72,7 +72,7 @@
             "queuedVotePeriodLimit": 3600,
             "queuedVoteRequiredPercentage": 50,
             "preBoostedVotePeriodLimit": 600,
-            "proposingRepReward": 5000,
+            "proposingRepReward": 0,
             "quietEndingPeriod": 1800,
             "thresholdConst": 1200,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
@@ -86,7 +86,7 @@
             "queuedVotePeriodLimit": 3600,
             "queuedVoteRequiredPercentage": 50,
             "preBoostedVotePeriodLimit": 600,
-            "proposingRepReward": 10000,
+            "proposingRepReward": 0,
             "quietEndingPeriod": 1800,
             "thresholdConst": 1300,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
@@ -100,7 +100,7 @@
             "queuedVotePeriodLimit": 3600,
             "queuedVoteRequiredPercentage": 50,
             "preBoostedVotePeriodLimit": 600,
-            "proposingRepReward": 100,
+            "proposingRepReward": 0,
             "quietEndingPeriod": 1800,
             "thresholdConst": 1200,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
@@ -118,7 +118,7 @@
     "useUController": false,
     "founders": [
         {
-            "address": "0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956",
+            "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
             "tokens": 1000000000,
             "reputation": 0
         },

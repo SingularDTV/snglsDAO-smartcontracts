@@ -155,7 +155,7 @@ class SchemeInfo extends React.Component<IProps, null> {
               </span></td>
             </tr>
             <tr>
-              <th><span>Can Register Plugins?</span></th>
+              <th><span>Can Register Application?</span></th>
               <td><span>
                 {scheme.canRegisterSchemes ? "Yes" : "No"}
               </span></td>

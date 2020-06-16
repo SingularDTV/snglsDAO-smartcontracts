@@ -47,13 +47,13 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   console.log("SIDEBAR mapStateTotProps: ", ownProps, " *", 
   {
     ...ownProps,
-    daoAvatarAddress: "0xF51773c2b907317E29C7a091a3a3F6F444135D12", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   }
   );
   return {
     ...ownProps,
-    daoAvatarAddress: "0xF51773c2b907317E29C7a091a3a3F6F444135D12", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   };
 };
@@ -237,20 +237,13 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
-          <ul>
-            {/* <li key={"0x0"}>
-              <Tooltip overlay={`${
-                fromWei(dao.reputationTotalSupply).toLocaleString(
-                  undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP`} placement="right">
-                <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
-              </Tooltip>
-            </li>             */}
-
+          <ul>        
             <SubscribedEthBalance dao={dao} />
 
             {Object.keys(supportedTokens()).map((tokenAddress) => {
               return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
             })}
+d
           </ul>
         </div>
         <div className={css.daoHoldings}>
@@ -268,9 +261,6 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
               </Tooltip>
             </li>            
-
-            <SubscribedEthBalance dao={dao} />
-
             {/* {Object.keys(supportedTokens()).map((tokenAddress) => {
               return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
             })} */} {/* todo: update token parser */}
@@ -296,7 +286,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     return (
       <div className={sidebarClass}>
         <div className={css.menuContent}>
-          { "0xF51773c2b907317E29C7a091a3a3F6F444135D12" && this.props.data ? this.daoMenu() : ""}
+          { "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f" && this.props.data ? this.daoMenu() : ""}
 
           <div className={css.siteLinksWrapper}>
             <ul>
@@ -425,7 +415,7 @@ const SubscribedSidebarMenu = withSubscription({
   loadingComponent: <div></div>,
   createObservable: (props: IProps) => {
     if (props.daoAvatarAddress) {
-      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0xF51773c2b907317E29C7a091a3a3F6F444135D12") || "0";
+      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f") || "0";
 
       const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
         .then((response: AxiosResponse<any>): IHasNewPosts => {
@@ -445,7 +435,7 @@ const SubscribedSidebarMenu = withSubscription({
         });
 
       const arc = getArc();
-      return combineLatest(arc.dao("0xF51773c2b907317E29C7a091a3a3F6F444135D12").state({ subscribe: true }), from(promise));
+      return combineLatest(arc.dao("0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f").state({ subscribe: true }), from(promise));
     } else {
       return of(null);
     }

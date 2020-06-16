@@ -13,13 +13,11 @@ interface IExternalProps {
 export default (props: IExternalProps) => {
   const { schemes } = props;
 
-  console.log("Unsupported Plugins: ", schemes)
-
   return !schemes.length ? <span></span> :
     (
       <div className={css.wrapper} data-test-id={"schemeCard-unknown"}>
         <div className={css.body}>
-          <h2>{schemes.length} Unsupported Plugins</h2>
+          <h2>{schemes.length} Unsupported Applications</h2>
         </div>
         <table><tbody>
           { schemes.map((scheme: Scheme) => <SubscribedUnknownSchemeRow key={scheme.id} scheme={scheme} />) }
