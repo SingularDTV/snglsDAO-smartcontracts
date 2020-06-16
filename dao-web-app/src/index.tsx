@@ -6,12 +6,15 @@ import * as Mixpanel from "mixpanel-browser";
 import * as React from "react";
 import { render } from "react-dom";
 import { AppContainer } from "react-hot-loader";
+//import { useTranslation } from 'react-i18next';
+import './i18n'
 
 import { App } from "./App";
 
 import "./assets/styles/global.scss";
 
 async function renderApp() {
+  //const { t, i18n } = useTranslation();
   // Add icons we want to use from FontAwesome
   library.add(faGithub, faTwitter);
   if (process.env.NODE_ENV === "production") {

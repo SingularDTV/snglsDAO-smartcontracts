@@ -18,6 +18,7 @@ import { first } from "rxjs/operators";
 import { IRootState } from "reducers";
 import { connect } from "react-redux";
 import { combineLatest, of, from } from "rxjs";
+import { withTranslation } from 'react-i18next';
 
 import Tooltip from "rc-tooltip";
 import * as css from "./SidebarMenu.scss";
@@ -85,6 +86,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
   }
 
   public daoMenu() {
+    //@ts-ignore
+    const { t } = this.props;
     const [ dao, { hasNewPosts } ] = this.props.data ;
     console.log("HELLO FROM SIDEBAR ", dao, dao.address)
     const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
@@ -126,7 +129,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         
 
         <div className={css.daoNavigation}>
-          <span className={css.daoNavHeading}><b>Menu</b></span>
+      <span className={css.daoNavHeading}><b>{t('sidebar.menu')}</b></span>
           <ul>
             <li>
               <Link to={"/dao/dashboard/"} onClick={this.handleCloseMenu}>
@@ -139,7 +142,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 }></span>
                 <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_home.svg" />
-                Dashboard
+                {t('sidebar.dashboard')}
                 </span>
               </Link>
             </li>
@@ -154,7 +157,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 }></span>
                 <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_membership.svg" />
-                Protocol Membership
+                {t('sidebar.protocolMembership')}
+
                 </span>
               </Link>
             </li>
@@ -169,7 +173,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 }></span>
                 <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_apps.svg" />
-                Applications
+                {t('sidebar.applications')}
                 </span>
               </Link>
             </li>
@@ -185,7 +189,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   }></span>
                   <span className={css.menuIcon}>
                   <img src="/assets/images/Icon/menu/_members.svg" />
-                  DAO Members
+                  {t('sidebar.members')}
                   </span>
                 </Link>
               </TrainingTooltip>
@@ -201,7 +205,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 }></span>
                 <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_history.svg" />
-                History
+                {t('sidebar.history')}
                 </span>
               </Link>
             </li>
@@ -221,7 +225,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   }></span>
                   <span className={css.menuIcon}>
                   <img src="/assets/images/Icon/menu/_wall.svg" />
-                  DAO Wall
+                  {t('sidebar.wall')}
                   </span>
                 </Link>
               </TrainingTooltip>
@@ -232,7 +236,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
-            <b>DAO Treasury</b>
+            <b>{t('sidebar.treasury')}</b>
             <a className="externalLink" href={daoHoldingsAddress} target="_blank">
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
@@ -255,7 +259,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
         </div>
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
-            <b>DAO Stakes</b>
+            <b>{t('sidebar.stakes')}</b>
             <a className="externalLink" href={daoHoldingsAddress} target="_blank">
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
@@ -265,7 +269,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               <Tooltip overlay={`${
                 fromWei(dao.reputationTotalSupply).toLocaleString(
                   undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP`} placement="right">
-                <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
+                <strong>{formatTokens(dao.reputationTotalSupply)} {t('sidebar.rep')}</strong>
               </Tooltip>
             </li>            
 
@@ -283,6 +287,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const sidebarClass = classNames({
       [css.menuOpen]: this.props.sidebarOpen,
       [css.sidebarWrapper]: true,
@@ -301,7 +307,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
           <div className={css.siteLinksWrapper}>
             <ul>
               <li>
-                <a>$ Buy SNGLS</a>
+              <a>{t("sidebar.buy")}</a>
                 <ul>
                   <div className={css.diamond}></div>
                   {
@@ -347,7 +353,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               </li>
               <li className={css.daoStack}>
                 <a className="externalLink" href="https://snglsdao.io/" target="_blank" rel="noopener noreferrer">
-                  <img src={"/assets/images/logo_icon.svg"} /> snglsDAO
+                  <img src={"/assets/images/logo_icon.svg"} /> {t("sidebar.sngls")}
                 </a>
               </li>
             </ul>
@@ -451,5 +457,6 @@ const SubscribedSidebarMenu = withSubscription({
     }
   },
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedSidebarMenu);
+//@ts-ignore
+const withTrans = withTranslation()(SubscribedSidebarMenu)
+export default connect(mapStateToProps, mapDispatchToProps)(withTrans);
