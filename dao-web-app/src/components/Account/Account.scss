@@ -365,7 +365,8 @@ a.accountName {
   }
 
   .otherInfoContainer {
-    width: 100%;
+    // width: 100%;
+    max-width: 100%;
     background: #010b2b7a;
     position: relative;
     padding: 40px;
