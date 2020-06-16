@@ -243,7 +243,6 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             {Object.keys(supportedTokens()).map((tokenAddress) => {
               return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
             })}
-d
           </ul>
         </div>
         <div className={css.daoHoldings}>
