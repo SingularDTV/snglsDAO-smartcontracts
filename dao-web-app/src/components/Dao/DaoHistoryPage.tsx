@@ -27,7 +27,6 @@ type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
 class DaoHistoryPage extends React.Component<IProps, null> {
 
   public componentDidMount() {
-    console.log("HISTORY componentDidMount <<<<<<<<<<<==============================")
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
       "DAO Address": "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f",
@@ -38,7 +37,6 @@ class DaoHistoryPage extends React.Component<IProps, null> {
   public render(): RenderOutput {
     const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
 
-    console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
 
 
     const proposals = data;

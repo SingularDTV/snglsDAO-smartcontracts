@@ -13,11 +13,11 @@ import { IRootState } from "reducers";
 import { dismissNotification, INotificationsState, NotificationStatus, showNotification, INotification } from "reducers/notifications";
 import { getCachedAccount, cacheWeb3Info, logout, pollForAccountChanges, getArcSettings } from "arc";
 import ErrorUncaught from "components/Errors/ErrorUncaught";
-import { parse } from "query-string";
+// import { parse } from "query-string";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
-import { matchPath, Link, Route, RouteComponentProps, Switch, Redirect } from "react-router-dom";
+import { /*matchPath,*/ Link, Route, RouteComponentProps, Switch, Redirect } from "react-router-dom";
 import { ModalContainer } from "react-router-modal";
 import { History } from "history";
 import classNames from "classnames";
@@ -39,15 +39,15 @@ interface IStateProps {
 }
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IStateProps & IExternalProps => {
-  const match = matchPath(ownProps.location.pathname, {
-    path: "/",
-    strict: false,
-  });
-  const queryValues = parse(ownProps.location.search);
-  console.log("lalala: ", ownProps, match, queryValues)
-  console.log("==========================>><><>K<><><>><>< ", getArcSettings().daoAvatarContractAddress)
+  // const match = matchPath(ownProps.location.pathname, {
+  //   path: "/",
+  //   strict: false,
+  // });
+  // const queryValues = parse(ownProps.location.search);
+  // console.log("lalala: ", ownProps, match, queryValues)
+  // console.log("==========================>><><>K<><><>><>< ", getArcSettings().daoAvatarContractAddress)
 
-  console.log("map state to props: ", state.web3.currentAccountAddress)
+  // console.log("map state to props: ", state.web3.currentAccountAddress)
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
@@ -179,7 +179,6 @@ class AppContainer extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
-    console.log("APP CONTANER: ", this.props);
     const {
       /*daoAvatarAddress,*/
       sortedNotifications,

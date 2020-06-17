@@ -45,7 +45,6 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
   constructor(props: IProps) {
     super(props);
-    console.log("CREATE PROPOSAL PAGE ====================================<<<<<<<<<<<<<");
 
     this.state = {
       createCrxProposalComponent: null,
@@ -108,9 +107,6 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
       scheme,
     };
     const schemeTitle = this.state.createCrxProposalComponent ? rewarderContractName(scheme) : schemeName(scheme);
-
-    console.log(" <<<<<<<<<<CreateProposalPage>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>: ", this.state, this.props);
-
 
     if (this.state.createCrxProposalComponent) {
       createSchemeComponent = <this.state.createCrxProposalComponent {...props} />;

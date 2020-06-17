@@ -28,6 +28,7 @@ class DaoMember extends React.Component<IProps, null> {
   public render(): RenderOutput {
     const { dao, daoTotalReputation, profile } = this.props;
     const memberState = this.props.data;
+    console.log(this.props)
 
     return (
       <div className={css.member + " clearfix"}
