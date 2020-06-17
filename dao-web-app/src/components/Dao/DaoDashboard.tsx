@@ -57,6 +57,7 @@ interface IState {
   // genBalance: string;
   // usdcBalance: string;
   // daiBalance: string;
+  userReputation: string;
 }
 
 class DaoDashboard extends React.Component<IProps, IState> {
@@ -71,7 +72,9 @@ class DaoDashboard extends React.Component<IProps, IState> {
       membershipFee: "0",
 
       stakedSGT: "0.00",
-      stakedSNGLS: "0"
+      stakedSNGLS: "0",
+
+      userReputation: "0.00",
     };
   }
 
@@ -117,12 +120,32 @@ class DaoDashboard extends React.Component<IProps, IState> {
         // stakedSNGLS: (formatTokens(memFeeTotalStaked, "SNGLS", 18)).split(' ')[0]
       }
     );
+
+    
+    const daoMembers = await this.props.daoState.dao.members({
+        where: {
+          address: this.props.currentAccountAddress
+        }
+    }).pipe(first()).toPromise();
+      
+    // const daoMembers = await this.props.daoState.dao.members({
+    //   orderBy: "balance",
+    //   orderDirection: "desc",
+    //   first: 5, 
+    //   skip: 0,
+    //   // address: this.props.currentAccountAddress
+    // }).pipe(first()).toPromise();
+
+    console.log("DAOMEMBERS ON DASHBOARD", daoMembers, await daoMembers[0].state().pipe(first()).toPromise());
   }
 
   public render(): RenderOutput {
     const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
     const proposals = data;
 
+
+
+    console.log
     const proposalsHTML = proposals.map((proposal: Proposal) => {
       return (<ProposalHistoryRow key={"proposal_" + proposal.id} history={this.props.history} proposal={proposal} daoState={daoState} currentAccountAddress={currentAccountAddress} />);
     });
@@ -147,7 +170,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
               > Get reputation </a>
-              <span className={css.reputationBalance}><strong>Balance:</strong> 123</span>
+              <span className={css.reputationBalance}>your reputation:<strong> 0.00% </strong></span>
           </div>
         </div>
          {/* Key parameters div */}
