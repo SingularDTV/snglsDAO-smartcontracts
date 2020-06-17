@@ -2219,34 +2219,34 @@
         "arcVersion": "0.0.1-rc.38"
       },
       "0.0.1-rc.32": {
-        "name": "Singularity DAO",
-        "Avatar": "0xeF94b25C0685124B6acFf65dfd72c7D8799B8d48",
-        "DAOToken": "0x688f78c123D1d0cE8e0326F91Cdd8E66b0eaeaA6",
-        "Reputation": "0x77B80e9E828D9f6EE1EeB54604cabbd5E4b51984",
-        "Controller": "0x8F8F145DBdb606F4F883C23333E213C095b80980",
+        "name": "snglsDAO",
+        "Avatar": "0xDc5d0cab00494e34e43A025cB4A7d69a43098fBF",
+        "DAOToken": "0x2CC479501C0a3AB4DD885bFc27e9810926a5606B",
+        "Reputation": "0x3B4Dd2dF649665951458a93732B2261426290C03",
+        "Controller": "0xD36B1e458C3fbA80be85657f41A5Af7a1a6778fC",
         "Schemes": [
           {
             "name": "LockingSGT4Reputation",
             "alias": "LockingSGT4Reputation",
-            "address": "0x446a8A5676030C44c14b313135F4566df299C1D7",
+            "address": "0xC598833eBb8a1117c0826C1c9cf89CB8b02030D6",
             "arcVersion": "0.0.1-rc.32"
           },
           {
             "name": "ContributionReward",
             "alias": "ContributionReward",
-            "address": "0xB3b7b5f7602cC5ac25f5EE375C6dB8659948E4dD",
+            "address": "0xDbc33423225b06d1242ac3dE4EFBFE96fAAaf1f2",
             "arcVersion": "0.0.1-rc.32"
           }
         ],
         "StandAloneContracts": [
           {
             "name": "Fee",
-            "address": "0xfbA4f76237E37bC66cFC2f692E1a80a7F6CFd5F4",
+            "address": "0x7985Ea7F66F7ac66ea111C00A93F21600f156Fb5",
             "arcVersion": "0.0.1-rc.32"
           },
           {
             "name": "MembershipFeeStaking",
-            "address": "0x097cAfb3Bd6CcB41BEb5bdb01607fa5266287bA4",
+            "address": "0xE810AEC0fF2e37262625AC8946247217d3204Ca6",
             "arcVersion": "0.0.1-rc.32"
           }
         ],
