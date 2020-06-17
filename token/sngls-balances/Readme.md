@@ -2,6 +2,8 @@
 
 Launch scripts from sngls-balances directory, not from sngls-balances/script directory.
 
+Before launching scripts you need to put etherscan .csv transactions list from which scripts will parse from address (for example transactions to token sale contract) to sngls-balances/tokenSaleTrxs.csv. Also you need to put array of preminted accounts (for example from token constructor) to premintedArray.json file.
+
 Scripts:
 
 1. getAddressesFromTrxs.js - it parses tokenSaleTrxs.csv file (which is .csv file with trancastions to SNGLS token sale contract) and writes array of addresses to tokenSaleAddressesArray.json file.
