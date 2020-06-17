@@ -26,11 +26,11 @@
 }
 
 .schemeRegisterIcon {
-  color: #fff;
+  // color: #fff;
   font-weight: bold;
 
   a {
-    color: #fff !important;
+    // color: #fff !important;
         font-weight: 600;
   }
 }
@@ -39,10 +39,10 @@
   margin: 0 11px;
   font-size: 14px;
   padding: 6px 15px;
-  color: #fff !important;
+  // color: #fff !important;
 
   a {
-    color: #fff !important;
+    // color: #fff !important;
     font-weight: 600;
   }
 }
@@ -56,14 +56,20 @@
   margin: 0 0 0 0;
   // width: 100%;
   display: inline-block;
-  color: #fff;
+  // color: #fff;
   font-weight: bold;
   font-size: 22px;
   line-height: 32px;
   font-family: Montserrat;
 
   a {
-    color: #fff !important;
+    // color: #fff !important;
+  }
+}
+
+.detailView.proposalSummary {
+  a {
+    color: #fff;
   }
 }
 
@@ -142,6 +148,10 @@
 .transactionModal.proposalSummary {
   max-width: 400px;
   margin: 0 auto;
+
+  a {
+    color: #000;
+  }
 }
 
 .transferAmount {

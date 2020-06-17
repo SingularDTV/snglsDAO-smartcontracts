@@ -147,6 +147,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
               > Get reputation </a>
+              <span className={css.reputationBalance}><strong>Balance:</strong> 123</span>
           </div>
         </div>
          {/* Key parameters div */}

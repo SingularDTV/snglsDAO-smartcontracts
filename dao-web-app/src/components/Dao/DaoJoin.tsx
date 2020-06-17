@@ -215,13 +215,19 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                     <Field
                       id="nativeTokenRewardInput"
                       maxLength={10}
-                      placeholder="How many tokens to reward"
+                      placeholder="How many SGT to stake"
                       name="nativeTokenReward"
                       type="number"
                       className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
                     />
+                    <div className={css.btnMax}>
+                      <button type="button">max</button>
+                    </div>
                   </div>
-                  <span className={css.holdings}>Holdings<strong>0.00% Rep.</strong></span>
+                  <div className={css.balances}>
+                    <span className={css.tokens}>SGT Tokens: <strong>0.00</strong></span>
+                    <span className={css.holdings}>Reputation: <strong>0.00% Rep.</strong></span>
+                  </div>
                 </div>
               </div>
 
