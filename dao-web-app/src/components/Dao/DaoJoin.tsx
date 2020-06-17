@@ -149,7 +149,6 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
     // const arc = getArc();
     // const localTimezone = getLocalTimezone();
     // const now = moment();
-    console.log("DAO GET REP LOG", this.props, this.state);
     return (
       <div className={css.createProposalWrapper}>
       {/* <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem> */}

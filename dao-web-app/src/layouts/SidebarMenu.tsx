@@ -253,19 +253,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             <b>DAO Stakes</b>
           </span>
           <ul>
-            {/* <li key={"0x0"}>
-              <Tooltip overlay={`${
-                fromWei(dao.reputationTotalSupply).toLocaleString(
-                  undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP`} placement="right">
-                <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
-              </Tooltip>
-            </li>             */}
-            
-            {/* {stakingContracts().forEach((info) => {
-              return <li key={"token_" + info[1]}><SubscribedTotalStakedBalance   stakingContractInfo={info}  /></li>; {/* todo: create normal structure with addresses 
-            })} */}
-            <SubscribedTotalStakedBalance   stakingContractAddress={"0x498EE93981A2453a3F8b8939458977DF86dCce42"} tokenAddress={"0x1E44072256F56527F22134604C9c633eC4cEc86B"} />
-            <SubscribedTotalStakedBalance   stakingContractAddress={"0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} tokenAddress={"0x877fF27181f814a6249285f312ed708EEaC961b5"} />
+            <SubscribedTotalStakedBalance   stakingContractAddress={"0x877fF27181f814a6249285f312ed708EEaC961b5"} tokenAddress={"0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} key={"staked_token_" + "0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} />
+            <SubscribedTotalStakedBalance   stakingContractAddress={"0x1E44072256F56527F22134604C9c633eC4cEc86B"} tokenAddress={"0x498EE93981A2453a3F8b8939458977DF86dCce42"} key={"staked_token_" + "0x498EE93981A2453a3F8b8939458977DF86dCce42"} />
           </ul>
         </div>
 
@@ -383,10 +372,10 @@ const TotalStakedBalance = (props: IStakedProps) => {
   const { data, error, isLoading, tokenAddress } = props;
 
   const tokenData = supportedTokens()[tokenAddress];
+
   if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
     return null;
   }
-
   return (
     <li key={tokenAddress}>
       <strong>{formatTokens(data, tokenData["symbol"], tokenData["decimals"])}</strong>
@@ -400,13 +389,9 @@ const SubscribedTotalStakedBalance = withSubscription({
     return oldProps.stakingContractAddress !== newProps.stakingContractAddress;
   },
   createObservable: async (props: IStakedProps) => {
-    console.log("TOTAL STAKED createObservable ", props);
-
-    // General cache priming for the DAO we do here
-    // prime the cache: get all members fo this DAO -
-
     const arc = getArc();
     const token = new Token(props.tokenAddress, arc);
+
     return token.balanceOf((props.stakingContractAddress)).pipe(ethErrorHandler());
   },
 });
@@ -440,11 +425,11 @@ const SubscribedTokenBalance = withSubscription({
     // General cache priming for the DAO we do here
     // prime the cache: get all members fo this DAO -
     const daoState = props.dao;
-
     await daoState.dao.members({ first: 1000, skip: 0 }).pipe(first()).toPromise();
 
     const arc = getArc();
     const token = new Token(props.tokenAddress, arc);
+
     return token.balanceOf(props.dao.address).pipe(ethErrorHandler());
   },
 });

@@ -59,7 +59,7 @@ interface IState {
   // daiBalance: string;
 }
 
-class DaoHistoryPage extends React.Component<IProps, IState> {
+class DaoDashboard extends React.Component<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
@@ -94,17 +94,17 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
       "0xc7F243ccEEC5d8bD325cF159dbe7ad7a2B9384D9"
     );
 
-    const reputationStakingContractAddress = "0x1E44072256F56527F22134604C9c633eC4cEc86B";
-    const memFeeStakingContractAddress = "0x877fF27181f814a6249285f312ed708EEaC961b5";
+    // const reputationStakingContractAddress = "0x1E44072256F56527F22134604C9c633eC4cEc86B";
+    // const memFeeStakingContractAddress = "0x877fF27181f814a6249285f312ed708EEaC961b5";
 
-    const reputationContractAbi = [ { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "Lock", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "_beneficiary", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "Release", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "", "type": "address" } ], "name": "lockers", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "releaseTime", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "minLockingPeriod", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "sgtToken", "outputs": [ { "internalType": "contract IERC20", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalLocked", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "release", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "lock", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "contract IERC20", "name": "_sgtToken", "type": "address" }, { "internalType": "uint256", "name": "_minLockingPeriod", "type": "uint256" } ], "name": "initialize", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
-    const memFeeContractAbi = [ { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "Lock", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "_beneficiary", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "Release", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "", "type": "address" } ], "name": "lockers", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "releaseTime", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "minLockingPeriod", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "sgtToken", "outputs": [ { "internalType": "contract IERC20", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalLocked", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "release", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "lock", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "contract IERC20", "name": "_sgtToken", "type": "address" }, { "internalType": "uint256", "name": "_minLockingPeriod", "type": "uint256" } ], "name": "initialize", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
+    // const reputationContractAbi = [ { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "Lock", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "_beneficiary", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "Release", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "", "type": "address" } ], "name": "lockers", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "releaseTime", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "minLockingPeriod", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "sgtToken", "outputs": [ { "internalType": "contract IERC20", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalLocked", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "release", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "lock", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "contract IERC20", "name": "_sgtToken", "type": "address" }, { "internalType": "uint256", "name": "_minLockingPeriod", "type": "uint256" } ], "name": "initialize", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
+    // const memFeeContractAbi = [ { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "Lock", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "_beneficiary", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "Release", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "", "type": "address" } ], "name": "lockers", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "releaseTime", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "minLockingPeriod", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "sgtToken", "outputs": [ { "internalType": "contract IERC20", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalLocked", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "release", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "lock", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "contract IERC20", "name": "_sgtToken", "type": "address" }, { "internalType": "uint256", "name": "_minLockingPeriod", "type": "uint256" } ], "name": "initialize", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
 
-    const reputationContract = new arc.web3.eth.Contract(reputationContractAbi, reputationStakingContractAddress);
-    const memFeeStakingContract = new arc.web3.eth.Contract(memFeeContractAbi, memFeeStakingContractAddress);
+    // const reputationContract = new arc.web3.eth.Contract(reputationContractAbi, reputationStakingContractAddress);
+    // const memFeeStakingContract = new arc.web3.eth.Contract(memFeeContractAbi, memFeeStakingContractAddress);
 
-    const reputationTotalStaked = arc.web3.utils.toBN(await reputationContract.methods.totalLocked().call());
-    const memFeeTotalStaked = arc.web3.utils.toBN(await memFeeStakingContract.methods.totalLocked().call());
+    // const reputationTotalStaked = arc.web3.utils.toBN(await reputationContract.methods.totalLocked().call());
+    // const memFeeTotalStaked = arc.web3.utils.toBN(await memFeeStakingContract.methods.totalLocked().call());
     
     this.setState( 
       { 
@@ -113,8 +113,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
         validationFee: arc.web3.utils.fromWei(await feeContract.methods.validationFee().call()),
         membershipFee:  arc.web3.utils.fromWei(await feeContract.methods.membershipFee().call()),
 
-        stakedSGT: (formatTokens(reputationTotalStaked, "SGT", 18)).split(' ')[0],
-        stakedSNGLS: (formatTokens(memFeeTotalStaked, "SNGLS", 18)).split(' ')[0]
+        // stakedSGT: (formatTokens(reputationTotalStaked, "SGT", 18)).split(' ')[0],
+        // stakedSNGLS: (formatTokens(memFeeTotalStaked, "SNGLS", 18)).split(' ')[0]
       }
     );
   }
@@ -243,8 +243,18 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                  </div>
                  <div className={css.count}>
                      <ul>
-                         <li><span>SGT:</span><p> { this.state.stakedSGT } </p></li>
-                         <li><span>Sngls:</span><p> { this.state.stakedSNGLS } </p></li>
+                         <li>
+                            <span>SGT:</span>
+                            <p>     
+                             <SubscribedTotalStakedBalance stakingContractAddress={"0x1E44072256F56527F22134604C9c633eC4cEc86B"} tokenAddress={"0x498EE93981A2453a3F8b8939458977DF86dCce42"} key={"staked_token_" + "0x498EE93981A2453a3F8b8939458977DF86dCce42"} />       
+                            </p>
+                          </li>
+                         <li>
+                            <span>Sngls:</span>
+                            <p>
+                              <SubscribedTotalStakedBalance stakingContractAddress={"0x877fF27181f814a6249285f312ed708EEaC961b5"} tokenAddress={"0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} key={"staked_token_" + "0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} />
+                            </p>
+                          </li>
                      </ul>
                  </div>
              </div>
@@ -333,7 +343,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
 }
 
 const SubscribedGetRep = withSubscription({
-  wrappedComponent: DaoHistoryPage,
+  wrappedComponent: DaoDashboard,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
 
@@ -446,7 +456,7 @@ const ETHBalance = (props: IEthProps) => {
 
 const SubscribedEthBalance = withSubscription({
   wrappedComponent: ETHBalance,
-  loadingComponent: <li key="ETH">... {baseTokenName()}</li>,
+  loadingComponent: <strong>... {baseTokenName()}</strong>,
   errorComponent: null,
   checkForUpdate: (oldProps: IEthProps, newProps: IEthProps) => {
     return oldProps.dao.address !== newProps.dao.address;
@@ -456,6 +466,38 @@ const SubscribedEthBalance = withSubscription({
     return arc.dao(props.dao.address).ethBalance().pipe(ethErrorHandler());
   },
 });
+
+/***** Total Staked Balance *****/
+interface IStakedProps extends ISubscriptionProps<any> {
+  stakingContractAddress: string;
+  tokenAddress: string;
+}
+const TotalStakedBalance = (props: IStakedProps) => {
+  const { data, error, isLoading, tokenAddress } = props;
+
+  const tokenData = supportedTokens()[tokenAddress];
+
+  if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
+    return null;
+  }
+  return (
+    <strong>{formatTokens(data, tokenData["symbol"], tokenData["decimals"])}</strong>
+  );
+};
+
+const SubscribedTotalStakedBalance = withSubscription({
+  wrappedComponent: TotalStakedBalance,
+  checkForUpdate: (oldProps: IStakedProps, newProps: IStakedProps) => {
+    return oldProps.stakingContractAddress !== newProps.stakingContractAddress;
+  },
+  createObservable: async (props: IStakedProps) => {
+    const arc = getArc();
+    const token = new Token(props.tokenAddress, arc);
+
+    return token.balanceOf((props.stakingContractAddress)).pipe(ethErrorHandler());
+  },
+});
+
 
 /***** Token Balance *****/
 interface ITokenProps extends ISubscriptionProps<any> {

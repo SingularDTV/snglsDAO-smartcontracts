@@ -83,12 +83,10 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   }
 
   public onChangeHandler(e: any) {
-    console.log("ONCHANGE: +==-===->>>>>", e, e.target)
+
   }
 
   public async componentDidMount() {
-    console.log("PROTOCOL MEMBERSHIP componentDidMount <<<<<<<<<<<==============================")
-    console.log(this.state, this.props);
     const arc = getArc();
     const feeContract = new arc.web3.eth.Contract(
       [ { "constant": true, "inputs": [], "name": "listingFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "membershipFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "transactionFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "validationFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" } ],
@@ -104,7 +102,6 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
     // Create contract object
     const snglsTokenContract = new arc.web3.eth.Contract(erc20TokenContractAbi, '0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab');
 
-    console.log(await memFeeStakingContract.methods.lockers(this.props.currentAccountAddress).call())
     const staked = await memFeeStakingContract.methods.lockers(this.props.currentAccountAddress).call()
     this.setState( 
       { 
