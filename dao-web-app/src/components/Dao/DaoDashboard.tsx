@@ -1,4 +1,4 @@
-import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake/*, Member*/ } from "@daostack/client";
+import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake /*, Member*/ } from "@daostack/client";
 import { enableWalletProvider,  getArc } from "arc";
 import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";
@@ -16,6 +16,11 @@ import * as css from "./Dao.scss";
 import classNames from "classnames";
 import { connect } from "react-redux";
 import { baseTokenName, ethErrorHandler, formatTokens, genName, supportedTokens/*, fromWei*/ } from "lib/util";
+// import { createGraphQlQuery, isAddress
+//   // stringToUint8Array
+//  } from './utils'
+//  import { map } from 'rxjs/operators'
+
 import BN = require("bn.js");
 
 // import { IProfilesState } from "reducers/profilesReducer";
@@ -60,6 +65,48 @@ interface IState {
   userReputation: string;
 }
 
+// const getUserRep = (daoAddress: string, userAddress: string, context: any) => {
+  
+//   let options: any = {
+//     where: {
+
+//     }
+//   }
+//     if (options.where.id) {
+//       return new Member(options.where.id, context).state().pipe(map((r: any) => [r]))
+//     } else {
+//       let where = ''
+//       for (const key of Object.keys(options.where)) {
+//         if (options.where[key] === undefined) {
+//           continue
+//         }
+
+//         if (key === 'address' || key === 'dao') {
+//           const option = options.where[key] as string
+//           isAddress(option)
+//           options.where[key] = option.toLowerCase()
+//         }
+
+//         where += `${key}: "${options.where[key] as string}"\n`
+//       }
+//       where += ' dao_not: null\n'
+
+//       const query = gql`
+//         query ReputationHolderSearch {
+//           reputationHolders ${createGraphQlQuery(options, where)} {
+//             ...ReputationHolderFields
+//           }
+//         }
+//         ${Member.fragments.ReputationHolderFields}
+//       `
+
+//       return context.getObservableList(
+//           query,
+//           (r: any) => new Member({ id: r.id, address: r.address, dao: r.dao.id, contract: r.contract}, context),
+//           apolloQueryOptions
+//         )
+// }
+
 class DaoDashboard extends React.Component<IProps, IState> {
 
   constructor(props: IProps) {
@@ -74,7 +121,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
       stakedSGT: "0.00",
       stakedSNGLS: "0",
 
-      userReputation: "0.00",
+      userReputation: "0",
     };
   }
 
@@ -121,13 +168,14 @@ class DaoDashboard extends React.Component<IProps, IState> {
       }
     );
 
-    
-    const daoMembers = await this.props.daoState.dao.members({
-        where: {
-          address: this.props.currentAccountAddress
-        }
-    }).pipe(first()).toPromise();
-      
+    // console.log("DASHBOARD props ", this.props)
+    // const daoMember = await this.props.daoState.dao.member("0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956"/* this.props.currentAccountAddress */)
+
+    // console.log("MEMBER STATE ", await daoMember.state());
+
+
+
+
     // const daoMembers = await this.props.daoState.dao.members({
     //   orderBy: "balance",
     //   orderDirection: "desc",
@@ -136,7 +184,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
     //   // address: this.props.currentAccountAddress
     // }).pipe(first()).toPromise();
 
-    console.log("DAOMEMBERS ON DASHBOARD", daoMembers, await daoMembers[0].state().pipe(first()).toPromise());
+    // console.log("DAOMEMBERS ON DASHBOARD", daoMember);
   }
 
   public render(): RenderOutput {

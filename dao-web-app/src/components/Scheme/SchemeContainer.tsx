@@ -148,25 +148,27 @@ class SchemeContainer extends React.Component<IProps, IState> {
           <h2 className={css.schemeName}>
             {schemeFriendlyName}
           </h2>
-          <div className={css.schemeTop}>
-            <div className={css.Item}>
-              <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
-              <div>Membership Fee: SNGLS 0</div>
+          {
+            schemeFriendlyName === "Protocol Parameters" &&
+            <div className={css.schemeTop}>
+              <div className={css.Item}>
+                <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
+                <div>Membership Fee: SNGLS 0</div>
+              </div>
+              <div className={css.Item}>
+                <div className={css.icon}><img src="/assets/images/Icon/dash_listing_rate.png" /></div>
+                <div>Listing Fee: SNGLS 0</div>
+              </div>
+              <div className={css.Item}>
+                <div className={css.icon}><img src="/assets/images/Icon/dash_transaction.png" /></div>
+                <div>Transaction Fee: % 0</div>
+              </div>
+              <div className={css.Item}>
+                <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
+                <div>Validation Fee: SNGLS 0</div>
+              </div>
             </div>
-            <div className={css.Item}>
-              <div className={css.icon}><img src="/assets/images/Icon/dash_listing_rate.png" /></div>
-              <div>Listing Fee: SNGLS 0</div>
-            </div>
-            <div className={css.Item}>
-              <div className={css.icon}><img src="/assets/images/Icon/dash_transaction.png" /></div>
-              <div>Transaction Fee: % 0</div>
-            </div>
-            <div className={css.Item}>
-              <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
-              <div>Validation Fee: SNGLS 0</div>
-            </div>
-          </div>
-
+          }
           <div className={css.schemeMenu}>
             {isProposalScheme
               ? <Link className={proposalsTabClass} to={`/dao/scheme/${schemeId}/proposals/`}>Proposals</Link>
