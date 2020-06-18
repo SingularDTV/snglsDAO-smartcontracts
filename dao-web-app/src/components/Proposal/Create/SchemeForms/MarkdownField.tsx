@@ -1,6 +1,8 @@
 import { FieldProps } from "formik";
 import * as React from "react";
 import ReactMde, { commands } from "react-mde";
+import { withTranslation } from 'react-i18next';
+
 
 const ReactMarkdown = require("react-markdown");
 
@@ -14,7 +16,7 @@ interface IState {
 
 type Props = FieldProps<any> & IProps;
 
-export default class MarkdownField extends React.Component<Props, IState> {
+class MarkdownField extends React.Component<Props, IState> {
 
   constructor(props: Props) {
     super(props);
@@ -66,3 +68,5 @@ export default class MarkdownField extends React.Component<Props, IState> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(MarkdownField)

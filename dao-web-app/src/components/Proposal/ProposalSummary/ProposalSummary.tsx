@@ -8,6 +8,8 @@ import ProposalSummaryContributionReward from "./ProposalSummaryContributionRewa
 import ProposalSummaryKnownGenericScheme from "./ProposalSummaryKnownGenericScheme";
 import ProposalSummarySchemeRegistrar from "./ProposalSummarySchemeRegistrar";
 import ProposalSummaryUnknownGenericScheme from "./ProposalSummaryUnknownGenericScheme";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   beneficiaryProfile?: IProfileState;
@@ -17,10 +19,11 @@ interface IProps {
   transactionModal?: boolean;
 }
 
-export default class ProposalSummary extends React.Component<IProps> {
+class ProposalSummary extends React.Component<IProps> {
 
   public render(): RenderOutput {
-
+    //@ts-ignore
+    const { t } = this.props;
     const { proposal, detailView, transactionModal } = this.props;
 
     const proposalSummaryClass = classNames({
@@ -47,3 +50,6 @@ export default class ProposalSummary extends React.Component<IProps> {
     }
   }
 }
+
+//@ts-ignore
+export default withTranslation()(ProposalSummary)

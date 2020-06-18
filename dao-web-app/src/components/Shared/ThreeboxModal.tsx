@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import ModalPopup from "components/Shared/ModalPopup";
 import { showNotification } from "reducers/notifications";
 import * as css from "./ThreeboxModal.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   action: any;
@@ -41,7 +43,8 @@ class ThreeboxModal extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
-
+    //@ts-ignore
+    const { t } = this.props;
     return (
       <ModalPopup
         closeHandler={this.props.closeHandler}
@@ -77,5 +80,5 @@ class ThreeboxModal extends React.Component<IProps, IState> {
     );
   }
 }
-
-export default connect(null, mapDispatchToProps)(ThreeboxModal);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(ThreeboxModal));

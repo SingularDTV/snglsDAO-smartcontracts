@@ -13,6 +13,8 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { first } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
+import { withTranslation } from 'react-i18next';
+
 
 const PAGE_SIZE = 50;
 
@@ -36,6 +38,8 @@ class DaoHistoryPage extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
     const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
+    //@ts-ignore
+    const { t } = this.props;
 
 
 
@@ -94,7 +98,7 @@ class DaoHistoryPage extends React.Component<IProps, null> {
   }
 }
 
-export default withSubscription({
+const DaoHistoryWithSubscription = withSubscription({
   wrappedComponent: DaoHistoryPage,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -181,3 +185,5 @@ export default withSubscription({
     );
   },
 });
+//@ts-ignore
+export default withTranslation()(DaoHistoryWithSubscription)

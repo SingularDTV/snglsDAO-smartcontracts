@@ -6,6 +6,8 @@ import { GenericSchemeInfo } from "genericSchemeRegistry";
 import { formatTokens, linkToEtherScan } from "lib/util";
 import * as React from "react";
 import * as css from "./ProposalSummary.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   genericSchemeInfo: GenericSchemeInfo;
@@ -14,9 +16,11 @@ interface IProps {
   transactionModal?: boolean;
 }
 
-export default class ProposalSummaryDutchX extends React.Component<IProps, null> {
+class ProposalSummaryDutchX extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { proposal, detailView, genericSchemeInfo, transactionModal } = this.props;
     let decodedCallData: any;
     try {
@@ -117,3 +121,5 @@ export default class ProposalSummaryDutchX extends React.Component<IProps, null>
     }
   }
 }
+//@ts-ignore
+export default withTranslation()(ProposalSummaryDutchX)

@@ -3,14 +3,18 @@ import classNames from "classnames";
 import * as React from "react";
 import { proposalExpired, proposalFailed, proposalPassed } from "lib/proposalHelpers";
 import * as css from "./ProposalStatus.scss";
+import { withTranslation } from 'react-i18next';
 
-export default class ProposalStatus extends React.Component<IProps, null> {
+
+class ProposalStatus extends React.Component<IProps, null> {
 
   constructor(props: IProps) {
     super(props);
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       proposalState,
     } = this.props;
@@ -82,3 +86,5 @@ export default class ProposalStatus extends React.Component<IProps, null> {
 interface IProps {
   proposalState: IProposalState;
 }
+//@ts-ignore
+export default withTranslation()(ProposalStatus)

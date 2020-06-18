@@ -16,6 +16,8 @@ import { Modal } from "react-router-modal";
 import { showNotification } from "reducers/notifications";
 import { IProfileState } from "reducers/profilesReducer";
 import * as css from "./PreTransactionModal.scss";
+import { withTranslation } from 'react-i18next';
+
 
 export enum ActionTypes {
   Execute,
@@ -129,6 +131,8 @@ class PreTransactionModal extends React.Component<IProps, IState> {
   };
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { actionType, beneficiaryProfile, currentAccount, currentAccountGens, dao, effectText, multiLineMsg, parentPage, proposal, secondaryHeader } = this.props;
     const { stakeAmount } = this.state;
 
@@ -453,5 +457,5 @@ class PreTransactionModal extends React.Component<IProps, IState> {
     );
   }
 }
-
-export default connect(null, mapDispatchToProps)(PreTransactionModal);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(PreTransactionModal));

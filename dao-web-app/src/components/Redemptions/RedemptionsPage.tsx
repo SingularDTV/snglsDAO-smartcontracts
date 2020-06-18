@@ -19,6 +19,8 @@ import { of } from "rxjs";
 import { map } from "rxjs/operators";
 import ProposalCard from "../Proposal/ProposalCard";
 import * as css from "./RedemptionsPage.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IStateProps {
   currentAccountAddress: string;
@@ -111,7 +113,8 @@ class RedemptionsPage extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
     const { data } = this.props;
-
+    //@ts-ignore
+    const { t } = this.props;
     if (data === null) {
       return <div className={css.wrapper}>
         <h3 className={css.pleaseLogin}>Please log in to see your rewards.</h3>
@@ -338,8 +341,9 @@ const SubscribedRedemptionsPage = withSubscription({
     return proposals;
   },
 });
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SubscribedRedemptionsPage);
+  //@ts-ignore
+
+)(withTranslation()(SubscribedRedemptionsPage));
