@@ -123,7 +123,9 @@
         "name": "Name",
         "address": "Address",
         "reputation": "Reputation",
-        "socVerification": "Social Verification"
+        "socVerification": "Social Verification",
+        "alreadyStaked": "Already staked:",
+        "balance": "Balance:"
     },
     "schemas": {
         "noSchemas": "No schemes registered",
@@ -186,7 +188,7 @@
        "description": "description",
        "profileOnAlchemy": " Profile on Alchemy by DAOstack",
        "inOrderToEvoke": "In order to evoke a sense of trust and reduce risk of scams, we invite you to create a user profile which will be associated with your current Ethereum address.",
-       "name": "Name",
+       "name": "Name:",
        "desc": "Description",
        "submit": "SUBMIT",
        "proveIt": "Prove it&apos;s you by linking your social accounts through 3box.",

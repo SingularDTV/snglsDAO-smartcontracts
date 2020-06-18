@@ -54,8 +54,8 @@ class ProposalCard extends React.Component<IProps, null> {
     } = this.props;
 
     return <ProposalData currentAccountAddress={currentAccountAddress} daoState={daoState} proposalId={proposal.id}>
-      //@ts-ignore
-      { props => {
+      {
+      (props: any) => {
         const {
           beneficiaryProfile,
           creatorProfile,

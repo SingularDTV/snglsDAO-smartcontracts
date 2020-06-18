@@ -186,15 +186,15 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
             <div className={css.icon}>
               <img src="/assets/images/Icon/dash_holdings.png" />
             </div>
-            <h2>Membership fee</h2>
-            <p>The amount of SNGLS needed to stake in the DAO <br/>so you don't have to pay the transaction fee.</p>
+        <h2>{t("membership.memFee")}</h2>
+            <p>{t("membership.amountNeedToStake")}</p>
 
-            <h5>Min amount required: <strong> { this.state.membershipFee.toString() } </strong></h5>
+            <h5>{t("membership.minAmountRequired")} <strong> { this.state.membershipFee.toString() } </strong></h5>
 
             <hr/>
 
             <div className={css.content}>
-              <p>Confirm auto <strong>( { parseFloat(this.state.membershipFee) - parseFloat(this.state.alreadyStaked) } )</strong> or enter the amount manually:</p>
+              <p>{t("membership.confAuto")} <strong>( { parseFloat(this.state.membershipFee) - parseFloat(this.state.alreadyStaked) } )</strong> or enter the amount manually:</p>
               <Formik
                 
                 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -206,13 +206,13 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                   const errors: any = {};
                   const nonNegative = (name: string): void => {
                     if ((values as any)[name] < 0) {
-                      errors[name] = "Please enter a non-negative value";
+                      errors[name] = t("errors.nonNegative");
                     }
                   };
    
                   nonNegative("ethReward");
                   if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.snglsToSend) {
-                    errors.rewards = "Please select at least some reward";
+                    errors.rewards = t("proposal.pleaseSelectAtLeastSomeReward");
                   }
       
                   return errors;
@@ -245,19 +245,19 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                       type="number"
                       className={touched.snglsToSend && errors.nativeTokenReward ? errCss.error : null}
                     />
-                    <button type="button" className={css.auto} onClick={this.autoAmount}>auto</button>
+                    <button type="button" className={css.auto} onClick={this.autoAmount}>{t("membership.confAuto")}</button>
                     </div>
 
                       <div className={css.bigInputFoot}>
-                        <span>Already staked: {parseFloat(this.state.alreadyStaked).toPrecision(4)} </span>
-                        <span>Balance: {parseFloat(this.state.snglsBalance).toPrecision(4)} SNGLS</span>
+                        <span>{t("membership.alreadyStaked")} {parseFloat(this.state.alreadyStaked).toPrecision(4)} </span>
+                        <span>{t("membership.balance")}  {parseFloat(this.state.snglsBalance).toPrecision(4)} {t("header.consumerProtection.SNGLS")}</span>
                       </div>
                       <hr />
 
-                      <button type="submit" className={css.stakeSubmit}>Stake</button>
+                      <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>
                       <hr />
 
-                      <button type="button" className={css.unstake}>unstake</button>
+                      <button type="button" className={css.unstake}>{t("membership.unstake")}</button>
 
 
 

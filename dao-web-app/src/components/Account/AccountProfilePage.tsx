@@ -223,7 +223,7 @@ class AccountProfilePage extends React.Component<IProps, IState> {
                       </div>
                       <div className={css.profileData}>
                         <label htmlFor="nameInput">
-                          Name:
+                          {t("account.name")}
                         </label>
                         {editing ?
                           <div>
@@ -244,7 +244,7 @@ class AccountProfilePage extends React.Component<IProps, IState> {
                     </div>
                     <div className={css.profileDescription}>
                       <label htmlFor="descriptionInput">
-                        Description:&nbsp;
+                      {t("account.desc")}
                         </label>
                       {editing ?
                         <div>
@@ -263,7 +263,7 @@ class AccountProfilePage extends React.Component<IProps, IState> {
                           <div className={css.saveProfile}>
                             <button className={css.submitButton} type="submit" disabled={isSubmitting}>
                               <img className={css.loading} src="/assets/images/Icon/Loading-black.svg" />
-                                SUBMIT
+                              {t("account.submit")}
                               </button>
                           </div>
                         </div>
@@ -278,11 +278,11 @@ class AccountProfilePage extends React.Component<IProps, IState> {
 
                     {Object.keys(accountProfile.socialURLs).length === 0 ? " " :
                       <div className={css.socialLogins}>
-                        <strong>Social Verification</strong>
+                        <strong>{t("membership.socVerification")}</strong>
 
                         {editing
                           ? <div className={css.socialProof}>
-                            <img src="/assets/images/Icon/Alert-yellow.svg" /> Prove it&apos;s you by linking your social accounts through 3box.
+                            <img src="/assets/images/Icon/Alert-yellow.svg" />{t("account.proveIt")}
                           </div>
                           : " "
                         }
@@ -299,13 +299,13 @@ class AccountProfilePage extends React.Component<IProps, IState> {
 
                     <div className={css.tokens}>
                       {accountInfo
-                        ? <div><strong>Rep. Score</strong><br /><Reputation reputation={accountInfo.reputation} totalReputation={dao.reputationTotalSupply} daoName={dao.name} /> </div>
+                        ? <div><strong>{t("account.repScore")}</strong><br /><Reputation reputation={accountInfo.reputation} totalReputation={dao.reputationTotalSupply} daoName={dao.name} /> </div>
                         : ""}
                       <div><strong>{genName()}:</strong><br /><span>{formatTokens(genBalance)}</span></div>
                         - <div><strong>{baseTokenName()}:</strong><br /><span>{formatTokens(ethBalance)}</span></div>
                     </div>
                     <div>
-                      <strong>ETH Address:</strong><br />
+                      <strong>{t("account.ethAddress")}</strong><br />
                       <span>{accountAddress.substr(0, 20)}...</span>
                       <button className={css.copyButton} onClick={this.copyAddress}><img src="/assets/images/Icon/Copy-white_nobg.svg" /></button>
                     </div>
