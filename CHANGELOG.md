@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.8] - 2020-06-15
+
+### Added
+
+- Wallet connect configured
+- Dashbord treasury and stakes balances
+- SGT staking pop-up on dashboard
+- Membership fee staking functionality
+- Scripts for creating balances list
+
+### Changed
+
+- Responsive history page
+- Responsive sidebar, staking pop-up
+- Reworked window for creating grant proposals
+- Reworked window for creating protocol parameters changing proposals
+
 ## [1.0.7] - 2020-05-18
 
 ### Added

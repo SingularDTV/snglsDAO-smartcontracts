@@ -29,10 +29,9 @@ type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
 class DaoHistoryPage extends React.Component<IProps, null> {
 
   public componentDidMount() {
-    console.log("HISTORY componentDidMount <<<<<<<<<<<==============================")
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
-      "DAO Address": "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9",
+      "DAO Address": "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f",
       "DAO Name": this.props.daoState.name,
     });
   }
@@ -42,7 +41,6 @@ class DaoHistoryPage extends React.Component<IProps, null> {
     //@ts-ignore
     const { t } = this.props;
 
-    console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
 
 
     const proposals = data;
@@ -128,7 +126,7 @@ const DaoHistoryWithSubscription = withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9"}"
+            dao: "${"0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f"}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",

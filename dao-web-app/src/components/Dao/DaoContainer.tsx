@@ -1,6 +1,6 @@
 import { IDAOState, Member } from "@daostack/client";
 import { getProfilesForAddresses } from "actions/profilesActions";
-import { getArc, getArcSettings } from "arc";
+import { getArc/*, getArcSettings*/ } from "arc";
 import CreateProposalPage from "components/Proposal/Create/CreateProposalPage";
 import ProposalDetailsPage from "components/Proposal/ProposalDetailsPage";
 import SchemeContainer from "components/Scheme/SchemeContainer";
@@ -45,15 +45,11 @@ interface IDispatchProps {
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, Member[]]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
-  console.log('ffeeffee', ownProps, state);
-  
-  console.log(process, process.env)
-  console.log("==========================>><><>K<><><>><>< ", getArcSettings().daoAvatarContractAddress)
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress: "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9", // ownProps.match.params.daoAvatarAddress,
+    daoAvatarAddress: "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f", // ownProps.match.params.daoAvatarAddress,
   };
 };
 
@@ -67,11 +63,9 @@ class DaoContainer extends React.Component<IProps, null> {
   public subscription: Subscription;
 
   public async componentDidMount() {
-    const { data } = this.props;
+    // const { data } = this.props;
     // const search = this.state.search.length > 2 ? this.state.search.toLowerCase() : "";
-    console.log("daos render func  ", data);
-    let allDAOs = data[0];
-    console.log(allDAOs)
+    // let allDAOs = data[0];
     // TODO: use this once 3box fixes Box.getProfiles
     this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
@@ -105,17 +99,13 @@ class DaoContainer extends React.Component<IProps, null> {
   public render(): RenderOutput {
     //@ts-ignore
     const { t } = this.props;
-    let searchString = "";    
-    const arc = getArc();
 
-    const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
+
+    // const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
     
-    console.log("MEMEME ", foundDaos);
+    // console.log("MEMEME ", foundDaos);
 
     const daoState = this.props.data[0];
-
-    console.log(daoState.name)
-    console.log("DaoContainer render: ", this.createProposalModalRoute, this.props);
 
     return (
       <div className={css.outer}>
@@ -188,7 +178,7 @@ const SubscribedDaoContainer = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    const daoAddress = "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9";//props.match.params.daoAvatarAddress;
+    const daoAddress = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f";//props.match.params.daoAvatarAddress;
     const dao =  arc.dao(daoAddress);
     const observable = combineLatest(
       dao.state({ subscribe: true, fetchAllData: true }), // DAO state

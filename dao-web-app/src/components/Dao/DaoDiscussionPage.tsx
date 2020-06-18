@@ -21,7 +21,6 @@ interface IProps {
 class DaoDiscussionPage extends React.Component<IProps, null> {
 
   public async componentDidMount() {
-    console.log("Discuss props ", this.props);
     const provider = await  Box.get3idConnectProvider(); // recomended provider
     const box = await Box.openBox(this.props.currentAccountAddress, provider)
     const space = await box.openSpace('snglsGeneral')

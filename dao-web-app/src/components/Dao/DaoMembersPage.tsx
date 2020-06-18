@@ -64,11 +64,10 @@ class DaoMembersPage extends React.Component<IProps, null> {
     //@ts-ignore
     const { t } = this.props;
     const { data } = this.props;
-    console.log("HAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", this.props);
     const members = data;
     const daoTotalReputation = this.props.daoState.reputationTotalSupply;
     const { daoState, profiles } = this.props;
-
+    console.log("MEMBERs => ", members);
     const membersHTML = members.map((member) =>
       <DaoMember key={member.staticState.address} dao={daoState} daoTotalReputation={daoTotalReputation} member={member} profile={profiles[member.staticState.address]} />);
 

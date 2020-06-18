@@ -36,7 +36,7 @@ function getWeb3ConnectProviderOptions(network: string) {
         walletconnect: {
           package: isMobileBrowser() ? null : WalletConnectProvider,
           options: {
-            infuraId: "e0cdf3bfda9b468fa908aa6ab03d5ba2",
+            infuraId: "ef306a43234747eb9c087e5301ed9363",
           },
         },
         burnerconnect: {
@@ -76,7 +76,7 @@ function getWeb3ConnectProviderOptions(network: string) {
         walletconnect: {
           package: isMobileBrowser() ? null : WalletConnectProvider,
           options: {
-            infuraId: "e0cdf3bfda9b468fa908aa6ab03d5ba2",
+            infuraId: "ef306a43234747eb9c087e5301ed9363",
           },
         },
         burnerconnect: {
@@ -130,7 +130,7 @@ function getWeb3ConnectProviderOptions(network: string) {
         walletconnect: {
           package: isMobileBrowser() ? null : WalletConnectProvider,
           options: {
-            infuraId: "e0cdf3bfda9b468fa908aa6ab03d5ba2",
+            infuraId: "ef306a43234747eb9c087e5301ed9363",
           },
         },
         burnerconnect: {
@@ -178,8 +178,8 @@ export const settings = {
     graphqlHttpProvider: process.env.ARC_GRAPHQLHTTPPROVIDER || "https://api.thegraph.com/subgraphs-daostack/name/daostack/v39_1_rinkeby",
     graphqlWsProvider:  process.env.ARC_GRAPHQLWSPROVIDER || "wss://api.thegraph.com/subgraphs-daostack/name/daostack/v39_1_rinkeby",
     graphqlSubscribeToQueries: false,
-    web3Provider:  process.env.ARC_WEB3PROVIDER || "wss://rinkeby.infura.io/ws/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2",
-    web3ProviderRead:  process.env.ARC_WEB3PROVIDERREAD || "wss://rinkeby.infura.io/ws/v3/e0cdf3bfda9b468fa908aa6ab03d5ba2",
+    web3Provider:  process.env.ARC_WEB3PROVIDER || "wss://rinkeby.infura.io/ws/v3/ef306a43234747eb9c087e5301ed9363",
+    web3ProviderRead:  process.env.ARC_WEB3PROVIDERREAD || "wss://rinkeby.infura.io/ws/v3/ef306a43234747eb9c087e5301ed9363",
     ipfsProvider: process.env.ARC_IPFSPROVIDER || "https://api.thegraph.com:443/ipfs-daostack/api/v0",
     txSenderServiceUrl: "https://tx-sender-service.herokuapp.com/send-tx",
     web3ConnectProviderOptions: getWeb3ConnectProviderOptions("rinkeby"),

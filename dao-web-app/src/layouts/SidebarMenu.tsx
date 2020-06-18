@@ -9,8 +9,7 @@ import classNames from "classnames";
 // import FollowButton from "components/Shared/FollowButton";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 // import { generate } from "geopattern";
-import Analytics from "lib/analytics";
-import { baseTokenName, ethErrorHandler, formatTokens, genName, getExchangesList, getExchangesListSNGLS, supportedTokens, fromWei } from "lib/util";
+import { baseTokenName, ethErrorHandler, formatTokens, genName, getExchangesList, getExchangesListSNGLS, supportedTokens/*, fromWei*/ } from "lib/util";
 // import { parse } from "query-string";
 import * as React from "react";
 import { /* matchPath,*/ Link, RouteComponentProps } from "react-router-dom";
@@ -20,7 +19,7 @@ import { connect } from "react-redux";
 import { combineLatest, of, from } from "rxjs";
 import { withTranslation } from 'react-i18next';
 
-import Tooltip from "rc-tooltip";
+// import Tooltip from "rc-tooltip";
 import * as css from "./SidebarMenu.scss";
 
 type IExternalProps = RouteComponentProps<any>;
@@ -48,17 +47,23 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   console.log("SIDEBAR mapStateTotProps: ", ownProps, " *", 
   {
     ...ownProps,
-    daoAvatarAddress: "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   }
   );
   return {
     ...ownProps,
-    daoAvatarAddress: "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   };
 };
 
+// const stakingContracts = () => {
+//   return [
+//     ["0x498EE93981A2453a3F8b8939458977DF86dCce42", "0x1E44072256F56527F22134604C9c633eC4cEc86B", "SGT", 18],
+//     ["0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab", "0x877fF27181f814a6249285f312ed708EEaC961b5", "SNGLS", 18]
+//   ]
+// }
 class SidebarMenu extends React.Component<IProps, IStateProps> {
 
   constructor(props: IProps) {
@@ -66,19 +71,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
   }
 
   public componentDidMount() {
-    Analytics.trackLinks(".externalLink", "Clicked External Link", (link: any) => {
-      return {
-        Page: link.innerText,
-        URL: link.getAttribute("href"),
-      };
-    });
-
-    Analytics.trackLinks(".buyGenLink", "Clicked Buy Gen Link", (link: any) => {
-      return {
-        Origin: "Side Bar",
-        URL: link.getAttribute("href"),
-      };
-    });
+  
   }
 
   private handleCloseMenu = (_event: any): void => {
@@ -92,6 +85,16 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     console.log("HELLO FROM SIDEBAR ", dao, dao.address)
     const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
     // const bgPattern = generate(dao.address + dao.name);
+    
+    // const sgtTokenContractAddress = "0x498EE93981A2453a3F8b8939458977DF86dCce42"
+    // const snglsTokenContractAddress = "0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab";
+
+    // const reputationStakingContractAddress = "0x1E44072256F56527F22134604C9c633eC4cEc86B";
+    // const memFeeStakingContractAddress = "0x877fF27181f814a6249285f312ed708EEaC961b5";
+    // const tokenSGT = new Token(sgtTokenContractAddress, arc);
+    // const tokenSNGLS = new Token(snglsTokenContractAddress, arc);
+    // const totalStakedSGT = tokenSGT.balanceOf(reputationStakingContractAddress).pipe(ethErrorHandler());
+    // const totalStakedSNGLS = tokenSNGLS.balanceOf(memFeeStakingContractAddress).pipe(ethErrorHandler());
 
     return (
       <div>
@@ -241,15 +244,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
-          <ul>
-            {/* <li key={"0x0"}>
-              <Tooltip overlay={`${
-                fromWei(dao.reputationTotalSupply).toLocaleString(
-                  undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP`} placement="right">
-                <strong>{formatTokens(dao.reputationTotalSupply)} REP</strong>
-              </Tooltip>
-            </li>             */}
-
+          <ul>        
             <SubscribedEthBalance dao={dao} />
 
             {Object.keys(supportedTokens()).map((tokenAddress) => {
@@ -264,20 +259,11 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
+
+            <b>DAO Stakes</b>
           <ul>
-            <li key={"0x0"}>
-              <Tooltip overlay={`${
-                fromWei(dao.reputationTotalSupply).toLocaleString(
-                  undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP`} placement="right">
-                <strong>{formatTokens(dao.reputationTotalSupply)} {t('sidebar.rep')}</strong>
-              </Tooltip>
-            </li>            
-
-            <SubscribedEthBalance dao={dao} />
-
-            {/* {Object.keys(supportedTokens()).map((tokenAddress) => {
-              return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
-            })} */} {/* todo: update token parser */}
+            <SubscribedTotalStakedBalance   stakingContractAddress={"0x877fF27181f814a6249285f312ed708EEaC961b5"} tokenAddress={"0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} key={"staked_token_" + "0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} />
+            <SubscribedTotalStakedBalance   stakingContractAddress={"0x1E44072256F56527F22134604C9c633eC4cEc86B"} tokenAddress={"0x498EE93981A2453a3F8b8939458977DF86dCce42"} key={"staked_token_" + "0x498EE93981A2453a3F8b8939458977DF86dCce42"} />
           </ul>
         </div>
 
@@ -302,7 +288,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     return (
       <div className={sidebarClass}>
         <div className={css.menuContent}>
-          { "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9" && this.props.data ? this.daoMenu() : ""}
+          { "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f" && this.props.data ? this.daoMenu() : ""}
 
           <div className={css.siteLinksWrapper}>
             <ul>
@@ -387,6 +373,40 @@ const SubscribedEthBalance = withSubscription({
   },
 });
 
+/***** Total Staked Balance *****/
+
+interface IStakedProps extends ISubscriptionProps<any> {
+  stakingContractAddress: string;
+  tokenAddress: string;
+}
+const TotalStakedBalance = (props: IStakedProps) => {
+  const { data, error, isLoading, tokenAddress } = props;
+
+  const tokenData = supportedTokens()[tokenAddress];
+
+  if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
+    return null;
+  }
+  return (
+    <li key={tokenAddress}>
+      <strong>{formatTokens(data, tokenData["symbol"], tokenData["decimals"])}</strong>
+    </li>
+  );
+};
+
+const SubscribedTotalStakedBalance = withSubscription({
+  wrappedComponent: TotalStakedBalance,
+  checkForUpdate: (oldProps: IStakedProps, newProps: IStakedProps) => {
+    return oldProps.stakingContractAddress !== newProps.stakingContractAddress;
+  },
+  createObservable: async (props: IStakedProps) => {
+    const arc = getArc();
+    const token = new Token(props.tokenAddress, arc);
+
+    return token.balanceOf((props.stakingContractAddress)).pipe(ethErrorHandler());
+  },
+});
+
 /***** Token Balance *****/
 interface ITokenProps extends ISubscriptionProps<any> {
   dao: IDAOState;
@@ -416,11 +436,11 @@ const SubscribedTokenBalance = withSubscription({
     // General cache priming for the DAO we do here
     // prime the cache: get all members fo this DAO -
     const daoState = props.dao;
-
     await daoState.dao.members({ first: 1000, skip: 0 }).pipe(first()).toPromise();
 
     const arc = getArc();
     const token = new Token(props.tokenAddress, arc);
+
     return token.balanceOf(props.dao.address).pipe(ethErrorHandler());
   },
 });
@@ -431,7 +451,7 @@ const SubscribedSidebarMenu = withSubscription({
   loadingComponent: <div></div>,
   createObservable: (props: IProps) => {
     if (props.daoAvatarAddress) {
-      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9") || "0";
+      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f") || "0";
 
       const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
         .then((response: AxiosResponse<any>): IHasNewPosts => {
@@ -451,7 +471,7 @@ const SubscribedSidebarMenu = withSubscription({
         });
 
       const arc = getArc();
-      return combineLatest(arc.dao("0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9").state({ subscribe: true }), from(promise));
+      return combineLatest(arc.dao("0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f").state({ subscribe: true }), from(promise));
     } else {
       return of(null);
     }

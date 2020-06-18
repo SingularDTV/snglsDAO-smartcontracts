@@ -76,7 +76,7 @@ class DaosPage extends React.Component<IProps, IState> {
         arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString.charAt(0).toUpperCase() + searchString.slice(1) } }, { fetchAllData: true }),
         (data1, data2) => data1.concat(data2),
       ).pipe(first()).toPromise();
-      const snglsDao = [foundDaos.find(element => element.id = "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9")];
+      const snglsDao = [foundDaos.find(element => element.id = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f")];
       this.setState({ searchDaos: snglsDao });
     } else {
       this.setState({ searchDaos: [] });
@@ -88,7 +88,6 @@ class DaosPage extends React.Component<IProps, IState> {
     const { t } = this.props;
     const { currentAccountProfile, data, fetchMore } = this.props;
     const search = this.state.search.length > 2 ? this.state.search.toLowerCase() : "";
-    console.log("daos render func  ", data);
     let allDAOs = data[0];
 
     // Add any DAOs found from searching the server to the list
@@ -118,7 +117,7 @@ class DaosPage extends React.Component<IProps, IState> {
       }));
     }
 
-    finalDAOList = [finalDAOList.find(element => element.id = "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9"), finalDAOList.find(element => element.id = "0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9")]
+    finalDAOList = [finalDAOList.find(element => element.id = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f"), finalDAOList.find(element => element.id = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f")]
 
     const daoNodes = finalDAOList.map((dao: DAO) => {
       return (
@@ -193,7 +192,6 @@ const SubscribedDaosPage = withSubscription({
       }
     `;
     const memberOfDAOs = props.currentAccountAddress ? arc.getObservableList(memberDAOsquery, (r: any) => r.dao.id, { subscribe: true }) : of([]);
-    console.log("New daos ==============================");
 
     return combineLatest(
       arc.daos({ orderBy: "name", orderDirection: "asc", first: PAGE_SIZE, skip: 0}, { fetchAllData: true, subscribe: true }),
@@ -215,9 +213,6 @@ const SubscribedDaosPage = withSubscription({
       }
     `;
     const memberOfDAOs = props.currentAccountAddress ? arc.getObservableList(memberDAOsquery, (r: any) => r.dao.id, { subscribe: true }) : of([]);
-
-    console.log("New daos 2 ==============================");
-
 
     return combineLatest(
       arc.daos({ orderBy: "name", orderDirection: "asc", first: PAGE_SIZE, skip: data[0].length}, { fetchAllData: true, subscribe: true }),

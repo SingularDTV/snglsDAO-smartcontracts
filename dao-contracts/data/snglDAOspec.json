@@ -1,5 +1,5 @@
 {
-    "orgName": "Singularity DAO",
+    "orgName": "snglsDAO",
     "tokenName": "Singularity governance token",
     "tokenSymbol": "SGT",
     "SchemeRegistrar": [
@@ -20,10 +20,18 @@
             "fromArc": false,
             "constructor": true,
             "params": [
-                1,
-                2,
-                3,
-                4
+                "100000000000000000000",
+                "1000000000000000000",
+                "100000000000000000000",
+                "1500000000000000000000"
+            ],
+            "runFunctions": [
+                {
+                    "functionName": "transferOwnership",
+                    "params": [
+                        "AvatarAddress"
+                    ]
+                }
             ]
         },
         {
@@ -31,7 +39,7 @@
             "fromArc": false,
             "constructor": false,
             "params": [
-                "0xd12eC26c3A8604D972403a18e425cA374F980601",
+                "0x00aBc5cb6B7b15a2DE2F8455e1c9e4Bd1f841661",
                 "0"
             ]
         }
@@ -72,7 +80,7 @@
             "queuedVotePeriodLimit": 3600,
             "queuedVoteRequiredPercentage": 50,
             "preBoostedVotePeriodLimit": 600,
-            "proposingRepReward": 5000,
+            "proposingRepReward": 0,
             "quietEndingPeriod": 1800,
             "thresholdConst": 1200,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
@@ -86,7 +94,7 @@
             "queuedVotePeriodLimit": 3600,
             "queuedVoteRequiredPercentage": 50,
             "preBoostedVotePeriodLimit": 600,
-            "proposingRepReward": 10000,
+            "proposingRepReward": 0,
             "quietEndingPeriod": 1800,
             "thresholdConst": 1300,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
@@ -100,7 +108,7 @@
             "queuedVotePeriodLimit": 3600,
             "queuedVoteRequiredPercentage": 50,
             "preBoostedVotePeriodLimit": 600,
-            "proposingRepReward": 100,
+            "proposingRepReward": 0,
             "quietEndingPeriod": 1800,
             "thresholdConst": 1200,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
