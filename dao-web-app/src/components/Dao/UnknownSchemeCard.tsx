@@ -3,6 +3,8 @@ import withSubscription, { ISubscriptionProps } from "components/Shared/withSubs
 import { splitByCamelCase } from "lib/util";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./UnknownSchemeCard.scss";
 
@@ -10,7 +12,9 @@ interface IExternalProps {
   schemes: Scheme[];
 }
 
-export default (props: IExternalProps) => {
+const unknownCard: any = (props: IExternalProps) => {
+  //@ts-ignore
+  const { t } = props;
   const { schemes } = props;
 
   return !schemes.length ? <span></span> :
@@ -59,3 +63,6 @@ const SubscribedUnknownSchemeRow = withSubscription({
     return props.scheme.state();
   },
 });
+
+
+export default withTranslation()(unknownCard)

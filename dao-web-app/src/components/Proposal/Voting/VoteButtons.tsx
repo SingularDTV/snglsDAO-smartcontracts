@@ -144,6 +144,7 @@ class VoteButtons extends React.Component<IProps, IState> {
       <div className={wrapperClass}>
         {this.state.showPreVoteModal ?
           <PreTransactionModal
+          //@ts-ignore
             actionType={this.state.currentVote === IProposalOutcome.Pass ? ActionTypes.VoteUp : ActionTypes.VoteDown}
             action={this.handleVoteOnProposal}
             closeAction={this.closePreVoteModal}

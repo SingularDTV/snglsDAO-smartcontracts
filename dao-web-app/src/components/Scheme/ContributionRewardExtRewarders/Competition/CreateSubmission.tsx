@@ -9,6 +9,8 @@ import { getArc } from "arc";
 import UserSearchField from "components/Shared/UserSearchField";
 import { ICreateSubmissionOptions } from "./utils";
 import * as css from "./Competitions.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps {
   daoState: IDAOState;
@@ -27,7 +29,7 @@ interface IFormValues extends ICreateSubmissionOptions {
   [key: string]: any;
 }
 
-export default class CreateSubmission extends React.Component<IProps, IStateProps> {
+class CreateSubmission extends React.Component<IProps, IStateProps> {
 
   constructor(props: IProps) {
     super(props);
@@ -54,6 +56,8 @@ export default class CreateSubmission extends React.Component<IProps, IStateProp
 
   public render(): RenderOutput {
     const { handleCancel, proposalState } = this.props;
+    //@ts-ignore
+    const { t } = this.props;
     const arc = getArc();
 
     return (
@@ -202,3 +206,5 @@ export default class CreateSubmission extends React.Component<IProps, IStateProp
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(CreateSubmission)

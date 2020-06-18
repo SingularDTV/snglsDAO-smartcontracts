@@ -18,6 +18,8 @@ import { CrxRewarderComponentType, getCrxRewarderComponent, rewarderContractName
 import CreateContributionRewardProposal from "components/Proposal/Create/SchemeForms/CreateContributionRewardProposal";
 import { schemeName } from "lib/schemeUtils";
 import * as css from "./CreateProposal.scss";
+import { withTranslation } from 'react-i18next';
+
 
 type IExternalProps = RouteComponentProps<any>;
 
@@ -94,6 +96,8 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const daoAvatarAddress = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f";
     const scheme = this.props.data;
 
@@ -165,5 +169,5 @@ const SubscribedCreateProposalPage = withSubscription({
     return scheme.state();
   },
 });
-
-export default connect(mapStateToProps)(SubscribedCreateProposalPage);
+//@ts-ignore
+export default connect(mapStateToProps)(withTranslation()(SubscribedCreateProposalPage));

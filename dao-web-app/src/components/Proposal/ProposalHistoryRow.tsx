@@ -14,6 +14,8 @@ import { combineLatest, of } from "rxjs";
 import StakeGraph from "./Staking/StakeGraph";
 import VoteBreakdown from "./Voting/VoteBreakdown";
 import * as css from "./ProposalHistoryRow.scss";
+import { withTranslation } from 'react-i18next';
+
 
 import BN = require("bn.js");
 
@@ -80,6 +82,8 @@ class ProposalHistoryRow extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       creatorProfile,
       currentAccountAddress,
@@ -209,7 +213,7 @@ class ProposalHistoryRow extends React.Component<IProps, IState> {
 const ConnectedProposalHistoryRow = connect(mapStateToProps)(ProposalHistoryRow);
 
 // In this case we wrap the Connected component because mapStateToProps requires the subscribed proposal state
-export default withSubscription({
+const ConnectedProposalHistoryRowWithSub = withSubscription({
   wrappedComponent: ConnectedProposalHistoryRow,
   loadingComponent: (props) => <tr><td>Loading proposal {props.proposal.id.substr(0, 6)}...</td></tr>,
   errorComponent: (props) => <tr><td>{ props.error.message }</td></tr>,
@@ -234,3 +238,5 @@ export default withSubscription({
     }
   },
 });
+//@ts-ignore
+export default withTranslation()(ConnectedProposalHistoryRowWithSub)
