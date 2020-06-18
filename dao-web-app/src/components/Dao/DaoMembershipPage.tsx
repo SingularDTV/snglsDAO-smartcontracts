@@ -18,6 +18,8 @@ import * as css from "./Dao.scss";
 import * as errCss from "./DaoJoin.scss"
 import { IRootState } from "reducers";
 import { connect } from "react-redux";
+import { withTranslation } from 'react-i18next';
+
 
 const PAGE_SIZE = 50;
 
@@ -151,6 +153,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     // const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
 
     // console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
@@ -183,39 +187,38 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
             <div className={css.icon}>
               <img src="/assets/images/Icon/dash_holdings.png" />
             </div>
-            <h2>Membership fee</h2>
-            <p>The amount of SNGLS needed to stake in the DAO <br/>so you don't have to pay the transaction fee.</p>
+        <h2>{t("membership.memFee")}</h2>
+            <p>{t("membership.amountNeedToStake")}</p>
 
-            <h5>Min amount required: <strong> { this.state.membershipFee.toString() } </strong></h5>
+            <h5>{t("membership.minAmountRequired")} <strong> { this.state.membershipFee.toString() } </strong></h5>
 
             <hr/>
 
             <div className={css.content}>
-              <p>Confirm auto <strong>( { parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) } )</strong> or enter the amount manually:</p>
+              <p>{t("membership.confAuto")} <strong>( { parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) } )</strong> {t("membership.orEnterManually")}</p>
               <Formik
                 
                 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                 initialValues={{
                   snglsToSend: 0,
                 } as IFormValues}
-                
+                /*
                 validate={(values: IFormValues): void => {
-                  // const errors: any = {};
-                  // const nonNegative = (name: string): void => {
-                  //   if ((values as any)[name] < 0) {
-                  //     console.log("Please enter a non-negative value")
-                  //     errors[name] = "Please enter a non-negative value";
-                  //   }
-                  // };
+                  const errors: any = {};
+                  const nonNegative = (name: string): void => {
+                    if ((values as any)[name] < 0) {
+                      errors[name] = t("errors.nonNegative");
+                    }
+                  };
    
-                  // nonNegative("ethReward");
-                  // if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.snglsToSend) {
-                  //   errors.rewards = "Please select at least some reward";
-                  // }
+                  nonNegative("ethReward");
+                  if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.snglsToSend) {
+                    errors.rewards = t("proposal.pleaseSelectAtLeastSomeReward");
+                  }
       
                   // return errors;
                 }}
-
+                */
                 onSubmit={this.handleSubmit}
 
                 // eslint-disable-next-line react/jsx-no-bind
@@ -232,6 +235,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                 <div className={css.bigInput}>
                   <Form noValidate>
                     <div className={css.formLabel}>
+
                       <label>SNGLS</label>
                       <Field
                         id="snglsToSendInput"
@@ -246,13 +250,13 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                       </button>
                     </div>
                     <div className={css.bigInputFoot}>
-                      <span>Already staked: {parseInt(this.state.alreadyStaked)} </span>
-                      <span>Balance: {parseInt(this.state.snglsBalance)} SNGLS</span>
+                      <span>{t("membership.alreadyStaked")}  {parseInt(this.state.alreadyStaked)} </span>
+                      <span>{t("membership.balance")}  {parseInt(this.state.snglsBalance)} {t("membership.confAuto")}</span>
                     </div>
                     <hr />
-                    <button type="submit" className={css.stakeSubmit}>Stake</button>
+                    <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>
                     <hr />
-                    <button type="button" className={css.unstake}>unstake</button>
+                    <button type="button" className={css.unstake}>{t("membership.unstake")}</button>
                   </Form>
                 </div>
                 }
@@ -353,5 +357,5 @@ const SubscribedCreateContributionRewardExProposal = withSubscription({
   },
 });
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedCreateContributionRewardExProposal);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedCreateContributionRewardExProposal));

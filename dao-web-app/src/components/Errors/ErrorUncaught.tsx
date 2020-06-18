@@ -3,6 +3,9 @@ import { showReportDialog } from "@sentry/browser";
 import { Link } from "react-router-dom";
 import * as appCss from "../../layouts/App.scss";
 import * as css from "./Errors.scss";
+import { withTranslation } from 'react-i18next';
+
+
 
 interface IExternalProps {
   errorMessage: string;
@@ -10,12 +13,14 @@ interface IExternalProps {
   goHome?: () => void;
 }
 
-export default class ErrorUncaught extends React.PureComponent<IExternalProps> {
+class ErrorUncaught extends React.PureComponent<IExternalProps> {
   handleReport = () => {
     showReportDialog({ eventId: this.props.sentryEventId });
   }
 
   render() {
+    //@ts-ignore
+    const { t } = this.props;
     return (
       <div className={css.errorContainer}>
         <nav className={appCss.header}>
@@ -45,3 +50,5 @@ export default class ErrorUncaught extends React.PureComponent<IExternalProps> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(ErrorUncaught)

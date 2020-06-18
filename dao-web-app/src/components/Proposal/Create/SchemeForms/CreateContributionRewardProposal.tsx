@@ -14,6 +14,9 @@ import { showNotification, NotificationStatus } from "reducers/notifications";
 import { exportUrl, importUrlValues } from "lib/proposalUtils";
 import * as css from "../CreateProposal.scss";
 import MarkdownField from "./MarkdownField";
+import { withTranslation } from 'react-i18next';
+
+
 
 const Select = React.lazy(() => import("react-select"));
 
@@ -163,6 +166,8 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { data, daoAvatarAddress, handleClose } = this.props;
 
     if (!data) {
@@ -391,5 +396,5 @@ const SubscribedCreateContributionReward = withSubscription({
     return arc.dao(props.daoAvatarAddress).state();
   },
 });
-
-export default connect(null, mapDispatchToProps)(SubscribedCreateContributionReward);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(SubscribedCreateContributionReward));

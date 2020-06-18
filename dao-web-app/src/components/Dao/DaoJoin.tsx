@@ -12,6 +12,8 @@ import { showNotification } from "../../reducers/notifications";
 // import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "../../components/Shared/TrainingTooltip";
 import * as css from "./DaoJoin.scss";
+import { withTranslation } from 'react-i18next';
+
 
 import { IRootState } from "reducers";
 
@@ -140,6 +142,8 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { data } = this.props;
 
     if (!data) {
@@ -153,7 +157,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
       <div className={css.createProposalWrapper}>
       {/* <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem> */}
       <div className={css.header}>
-        <h2><span> DAO REPUTATION </span></h2>
+        <h2><span> {t("daojoin.rep")} </span></h2>
         <button className={css.closeButton} aria-label="Close Create Proposal Modal"  onClick={this.handleClose}  ><img src="/assets/images/close.svg" alt=""/></button>
       </div>
       <div className={css.contributionReward}>
@@ -197,15 +201,15 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
             <Form noValidate>
               <div className={css.subhead}>
                 <div className={css.description}>
-                    <p>You need to stake tokens to become a member of the DAO</p>
+                    <p>{t("daojoin.needStake")}</p>
                 </div>
                   <div>
-                  <a href="#" className={css.btn}>LEAVE</a>
+                  <a href="#" className={css.btn}>{t("daojoin.cancel")}</a>
                   </div>
               </div>
 
               <div className={css.content}>
-                <p>The amount you have staked will be your reputation in the DAO</p>
+                <p>{t("daojoin.haveAmountStaked")}</p>
               <div className={css.rewards}>
                 <div className={css.reward}>
                   <div className={css.bigInput}>
@@ -228,6 +232,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                     <span className={css.tokens}>SGT Tokens: <strong>0.00</strong></span>
                     <span className={css.holdings}>Reputation: <strong>0.00% Rep.</strong></span>
                   </div>
+                  <span className={css.holdings}>{t("daojoin.haveAmountStaked")}</span>
                 </div>
               </div>
 
@@ -239,13 +244,13 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                 <div>
                 <TrainingTooltip overlay="Once the proposal is submitted it cannot be edited or deleted" placement="top">
                   <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
-                  GET REPUTATION
+                  {t('daojoin.getRep')}
                   </button>
                 </TrainingTooltip>
                 </div>
                 <div>
                   <button className={css.exitProposalCreation} type="button" onClick={this.handleClose}>
-                    Cancel
+                  {t('daojoin.cancel')}
                   </button>
                 </div>
               </div>
@@ -270,5 +275,5 @@ const SubscribedCreateContributionRewardExProposal = withSubscription({
     return arc.dao("0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f").state();
   },
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedCreateContributionRewardExProposal);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedCreateContributionRewardExProposal));

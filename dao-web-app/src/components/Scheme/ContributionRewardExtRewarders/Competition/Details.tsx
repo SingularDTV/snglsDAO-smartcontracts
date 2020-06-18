@@ -29,6 +29,8 @@ import SubmissionDetails from "./SubmissionDetails";
 import StatusBlob from "./StatusBlob";
 import * as css from "./Competitions.scss";
 import * as CompetitionActions from "./utils";
+import { withTranslation } from 'react-i18next';
+
 
 const ReactMarkdown = require("react-markdown");
 
@@ -239,7 +241,8 @@ class CompetitionDetails extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
-
+    //@ts-ignore
+    const { t } = this.props;
     const status = this.state.status;
     const { daoState, proposalState } = this.props;
     const submissions = this.props.data[0];
@@ -409,7 +412,7 @@ class CompetitionDetails extends React.Component<IProps, IStateProps> {
 
 const CompetitionDetailsConnected = connect(mapStateToProps, mapDispatchToProps)(CompetitionDetails);
 
-export default withSubscription({
+const CompetitionDetailsConnectedWithSub = withSubscription({
   wrappedComponent: CompetitionDetailsConnected,
   loadingComponent: null,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -458,3 +461,6 @@ export default withSubscription({
     );
   },
 });
+
+//@ts-ignore
+export default withTranslation()(CompetitionDetailsConnectedWithSub)

@@ -2,6 +2,8 @@ import BN = require("bn.js");
 import { fromWei } from "lib/util";
 import Tooltip from "rc-tooltip";
 import * as React from "react";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps {
   daoName?: string;
@@ -11,8 +13,10 @@ interface IExternalProps {
   totalReputation: BN;
 }
 
-export default class Reputation extends React.Component<IExternalProps, null> {
+class Reputation extends React.Component<IExternalProps, null> {
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     /**
      * totalReputation is a BN in WEI
      * reputation is a BN in WEI
@@ -70,3 +74,5 @@ export default class Reputation extends React.Component<IExternalProps, null> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(Reputation)

@@ -3,6 +3,9 @@ import { schemeName } from "lib/schemeUtils";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import * as css from "./SchemeCard.scss";
+import { withTranslation } from 'react-i18next';
+
+
 
 interface IProps {
   dao: IDAOState;
@@ -21,5 +24,5 @@ const SimpleSchemeCard = (props: IProps) => {
     </div>
   );
 };
-
-export default SimpleSchemeCard;
+//@ts-ignore
+export default withTranslation()(SimpleSchemeCard);

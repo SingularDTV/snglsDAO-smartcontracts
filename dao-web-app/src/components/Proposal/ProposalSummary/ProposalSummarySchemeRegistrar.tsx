@@ -5,6 +5,8 @@ import { schemeNameAndAddress } from "lib/schemeUtils";
 import * as React from "react";
 import { IProfileState } from "reducers/profilesReducer";
 import * as css from "./ProposalSummary.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   beneficiaryProfile?: IProfileState;
@@ -19,7 +21,7 @@ interface IState {
 
 }
 
-export default class ProposalSummary extends React.Component<IProps, IState> {
+class ProposalSummary extends React.Component<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
@@ -37,6 +39,8 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
   private copySchemeParamsHashOnClick = (schemeRegistrar: ISchemeRegistrar) => (): void => copyToClipboard(schemeRegistrar.schemeToRegisterParamsHash);
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { proposal, detailView, transactionModal } = this.props;
 
     const proposalSummaryClass = classNames({
@@ -152,3 +156,5 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
     // }
   }
 }
+//@ts-ignore
+export default withTranslation()(ProposalSummary)

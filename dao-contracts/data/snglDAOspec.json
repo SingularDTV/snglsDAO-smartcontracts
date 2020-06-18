@@ -23,7 +23,15 @@
                 "100000000000000000000",
                 "1000000000000000000",
                 "100000000000000000000",
-                "5000000000000000000"
+                "1500000000000000000000"
+            ],
+            "runFunctions": [
+                {
+                    "functionName": "transferOwnership",
+                    "params": [
+                        "AvatarAddress"
+                    ]
+                }
             ]
         },
         {
@@ -31,8 +39,8 @@
             "fromArc": false,
             "constructor": false,
             "params": [
-                "0x067166f4960A612B5aF2B75afF638627cEb7fB4f",
-                "300"
+                "0x00aBc5cb6B7b15a2DE2F8455e1c9e4Bd1f841661",
+                "0"
             ]
         }
     ],
@@ -43,7 +51,7 @@
             "isUniversal": false,
             "params": [
                 "TokenAddress",
-                "300"
+                "0"
             ],
             "permissions": "0x00000010",
             "alias": "LockingSGT4Reputation",

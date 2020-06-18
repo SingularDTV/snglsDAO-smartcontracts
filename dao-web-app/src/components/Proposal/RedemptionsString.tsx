@@ -4,6 +4,8 @@ import BN = require("bn.js");
 import Reputation from "components/Account/Reputation";
 import { baseTokenName, genName, getCRRewards, getGpRewards, formatTokens, tokenDecimals, tokenSymbol } from "lib/util";
 import * as React from "react";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   currentAccountAddress: Address;
@@ -13,9 +15,11 @@ interface IProps {
   separator?: string;
 }
 
-export default class RedemptionsString extends React.Component<IProps, null> {
+class RedemptionsString extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { currentAccountAddress, dao, proposal, rewards, separator } = this.props;
 
     const zero = new BN(0);
@@ -77,3 +81,5 @@ export default class RedemptionsString extends React.Component<IProps, null> {
     </span>;
   }
 }
+//@ts-ignore
+export default withTranslation()(RedemptionsString)

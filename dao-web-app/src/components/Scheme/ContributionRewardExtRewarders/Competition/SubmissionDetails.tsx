@@ -17,6 +17,8 @@ import { DiscussionEmbed } from "disqus-react";
 import { RouteComponentProps } from "react-router-dom";
 import { getSubmission, getSubmissionVoterHasVoted, getCompetitionVotes, CompetitionStatus } from "./utils";
 import * as css from "./Competitions.scss";
+import { withTranslation } from 'react-i18next';
+
 
 const ReactMarkdown = require("react-markdown");
 
@@ -59,7 +61,8 @@ class SubmissionDetails extends React.Component<IProps, null> {
   private disqusConfig = { url: "", identifier: "", title: "" };
 
   public render(): RenderOutput {
-
+    //@ts-ignore
+    const { t } = this.props;
     const competition = this.props.proposalState.competition;
     const submission = this.props.data[0];
     const currentAccountVotedForIt = this.props.data[1];
@@ -179,5 +182,5 @@ const SubmissionDetailsSubscription = withSubscription({
     );
   },
 });
-
-export default connect(mapStateToProps)(SubmissionDetailsSubscription);
+//@ts-ignore
+export default connect(mapStateToProps)(withTranslation()(SubmissionDetailsSubscription));

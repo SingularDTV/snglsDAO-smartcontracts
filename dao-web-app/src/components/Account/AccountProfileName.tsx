@@ -6,6 +6,9 @@ import { IProfileState } from "reducers/profilesReducer";
 import * as classNames from "classnames";
 
 import * as css from "./Account.scss";
+import { withTranslation } from 'react-i18next';
+
+
 
 interface IProps {
   accountAddress: string;
@@ -15,7 +18,7 @@ interface IProps {
   historyView?: boolean;
 }
 
-export default class AccountProfileName extends React.Component<IProps, null> {
+class AccountProfileName extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
     const { accountAddress, accountProfile, daoAvatarAddress, historyView, detailView } = this.props;
@@ -33,3 +36,5 @@ export default class AccountProfileName extends React.Component<IProps, null> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(AccountProfileName)
