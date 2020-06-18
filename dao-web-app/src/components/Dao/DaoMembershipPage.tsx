@@ -18,6 +18,8 @@ import * as css from "./Dao.scss";
 import * as errCss from "./DaoJoin.scss"
 import { IRootState } from "reducers";
 import { connect } from "react-redux";
+import { withTranslation } from 'react-i18next';
+
 
 const PAGE_SIZE = 50;
 
@@ -150,6 +152,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     // const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
 
     // console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
@@ -357,5 +361,5 @@ const SubscribedCreateContributionRewardExProposal = withSubscription({
   },
 });
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedCreateContributionRewardExProposal);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedCreateContributionRewardExProposal));

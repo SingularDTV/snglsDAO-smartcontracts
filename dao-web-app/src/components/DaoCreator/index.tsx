@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Prompt } from "react-router-dom";
 import { showNotification } from "reducers/notifications";
 import { enableWalletProvider, getWeb3Provider } from "arc";
+import { withTranslation } from 'react-i18next';
+
 
 const DAOcreator = React.lazy(() => import("@dorgtech/daocreator-ui"));
 
@@ -33,6 +35,8 @@ class DaoCreator extends React.Component<IProps> {
   }
 
   render() {
+    //@ts-ignore
+    const { t } = this.props;
     return (
       <React.Suspense fallback={<div>Loading...</div>}>
         <Prompt
@@ -53,5 +57,5 @@ class DaoCreator extends React.Component<IProps> {
     );
   }
 }
-
-export default connect(null, mapDispatchToProps)(DaoCreator);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(DaoCreator));

@@ -2,6 +2,9 @@ import i18n from 'i18next';
 import { initReactI18next } from "react-i18next";
 // @ts-ignore
 import eng from './en'
+// @ts-ignore
+import tc from './tc'
+
 
 
 
@@ -20,9 +23,7 @@ i18n
         translation: eng
       },
       chin: {
-        translation: {
-          "test": "Chin"
-        }
+        translation: tc
       }
     },
     lng: "en",

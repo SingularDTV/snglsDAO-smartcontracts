@@ -21,6 +21,8 @@ import ProposalSummary from "./ProposalSummary";
 import VoteBreakdown from "./Voting/VoteBreakdown";
 import VoteButtons from "./Voting/VoteButtons";
 import VoteGraph from "./Voting/VoteGraph";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./ProposalCard.scss";
 
@@ -33,7 +35,7 @@ interface IExternalProps {
 
 type IProps = IExternalProps;
 
-export default class ProposalCard extends React.Component<IProps, null> {
+class ProposalCard extends React.Component<IProps, null> {
 
   constructor(props: IProps) {
     super(props);
@@ -42,6 +44,8 @@ export default class ProposalCard extends React.Component<IProps, null> {
   private stopClick = (e: any) => { e.preventDefault(); e.stopPropagation(); }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
 
     const {
       currentAccountAddress,
@@ -50,6 +54,7 @@ export default class ProposalCard extends React.Component<IProps, null> {
     } = this.props;
 
     return <ProposalData currentAccountAddress={currentAccountAddress} daoState={daoState} proposalId={proposal.id}>
+      //@ts-ignore
       { props => {
         const {
           beneficiaryProfile,
@@ -128,6 +133,7 @@ export default class ProposalCard extends React.Component<IProps, null> {
 
           <div className={css.predictionButtons}>
             <StakeButtons
+            //@ts-ignore
               beneficiaryProfile={beneficiaryProfile}
               currentAccountAddress={currentAccountAddress}
               currentAccountGens={currentAccountGenBalance}
@@ -191,8 +197,8 @@ export default class ProposalCard extends React.Component<IProps, null> {
                         contextMenu
                         parentPage={Page.SchemeProposals}
                       />
-
                       <StakeButtons
+                      //@ts-ignore
                         beneficiaryProfile={beneficiaryProfile}
                         contextMenu
                         currentAccountAddress={currentAccountAddress}
@@ -256,3 +262,5 @@ export default class ProposalCard extends React.Component<IProps, null> {
     </ProposalData>;
   }
 }
+//@ts-ignore
+export default withTranslation()(ProposalCard)

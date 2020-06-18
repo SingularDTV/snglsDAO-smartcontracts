@@ -19,6 +19,8 @@ import { IRootState } from "reducers";
 import { showNotification } from "reducers/notifications";
 import * as schemeCss from "./Scheme.scss";
 import * as css from "./ReputationFromToken.scss";
+import { withTranslation } from 'react-i18next';
+
 
 import BN = require("bn.js");
 
@@ -268,6 +270,8 @@ class ReputationFromToken extends React.Component<IProps, IState> {
   private onSubmitClick = (setFieldValue: any) => ()=>{ setFieldValue("useTxSenderService",false); }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { /*daoAvatarAddress,*/ schemeState, currentAccountAddress } = this.props;
     const redeemerAddress = this.state.redeemerAddress;
 
@@ -365,5 +369,5 @@ class ReputationFromToken extends React.Component<IProps, IState> {
 }
 
 const ConnectedReputationFromToken = connect(mapStateToProps, mapDispatchToProps)(ReputationFromToken);
-
-export default ConnectedReputationFromToken;
+//@ts-ignore
+export default withTranslation()(ConnectedReputationFromToken);

@@ -22,6 +22,8 @@ import TagsSelector from "components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 import * as css from "../CreateProposal.scss";
 import MarkdownField from "./MarkdownField";
+import { withTranslation } from 'react-i18next';
+
 
 const BN = require("bn.js");
 
@@ -280,6 +282,8 @@ class CreateKnownSchemeProposal extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { handleClose } = this.props;
     const arc = getArc();
 
@@ -491,5 +495,5 @@ class CreateKnownSchemeProposal extends React.Component<IProps, IState> {
     );
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateKnownSchemeProposal);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(CreateKnownSchemeProposal));

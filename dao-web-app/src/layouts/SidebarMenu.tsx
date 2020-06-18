@@ -178,7 +178,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               </Link>
             </li>
             <li>
-              <TrainingTooltip placement="right" overlay={"List of entities (DAOs and individuals) that have voting power in the DAO"}>
+              <TrainingTooltip placement="right" overlay={t("tooltips.listOfEntities")}>
                 <Link to={"/dao/members/"} onClick={this.handleCloseMenu}>
                   <span className={css.menuDot} />
                   <span className={
@@ -210,7 +210,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               </Link>
             </li>
             <li>
-              <TrainingTooltip placement="right" overlay={"Space designated for general questions, statements and comments"}>
+              <TrainingTooltip placement="right" overlay={t("tooltips.spaceDesignated")}>
                 <Link to={"/dao/discussion/"} onClick={this.handleCloseMenu}>
                   <span className={
                     classNames({
@@ -325,7 +325,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </ul>
               </li>
               <li>
-                <a>$ Buy SGT</a>
+                <a>{t("sidebar.buySgt")}</a>
                 <ul>
                   <div className={css.diamond}></div>
                   <span className={css.soon}>{
@@ -334,7 +334,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </ul>
               </li>
               <li>
-                <a>$ Buy GEN</a>
+                <a>{t("sidebar.buyGen")}</a>
                 <ul>
                   <div className={css.diamond}></div>
                   {

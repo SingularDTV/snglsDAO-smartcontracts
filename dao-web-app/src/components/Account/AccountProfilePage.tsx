@@ -26,6 +26,8 @@ import { IProfileState } from "reducers/profilesReducer";
 import { combineLatest, of } from "rxjs";
 import Loading from "components/Shared/Loading";
 import * as css from "./Account.scss";
+import { withTranslation } from 'react-i18next';
+
 
 type IExternalProps = RouteComponentProps<any>;
 
@@ -138,6 +140,8 @@ class AccountProfilePage extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const [dao, accountInfo, ethBalance, genBalance] = this.props.data;
 
     const { accountAddress, accountProfile, currentAccountAddress } = this.props;
@@ -166,6 +170,7 @@ class AccountProfilePage extends React.Component<IProps, IState> {
         </Helmet>
 
         {this.state.showThreeBoxModal ?
+        //@ts-ignore
           <ThreeboxModal action={this.doUpdateProfile} closeHandler={this.closeThreeboxModal} />
           : ""}
 
@@ -346,5 +351,5 @@ const SubscribedAccountProfilePage = withSubscription({
     );
   },
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedAccountProfilePage);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedAccountProfilePage));

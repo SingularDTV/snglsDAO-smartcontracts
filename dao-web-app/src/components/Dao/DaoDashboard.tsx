@@ -12,6 +12,8 @@ import { first } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
 import classNames from "classnames";
+import { withTranslation } from 'react-i18next';
+
 
 // import { IProfilesState } from "reducers/profilesReducer";
 
@@ -78,7 +80,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
-    const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
+    //@ts-ignore
+    const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress, t } = this.props;
 
     console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
     
@@ -100,7 +103,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
          <BreadcrumbsItem to={"/dao/members"}>DAO Members</BreadcrumbsItem>
         
          <div className={css.pageHead}>
-          <h1>DASHBOARD</h1>
+    <h1>{t("sidebar.dashboard")}</h1>
           <div>
             <a className={classNames({
                 [css.redButton]: true,
@@ -109,12 +112,12 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
               href="#!"
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
-              > Get reputation </a>
+              > {t("daojoin.getRep")} </a>
           </div>
         </div>
          {/* Key parameters div */}
            <div> 
-             <h3>KEY PARAMETERS</h3>
+            <h3>{t('dashboard.keyParams')}</h3>
 
 
 
@@ -129,8 +132,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                      { this.state.listingFee }
                  </div>
                  <div className={css.cont}>
-                     <h4>Listing Rate: SNGLS</h4>
-                     <p>The amount of SNGLS needed to be paid to the treasury <br/>to add content to the protocol.</p>
+            <h4>{t('dashboard.listingRate')}</h4>
+                     <p>{t('dashboard.amountToTreasury')} <br/>{t('dashboard.toAddToProtocol')}</p>
                  </div>
              </div>
 
@@ -145,8 +148,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                      { this.state.transactionFee }
                  </div>
                  <div className={css.cont}>
-                     <h4>Transaction Fee: %</h4>
-                     <p>The % of the transaction that the protocol puts into the <br/>treasury.</p>
+                     <h4>{t('dashboard.transFee')}</h4>
+                     <p>{t('dashboard.transFeeDescription')}</p>
                  </div>
              </div>
 
@@ -154,7 +157,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
 
 
          <div className={css.comingSoon}>
-             <h3>COMING SOON</h3>
+             <h3>{t('dashboard.comingSoon')}</h3>
              <div className={css.dashBlock}>
                  <div className={css.icon}>
                      <img src="/assets/images/Icon/dash_validation.png" />
@@ -163,8 +166,8 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                      { this.state.validationFee }
                  </div>
                  <div className={css.cont}>
-                     <h4>Validation Fee: SNGLS</h4>
-                     <p>Minimum amount paid to validators.</p>
+                     <h4>{t('dashboard.validationFee')}</h4>
+                     <p>{t('dashboard.minimumAmount')}</p>
                  </div>
              </div>
          </div>
@@ -177,7 +180,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                      <img src="/assets/images/Icon/dash_treasury.png" />
                  </div>
                  <div className={css.cont}>
-                     <h4>DAO Treasury</h4>
+                     <h4>{t('sidebar.treasury')}</h4>
                  </div>
                  <div className={css.count}>
                      <ul>
@@ -196,7 +199,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
                      <img src="/assets/images/Icon/dash_holdings.png" />
                  </div>
                  <div className={css.cont}>
-                     <h4>DAO Stakes</h4>
+                     <h4>{t('sidebar.stakes')}</h4>
                  </div>
                  <div className={css.count}>
                      <ul>
@@ -210,7 +213,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
 
            </div>
            <br/>
-           <h4>Boosted proposals (3)</h4>
+           <h4>{t('dashboard.boostedProposals')}</h4>
            <InfiniteScroll
           dataLength={proposals.length} //This is important field to render the next data
           next={fetchMore}
@@ -224,18 +227,18 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
           }
         >
           { proposals.length === 0 ?
-            <span>This DAO hasn&apos;t passed any proposals yet. Checkout the <Link to={"/dao/proposal/"}>DAO&apos;s installed schemes</Link> for any open proposals.</span> :
+            <span>{t('dashboard.notPassedProposals')}<Link to={"/dao/proposal/"}>DAO&apos;s installed schemes</Link></span> :
             <table className={css.proposalHistoryTable}>
               <thead>
                 <tr className={css.proposalHistoryTableHeader}>
-                  <th>Proposed by</th>
-                  <th>End date</th>
-                  <th>Plugin</th>
-                  <th>Title</th>
-                  <th>Votes</th>
-                  <th>Predictions</th>
-                  <th>Status</th>
-                  <th>My actions</th>
+                  <th>{t('dashboard.proposedBy')}</th>
+                  <th>{t('dashboard.endDate')}</th>
+                  <th>{t('dashboard.plugin')}</th>
+                  <th>{t('dashboard.title')}</th>
+                  <th>{t('dashboard.votes')}</th>
+                  <th>{t('dashboard.predictions')}</th>
+                  <th>{t('dashboard.status')}</th>
+                  <th>{t('dashboard.actions')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -247,7 +250,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
           <div className={css.daoHistoryHeader}>
-            History
+            {t('sidebar.history')}
           </div>
         {/* </Sticky> */}
 
@@ -268,14 +271,14 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
             <table className={css.proposalHistoryTable}>
               <thead>
                 <tr className={css.proposalHistoryTableHeader}>
-                  <th>Proposed by</th>
-                  <th>End date</th>
-                  <th>Plugin</th>
-                  <th>Title</th>
-                  <th>Votes</th>
-                  <th>Predictions</th>
-                  <th>Status</th>
-                  <th>My actions</th>
+                <th>{t('dashboard.proposedBy')}</th>
+                  <th>{t('dashboard.endDate')}</th>
+                  <th>{t('dashboard.plugin')}</th>
+                  <th>{t('dashboard.title')}</th>
+                  <th>{t('dashboard.votes')}</th>
+                  <th>{t('dashboard.predictions')}</th>
+                  <th>{t('dashboard.status')}</th>
+                  <th>{t('dashboard.actions')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -318,7 +321,7 @@ class DaoHistoryPage extends React.Component<IProps, IState> {
   }
 }
 
-export default withSubscription({
+const dashboardWithSubscription = withSubscription({
   wrappedComponent: DaoHistoryPage,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -419,3 +422,6 @@ export default withSubscription({
     return proposals
   },
 });
+//@ts-ignore
+const dashboardWithTranslation = withTranslation()(dashboardWithSubscription)
+export default dashboardWithTranslation

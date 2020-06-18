@@ -19,6 +19,7 @@ import classNames from "classnames";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 import ProposalCard from "../Proposal/ProposalCard";
 import * as css from "./SchemeProposals.scss";
+import { withTranslation } from 'react-i18next';
 
 // For infinite scrolling
 const PAGE_SIZE = 100;
@@ -81,6 +82,8 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
   };
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { data } = this.props;
 
     const [proposalsQueued, proposalsPreBoosted, proposalsBoosted ] = data;
@@ -335,5 +338,5 @@ const SubscribedSchemeProposalsPage = withSubscription<IProps, SubscriptionData>
     return [prevState[0].concat(newData), prevState[1], prevState[2], []];
   },
 });
-
-export default connect(null, mapDispatchToProps)(SubscribedSchemeProposalsPage);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(SubscribedSchemeProposalsPage));

@@ -13,6 +13,8 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import * as css from "./DaoSchemesPage.scss";
 import ProposalSchemeCard from "./ProposalSchemeCard";
 import SimpleSchemeCard from "./SimpleSchemeCard";
+import { withTranslation } from 'react-i18next';
+
 
 const Fade = ({ children, ...props }: any) => (
   <CSSTransition
@@ -46,6 +48,8 @@ class DaoSchemesPage extends React.Component<IProps, null> {
   }
 
   public render() {
+    //@ts-ignore
+    const { t } = this.props;
     const { data } = this.props;
     const dao = this.props.daoState;
     const allSchemes = data;
@@ -68,9 +72,12 @@ class DaoSchemesPage extends React.Component<IProps, null> {
           </Fade>
         ))
         }
-
-        {!unknownSchemes ? "" :
+  
+        {
+          //@ts-ignore
+        !unknownSchemes ? "" :
           <Fade key={"schemes unknown"}>
+            //@ts-ignore
             <UnknownSchemeCard schemes={unknownSchemes} />
           </Fade>
         }
@@ -99,7 +106,7 @@ class DaoSchemesPage extends React.Component<IProps, null> {
   }
 }
 
-export default withSubscription({
+const DaoSchemesPageWithSub = withSubscription({
   wrappedComponent: DaoSchemesPage,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <span>{props.error.message}</span>,
@@ -109,3 +116,5 @@ export default withSubscription({
     return dao.schemes({ where: { isRegistered: true } }, { fetchAllData: true, subscribe: true });
   },
 });
+//@ts-ignore
+export default withTranslation()(DaoSchemesPageWithSub)

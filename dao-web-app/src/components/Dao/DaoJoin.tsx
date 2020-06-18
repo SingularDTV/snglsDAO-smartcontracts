@@ -12,6 +12,8 @@ import { showNotification } from "../../reducers/notifications";
 // import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "../../components/Shared/TrainingTooltip";
 import * as css from "./DaoJoin.scss";
+import { withTranslation } from 'react-i18next';
+
 
 import { IRootState } from "reducers";
 
@@ -196,6 +198,8 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
   // private fnDescription = (<span>Short description of the proposal.<ul><li>What are you proposing to do?</li><li>Why is it important?</li><li>How much will it cost the DAO?</li><li>When do you plan to deliver the work?</li></ul></span>);
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { data } = this.props;
 
     if (!data) {
@@ -321,5 +325,5 @@ const SubscribedCreateContributionRewardExProposal = withSubscription({
     return arc.dao("0x230C5B874F85b62879DfBDC857D2230B2A0EBBC9").state();
   },
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedCreateContributionRewardExProposal);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedCreateContributionRewardExProposal));

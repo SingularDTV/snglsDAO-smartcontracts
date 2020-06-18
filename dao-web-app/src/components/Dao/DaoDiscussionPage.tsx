@@ -7,6 +7,8 @@ import * as css from "./Dao.scss";
 import Box = require("3box");
 import { IProfileState } from "reducers/profilesReducer";
 // import { getWeb3Provider } from "arc";
+import { withTranslation } from 'react-i18next';
+
 
 import moment = require("moment");
 
@@ -16,7 +18,7 @@ interface IProps {
   currentAccountProfile: IProfileState;
 }
 
-export default class DaoDiscussionPage extends React.Component<IProps, null> {
+class DaoDiscussionPage extends React.Component<IProps, null> {
 
   public async componentDidMount() {
     console.log("Discuss props ", this.props);
@@ -39,6 +41,8 @@ export default class DaoDiscussionPage extends React.Component<IProps, null> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const dao = this.props.dao;
 
     const disqusConfig = {
@@ -64,3 +68,5 @@ export default class DaoDiscussionPage extends React.Component<IProps, null> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(DaoDiscussionPage)

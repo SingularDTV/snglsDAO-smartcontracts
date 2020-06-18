@@ -4,6 +4,7 @@ import { IProposalStage, IProposalState } from "@daostack/client";
 import classNames from "classnames";
 import * as React from "react";
 import * as css from "./BoostAmount.scss";
+import { withTranslation } from 'react-i18next';
 
 
 interface IProps {
@@ -12,9 +13,11 @@ interface IProps {
   proposal: IProposalState;
 }
 
-export default class BoostAmount extends React.Component<IProps, null> {
+class BoostAmount extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       detailView,
       expired,
@@ -57,3 +60,5 @@ export default class BoostAmount extends React.Component<IProps, null> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(BoostAmount)

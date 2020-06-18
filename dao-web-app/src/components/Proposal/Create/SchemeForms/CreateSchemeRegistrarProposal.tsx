@@ -19,6 +19,8 @@ import { connect } from "react-redux";
 import * as React from "react";
 import * as css from "../CreateProposal.scss";
 import MarkdownField from "./MarkdownField";
+import { withTranslation } from 'react-i18next';
+
 
 
 interface IExternalProps {
@@ -176,6 +178,8 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     // "schemes" are the schemes registered in this DAO
     const schemes = this.props.data;
     const { handleClose } = this.props;
@@ -531,5 +535,5 @@ const SubscribedCreateSchemeRegistrarProposal = withSubscription({
     return arc.dao(props.daoAvatarAddress).schemes();
   },
 });
-
-export default connect(null, mapDispatchToProps)(SubscribedCreateSchemeRegistrarProposal);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(SubscribedCreateSchemeRegistrarProposal));

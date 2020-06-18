@@ -4,6 +4,8 @@ import { ICompetitionProposalState } from "@daostack/client";
 import * as React from "react";
 import { CompetitionStatus, CompetitionStatusEnum } from "./utils";
 import * as css from "./Competitions.scss";
+import { withTranslation } from 'react-i18next';
+
 
 export interface IExternalProps {
   status: CompetitionStatus;
@@ -11,14 +13,15 @@ export interface IExternalProps {
   onEndCountdown: () => void;
 }
 
-export default class CountdownText extends React.Component<IExternalProps, null> {
+class CountdownText extends React.Component<IExternalProps, null> {
 
   private onEndCountdown = () => {
     this.props.onEndCountdown();
   }
 
   public render(): RenderOutput {
-
+    //@ts-ignore
+    const { t } = this.props;
     const {status, competition } = this.props;
     const inSubmissions =  status.now.isSameOrAfter(competition.startTime) && status.now.isBefore(competition.suggestionsEndTime);
     const pausedWithSubmissions = status.paused;
@@ -62,3 +65,5 @@ export default class CountdownText extends React.Component<IExternalProps, null>
     </React.Fragment>;
   }
 }
+//@ts-ignore
+export default withTranslation()(CountdownText)

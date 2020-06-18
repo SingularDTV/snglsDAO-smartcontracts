@@ -217,7 +217,7 @@ class Header extends React.Component<IProps, null> {
     return(
       <div className={css.headerContainer}>
         <nav id="header" className={css.header}>
-          <TrainingTooltip overlay="View your personal feed" placement="bottomRight">
+          <TrainingTooltip overlay={t("tooltips.viewYourPersonalFeed")} placement="bottomRight">
             <div className={css.menu}>
               <Link to="/">
                 {/* <img src="/assets/images/alchemy-logo-white.svg" /> */}
@@ -294,7 +294,7 @@ class Header extends React.Component<IProps, null> {
           </div>
 
 
-          <TrainingTooltip placement="left" overlay={"Show / hide tooltips on hover"} alwaysAvailable>
+          <TrainingTooltip placement="left" overlay={t('tooltips.showHide')} alwaysAvailable>
             <div className={css.toggleButton} ref={this.toggleDiv}>
               <Toggle
                 defaultChecked={trainingTooltipsOn}
@@ -337,7 +337,7 @@ class Header extends React.Component<IProps, null> {
                     </div>
                     <div className={css.fullProfile}>
                       <Link className={css.profileLink} to={"/profile/" + currentAccountAddress + (daoAvatarAddress ? "?daoAvatarAddress=" + daoAvatarAddress : "")}>
-                      Full Profile
+                      {t("fullProfile")}
                       </Link>
                     </div>
                   </div>
@@ -393,7 +393,7 @@ class Header extends React.Component<IProps, null> {
         <div className={menuClass} onClick={this.handleToggleSidebar}>
           {this.props.sidebarOpen ?
             <img src="/assets/images/Icon/close-grey.svg" /> :
-            <span>DAO</span>}
+            <span>{t("header.dao")}</span>}
         </div>
 
 

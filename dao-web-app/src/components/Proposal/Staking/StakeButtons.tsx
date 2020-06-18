@@ -14,6 +14,8 @@ import { connect } from "react-redux";
 import { Modal } from "react-router-modal";
 import { showNotification } from "reducers/notifications";
 import { IProfileState } from "reducers/profilesReducer";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./StakeButtons.scss";
 
@@ -113,6 +115,8 @@ class StakeButtons extends React.Component<IProps, IState> {
     };
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       beneficiaryProfile,
       contextMenu,
@@ -244,6 +248,7 @@ class StakeButtons extends React.Component<IProps, IState> {
       <div className={wrapperClass}>
         {showPreStakeModal ?
           <PreTransactionModal
+            //@ts-ignore
             actionType={pendingPrediction === IProposalOutcome.Pass ? ActionTypes.StakePass : ActionTypes.StakeFail}
             action={this.getStakeProposalAction(proposal, dao, pendingPrediction)}
             beneficiaryProfile={beneficiaryProfile}
@@ -300,5 +305,5 @@ class StakeButtons extends React.Component<IProps, IState> {
     );
   }
 }
-
-export default connect(null, mapDispatchToProps)(StakeButtons);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(StakeButtons));

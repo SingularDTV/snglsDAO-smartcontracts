@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import { combineLatest } from "rxjs";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 import * as css from "./SchemeCard.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps {
   dao: IDAOState;
@@ -21,6 +23,8 @@ type SubscriptionData = [ISchemeState, Proposal[]];
 type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
 
 const ProposalSchemeCard = (props: IProps) => {
+  //@ts-ignore
+  const { t } = this.props;
   const { data, dao } = props;
 
   const [schemeState, boostedProposals] = data;
@@ -80,7 +84,7 @@ const ProposalSchemeCard = (props: IProps) => {
   );
 };
 
-export default withSubscription({
+const ProposalSchemeCardWithSub = withSubscription({
   wrappedComponent: ProposalSchemeCard,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -145,3 +149,6 @@ const SubscribedProposalDetail = withSubscription({
     return props.proposal.state();
   },
 });
+
+//@ts-ignore
+export default withTranslation()(ProposalSchemeCardWithSub)

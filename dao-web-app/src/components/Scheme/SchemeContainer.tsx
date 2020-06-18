@@ -22,6 +22,8 @@ import SchemeInfoPage from "./SchemeInfoPage";
 import SchemeProposalsPage from "./SchemeProposalsPage";
 import SchemeOpenBountyPage from "./SchemeOpenBountyPage";
 import * as css from "./Scheme.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IDispatchProps {
   showNotification: typeof showNotification;
@@ -102,6 +104,8 @@ class SchemeContainer extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { schemeId, daoState } = this.props;
     const daoAvatarAddress = daoState.address;
     const schemeState = this.props.data[0];
@@ -268,5 +272,5 @@ const SubscribedSchemeContainer = withSubscription({
     );
   },
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedSchemeContainer);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedSchemeContainer));

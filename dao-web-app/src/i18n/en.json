@@ -11,7 +11,9 @@
         "stakes": "DAO Stakes",
         "buy": "$ Buy SNGLS",
         "sngls": "snglsDAO",
-        "rep": "REP"
+        "rep": "REP",
+        "buySgt": "$ Buy SGT",
+        "buyGen": "$ Buy GEN"
     },
     "header": {
         "git": " GitHub",
@@ -136,7 +138,7 @@
         "unknown": "Unknown",
         "unsuported": "Unsupported Applications"
     },
-    "toolTips": {
+    "tooltips": {
         "useSchemaToRewardUsers": "Use this scheme to reward users (rep and/or funds) for their contributions to the DAO",
         "useToInstallEditRemove": "Use this scheme to install, remove or edit the schemes of the DAO",
         "enterPositive": "Please enter a positive amount",
@@ -170,7 +172,7 @@
         "listOfEntities":"List of entities (DAOs and individuals) that have voting power in the DAO",
         "spaceDesignated": "Space designated for general questions, statements and comments",
         "viewYourPersonalFeed": "View your personal feed",
-        "showHide": "Show / hide tooltips on hover",
+        "showHide": "Show / hide tooltips on hover"
 
     },
     "account": {
@@ -536,6 +538,9 @@
     },
     "cookieStart": "Alchemy stores cookies on your device to enhance platform experience and analyze platform usage. Please read the&nbsp;",
     "cookieLinkPolicy": "Cookie Policy",
-    "cookieMoreInformation": " for more information."
-    
+    "cookieMoreInformation": " for more information.",
+    "disclaimer": "DISCLAIMER",
+    "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
+    "iAccept": "I Accept",
+    "fullProfile": "Full Profile"
 }

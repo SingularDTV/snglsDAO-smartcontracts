@@ -12,6 +12,7 @@ import { RouteComponentProps } from "react-router-dom";
 import * as Sticky from "react-stickynode";
 import { IRootState } from "reducers";
 import { IProfilesState } from "reducers/profilesReducer";
+import { withTranslation } from 'react-i18next';
 
 import DaoMember from "./DaoMember";
 import * as css from "./Dao.scss";
@@ -60,6 +61,8 @@ class DaoMembersPage extends React.Component<IProps, null> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { data } = this.props;
     console.log("HAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", this.props);
     const members = data;
@@ -135,5 +138,5 @@ const SubscribedDaoMembersPage = withSubscription({
     });
   },
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedDaoMembersPage);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedDaoMembersPage));

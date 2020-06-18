@@ -5,6 +5,8 @@ import AccountProfileName from "components/Account/AccountProfileName";
 import * as React from "react";
 import { IProfileState } from "reducers/profilesReducer";
 import RewardsString from "../RewardsString";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./ProposalSummary.scss";
 
@@ -16,13 +18,15 @@ interface IProps {
   transactionModal?: boolean;
 }
 
-export default class ProposalSummaryContributionReward extends React.Component<IProps> {
+class ProposalSummaryContributionReward extends React.Component<IProps> {
 
   constructor(props: IProps) {
     super(props);
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
 
     const { beneficiaryProfile, proposal, dao, detailView, transactionModal } = this.props;
 
@@ -45,3 +49,5 @@ export default class ProposalSummaryContributionReward extends React.Component<I
 
   }
 }
+//@ts-ignore
+export default withTranslation()(ProposalSummaryContributionReward)

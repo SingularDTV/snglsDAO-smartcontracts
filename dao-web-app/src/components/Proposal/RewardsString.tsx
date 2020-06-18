@@ -5,6 +5,8 @@ import { IDAOState, IProposalState } from "@daostack/client";
 import { baseTokenName, formatTokens, tokenDetails } from "lib/util";
 
 import Reputation from "components/Account/Reputation";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   dao: IDAOState;
@@ -12,8 +14,10 @@ interface IProps {
   separator?: string;
 }
 
-export default class RewardsString extends React.Component<IProps, null> {
+class RewardsString extends React.Component<IProps, null> {
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { dao, proposal, separator } = this.props;
 
     const contributionReward = proposal.contributionReward;
@@ -40,3 +44,5 @@ export default class RewardsString extends React.Component<IProps, null> {
     </strong>;
   }
 }
+//@ts-ignore
+export default withTranslation()(RewardsString)

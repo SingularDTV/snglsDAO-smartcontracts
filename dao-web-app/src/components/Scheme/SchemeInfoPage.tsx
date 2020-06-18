@@ -10,6 +10,8 @@ import { NotificationStatus, showNotification } from "reducers/notifications";
 import { connect } from "react-redux";
 import Tooltip from "rc-tooltip";
 import * as css from "./SchemeInfo.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IDispatchProps {
   showNotification: typeof showNotification;
@@ -34,6 +36,8 @@ class SchemeInfo extends React.Component<IProps, null> {
   };
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { /*daoState,*/ scheme } = this.props;
     // const daoAvatarAddress = daoState.address;
 
@@ -240,5 +244,5 @@ class SchemeInfo extends React.Component<IProps, null> {
     </div>;
   }
 }
-
-export default connect(null, mapDispatchToProps)(SchemeInfo);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(SchemeInfo));

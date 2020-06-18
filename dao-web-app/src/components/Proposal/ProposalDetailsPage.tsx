@@ -29,6 +29,8 @@ import VoteButtons from "./Voting/VoteButtons";
 import VoteGraph from "./Voting/VoteGraph";
 import VotersModal from "./Voting/VotersModal";
 import * as css from "./ProposalDetails.scss";
+import { withTranslation } from 'react-i18next';
+
 
 const ReactMarkdown = require("react-markdown");
 
@@ -98,6 +100,8 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       beneficiaryProfile,
       creatorProfile,
@@ -319,6 +323,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
               </div>
                 <div className={css.stakeButtons}>
                   <StakeButtons
+                  //@ts-ignore
                     beneficiaryProfile={beneficiaryProfile}
                     currentAccountAddress={currentAccountAddress}
                     currentAccountGens={currentAccountGenBalance}
@@ -358,9 +363,12 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
   }
 }
 
-export default function ProposalDetailsPageData(props: IExternalProps) {
+function ProposalDetailsPageData(props: IExternalProps) {
   const { currentAccountAddress, daoState, proposalId } = props;
   return <ProposalData currentAccountAddress={currentAccountAddress} daoState={daoState} proposalId={proposalId} subscribeToProposalDetails>
+    //@ts-ignore
     { proposalData => <ProposalDetailsPage {...props} {...proposalData} /> }
   </ProposalData>;
 }
+//@ts-ignore
+export default withTranslation()(ProposalDetailsPageData)

@@ -26,6 +26,8 @@ import DaoDashboard from "./DaoDashboard";
 import DaoMembershipPage from "./DaoMembershipPage"
 import DaoJoinPage from "./DaoJoin"
 import * as css from "./Dao.scss";
+import { withTranslation } from 'react-i18next';
+
 
 type IExternalProps = RouteComponentProps<any>;
 
@@ -101,6 +103,8 @@ class DaoContainer extends React.Component<IProps, null> {
 
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     let searchString = "";    
     const arc = getArc();
 
@@ -193,5 +197,5 @@ const SubscribedDaoContainer = withSubscription({
     return observable;
   },
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedDaoContainer);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedDaoContainer));
