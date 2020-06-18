@@ -77,8 +77,9 @@ class DaoSchemesPage extends React.Component<IProps, null> {
           //@ts-ignore
         !unknownSchemes ? "" :
           <Fade key={"schemes unknown"}>
+            <UnknownSchemeCard
             //@ts-ignore
-            <UnknownSchemeCard schemes={unknownSchemes} />
+             schemes={unknownSchemes} />
           </Fade>
         }
       </TransitionGroup>
@@ -105,9 +106,11 @@ class DaoSchemesPage extends React.Component<IProps, null> {
     );
   }
 }
+//@ts-ignore
+const DaoSchemaWithTranslation = withTranslation()(DaoSchemesPage)
 
 const DaoSchemesPageWithSub = withSubscription({
-  wrappedComponent: DaoSchemesPage,
+  wrappedComponent: DaoSchemaWithTranslation,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <span>{props.error.message}</span>,
   checkForUpdate: [],
@@ -117,4 +120,4 @@ const DaoSchemesPageWithSub = withSubscription({
   },
 });
 //@ts-ignore
-export default withTranslation()(DaoSchemesPageWithSub)
+export default DaoSchemesPageWithSub

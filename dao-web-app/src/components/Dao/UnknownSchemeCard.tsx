@@ -14,7 +14,7 @@ interface IExternalProps {
 
 const unknownCard: any = (props: IExternalProps) => {
   //@ts-ignore
-  const { t } = this.props;
+  const { t } = props;
   const { schemes } = props;
 
   return !schemes.length ? <span></span> :

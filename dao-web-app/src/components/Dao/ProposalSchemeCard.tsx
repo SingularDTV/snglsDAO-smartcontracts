@@ -24,7 +24,7 @@ type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
 
 const ProposalSchemeCard = (props: IProps) => {
   //@ts-ignore
-  const { t } = this.props;
+  const { t } = props;
   const { data, dao } = props;
 
   const [schemeState, boostedProposals] = data;
