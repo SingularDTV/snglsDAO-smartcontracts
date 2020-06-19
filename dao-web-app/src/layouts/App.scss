@@ -864,6 +864,7 @@ h4 {
                             background: none;
                             width: auto;
                             height: auto;
+                            color: #fff;
                           }
                         }
 
@@ -891,6 +892,9 @@ h4 {
                   & > a, & > span {
                     position: relative;
                     padding-right: 18px;
+                    color: #fff;
+                    opacity: 1;
+                    padding-left: 0;
 
                     &:before {
                       position: absolute;
@@ -910,6 +914,31 @@ h4 {
                     }
                   }
                 }
+
+              &.langSelector {
+                min-width: 84px;
+                position: relative;
+
+                .menu__link {
+                  display: block;
+                  background: #D40D26;
+                  box-shadow: 0 0 20px #e4112a;
+                  border-radius: 30px;
+                  padding: 6px 18px;
+                  top: -6px;
+                  
+
+                  &:before {
+                    right: 18px;
+                  }
+                }
+
+                & > ul {
+                  max-width: 84px;
+                }
+              }
+
+
             }
         }
     }
