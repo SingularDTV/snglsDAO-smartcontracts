@@ -259,8 +259,6 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
-
-            <b>DAO Stakes</b>
           <ul>
             <SubscribedTotalStakedBalance   stakingContractAddress={"0x877fF27181f814a6249285f312ed708EEaC961b5"} tokenAddress={"0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} key={"staked_token_" + "0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} />
             <SubscribedTotalStakedBalance   stakingContractAddress={"0x1E44072256F56527F22134604C9c633eC4cEc86B"} tokenAddress={"0x498EE93981A2453a3F8b8939458977DF86dCce42"} key={"staked_token_" + "0x498EE93981A2453a3F8b8939458977DF86dCce42"} />
