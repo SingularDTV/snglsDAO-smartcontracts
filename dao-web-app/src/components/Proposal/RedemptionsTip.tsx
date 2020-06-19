@@ -21,19 +21,20 @@ interface IProps {
 const RedemptionsTip: any = (props: IProps) => {
   //@ts-ignore
   const { t } = props;
+  console.log('from redemption', props)
   const { canRewardNone, canRewardOnlySome, currentAccountAddress, contributionRewards, dao, gpRewards, id, proposal } = props;
 
   const messageDiv = (canRewardNone || canRewardOnlySome) ? <div className={css.message}>
     <img className={css.icon} src="/assets/images/Icon/Alert-yellow-b.svg" />
-    {canRewardNone ? <div className={css.text}>At this time, none of these rewards can be redeemed -- {dao.name} does not hold all the necessary assets.</div> : ""}
-    {canRewardOnlySome ? <div className={css.text}>At this time, only some of these rewards can be redeemed -- {dao.name} does not hold all the necessary assets.</div> : ""}
+    {canRewardNone ? <div className={css.text}>{t("proposal.cannotBeRedeemed", {name: dao.name})}</div> : ""}
+    {canRewardOnlySome ? <div className={css.text}>{t("proposal.someOfThisCanBeRedeemed", {name: dao.name})}</div> : ""}
   </div> : <span></span>;
 
   const rewardComponents = [];
   let c = null;
   if (gpRewards.reputationForProposer) {
     c = <div key={id + "_proposer"}>
-      <strong>For creating the proposal you are due to receive:</strong>
+      <strong>{t("proposal.dueToReceive")}</strong>
       <ul>
         <li><Reputation reputation={gpRewards.reputationForProposer} totalReputation={dao.reputationTotalSupply} daoName={dao.name} /></li>
       </ul>
@@ -42,7 +43,7 @@ const RedemptionsTip: any = (props: IProps) => {
   }
   if (gpRewards.reputationForVoter) {
     c = <div key={id + "_voter"}>
-      <strong>For voting on the proposal you are due to receive:</strong>
+      <strong>{t("proposal.forVoting")}</strong>
       <ul>
         <li><Reputation reputation={gpRewards.reputationForVoter} totalReputation={dao.reputationTotalSupply} daoName={dao.name} /></li>
       </ul>
@@ -51,7 +52,7 @@ const RedemptionsTip: any = (props: IProps) => {
   }
   if (gpRewards.tokensForStaker) {
     c = <div key={id + "_staker_tokens"}>
-      <strong>For staking on the proposal you are due to receive:</strong>
+      <strong>{t("proposal.forStaking")}</strong>
       <ul>
         <li>{fromWei(gpRewards.tokensForStaker)} {genName()}</li>
       </ul>
@@ -60,9 +61,9 @@ const RedemptionsTip: any = (props: IProps) => {
   }
   if (gpRewards.daoBountyForStaker) {
     c = <div key={id + "_staker_bounty"}>
-      <strong>For staking on the proposal you are due to receive:</strong>
+      <strong>{t("proposal.forStaking")}</strong>
       <ul>
-        <li>{fromWei(gpRewards.daoBountyForStaker)} {genName()} as bounty from {dao.name}
+        <li>{fromWei(gpRewards.daoBountyForStaker)} {genName()} {t("proposal.asBounty")} {dao.name}
         </li>
       </ul>
     </div >;

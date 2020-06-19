@@ -208,7 +208,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
 
     return(
        <div className={css.membersContainer}>
-         <BreadcrumbsItem to={"/dao/members"}>DAO Members</BreadcrumbsItem>
+         <BreadcrumbsItem to={"/dao/members"}>{t("yourReputation")}</BreadcrumbsItem>
         
          <div className={css.pageHead}>
     <h1>{t("sidebar.dashboard")}</h1>
@@ -221,7 +221,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
               > {t("daojoin.getRep")} </a>
-              <span className={css.reputationBalance}>your reputation:<strong> 0.00% </strong></span>
+              <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
           </div>
         </div>
          {/* Key parameters div */}
@@ -352,7 +352,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
           }
         >
           { proposals.length === 0 ?
-            <span>{t('dashboard.notPassedProposals')}<Link to={"/dao/proposal/"}>DAO&apos;s installed schemes</Link></span> :
+            <span>{t('dashboard.notPassedProposals')}<Link to={"/dao/proposal/"}></Link></span> :
             <table className={css.proposalHistoryTable}>
               <thead>
                 <tr className={css.proposalHistoryTableHeader}>

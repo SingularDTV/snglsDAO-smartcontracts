@@ -51,11 +51,11 @@ class DaoHistoryPage extends React.Component<IProps, null> {
 
     return(
       <div>
-        <BreadcrumbsItem to={"/dao/history"}>History</BreadcrumbsItem>
+        <BreadcrumbsItem to={"/dao/history"}>{t("sidebar.history")}</BreadcrumbsItem>
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
           <div className={css.daoHistoryHeader}>
-            History
+          {t("sidebar.history")}
           </div>
         {/* </Sticky> */}
 
@@ -72,18 +72,18 @@ class DaoHistoryPage extends React.Component<IProps, null> {
           }
         >
           { proposals.length === 0 ?
-            <span>This DAO hasn&apos;t passed any proposals yet. Checkout the <Link to={"/dao/proposal/"}>DAO&apos;s installed schemes</Link> for any open proposals.</span> :
+            <span>{t('dashboard.notPassedProposals')}<Link to={"/dao/proposal/"}></Link></span> :
             <table className={css.proposalHistoryTable}>
               <thead>
                 <tr className={css.proposalHistoryTableHeader}>
-                  <th>Proposed by</th>
-                  <th>End date</th>
-                  <th>Plugin</th>
-                  <th>Title</th>
-                  <th>Votes</th>
-                  <th>Predictions</th>
-                  <th>Status</th>
-                  <th>My actions</th>
+                <th>{t('dashboard.proposedBy')}</th>
+                  <th>{t('dashboard.endDate')}</th>
+                  <th>{t('dashboard.plugin')}</th>
+                  <th>{t('dashboard.title')}</th>
+                  <th>{t('dashboard.votes')}</th>
+                  <th>{t('dashboard.predictions')}</th>
+                  <th>{t('dashboard.status')}</th>
+                  <th>{t('dashboard.actions')}</th>
                 </tr>
               </thead>
               <tbody>

@@ -289,7 +289,8 @@
         "redemptions": "Redemptions",
         "pendingProtocolRewards": "Pending Protocol Rewards: ",
         "getMoreRewards": "Get more rewards by proposing a proposal that the DAO accepts, and by voting / staking in alignment with the DAO.",
-        "reputationIn": "reputation in {{size}}  DAOs"
+        "reputationIn": "reputation in {{size}}  DAOs",
+        "reedemProp": "Redeem proposal"
     },
     "schema": {
         "noUpcomingProp": "No upcoming proposals",
@@ -397,12 +398,12 @@
     },
     "proposal": {
         "forStaking": "For staking on the proposal you are due to receive:",
-        "asBounty": "{{genName}} as bounty from {{name}}",
+        "asBounty": " as bounty from ",
         "asBeneficiary": "As the beneficiary of the proposal you are due to receive:",
         "benificiary": "The beneficiary of the proposal is due to receive:",
         "forVoting": "For voting on the proposal you are due to receive:",
         "dueToReceive": "For creating the proposal you are due to receive:",
-        "cannotBeRedeemed": "At this time, none of these rewards can be redeemed -- {{dao.name}} does not hold all the necessary assets.",
+        "cannotBeRedeemed": "At this time, none of these rewards can be redeemed -- {{name}} does not hold all the necessary assets.",
         "someOfThisCanBeRedeemed": "At this time, only some of these rewards can be redeemed -- {{dao.name}} does not hold all the necessary assets.",
         "passed": "Passed",
         "failed": "Failed",
@@ -544,5 +545,6 @@
     "disclaimer": "DISCLAIMER",
     "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
     "iAccept": "I Accept",
-    "fullProfile": "Full Profile"
+    "fullProfile": "Full Profile",
+    "yourReputation": "your reputation: "
 }
