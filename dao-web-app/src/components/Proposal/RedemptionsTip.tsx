@@ -3,7 +3,7 @@ import Reputation from "components/Account/Reputation";
 import { baseTokenName, formatTokens, fromWei, genName, tokenDecimals, tokenSymbol, AccountClaimableRewardsType } from "lib/util";
 import * as React from "react";
 import * as css from "components/Shared/PreTransactionModal.scss";
-import { withTranslation } from 'react-i18next';
+//import { withTranslation } from 'react-i18next';
 
 
 interface IProps {
@@ -114,4 +114,4 @@ const RedemptionsTip: any = (props: IProps) => {
   </div>;
 };
 //@ts-ignore
-export default withTranslation()(RedemptionsTip)
+export default RedemptionsTip
