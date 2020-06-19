@@ -73,18 +73,18 @@ class DaoMembersPage extends React.Component<IProps, null> {
 
     return (
       <div className={css.membersContainer}>
-        <BreadcrumbsItem to={"/dao/" + daoState.address + "/members"}>DAO Members</BreadcrumbsItem>
+        <BreadcrumbsItem to={"/dao/" + daoState.address + "/members"}>{t("membership.daoMembers")}</BreadcrumbsItem>
         <Sticky enabled top={50} innerZ={10000}>
-          <h2>DAO Members</h2>
+          <h2>{t("membership.daoMembers")}</h2>
         </Sticky>
         <table className={css.memberHeaderTable}>
           <tbody className={css.memberTable + " " + css.memberTableHeading}>
             <tr>
               <td className={css.memberAvatar}></td>
-              <td className={css.memberName}>Name</td>
-              <td className={css.memberAddress}>Address</td>
-              <td className={css.memberReputation}>Reputation</td>
-              <td className={css.memberSocial}>Social Verification</td>
+              <td className={css.memberName}>{t("membership.name")}</td>
+              <td className={css.memberAddress}>{t("membership.address")}</td>
+              <td className={css.memberReputation}>{t("membership.reputation")}</td>
+              <td className={css.memberSocial}>{t("membership.socVerification")}</td>
             </tr>
           </tbody>
         </table>

@@ -147,7 +147,8 @@
     "utility-types": "^3.7.0",
     "web3": "1.2.4",
     "web3modal": "^1.1.0",
-    "ws": "^7.1.0"
+    "ws": "^7.1.0",
+    "i18next": "^19.4.5"
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.7.4",
