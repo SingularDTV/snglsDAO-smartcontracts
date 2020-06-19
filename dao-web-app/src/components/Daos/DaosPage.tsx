@@ -15,6 +15,8 @@ import { IRootState } from "reducers";
 import { IProfileState } from "reducers/profilesReducer";
 import { combineLatest, of } from "rxjs";
 import { first } from "rxjs/operators";
+import { withTranslation } from 'react-i18next';
+
 
 import DaoCard from "./DaoCard";
 import * as css from "./Daos.scss";
@@ -82,6 +84,8 @@ class DaosPage extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { currentAccountProfile, data, fetchMore } = this.props;
     const search = this.state.search.length > 2 ? this.state.search.toLowerCase() : "";
     let allDAOs = data[0];
@@ -220,6 +224,6 @@ const SubscribedDaosPage = withSubscription({
     return [prevData[0].concat(newData[0]), prevData[1].concat(newData[1])] as SubscriptionData;
   },
 });
-
-export default connect(mapStateToProps)(SubscribedDaosPage);
+//@ts-ignore
+export default connect(mapStateToProps)(withTranslation()(SubscribedDaosPage));
 

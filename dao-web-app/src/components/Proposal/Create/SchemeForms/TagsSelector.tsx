@@ -8,6 +8,7 @@ import { RefObject } from "react";
 import { map } from "rxjs/operators";
 import { ITagState } from "@daostack/client/dist/types/tag";
 import * as css from "./TagsSelector.scss";
+import { withTranslation } from 'react-i18next';
 
 interface IExternalProps {
   /**
@@ -153,7 +154,7 @@ class TagsSelector extends React.Component<IProps, IStateProps> {
   }
 }
 
-export default withSubscription({
+const TagsSelectorWithSub = withSubscription({
   wrappedComponent: TagsSelector,
   checkForUpdate: () => { return false; },
   createObservable: (_props: IExternalProps) => {
@@ -169,3 +170,6 @@ export default withSubscription({
       );
   },
 });
+
+//@ts-ignore
+export default withTranslation()(TagsSelectorWithSub)

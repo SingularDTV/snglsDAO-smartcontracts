@@ -2,6 +2,8 @@ import { IProposalState } from "@daostack/client";
 import classNames from "classnames";
 import { formatTokens, fromWei } from "lib/util";
 import * as React from "react";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./StakeGraph.scss";
 
@@ -11,9 +13,11 @@ interface IProps {
   proposal: IProposalState;
 }
 
-export default class StakeGraph extends React.Component<IProps, null> {
+class StakeGraph extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       detailView,
       historyView,
@@ -74,3 +78,5 @@ export default class StakeGraph extends React.Component<IProps, null> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(StakeGraph)

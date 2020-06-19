@@ -5,6 +5,9 @@ import Linkify from "react-linkify";
 import { NotificationStatus, showNotification } from "reducers/notifications";
 import Tooltip from "rc-tooltip";
 import * as css from "./Notification.scss";
+import { withTranslation } from 'react-i18next';
+
+
 
 export enum NotificationViewStatus {
   Pending = "Pending",
@@ -23,7 +26,7 @@ interface IProps {
   showNotification: typeof showNotification;
 }
 
-export default class Notification extends React.Component<IProps, null> {
+class Notification extends React.Component<IProps, null> {
   constructor(props: IProps) {
     super(props);
   }
@@ -46,6 +49,8 @@ export default class Notification extends React.Component<IProps, null> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { title, message, status, url, fullErrorMessage } = this.props;
 
     const transactionClass = classNames({
@@ -103,3 +108,5 @@ export default class Notification extends React.Component<IProps, null> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(Notification)

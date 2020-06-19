@@ -13,6 +13,8 @@ import TagsSelector from "components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 import * as css from "../CreateProposal.scss";
 import MarkdownField from "./MarkdownField";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps {
   daoAvatarAddress: string;
@@ -99,6 +101,8 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { handleClose } = this.props;
 
     const fnDescription = () => (<span>Short description of the proposal.<ul><li>What are you proposing to do?</li><li>Why is it important?</li><li>How much will it cost the DAO?</li><li>When do you plan to deliver the work?</li></ul></span>);
@@ -374,5 +378,5 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
     );
   }
 }
-
-export default connect(null, mapDispatchToProps)(CreateGenericScheme);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation(CreateGenericScheme));

@@ -1,5 +1,6 @@
 import * as moment from "moment";
 import * as React from "react";
+import { withTranslation } from 'react-i18next';
 
 import * as css from "./Countdown.scss";
 
@@ -17,7 +18,7 @@ interface IState {
   seconds: number;
 }
 
-export default class Countdown extends React.Component<IProps, IState> {
+class Countdown extends React.Component<IProps, IState> {
   public interval: any;
 
   constructor(props: IProps) {
@@ -94,7 +95,8 @@ export default class Countdown extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
-
+    //@ts-ignore
+    const { t } = this.props;
     // handle case where fromDate has being reset and need to restart the countdown
     this.setInterval();
 
@@ -132,3 +134,6 @@ export default class Countdown extends React.Component<IProps, IState> {
     );
   }
 }
+
+//@ts-ignore
+export default withTranslation()(Countdown)
