@@ -137,7 +137,7 @@ class DaoContainer extends React.Component<IProps, null> {
               render={this.schemeRoute} />
 
 
-            <Route exact path="/dao/plugins" 
+            <Route exact path="/dao/applications" 
               render={this.daoSchemesRoute} />
             
             <Route exact path="/dao/dashboard"

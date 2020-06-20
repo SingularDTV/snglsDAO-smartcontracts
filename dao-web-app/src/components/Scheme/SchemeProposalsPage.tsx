@@ -139,9 +139,18 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
             </div>
             <p>You can be the first one to create a {schemeFriendlyName} proposal today! :)</p>
             <div className={css.cta}>
-              <Link to={"/dao/plugins"}>
-                <img className={css.relax} src="/assets/images/lt.svg"/> Back to schemes
-              </Link>
+              {
+                schemeFriendlyName === "Grants" || schemeFriendlyName === "Protocol Parameters"
+                ?
+                <Link to={"/dao/dashboard"}>
+                  <img className={css.relax} src="/assets/images/lt.svg"/> Back to dashboard
+                </Link>                
+                :
+                <Link to={"/dao/applications"}>
+                  <img className={css.relax} src="/assets/images/lt.svg"/> Back to applications
+                </Link>
+              }
+              
               <a className={classNames({
                 [css.blueButton]: true,
                 [css.disabled]: !isActive,
