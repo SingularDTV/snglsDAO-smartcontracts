@@ -114,6 +114,7 @@ class ProposalCard extends React.Component<IProps, null> {
 
           <div className={css.voteButtons}>
             <VoteButtons
+            //@ts-ignore
               currentAccountAddress={currentAccountAddress}
               currentAccountState={member}
               currentVote={currentAccountVote}
@@ -188,6 +189,7 @@ class ProposalCard extends React.Component<IProps, null> {
                       </div>
 
                       <VoteButtons
+                      //@ts-ignore
                         currentAccountAddress={currentAccountAddress}
                         currentAccountState={member}
                         currentVote={currentAccountVote}

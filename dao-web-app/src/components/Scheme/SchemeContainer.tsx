@@ -157,34 +157,34 @@ class SchemeContainer extends React.Component<IProps, IState> {
             <div className={css.schemeTop}>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
-                <div>Membership Fee: SNGLS 0</div>
+                <div>{t('membership.memFee')}: SNGLS 0</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_listing_rate.png" /></div>
-                <div>Listing Fee: SNGLS 0</div>
+                <div>{t('proposal.listingFee')}: SNGLS 0</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_transaction.png" /></div>
-                <div>Transaction Fee: % 0</div>
+                <div>{t('proposal.transFee')}: % 0</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
-                <div>Validation Fee: SNGLS 0</div>
+                <div>{t('dashboard.validationFee')}: SNGLS 0</div>
               </div>
             </div>
           }
           <div className={css.schemeMenu}>
             {isProposalScheme
-              ? <Link className={proposalsTabClass} to={`/dao/scheme/${schemeId}/proposals/`}>Proposals</Link>
+              ? <Link className={proposalsTabClass} to={`/dao/scheme/${schemeId}/proposals/`}>{t("schema.proposal")}</Link>
               : ""}
 
             { // if Bounties Scheme, create new tab
               (schemeName(schemeState, schemeState.address) === "Standard Bounties") &&
-              <Link className={openBountiesTabClass} to={`/dao/scheme/${schemeId}/openbounties/`}>Open Bounties</Link>
+              <Link className={openBountiesTabClass} to={`/dao/scheme/${schemeId}/openbounties/`}>{t("schema.openBounties")}</Link>
             }
 
             <TrainingTooltip placement="top" overlay={"Learn about the protocol parameters for this scheme"}>
-              <Link className={infoTabClass} to={`/dao/scheme/${schemeId}/info/`}>Information</Link>
+              <Link className={infoTabClass} to={`/dao/scheme/${schemeId}/info/`}>{t("schema.Information")}</Link>
             </TrainingTooltip>
             {
               this.state.crxRewarderProps ?
@@ -206,7 +206,7 @@ class SchemeContainer extends React.Component<IProps, IState> {
                   href="#!"
                   onClick={isActive ? this.handleNewProposal : null}
                 >
-                  + New {`${this.state.crxRewarderProps ? this.state.crxRewarderProps.contractName : schemeFriendlyName} `}Proposal</a>
+                  {t('schema.newProposal', { proposal: this.state.crxRewarderProps ? this.state.crxRewarderProps.contractName : schemeFriendlyName })} </a>
               </TrainingTooltip>
             </div>
             : ""}

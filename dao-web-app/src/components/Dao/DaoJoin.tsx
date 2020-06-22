@@ -156,17 +156,17 @@ class GetReputation extends React.Component<IProps, IStateProps> {
             const errors: any = {};
             const nonNegative = (name: string): void => {
               if ((values as any)[name] < 0) {
-                errors[name] = "Please enter a non-negative value";
+                errors[name] = t("errors.nonNegative");
               }
             };
 
             if (!isValidUrl(values.url)) {
-              errors.url = "Invalid URL";
+              errors.url = t("errors.invalidUrl");
             }
 
             nonNegative("ethReward");
             if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.nativeTokenReward) {
-              errors.rewards = "Please select at least some reward";
+              errors.rewards = t("proposal.pleaseSelectAtLeastSomeReward");
             }
 
             return errors;
@@ -210,12 +210,12 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                       className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
                     />
                     <div className={css.btnMax}>
-                      <button type="button">max</button>
+                      <button type="button">{t('daojoin.max')}</button>
                     </div>
                   </div>
                   <div className={css.balances}>
-                    <span className={css.tokens}>SGT Tokens: <strong>0.00</strong></span>
-                    <span className={css.holdings}>Reputation: <strong>0.00% Rep.</strong></span>
+                    <span className={css.tokens}>{t('daojoin.sgtTokens')}<strong>0.00</strong></span>
+                    <span className={css.holdings}>{t('daojoin.reputation')} <strong>0.00% Rep.</strong></span>
                   </div>
                   <span className={css.holdings}>{t("daojoin.haveAmountStaked")}</span>
                 </div>
@@ -227,7 +227,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
               }
               <div className={css.createProposalActions}>
                 <div>
-                <TrainingTooltip overlay="Once the proposal is submitted it cannot be edited or deleted" placement="top">
+                <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
                   <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
                   {t('daojoin.getRep')}
                   </button>

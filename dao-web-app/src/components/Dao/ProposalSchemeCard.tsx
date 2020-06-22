@@ -64,7 +64,7 @@ const ProposalSchemeCard = (props: IProps) => {
           <div className={css.loading}>
             <img src="/assets/images/logo_white.svg" />
             <div>
-              No upcoming proposals
+              {t("schemas.noUpcoming")}
             </div>
           </div>
           : " "
