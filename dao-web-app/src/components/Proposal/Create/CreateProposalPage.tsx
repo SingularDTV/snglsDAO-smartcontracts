@@ -147,10 +147,10 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
     return (
       <div className={css.createProposalWrapper}>
-        <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>{t('notifications.create')}</BreadcrumbsItem>
         <h2 className={css.header}>
-          <span>+ New proposal <b>| {schemeTitle}</b></span>
-          <button className={css.closeButton} aria-label="Close Create Proposal Modal" onClick={this.handleClose}>&times;</button>
+          <span>{t("schema.newProposal")} <b>| {schemeTitle}</b></span>
+          <button className={css.closeButton} aria-label={t('proposal.closeCreateModal')} onClick={this.handleClose}>&times;</button>
         </h2>
         { createSchemeComponent }
       </div>

@@ -93,7 +93,7 @@ class CreateSubmission extends React.Component<IProps, IStateProps> {
             }
 
             if (!isValidUrl(values.url)) {
-              errors.url = "Invalid URL";
+              errors.url = t('errors.invalidUrl');;
             }
 
             require("description");
