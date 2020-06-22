@@ -183,7 +183,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
               {
                 (crxContractName) ? <div className={css.gotoCompetition}>
                   {
-                    <Link to={`/dao/crx/proposal/${proposal.id}`}>Go to {crxContractName}&nbsp;&gt;</Link>
+                    <Link to={`/dao/crx/proposal/${proposal.id}`}>{t('proposal.goTo')} {crxContractName}&nbsp;&gt;</Link>
                   }
                 </div> : ""
               }
@@ -221,7 +221,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
             {url ?
               <a href={url} className={css.attachmentLink} target="_blank" rel="noopener noreferrer">
                 <img src="/assets/images/Icon/Attachment.svg" />
-            Attachment
+            {t('schema.attachmend')}
               </a>
               : " "
             }
@@ -239,9 +239,10 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
 
             <div className={css.buttonBar}>
               <div className={css.voteButtonsBottom}>
-                <h4 className={css.voteLabel}>Vote:</h4>
+                <h4 className={css.voteLabel}>{t("notifications.vote")}:</h4>
                 <div className={css.altVoteButtons}>
                   <VoteButtons
+                  //@ts-ignore
                     altStyle
                     currentAccountAddress={currentAccountAddress}
                     currentVote={currentAccountVote}
@@ -255,13 +256,13 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
               </div>
 
               <button onClick={this.showShareModal} className={css.shareButton} data-test-id="share">
-                <span>Share</span>
+                <span>{t("shared.share")}</span>
               </button>
 
               <div className={css.followButton}><FollowButton type="proposals" id={proposal.id} style="bigButton" /></div>
             </div>
 
-                <h3 className={css.discussionTitle}>Discussion</h3>
+          <h3 className={css.discussionTitle}>{t("proposal.discussion")}</h3>
                 <div className={css.disqus}>
                   <DiscussionEmbed shortname={process.env.DISQUS_SITE} config={this.disqusConfig} />
                 </div>
@@ -274,11 +275,11 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
             <div className={voteWrapperClass}>
               <div>
                 <div className={css.statusTitle}>
-                  <h3>Votes</h3>
+                  <h3>{t("proposal.votes")}</h3>
                 </div>
                   <div className={css.statusVote}>
                   <span onClick={this.showVotersModal(proposal.votesCount)} className={classNames({ [css.clickable]: proposal.votesCount > 0 })}>
-                    Vote{proposal.votesCount === 1 ? "" : "s"} <div className={css.votesCount}>{proposal.votesCount}</div>
+                  {t("notifications.vote")}{proposal.votesCount === 1 ? "" : "s"} <div className={css.votesCount}>{proposal.votesCount}</div>
                   </span>
                   </div>
               </div>
@@ -298,6 +299,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
               </div>
                 <div className={css.voteButtons}>
                   <VoteButtons
+                  //@ts-ignore
                     currentAccountAddress={currentAccountAddress}
                     currentAccountState={member}
                     currentVote={currentAccountVote}
@@ -311,7 +313,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
 
             <div className={css.predictions}>
               <div className={css.statusTitle}>
-                <h3>Predictions</h3>
+                <h3>{t("proposal.predictions")}</h3>
               </div>
 
               <div className={css.predictionStatus}>

@@ -333,7 +333,7 @@ class CreateKnownSchemeProposal extends React.Component<IProps, IState> {
               }
 
               if (!isValidUrl(values.url)) {
-                errors.url = "Invalid URL";
+                errors.url = t('errors.invalidUrl');;
               }
 
               for (const field of this.state.currentAction.getFields()) {

@@ -92,7 +92,7 @@ class DaoMembersPage extends React.Component<IProps, null> {
           dataLength={members.length} //This is important field to render the next data
           next={this.props.fetchMore}
           hasMore={members.length < this.props.daoState.memberCount}
-          loader={<h4>Loading...</h4>}
+          loader={<h4>{t("loading")}</h4>}
           endMessage={
             <p style={{textAlign: "center"}}>
               <b>&mdash;</b>
