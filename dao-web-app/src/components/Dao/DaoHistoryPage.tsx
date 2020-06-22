@@ -1,10 +1,8 @@
 import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake } from "@daostack/client";
-import { getArc } from "arc";
+import { getArc, getArcSettings } from "arc";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
-import Analytics from "lib/analytics";
-import { Page } from "pages";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as InfiniteScroll from "react-infinite-scroll-component";
@@ -27,14 +25,6 @@ type SubscriptionData = Proposal[];
 type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
 
 class DaoHistoryPage extends React.Component<IProps, null> {
-
-  public componentDidMount() {
-    Analytics.track("Page View", {
-      "Page Name": Page.DAOHistory,
-      "DAO Address": "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f",
-      "DAO Name": this.props.daoState.name,
-    });
-  }
 
   public render(): RenderOutput {
     const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
@@ -126,7 +116,7 @@ const DaoHistoryWithSubscription = withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f"}"
+            dao: "${getArcSettings().daoAvatarContractAddress}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",

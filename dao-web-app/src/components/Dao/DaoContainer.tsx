@@ -1,6 +1,6 @@
 import { IDAOState, Member } from "@daostack/client";
 import { getProfilesForAddresses } from "actions/profilesActions";
-import { getArc/*, getArcSettings*/ } from "arc";
+import { getArc, getArcSettings } from "arc";
 import CreateProposalPage from "components/Proposal/Create/CreateProposalPage";
 import ProposalDetailsPage from "components/Proposal/ProposalDetailsPage";
 import SchemeContainer from "components/Scheme/SchemeContainer";
@@ -49,7 +49,7 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress: "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f", // ownProps.match.params.daoAvatarAddress,
+    daoAvatarAddress: getArcSettings().daoAvatarContractAddress
   };
 };
 
@@ -178,7 +178,7 @@ const SubscribedDaoContainer = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    const daoAddress = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f";//props.match.params.daoAvatarAddress;
+    const daoAddress = getArcSettings().daoAvatarContractAddress;
     const dao =  arc.dao(daoAddress);
     const observable = combineLatest(
       dao.state({ subscribe: true, fetchAllData: true }), // DAO state
