@@ -177,7 +177,8 @@
         "listOfEntities":"List of entities (DAOs and individuals) that have voting power in the DAO",
         "spaceDesignated": "Space designated for general questions, statements and comments",
         "viewYourPersonalFeed": "View your personal feed",
-        "showHide": "Show / hide tooltips on hover"
+        "showHide": "Show / hide tooltips on hover",
+        "regProposalArePassedOrFailed": "Regular proposals are passed or failed via absolute majority over a configured voting period. If enough GEN is staked predicting they will pass, they can move to the pending and then boosted queues."
 
     },
     "account": {
@@ -298,7 +299,7 @@
         "noUpcomingProp": "No upcoming proposals",
         "firstOneToCreate": "You can be the first one to create a {{schemeFriendlyName}} proposal today! :)",
         "backToSchema": "Back to schemes",
-        "newProposal": "+ New Proposal",
+        "newProposal": "+ New {{proposal}} Proposal",
         "boostedProposals": "Boosted Proposals ({{num}})",
         "pendingBoostedProposals": "Pending Boosting Proposals ({{num}})",
         "regularProposals": "Regular Proposals ({{num}})",
@@ -398,7 +399,9 @@
         "daoTokenRewardToSplit": "DAO token ({{tokenSymbol}}) Reward to split",
         "submitProposal": "Submit proposal",
         "activationTime": "Activation Time:",
-        "proposal": "Proposal"
+        "proposal": "Proposal",
+        "backToDashboard": "Back to dashboard",
+        "backToApp": "Back to applications"
     },
     "proposal": {
         "forStaking": "For staking on the proposal you are due to receive:",
