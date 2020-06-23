@@ -39,7 +39,7 @@
             "fromArc": false,
             "constructor": false,
             "params": [
-                "0x00aBc5cb6B7b15a2DE2F8455e1c9e4Bd1f841661",
+                "0xC186d4D61D1e74Bf686616049b7672e2aE573C3F",
                 "0"
             ]
         }
@@ -126,7 +126,7 @@
     "useUController": false,
     "founders": [
         {
-            "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
+            "address": "0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956",
             "tokens": 1000000000,
             "reputation": 0
         },
