@@ -136,9 +136,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
   public async componentDidMount() {
     const arc = getArc();
 
-    const feesContract = new arc.web3.eth.Contract([ { "constant": true, "inputs": [], "name": "listingFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "membershipFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "transactionFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "validationFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" } ],
-      getArcSettings().feesContractAddress
-    );
+    const feesContract = new arc.web3.eth.Contract(getArcSettings().feesContractABI, getArcSettings().feesContractAddress);
 
     this.setState( 
       { 

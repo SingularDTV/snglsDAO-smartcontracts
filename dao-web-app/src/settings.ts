@@ -186,7 +186,7 @@ export const settings = {
     
     minLockingPeriod: 604800,
 
-    daoAvatarContractAddress: "0xA83bD4183b7Feef2AD464485f21E8c027a62EADd",
+    daoAvatarContractAddress: "0x58A3d1d97b899D7Ebce324A20D0977FCb44aeB46",
     sgtTokenContractAddress: "0x4E9A6877b089417265Bf202be4eFc81CE1F9DB95",
     reputationContractAddress: "0xcB3F314142Fad865fCE7B6703074cf80Ad2Da552",
     controllerContractAddress: "0xd6bb4CfFc0b180782a1D40929BaA2E54344062D0",
