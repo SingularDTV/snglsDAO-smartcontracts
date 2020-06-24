@@ -205,7 +205,7 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
             }
 
             if (!isValidUrl(values.url)) {
-              errors.url = "Invalid URL";
+              errors.url = t('errors.invalidUrl');;
             }
 
             nonNegative("ethReward");
@@ -234,12 +234,12 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
             values,
           }: FormikProps<IFormValues>) =>
             <Form noValidate>
-              <label className={css.description}>What to Expect</label>
-              <div className={css.description}>This proposal can send eth / erc20 token. Each proposal can have one of each of these actions. e.g. 20 SNGLS for completing a project + 0.05 ETH for covering expenses.</div>
-              <TrainingTooltip overlay="The title is the header of the proposal card and will be the first visible information about your proposal" placement="right">
+              <label className={css.description}>{t("schema.whatToExpect")}</label>
+              <div className={css.description}>{t("proposal.thisProposalCanSendEth")}</div>
+              <TrainingTooltip overlay={t("tooltips.theTitleIsTHeHeaderOfTheProposal")} placement="right">
                 <label htmlFor="titleInput">
                   <div className={css.requiredMarker}>*</div>
-                Title
+                  {t("dashboard.title")}
                   <ErrorMessage name="title">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                 </label>
               </TrainingTooltip>
@@ -247,7 +247,7 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
                 autoFocus
                 id="titleInput"
                 maxLength={120}
-                placeholder="Summarize your proposal"
+                placeholder={t('proposal.summarizeYourProposal')}
                 name="title"
                 type="text"
                 className={touched.title && errors.title ? css.error : null}
@@ -256,7 +256,7 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
               <TrainingTooltip overlay={this.fnDescription} placement="right">
                 <label htmlFor="descriptionInput">
                   <div className={css.requiredMarker}>*</div>
-                Description
+                {t('account.desc')}
                   <img className={css.infoTooltip} src="/assets/images/Icon/Info.svg"/>
                   <ErrorMessage name="description">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                 </label>
@@ -270,9 +270,9 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
                 className={touched.description && errors.description ? css.error : null}
               />
 
-              <TrainingTooltip overlay="Add some tags to give context about your proposal e.g. idea, signal, bounty, research, etc" placement="right">
+              <TrainingTooltip overlay={t("tooltips.addSomeTags")} placement="right">
                 <label className={css.tagSelectorLabel}>
-                Tags
+                {t("schema.tags")}
                 </label>
               </TrainingTooltip>
 
@@ -280,26 +280,26 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
                 <TagsSelector onChange={this.onTagsChange()} tags={this.state.tags}></TagsSelector>
               </div>
 
-              <TrainingTooltip overlay="Link to the fully detailed description of your proposal" placement="right">
+              <TrainingTooltip overlay={t("tooltips.linkToTheFullyDetailedDesc")} placement="right">
                 <label htmlFor="urlInput">
-                URL
+                {t("schema.url")}
                   <ErrorMessage name="url">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                 </label>
               </TrainingTooltip>
               <Field
                 id="urlInput"
                 maxLength={120}
-                placeholder="Description URL"
+                placeholder={t('proposal.descriptionUrl')}
                 name="url"
                 type="text"
                 className={touched.url && errors.url ? css.error : null}
               />
 
               <div>
-                <TrainingTooltip overlay="Ethereum Address or Alchemy Username to receive rewards" placement="right">
+                <TrainingTooltip overlay={t('tooltips.etherAddressOrAlchemyUserToReceiveRewards')} placement="right">
                   <label htmlFor="beneficiary">
                     <div className={css.requiredMarker}>*</div>
-                    Recipient
+                    {t('proposal.recipient')}
                     <ErrorMessage name="beneficiary">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
                 </TrainingTooltip>
@@ -315,7 +315,7 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
               <div className={css.rewards}>
                 <div className={css.reward}>
                   <label htmlFor="ethRewardInput">
-                    {baseTokenName()} Treasury Allocation
+                    {baseTokenName()} {t('proposal.treasuryAllocation')}
                     <ErrorMessage name="ethReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
                   <Field
@@ -331,14 +331,14 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
 
                 <div className={css.reward}>
                   <label htmlFor="externalRewardInput">
-                    Token Treasury Allocation
+                  {t('proposal.tokenTreasuryAllocation')}
                     <ErrorMessage name="externalTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
                   <div className={css.externalTokenInput}>
                     <div className={css.amount}>
                       <Field
                         id="externalRewardInput"
-                        placeholder={"How many tokens to reward"}
+                        placeholder={t('proposal.howManyTokensToReward')}
                         name="externalTokenReward"
                         type="number"
                         className={touched.externalTokenReward && errors.externalTokenReward ? css.error : null}
@@ -372,11 +372,11 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
                   </button>
                 </TrainingTooltip>
                 <button className={css.exitProposalCreation} type="button" onClick={handleClose}>
-                  Cancel
+                  {t('daojoin.cancel')}
                 </button>
-                <TrainingTooltip overlay="Once the proposal is submitted it cannot be edited or deleted" placement="top">
+                <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
                   <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
-                    Submit proposal
+                  {t('schema.submitProposal')}
                   </button>
                 </TrainingTooltip>
               </div>

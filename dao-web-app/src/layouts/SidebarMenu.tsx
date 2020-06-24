@@ -166,7 +166,39 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               </Link>
             </li>
             <li>
-              <Link to={"/dao/plugins/"} onClick={this.handleCloseMenu}>
+              <Link to={"/dao/scheme/0xc90f07c90bde8812d1ce9dc1e9281932aa5f2761775f7ef70270ce8f30cc0780"} onClick={this.handleCloseMenu}>
+                <span className={css.menuDot} />
+                <span className={
+                  classNames({
+                    [css.notification]: true,
+                    [css.homeNotification]: true,
+                  })
+                }></span>
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_membership.svg" />
+                { "Grants" }
+
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link to={"/dao/scheme/0x4f5c907a13eb31d8759b89c10eb1b4077dfb6228734536a188775f2a51083bcb"} onClick={this.handleCloseMenu}>
+                <span className={css.menuDot} />
+                <span className={
+                  classNames({
+                    [css.notification]: true,
+                    [css.homeNotification]: true,
+                  })
+                }></span>
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_membership.svg" />
+                { "Protocol Parameters" }
+
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link to={"/dao/applications/"} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({

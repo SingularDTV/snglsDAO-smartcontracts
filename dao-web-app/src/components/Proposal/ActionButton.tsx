@@ -126,6 +126,7 @@ class ActionButton extends React.Component<IProps, IState> {
        * unredeemed GP rewards owed to the current account
        */
       rewards,
+      ...other
     } = this.props;
 
     const daoBalances: {[key: string]: BN} = {
@@ -199,6 +200,7 @@ class ActionButton extends React.Component<IProps, IState> {
                         ((proposalState.winningOutcome === IProposalOutcome.Pass) && (beneficiaryNumUnredeemedCrRewards > 0)));
 //@ts-ignore
     const redemptionsTip = RedemptionsTip({
+      ...other,
       canRewardNone,
       canRewardOnlySome: canRewardSomeNotAll,
       contributionRewards,
@@ -206,7 +208,7 @@ class ActionButton extends React.Component<IProps, IState> {
       dao: daoState,
       gpRewards,
       id: rewards ? rewards.id : "0",
-      proposal: proposalState,
+      proposal: proposalState
     });
 
     const redeemButtonClass = classNames({

@@ -107,7 +107,10 @@
         "haveAmountStaked": "The amount you have staked will be your reputation in the DAO",
         "holding": "Holdings 0.00% Rep.",
         "getRep": "GET REPUTATION",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "max": "max",
+        "sgtTokens": "SGT Tokens: ",
+        "reputation": "Reputation:"
     },
     "loading": "Loading...",
     "noProfile": "No Profile",
@@ -174,7 +177,8 @@
         "listOfEntities":"List of entities (DAOs and individuals) that have voting power in the DAO",
         "spaceDesignated": "Space designated for general questions, statements and comments",
         "viewYourPersonalFeed": "View your personal feed",
-        "showHide": "Show / hide tooltips on hover"
+        "showHide": "Show / hide tooltips on hover",
+        "regProposalArePassedOrFailed": "Regular proposals are passed or failed via absolute majority over a configured voting period. If enough GEN is staked predicting they will pass, they can move to the pending and then boosted queues."
 
     },
     "account": {
@@ -295,7 +299,7 @@
         "noUpcomingProp": "No upcoming proposals",
         "firstOneToCreate": "You can be the first one to create a {{schemeFriendlyName}} proposal today! :)",
         "backToSchema": "Back to schemes",
-        "newProposal": "+ New Proposal",
+        "newProposal": "+ New {{proposal}} Proposal",
         "boostedProposals": "Boosted Proposals ({{num}})",
         "pendingBoostedProposals": "Pending Boosting Proposals ({{num}})",
         "regularProposals": "Regular Proposals ({{num}})",
@@ -393,16 +397,20 @@
         "reputationRewardToSplit": "Reputation Reward to split",
         "externalTokenRewardSplit": "External Token Reward to split",
         "daoTokenRewardToSplit": "DAO token ({{tokenSymbol}}) Reward to split",
-        "submitProposal": "Submit proposal"
+        "submitProposal": "Submit proposal",
+        "activationTime": "Activation Time:",
+        "proposal": "Proposal",
+        "backToDashboard": "Back to dashboard",
+        "backToApp": "Back to applications"
     },
     "proposal": {
         "forStaking": "For staking on the proposal you are due to receive:",
-        "asBounty": "{{genName}} as bounty from {{name}}",
+        "asBounty": " as bounty from ",
         "asBeneficiary": "As the beneficiary of the proposal you are due to receive:",
         "benificiary": "The beneficiary of the proposal is due to receive:",
         "forVoting": "For voting on the proposal you are due to receive:",
         "dueToReceive": "For creating the proposal you are due to receive:",
-        "cannotBeRedeemed": "At this time, none of these rewards can be redeemed -- {{dao.name}} does not hold all the necessary assets.",
+        "cannotBeRedeemed": "At this time, none of these rewards can be redeemed -- {{name}} does not hold all the necessary assets.",
         "someOfThisCanBeRedeemed": "At this time, only some of these rewards can be redeemed -- {{dao.name}} does not hold all the necessary assets.",
         "passed": "Passed",
         "failed": "Failed",
@@ -431,7 +439,7 @@
         "cantChangeYourVOte": "Can't change your vote",
         "requiresReputation": "Requires reputation in this DAO",
         "cantVoteOnExpired": "Can't vote on expired proposals",
-        "cannotVote": "Can't vote on {{'passed' | 'failed'}} proposals",
+        "cannotVote": "Can't vote on {{status}} proposals",
         "noOneHasVotedFor": "No one has voted For",
         "noOneHasVotedAgainst": "No one has voted Against",
         "onFailToUnBoost": "on Fail to un-boost",
@@ -442,7 +450,7 @@
         "preapprove": "Preapprove",
         "cantPredict":"Can't predict on expired proposals",
         "cantPredictOnBoosted": "Can't predict on boosted proposals",
-        "cantPredictOnPassedFailded": "Can't predict on {{ 'passed' | 'failed' }} proposals",
+        "cantPredictOnPassedFailded": "Can't predict on {{status}} proposals",
         "insufGens": "Insufficient GENs",
         "cantChangePrediction": "Can't change your prediction",
         "enablePredictions": "Enable Predictions",
@@ -534,9 +542,15 @@
         "listingFee": "Listing Fee",
         "transFee": "Transaction Fee",
         "paramsToChange": "Parameters you want to change:",
-        "invalidEncoded": "Invalid encoded function call data"
-
-
+        "invalidEncoded": "Invalid encoded function call data",
+        "edit": "Edit",
+        "add": "Add",
+        "scheme": "Scheme",
+        "app": "Application",
+        "enterAppAddr": "Enter application address",
+        "addApplication": "Add Application",
+        "editApp": "Edit Application",
+        "rmApp": "Remove Application"
     },
     "cookieStart": "Alchemy stores cookies on your device to enhance platform experience and analyze platform usage. Please read the&nbsp;",
     "cookieLinkPolicy": "Cookie Policy",
@@ -544,5 +558,6 @@
     "disclaimer": "DISCLAIMER",
     "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
     "iAccept": "I Accept",
-    "fullProfile": "Full Profile"
+    "fullProfile": "Full Profile",
+    "yourReputation": "your reputation: "
 }

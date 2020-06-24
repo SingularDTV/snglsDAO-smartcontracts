@@ -76,7 +76,7 @@ class SchemeInfo extends React.Component<IProps, null> {
     const renderVotingMachineLink = (votingMachine: Address) => {
       if (votingMachine) {
         return <tr>
-          <th><span>Address:</span></th>
+          <th><span>{t("membership.address")}:</span></th>
           <td><span>
             <a href={linkToEtherScan(votingMachine)} target="_blank" rel="noopener noreferrer">{ votingMachine }</a>
           </span></td>
@@ -89,18 +89,18 @@ class SchemeInfo extends React.Component<IProps, null> {
       const activationTime = moment.unix(params.activationTime).utc();
 
       return <tbody>
-        <tr><th><span>Activation Time:</span></th><td className={css.ellipsis}><span>{
+        <tr><th><span>{t("schema.activationTime")}</span></th><td className={css.ellipsis}><span>{
           `${ activationTime.format("h:mm A [UTC] on MMMM Do, YYYY")} ${activationTime.isSameOrBefore(moment()) ? "(active)" : "(inactive)"}`
         }</span></td></tr>
-        <tr><th><span>Boosted Vote Period Limit:</span></th><td><span>{duration(params.boostedVotePeriodLimit)} ({params.boostedVotePeriodLimit} seconds)</span></td></tr>
-        <tr><th><span>DAO Bounty Constant:</span></th><td><span>{params.daoBountyConst}</span></td></tr>
-        <tr><th><span>Proposal Reputation Reward:</span></th><td><span>{fromWei(params.proposingRepReward)} REP</span></td></tr>
-        <tr><th><span>Minimum DAO Bounty:</span></th><td><span>{fromWei(params.minimumDaoBounty)} GEN</span></td></tr>
-        <tr><th><span>Pre-Boosted Vote Period Limit:</span></th><td><span>{duration(params.preBoostedVotePeriodLimit)} ({params.preBoostedVotePeriodLimit} seconds)</span></td></tr>
-        <tr><th><span>Queued Vote Period Limit:</span></th><td><span>{duration(params.queuedVotePeriodLimit)} ({params.queuedVotePeriodLimit} seconds)</span></td></tr>
-        <tr><th><span>Queued Vote Required:</span></th><td><span>{params.queuedVoteRequiredPercentage}%</span></td></tr>
-        <tr><th><span>Quiet Ending Period:</span></th><td><span>{duration(params.quietEndingPeriod)} ({params.quietEndingPeriod} seconds)</span></td></tr>
-        <tr><th><span>Threshold Constant</span></th><td><span>
+        <tr><th><span>{t("schema.boostedVotePeriodLimit", {secondes: params.boostedVotePeriodLimit})}</span></th><td><span>{duration(params.boostedVotePeriodLimit)} ({params.boostedVotePeriodLimit} seconds)</span></td></tr>
+        <tr><th><span>{t("schema.daoBountyConstant")}</span></th><td><span>{params.daoBountyConst}</span></td></tr>
+        <tr><th><span>{t("schema.proposalReward")}</span></th><td><span>{fromWei(params.proposingRepReward)} REP</span></td></tr>
+        <tr><th><span>{t("schema.minDaoBounty")}</span></th><td><span>{fromWei(params.minimumDaoBounty)} GEN</span></td></tr>
+        <tr><th><span>{t("schema.preBoostedVotePeriod")}</span></th><td><span>{duration(params.preBoostedVotePeriodLimit)} ({params.preBoostedVotePeriodLimit} seconds)</span></td></tr>
+        <tr><th><span>{t("schema.votePeriodLimit")}</span></th><td><span>{duration(params.queuedVotePeriodLimit)} ({params.queuedVotePeriodLimit} seconds)</span></td></tr>
+        <tr><th><span>{t("schema.voteRequired")}</span></th><td><span>{params.queuedVoteRequiredPercentage}%</span></td></tr>
+        <tr><th><span>{t("schema.endingPeriod")}</span></th><td><span>{duration(params.quietEndingPeriod)} ({params.quietEndingPeriod} seconds)</span></td></tr>
+        <tr><th><span>{t("schema.thresholdConstant")}</span></th><td><span>
           <Tooltip
             placement="top"
             overlay={
@@ -111,7 +111,7 @@ class SchemeInfo extends React.Component<IProps, null> {
             <span>{roundUp(params.thresholdConst, 3).toString()}</span>
           </Tooltip>
         </span></td></tr>
-        <tr><th><span>Voters Reputation Loss:</span></th><td><span>{params.votersReputationLossRatio}%</span></td></tr>
+        <tr><th><span>{t("schema.voteRep")}</span></th><td><span>{params.votersReputationLossRatio}%</span></td></tr>
       </tbody>;
     };
 
@@ -122,7 +122,7 @@ class SchemeInfo extends React.Component<IProps, null> {
       (scheme.schemeRegistrarParams && scheme.schemeRegistrarParams.votingMachine)
     );
     return <div>
-      <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/info`}>Info</BreadcrumbsItem>
+      <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/info`}>{t("schema.info")}</BreadcrumbsItem>
 
       <div className={css.schemeInfoContainer}>
         <h3>{schemeName(scheme, scheme.address)}</h3>
@@ -130,14 +130,14 @@ class SchemeInfo extends React.Component<IProps, null> {
         <table className={css.infoCardContent}>
           <tbody>
             <tr>
-                <th><span>Address of plugin: <a href={linkToEtherScan(scheme.address)} target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/Link-blue.svg" /></a></span></th>
+                <th><span>{t("schema.pluginAddr")} <a href={linkToEtherScan(scheme.address)} target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/Link-blue.svg" /></a></span></th>
               <td><span>
                   <div className={css.copyButton}><img src="/assets/images/Icon/t-copy.svg" onClick={this.copyToClipboardHandler(scheme.address)} /></div> <span>{scheme.address}</span>
               </span></td>
             </tr>
             { scheme.genericSchemeParams ?
               <tr>
-                  <th><span>will call this contract: <a href={linkToEtherScan(scheme.genericSchemeParams.contractToCall)} target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/Link-blue.svg" /></a></span></th>
+                  <th><span>{t("schema.willCallThisContract")} <a href={linkToEtherScan(scheme.genericSchemeParams.contractToCall)} target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/Link-blue.svg" /></a></span></th>
                 <td><span>
                   <div className={css.copyButton}><img src="/assets/images/Icon/t-copy.svg" onClick={this.copyToClipboardHandler(scheme.genericSchemeParams.contractToCall)} /></div> <span>{scheme.genericSchemeParams.contractToCall}</span>
                 </span></td>
@@ -145,7 +145,7 @@ class SchemeInfo extends React.Component<IProps, null> {
             }
             { scheme.uGenericSchemeParams ?
               <tr>
-                  <th><span>will call this contract: <a href={linkToEtherScan(scheme.uGenericSchemeParams.contractToCall)} target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/Link-blue.svg" /></a></span></th>
+                  <th><span>{t("schema.willCallThisContract")} <a href={linkToEtherScan(scheme.uGenericSchemeParams.contractToCall)} target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/Link-blue.svg" /></a></span></th>
                 <td><span>
                   <div className={css.copyButton}><img src="/assets/images/Icon/t-copy.svg" onClick={this.copyToClipboardHandler(scheme.uGenericSchemeParams.contractToCall)} /></div> <span>{scheme.uGenericSchemeParams.contractToCall}</span>
                 </span></td>
@@ -153,37 +153,37 @@ class SchemeInfo extends React.Component<IProps, null> {
             }
 
             <tr>
-              <th><span>Param Hash:</span></th>           
+              <th><span>{t('schema.paramHash')}:</span></th>           
               <td><span>
                 <div className={css.copyButton}><img src="/assets/images/Icon/t-copy.svg" onClick={this.copyToClipboardHandler(scheme.paramsHash)} /></div> <span>{scheme.paramsHash}</span>
               </span></td>
             </tr>
             <tr>
-              <th><span>Can Register Application?</span></th>
+              <th><span>{t('schema.canRegisterApp')}</span></th>
               <td><span>
                 {scheme.canRegisterSchemes ? "Yes" : "No"}
               </span></td>
             </tr>
             <tr>
-              <th><span>Can Upgrade Controller?</span></th>
+              <th><span>{t('schema.canUpgradeController')}</span></th>
               <td><span>
                 {scheme.canUpgradeController ? "Yes" : "No"}
               </span></td>
             </tr>
             <tr>
-              <th><span>Can Delegate Call?</span></th>
+              <th><span>{t('schema.canManageGlobal')}</span></th>
               <td><span>
                 {scheme.canDelegateCall ? "Yes" : "No"}
               </span></td>
             </tr>
             <tr>
-              <th><span>Can Manage Global Constraints?</span></th>
+              <th><span>{t('schema.canDelegateCall')}</span></th>
               <td><span>
                 {scheme.canManageGlobalConstraints ? "Yes" : "No"}
               </span></td>
             </tr>
             <tr>
-              <th><span>Can Mint or Burn Reputation?</span></th>
+              <th><span>{t('schema.canMintOrBurn')}</span></th>
               <td><span>Yes</span></td>
             </tr>
           </tbody>
@@ -193,7 +193,7 @@ class SchemeInfo extends React.Component<IProps, null> {
 
       {scheme.contributionRewardParams || scheme.genericSchemeParams ?
         <div className={css.schemeInfoContainer}>
-          <h3>Genesis Protocol Params - <a href="https://daostack.zendesk.com/hc/en-us/articles/360002000537" target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/leanMore.svg" onClick={this.copyToClipboardHandler(scheme.address)} /></a></h3>
+          <h3>{t('schema.genesisProtocolParams')}<a href="https://daostack.zendesk.com/hc/en-us/articles/360002000537" target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/leanMore.svg" onClick={this.copyToClipboardHandler(scheme.address)} /></a></h3>
           <div className={css.schemeInfoContainerTable}>
           <table className={css.infoCardContent}>
             {renderVotingMachineLink(votingMachine)}
@@ -205,7 +205,7 @@ class SchemeInfo extends React.Component<IProps, null> {
       }
       { scheme.uGenericSchemeParams ?
         <div className={css.schemeInfoContainer}>
-          <h3>Genesis Protocol Params - <a href="https://daostack.zendesk.com/hc/en-us/articles/360002000537" target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/leanMore.svg" onClick={this.copyToClipboardHandler(scheme.address)} /></a></h3>
+          <h3>{t('schema.genesisProtocolParams')} <a href="https://daostack.zendesk.com/hc/en-us/articles/360002000537" target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/leanMore.svg" onClick={this.copyToClipboardHandler(scheme.address)} /></a></h3>
           <div className={css.schemeInfoContainerTable}>
           <table className={css.infoCardContent}>
             {renderVotingMachineLink(votingMachine)}
@@ -218,7 +218,7 @@ class SchemeInfo extends React.Component<IProps, null> {
 
       {scheme.schemeRegistrarParams ?
         <div className={css.schemeInfoContainer}>
-          <h3>Genesis Protocol Params for Plugin Registration - <a href="https://daostack.zendesk.com/hc/en-us/articles/360002000537" target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/leanMore.svg" onClick={this.copyToClipboardHandler(scheme.address)} /></a></h3>
+          <h3>{t('schema.genesisProtocolParams')} <a href="https://daostack.zendesk.com/hc/en-us/articles/360002000537" target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/leanMore.svg" onClick={this.copyToClipboardHandler(scheme.address)} /></a></h3>
           <div className={css.schemeInfoContainerTable}>
           <table className={css.infoCardContent}>
             {renderVotingMachineLink(votingMachine)}
@@ -231,7 +231,7 @@ class SchemeInfo extends React.Component<IProps, null> {
 
       {scheme.schemeRegistrarParams ?
         <div className={css.schemeInfoContainer}>
-          <h3>Genesis Protocol Params for Plugin Removal - <a href="https://daostack.zendesk.com/hc/en-us/articles/360002000537" target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/leanMore.svg" onClick={this.copyToClipboardHandler(scheme.address)} /></a></h3>
+          <h3>{t('schema.genProtForPlugRemoval')}<a href="https://daostack.zendesk.com/hc/en-us/articles/360002000537" target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/leanMore.svg" onClick={this.copyToClipboardHandler(scheme.address)} /></a></h3>
           <div className={css.schemeInfoContainerTable}>
           <table className={css.infoCardContent}>
             {renderVotingMachineLink(votingMachine)}

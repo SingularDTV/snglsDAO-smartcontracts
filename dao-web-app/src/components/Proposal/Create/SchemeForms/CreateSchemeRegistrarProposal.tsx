@@ -216,19 +216,20 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
           { isAddActive ?
             <button className={addSchemeButtonClass} onClick={this.handleTabClick("addScheme")} data-test-id="tab-AddScheme">
               <span></span>
-              Add Application
+              {t('proposal.addApplication')}
             </button>
             : "" }
           { isAddActive ?
             <button className={editSchemeButtonClass} onClick={this.handleTabClick("editScheme")} data-test-id="tab-EditScheme">
               <span></span>
-              Edit Application
+              {t('proposal.editApp')}
+
             </button>
             : "" }
           { isRemoveActive ?
             <button className={removeSchemeButtonClass} onClick={this.handleTabClick("removeScheme")} data-test-id="tab-RemoveScheme">
               <span></span>
-            Remove Application
+              {t('proposal.rmApp')}
             </button>
             : "" }
         </div>
@@ -274,7 +275,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
               }
 
               if (!isValidUrl(values.url)) {
-                errors.url = "Invalid URL";
+                errors.url = t('errors.invalidUrl');;
               }
 
               return errors;
@@ -291,18 +292,18 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
             }: FormikProps<IFormValues>) => {
               return (
                 <Form noValidate>
-                  <label className={css.description}>What to Expect</label>
+                  <label className={css.description}>{t("schema.whatToExpect")}</label>
                   { (currentTab === "addScheme") ?
-                    <div className={css.description}>Propose to add a new application to the DAO. If this application is a universal scheme, you must also supply its param hash configuration.</div> :
+                    <div className={css.description}>{t("schema.proposeToAddNewApplication")}</div> :
                     (currentTab === "editScheme") ?
-                      <div className={css.description}>Propose to edit param hash configuration of an application.</div> :
+                      <div className={css.description}>{t("schema.proposeToEditParamHash")}</div> :
                       (currentTab === "removeScheme") ?
-                        <div className={css.description}>Propose to remove an application from the DAO.</div> : ""
+                        <div className={css.description}>{t("schema.proposeToRemove")}</div> : ""
                   }
-                  <TrainingTooltip overlay="The title is the header of the proposal card and will be the first visible information about your proposal" placement="right">
+                  <TrainingTooltip overlay={t("tooltips.theTitleIsTHeHeaderOfTheProposal")} placement="right">
                     <label htmlFor="titleInput">
                       <div className={css.requiredMarker}>*</div>
-                    Title
+                      {t("dashboard.title")}
                       <ErrorMessage name="title">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                     </label>
                   </TrainingTooltip>
@@ -310,7 +311,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                     autoFocus
                     id="titleInput"
                     maxLength={120}
-                    placeholder="Summarize your proposal"
+                    placeholder={t('proposal.summarizeYourProposal')}
                     name="title"
                     type="text"
                     className={touched.title && errors.title ? css.error : null}
@@ -319,7 +320,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                   <TrainingTooltip overlay={fnDescription} placement="right">
                     <label htmlFor="descriptionInput">
                       <div className={css.requiredMarker}>*</div>
-                    Description
+                      {t('account.desc')}
                       <img className={css.infoTooltip} src="/assets/images/Icon/Info.svg"/>
                       <ErrorMessage name="description">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                     </label>
@@ -333,9 +334,9 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                     className={touched.description && errors.description ? css.error : null}
                   />
 
-                  <TrainingTooltip overlay="Add some tags to give context about your proposal e.g. idea, signal, bounty, research, etc" placement="right">
+                  <TrainingTooltip overlay={t("tooltips.addSomeTags")} placement="right">
                     <label className={css.tagSelectorLabel}>
-                    Tags
+                    {t("schema.tags")}
                     </label>
                   </TrainingTooltip>
 
@@ -343,16 +344,16 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                     <TagsSelector onChange={this.onTagsChange} tags={this.state.tags}></TagsSelector>
                   </div>
 
-                  <TrainingTooltip overlay="Link to the fully detailed description of your proposal" placement="right">
+                  <TrainingTooltip overlay={t("tooltips.linkToTheFullyDetailedDesc")} placement="right">
                     <label htmlFor="urlInput">
-                    URL
+                    {t("schema.url")}
                       <ErrorMessage name="url">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                     </label>
                   </TrainingTooltip>
                   <Field
                     id="urlInput"
                     maxLength={120}
-                    placeholder="Description URL"
+                    placeholder={t("proposal.descriptionUrl")} 
                     name="url"
                     type="text"
                     className={touched.url && errors.url ? css.error : null}
@@ -362,12 +363,12 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                     <div className={css.addSchemeSelectContainer}>
                       <label htmlFor="schemeToAddInput">
                         <div className={css.requiredMarker}>*</div>
-                        Application
+                        {t("proposal.app")}
                         <ErrorMessage name="schemeToAdd">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                       </label>
                       <Field
                         id="schemeToAddInput"
-                        placeholder="Enter application address"
+                        placeholder={t("proposal.enterAppAddr")}
                         name="schemeToAdd"
                         onChange={(e: any) => {
                           // call the built-in handleChange
@@ -380,7 +381,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                     <div className={css.editSchemeSelectContainer}>
                       <label htmlFor="schemeToEditInput">
                         <div className={css.requiredMarker}>*</div>
-                        Application
+                        {t("proposal.app")}
                         <ErrorMessage name="schemeToEdit">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                       </label>
                       <Field
@@ -394,7 +395,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                           this.handleChangeScheme(e);
                         }}
                       >
-                        <option value="">Select an application...</option>
+                        <option value="">{t("proposal.selectAnApp")}</option>
                         {schemes.map((scheme, _i) => {
                           return <option key={`edit_scheme_${scheme.staticState.address}`} value={scheme.staticState.address}>{schemeNameAndAddress(scheme.staticState.address)}</option>;
                         })}
@@ -404,7 +405,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                     <div className={css.parametersHash}>
                       <label htmlFor="parametersHashInput">
                         <div className={css.requiredMarker}>*</div>
-                        Parameters Hash
+                        {t("schema.paramHash")}
                         <ErrorMessage name="parametersHash">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                       </label>
                       <Field
@@ -416,7 +417,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                     </div>
                     <div className={css.permissions}>
                       <div className={css.permissionsLabel}>
-                        Permissions
+                        {t("proposal.permissions")}
                       </div>
                       <div className={css.permissionCheckbox}>
                         <Field
@@ -427,7 +428,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                           disabled={requiredPermissions & SchemePermissions.CanRegisterSchemes}
                         />
                         <label htmlFor="registerOtherSchemesInput">
-                          Register other applications
+                        {t("proposal.registerOtherSchemes")}
                         </label>
                       </div>
 
@@ -440,7 +441,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                           disabled={requiredPermissions & SchemePermissions.CanAddRemoveGlobalConstraints}
                         />
                         <label htmlFor="changeConstraintsInput">
-                          Add/remove global constraints
+                          {t('proposal.addRemoveGlobalConst')}
                         </label>
                       </div>
 
@@ -453,7 +454,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                           disabled={requiredPermissions & SchemePermissions.CanUpgradeController}
                         />
                         <label htmlFor="upgradeControllerInput">
-                          Upgrade the controller
+                        {t('proposal.upgradeTheController')}
                         </label>
                       </div>
 
@@ -466,7 +467,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                           disabled={requiredPermissions & SchemePermissions.CanCallDelegateCall}
                         />
                         <label htmlFor="genericCallInput">
-                          Call genericCall on behalf of
+                        {t('proposal.callGenericCall')}
                         </label>
                       </div>
                     </div>
@@ -476,7 +477,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                     <div className={css.removeSchemeSelectContainer}>
                       <label htmlFor="schemeToRemoveInput">
                         <div className={css.requiredMarker}>*</div>
-                        Application
+                        {t('proposal.app')}
                         <ErrorMessage name="schemeToRemove">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                       </label>
                       <Field
@@ -485,7 +486,7 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                         component="select"
                         className={css.schemeSelect}
                       >
-                        <option value="">Select an application...</option>
+                        <option value="">{t('proposal.selectAnApp')}</option>
                         {schemes.map((scheme, _i) => {
                           return <option key={`remove_scheme_${scheme.staticState.address}`} value={scheme.staticState.address}>{schemeNameAndAddress(scheme.staticState.address)}</option>;
                         })}
@@ -494,17 +495,17 @@ class CreateSchemeRegistrarProposal extends React.Component<IProps, IState> {
                   </div>
 
                   <div className={css.createProposalActions}>
-                    <TrainingTooltip overlay="Export proposal" placement="top">
+                    <TrainingTooltip overlay={t('tooltips.exportProposal')}  placement="top">
                       <button id="export-proposal" className={css.exportProposal} type="button" onClick={() => this.exportFormValues(values)}>
                         <img src="/assets/images/Icon/share-blue.svg" />
                       </button>
                     </TrainingTooltip>
                     <button className={css.exitProposalCreation} type="button" onClick={handleClose}>
-                      Cancel
+                    {t('daojoin.cancel')}
                     </button>
-                    <TrainingTooltip overlay="Once the proposal is submitted it cannot be edited or deleted" placement="top">
+                    <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
                       <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
-                      Submit proposal
+                      {t('schema.submitProposal')}
                       </button>
                     </TrainingTooltip>
                   </div>
