@@ -18,14 +18,19 @@ const ThreeBoxMessageList =({  author, message, timestamp}: ThreeBoxMessageListP
   const [profile, setProfile]= useState(null);
 
   useEffect(()=>{
-    const person = getProfile(author)
-    setProfile(person)
+    onGetProfile()
   }, [])
 
+  const onGetProfile = async () => {
+    const person = await getProfile(author)
+    setProfile(person)
+  }
+
+  console.log('profile', profile)
   return profile && (<Comment
     author={profile.name}
     avatar={<Avatar style={{ verticalAlign: 'middle' }} size="large" gap={3}>
-      Test
+      {profile.name}
     </Avatar>}
     content={
       <p>{message}</p>

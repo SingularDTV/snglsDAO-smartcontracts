@@ -1,6 +1,6 @@
 $header-height: 100px;
 
-
+//@import '~antd/dist/antd.css';
 // Add google fonts
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -174,7 +174,7 @@ h4 {
 }
 
 .header {
-  width: calc(100% - 140px);
+  width: 100%;
   position: fixed;
   vertical-align: middle;
   background-color: $navy;
@@ -1003,7 +1003,6 @@ h4 {
 @media (max-width: 1580px) {
   .header {
     padding: 0 48px;
-    width: calc(100% - 96px);
   }
 }
 

@@ -4,7 +4,7 @@ import { useEffect, useState} from "react";
 // import { Comment, Tooltip, List } from 'antd';
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
-import * as css from "../Dao.scss";
+// import * as css from "../Dao.scss";
 // import Box = require("3box");
 import { IProfileState } from "reducers/profilesReducer";
 
@@ -49,9 +49,9 @@ const ThreeBoxTreadPage = ({ currentAccountAddress, threeBox }: IProps) => {
       <BreadcrumbsItem to={"/dao/discussion"}>Discussion</BreadcrumbsItem>
 
       {/* <Sticky enabled top={50} innerZ={10000}> */}
-      <div className={css.daoHistoryHeader}>
+      <h2 style={{ textAlign: "center", color:'black'}}>
         Common Discuss
-      </div>
+      </h2>
       {!web3Provider
         ? <h3>Please connect to wallet</h3>
         : !threeBox

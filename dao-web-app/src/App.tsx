@@ -12,6 +12,7 @@ import { ConnectedRouter } from "react-router-redux";
 import { ThroughProvider } from "react-through";
 import { history, default as store } from "./configureStore";
 
+import 'antd/dist/antd.css'
 import * as css from "./layouts/App.scss";
 
 export class App extends React.Component<{}, {
