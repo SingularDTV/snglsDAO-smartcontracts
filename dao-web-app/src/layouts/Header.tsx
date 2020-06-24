@@ -96,17 +96,25 @@ type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps
 
 function LangSwitcher() {
   const { i18n } = useTranslation();
-
+  const [lang, setLang] = React.useState("ENG")
+  const langs = [{ title:"ENG", key: "en" }, {title: "T Chin", key: "tchin" }, { title:"S Chin", key: "schin"  } ]
   const changeLanguage = (lng: any) => {
     i18n.changeLanguage(lng);
   };
+  const setLanguage = (it: any) => {
+    changeLanguage(it.key);
+    setLang(it.title);
+  }
 
   return (
-    <select onChange={event => changeLanguage(event.target.value)}>
-      <option value={'en'}>Eng</option>
-      <option value={'tchin'}>T Chin</option>
-      <option value={'schin'}>S Chin</option>
-    </select>
+      <li className={css.submenu + ' ' + css.langSelector}>
+          <span className={css.menu__link}>{lang}</span>
+          <ul>
+            {langs.filter((it: any)=> it.title !== lang).map((it: any)=> (
+              <li onClick={() => setLanguage(it)}><a href="#">{it.title}</a></li>
+            ))}
+          </ul>
+      </li>
   );
 }
 
@@ -290,13 +298,7 @@ class Header extends React.Component<IProps, null> {
                 </svg>{t('header.git')}</a></li>
                 <LangSwitcher/>
 
-                <li className={css.submenu + ' ' + css.langSelector}>
-                    <span className={css.menu__link}>ENG</span>
-                    <ul>
-                        <li><a href="#">Eng</a></li>
-                        <li><a href="#">Chin</a></li>
-                    </ul>
-                </li>
+
                 
               </ul>
             </div>
