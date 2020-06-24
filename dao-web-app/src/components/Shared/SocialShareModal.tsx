@@ -3,6 +3,8 @@ import { copyToClipboard } from "lib/util";
 import * as React from "react";
 import Tooltip from "rc-tooltip";
 import * as css from "./SocialShareModal.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IState {
   showCopiedFeedback: boolean;
@@ -13,7 +15,7 @@ interface IProps {
   url: string;
 }
 
-export default class SocialShareModal extends React.Component<IProps, IState> {
+class SocialShareModal extends React.Component<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
@@ -63,6 +65,8 @@ export default class SocialShareModal extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     return (
       <ModalPopup
         width={318}
@@ -97,3 +101,6 @@ export default class SocialShareModal extends React.Component<IProps, IState> {
     );
   }
 }
+
+//@ts-ignore
+export default withTranslation()(SocialShareModal)

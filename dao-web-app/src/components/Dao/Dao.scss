@@ -219,6 +219,17 @@ a {
   margin: 10px auto;
   max-width: 1230px;
 
+  span {
+    &.reputationBalance {
+      text-align: center;
+      color: #fff;
+      display: block;
+      padding-top: 5px;
+      font-family: Montserrat;
+      font-size: 14px;
+    }
+  }
+
 
   h4 {
     margin-bottom: 20px;

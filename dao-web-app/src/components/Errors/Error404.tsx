@@ -2,8 +2,11 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import * as appCss from "../../layouts/App.scss";
 import * as css from "./Errors.scss";
+import { withTranslation } from 'react-i18next';
 
-export default class Error404 extends React.PureComponent {
+
+
+class Error404 extends React.PureComponent {
 
   constructor(props: any) {
     super(props);
@@ -13,14 +16,16 @@ export default class Error404 extends React.PureComponent {
   }
 
   render() {
+    //@ts-ignore
+    const { t } = this.props;
     return (
       <div className={css.errorContainer}>
         <nav className={appCss.header}>
           <div>
             <div className={appCss.menu}>
-              <Link to="/"><img src="/assets/images/alchemy-logo-white.svg"/></Link>
+              <Link to="/"><img src="/assets/images/logo.svg"/></Link>
             </div>
-            <div className={appCss.topInfo}>Alchemy</div>
+            {/* <div className={appCss.topInfo}>Alchemy</div> */}
           </div>
         </nav>
         <div className={css.content}>
@@ -37,3 +42,5 @@ export default class Error404 extends React.PureComponent {
     );
   }
 }
+
+export default withTranslation()(Error404)

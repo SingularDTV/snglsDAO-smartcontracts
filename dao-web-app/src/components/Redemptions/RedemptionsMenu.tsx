@@ -18,6 +18,8 @@ import { IProfileState } from "reducers/profilesReducer";
 import { combineLatest, concat, Observable, of } from "rxjs";
 import { defaultIfEmpty, map, mergeMap } from "rxjs/operators";
 import * as css from "./RedemptionsMenu.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps {
   redeemableProposals: any[];
@@ -205,5 +207,5 @@ const SubscribedMenuItemContent = withSubscription({
 });
 
 const ConnectedMenuItemContent = connect(mapStateToItemContentProps, null)(SubscribedMenuItemContent);
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedRedemptionsMenu);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedRedemptionsMenu));

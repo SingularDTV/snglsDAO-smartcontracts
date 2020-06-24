@@ -14,6 +14,7 @@ import * as css from "components/Proposal/Create/CreateProposal.scss";
 import MarkdownField from "components/Proposal/Create/SchemeForms/MarkdownField";
 import { checkTotalPercent } from "lib/util";
 import * as Datetime from "react-datetime";
+import { withTranslation } from 'react-i18next';
 
 import moment = require("moment");
 import BN = require("bn.js");
@@ -181,6 +182,8 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
   private fnDescription = (<span>Short description of the proposal.<ul><li>What are you proposing to do?</li><li>Why is it important?</li><li>How much will it cost the DAO?</li><li>When do you plan to deliver the work?</li></ul></span>);
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { data, handleClose } = this.props;
 
     if (!data) {
@@ -637,5 +640,5 @@ const SubscribedCreateContributionRewardExProposal = withSubscription({
     return arc.dao(props.daoAvatarAddress).state();
   },
 });
-
-export default connect(null, mapDispatchToProps)(SubscribedCreateContributionRewardExProposal);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(SubscribedCreateContributionRewardExProposal));

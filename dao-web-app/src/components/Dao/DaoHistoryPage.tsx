@@ -13,6 +13,8 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { first } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
+import { withTranslation } from 'react-i18next';
+
 
 const PAGE_SIZE = 50;
 
@@ -27,7 +29,6 @@ type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
 class DaoHistoryPage extends React.Component<IProps, null> {
 
   public componentDidMount() {
-    console.log("HISTORY componentDidMount <<<<<<<<<<<==============================")
     Analytics.track("Page View", {
       "Page Name": Page.DAOHistory,
       "DAO Address": "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f",
@@ -37,8 +38,9 @@ class DaoHistoryPage extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
     const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
+    //@ts-ignore
+    const { t } = this.props;
 
-    console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
 
 
     const proposals = data;
@@ -96,7 +98,7 @@ class DaoHistoryPage extends React.Component<IProps, null> {
   }
 }
 
-export default withSubscription({
+const DaoHistoryWithSubscription = withSubscription({
   wrappedComponent: DaoHistoryPage,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -183,3 +185,5 @@ export default withSubscription({
     );
   },
 });
+//@ts-ignore
+export default withTranslation()(DaoHistoryWithSubscription)

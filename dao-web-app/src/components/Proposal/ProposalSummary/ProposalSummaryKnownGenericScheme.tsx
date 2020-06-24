@@ -8,6 +8,8 @@ import * as css from "./ProposalSummary.scss";
 import ProposalSummaryDutchX from "./ProposalSummaryDutchX";
 import ProposalSummaryStandardBounties from "./ProposalSummaryStandardBounties";
 import ProposalSummaryCO2ken from "./ProposalSummaryCO2ken";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   beneficiaryProfile?: IProfileState;
@@ -18,7 +20,7 @@ interface IProps {
   genericSchemeInfo: GenericSchemeInfo;
 }
 
-export default class ProposalSummary extends React.Component<IProps> {
+class ProposalSummary extends React.Component<IProps> {
 
   constructor(props: IProps) {
     super(props);
@@ -29,6 +31,8 @@ export default class ProposalSummary extends React.Component<IProps> {
 
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { proposal, detailView, transactionModal, genericSchemeInfo } = this.props;
     if (genericSchemeInfo.specs.name === "DutchX") {
       return <ProposalSummaryDutchX {...this.props} />;
@@ -82,3 +86,5 @@ export default class ProposalSummary extends React.Component<IProps> {
     </div>;
   }
 }
+//@ts-ignore
+export default withTranslation()(ProposalSummary)

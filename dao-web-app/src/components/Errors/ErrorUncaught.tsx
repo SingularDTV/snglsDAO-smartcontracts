@@ -3,6 +3,9 @@ import { showReportDialog } from "@sentry/browser";
 import { Link } from "react-router-dom";
 import * as appCss from "../../layouts/App.scss";
 import * as css from "./Errors.scss";
+import { withTranslation } from 'react-i18next';
+
+
 
 interface IExternalProps {
   errorMessage: string;
@@ -10,24 +13,26 @@ interface IExternalProps {
   goHome?: () => void;
 }
 
-export default class ErrorUncaught extends React.PureComponent<IExternalProps> {
+class ErrorUncaught extends React.PureComponent<IExternalProps> {
   handleReport = () => {
     showReportDialog({ eventId: this.props.sentryEventId });
   }
 
   render() {
+    //@ts-ignore
+    const { t } = this.props;
     return (
       <div className={css.errorContainer}>
         <nav className={appCss.header}>
           <div>
             <div className={appCss.menu}>
               { this.props.goHome ?
-                <Link to="/"><img onClick={this.props.goHome} src="/assets/images/alchemy-logo-white.svg"/></Link>
+                <Link to="/"><img onClick={this.props.goHome} src="/assets/images/logo.svg"/></Link>
                 :
-                <img src="/assets/images/alchemy-logo-white.svg"/>
+                <img src="/assets/images/logo.svg"/>
               }
             </div>
-            <div className={appCss.topInfo}>Alchemy</div>
+            {/* <div className={appCss.topInfo}>Alchemy</div> */}
           </div>
         </nav>
         <div className={css.content}>
@@ -45,3 +50,5 @@ export default class ErrorUncaught extends React.PureComponent<IExternalProps> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(ErrorUncaught)

@@ -4,6 +4,8 @@ import { linkToEtherScan } from "lib/util";
 import * as React from "react";
 import { IProfileState } from "reducers/profilesReducer";
 import * as css from "./ProposalSummary.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   beneficiaryProfile?: IProfileState;
@@ -17,13 +19,15 @@ interface IProps {
 interface IState {
 }
 
-export default class ProposalSummary extends React.Component<IProps, IState> {
+class ProposalSummary extends React.Component<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { proposal, detailView, transactionModal } = this.props;
     const proposalSummaryClass = classNames({
       [css.detailView]: detailView,
@@ -44,3 +48,5 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(ProposalSummary)

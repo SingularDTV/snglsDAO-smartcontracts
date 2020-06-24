@@ -3,6 +3,8 @@ import Reputation from "components/Account/Reputation";
 import { baseTokenName, formatTokens, fromWei, genName, tokenDecimals, tokenSymbol, AccountClaimableRewardsType } from "lib/util";
 import * as React from "react";
 import * as css from "components/Shared/PreTransactionModal.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   canRewardNone: boolean;
@@ -16,7 +18,9 @@ interface IProps {
   proposal: IProposalState;
 }
 
-export default (props: IProps) => {
+const RedemptionsTip: any = (props: IProps) => {
+  //@ts-ignore
+  const { t } = props;
   const { canRewardNone, canRewardOnlySome, currentAccountAddress, contributionRewards, dao, gpRewards, id, proposal } = props;
 
   const messageDiv = (canRewardNone || canRewardOnlySome) ? <div className={css.message}>
@@ -109,3 +113,5 @@ export default (props: IProps) => {
     { ContributionRewardDiv }
   </div>;
 };
+//@ts-ignore
+export default withTranslation()(RedemptionsTip)

@@ -9,6 +9,8 @@ import { getArc } from "arc";
 import { CompetitionStatusEnum, CompetitionStatus } from "./utils";
 import Card from "./Card";
 import * as css from "./Competitions.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps {
   daoState: IDAOState;
@@ -82,7 +84,8 @@ class CompetitionsList extends React.Component<IProps, IStateProps> {
 
 
   public render(): RenderOutput {
-
+    //@ts-ignore
+    const { t } = this.props;
     const { daoState, scheme, proposals} = this.props;
     // const daoAvatarAddress = daoState.address;
 
@@ -102,7 +105,7 @@ class CompetitionsList extends React.Component<IProps, IStateProps> {
   }
 }
 
-export default withSubscription({
+const CompetitionsListWithSub = withSubscription({
   wrappedComponent: CompetitionsList,
   loadingComponent: null,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -148,3 +151,5 @@ export default withSubscription({
   },
 });
 
+//@ts-ignore
+export default withSubscription()(withTranslation()(CompetitionsListWithSub))

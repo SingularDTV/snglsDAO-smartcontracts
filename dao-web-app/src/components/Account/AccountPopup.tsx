@@ -12,6 +12,9 @@ import { connect } from "react-redux";
 import { IRootState } from "reducers";
 import { NotificationStatus, showNotification } from "reducers/notifications";
 import { IProfileState } from "reducers/profilesReducer";
+import { withTranslation } from 'react-i18next';
+
+
 
 import BN = require("bn.js");
 
@@ -67,6 +70,8 @@ class AccountPopup extends React.Component<IProps, null> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const accountInfo = this.props.data;
     const { accountAddress, daoState, profile, width } = this.props;
     const reputation = accountInfo ? accountInfo.reputation : new BN(0);
@@ -132,5 +137,5 @@ const SubscribedAccountPopup = withSubscription({
     return props.daoState.dao.member(props.accountAddress).state({ fetchPolicy: "cache-only"});
   },
 });
-
-export default SubscribedAccountPopup;
+//@ts-ignore
+export default withTranslation()(SubscribedAccountPopup);

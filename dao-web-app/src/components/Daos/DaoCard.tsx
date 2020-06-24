@@ -7,6 +7,8 @@ import * as moment from "moment";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import * as css from "./Daos.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps {
   dao: DAO;
@@ -16,6 +18,8 @@ type IProps = IExternalProps & ISubscriptionProps<IDAOState>
 
 
 const DaoCard = (props: IProps) => {
+  //@ts-ignore
+  const { t } = this.props;
   const { dao } = props;
   const daoState = props.data;
   const bgPattern = generate(dao.id + daoState.name);
@@ -72,7 +76,7 @@ const DaoCard = (props: IProps) => {
   );
 };
 
-export default withSubscription({
+const DaoCardWithSub = withSubscription({
   wrappedComponent: DaoCard,
   loadingComponent: null,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -86,3 +90,5 @@ export default withSubscription({
     return dao.state();
   },
 });
+//@ts-ignore
+export default withTranslation()(DaoCardWithSub)
