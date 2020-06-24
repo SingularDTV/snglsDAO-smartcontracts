@@ -2,6 +2,7 @@
     "orgName": "snglsDAO",
     "tokenName": "snglsDAO Governance Token",
     "tokenSymbol": "SGT",
+    "tokenAddress": "0xFD22ac4045A030C280d4054AE6189FBF4E244B39",
     "SchemeRegistrar": [
         {
             "voteRegisterParams": 1,
@@ -39,7 +40,7 @@
             "fromArc": false,
             "constructor": false,
             "params": [
-                "0xC186d4D61D1e74Bf686616049b7672e2aE573C3F",
+                "0xD681ED86eBa1b64086BF532e8b88c5bE3b74cb93",
                 "0"
             ]
         }
@@ -122,23 +123,7 @@
         "UGenericScheme": true
     },
     "unregisterOwner": true,
-    "useDaoCreator": true,
+    "useDaoCreator": false,
     "useUController": false,
-    "founders": [
-        {
-            "address": "0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956",
-            "tokens": 1000000000,
-            "reputation": 0
-        },
-        {
-            "address": "0x3819a7547B9eC89B74bE1035BfE33c1fDD871EC0",
-            "tokens": 0,
-            "reputation": 0
-        },
-        {
-            "address": "0x1D21686ae41be46f34eCDC0879577FC3781EB433",
-            "tokens": 0,
-            "reputation": 0
-        }
-    ]
+    "founders": []
 }

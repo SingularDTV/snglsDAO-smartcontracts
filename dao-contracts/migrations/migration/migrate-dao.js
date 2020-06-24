@@ -247,6 +247,7 @@ async function migrateDAO({
       deploymentState.Controller = controller.options.address
     }
   } else {
+    deploymentState.DAOToken = migrationParams.tokenAddress;
     if (deploymentState.DAOToken === undefined) {
       let {
         receipt,
@@ -386,7 +387,7 @@ async function migrateDAO({
         opts
       )
       tx = (await sendTx(getArcVersionNumber(arcVersion) >= 32 ?
-        await daoTracker.methods.track(avatar.options.address, deploymentState.Controller, arcVersion) :
+        await daoTracker.methods.track(avatar.options.address, deploymentState.Controller, "") :
         await daoTracker.methods.track(avatar.options.address, deploymentState.Controller), 'Registering DAO in DAOTracker')).receipt
       await logTx(tx, 'Finished Registering DAO in DAOTracker')
       deploymentState.trackedDAO = true
@@ -408,8 +409,8 @@ async function migrateDAO({
     }
 
     if (deploymentState.transferredDAOTokenOwnership !== true) {
-      tx = (await sendTx(daoToken.methods.transferOwnership(deploymentState.Controller), 'Transfer DAOToken to Controller ownership')).receipt
-      await logTx(tx, 'Finished transferring DAOToken to Controller ownership')
+      // tx = (await sendTx(daoToken.methods.transferOwnership(deploymentState.Controller), 'Transfer DAOToken to Controller ownership')).receipt
+      // await logTx(tx, 'Finished transferring DAOToken to Controller ownership')
       deploymentState.transferredDAOTokenOwnership = true
       setState(deploymentState, network)
     }
