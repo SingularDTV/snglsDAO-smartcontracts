@@ -7,12 +7,15 @@ const rinkebyEnv = "../config/private.env";
 const destEnv = "../.env";
 const rinkebyAirdropOptions = "../../token/airdrop/script/config/options.private.js";
 const destAirdropOptions = "../../token/airdrop/script/options.js";
-const foundersAddresses = ["0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1"];
-const foundersTokens = [1000000000];
+// const foundersAddresses = ["0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1"];
+const foundersAddresses = [];
+// const foundersTokens = [1000000000];
+const foundersTokens = [];
 const foundersReputation = [0];
 
 //set founder's address in spec file to current first account
 const spec = require(specFile);
+spec.founders = [];
 for (let i = 0; i < foundersAddresses.length; i++) {
     const address = foundersAddresses[i];
     const tokens = foundersTokens[i] ? foundersTokens[i] : 0;
