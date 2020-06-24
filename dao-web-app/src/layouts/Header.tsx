@@ -104,7 +104,8 @@ function LangSwitcher() {
   return (
     <select onChange={event => changeLanguage(event.target.value)}>
       <option value={'en'}>Eng</option>
-      <option value={'chin'}>Chin</option>
+      <option value={'tchin'}>T Chin</option>
+      <option value={'schin'}>S Chin</option>
     </select>
   );
 }
