@@ -97,7 +97,7 @@ type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps
 function LangSwitcher() {
   const { i18n } = useTranslation();
   const [lang, setLang] = React.useState("ENG")
-  const langs = [{ title:"ENG", key: "en" }, {title: "T Chin", key: "tchin" }, { title:"S Chin", key: "schin"  } ]
+  const langs = [{ title: i18n.t("en"), key: "en" }, {title: i18n.t("tchin"), key: "tchin" }, { title: i18n.t("schin"), key: "schin"  } ]
   const changeLanguage = (lng: any) => {
     i18n.changeLanguage(lng);
   };
