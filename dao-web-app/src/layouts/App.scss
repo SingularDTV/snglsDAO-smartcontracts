@@ -916,8 +916,9 @@ h4 {
                 }
 
               &.langSelector {
-                min-width: 84px;
+                min-width: 96px;
                 position: relative;
+                transform: translateY(11px);
 
                 .menu__link {
                   display: block;
