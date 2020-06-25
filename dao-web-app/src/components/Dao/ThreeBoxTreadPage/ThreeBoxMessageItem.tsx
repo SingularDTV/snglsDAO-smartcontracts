@@ -1,11 +1,10 @@
 import * as React from "react";
-import { useEffect, useState, useContext} from "react";
+import { useEffect, useState } from "react";
 import * as moment  from "moment";
 import { getProfile, getConfig } from '3box';
 import { Comment, Tooltip, Popconfirm } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
-import { ThreeBoxContext } from ".";
 import AccountImage from "../../Account/AccountImage";
 
 interface ThreeBoxMessageListProps {
@@ -14,13 +13,11 @@ interface ThreeBoxMessageListProps {
   isModerator: boolean;
   onRemoveMessage: (postId: string) => void;
   postId: string;
+  currDID: string;
   message: string;
 }
 
-const ThreeBoxMessageList =({  author, message, timestamp, postId, onRemoveMessage, isModerator}: ThreeBoxMessageListProps) =>{
-
-  const { currDID } =useContext(ThreeBoxContext)
-
+const ThreeBoxMessageList =({  author, message, timestamp, postId, onRemoveMessage, isModerator, currDID}: ThreeBoxMessageListProps) =>{
   const [profile, setProfile]= useState(null);
   const [personConfig, setPersonConfig]= useState(null);
 

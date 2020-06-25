@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState } from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
 import { getConfig, getProfile } from '3box';
@@ -17,8 +17,6 @@ interface IProps {
   threeBox?: any;
   currentAccountProfile: IProfileState;
 }
-
-export const ThreeBoxContext = createContext(null)
 
 const ThreeBoxTreadPage = ({ currentAccountAddress, threeBox }: IProps) => {
   const provider = getWeb3Provider()
@@ -64,16 +62,14 @@ const ThreeBoxTreadPage = ({ currentAccountAddress, threeBox }: IProps) => {
       <h2 className={style.title}>
         Common Discuss
       </h2>
-      <ThreeBoxContext.Provider value={{currDID, currConfig}}>
-        {!web3Provider
-          ? <h3>Please connect to wallet</h3>
-          : !threeBox
-            ? <h3>Loading...</h3>
-            : (<div>
-              <ThreeBoxAddMessage profile={currProfile} thread={thread} currentAddress={currentAccountAddress} />
-              <ThreeBoxMessageList thread={thread}/>
-            </div>)}
-      </ThreeBoxContext.Provider>
+      {!web3Provider
+        ? <h3>Please connect to wallet</h3>
+        : !threeBox
+          ? <h3>Loading...</h3>
+          : (<div>
+            <ThreeBoxAddMessage profile={currProfile} thread={thread} currentAddress={currentAccountAddress} />
+            <ThreeBoxMessageList currDID={currDID} currConfig={currConfig} thread={thread}/>
+          </div>)}
     </div>
   );
 }

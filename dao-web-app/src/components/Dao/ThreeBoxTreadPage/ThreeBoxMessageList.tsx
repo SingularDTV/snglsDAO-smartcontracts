@@ -1,18 +1,16 @@
 import * as React from "react";
-import { useEffect, useState, useCallback, useContext} from "react";
+import { useEffect, useState, useCallback} from "react";
 import { List, Skeleton } from 'antd';
 
 import ThreeBoxMessageItem from './ThreeBoxMessageItem'
 
-import { ThreeBoxContext } from ".";
-
 interface ThreeBoxMessageListProps {
   thread: any;
+  currDID: string;
+  currConfig: any;
 }
 
-const ThreeBoxMessageList =({ thread }: ThreeBoxMessageListProps) =>{
-
-  const { currConfig } =useContext(ThreeBoxContext)
+const ThreeBoxMessageList =({ thread, currDID, currConfig }: ThreeBoxMessageListProps) =>{
 
   const [messages, setMessages] =useState(null)
   const [moderators, setModerators] =useState(null)
@@ -44,7 +42,7 @@ const ThreeBoxMessageList =({ thread }: ThreeBoxMessageListProps) =>{
         dataSource={messages}
         itemLayout="horizontal"
       // @ts-ignore
-        renderItem={props => <ThreeBoxMessageItem isModerator={moderators?.some((i: string) => i === currConfig?.spaces.treads.DID) || false} key={props.postId} onRemoveMessage={handleRemoveMessage} {...props} />}
+        renderItem={props => <ThreeBoxMessageItem currDID={currDID} isModerator={moderators?.some((i: string) => i === currConfig?.spaces.treads.DID) || false} key={props.postId} onRemoveMessage={handleRemoveMessage} {...props} />}
       />)
     :(<Skeleton />)
 }
