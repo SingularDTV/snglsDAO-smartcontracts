@@ -116,7 +116,7 @@
     "noProfile": "No Profile",
     "membership": {
         "memFee": "Membership fee",
-        "amountNeedToStake": "The amount of SNGLS needed to stake in the DAO <br/>so you don't have to pay the transaction fee.",
+        "amountNeedToStake": "The amount of SNGLS needed to stake in the DAO so you don't have to pay the transaction fee.",
         "minAmountRequired": "Min amount required: ",
         "confAuto": "Confirm auto ",
         "orEnterManually": " or enter the amount manually:",
