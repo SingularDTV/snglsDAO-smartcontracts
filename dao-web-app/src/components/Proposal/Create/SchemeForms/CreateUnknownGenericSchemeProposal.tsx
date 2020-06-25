@@ -379,4 +379,4 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
   }
 }
 //@ts-ignore
-export default connect(null, mapDispatchToProps)(withTranslation(CreateGenericScheme));
+export default connect(null, mapDispatchToProps)(withTranslation()(CreateGenericScheme));

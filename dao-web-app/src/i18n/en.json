@@ -81,7 +81,7 @@
         "amountToTreasury": "The amount of SNGLS needed to be paid to the treasury ",
         "toAddToProtocol": "to add content to the protocol.",
         "transFee": "Transaction Fee: %",
-        "transFeeDescription": "The % of the transaction that the protocol puts into the <br/>treasury.",
+        "transFeeDescription": "The % of the transaction that the protocol puts into the treasury.",
         "comingSoon": "COMING SOON",
         "validationFee": "Validation Fee: SNGLS",
         "minimumAmount": "Minimum amount paid to validators.",
@@ -116,7 +116,7 @@
     "noProfile": "No Profile",
     "membership": {
         "memFee": "Membership fee",
-        "amountNeedToStake": "The amount of SNGLS needed to stake in the DAO <br/>so you don't have to pay the transaction fee.",
+        "amountNeedToStake": "The amount of SNGLS needed to stake in the DAO so you don't have to pay the transaction fee.",
         "minAmountRequired": "Min amount required: ",
         "confAuto": "Confirm auto ",
         "orEnterManually": " or enter the amount manually:",
@@ -561,6 +561,6 @@
     "fullProfile": "Full Profile",
     "yourReputation": "your reputation: ",
     "en": "ENG",
-    "tchin": "T Chin",
-    "schin": "S Chin"
+    "tchin": "繁體中文",
+    "schin": "简体中文"
 }
