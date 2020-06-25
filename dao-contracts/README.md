@@ -35,6 +35,8 @@ cd ../token/airdrop
 npm install
 cd ../contracts
 npm install
+cd ../sgt-token
+npm install
 ```
 
 ## Run environment
@@ -54,14 +56,46 @@ npm run start-private # ganache (private net)web version
 
 Access it on http://127.0.0.1:3000
 
-## Deploy DAO
+## Deploy DAO to ganache
+
+Before deploying DAO, you need to deploy token, which will be used for DAO.
+Specify your address in token (token/sgt-token/contracts/SGToken.sol, line 7).
+Then run migration:
+
+```sh
+cd ../token/sgt-token
+npm run start
+```
+
+Then copy token address from console and put it to the DAO config file (dao-contracts/data/migration.json, line 5).
+
+Run migrations (in another tab):
+
+```sh
+cd ../dao-contracts
+nvm use 8.10.0
+npm run start
+```
+
+## Deploy DAO to rinkeby
+
+Before deploying DAO, you need to deploy token, which will be used for DAO.
+Specify your address in token (token/sgt-token/contracts/SGToken.sol, line 7).
+Then run migration:
+
+```sh
+cd ../token/sgt-token
+npm run start-rinkeby
+```
+
+Then copy token address from console and put it to the DAO config file (dao-contracts/data/migration.json, line 5).
 
 Run migrations (in another tab)
 
 ```sh
 cd ../dao-contracts
 nvm use 8.10.0
-npm run start
+npm run start-rinkeby
 ```
 
 ## Testing
