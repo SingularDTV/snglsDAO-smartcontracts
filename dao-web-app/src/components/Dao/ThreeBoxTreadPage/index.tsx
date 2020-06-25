@@ -43,6 +43,7 @@ const ThreeBoxTreadPage = ({ currentAccountAddress, threeBox }: IProps) => {
     setCurrDID(currDID)
     const space = await threeBox.openSpace("treads")
     const thread = await space.joinThread('commonTread', {
+      //TODO add moderator address
       firstModerator: currentAccountAddress
     })
     setThread(thread)
