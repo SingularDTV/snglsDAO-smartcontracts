@@ -10,3 +10,22 @@ for (const add in balances) {
     }
 }
 console.log(sum.toString())
+
+const Papa = require("papaparse");
+const fs = require("fs");
+let csvString = fs.readFileSync("./balances.csv").toString();
+
+Papa.parse(csvString, {
+    // header: true,
+    // dynamicTyping: true,
+    complete: function (results) {
+        const sum = new BN("0");
+        const data = results.data;
+        for (let i = 0; i < data.length; i++) {
+            const el = data[i];
+            sum.iadd(new BN(el[1]));
+        }
+        console.log(sum.toString());
+
+    }
+});
