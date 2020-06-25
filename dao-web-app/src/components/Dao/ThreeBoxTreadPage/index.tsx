@@ -4,11 +4,11 @@ import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
 import { getConfig, getProfile } from '3box';
 
-
-import { IProfileState } from "reducers/profilesReducer";
+import Loading from "components/Shared/Loading";
 import ThreeBoxMessageList from "./ThreeBoxMessageList"
 import ThreeBoxAddMessage from "./ThreeBoxAddMessage"
-import {getWeb3Provider} from "../../../arc";
+import { IProfileState } from "reducers/profilesReducer";
+import { getWeb3Provider } from "../../../arc";
 
 import * as style from './ThreeBoxTreadPage.scss'
 
@@ -65,7 +65,7 @@ const ThreeBoxTreadPage = ({ currentAccountAddress, threeBox }: IProps) => {
       {!web3Provider
         ? <h3>Please connect to wallet</h3>
         : !threeBox
-          ? <h3>Loading...</h3>
+          ? <Loading />
           : (<div>
             <ThreeBoxAddMessage profile={currProfile} thread={thread} currentAddress={currentAccountAddress} />
             <ThreeBoxMessageList currDID={currDID} currConfig={currConfig} thread={thread}/>
