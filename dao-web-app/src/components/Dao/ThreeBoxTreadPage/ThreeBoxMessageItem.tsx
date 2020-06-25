@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import * as moment  from "moment";
 import { getProfile, getConfig } from '3box';
 import { Comment, Tooltip, Popconfirm } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, LoadingOutlined } from '@ant-design/icons';
 
 import AccountImage from "../../Account/AccountImage";
 
@@ -14,7 +14,7 @@ interface ThreeBoxMessageListProps {
   onRemoveMessage: (postId: string) => void;
   postId: string;
   currDID: string;
-  message: string;
+  message: any;
 }
 
 const ThreeBoxMessageList =({  author, message, timestamp, postId, onRemoveMessage, isModerator, currDID}: ThreeBoxMessageListProps) =>{
@@ -46,10 +46,10 @@ const ThreeBoxMessageList =({  author, message, timestamp, postId, onRemoveMessa
   }
 
   return <Comment
-    author={profile?.name}
+    author={profile?.name ||  <LoadingOutlined />}
     avatar={<AccountImage profile={profile} width={40} accountAddress={personConfig?.address}  />}
     actions={(currDID === personConfig?.did || isModerator) && [<RemoveIcon />]}
-    content={<p>{message}</p>}
+    content={<p>{message?.data || message}</p>}
     datetime={
       <Tooltip
         title={moment(timestamp * 1000)

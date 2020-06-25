@@ -41,10 +41,19 @@ const ThreeBoxMessageList =({ thread, currDID, currConfig }: ThreeBoxMessageList
     ? (  <List
         dataSource={messages}
         itemLayout="horizontal"
-      // @ts-ignore
-        renderItem={props => <ThreeBoxMessageItem currDID={currDID} isModerator={moderators?.some((i: string) => i === currConfig?.spaces.treads.DID) || false} key={props.postId} onRemoveMessage={handleRemoveMessage} {...props} />}
+        renderItem={props => {
+          return(
+            // @ts-ignore
+            <ThreeBoxMessageItem currDID={currDID}
+                                 isModerator={moderators?.some((i: string) => i === currConfig?.spaces.treads.DID) || false}
+              // @ts-ignore
+                                 key={props.postId}
+                                 onRemoveMessage={handleRemoveMessage}
+                                 {...props} />
+          )
+        }}
       />)
-    :(<Skeleton />)
+    :(<Skeleton avatar />)
 }
 
 export default ThreeBoxMessageList
