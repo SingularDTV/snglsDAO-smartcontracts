@@ -1,18 +1,16 @@
 import * as React from "react";
-import { useEffect, useState} from "react";
-// @ts-ignore
-// import { Comment, Tooltip, List } from 'antd';
+import { useEffect, useState, createContext } from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
-// import * as css from "../Dao.scss";
-// import Box = require("3box");
+import { getConfig, getProfile } from '3box';
+
+
 import { IProfileState } from "reducers/profilesReducer";
-
 import ThreeBoxMessageList from "./ThreeBoxMessageList"
-
-// import moment = require("moment");
-// @ts-ignore
+import ThreeBoxAddMessage from "./ThreeBoxAddMessage"
 import {getWeb3Provider} from "../../../arc";
+
+import * as style from './ThreeBoxTreadPage.scss'
 
 interface IProps {
   currentAccountAddress: string;
@@ -20,11 +18,19 @@ interface IProps {
   currentAccountProfile: IProfileState;
 }
 
+export const ThreeBoxContext = createContext(null)
 
 const ThreeBoxTreadPage = ({ currentAccountAddress, threeBox }: IProps) => {
   const provider = getWeb3Provider()
   const [web3Provider, setWeb3Provider] = useState(null)
   const [thread, setThread] = useState(null)
+  const [currDID, setCurrDID] = useState(null)
+  const [currProfile, setCurrProfile] = useState(null)
+  const [currConfig, setCurrConfig] = useState(null)
+
+  useEffect(() => {
+    onGetCurrUser()
+  }, [])
 
   useEffect(() =>{
     provider && setWeb3Provider(provider)
@@ -32,10 +38,11 @@ const ThreeBoxTreadPage = ({ currentAccountAddress, threeBox }: IProps) => {
 
   useEffect(() => {
     threeBox && openTread()
-  }, [threeBox, web3Provider])
+  }, [threeBox])
 
   const openTread = async () => {
-    // const currDID = await threeBox.DID
+    const currDID = await threeBox.DID
+    setCurrDID(currDID)
     const space = await threeBox.openSpace("treads")
     const thread = await space.joinThread('commonTread', {
       firstModerator: currentAccountAddress
@@ -43,22 +50,30 @@ const ThreeBoxTreadPage = ({ currentAccountAddress, threeBox }: IProps) => {
     setThread(thread)
   }
 
+  const onGetCurrUser = async () => {
+    const resConfig = await getConfig(currentAccountAddress)
+    const resProfile = await getProfile(currentAccountAddress)
+    setCurrConfig(resConfig)
+    setCurrProfile(resProfile)
+  }
+
 
   return(
-    <div style={{ backgroundColor: 'white' }}>
+    <div className={style.page}>
       <BreadcrumbsItem to={"/dao/discussion"}>Discussion</BreadcrumbsItem>
-
-      {/* <Sticky enabled top={50} innerZ={10000}> */}
-      <h2 style={{ textAlign: "center", color:'black'}}>
+      <h2 className={style.title}>
         Common Discuss
       </h2>
-      {!web3Provider
-        ? <h3>Please connect to wallet</h3>
-        : !threeBox
-          ? <h3>Loading...</h3>
-          : (<div>
-            <ThreeBoxMessageList thread={thread}/>
-          </div>)}
+      <ThreeBoxContext.Provider value={{currDID, currConfig}}>
+        {!web3Provider
+          ? <h3>Please connect to wallet</h3>
+          : !threeBox
+            ? <h3>Loading...</h3>
+            : (<div>
+              <ThreeBoxAddMessage profile={currProfile} thread={thread} currentAddress={currentAccountAddress} />
+              <ThreeBoxMessageList thread={thread}/>
+            </div>)}
+      </ThreeBoxContext.Provider>
     </div>
   );
 }
