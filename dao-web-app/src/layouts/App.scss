@@ -919,6 +919,7 @@ h4 {
                 min-width: 96px;
                 position: relative;
                 transform: translateY(11px);
+                padding: 0;
 
                 .menu__link {
                   display: block;
@@ -1017,6 +1018,10 @@ h4 {
                     ul {
                         li {
                             padding: 10px 15px;
+
+                            &.langSelector {
+                              padding: 0;
+                            }
                         }
                     }
                 }
@@ -1235,6 +1240,13 @@ h4 {
 
 
 @media (max-width: 992px) {
+  .sidebarWrapper {
+    .sticky-outer-wrapper {
+      .sticky-inner-wrapper {
+        transform: none;
+      }
+    }
+  }
     .sidebarToggle {
         display: block;
 
@@ -1269,9 +1281,7 @@ h4 {
 
     .withDAO .sidebarWrapper {
         z-index: 1000;
-        // height: 100%;
         width: 100%;
-        // position: fixed;
     }
 
 
