@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { IDAOState, Token } from "@daostack/client";
 import { hideMenu } from "actions/uiActions";
-import { getArc } from "arc";
+import { getArc, getArcSettings } from "arc";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 
 import BN = require("bn.js");
@@ -44,26 +44,12 @@ const mapDispatchToProps = {
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, IHasNewPosts]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
-  console.log("SIDEBAR mapStateTotProps: ", ownProps, " *", 
-  {
-    ...ownProps,
-    daoAvatarAddress: "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
-    sidebarOpen: state.ui.sidebarOpen,
-  }
-  );
   return {
     ...ownProps,
-    daoAvatarAddress: "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f", // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+    daoAvatarAddress: getArcSettings().daoAvatarContractAddress, // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
     sidebarOpen: state.ui.sidebarOpen,
   };
 };
-
-// const stakingContracts = () => {
-//   return [
-//     ["0x498EE93981A2453a3F8b8939458977DF86dCce42", "0x1E44072256F56527F22134604C9c633eC4cEc86B", "SGT", 18],
-//     ["0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab", "0x877fF27181f814a6249285f312ed708EEaC961b5", "SNGLS", 18]
-//   ]
-// }
 class SidebarMenu extends React.Component<IProps, IStateProps> {
 
   constructor(props: IProps) {
@@ -82,56 +68,12 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     //@ts-ignore
     const { t } = this.props;
     const [ dao, { hasNewPosts } ] = this.props.data ;
-    console.log("HELLO FROM SIDEBAR ", dao, dao.address)
     const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
-    // const bgPattern = generate(dao.address + dao.name);
+    const arcSettings = getArcSettings();
     
-    // const sgtTokenContractAddress = "0x498EE93981A2453a3F8b8939458977DF86dCce42"
-    // const snglsTokenContractAddress = "0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab";
-
-    // const reputationStakingContractAddress = "0x1E44072256F56527F22134604C9c633eC4cEc86B";
-    // const memFeeStakingContractAddress = "0x877fF27181f814a6249285f312ed708EEaC961b5";
-    // const tokenSGT = new Token(sgtTokenContractAddress, arc);
-    // const tokenSNGLS = new Token(snglsTokenContractAddress, arc);
-    // const totalStakedSGT = tokenSGT.balanceOf(reputationStakingContractAddress).pipe(ethErrorHandler());
-    // const totalStakedSNGLS = tokenSNGLS.balanceOf(memFeeStakingContractAddress).pipe(ethErrorHandler());
-
     return (
       <div>
-        {/* <div className={css.daoName}>
-          <Link to={"/dao/" + dao.address} onClick={this.handleCloseMenu}>
-            <b className={css.daoIcon} style={{ backgroundImage: bgPattern.toDataUrl() }}></b>
-            <em></em>
-            <span>{dao.name}</span>
-          </Link>
-        </div> */}
-        {/* <div className={css.daoDescription}>
-          {dao.name === "dxDAO" ?
-            <p>
-              By submitting a proposal, you agree to be bound by the&nbsp;
-              <a className="externalLink" href="https://cloudflare-ipfs.com/ipfs/QmRQhXUKKfUCgsAf5jre18T3bz5921fSfvnZCB5rR8mCKj" target="_blank" rel="noopener noreferrer">Participation Agreement</a>, which includes the terms of participation in the dxDAO
-            </p>
-            : dao.name === "Meme" ?
-              <p><a className="externalLink" href="https://docs.google.com/document/d/1iJZfjmOK1eZHq-flmVF_44dZWNsN-Z2KAeLqW3pLQo8" target="_blank" rel="noopener noreferrer">Learn how to MemeDAO</a></p>
-              : dao.name === "ETHBerlin dHack.io" ?
-                <p>
-                For more info join our TG group -
-                  <a className="externalLink" href="https://t.me/dhack0" target="_blank" rel="noopener noreferrer">t.me/dhack0</a>
-                </p>
-                : dao.name === "Identity" ?
-                  <p>
-                A curated registry of identities on the Ethereum blockchain.&nbsp;
-                    <a className="externalLink" href="https://docs.google.com/document/d/1_aS41bvA6D83aTPv6QNehR3PfIRHJKkELnU76Sds5Xk" target="_blank" rel="noopener noreferrer">How to register.</a>
-                  </p>
-                  : <p>New to DAOstack? Visit the <a href="https://daostack.zendesk.com/hc" target="_blank" rel="noopener noreferrer">help center</a> to get started.</p>
-          }
-        </div>
-        <div className={css.followButton}><FollowButton id={dao.address} type="daos" style="default" /></div> */}
-
-
-        
-
-        <div className={css.daoNavigation}>
+      <div className={css.daoNavigation}>
       <span className={css.daoNavHeading}><b>{t('sidebar.menu')}</b></span>
           <ul>
             <li>
@@ -159,14 +101,46 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   })
                 }></span>
                 <span className={css.menuIcon}>
-                <img src="/assets/images/Icon/menu/_membership.svg" />
+                <img src="/assets/images/Icon/menu/_badge.svg" />
                 {t('sidebar.protocolMembership')}
 
                 </span>
               </Link>
             </li>
             <li>
-              <Link to={"/dao/plugins/"} onClick={this.handleCloseMenu}>
+              <Link to={ "/dao/scheme/" + arcSettings.grantsSchemeContractAddress } onClick={this.handleCloseMenu}>
+                <span className={css.menuDot} />
+                <span className={
+                  classNames({
+                    [css.notification]: true,
+                    [css.homeNotification]: true,
+                  })
+                }></span>
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_membership.svg" />
+                { "Grants" }
+
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link to={ "/dao/scheme/" + arcSettings.protocolParametersSchemeContractAddress } onClick={this.handleCloseMenu}>
+                <span className={css.menuDot} />
+                <span className={
+                  classNames({
+                    [css.notification]: true,
+                    [css.homeNotification]: true,
+                  })
+                }></span>
+                <span className={css.menuIcon}>
+                <img src="/assets/images/Icon/menu/_parameters.svg" />
+                { "Protocol Parameters" }
+
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link to={"/dao/applications/"} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -260,8 +234,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             </a>
           </span>
           <ul>
-            <SubscribedTotalStakedBalance   stakingContractAddress={"0x877fF27181f814a6249285f312ed708EEaC961b5"} tokenAddress={"0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} key={"staked_token_" + "0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} />
-            <SubscribedTotalStakedBalance   stakingContractAddress={"0x1E44072256F56527F22134604C9c633eC4cEc86B"} tokenAddress={"0x498EE93981A2453a3F8b8939458977DF86dCce42"} key={"staked_token_" + "0x498EE93981A2453a3F8b8939458977DF86dCce42"} />
+            <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.membershipFeeStakingContractAddress} tokenAddress={arcSettings.snglsTokenContractAddress} key={"staked_token_" + arcSettings.snglsTokenContractAddress} />
+            <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} />
           </ul>
         </div>
 
@@ -280,13 +254,10 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
       clearfix: true,
     });
 
-    console.log("SIDEBAR RENDER: ", this.props);
-    console.log("Data ", this.props.data);
-
     return (
       <div className={sidebarClass}>
         <div className={css.menuContent}>
-          { "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f" && this.props.data ? this.daoMenu() : ""}
+          { this.props.daoAvatarAddress && this.props.data ? this.daoMenu() : ""}
 
           <div className={css.siteLinksWrapper}>
             <ul>
@@ -449,7 +420,7 @@ const SubscribedSidebarMenu = withSubscription({
   loadingComponent: <div></div>,
   createObservable: (props: IProps) => {
     if (props.daoAvatarAddress) {
-      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f") || "0";
+      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + props.daoAvatarAddress) || "0";
 
       const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
         .then((response: AxiosResponse<any>): IHasNewPosts => {
@@ -469,7 +440,7 @@ const SubscribedSidebarMenu = withSubscription({
         });
 
       const arc = getArc();
-      return combineLatest(arc.dao("0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f").state({ subscribe: true }), from(promise));
+      return combineLatest(arc.dao(props.daoAvatarAddress).state({ subscribe: true }), from(promise));
     } else {
       return of(null);
     }

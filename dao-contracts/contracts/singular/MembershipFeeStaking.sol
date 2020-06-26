@@ -28,7 +28,7 @@ contract MembershipFeeStaking {
 
     /**
      * @dev release function
-     * @return bool
+     * @return uint256 amount of released tokens
      */
     function release() public returns (uint256 amount) {
         Locker storage locker = lockers[msg.sender];
@@ -45,6 +45,7 @@ contract MembershipFeeStaking {
 
         amount = locker.amount;
         locker.amount = 0;
+        totalLocked = totalLocked.sub(amount);
 
         require(
             sgtToken.transfer(msg.sender, amount),
@@ -58,7 +59,6 @@ contract MembershipFeeStaking {
      * @dev lock function
      * @param _amount the amount to lock
      * @param _period the locking period
-     * @return bool
      */
     function lock(uint256 _amount, uint256 _period) public {
         require(

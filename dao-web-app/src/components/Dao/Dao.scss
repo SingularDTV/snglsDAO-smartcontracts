@@ -3,6 +3,9 @@ button:hover {
 }
 
 
+.clearfix::before {
+  display: none;
+}
 
 
 a {

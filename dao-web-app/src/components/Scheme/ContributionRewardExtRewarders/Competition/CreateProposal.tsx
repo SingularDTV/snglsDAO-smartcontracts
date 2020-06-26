@@ -228,13 +228,13 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
 
             const nonNegative = (name: string): void => {
               if ((values as any)[name] < 0) {
-                errors[name] = "Please enter a non-negative value";
+                errors[name] = t('errors.nonNegative');
               }
             };
 
             const nonZero = (name: string): void => {
               if ((values as any)[name] === 0) {
-                errors[name] = "Please enter a non-zero value";
+                errors[name] = t('errors.nonZero');
               }
             };
 
@@ -298,12 +298,12 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
               errors.compEndTimeInput = "Invalid datetime format";
             } else {
               if (compEndTimeInput && compEndTimeInput.isSameOrBefore(votingStartTimeInput)) {
-                errors.compEndTimeInput = "Competion must end after voting starts";
+                errors.compEndTimeInput = t('errors.mustEndAfterVotingStart');
               }
             }
 
             if (!isValidUrl(values.url)) {
-              errors.url = "Invalid URL";
+              errors.url = t('errors.invalidUrl');;
             }
 
             nonNegative("ethReward");

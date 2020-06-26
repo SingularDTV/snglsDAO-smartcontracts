@@ -185,20 +185,20 @@ class PreTransactionModal extends React.Component<IProps, IState> {
         transactionType = <span><strong className={css.passVote}>For</strong> vote</span>;
         rulesHeader = "RULES FOR YES VOTES";
         rules = <div>
-          <p>When you vote on a regular proposal, 1% of your reputation is taken away for the duration of the vote. You will get the 1% back + an extra reputation reward if you vote correctly (e.g. vote For on a proposal that passes or vote Against on a proposal that fails). If you vote on a regular proposal that times-out, you will get your reputation back.</p>
-          <p>If you vote For and the proposal passes you will be given a portion of whatever GEN have been staked on the proposal.</p>
-          <p>If you vote Against and the proposal fails you will be given a portion of whatever GEN have been staked on the proposal.</p>
-          <p>You will not receive reputation or GEN for voting on a boosted proposal.</p>
+          <p>{t("shared.whenUVoteRegProposal")}</p>
+          <p>{t("shared.ifUVoteForAndPasses")}</p>
+          <p>{t("shared.ifUVoteAgainstAndPasses")}</p>
+          <p>{t("shared.notReceivedOnBoosted")}</p>
           <div className={css.notification}>
-            <img src="/assets/images/Icon/Alert-yellow.svg"/> You will not receive reputation or GEN for voting on a boosted proposal.
+            <img src="/assets/images/Icon/Alert-yellow.svg"/> {t("shared.notReceivedOnBoosted")}
           </div>
           <a className={css.genesisProtocolLink} href="https://docs.google.com/document/d/1LMe0S4ZFWELws1-kd-6tlFmXnlnX9kfVXUNzmcmXs6U/edit?usp=drivesdk" target="_blank" rel="noopener noreferrer">View the Genesis Protocol &gt;</a>
           <div className={css.passFailConditions}>
             <span className={css.passCondition}>
-                      If you vote For and the proposal passes you will be given a portion of whatever GEN have been staked on the proposal.
+            {t("shared.ifUVoteForAndPasses")}
             </span>
             <span className={css.failCondition}>
-                      If you vote Against and the proposal fails you will be given a portion of whatever GEN have been staked on the proposal.
+            {t("shared.ifUVoteAgainstAndPasses")}
             </span>
           </div>
         </div>;
@@ -209,20 +209,20 @@ class PreTransactionModal extends React.Component<IProps, IState> {
         transactionType = <span><strong className={css.failVote}>Against</strong> vote</span>;
         rulesHeader = "RULES FOR NO VOTES";
         rules = <div>
-          <p>When you vote on a regular proposal, 1% of your reputation is taken away for the duration of the vote. You will get the 1% back + an extra reputation reward if you vote correctly (e.g. vote For on a proposal that passes or vote Against on a proposal that fails). If you vote on a regular proposal that times-out, you will get your reputation back.</p>
-          <p>If you vote for something to pass and it does, you will be given a portion of whatever GEN have been staked on the proposal.</p>
-          <p>If you vote for something to fail and it does, you will be given a portion of whatever GEN have been staked on the proposal.</p>
-          <p>You will not receive reputation or GEN for voting on a boosted proposal.</p>
+          <p>{t("shared.whenUVoteRegProposal")}</p>
+          <p>{t("shared.ifUVoteForAndPasses")}</p>
+          <p>{t("shared.ifUVoteAgainstAndPasses")}</p>
+          <p>{t("shared.notReceivedOnBoosted")}</p>
           <div className={css.notification}>
-            <img src="/assets/images/Icon/Alert-yellow.svg"/> You will not receive reputation or GEN for voting on a boosted proposal.
+            <img src="/assets/images/Icon/Alert-yellow.svg"/> {t("shared.notReceivedOnBoosted")}
           </div>
           <a className={css.genesisProtocolLink} href="https://docs.google.com/document/d/1LMe0S4ZFWELws1-kd-6tlFmXnlnX9kfVXUNzmcmXs6U/edit?usp=drivesdk" target="_blank" rel="noopener noreferrer">View the Genesis Protocol &gt;</a>
           <div className={css.passFailConditions}>
             <span className={css.passCondition}>
-                      If you vote Against and the proposal passes you will be given a portion of whatever GEN have been staked on the proposal.
+            {t("shared.ifUVoteForAndPasses")}
             </span>
             <span className={css.failCondition}>
-                      If you vote Against and the proposal fails you will be given a portion of whatever GEN have been staked on the proposal.
+            {t("shared.ifUVoteAgainstAndPasses")}
             </span>
           </div>
         </div>;
@@ -236,19 +236,19 @@ class PreTransactionModal extends React.Component<IProps, IState> {
         // failIncentive = <span>LOSE YOUR STAKE</span>;
         rulesHeader = "RULES FOR PASS PREDICTIONS";
         rules = <div>
-          <p>When you predict correctly you gain (1) GEN from the DAO bounty. (2) A portion of GEN from incorrect predictions.</p>
-          <p>When you predict correctly, you receive some reputation from other voters who didn&apos;t vote correctly on the proposal.</p>
-          <p>When you predict incorrectly you simply lose all the GEN you have staked.</p>
+          <p>{t("shared.whenYouPredictCorrectly")}</p>
+          <p>{t("shared.uReceiveRep")}</p>
+          <p>{t("shared.whenIncorrect")}</p>
           <div className={css.notification}>
-            <img src="/assets/images/Icon/Alert-yellow.svg"/> You will not receive reputation or GEN for voting on a boosted proposal.
+            <img src="/assets/images/Icon/Alert-yellow.svg"/> {t("shared.notReceivedOnBoosted")}
           </div>
           <a className={css.genesisProtocolLink} href="https://docs.google.com/document/d/1LMe0S4ZFWELws1-kd-6tlFmXnlnX9kfVXUNzmcmXs6U/edit?usp=drivesdk" target="_blank" rel="noopener noreferrer">View the Genesis Protocol &gt;</a>
           <div className={css.passFailConditions}>
             <span className={css.passCondition}>
-                      If you vote For and the proposal passes you will be given a portion of whatever GEN have been staked on the proposal.
+            {t("shared.ifUVoteForAndPasses")}
             </span>
             <span className={css.failCondition}>
-                      If you vote Against and the proposal fails you will be given a portion of whatever GEN have been staked on the proposal.
+            {t("shared.ifUVoteAgainstAndPasses")}
             </span>
           </div>
         </div>;
@@ -256,31 +256,31 @@ class PreTransactionModal extends React.Component<IProps, IState> {
       case ActionTypes.StakeFail:
         actionTypeClass = css.stakeFail;
         icon = <img src="/assets/images/Icon/x-white.svg"/>;
-        transactionType = <span><strong className={css.failVote}>Fail</strong> prediction</span>;
+        transactionType = <span><strong className={css.failVote}>{t("proposal.fail")}</strong> {t("proposal.predictions")}</span>;
         // passIncentive = <span>LOSE YOUR STAKE</span>;
         // failIncentive = <span>YOU GAIN GEN AND REPUTATION</span>;
         rulesHeader = "RULES FOR FAIL PREDICTIONS";
         rules = <div>
-          <p>When you predict correctly you gain (1) GEN from the DAO bounty. (2) A portion of GEN from incorrect predictions.</p>
-          <p>When you predict correctly, you receive some reputation from other voters who didn&apos;t vote correctly on the proposal.</p>
-          <p>When you predict incorrectly you simply lose all the GEN you have staked.</p>
+          <p>{t("shared.whenYouPredictCorrectly")}</p>
+          <p>{t("shared.uReceiveRep")}</p>
+          <p>{t("shared.whenIncorrect")}</p>
           <div className={css.notification}>
-            <img src="/assets/images/Icon/Alert-yellow.svg"/> You will not receive reputation or GEN for voting on a boosted proposal.
+            <img src="/assets/images/Icon/Alert-yellow.svg"/> {t("shared.notReceivedOnBoosted")}
           </div>
           <a className={css.genesisProtocolLink} href="https://docs.google.com/document/d/1LMe0S4ZFWELws1-kd-6tlFmXnlnX9kfVXUNzmcmXs6U/edit?usp=drivesdk" target="_blank" rel="noopener noreferrer">View the Genesis Protocol &gt;</a>
           <div className={css.passFailConditions}>
             <span className={css.passCondition}>
-                      If you vote For and the proposal passes you will be given a portion of whatever GEN have been staked on the proposal.
+            {t("shared.ifUVoteForAndPasses")}
             </span>
             <span className={css.failCondition}>
-                      If you vote Against and the proposal fails you will be given a portion of whatever GEN have been staked on the proposal.
+            {t("shared.ifUVoteAgainstAndPasses")}
             </span>
           </div>
         </div>;
         break;
       case ActionTypes.Redeem:
         icon = <img src="/assets/images/Tx/Redemption.svg"/>;
-        transactionType = <span>Redeem proposal</span>;
+    transactionType = <span>{t("shared.redeemProposal")}</span>;
 
         Analytics.track("Open Redeem Popup", {
           "Origin": parentPage,
@@ -294,7 +294,7 @@ class PreTransactionModal extends React.Component<IProps, IState> {
         break;
       case ActionTypes.Execute:
         icon = <img src="/assets/images/Tx/Redemption.svg"/>;
-        transactionType = <span>Execute proposal</span>;
+        transactionType = <span>{t("shared.execProposal")}</span>;
         break;
     }
 
@@ -315,7 +315,7 @@ class PreTransactionModal extends React.Component<IProps, IState> {
               {actionType !== ActionTypes.Redeem && actionType !== ActionTypes.Execute ?
                 <div className={classNames({[css.helpButton]: true, [css.open]: this.state.instructionsOpen})}>
                   <button className={css.hover}  onClick={this.toggleInstructions}>
-                    <b> &lt; Got it</b>
+                    <b> {t("shared.gotIt")}</b>
                     <span>x</span>
                     <span>?</span>
                   </button>
@@ -329,7 +329,7 @@ class PreTransactionModal extends React.Component<IProps, IState> {
                   <div className={css.header}>
                   </div>
                   <div className={css.body}>
-                    <h2>Genesis Protocol</h2>
+                    <h2>{t("shared.genesisProtocol")}</h2>
                     <h3>{rulesHeader}</h3>
                     {rules}
                   </div>
@@ -346,10 +346,10 @@ class PreTransactionModal extends React.Component<IProps, IState> {
                 actionType === ActionTypes.StakeFail || actionType === ActionTypes.StakePass ?
                   <div className={css.stakingInfo + " clearfix"}>
                     <div className={css.stakingForm}>
-                      <span className={css.yourStakeTitle}>Your stake</span>
+                      <span className={css.yourStakeTitle}>{t("shared.yourStake")}</span>
                       <div className={buyGensClass}>
                         <h4>
-                        You do not have enough GEN
+                        {t("shared.notHaveEnoughtGen")}
                         </h4>
                       </div>
                       <div className={css.formGroup + " clearfix"}>
@@ -365,9 +365,9 @@ class PreTransactionModal extends React.Component<IProps, IState> {
                         />
                         <span className={css.genLabel + " " + css.genSymbol}>GEN</span>
                         <div className={css.yourBalance}>
-                          <div>Your balance: {formatTokens(currentAccountGens)} GEN</div>
+                          <div>{t("shared.yourBalance")} {formatTokens(currentAccountGens)} GEN</div>
                           <div className={css.exchangeList}>
-                          Buy GEN &gt;
+                          {t("sidebar.buyGen")}
                             <ul>
                               <div className={css.diamond}></div>
                               {

@@ -1,10 +1,11 @@
 import * as uiActions from "actions/uiActions";
-import { threeBoxLogout } from "actions/profilesActions";
+import { threeBoxLogout, updateThreeBox } from "actions/profilesActions";
 import { enableWalletProvider, getAccountIsEnabled, getArc, logout, getWeb3ProviderInfo, getWeb3Provider, providerHasConfigUi } from "arc";
 import AccountBalances from "components/Account/AccountBalances";
 import AccountImage from "components/Account/AccountImage";
 import AccountProfileName from "components/Account/AccountProfileName";
 import RedemptionsButton from "components/Redemptions/RedemptionsButton";
+import { openBox } from "3box";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import { copyToClipboard } from "lib/util";
 import { IRootState } from "reducers";
@@ -47,7 +48,7 @@ const mapStateToProps = (state: IRootState & IStateProps, ownProps: IExternalPro
   });
   const queryValues = parse(ownProps.location.search);
 
-  // TODO: this is a temporary hack to send less requests during the ethDenver conference: 
+  // TODO: this is a temporary hack to send less requests during the ethDenver conference:
   // we hide the demptionsbutton when the URL contains "crx". Should probably be disabled at later date..
   let showRedemptionsButton;
   if (ETHDENVER_OPTIMIZATION) {
@@ -78,6 +79,7 @@ interface IDispatchProps {
   enableTrainingTooltipsShowAll: typeof  uiActions.enableTrainingTooltipsShowAll;
   disableTrainingTooltipsShowAll: typeof uiActions.disableTrainingTooltipsShowAll;
   threeBoxLogout: typeof threeBoxLogout;
+  updateThreeBox: typeof updateThreeBox;
 }
 
 const mapDispatchToProps = {
@@ -90,22 +92,32 @@ const mapDispatchToProps = {
   enableTrainingTooltipsShowAll: uiActions.enableTrainingTooltipsShowAll,
   disableTrainingTooltipsShowAll: uiActions.disableTrainingTooltipsShowAll,
   threeBoxLogout,
+  updateThreeBox,
 };
 
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<IDAOState>;
 
 function LangSwitcher() {
   const { i18n } = useTranslation();
-
+  const [lang, setLang] = React.useState(i18n.t("en"))
+  const langs = [{ title: i18n.t("en"), key: "en" }, {title: i18n.t("tchin"), key: "tchin" }, { title: i18n.t("schin"), key: "schin"  } ]
   const changeLanguage = (lng: any) => {
     i18n.changeLanguage(lng);
   };
+  const setLanguage = (it: any) => {
+    changeLanguage(it.key);
+    setLang(it.title);
+  }
 
   return (
-    <select onChange={event => changeLanguage(event.target.value)}>
-      <option value={'en'}>Eng</option>
-      <option value={'chin'}>Chin</option>
-    </select>
+      <li className={css.submenu + ' ' + css.langSelector}>
+          <span className={css.menu__link}>{lang}</span>
+          <ul>
+            {langs.filter((it: any)=> it.title !== lang).map((it: any)=> (
+              <li onClick={() => setLanguage(it)}><a href="#">{it.title}</a></li>
+            ))}
+          </ul>
+      </li>
   );
 }
 
@@ -130,6 +142,16 @@ class Header extends React.Component<IProps, null> {
     };
   }
 
+  public openTreeBox = async(): Promise<void> => {
+    const { currentAccountAddress, updateThreeBox } = this.props;
+    const web3Provider = getWeb3Provider();
+    if(web3Provider) {
+      const box = await openBox(currentAccountAddress, web3Provider)
+      // await box.syncDone
+      updateThreeBox(box)
+    }
+  }
+
   public copyAddress(e: any): void {
     const { showNotification, currentAccountAddress } = this.props;
     copyToClipboard(currentAccountAddress);
@@ -141,19 +163,23 @@ class Header extends React.Component<IProps, null> {
     enableWalletProvider({
       suppressNotifyOnSuccess: true,
       showNotification: this.props.showNotification,
+      onSuccess: (): Promise<void> => this.openTreeBox()
     });
+
   }
 
   public handleConnect = async (_event: any): Promise<void> => {
     enableWalletProvider({
       suppressNotifyOnSuccess: true,
       showNotification: this.props.showNotification,
+      onSuccess: (): Promise<void> => this.openTreeBox()
     });
   }
 
   public handleClickLogout = async (_event: any): Promise<void> => {
     await logout(this.props.showNotification);
     await this.props.threeBoxLogout();
+    updateThreeBox()
   }
 
   private handleToggleMenu = (_event: any): void => {
@@ -227,7 +253,7 @@ class Header extends React.Component<IProps, null> {
             </div>
           </TrainingTooltip>
 
-          
+
           <div className={css.topInfo}>
             <div className={css.breadcrumbs}>
               <Breadcrumbs
@@ -289,14 +315,8 @@ class Header extends React.Component<IProps, null> {
                 </svg>{t('header.git')}</a></li>
                 <LangSwitcher/>
 
-                <li className={css.submenu + ' ' + css.langSelector}>
-                    <span className={css.menu__link}>ENG</span>
-                    <ul>
-                        <li><a href="#">Eng</a></li>
-                        <li><a href="#">Chin</a></li>
-                    </ul>
-                </li>
-                
+
+
               </ul>
             </div>
           </div>

@@ -1,10 +1,8 @@
 import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake } from "@daostack/client";
-import { getArc } from "arc";
+import { getArc, getArcSettings } from "arc";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
-import Analytics from "lib/analytics";
-import { Page } from "pages";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as InfiniteScroll from "react-infinite-scroll-component";
@@ -28,14 +26,6 @@ type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
 
 class DaoHistoryPage extends React.Component<IProps, null> {
 
-  public componentDidMount() {
-    Analytics.track("Page View", {
-      "Page Name": Page.DAOHistory,
-      "DAO Address": "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f",
-      "DAO Name": this.props.daoState.name,
-    });
-  }
-
   public render(): RenderOutput {
     const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
     //@ts-ignore
@@ -51,11 +41,11 @@ class DaoHistoryPage extends React.Component<IProps, null> {
 
     return(
       <div>
-        <BreadcrumbsItem to={"/dao/history"}>History</BreadcrumbsItem>
+        <BreadcrumbsItem to={"/dao/history"}>{t("sidebar.history")}</BreadcrumbsItem>
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
           <div className={css.daoHistoryHeader}>
-            History
+          {t("sidebar.history")}
           </div>
         {/* </Sticky> */}
 
@@ -72,18 +62,18 @@ class DaoHistoryPage extends React.Component<IProps, null> {
           }
         >
           { proposals.length === 0 ?
-            <span>This DAO hasn&apos;t passed any proposals yet. Checkout the <Link to={"/dao/proposal/"}>DAO&apos;s installed schemes</Link> for any open proposals.</span> :
+            <span>{t('dashboard.notPassedProposals')}<Link to={"/dao/proposal/"}></Link></span> :
             <table className={css.proposalHistoryTable}>
               <thead>
                 <tr className={css.proposalHistoryTableHeader}>
-                  <th>Proposed by</th>
-                  <th>End date</th>
-                  <th>Plugin</th>
-                  <th>Title</th>
-                  <th>Votes</th>
-                  <th>Predictions</th>
-                  <th>Status</th>
-                  <th>My actions</th>
+                <th>{t('dashboard.proposedBy')}</th>
+                  <th>{t('dashboard.endDate')}</th>
+                  <th>{t('dashboard.plugin')}</th>
+                  <th>{t('dashboard.title')}</th>
+                  <th>{t('dashboard.votes')}</th>
+                  <th>{t('dashboard.predictions')}</th>
+                  <th>{t('dashboard.status')}</th>
+                  <th>{t('dashboard.actions')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -126,7 +116,7 @@ const DaoHistoryWithSubscription = withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f"}"
+            dao: "${getArcSettings().daoAvatarContractAddress}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",

@@ -30,7 +30,7 @@ contract LockingSGT4Reputation {
 
     /**
      * @dev release function
-     * @return bool
+     * @return uint256 amount of released tokens/burned reputation
      */
     function release() public returns (uint256 amount) {
         Locker storage locker = lockers[msg.sender];
@@ -47,7 +47,7 @@ contract LockingSGT4Reputation {
 
         amount = locker.amount;
         locker.amount = 0;
-
+        totalLocked = totalLocked.sub(amount);
         require(
             Controller(avatar.owner()).burnReputation(
                 amount,
@@ -68,7 +68,6 @@ contract LockingSGT4Reputation {
      * @dev lock function
      * @param _amount the amount to lock
      * @param _period the locking period
-     * @return bool
      */
     function lock(uint256 _amount, uint256 _period) public {
         require(
@@ -115,6 +114,7 @@ contract LockingSGT4Reputation {
 
     /**
      * @dev initialize
+     * @param _avatar the DAO's avatar
      * @param _sgtToken the SGT token address to stake on
      * @param _minLockingPeriod minimum locking period allowed.
      */

@@ -1,10 +1,12 @@
 import { IDAOState, ISchemeState /*, IProposalCreateOptionsCompetition */ } from "@daostack/client";
 import * as arcActions from "../../actions/arcActions";
-import { enableWalletProvider, getArc } from "../../arc";
+import { enableWalletProvider, getArc, getArcSettings } from "../../arc";
 import withSubscription, { ISubscriptionProps } from "../../components/Shared/withSubscription";
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import { /* baseTokenName, supportedTokens,  toBaseUnit, tokenDetails,  toWei, */ isValidUrl/*, getLocalTimezone */ } from "lib/util";
+import Loading from "components/Shared/Loading";
 import * as React from "react";
+// import { RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import Select from "react-select";
 import { History } from "history";
@@ -13,19 +15,10 @@ import { showNotification } from "../../reducers/notifications";
 import TrainingTooltip from "../../components/Shared/TrainingTooltip";
 import * as css from "./DaoJoin.scss";
 import { withTranslation } from 'react-i18next';
-
-
 import { IRootState } from "reducers";
 
-
-// import MarkdownField from "../../components/Proposal/Create/SchemeForms/MarkdownField";
-// import { checkTotalPercent } from "../../lib/util";
-// import * as Datetime from "react-datetime";
-
-// imporsst moment = require("moment");
-// import BN = require("bn.js");
-
 interface IExternalStateProps {
+  daoAvatarAddress: string;
   history: History;
 }
 
@@ -92,7 +85,7 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   };
 };
 
-class CreateProposal extends React.Component<IProps, IStateProps> {
+class GetReputation extends React.Component<IProps, IStateProps> {
   
 
   constructor(props: IProps) {
@@ -111,29 +104,21 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
       return;
     }
     const arc = getArc();
-    const reputationContractAbi = [ { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "Lock", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "_beneficiary", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "Release", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "", "type": "address" } ], "name": "lockers", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "releaseTime", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "minLockingPeriod", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "sgtToken", "outputs": [ { "internalType": "contract IERC20", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalLocked", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "release", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "lock", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "contract IERC20", "name": "_sgtToken", "type": "address" }, { "internalType": "uint256", "name": "_minLockingPeriod", "type": "uint256" } ], "name": "initialize", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
-    const reputationStakingContractAddress = "0x1E44072256F56527F22134604C9c633eC4cEc86B";
+    const settings = getArcSettings();
 
-    const reputationContract = new arc.web3.eth.Contract(reputationContractAbi, reputationStakingContractAddress);
-    // Get the contract ABI from compiled smart contract json
-    const sgtTokenContractAbi = [ { "inputs": [ { "internalType": "string", "name": "_name", "type": "string" }, { "internalType": "string", "name": "_symbol", "type": "string" }, { "internalType": "uint256", "name": "_cap", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "spender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" } ], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "Transfer", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "spender", "type": "address" } ], "name": "allowance", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "approve", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "account", "type": "address" } ], "name": "balanceOf", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "burn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "account", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "burnFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "cap", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [ { "internalType": "uint8", "name": "", "type": "uint8" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "subtractedValue", "type": "uint256" } ], "name": "decreaseAllowance", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "addedValue", "type": "uint256" } ], "name": "increaseAllowance", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "isOwner", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "renounceOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "transfer", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "transferFrom", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "newOwner", "type": "address" } ], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "mint", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
-    const sgtTokenContractAddress = '0x498EE93981A2453a3F8b8939458977DF86dCce42'
+    const reputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
+    const sgtTokenContract = new arc.web3.eth.Contract(settings.erc20TokenContractABI, settings.sgtTokenContractAddress);
 
-    // Create contract object
-    const sgtTokenContract = new arc.web3.eth.Contract(sgtTokenContractAbi, sgtTokenContractAddress);
-
-    // Calculate contract compatible value for approve with proper decimal points using BigNumber
     const tokenDecimals = arc.web3.utils.toBN(18);
     const tokenAmountToApprove = arc.web3.utils.toBN(values.nativeTokenReward);
     const calculatedApproveValue = arc.web3.utils.toHex(tokenAmountToApprove.mul(arc.web3.utils.toBN(10).pow(tokenDecimals)));
 
     const currentAccountAddress = this.props.currentAccountAddress;
 
-    // Get user account wallet address first
-    sgtTokenContract.methods.approve(reputationStakingContractAddress, calculatedApproveValue).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
+    sgtTokenContract.methods.approve(settings.lockingSGT4ReputationContractAddress, calculatedApproveValue).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
       if (error) throw error;
     }).then(function () {
-      reputationContract.methods.lock(calculatedApproveValue, /* min locking period */ 700000).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
+      reputationContract.methods.lock(calculatedApproveValue, settings.minLockingPeriod).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
         if (error) throw error;
       });
     });
@@ -171,17 +156,17 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
             const errors: any = {};
             const nonNegative = (name: string): void => {
               if ((values as any)[name] < 0) {
-                errors[name] = "Please enter a non-negative value";
+                errors[name] = t("errors.nonNegative");
               }
             };
 
             if (!isValidUrl(values.url)) {
-              errors.url = "Invalid URL";
+              errors.url = t("errors.invalidUrl");
             }
 
             nonNegative("ethReward");
             if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.nativeTokenReward) {
-              errors.rewards = "Please select at least some reward";
+              errors.rewards = t("proposal.pleaseSelectAtLeastSomeReward");
             }
 
             return errors;
@@ -225,12 +210,12 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
                       className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
                     />
                     <div className={css.btnMax}>
-                      <button type="button">max</button>
+                      <button type="button">{t('daojoin.max')}</button>
                     </div>
                   </div>
                   <div className={css.balances}>
-                    <span className={css.tokens}>SGT Tokens: <strong>0.00</strong></span>
-                    <span className={css.holdings}>Reputation: <strong>0.00% Rep.</strong></span>
+                    <span className={css.tokens}>{t('daojoin.sgtTokens')}<strong>0.00</strong></span>
+                    <span className={css.holdings}>{t('daojoin.reputation')} <strong>0.00% Rep.</strong></span>
                   </div>
                   <span className={css.holdings}>{t("daojoin.haveAmountStaked")}</span>
                 </div>
@@ -242,7 +227,7 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
               }
               <div className={css.createProposalActions}>
                 <div>
-                <TrainingTooltip overlay="Once the proposal is submitted it cannot be edited or deleted" placement="top">
+                <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
                   <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
                   {t('daojoin.getRep')}
                   </button>
@@ -267,13 +252,14 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
   }
 }
 
-const SubscribedCreateContributionRewardExProposal = withSubscription({
-  wrappedComponent: CreateProposal,
+const SubscribedGetReputation = withSubscription({
+  wrappedComponent: GetReputation,
   checkForUpdate: ["daoAvatarAddress"],
-  createObservable: (props: IExternalProps) => {
+  loadingComponent: <Loading/>,
+  createObservable: (props: IExternalStateProps) => {
     const arc = getArc();
-    return arc.dao("0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f").state();
+    return arc.dao(getArcSettings().daoAvatarContractAddress).state();
   },
 });
 //@ts-ignore
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedCreateContributionRewardExProposal));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedGetReputation));

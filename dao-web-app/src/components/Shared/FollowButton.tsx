@@ -113,9 +113,9 @@ class FollowButton extends React.Component<IProps, IState> {
         >
           <div className={css.spinner}></div>
           <span className={css.followText}>{
-            isFollowing && isPending ? "Unfollowing" :
-              isFollowing ? "Following" :
-                isPending ? "Following" : "Follow"}
+            isFollowing && isPending ? t('shared.unfollowing') :
+              isFollowing ? t('shared.following') :
+                isPending ? t('shared.following')  : t('shared.follow') }
           </span>
           <span className={css.unfollowText}>Unfollow</span>
           {this.state.showThreeboxModal ?

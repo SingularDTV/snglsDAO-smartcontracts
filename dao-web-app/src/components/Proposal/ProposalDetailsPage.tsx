@@ -4,7 +4,6 @@ import AccountPopup from "components/Account/AccountPopup";
 import AccountProfileName from "components/Account/AccountProfileName";
 import ProposalCountdown from "components/Shared/ProposalCountdown";
 import FollowButton from "components/Shared/FollowButton";
-import { DiscussionEmbed } from "disqus-react";
 import { humanProposalTitle, ensureHttps } from "lib/util";
 import { schemeName } from "lib/schemeUtils";
 import Analytics from "lib/analytics";
@@ -16,6 +15,7 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { closingTime, proposalEnded } from "lib/proposalHelpers";
 import TagsSelector from "components/Proposal/Create/SchemeForms/TagsSelector";
 import { rewarderContractName } from "components/Scheme/ContributionRewardExtRewarders/rewardersProps";
+import ThreeBoxTread from "components/DAO/ThreeBoxTreadPage/ThreeBoxTread";
 import SocialShareModal from "../Shared/SocialShareModal";
 import ActionButton from "./ActionButton";
 import BoostAmount from "./Staking/BoostAmount";
@@ -30,6 +30,7 @@ import VoteGraph from "./Voting/VoteGraph";
 import VotersModal from "./Voting/VotersModal";
 import * as css from "./ProposalDetails.scss";
 import { withTranslation } from 'react-i18next';
+import {getWeb3Provider} from "../../arc";
 
 
 const ReactMarkdown = require("react-markdown");
@@ -78,7 +79,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
   private disqusConfig = { url: "", identifier: "", title: "" };
   private proposalClass = classNames({
     [css.proposal]: true,
-    clearfix: true,
+    // clearfix: true,
   });
 
   private showShareModal = (_event: any): void => {
@@ -143,6 +144,8 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
       clearfix: true,
     });
 
+    const web3Provider = getWeb3Provider();
+
     return (
       <div className={css.wrapper}>
         <div className={css.wrapperTitle}>
@@ -163,7 +166,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
 
             <div>
 
-                
+
               <div className={css.statusContainer}>
                 <ProposalStatus proposalState={proposal} />
               </div>
@@ -183,7 +186,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
               {
                 (crxContractName) ? <div className={css.gotoCompetition}>
                   {
-                    <Link to={`/dao/crx/proposal/${proposal.id}`}>Go to {crxContractName}&nbsp;&gt;</Link>
+                    <Link to={`/dao/crx/proposal/${proposal.id}`}>{t('proposal.goTo')} {crxContractName}&nbsp;&gt;</Link>
                   }
                 </div> : ""
               }
@@ -221,7 +224,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
             {url ?
               <a href={url} className={css.attachmentLink} target="_blank" rel="noopener noreferrer">
                 <img src="/assets/images/Icon/Attachment.svg" />
-            Attachment
+            {t('schema.attachmend')}
               </a>
               : " "
             }
@@ -239,9 +242,10 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
 
             <div className={css.buttonBar}>
               <div className={css.voteButtonsBottom}>
-                <h4 className={css.voteLabel}>Vote:</h4>
+                <h4 className={css.voteLabel}>{t("notifications.vote")}:</h4>
                 <div className={css.altVoteButtons}>
                   <VoteButtons
+                  //@ts-ignore
                     altStyle
                     currentAccountAddress={currentAccountAddress}
                     currentVote={currentAccountVote}
@@ -255,15 +259,15 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
               </div>
 
               <button onClick={this.showShareModal} className={css.shareButton} data-test-id="share">
-                <span>Share</span>
+                <span>{t("shared.share")}</span>
               </button>
 
               <div className={css.followButton}><FollowButton type="proposals" id={proposal.id} style="bigButton" /></div>
             </div>
 
-                <h3 className={css.discussionTitle}>Discussion</h3>
+          <h3 className={css.discussionTitle}>{t("proposal.discussion")}</h3>
                 <div className={css.disqus}>
-                  <DiscussionEmbed shortname={process.env.DISQUS_SITE} config={this.disqusConfig} />
+                  <ThreeBoxTread web3Provider={web3Provider} currentAccountAddress={currentAccountAddress} chatName={proposal.id} />
                 </div>
 
             </div>
@@ -274,11 +278,11 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
             <div className={voteWrapperClass}>
               <div>
                 <div className={css.statusTitle}>
-                  <h3>Votes</h3>
+                  <h3>{t("proposal.votes")}</h3>
                 </div>
                   <div className={css.statusVote}>
                   <span onClick={this.showVotersModal(proposal.votesCount)} className={classNames({ [css.clickable]: proposal.votesCount > 0 })}>
-                    Vote{proposal.votesCount === 1 ? "" : "s"} <div className={css.votesCount}>{proposal.votesCount}</div>
+                  {t("notifications.vote")}{proposal.votesCount === 1 ? "" : "s"} <div className={css.votesCount}>{proposal.votesCount}</div>
                   </span>
                   </div>
               </div>
@@ -298,6 +302,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
               </div>
                 <div className={css.voteButtons}>
                   <VoteButtons
+                  //@ts-ignore
                     currentAccountAddress={currentAccountAddress}
                     currentAccountState={member}
                     currentVote={currentAccountVote}
@@ -311,7 +316,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
 
             <div className={css.predictions}>
               <div className={css.statusTitle}>
-                <h3>Predictions</h3>
+                <h3>{t("proposal.predictions")}</h3>
               </div>
 
               <div className={css.predictionStatus}>

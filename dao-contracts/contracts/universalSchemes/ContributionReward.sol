@@ -24,7 +24,6 @@ contract ContributionReward is
         bytes32 indexed _proposalId,
         address indexed _intVoteInterface,
         string _descriptionHash,
-        int256 _reputationChange,
         uint256[5] _rewards,
         IERC20 _externalToken,
         address _beneficiary
@@ -36,13 +35,6 @@ contract ContributionReward is
         int256 _param
     );
 
-    event RedeemReputation(
-        address indexed _avatar,
-        bytes32 indexed _proposalId,
-        address indexed _beneficiary,
-        int256 _amount
-    );
-
     event RedeemEther(
         address indexed _avatar,
         bytes32 indexed _proposalId,
@@ -50,12 +42,7 @@ contract ContributionReward is
         uint256 _amount
     );
 
-    event RedeemNativeToken(
-        address indexed _avatar,
-        bytes32 indexed _proposalId,
-        address indexed _beneficiary,
-        uint256 _amount
-    );
+  
 
     event RedeemExternalToken(
         address indexed _avatar,
@@ -66,8 +53,6 @@ contract ContributionReward is
 
     // A struct holding the data for a contribution proposal
     struct ContributionProposal {
-        uint256 nativeTokenReward; // Reward asked in the native token of the organization.
-        int256 reputationChange; // Organization reputation reward requested.
         uint256 ethReward;
         IERC20 externalToken;
         uint256 externalTokenReward;
@@ -136,7 +121,6 @@ contract ContributionReward is
      * @dev Submit a proposal for a reward for a contribution:
      * @param _avatar Avatar of the organization that the contribution was made for
      * @param _descriptionHash A hash of the proposal's description
-     * @param _reputationChange - Amount of reputation change requested .Can be negative.
      * @param _rewards rewards array:
      *         rewards[0] - Amount of tokens requested per period
      *         rewards[1] - Amount of ETH requested per period
@@ -148,12 +132,12 @@ contract ContributionReward is
     function proposeContributionReward(
         Avatar _avatar,
         string memory _descriptionHash,
-        int256 _reputationChange,
+        int256,
         uint256[5] memory _rewards,
         IERC20 _externalToken,
         address payable _beneficiary
     ) public returns (bytes32) {
-        validateProposalParams(_reputationChange, _rewards);
+        validateProposalParams( _rewards);
 
 
             Parameters memory controllerParams
@@ -169,8 +153,6 @@ contract ContributionReward is
             beneficiary = msg.sender;
         }
         ContributionProposal memory proposal = ContributionProposal({
-            nativeTokenReward: _rewards[0],
-            reputationChange: _reputationChange,
             ethReward: _rewards[1],
             externalToken: _externalToken,
             externalTokenReward: _rewards[2],
@@ -187,7 +169,6 @@ contract ContributionReward is
             contributionId,
             address(controllerParams.intVote),
             _descriptionHash,
-            _reputationChange,
             _rewards,
             _externalToken,
             beneficiary
@@ -201,112 +182,6 @@ contract ContributionReward is
         return contributionId;
     }
 
-    /**
-     * @dev RedeemReputation reward for proposal
-     * @param _proposalId the ID of the voting in the voting machine
-     * @param _avatar address of the controller
-     * @return reputation the redeemed reputation.
-     */
-    function redeemReputation(bytes32 _proposalId, Avatar _avatar)
-        public
-        returns (int256 reputation)
-    {
-        ContributionProposal memory _proposal = organizationsProposals[address(
-            _avatar
-        )][_proposalId];
-        ContributionProposal storage proposal = organizationsProposals[address(
-            _avatar
-        )][_proposalId];
-        require(proposal.executionTime != 0);
-        uint256 periodsToPay = getPeriodsToPay(
-            _proposalId,
-            address(_avatar),
-            0
-        );
-
-        //set proposal reward to zero to prevent reentrancy attack.
-        proposal.reputationChange = 0;
-        reputation = int256(periodsToPay) * _proposal.reputationChange;
-        if (reputation > 0) {
-            require(
-                Controller(_avatar.owner()).mintReputation(
-                    uint256(reputation),
-                    _proposal.beneficiary,
-                    address(_avatar)
-                )
-            );
-        } else if (reputation < 0) {
-            require(
-                Controller(_avatar.owner()).burnReputation(
-                    uint256(reputation * (-1)),
-                    _proposal.beneficiary,
-                    address(_avatar)
-                )
-            );
-        }
-        if (reputation != 0) {
-            proposal.redeemedPeriods[0] = proposal.redeemedPeriods[0].add(
-                periodsToPay
-            );
-            emit RedeemReputation(
-                address(_avatar),
-                _proposalId,
-                _proposal.beneficiary,
-                reputation
-            );
-        }
-        //restore proposal reward.
-        proposal.reputationChange = _proposal.reputationChange;
-    }
-
-    /**
-     * @dev RedeemNativeToken reward for proposal
-     * @param _proposalId the ID of the voting in the voting machine
-     * @param _avatar address of the controller
-     * @return amount the redeemed nativeToken.
-     */
-    function redeemNativeToken(bytes32 _proposalId, Avatar _avatar)
-        public
-        returns (uint256 amount)
-    {
-        ContributionProposal memory _proposal = organizationsProposals[address(
-            _avatar
-        )][_proposalId];
-        ContributionProposal storage proposal = organizationsProposals[address(
-            _avatar
-        )][_proposalId];
-        require(proposal.executionTime != 0);
-        uint256 periodsToPay = getPeriodsToPay(
-            _proposalId,
-            address(_avatar),
-            1
-        );
-        //set proposal rewards to zero to prevent reentrancy attack.
-        proposal.nativeTokenReward = 0;
-
-        amount = periodsToPay.mul(_proposal.nativeTokenReward);
-        if (amount > 0) {
-            require(
-                Controller(_avatar.owner()).mintTokens(
-                    amount,
-                    _proposal.beneficiary,
-                    address(_avatar)
-                )
-            );
-            proposal.redeemedPeriods[1] = proposal.redeemedPeriods[1].add(
-                periodsToPay
-            );
-            emit RedeemNativeToken(
-                address(_avatar),
-                _proposalId,
-                _proposal.beneficiary,
-                amount
-            );
-        }
-
-        //restore proposal reward.
-        proposal.nativeTokenReward = _proposal.nativeTokenReward;
-    }
 
     /**
      * @dev RedeemEther reward for proposal
@@ -429,20 +304,10 @@ contract ContributionReward is
     )
         public
         returns (
-            int256 reputationReward,
-            uint256 nativeTokenReward,
             uint256 etherReward,
             uint256 externalTokenReward
         )
     {
-        if (_whatToRedeem[0]) {
-            reputationReward = redeemReputation(_proposalId, _avatar);
-        }
-
-        if (_whatToRedeem[1]) {
-            nativeTokenReward = redeemNativeToken(_proposalId, _avatar);
-        }
-
         if (_whatToRedeem[2]) {
             etherReward = redeemEther(_proposalId, _avatar);
         }
@@ -568,7 +433,6 @@ contract ContributionReward is
      * @dev validateProposalParams validate proposal's rewards parameters.
      * The function check for potential overflow upon proposal's redeem.
      * The function reverts if the params are not valid.
-     * @param _reputationChange - Amount of reputation change requested .Can be negative.
      * @param _rewards rewards array:
      *         rewards[0] - Amount of tokens requested per period
      *         rewards[1] - Amount of ETH requested per period
@@ -577,11 +441,9 @@ contract ContributionReward is
      *         rewards[4] - Number of periods
      */
     function validateProposalParams(
-        int256 _reputationChange,
         uint256[5] memory _rewards
     ) private pure {
         //changed for sngls dao
-        require(_reputationChange == 0, "Reputation functionality is blocked.");
         require(_rewards[0] == 0, "SGT token functionality is blocked.");
 
         require(
@@ -590,17 +452,6 @@ contract ContributionReward is
         );
         if (_rewards[4] > 0) {
             // This is the only case of overflow not detected by the check below
-            require(
-                !(int256(_rewards[4]) == -1 && _reputationChange == (-2**255)),
-                "numberOfPeriods * _reputationChange will overflow"
-            );
-            //check that numberOfPeriods * _reputationChange will not overflow
-            require(
-                (int256(_rewards[4]) * _reputationChange) /
-                    int256(_rewards[4]) ==
-                    _reputationChange,
-                "numberOfPeriods * reputationChange will overflow"
-            );
             //check that numberOfPeriods * tokenReward will not overflow
             require(
                 (_rewards[4] * _rewards[0]) / _rewards[4] == _rewards[0],

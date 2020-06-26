@@ -1,6 +1,6 @@
 import { IDAOState, Member } from "@daostack/client";
 import { getProfilesForAddresses } from "actions/profilesActions";
-import { getArc/*, getArcSettings*/ } from "arc";
+import { getArc, getArcSettings } from "arc";
 import CreateProposalPage from "components/Proposal/Create/CreateProposalPage";
 import ProposalDetailsPage from "components/Proposal/ProposalDetailsPage";
 import SchemeContainer from "components/Scheme/SchemeContainer";
@@ -18,7 +18,8 @@ import { showNotification } from "reducers/notifications";
 import { IProfileState } from "reducers/profilesReducer";
 import DetailsPageRouter from "components/Scheme/ContributionRewardExtRewarders/DetailsPageRouter";
 import { combineLatest, Subscription } from "rxjs";
-import DaoDiscussionPage from "./DaoDiscussionPage";
+// import DaoDiscussionPage from "./DaoDiscussionPage";
+import ThreeBoxTreadPage from "./ThreeBoxTreadPage";
 import DaoSchemesPage from "./DaoSchemesPage";
 import DaoHistoryPage from "./DaoHistoryPage";
 import DaoMembersPage from "./DaoMembersPage";
@@ -49,7 +50,7 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress: "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f", // ownProps.match.params.daoAvatarAddress,
+    daoAvatarAddress: getArcSettings().daoAvatarContractAddress
   };
 };
 
@@ -69,12 +70,12 @@ class DaoContainer extends React.Component<IProps, null> {
     // TODO: use this once 3box fixes Box.getProfiles
     this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
-  
+
   // private daoJoinRoute = (routeProps: any) => <DaoJoinPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembershipRoute = (routeProps: any) => <DaoMembershipPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoHistoryRoute = (routeProps: any) => <DaoHistoryPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} />;
-  private daoDiscussionRoute = (routeProps: any) => <DaoDiscussionPage {...routeProps} dao={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} currentAccountProfile={this.props.currentAccountProfile} />;
+  private threeBoxTreadPage = (routeProps: any) => <ThreeBoxTreadPage {...routeProps} dao={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} currentAccountProfile={this.props.currentAccountProfile} />;
   private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} daoState={this.props.data[0]} />;
   private daoProposalRoute = (routeProps: any) =>
     <ProposalDetailsPage {...routeProps}
@@ -91,7 +92,7 @@ class DaoContainer extends React.Component<IProps, null> {
 
   private schemeRoute = (routeProps: any) => <SchemeContainer {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoSchemesRoute = (routeProps: any) => <DaoSchemesPage {...routeProps} daoState={this.props.data[0]} />;
-  
+
   private createProposalModalRoute = (route: any) => `/dao/scheme/${route.params.schemeId}/`;
   private daoJoinModalRoute = (route: any) => `/dao/dashboard/`;
 
@@ -102,7 +103,7 @@ class DaoContainer extends React.Component<IProps, null> {
 
 
     // const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
-    
+
     // console.log("MEMEME ", foundDaos);
 
     const daoState = this.props.data[0];
@@ -124,7 +125,7 @@ class DaoContainer extends React.Component<IProps, null> {
             <Route exact path="/dao/members"
               render={this.daoMembersRoute} />
             <Route exact path="/dao/discussion"
-              render={this.daoDiscussionRoute} />
+              render={this.threeBoxTreadPage} />
 
             <Route exact path="/dao/proposal/:proposalId"
               render={this.daoProposalRoute}
@@ -137,9 +138,9 @@ class DaoContainer extends React.Component<IProps, null> {
               render={this.schemeRoute} />
 
 
-            <Route exact path="/dao/plugins" 
+            <Route exact path="/dao/applications"
               render={this.daoSchemesRoute} />
-            
+
             <Route exact path="/dao/dashboard"
               render={this.daoDashboardRoute} />
 
@@ -178,7 +179,7 @@ const SubscribedDaoContainer = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    const daoAddress = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f";//props.match.params.daoAvatarAddress;
+    const daoAddress = getArcSettings().daoAvatarContractAddress;
     const dao =  arc.dao(daoAddress);
     const observable = combineLatest(
       dao.state({ subscribe: true, fetchAllData: true }), // DAO state

@@ -1,5 +1,5 @@
 import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake /*, Member*/ } from "@daostack/client";
-import { enableWalletProvider,  getArc } from "arc";
+import { enableWalletProvider,  getArc, getArcSettings } from "arc";
 import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
@@ -58,12 +58,7 @@ interface IState {
   membershipFee: string;
   stakedSGT: string;
   stakedSNGLS: string;
-  // snglsBalance: string;
-  // sgtBalance: string;
-  // ethBalance: string;
-  // genBalance: string;
-  // usdcBalance: string;
-  // daiBalance: string;
+
   userReputation: string;
 }
 
@@ -131,7 +126,6 @@ class DaoDashboard extends React.Component<IProps, IState> {
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
 
     this.props.history.push(`/dao/dashboard/join/`);
-    // this.props.history.push(`/dao/dashboard/join`);
   }
 
   private _handleNewProposal = (e: any): void => {
@@ -142,65 +136,29 @@ class DaoDashboard extends React.Component<IProps, IState> {
   public async componentDidMount() {
     const arc = getArc();
 
-    const feeContract = new arc.web3.eth.Contract([ { "constant": true, "inputs": [], "name": "listingFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "membershipFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "transactionFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "validationFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" } ],
-      "0xc7F243ccEEC5d8bD325cF159dbe7ad7a2B9384D9"
-    );
+    const feesContract = new arc.web3.eth.Contract(getArcSettings().feesContractABI, getArcSettings().feesContractAddress);
 
-    // const reputationStakingContractAddress = "0x1E44072256F56527F22134604C9c633eC4cEc86B";
-    // const memFeeStakingContractAddress = "0x877fF27181f814a6249285f312ed708EEaC961b5";
-
-    // const reputationContractAbi = [ { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "Lock", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "_beneficiary", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "Release", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "", "type": "address" } ], "name": "lockers", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "releaseTime", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "minLockingPeriod", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "sgtToken", "outputs": [ { "internalType": "contract IERC20", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalLocked", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "release", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "lock", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "contract IERC20", "name": "_sgtToken", "type": "address" }, { "internalType": "uint256", "name": "_minLockingPeriod", "type": "uint256" } ], "name": "initialize", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
-    // const memFeeContractAbi = [ { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "Lock", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "_beneficiary", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "Release", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "", "type": "address" } ], "name": "lockers", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "releaseTime", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "minLockingPeriod", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "sgtToken", "outputs": [ { "internalType": "contract IERC20", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalLocked", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "release", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "lock", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "contract IERC20", "name": "_sgtToken", "type": "address" }, { "internalType": "uint256", "name": "_minLockingPeriod", "type": "uint256" } ], "name": "initialize", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
-
-    // const reputationContract = new arc.web3.eth.Contract(reputationContractAbi, reputationStakingContractAddress);
-    // const memFeeStakingContract = new arc.web3.eth.Contract(memFeeContractAbi, memFeeStakingContractAddress);
-
-    // const reputationTotalStaked = arc.web3.utils.toBN(await reputationContract.methods.totalLocked().call());
-    // const memFeeTotalStaked = arc.web3.utils.toBN(await memFeeStakingContract.methods.totalLocked().call());
-    
     this.setState( 
       { 
-        transactionFee: arc.web3.utils.fromWei(await feeContract.methods.transactionFee().call()),
-        listingFee: arc.web3.utils.fromWei(await feeContract.methods.listingFee().call()),
-        validationFee: arc.web3.utils.fromWei(await feeContract.methods.validationFee().call()),
-        membershipFee:  arc.web3.utils.fromWei(await feeContract.methods.membershipFee().call()),
+        transactionFee: arc.web3.utils.fromWei(await feesContract.methods.transactionFee().call()),
+        listingFee: arc.web3.utils.fromWei(await feesContract.methods.listingFee().call()),
+        validationFee: arc.web3.utils.fromWei(await feesContract.methods.validationFee().call()),
+        membershipFee:  arc.web3.utils.fromWei(await feesContract.methods.membershipFee().call()),
 
-        // stakedSGT: (formatTokens(reputationTotalStaked, "SGT", 18)).split(' ')[0],
-        // stakedSNGLS: (formatTokens(memFeeTotalStaked, "SNGLS", 18)).split(' ')[0]
       }
     );
-
-    // console.log("DASHBOARD props ", this.props)
-    // const daoMember = await this.props.daoState.dao.member("0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956"/* this.props.currentAccountAddress */)
-
-    // console.log("MEMBER STATE ", await daoMember.state());
-
-
-
-
-    // const daoMembers = await this.props.daoState.dao.members({
-    //   orderBy: "balance",
-    //   orderDirection: "desc",
-    //   first: 5, 
-    //   skip: 0,
-    //   // address: this.props.currentAccountAddress
-    // }).pipe(first()).toPromise();
-
-    // console.log("DAOMEMBERS ON DASHBOARD", daoMember);
   }
 
   public render(): RenderOutput {
     //@ts-ignore
     const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress, t } = this.props;
     const proposals = data;
+    const arcSettings = getArcSettings();
 
-
-
-    console.log
     const proposalsHTML = proposals.map((proposal: Proposal) => {
       return (<ProposalHistoryRow key={"proposal_" + proposal.id} history={this.props.history} proposal={proposal} daoState={daoState} currentAccountAddress={currentAccountAddress} />);
     });
-    
+
     // const daoTotalRseputation = this.props.daoState.reputationTotalSupply;
 
     // const membersHTML = members.map((member) =>
@@ -208,7 +166,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
 
     return(
        <div className={css.membersContainer}>
-         <BreadcrumbsItem to={"/dao/members"}>DAO Members</BreadcrumbsItem>
+         <BreadcrumbsItem to={"/dao/members"}>{t("yourReputation")}</BreadcrumbsItem>
         
          <div className={css.pageHead}>
     <h1>{t("sidebar.dashboard")}</h1>
@@ -221,7 +179,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
               > {t("daojoin.getRep")} </a>
-              <span className={css.reputationBalance}>your reputation:<strong> 0.00% </strong></span>
+              <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
           </div>
         </div>
          {/* Key parameters div */}
@@ -320,14 +278,14 @@ class DaoDashboard extends React.Component<IProps, IState> {
                      <ul>
                          <li>
                             <span>SGT:</span>
-                            <p>     
-                             <SubscribedTotalStakedBalance stakingContractAddress={"0x1E44072256F56527F22134604C9c633eC4cEc86B"} tokenAddress={"0x498EE93981A2453a3F8b8939458977DF86dCce42"} key={"staked_token_" + "0x498EE93981A2453a3F8b8939458977DF86dCce42"} />       
+                            <p>
+                              <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} /> 
                             </p>
                           </li>
                          <li>
                             <span>Sngls:</span>
                             <p>
-                              <SubscribedTotalStakedBalance stakingContractAddress={"0x877fF27181f814a6249285f312ed708EEaC961b5"} tokenAddress={"0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} key={"staked_token_" + "0x4f0cF2Ca2BB02F76Ed298Da6b584AfeBeC1E44Ab"} />
+                              <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.membershipFeeStakingContractAddress} tokenAddress={arcSettings.snglsTokenContractAddress} key={"staked_token_" + arcSettings.snglsTokenContractAddress} />
                             </p>
                           </li>
                      </ul>
@@ -352,7 +310,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
           }
         >
           { proposals.length === 0 ?
-            <span>{t('dashboard.notPassedProposals')}<Link to={"/dao/proposal/"}>DAO&apos;s installed schemes</Link></span> :
+            <span>{t('dashboard.notPassedProposals')}<Link to={"/dao/proposal/"}></Link></span> :
             <table className={css.proposalHistoryTable}>
               <thead>
                 <tr className={css.proposalHistoryTableHeader}>
@@ -445,7 +403,7 @@ const SubscribedGetRep = withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f"}"
+            dao: "${props.daoState.address}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",

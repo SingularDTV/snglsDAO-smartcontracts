@@ -12,6 +12,7 @@ const balances = require("../balancesFromChain.json");
     for (const address in balances) {
         if (balances.hasOwnProperty(address)) {
             const balanceBN = new BN(balances[address]);
+            if (balanceBN.toString() === "0") continue;
             if (balanceBN.isNeg()) {
                 sumNeg.iadd(balanceBN);
             }

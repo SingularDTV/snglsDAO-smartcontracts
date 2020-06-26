@@ -6,9 +6,7 @@ import CreateUnknownGenericSchemeProposal from "components/Proposal/Create/Schem
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import { GenericSchemeRegistry } from "genericSchemeRegistry";
-import Analytics from "lib/analytics";
 import { History } from "history";
-import { Page } from "pages";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
@@ -65,12 +63,6 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
   public async componentDidMount() {
     document.addEventListener("keydown", this.handleKeyPress, false);
-
-    Analytics.track("Page View", {
-      "Page Name": Page.CreateProposal,
-      "DAO Address": "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f",
-      "Scheme Address": this.props.schemeId,
-    });
     const newState = {};
 
     /**
@@ -98,7 +90,7 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
   public render(): RenderOutput {
     //@ts-ignore
     const { t } = this.props;
-    const daoAvatarAddress = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f";
+    const daoAvatarAddress = this.props.data.dao;
     const scheme = this.props.data;
 
     let createSchemeComponent = <div />;
@@ -147,10 +139,10 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
     return (
       <div className={css.createProposalWrapper}>
-        <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>{t('notifications.create')}</BreadcrumbsItem>
         <h2 className={css.header}>
-          <span>+ New proposal <b>| {schemeTitle}</b></span>
-          <button className={css.closeButton} aria-label="Close Create Proposal Modal" onClick={this.handleClose}>&times;</button>
+          <span>{t("schema.newProposal")} <b>| {schemeTitle}</b></span>
+          <button className={css.closeButton} aria-label={t('proposal.closeCreateModal')} onClick={this.handleClose}>&times;</button>
         </h2>
         { createSchemeComponent }
       </div>
