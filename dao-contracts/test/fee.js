@@ -112,7 +112,6 @@ contract("Fee", async accounts => {
                 "12000000000000000000"
             ]
         };
-        let unnecessary;
         for (const func in functions) {
             if (functions.hasOwnProperty(func)) {
                 const arguments = functions[func];
