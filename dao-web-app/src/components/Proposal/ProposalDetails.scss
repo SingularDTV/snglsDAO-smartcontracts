@@ -92,10 +92,15 @@ button.disabled {
 }
 
 .disqus {
-  padding: 20px;
-  background-color: #fff;
+  // padding: 20px;
+  // background-color: #fff;
   position: relative;
   color: #fff;
+
+  h3 {
+    color: #fff;
+    text-transform: none;;
+  }
 }
 
 .clickable {
