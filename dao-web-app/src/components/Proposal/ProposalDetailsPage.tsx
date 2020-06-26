@@ -30,6 +30,7 @@ import VoteGraph from "./Voting/VoteGraph";
 import VotersModal from "./Voting/VotersModal";
 import * as css from "./ProposalDetails.scss";
 import { withTranslation } from 'react-i18next';
+import {getWeb3Provider} from "../../arc";
 
 
 const ReactMarkdown = require("react-markdown");
@@ -142,6 +143,8 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
       [css.voteBox]: true,
       clearfix: true,
     });
+
+    const web3Provider = getWeb3Provider();
 
     return (
       <div className={css.wrapper}>
@@ -264,7 +267,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
 
           <h3 className={css.discussionTitle}>{t("proposal.discussion")}</h3>
                 <div className={css.disqus}>
-                  <ThreeBoxTread currentAccountAddress={currentAccountAddress} chatName={proposal.id} />
+                  <ThreeBoxTread web3Provider={web3Provider} currentAccountAddress={currentAccountAddress} chatName={proposal.id} />
                 </div>
 
             </div>

@@ -7,18 +7,17 @@ import Loading from "components/Shared/Loading";
 import ThreeBoxMessageList from "./ThreeBoxMessageList"
 import ThreeBoxAddMessage from "./ThreeBoxAddMessage"
 import { IProfileState } from "reducers/profilesReducer";
-import { getWeb3Provider } from "../../../arc";
 
 interface IProps {
   currentAccountAddress: string;
   threeBox?: any;
+  web3Provider?: any;
   chatName: string;
   currentAccountProfile: IProfileState;
 }
 
-const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName }: IProps) => {
-  const provider = getWeb3Provider()
-  const [web3Provider, setWeb3Provider] = useState(null)
+const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName, web3Provider }: IProps) => {
+
   const [thread, setThread] = useState(null)
   const [currDID, setCurrDID] = useState(null)
   const [currProfile, setCurrProfile] = useState(null)
@@ -27,10 +26,6 @@ const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName }: IProps) =>
   useEffect(() => {
     onGetCurrUser()
   }, [])
-
-  useEffect(() =>{
-    provider && setWeb3Provider(provider)
-  }, [provider])
 
   useEffect(() => {
     threeBox && openTread()
