@@ -75,6 +75,16 @@ const profilesReducer = (state = initialState, action: any) => {
       }
     }
 
+    case ActionTypes.SAVE_THREEBOX: {
+      switch (action.sequence) {
+        case AsyncActionSequence.Success:
+          return {...state, ...payload }
+        default: {
+          return state;
+        }
+      }
+    }
+
     case ActionTypes.FOLLOW_ITEM: {
       switch (action.sequence) {
         case AsyncActionSequence.Success: {

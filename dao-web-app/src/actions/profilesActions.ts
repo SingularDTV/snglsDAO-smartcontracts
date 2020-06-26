@@ -32,6 +32,14 @@ export function getProfilesForAddresses(addresses: string[]) {
 export function getProfile(accountAddress: string, currentAccount = false) {
   return async (dispatch: any) => {
     try {
+      const web3Provider = await getWeb3Provider()
+      console.log('web3Provider====', web3Provider, await Box.isLoggedIn(accountAddress))
+      // let box = null;
+      // if(web3Provider){
+      //   box = await Box.openBox(accountAddress, web3Provider)
+      //   await box.syncDone
+      // }
+      // console.log('box', box)
       // Get profile data for this account
       const profile: any = await Box.getProfile(accountAddress);
 
@@ -55,7 +63,7 @@ export function getProfile(accountAddress: string, currentAccount = false) {
         dispatch({
           type: ActionTypes.GET_PROFILE_DATA,
           sequence: AsyncActionSequence.Success,
-          payload: { profiles: { [accountAddress]: profile } },
+          payload: { profiles: { [accountAddress]: profile, threeBoxSpace: space } },
         });
 
         if (currentAccount) {
@@ -99,6 +107,16 @@ export function threeBoxLogout() {
   };
 }
 
+export function updateThreeBox(threeBox: any = null, threeBoxSpace: any = null) {
+  return async (dispatch: any) => {
+    dispatch({
+      type: ActionTypes.SAVE_THREEBOX,
+      sequence: AsyncActionSequence.Success,
+      payload: { threeBox, threeBoxSpace },
+    });
+  };
+}
+
 export type UpdateProfileAction = IAsyncAction<"UPDATE_PROFILE", { accountAddress: string }, { description: string; name: string; socialURLs?: any }>;
 
 export function updateProfile(accountAddress: string, name: string, description: string) {
@@ -117,6 +135,7 @@ export function updateProfile(accountAddress: string, name: string, description:
         threeBox = state.profiles.threeBox;
       } else {
         const web3Provider = await getWeb3Provider();
+        console.log('updateProfile openBox====')
         threeBox = await Box.openBox(accountAddress, web3Provider);
       }
       await threeBox.syncDone;
@@ -172,6 +191,7 @@ export function toggleFollow(accountAddress: string, type: FollowType, id: strin
         threeBox = state.profiles.threeBox;
       } else {
         const web3Provider = await getWeb3Provider();
+        console.log('toggleFollow openBox====')
         threeBox = await Box.openBox(accountAddress, web3Provider);
       }
 
