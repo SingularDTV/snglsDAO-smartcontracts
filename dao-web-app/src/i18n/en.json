@@ -81,7 +81,7 @@
         "amountToTreasury": "The amount of SNGLS needed to be paid to the treasury ",
         "toAddToProtocol": "to add content to the protocol.",
         "transFee": "Transaction Fee: %",
-        "transFeeDescription": "The % of the transaction that the protocol puts into the <br/>treasury.",
+        "transFeeDescription": "The % of the transaction that the protocol puts into the treasury.",
         "comingSoon": "COMING SOON",
         "validationFee": "Validation Fee: SNGLS",
         "minimumAmount": "Minimum amount paid to validators.",
