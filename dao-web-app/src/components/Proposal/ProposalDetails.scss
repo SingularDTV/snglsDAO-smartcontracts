@@ -92,6 +92,8 @@ button.disabled {
 }
 
 .disqus {
+  padding: 20px;
+  background-color: #fff;
   position: relative;
   color: #fff;
 }
@@ -127,7 +129,7 @@ button.disabled {
   flex-grow: 2;
   // padding-right: 25px;
   position: relative;
-  
+
 
   &Cont {
     padding: 35px 46px;
@@ -478,6 +480,7 @@ button.disabled {
   }
 
   .disqus {
+    background-color: #fff;
     position: relative;
     color: #fff;
   }
@@ -566,6 +569,7 @@ button.disabled {
   }
 
   .disqus {
+    background-color: #fff;
     padding: 15px;
     position: relative;
   }
