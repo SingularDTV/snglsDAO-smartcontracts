@@ -2,7 +2,8 @@
     "orgName": "snglsDAO",
     "tokenName": "snglsDAO Governance Token",
     "tokenSymbol": "SGT",
-    "tokenAddress": "0xFD22ac4045A030C280d4054AE6189FBF4E244B39",
+    "tokenAddress": "0x15A9b43067719376115242B347d2B35aF4aaf386",
+    "daoCreatorAddr": "0xa370F508f3241a5675480A9c9924E642A74245Cb",
     "SchemeRegistrar": [
         {
             "voteRegisterParams": 1,
@@ -11,36 +12,17 @@
     ],
     "UGenericScheme": [
         {
-            "targetContract": "0xa4a539c9c6882F4B1f235058A3c86a470D7ddcF2",
+            "targetContract": "0x2c3721F4DAb79abc020d54EC34C21a4B90287D00",
             "voteParams": 2
         }
     ],
     "StandAloneContracts": [
         {
-            "name": "Fee",
-            "fromArc": false,
-            "constructor": true,
-            "params": [
-                "100000000000000000000",
-                "1000000000000000000",
-                "100000000000000000000",
-                "1500000000000000000000"
-            ],
-            "runFunctions": [
-                {
-                    "functionName": "transferOwnership",
-                    "params": [
-                        "AvatarAddress"
-                    ]
-                }
-            ]
-        },
-        {
             "name": "MembershipFeeStaking",
             "fromArc": false,
             "constructor": false,
             "params": [
-                "0xD681ED86eBa1b64086BF532e8b88c5bE3b74cb93",
+                "0x83928232e2103A4790752792fa6608bf69ba72B7",
                 "0"
             ]
         }
@@ -123,7 +105,7 @@
         "UGenericScheme": true
     },
     "unregisterOwner": true,
-    "useDaoCreator": false,
+    "useDaoCreator": true,
     "useUController": false,
     "founders": []
 }

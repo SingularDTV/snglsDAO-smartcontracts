@@ -2220,28 +2220,28 @@
       },
       "0.0.1-rc.32": {
         "name": "snglsDAO",
-        "Avatar": "0x0eB7EFd4fC857C31760D9aE82b3f5dBa3593D903",
-        "DAOToken": "0x15A9b43067719376115242B347d2B35aF4aaf386",
-        "Reputation": "0xd5464C6DD4CDd17cA628eB11cf7a85c440653488",
-        "Controller": "0x71C2E4B2DE84670b144Ea2c1A12b9a39e607e854",
+        "Avatar": "0x4D3c799890d42aab8851Efadf26fa8E8E4a24046",
+        "DAOToken": "0xdB5e70eD4D179091c8f814276aD1e54471dF9e65",
+        "Reputation": "0x1f28496Fc0a4EdC146506CB7aF779826F8B44217",
+        "Controller": "0x49D18F7a862032cEebbF4a77387aB97DC8AeF37C",
         "Schemes": [
           {
             "name": "LockingSGT4Reputation",
             "alias": "LockingSGT4Reputation",
-            "address": "0xCAbF5CD2A9f9feBB3174a9279311B148A42d2728",
+            "address": "0x1c05dbffcDfe2290ccFa0118D1DC714C6E99a287",
             "arcVersion": "0.0.1-rc.32"
           },
           {
             "name": "ContributionReward",
             "alias": "ContributionReward",
-            "address": "0x8457CF3217524e9505510fF48780B69695ECfCdF",
+            "address": "0x54e93b4B63F79e016CBdbb535EB25E39b635403F",
             "arcVersion": "0.0.1-rc.32"
           }
         ],
         "StandAloneContracts": [
           {
             "name": "MembershipFeeStaking",
-            "address": "0x566fc951b30BB21cFbB96eACf8eA6B213aDF1E66",
+            "address": "0x0d83d97693b24626b83D45c06502C2bb0850Bf54",
             "arcVersion": "0.0.1-rc.32"
           }
         ],
