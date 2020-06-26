@@ -78,6 +78,7 @@
   },
   "dependencies": {
     "3box": "^1.20.1",
+    "@ant-design/icons": "^4.2.1",
     "@burner-wallet/burner-connect-provider": "^0.1.1",
     "@daostack/client": "0.2.66",
     "@dorgtech/daocreator-ui": "^1.0.8",
@@ -88,6 +89,7 @@
     "@sentry/browser": "^5.0.8",
     "@toruslabs/torus-embed": "^1.2.3",
     "@walletconnect/web3-provider": "^1.0.0-beta.37",
+    "antd": "^4.3.5",
     "axios": "^0.19.0",
     "bn.js": "^4.11.8",
     "classnames": "^2.2.5",

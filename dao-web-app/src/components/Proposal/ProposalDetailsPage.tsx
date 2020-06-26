@@ -4,7 +4,6 @@ import AccountPopup from "components/Account/AccountPopup";
 import AccountProfileName from "components/Account/AccountProfileName";
 import ProposalCountdown from "components/Shared/ProposalCountdown";
 import FollowButton from "components/Shared/FollowButton";
-import { DiscussionEmbed } from "disqus-react";
 import { humanProposalTitle, ensureHttps } from "lib/util";
 import { schemeName } from "lib/schemeUtils";
 import Analytics from "lib/analytics";
@@ -16,6 +15,7 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { closingTime, proposalEnded } from "lib/proposalHelpers";
 import TagsSelector from "components/Proposal/Create/SchemeForms/TagsSelector";
 import { rewarderContractName } from "components/Scheme/ContributionRewardExtRewarders/rewardersProps";
+import ThreeBoxTread from "components/DAO/ThreeBoxTreadPage/ThreeBoxTread";
 import SocialShareModal from "../Shared/SocialShareModal";
 import ActionButton from "./ActionButton";
 import BoostAmount from "./Staking/BoostAmount";
@@ -78,7 +78,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
   private disqusConfig = { url: "", identifier: "", title: "" };
   private proposalClass = classNames({
     [css.proposal]: true,
-    clearfix: true,
+    // clearfix: true,
   });
 
   private showShareModal = (_event: any): void => {
@@ -163,7 +163,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
 
             <div>
 
-                
+
               <div className={css.statusContainer}>
                 <ProposalStatus proposalState={proposal} />
               </div>
@@ -264,7 +264,7 @@ class ProposalDetailsPage extends React.Component<IProps, IState> {
 
           <h3 className={css.discussionTitle}>{t("proposal.discussion")}</h3>
                 <div className={css.disqus}>
-                  <DiscussionEmbed shortname={process.env.DISQUS_SITE} config={this.disqusConfig} />
+                  <ThreeBoxTread currentAccountAddress={currentAccountAddress} chatName={proposal.id} />
                 </div>
 
             </div>
