@@ -6,7 +6,7 @@
         "applications": "应用程序",
         "members": "DAO会员中心",
         "history": "过往记录",
-        "wall": "DAO Wall",
+        "wall": "DAO讨论区",
         "treasury": "DAO储备资金",
         "stakes": "DAO质押",
         "buy": "$ 购买 SNGLS",
@@ -78,8 +78,8 @@
         "listingRate": "上架费用：SNGLS",
         "amountToTreasury": "需注入储备资金池的SNGLS数量",
         "toAddToProtocol": "将内容上架到协定上。",
-        "transFee": "Transaction Fee: %",
-        "transFeeDescription": "协定会将内容交易所产生的交易费用的某个百份比置入于<br/>储备资金。",
+        "transFee": "交易费用：%",
+        "transFeeDescription": "协定会将内容交易所产生的交易费用的某个百份比置入于储备资金。",
         "comingSoon": "敬请期待",
         "validationFee": "验证费用：SNGLS",
         "minimumAmount": "给付验证者的最低收费。",
@@ -536,6 +536,15 @@
     },
     "cookieStart": "Alchemy在您的设备上存储Cookie，以增强平台体验并分析平台使用情况。请阅读",
     "cookieLinkPolicy": "Cookie政策",
-    "cookieMoreInformation": "以获得更多信息。"
+    "cookieMoreInformation": "以获得更多信息。",
+    "disclaimer": "DISCLAIMER",
+    "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
+    "iAccept": "我同意",
+    "fullProfile": "Full Profile",
+    "yourReputation": "your reputation: ",
+    "en": "ENG",
+    "tchin": "繁體中文",
+    "schin": "简体中文",
+    "protocolParameters": "Protocol Parameters"
     
 }

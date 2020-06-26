@@ -6,7 +6,7 @@
         "applications": "應用",
         "members": "DAO會員中心",
         "history": "過往記錄",
-        "wall": "DAO Wall",
+        "wall": "DAO討論區",
         "treasury": "DAO儲備資金",
         "stakes": "DAO質押",
         "buy": "$ 購買 SNGLS",
@@ -78,7 +78,7 @@
         "listingRate": "上架費用：SNGLS",
         "amountToTreasury": "需注入儲備資金池的SNGLS數量",
         "toAddToProtocol": "將內容上架到協定上。",
-        "transFee": "Transaction Fee: %",
+        "transFee": "交易費用：%",
         "transFeeDescription": "協定會將內容交易所產生的交易費用的某個百份比置入於<br/>儲備資金。",
         "comingSoon": "敬請期待",
         "validationFee": "驗証費用：SNGLS",
@@ -536,6 +536,15 @@
     },
     "cookieStart": "Alchemy在您的設備上存儲Cookie，以增強平台體驗並分析平台使用情況。 請閱讀",
     "cookieLinkPolicy": "Cookie政策",
-    "cookieMoreInformation": "以獲得更多信息。"
+    "cookieMoreInformation": "以獲得更多信息。",
+    "disclaimer": "DISCLAIMER",
+    "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
+    "iAccept": "我同意",
+    "fullProfile": "Full Profile",
+    "yourReputation": "your reputation: ",
+    "en": "ENG",
+    "tchin": "繁體中文",
+    "schin": "简体中文",
+    "protocolParameters": "Protocol Parameters"
     
 }
