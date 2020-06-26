@@ -15,7 +15,7 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { closingTime, proposalEnded } from "lib/proposalHelpers";
 import TagsSelector from "components/Proposal/Create/SchemeForms/TagsSelector";
 import { rewarderContractName } from "components/Scheme/ContributionRewardExtRewarders/rewardersProps";
-import ThreeBoxTread from "components/DAO/ThreeBoxTreadPage/ThreeBoxTread";
+import ThreeBoxTread from "components/Dao/ThreeBoxTreadPage/ThreeBoxTread";
 import SocialShareModal from "../Shared/SocialShareModal";
 import ActionButton from "./ActionButton";
 import BoostAmount from "./Staking/BoostAmount";
