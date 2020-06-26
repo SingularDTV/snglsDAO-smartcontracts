@@ -11,27 +11,31 @@ interface ThreeBoxMessageListProps {
   currConfig: any;
 }
 
+let isSubscribed = true
+
 const ThreeBoxMessageList =({ thread, currDID, currConfig }: ThreeBoxMessageListProps) =>{
 
   const [messages, setMessages] =useState(null);
   const [moderators, setModerators] =useState(null);
 
   useEffect(()=>{
+    isSubscribed = true
     if(thread) {
       onGetPosts();
       onGetListModerators();
       thread.onUpdate(onGetPosts);
+      return () => isSubscribed = false
     }
   }, [thread]);
 
   const onGetPosts = async() => {
     const res = await thread.getPosts();
-    setMessages(res);
+    isSubscribed && setMessages(res);
   };
 
   const onGetListModerators = async() => {
     const res = await thread.listModerators();
-    setModerators(res);
+    isSubscribed && setModerators(res);
   };
 
   const handleRemoveMessage = useCallback(async (postId: string) => {

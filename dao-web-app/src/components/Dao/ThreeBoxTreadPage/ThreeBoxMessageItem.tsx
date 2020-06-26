@@ -19,19 +19,25 @@ interface ThreeBoxMessageListProps {
   message: any;
 }
 
+let isSubscribed = true
+
 const ThreeBoxMessageList =({  author, message, timestamp, postId, onRemoveMessage, isModerator, currDID}: ThreeBoxMessageListProps) =>{
   const [profile, setProfile]= useState(null);
   const [personConfig, setPersonConfig]= useState(null);
 
   useEffect(()=>{
+    isSubscribed = true
     onGetProfile()
+    return () => isSubscribed = false
   }, [])
 
   const onGetProfile = async () => {
     const person = await getProfile(author)
     const { links } = await getConfig(author)
-    setProfile(person)
-    setPersonConfig(links[0])
+    if(isSubscribed){
+      setProfile(person)
+      setPersonConfig(links[0])
+    }
   }
 
   const RemoveIcon = () =>{
