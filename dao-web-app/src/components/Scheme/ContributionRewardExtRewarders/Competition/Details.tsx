@@ -288,7 +288,7 @@ class CompetitionDetails extends React.Component<IProps, IStateProps> {
                           "Create a submission"
                   }
                   >
-                    <a className={classNames({[css.blueButton]: true, [css.disabled]: submissionsAreDisabled})}
+                    <a className={classNames({[css.redButton]: true, [css.disabled]: submissionsAreDisabled})}
                       href="#!"
                       onClick={submissionsAreDisabled ? undefined : this.openNewSubmissionModal}
                       data-test-id="createSuggestion"

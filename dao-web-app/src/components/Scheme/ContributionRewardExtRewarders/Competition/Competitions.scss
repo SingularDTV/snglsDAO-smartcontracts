@@ -1,16 +1,19 @@
 /** <globally-scoped> */
-a.blueButton {
+a.redButton {
   font-size: 13px;
   color: white;
-  background-color: rgba(5, 118, 255, 1);
+  background-color: #D40D26;
   transition: all 0.25s ease;
   border-radius: 15px;
   display: inline-block;
   padding: 8px 15px;
   white-space: nowrap;
+  text-transform: uppercase; 
+  letter-spacing: 1.61455px;
+  box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7); 
 
   &:hover {
-    background-color: rgba(19, 46, 91, 1);
+    box-shadow: none;
     color: $white;
   }
 
@@ -798,13 +801,13 @@ a.blueButton {
       flex-grow: 1;
       padding-left: 12px;
 
-      a.blueButton {
+      a.redButton {
         padding: 3px 14px;
         display: flex;
         align-items: center;
       }
 
-      a.blueButton.voteButton {
+      a.redButton.voteButton {
         img {
           margin-left: 7px;
           position: relative;
@@ -812,7 +815,7 @@ a.blueButton {
         }
       }
 
-      a.blueButton.redeemButton {
+      a.redButton.redeemButton {
         padding-top: 5px; // correct for diff in icons
         padding-bottom: 5px; // correct for diff in icons
         img {

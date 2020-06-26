@@ -1201,19 +1201,21 @@ h4 {
       display: inline-block;
       white-space: nowrap;
 
-      a.blueButton {
+      a.redButton {
         position: relative;
         top: 12px;
         height: 30px;
         line-height: 30px;
         font-size: 13px;
         color: white;
-        background-color: rgba(5, 118, 255, 1);
+        background-color: #D40D26;
         transition: all 0.25s ease;
         border-radius: 15px;
         display: inline-block;
         padding: 0 30px;
-        font-weight: bold;
+        text-transform: uppercase; 
+        letter-spacing: 1.61455px;
+        box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7); 
         cursor: pointer;
 
         img {
@@ -1335,7 +1337,7 @@ h4 {
     .header {
         height: 64px;
         padding: 0 15px;
-        width: calc(100% - 30px);
+        // width: calc(100% - 30px);
         grid-gap: 15px;
 
         .accountInfo {
