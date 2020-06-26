@@ -23,6 +23,37 @@
   clear: both;
 }
 
+:global(.clearfix:before) {
+    display: none;
+}
+
+:global(.ant-skeleton-header .ant-skeleton-avatar) {
+  background: #ffffff1f;
+}
+
+:global(.ant-skeleton-content .ant-skeleton-paragraph > li) {
+  background: #ffffff1f;
+}
+
+:global(.ant-skeleton-content .ant-skeleton-title) {
+  background: #ffffff1f;
+  margin-top: 0px;
+}
+
+:global(.ant-skeleton-with-avatar .ant-skeleton-content .ant-skeleton-title) {
+  margin-top: 0px;
+}
+
+:global(.ant-skeleton-header .ant-skeleton-avatar-lg.ant-skeleton-avatar-circle) {
+  border-radius: 0;
+  width: 32px;
+  height: 32px;
+}
+
+:global(.ant-skeleton-header) {
+  padding-right: 13px;
+}
+
 /**
  * the Web3Modal popup
  */

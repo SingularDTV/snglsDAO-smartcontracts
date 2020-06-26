@@ -3,8 +3,10 @@ import { useState } from "react";
 import { Comment, Form, Button, Input, Skeleton } from 'antd';
 
 import AccountImage from "../../Account/AccountImage";
+import * as style from './ThreeBoxTreadPage.scss'
 
 const { TextArea } = Input;
+const { Item } = Form;
 
 interface ThreeBoxAddMessageProps {
   thread: any;
@@ -14,41 +16,43 @@ interface ThreeBoxAddMessageProps {
 
 const ThreeBoxAddMessage =({ thread, profile, currentAddress }: ThreeBoxAddMessageProps) => {
   const [value, setValue] = useState('')
-  const [isSubmitting, seIsSubmittingt] = useState(false)
+  const [isSubmitting, seIsSubmitting] = useState(false)
 
   const handleChange = ({target: {value: val}}: any) => {
     setValue(val)
   };
 
   const handleSubmit = async () =>{
-    seIsSubmittingt(true)
+    seIsSubmitting(true)
     try{
       await thread.post(value)
       setValue('')
     } finally {
-      seIsSubmittingt(false)
+      seIsSubmitting(false)
     }
   }
 
   return (
+    <div className={style.antForm}>
     <Comment
-      avatar={<AccountImage profile={profile} width={40} accountAddress={currentAddress}  />}
+      avatar={<div className={style.photo}><AccountImage profile={profile} width={40} accountAddress={currentAddress}  /></div>}
       content={thread
         ? (
           <>
-            <Form.Item>
+            <Item>
               <TextArea rows={4} onChange={handleChange} value={value} />
-            </Form.Item>
-            <Form.Item>
-              <Button htmlType="submit" loading={isSubmitting} disabled={isSubmitting || !value} onClick={handleSubmit} type="primary">
+            </Item>
+            <Item>
+              <Button htmlType="submit" className={style.antFormButton} loading={isSubmitting} disabled={isSubmitting || !value} onClick={handleSubmit} type="primary">
                 Add message
               </Button>
-            </Form.Item>
+            </Item>
           </>
         )
         : (<Skeleton />)
       }
     />
+    </div>
   )
 }
 

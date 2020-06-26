@@ -5,6 +5,8 @@ import { getProfile, getConfig } from '3box';
 import { Comment, Tooltip, Popconfirm } from 'antd';
 import { DeleteOutlined, LoadingOutlined } from '@ant-design/icons';
 
+import * as style from './ThreeBoxTreadPage.scss'
+
 import AccountImage from "../../Account/AccountImage";
 
 interface ThreeBoxMessageListProps {
@@ -46,16 +48,18 @@ const ThreeBoxMessageList =({  author, message, timestamp, postId, onRemoveMessa
         okText="Yes"
         cancelText="No"
       >
-        <DeleteOutlined style={{ color:'hotpink' }} />
+        <DeleteOutlined style={{ color:'darkgray' }} />
       </Popconfirm>
     )
   }
 
-  return <Comment
+  return  (
+  <div className={style.blockMessage}>
+  <Comment
     author={profile?.name ||  <LoadingOutlined />}
-    avatar={<AccountImage profile={profile} width={40} accountAddress={personConfig?.address}  />}
+    avatar={<p className={style.photo}><AccountImage profile={profile} width={40} accountAddress={personConfig?.address}  /></p>}
     actions={(currDID === personConfig?.did || isModerator) && [<RemoveIcon />]}
-    content={<p>{message?.data || message}</p>}
+    content={<p className={style.text}>{message?.data || message}</p>}
     datetime={
       <Tooltip
         title={moment(timestamp * 1000)
@@ -70,6 +74,8 @@ const ThreeBoxMessageList =({  author, message, timestamp, postId, onRemoveMessa
       </Tooltip>
     }
   />
+  </div>
+  )
 }
 
 export default ThreeBoxMessageList
