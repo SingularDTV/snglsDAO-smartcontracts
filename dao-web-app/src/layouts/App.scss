@@ -1166,6 +1166,8 @@ h4 {
   bottom: 0px;
   z-index: 999999;
   display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
 
   .cookieDisclaimer {
     padding: 25px;

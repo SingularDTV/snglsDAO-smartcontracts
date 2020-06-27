@@ -556,6 +556,24 @@ input {
 }
 
 @media (max-width: 768px) {
+  .profileContainer {
+    form {
+      padding: 0 !important;
+      width: calc(100% - 30px);
+      left: 15px;
+      position: relative;
+      grid-template-columns: 1fr;
+      margin-bottom: 30px;
+
+      .profileContent {
+        padding: 20px;
+      }
+    }
+
+    .otherInfoContainer {
+      padding: 20px;
+    }
+  }
     .targetAccount:hover {
     .avatar {
         width: 80px;
