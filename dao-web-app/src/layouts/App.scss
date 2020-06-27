@@ -771,6 +771,8 @@ h4 {
     &.navigation {
         text-align: left;
         display: inline-block;
+        position: relative;
+        top: 3px;
         ul {
             list-style: none;
             padding: 0;

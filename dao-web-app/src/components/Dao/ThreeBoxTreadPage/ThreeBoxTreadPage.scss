@@ -19,10 +19,12 @@
     z-index: -1;
   }
   
-  h3 {
+  h5 {
     color: #fff;
     text-transform: none;
     padding: 20px;
+    text-align: center;
+    font-size: 18px;
   }
 
   .antForm {
@@ -46,9 +48,13 @@
 }
 
 .title {
-  text-align: center;
-  color: #fff;
-  padding: 20px;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 30px;
+    padding-bottom: 3px;
+    // padding-top: 10px;
+    text-transform: uppercase;
 }
 
 .antForm {

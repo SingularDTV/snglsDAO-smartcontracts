@@ -13,12 +13,14 @@ interface IProps {
 const ThreeBoxTreadPage = ({ currentAccountAddress }: IProps) => {
     const web3Provider = getWeb3Provider();
   return(
-    <div className={style.page}>
-      <BreadcrumbsItem to={"/dao/discussion"}>Discussion</BreadcrumbsItem>
+    <div>
       <h2 className={style.title}>
         Common Discuss
       </h2>
-      <ThreeBoxTread chatName="commonTread" web3Provider={web3Provider} currentAccountAddress={currentAccountAddress}/>
+      <div className={style.page}>
+        <BreadcrumbsItem to={"/dao/discussion"}>Discussion</BreadcrumbsItem>
+        <ThreeBoxTread chatName="commonTread" web3Provider={web3Provider} currentAccountAddress={currentAccountAddress}/>
+      </div>
     </div>
   );
 }

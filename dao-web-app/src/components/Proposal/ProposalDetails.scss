@@ -97,7 +97,7 @@ button.disabled {
   position: relative;
   color: #fff;
 
-  h3 {
+  h5 {
     color: #fff;
     text-transform: none;;
   }
@@ -485,9 +485,12 @@ button.disabled {
   }
 
   .disqus {
-    background-color: #fff;
+    // background-color: #fff;
     position: relative;
     color: #fff;
+    h5 {
+      color: #fff;
+    }
   }
 }
 
@@ -575,9 +578,14 @@ button.disabled {
   }
 
   .disqus {
-    background-color: #fff;
-    padding: 15px;
+    // background-color: #fff;
+    color: #fff;
+    // padding: 15px;
     position: relative;
+
+    h5 {
+      color: #fff;
+    }
   }
 
   .voteButtonsBottom {

@@ -44,9 +44,9 @@ class DaoHistoryPage extends React.Component<IProps, null> {
         <BreadcrumbsItem to={"/dao/history"}>{t("sidebar.history")}</BreadcrumbsItem>
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
-          <div className={css.daoHistoryHeader}>
+          <h2 className={css.daoHistoryHeader}>
           {t("sidebar.history")}
-          </div>
+          </h2>
         {/* </Sticky> */}
 
         <InfiniteScroll
