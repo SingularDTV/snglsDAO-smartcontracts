@@ -89,18 +89,18 @@ class DaoSchemesPage extends React.Component<IProps, null> {
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
 
-        {/* <div className={css.pageHead}>
+        <div className={css.pageHead}>
           <h2>Applications</h2>
           <div>
             <a className={css.redButton}
               href="#!"
               data-test-id="openJoin"
-            > Apps </a>
+            >Apps manager</a>
           </div>
-        </div> */}
+        </div>
 
 
-        <h2>Applications</h2>
+        {/* <h2>Applications</h2> */}
         {/* </Sticky> */}
         {(allKnownSchemes.length + unknownSchemes.length) === 0
           ? <div>
