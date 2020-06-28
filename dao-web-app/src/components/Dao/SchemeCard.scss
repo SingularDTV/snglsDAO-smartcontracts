@@ -57,7 +57,7 @@
     }
 
     div {
-      padding-top: 10px;
+      // padding-top: 10px;
       font-size: 16px;
       font-family: $body-font;
       text-transform: uppercase;
@@ -65,8 +65,13 @@
 
       &.headerItems {
         line-height: normal;
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
 
         & > div {
+          flex-basis: auto;
+          flex-grow: 1;
           display: inline-block;
           font-size: 15px;
           color: #fff;
@@ -181,11 +186,29 @@ a.proposalTitle {
   }
 }
 
+@media (max-width: 992px) {
+  .wrapper {
+    a.headerLink {
+      div {
+        &.headerItems {
+          display: grid;
+          justify-content: normal;
+          text-align: left;
+          grid-gap: 10px;
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 425px) {
+
   .wrapper {
     border-radius: 0;
     width: 100%;
   }
+
+
 
   .numProposals {
     padding-left: 10px;
