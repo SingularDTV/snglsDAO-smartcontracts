@@ -50,7 +50,7 @@ class StakeGraph extends React.Component<IProps, null> {
               <div className={css.stakesForTitle}>
               <img className={css.defaultIcon} src="/assets/images/Icon/v-small-line.svg"/>
               <img className={css.detailIcon} src="/assets/images/Icon/v-small.svg"/>
-                <b>{formatTokens(proposal.stakesFor)} Pass</b>
+                <b>{formatTokens(proposal.stakesFor)} {t('proposal.pass')}</b>
               </div>
               <div className={css.stakesForLine}><span style={{ width: passWidth + "%" }}></span></div>
             </div>
@@ -58,7 +58,7 @@ class StakeGraph extends React.Component<IProps, null> {
               <div className={css.stakesAgainstTitle}>
               <img className={css.defaultIcon} src="/assets/images/Icon/x-small-line.svg"/>
               <img className={css.detailIcon} src="/assets/images/Icon/x-small.svg"/>
-                <b>{formatTokens(proposal.stakesAgainst)} Fail</b>
+                <b>{formatTokens(proposal.stakesAgainst)} {t('proposal.fail')}</b>
               </div>
               <div className={css.stakesAgainstLine}><span style={{ width: failWidth + "%" }}></span></div>
             </div>

@@ -121,7 +121,9 @@
         "name": "名稱",
         "address": "錢包地址",
         "reputation": "聲譽值",
-        "socVerification": "通過驗証的社交帳戶"
+        "socVerification": "通過驗証的社交帳戶",
+        "alreadyStaked": "已質押",
+        "balance": "結餘:"
     },
     "schemas": {
         "noSchemas": "沒有已套用方案",
@@ -389,7 +391,9 @@
         "reputationRewardToSplit": "聲譽值獎勵拆分",
         "externalTokenRewardSplit": "其他代幣獎勵拆分",
         "daoTokenRewardToSplit": "DAO 代幣({{tokenSymbol}}) 獎勵拆分",
-        "submitProposal": "提交提案"
+        "submitProposal": "提交提案",
+        "backToDashboard": "返回概要页面",
+        "proposal": "提案"
     },
     "proposal": {
         "forStaking": "質押於提案，您可獲得：",
@@ -545,6 +549,7 @@
     "en": "ENG",
     "tchin": "繁體中文",
     "schin": "简体中文",
-    "protocolParameters": "Protocol Parameters"
-    
+    "protocolParameters": "Protocol Parameters",
+    "limit150": "告訴DAO關於你的簡介"
+
 }

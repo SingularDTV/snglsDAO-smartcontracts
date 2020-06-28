@@ -563,5 +563,6 @@
     "en": "ENG",
     "tchin": "繁體中文",
     "schin": "简体中文",
-    "protocolParameters": "Protocol Parameters"
+    "protocolParameters": "Protocol Parameters",
+    "limit150": "Limit 150 characters"
 }

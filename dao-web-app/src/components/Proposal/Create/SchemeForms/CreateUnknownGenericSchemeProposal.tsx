@@ -261,7 +261,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                   </div>
 
                   <div className={css.labelInput}>
-                    <label htmlFor="Validationfee">{t('proposal.validationFee')}</label>
+                    <label htmlFor="Validationfee">{t('dashboard.validationFee')}</label>
                     <Field
                       id="Validationfee"
                       maxLength={120}

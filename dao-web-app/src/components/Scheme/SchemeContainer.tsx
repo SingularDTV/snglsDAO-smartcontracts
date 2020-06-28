@@ -183,7 +183,7 @@ class SchemeContainer extends React.Component<IProps, IState> {
               <Link className={openBountiesTabClass} to={`/dao/scheme/${schemeId}/openbounties/`}>{t("schema.openBounties")}</Link>
             }
 
-            <TrainingTooltip placement="top" overlay={"Learn about the protocol parameters for this scheme"}>
+            <TrainingTooltip placement="top" overlay={t("tooltips.learnAboutSchemaProtParams")}>
               <Link className={infoTabClass} to={`/dao/scheme/${schemeId}/info/`}>{t("schema.Information")}</Link>
             </TrainingTooltip>
             {

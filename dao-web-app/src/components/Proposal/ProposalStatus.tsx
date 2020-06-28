@@ -46,7 +46,7 @@ class ProposalStatus extends React.Component<IProps, null> {
                 <div className={classNames({
                   [css.status]: true,
                   [css.passed]: true,
-                })}><img src="/assets/images/Icon/vote/for-fill-green.svg" />Passed</div> :
+                })}><img src="/assets/images/Icon/vote/for-fill-green.svg" />{t("proposa.pass")}</div> :
 
                 (failedByVote) ?
                   <div className={classNames({
