@@ -13,7 +13,8 @@
         "sngls": "snglsDAO",
         "rep": "REP",
         "buySgt": "$ Buy SGT",
-        "buyGen": "$ Buy GEN"
+        "buyGen": "$ Buy GEN",
+        "protocolParams": "Protocol Parameters"
     },
     "header": {
         "git": " GitHub",
@@ -553,7 +554,7 @@
         "editApp": "Edit Application",
         "rmApp": "Remove Application"
     },
-    "cookieStart": "snglsDAO stores cookies on your device to enhance platform experience and analyze platform usage. Please read the&nbsp;",
+    "cookieStart": "snglsDAO stores cookies on your device to enhance platform experience and analyze platform usage. Please read the ",
     "cookieLinkPolicy": "Cookie Policy",
     "cookieMoreInformation": " for more information.",
     "disclaimer": "DISCLAIMER",
@@ -563,5 +564,7 @@
     "yourReputation": "your reputation: ",
     "en": "ENG",
     "tchin": "繁體中文",
-    "schin": "简体中文"
+    "schin": "简体中文",
+    "protocolParameters": "Protocol Parameters",
+    "limit150": "Limit 150 characters"
 }

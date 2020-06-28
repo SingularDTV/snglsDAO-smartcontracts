@@ -101,7 +101,8 @@ class StakeButtons extends React.Component<IProps, IState> {
   private getStakeProposalAction = (proposal: IProposalState, dao: IDAOState, pendingPrediction: number) =>
     (amount: number) => {
       this.props.stakeProposal(proposal.dao.id, proposal.id, pendingPrediction, amount);
-
+      //@ts-ignore
+      const { t } = this.propos;
       Analytics.track("Stake", {
         "DAO Address": proposal.dao.id,
         "DAO Name": dao.name,
@@ -110,7 +111,7 @@ class StakeButtons extends React.Component<IProps, IState> {
         "Proposal TItle": proposal.title,
         "Scheme Address": proposal.scheme.address,
         "Scheme Name": proposal.scheme.name,
-        "Stake Type": pendingPrediction === IProposalOutcome.Fail ? "Fail" : pendingPrediction === IProposalOutcome.Pass ? "Pass" : "None",
+        "Stake Type": pendingPrediction === IProposalOutcome.Fail ? t('proposal.fail') : pendingPrediction === IProposalOutcome.Pass ? t('proposal.pass') : t('proposal.none'),
       });
     };
 

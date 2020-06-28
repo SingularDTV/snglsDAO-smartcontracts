@@ -21,7 +21,7 @@ const unknownCard: any = (props: IExternalProps) => {
     (
       <div className={css.wrapper} data-test-id={"schemeCard-unknown"}>
         <div className={css.body}>
-          <h2>{schemes.length} Unsupported Applications</h2>
+    <h2>{schemes.length} {t('schemas.unsuported')}</h2>
         </div>
         <table><tbody>
           { schemes.map((scheme: Scheme) => <SubscribedUnknownSchemeRow key={scheme.id} scheme={scheme} />) }

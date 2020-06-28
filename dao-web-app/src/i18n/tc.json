@@ -6,12 +6,15 @@
         "applications": "應用",
         "members": "DAO會員中心",
         "history": "過往記錄",
-        "wall": "DAO Wall",
+        "wall": "DAO討論區",
         "treasury": "DAO儲備資金",
         "stakes": "DAO質押",
-        "buy": "$ 購買 SNGLS",
+        "buy": "$ 购买 SNGLS",
+        "buySGT": "$ 购买 SGT",
+        "buyGEN": "$ 购买 GEN",
         "sngls": "snglsDAO",
-        "rep": "聲譽值"
+        "rep": "聲譽值",
+        "protocolParams": "DAO討論區"
     },
     "header": {
         "git": " GitHub",
@@ -78,7 +81,7 @@
         "listingRate": "上架費用：SNGLS",
         "amountToTreasury": "需注入儲備資金池的SNGLS數量",
         "toAddToProtocol": "將內容上架到協定上。",
-        "transFee": "Transaction Fee: %",
+        "transFee": "交易費用：%",
         "transFeeDescription": "協定會將內容交易所產生的交易費用的某個百份比置入於<br/>儲備資金。",
         "comingSoon": "敬請期待",
         "validationFee": "驗証費用：SNGLS",
@@ -122,7 +125,9 @@
         "name": "名稱",
         "address": "錢包地址",
         "reputation": "聲譽值",
-        "socVerification": "通過驗証的社交帳戶"
+        "socVerification": "通過驗証的社交帳戶",
+        "alreadyStaked": "已質押",
+        "balance": "結餘:"
     },
     "schemas": {
         "noSchemas": "沒有已套用方案",
@@ -390,7 +395,9 @@
         "reputationRewardToSplit": "聲譽值獎勵拆分",
         "externalTokenRewardSplit": "其他代幣獎勵拆分",
         "daoTokenRewardToSplit": "DAO 代幣({{tokenSymbol}}) 獎勵拆分",
-        "submitProposal": "提交提案"
+        "submitProposal": "提交提案",
+        "backToDashboard": "返回概要页面",
+        "proposal": "提案"
     },
     "proposal": {
         "forStaking": "質押於提案，您可獲得：",
@@ -537,6 +544,16 @@
     },
     "cookieStart": "Alchemy在您的設備上存儲Cookie，以增強平台體驗並分析平台使用情況。 請閱讀",
     "cookieLinkPolicy": "Cookie政策",
-    "cookieMoreInformation": "以獲得更多信息。"
+    "cookieMoreInformation": "以獲得更多信息。",
+    "disclaimer": "DISCLAIMER",
+    "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
+    "iAccept": "我同意",
+    "fullProfile": "Full Profile",
+    "yourReputation": "your reputation: ",
+    "en": "ENG",
+    "tchin": "繁體中文",
+    "schin": "简体中文",
+    "protocolParameters": "Protocol Parameters",
+    "limit150": "告訴DAO關於你的簡介"
 
 }
