@@ -207,7 +207,7 @@ const withSubscription = <Props extends ISubscriptionProps<ObservableType>, Obse
       }
 
       // Default way of combining
-      return (oldState as any).concat(newData);
+      return {...oldState, ...newData};
     }
   };
 };

@@ -57,7 +57,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
   }
 
   public componentDidMount() {
-  
+
   }
 
   private handleCloseMenu = (_event: any): void => {
@@ -70,7 +70,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     const [ dao, { hasNewPosts } ] = this.props.data ;
     const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
     const arcSettings = getArcSettings();
-    
+
     return (
       <div>
       <div className={css.daoNavigation}>
@@ -210,7 +210,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
           </ul>
         </div>
 
-        
+
         <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
             <b>{t('sidebar.treasury')}</b>
@@ -218,7 +218,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
-          <ul>        
+          <ul>
             <SubscribedEthBalance dao={dao} />
 
             {Object.keys(supportedTokens()).map((tokenAddress) => {
@@ -385,7 +385,7 @@ const TokenBalance = (props: ITokenProps) => {
   const { data, error, isLoading, tokenAddress } = props;
 
   const tokenData = supportedTokens()[tokenAddress];
-  if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
+  if (isLoading || error || ((data === null || isNaN(data)) && tokenData.symbol !== genName())) {
     return null;
   }
 
