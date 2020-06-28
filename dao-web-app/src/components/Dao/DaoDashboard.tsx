@@ -560,7 +560,7 @@ interface ITokenProps extends ISubscriptionProps<any> {
 const TokenBalance = (props: ITokenProps) => {
   const { data, error, isLoading, tokenAddress } = props;
   const tokenData = supportedTokens()[tokenAddress];
-  if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
+  if (isLoading || error || ((data === null || isNaN(data)) && tokenData.symbol !== genName())) {
     return null;
   }
 
