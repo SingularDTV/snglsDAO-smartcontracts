@@ -10,8 +10,10 @@ import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
 import { ThroughProvider } from "react-through";
-import * as css from "./layouts/App.scss";
 import { history, default as store } from "./configureStore";
+
+import 'antd/dist/antd.css'
+import * as css from "./layouts/App.scss";
 
 export class App extends React.Component<{}, {
   arcIsInitialized: boolean;
@@ -27,7 +29,7 @@ export class App extends React.Component<{}, {
     };
   }
 
-                
+
   private getPdfHtml = (filename: string): any => {
     window.location.href = `${window.location.protocol}//${window.location.host}/assets/${filename}`;
     return null;
@@ -77,7 +79,7 @@ export class App extends React.Component<{}, {
         await sleep(2000);
       }
     }
-    
+
     console.log("-0000000000000000000--------------0000000000000000---------------", process.env);
     let GOOGLE_ANALYTICS_ID: string;
     switch (process.env.NODE_ENV) {

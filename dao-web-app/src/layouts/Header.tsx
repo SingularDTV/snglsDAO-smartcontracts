@@ -1,10 +1,11 @@
 import * as uiActions from "actions/uiActions";
-import { threeBoxLogout } from "actions/profilesActions";
+import { threeBoxLogout, updateThreeBox } from "actions/profilesActions";
 import { enableWalletProvider, getAccountIsEnabled, getArc, logout, getWeb3ProviderInfo, getWeb3Provider, providerHasConfigUi } from "arc";
 import AccountBalances from "components/Account/AccountBalances";
 import AccountImage from "components/Account/AccountImage";
 import AccountProfileName from "components/Account/AccountProfileName";
 import RedemptionsButton from "components/Redemptions/RedemptionsButton";
+import { openBox } from "3box";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import { copyToClipboard } from "lib/util";
 import { IRootState } from "reducers";
@@ -47,7 +48,7 @@ const mapStateToProps = (state: IRootState & IStateProps, ownProps: IExternalPro
   });
   const queryValues = parse(ownProps.location.search);
 
-  // TODO: this is a temporary hack to send less requests during the ethDenver conference: 
+  // TODO: this is a temporary hack to send less requests during the ethDenver conference:
   // we hide the demptionsbutton when the URL contains "crx". Should probably be disabled at later date..
   let showRedemptionsButton;
   if (ETHDENVER_OPTIMIZATION) {
@@ -78,6 +79,7 @@ interface IDispatchProps {
   enableTrainingTooltipsShowAll: typeof  uiActions.enableTrainingTooltipsShowAll;
   disableTrainingTooltipsShowAll: typeof uiActions.disableTrainingTooltipsShowAll;
   threeBoxLogout: typeof threeBoxLogout;
+  updateThreeBox: typeof updateThreeBox;
 }
 
 const mapDispatchToProps = {
@@ -90,6 +92,7 @@ const mapDispatchToProps = {
   enableTrainingTooltipsShowAll: uiActions.enableTrainingTooltipsShowAll,
   disableTrainingTooltipsShowAll: uiActions.disableTrainingTooltipsShowAll,
   threeBoxLogout,
+  updateThreeBox,
 };
 
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<IDAOState>;
@@ -139,6 +142,16 @@ class Header extends React.Component<IProps, null> {
     };
   }
 
+  public openTreeBox = async(): Promise<void> => {
+    const { currentAccountAddress, updateThreeBox } = this.props;
+    const web3Provider = getWeb3Provider();
+    if(web3Provider) {
+      const box = await openBox(currentAccountAddress, web3Provider)
+      // await box.syncDone
+      updateThreeBox(box)
+    }
+  }
+
   public copyAddress(e: any): void {
     const { showNotification, currentAccountAddress } = this.props;
     copyToClipboard(currentAccountAddress);
@@ -150,19 +163,23 @@ class Header extends React.Component<IProps, null> {
     enableWalletProvider({
       suppressNotifyOnSuccess: true,
       showNotification: this.props.showNotification,
+      onSuccess: (): Promise<void> => this.openTreeBox()
     });
+
   }
 
   public handleConnect = async (_event: any): Promise<void> => {
     enableWalletProvider({
       suppressNotifyOnSuccess: true,
       showNotification: this.props.showNotification,
+      onSuccess: (): Promise<void> => this.openTreeBox()
     });
   }
 
   public handleClickLogout = async (_event: any): Promise<void> => {
     await logout(this.props.showNotification);
     await this.props.threeBoxLogout();
+    updateThreeBox()
   }
 
   private handleToggleMenu = (_event: any): void => {
@@ -236,7 +253,7 @@ class Header extends React.Component<IProps, null> {
             </div>
           </TrainingTooltip>
 
-          
+
           <div className={css.topInfo}>
             <div className={css.breadcrumbs}>
               <Breadcrumbs
@@ -299,7 +316,7 @@ class Header extends React.Component<IProps, null> {
                 <LangSwitcher/>
 
 
-                
+
               </ul>
             </div>
           </div>

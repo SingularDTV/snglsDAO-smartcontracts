@@ -444,7 +444,7 @@
         overflow: scroll;
         right: 0;
         left: 0;
-        top: 64px;
+        top: 93px;
         height: 100%;
         padding: 0;
         transform: translateX(-100%);
@@ -459,6 +459,8 @@
             width: 100%;
             transform: translateX(0%);
             opacity: 1;
+            background: #fff;
+            transition: 0.2s;
 
             .menuContent {
                 min-height: 900px;
@@ -478,6 +480,9 @@
 }
 
 @media (max-width: 768px) {
+  .sidebarWrapper {
+    top: 64px;
+  }
     .sidebarWrapper.menuOpen {
         .menuContent {
             min-height: 720px;
@@ -540,7 +545,7 @@
     width: 100%;
     // background-color: rgba(49, 120, 202, 1);
     padding-bottom: 50px;
-    transition: width 0s 0s, height 0.25s ease;
+    // transition: width 0s 0s, height 0.25s ease;
 
     .menuContent {
       height: 520px;

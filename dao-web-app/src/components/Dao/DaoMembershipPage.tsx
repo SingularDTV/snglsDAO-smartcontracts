@@ -68,6 +68,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
     super(props);
     this.autoAmount = this.autoAmount.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.fetchBalances = this.fetchBalances.bind(this);
     this.state = {
       membershipFee: "0.00",
       alreadyStaked: "0.00",
@@ -85,8 +86,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
   public onChangeHandler(e: any) {
 
   }
-
-  public async componentDidMount() {
+  public async fetchBalances() {
     const arc = getArc();
     const settings = getArcSettings();
 
@@ -104,14 +104,17 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
       { 
         membershipFee:  arc.web3.utils.fromWei(await feeContract.methods.membershipFee().call(), 'ether'),
         alreadyStaked: arc.web3.utils.fromWei(staked.amount, 'ether'),
-        snglsBalance: arc.web3.utils.fromWei(await snglsTokenContract.methods.balanceOf(this.props.currentAccountAddress).call(), 'ether')
+        snglsBalance: arc.web3.utils.fromWei(await snglsTokenContract.methods.balanceOf(this.props.currentAccountAddress).call(), 'ether'),
+        fieldValue: 0
       }
     );
-    console.log("FROM WEI: ", this.state.membershipFee, arc.web3.utils.fromWei(this.state.membershipFee, 'ether'));
+  }
+
+  public async componentDidMount() {
+    this.fetchBalances();
   }
 
   public handleSubmit = async (values: IFormValues, { _setSubmitting }: any ): Promise<void> => {
-    console.log("MEMFEESTAKE", this.props, values)
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
       return;
     }
@@ -132,6 +135,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
       memFeeStakingContract.methods.lock(calculatedApproveValue, settings.minLockingPeriod).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
         console.log(error);
         if (error) throw error;
+         this.fetchBalances();
       });
     });
   }
@@ -179,7 +183,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
             <hr/>
 
             <div className={css.content}>
-              <p>{t("membership.confAuto")} <strong>( { parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) } )</strong> {t("membership.orEnterManually")}</p>
+              <p>{t("membership.confAuto")} <strong>( { parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) < 0 ? 0 : parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) } )</strong> {t("membership.orEnterManually")}</p>
               <Formik
                 
                 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -235,7 +239,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                     </div>
                     <div className={css.bigInputFoot}>
                       <span>{t("membership.alreadyStaked")}  {parseInt(this.state.alreadyStaked)} </span>
-                      <span>{t("membership.balance")}  {parseInt(this.state.snglsBalance)} {t("membership.confAuto")}</span>
+                      <span>{t("membership.balance")}  {parseInt(this.state.snglsBalance)} {"SNGLS"}</span>
                     </div>
                     <hr />
                     <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>

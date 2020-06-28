@@ -288,13 +288,12 @@ a.accountName {
       content: '';
       height: 100%;
       width: 100%;
-      // background: rgba(255, 255, 255, 0.05);
       opacity: 0.8;
       border: 1px solid rgba(255, 255, 255, 0.05);
       box-sizing: border-box;
-      // backdrop-filter: blur(40px);
       background: url(/assets/images/bg_blur.png) repeat;
       background-size: cover;
+      display: block !important;
     }
   }
 
@@ -557,6 +556,24 @@ input {
 }
 
 @media (max-width: 768px) {
+  .profileContainer {
+    form {
+      padding: 0 !important;
+      width: calc(100% - 30px);
+      left: 15px;
+      position: relative;
+      grid-template-columns: 1fr;
+      margin-bottom: 30px;
+
+      .profileContent {
+        padding: 20px;
+      }
+    }
+
+    .otherInfoContainer {
+      padding: 20px;
+    }
+  }
     .targetAccount:hover {
     .avatar {
         width: 80px;
