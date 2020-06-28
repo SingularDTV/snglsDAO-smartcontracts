@@ -66,10 +66,12 @@
       &.headerItems {
         line-height: normal;
         display: flex;
-            justify-content: space-between;
+        justify-content: space-between;
+        text-align: center;
 
         & > div {
           flex-basis: auto;
+          flex-grow: 1;
           display: inline-block;
           font-size: 15px;
           color: #fff;
@@ -191,6 +193,8 @@ a.proposalTitle {
         &.headerItems {
           display: grid;
           justify-content: normal;
+          text-align: left;
+          grid-gap: 10px;
         }
       }
     }
