@@ -13,7 +13,8 @@
         "sngls": "snglsDAO",
         "rep": "REP",
         "buySgt": "$ Buy SGT",
-        "buyGen": "$ Buy GEN"
+        "buyGen": "$ Buy GEN",
+        "protocolParams": "Protocol Parameters"
     },
     "header": {
         "git": " GitHub",

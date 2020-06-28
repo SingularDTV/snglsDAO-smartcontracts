@@ -9,9 +9,12 @@
         "wall": "DAO討論區",
         "treasury": "DAO儲備資金",
         "stakes": "DAO質押",
-        "buy": "$ 購買 SNGLS",
+        "buy": "$ 购买 SNGLS",
+        "buySGT": "$ 购买 SGT",
+        "buyGEN": "$ 购买 GEN",
         "sngls": "snglsDAO",
-        "rep": "聲譽值"
+        "rep": "聲譽值",
+        "protocolParams": "DAO討論區"
     },
     "header": {
         "git": " GitHub",
