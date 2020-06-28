@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import Select from "react-select";
 import * as moment from "moment";
 import { History } from "history";
-import { showNotification } from "../../reducers/notifications";
+import { showNotification, NotificationStatus } from "reducers/notifications";
 // import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "../../components/Shared/TrainingTooltip";
 import * as css from "./DaoJoin.scss";
@@ -141,13 +141,27 @@ class GetReputation extends React.Component<IProps, IStateProps> {
 
     const currentAccountAddress = this.props.currentAccountAddress;
 
-    sgtTokenContract.methods.approve(settings.lockingSGT4ReputationContractAddress, calculatedApproveValue).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
-      if (error) throw error;
-    }).then(function () {
-      reputationContract.methods.lock(calculatedApproveValue, settings.minLockingPeriod).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
-        if (error) throw error;
-      });
-    });
+
+    let txDescription: string;
+    let msg;
+
+    try{
+      txDescription = 'Get reputation approve'
+      msg = `${txDescription} transaction sent! Please wait for it to be processed`;
+
+      this.props.showNotification(NotificationStatus.Success, msg)
+      await sgtTokenContract.methods.approve(settings.lockingSGT4ReputationContractAddress, calculatedApproveValue).send({from: currentAccountAddress})
+      msg = `${txDescription} transaction confirmed`;
+      this.props.showNotification(NotificationStatus.Success, msg);
+
+      txDescription = 'Get reputation lock'
+      await reputationContract.methods.lock(calculatedApproveValue, settings.minLockingPeriod).send({from: currentAccountAddress})
+      msg = `${txDescription} transaction confirmed`;
+      this.props.showNotification(NotificationStatus.Success, msg);
+    } catch (error) {
+      const msg = `${txDescription}: transaction failed :-( - ${error.message}`;
+      this.props.showNotification(NotificationStatus.Failure, msg)
+    }
 
     this.handleClose({});
   }
