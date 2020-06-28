@@ -105,6 +105,7 @@
         "haveAmountStaked": "您质押的金额将成为您在DAO中的声誉值",
         "holding": "持有 0.00% 声誉值",
         "getRep": "增加声誉值",
+        "removeRep": "Remove REPUTATION",
         "cancel": "取消"
     },
     "loading": "加载中...",
@@ -467,7 +468,7 @@
         "delist": "下架",
         "unknown": "未知函数调用",
         "toContractAt": "给合约：",
-        "withCallData": "callData：", 
+        "withCallData": "callData：",
         "onContract": "于合约",
         "mintOrBurn": "创造或销毁声誉值",
         "callGenericCall": "代表调用 genericCall",
@@ -537,5 +538,5 @@
     "cookieStart": "Alchemy在您的设备上存储Cookie，以增强平台体验并分析平台使用情况。请阅读",
     "cookieLinkPolicy": "Cookie政策",
     "cookieMoreInformation": "以获得更多信息。"
-    
+
 }

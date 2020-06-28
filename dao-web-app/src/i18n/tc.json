@@ -105,6 +105,7 @@
         "haveAmountStaked": "您質押的金額將成為您在sDAO中的聲譽值",
         "holding": "持有 0.00% 聲譽值",
         "getRep": "增加聲譽值",
+        "removeRep": "Remove REPUTATION",
         "cancel": "取消"
     },
     "loading": "加載中...",
@@ -467,7 +468,7 @@
         "delist": "下架",
         "unknown": "未知函數調用",
         "toContractAt": "給合約：",
-        "withCallData": "callData：", 
+        "withCallData": "callData：",
         "onContract": "於合約",
         "mintOrBurn": "創造或銷毀聲譽值",
         "callGenericCall": "代表調用 genericCall",
@@ -537,5 +538,5 @@
     "cookieStart": "Alchemy在您的設備上存儲Cookie，以增強平台體驗並分析平台使用情況。 請閱讀",
     "cookieLinkPolicy": "Cookie政策",
     "cookieMoreInformation": "以獲得更多信息。"
-    
+
 }

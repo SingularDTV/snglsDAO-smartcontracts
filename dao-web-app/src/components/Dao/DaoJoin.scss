@@ -7,7 +7,10 @@
 
 
 
-
+.releaseTime {
+  display: flex;
+  justify-content: center;
+}
 
 
 
@@ -71,7 +74,7 @@
         grid-template-columns: 1fr auto;
         grid-gap: 50px;
         align-items: center;
-        
+
         .description {
           font-size: 18px;
         }
@@ -270,7 +273,7 @@
                 font-weight: 500;
                 line-height: 24px;
                 letter-spacing: 1.61455px;
-                text-transform: uppercase; 
+                text-transform: uppercase;
                 padding: 20px 70px;
                 border: 1px solid #4E5469;
                 border-radius: 50px;
@@ -414,6 +417,7 @@
     }
 
     .contributionReward {
+      padding: 20px;
       width: 110px;
       display: inline-block;
       height: calc(100% - 40px);
@@ -713,6 +717,7 @@
 }
 
 .contributionReward {
+  padding: 20px;
   // width: 562px;
   overflow-y: auto;
   height: calc(100% - 100px);
@@ -1097,6 +1102,7 @@ div.description {
   }
 
   .contributionReward {
+    padding: 20px;
     width: auto;
   }
 
