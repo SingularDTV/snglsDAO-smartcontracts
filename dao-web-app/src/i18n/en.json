@@ -83,7 +83,7 @@
         "transFee": "Transaction Fee: %",
         "transFeeDescription": "The % of the transaction that the protocol puts into the treasury.",
         "comingSoon": "COMING SOON",
-        "validationFee": "Validation Fee: SNGLS",
+        "validationFee": "Validation Fee",
         "minimumAmount": "Minimum amount paid to validators.",
         "boostedProposals": "Boosted proposals (3)",
         "notPassedProposals": "This DAO hasn&apos;t passed any proposals yet. Checkout the {{notPassedProposalsLink}}  for any open proposals.",
