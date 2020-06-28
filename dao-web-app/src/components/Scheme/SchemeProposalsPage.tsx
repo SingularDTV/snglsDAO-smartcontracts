@@ -153,7 +153,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
               }
               
               <a className={classNames({
-                [css.blueButton]: true,
+                [css.redButton]: true,
                 [css.disabled]: !isActive,
               })}
               href="#!"

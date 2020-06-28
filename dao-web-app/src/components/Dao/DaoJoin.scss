@@ -970,7 +970,9 @@ div.description {
 @media(max-width: 768px) {
 
   .createProposalWrapper {
-    width: calc(100% - 30px);
+// width: calc(100% - 30px);
+    width: 100%;
+    max-width: calc(100% - 30px);
     box-shadow: none;
     top: calc(50% - 64px);
     // left: 15px;
@@ -1010,6 +1012,15 @@ div.description {
           font-size: 18px;
               padding: 20px 15px;
         }
+
+        .btnMax {
+          right: 15px;
+
+          button {
+                padding: 3px 8px;
+                font-size: 14px;
+          }
+        }
       }
 
       .newInput {
@@ -1020,6 +1031,11 @@ div.description {
           font-size: 18px;
               padding: 20px 15px;
         }
+      }
+
+      .balances {
+        font-size: 16px;
+        margin-bottom: 10px;;
       }
     }
   }

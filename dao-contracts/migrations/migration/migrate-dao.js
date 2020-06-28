@@ -80,8 +80,8 @@ async function migrateDAO({
   } = base[arcVersion]
 
   const daoCreator = new web3.eth.Contract(
-    utils.importAbi(`./${contractsDir}/${arcVersion}/DaoCreator.json`).abi,
-    DaoCreator,
+    utils.importAbi(`./../../../dao-creator/build/contracts/DaoCreator.json `).abi,
+    migrationParams.daoCreatorAddr,
     opts
   )
 
@@ -153,6 +153,8 @@ async function migrateDAO({
   }
 
   if (migrationParams.useDaoCreator === true) {
+    console.log(daoCreator.address);
+
     const [founderAddresses, tokenDist, repDist] = [
       founders.map(({
         address
@@ -171,21 +173,10 @@ async function migrateDAO({
       let foundersInitCount = founderAddresses.length < initFoundersBatchSize ? founderAddresses.length : initFoundersBatchSize
       const forgeOrg = getArcVersionNumber(arcVersion) < 34 ? daoCreator.methods.forgeOrg(
         orgName,
-        tokenName,
-        tokenSymbol,
-        founderAddresses.slice(0, foundersInitCount),
-        tokenDist.slice(0, foundersInitCount),
-        repDist.slice(0, foundersInitCount),
-        migrationParams.useUController === true ? UController : '0x0000000000000000000000000000000000000000',
-        '0'
+        migrationParams.tokenAddress
       ) : daoCreator.methods.forgeOrg(
         orgName,
-        tokenName,
-        tokenSymbol,
-        founderAddresses.slice(0, foundersInitCount),
-        tokenDist.slice(0, foundersInitCount),
-        repDist.slice(0, foundersInitCount),
-        '0'
+        migrationParams.tokenAddress
       )
 
       tx = (await sendTx(forgeOrg, 'Creating a new organization...')).receipt
@@ -387,7 +378,7 @@ async function migrateDAO({
         opts
       )
       tx = (await sendTx(getArcVersionNumber(arcVersion) >= 32 ?
-        await daoTracker.methods.track(avatar.options.address, deploymentState.Controller, "") :
+        await daoTracker.methods.track(avatar.options.address, deploymentState.Controller, arcVersion) :
         await daoTracker.methods.track(avatar.options.address, deploymentState.Controller), 'Registering DAO in DAOTracker')).receipt
       await logTx(tx, 'Finished Registering DAO in DAOTracker')
       deploymentState.trackedDAO = true

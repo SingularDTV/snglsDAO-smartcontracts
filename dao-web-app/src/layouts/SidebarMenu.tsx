@@ -101,7 +101,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   })
                 }></span>
                 <span className={css.menuIcon}>
-                <img src="/assets/images/Icon/menu/_membership.svg" />
+                <img src="/assets/images/Icon/menu/_badge.svg" />
                 {t('sidebar.protocolMembership')}
 
                 </span>
@@ -133,7 +133,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   })
                 }></span>
                 <span className={css.menuIcon}>
-                <img src="/assets/images/Icon/menu/_membership.svg" />
+                <img src="/assets/images/Icon/menu/_parameters.svg" />
                 { "Protocol Parameters" }
 
                 </span>

@@ -7,7 +7,9 @@ const rinkebyEnv = "../config/rinkeby.env";
 const destEnv = "../.env";
 const rinkebyAirdropOptions = "../../token/airdrop/script/config/options.rinkeby.js";
 const destAirdropOptions = "../../token/airdrop/script/options.js";
+// const foundersAddresses = ["0x4fbeA1BECD2F3F24dcbdd59b2b609ABCDCDD6956"];
 const foundersAddresses = [];
+// const foundersTokens = [100000000000000];
 const foundersTokens = [];
 const foundersReputation = [0, 0, 0];
 

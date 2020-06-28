@@ -1,5 +1,8 @@
 const migration = require("../data/migration.json");
-module.exports = async function getDeployedAddress(contractName) {
+module.exports = async function getDeployedAddress(contractName, optionalWeb3) {
+    if (!global.web3) {
+        global.web3 = optionalWeb3;
+    }
     let chainId = await web3.eth.net.getId();
     let network;
     if (chainId === 4) network = "rinkeby";
