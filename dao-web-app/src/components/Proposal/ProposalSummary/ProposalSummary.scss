@@ -77,6 +77,12 @@
 .detailView.proposalSummary.withDetails {
   font-size: 13px;
   padding: 0;
+  width: 100%;
+  max-width: 580px;
+
+  table {
+    width: 100%;
+  }
 
   .summaryTitle {
     padding: 20px;
@@ -111,26 +117,51 @@
       img {
         margin-left: 5px;
         position: relative;
-        top: 1px;
+        top: -1px;
       }
     }
 
     td {
       // color: $gray-1;
 
+      .hashCopy {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        grid-gap: 5px;
+        text-align: right;
+        padding-left: 5px;
+
+        .hash {
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+          height: 100%;
+          min-height: 32px;
+        }
+      }
+
+      &.description {
+        text-align: right;
+      }
+
       span {
-        display: inline-block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-right: 5px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
       }
 
       img {
         position: relative;
-        top: -9px;
-        left: 2px;
-        height: 14px;
+        display: block;
+        // top: -12px;
+        // left: 2px;
+        // height: 14px;
 
       }
     }
@@ -193,6 +224,26 @@
     font-weight: normal;
     position: relative;
   }
+}
+
+@media (min-width: 992px) and (max-width: 1320px) {
+
+.detailView.proposalSummary.withDetails {
+
+  .summaryDetails {
+    td {
+      span {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 5px;
+        max-width: 250px;
+      }
+    }
+  }
+
+}
 }
 
 @media only screen and (max-width: 425px) {

@@ -9,7 +9,7 @@ import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as InfiniteScroll from "react-infinite-scroll-component";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import * as Sticky from "react-stickynode";
+// import * as Sticky from "react-stickynode";
 import { IRootState } from "reducers";
 import { IProfilesState } from "reducers/profilesReducer";
 import { withTranslation } from 'react-i18next';
@@ -74,9 +74,9 @@ class DaoMembersPage extends React.Component<IProps, null> {
     return (
       <div className={css.membersContainer}>
         <BreadcrumbsItem to={"/dao/" + daoState.address + "/members"}>{t("membership.daoMembers")}</BreadcrumbsItem>
-        <Sticky enabled top={50} innerZ={10000}>
+        {/* <Sticky enabled top={50} innerZ={10000}> */}
           <h2>{t("membership.daoMembers")}</h2>
-        </Sticky>
+        {/* </Sticky> */}
         <table className={css.memberHeaderTable}>
           <tbody className={css.memberTable + " " + css.memberTableHeading}>
             <tr>

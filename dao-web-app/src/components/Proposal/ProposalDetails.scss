@@ -97,7 +97,7 @@ button.disabled {
   position: relative;
   color: #fff;
 
-  h3 {
+  h5 {
     color: #fff;
     text-transform: none;;
   }
@@ -393,7 +393,7 @@ button.disabled {
   flex-grow: 1;
   // min-width: 320px;
   max-width: 465px;
-  width: calc(100% - 40px);
+  // width: calc(100% - 40px);
   min-width: 300px;
 }
 
@@ -485,9 +485,12 @@ button.disabled {
   }
 
   .disqus {
-    background-color: #fff;
+    // background-color: #fff;
     position: relative;
     color: #fff;
+    h5 {
+      color: #fff;
+    }
   }
 }
 
@@ -499,7 +502,8 @@ button.disabled {
     display: block;
 
     &Actions {
-      max-width: calc(100% - 40px);
+      // max-width: calc(100% - 40px);
+      max-width: 100%;
     }
 
     &TitleTop {
@@ -508,18 +512,18 @@ button.disabled {
 
     &Info {
       &Cont {
-        padding: 15px 0;
+        padding: 15px 20px;
       }
     }
 
-    &SummaryContainer {
-      left: -15px;
-    }
+    // &SummaryContainer {
+    //   left: -15px;
+    // }
   }
 
-  .proposalActions {
-    width: calc(100% - 40px);
-  }
+  // .proposalActions {
+  //   width: calc(100% - 40px);
+  // }
 
   .buttonBar {
     button {
@@ -545,8 +549,8 @@ button.disabled {
 @media only screen and (max-width: 425px) {
 
   .proposalInfo {
-	  padding: 15px;
-	  padding-right: 15px;
+	  // padding: 15px;
+	  // padding-right: 15px;
 
 	  h3 {
 	  	font-size: 16px;
@@ -574,9 +578,14 @@ button.disabled {
   }
 
   .disqus {
-    background-color: #fff;
-    padding: 15px;
+    // background-color: #fff;
+    color: #fff;
+    // padding: 15px;
     position: relative;
+
+    h5 {
+      color: #fff;
+    }
   }
 
   .voteButtonsBottom {

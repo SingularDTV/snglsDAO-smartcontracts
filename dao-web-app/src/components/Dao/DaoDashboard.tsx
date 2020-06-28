@@ -332,9 +332,9 @@ class DaoDashboard extends React.Component<IProps, IState> {
         </InfiniteScroll>
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
-          <div className={css.daoHistoryHeader}>
+          <h4>
             {t('sidebar.history')}
-          </div>
+          </h4>
         {/* </Sticky> */}
 
         <InfiniteScroll

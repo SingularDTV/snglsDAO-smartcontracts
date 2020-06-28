@@ -54,7 +54,7 @@ const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName, web3Provider
   return(
     <div>
       {!web3Provider
-        ? <h3>Please connect to wallet</h3>
+        ? <h5>Please connect to wallet</h5>
         : !threeBox
           ? <Loading />
           : (<div>
