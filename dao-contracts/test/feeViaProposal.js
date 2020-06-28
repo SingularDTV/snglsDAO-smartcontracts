@@ -72,10 +72,9 @@ contract("Fee", async accounts => {
                     const acc = accounts[i];
                     // console.log(acc);
 
-                    console.log(
-                        await GenesisProtocolInstance.vote(proposalId, 1, 0, acc, {
-                            from: acc
-                        }));
+                    await GenesisProtocolInstance.vote(proposalId, 1, 0, acc, {
+                        from: acc
+                    });
                 }
                 assert.strictEqual((await FeeInstance[`${fee}Fee`].call()).toString(), testValue, "Expected fee value doesn't equal to on-chain values.");
             });
@@ -85,7 +84,7 @@ contract("Fee", async accounts => {
     it(`Proposal is unable to set non-integer membership fee`, async () => {
         let fee = "membership";
         let feeBefore = (await FeeInstance[`${fee}Fee`].call()).toString();
-        const testValues = ["1500000000000000000", "500000000000000000", "7", "0"]; //1.5,0.5,0.000..07, 0.0
+        const testValues = ["1500000000000000000", "500000000000000000", "7"]; //1.5,0.5,0.000..07
         for (let i = 0; i < testValues.length; i++) {
             const testValue = testValues[i];
 
@@ -120,12 +119,12 @@ contract("Fee", async accounts => {
     });
     it(`Proposal is able to set all fees via setFees function`, async () => {
         const fees = [
-            "validation",
             "listing",
             "transaction",
+            "validation",
             "membership"
         ];
-        const testValues = ["1300000000000000000", "2400000000000000000", "3500000000000000000", "4000000000000000000"]; //1.5,0.5,0.000..07, 0.0
+        const testValues = ["1300000000000000000", "2400000000000000000", "3500000000000000000", "4000000000000000000"];
 
         const proposalId = await GenericSchemeInstance.proposeCall.call(avatarAddress, encodeSetFeesCall(testValues), 0, `Change all fees`);
         await GenericSchemeInstance.proposeCall(avatarAddress, encodeSetFeesCall(testValues), 0, `Change all fees`);
