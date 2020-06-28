@@ -155,7 +155,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
   public render(): RenderOutput {
     //@ts-ignore
     const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress, t } = this.props;
-
+    //@ts-ignore
     const proposals = data.proposals;
     const arcSettings = getArcSettings();
 
