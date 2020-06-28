@@ -15,7 +15,7 @@ const ThreeBoxTreadPage = ({ currentAccountAddress }: IProps) => {
   return(
     <div>
       <h2 className={style.title}>
-        Common Discuss
+        Common Discussion
       </h2>
       <div className={style.page}>
         <BreadcrumbsItem to={"/dao/discussion"}>Discussion</BreadcrumbsItem>

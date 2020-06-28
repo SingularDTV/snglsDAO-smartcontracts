@@ -88,7 +88,23 @@ class DaoSchemesPage extends React.Component<IProps, null> {
         <BreadcrumbsItem to={"/dao/" + dao.address}>{dao.name}</BreadcrumbsItem>
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
+<<<<<<< HEAD
         <h2>{t("sidebar.applications")}</h2>
+=======
+
+        {/* <div className={css.pageHead}>
+          <h2>Applications</h2>
+          <div>
+            <a className={css.redButton}
+              href="#!"
+              data-test-id="openJoin"
+            > Apps </a>
+          </div>
+        </div> */}
+
+
+        <h2>Applications</h2>
+>>>>>>> f3104066a7de30eea92fda749b18e229ec2f7fd1
         {/* </Sticky> */}
         {(allKnownSchemes.length + unknownSchemes.length) === 0
           ? <div>
