@@ -141,7 +141,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
 
     const currentAccountAddress = this.props.currentAccountAddress;
 
-
+    //todo move methods to store
     let txDescription: string;
     let msg;
 
