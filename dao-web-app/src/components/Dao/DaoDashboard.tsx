@@ -479,13 +479,20 @@ const SubscribedGetRep = withSubscription({
       skip: data.length,
     }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
     );
+    //@ts-ignore
+    const member =  dao.member(props.currAddress)
     // const members = dao.members({
     //   orderBy: "balance",
     //   orderDirection: "desc",
     //   first: PAGE_SIZE,
     //   skip: data.members.length,
     // });
-    return proposals
+    return zip(
+      proposals,
+      member.state(),
+    ).pipe(
+      map(([proposals, member]) => ({proposals, member}))
+    )
   },
 });
 
