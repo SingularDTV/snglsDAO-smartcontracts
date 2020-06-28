@@ -161,30 +161,30 @@ class SchemeInfo extends React.Component<IProps, null> {
             <tr>
               <th><span>{t('schema.canRegisterApp')}</span></th>
               <td><span>
-                {scheme.canRegisterSchemes ? "Yes" : "No"}
+                {scheme.canRegisterSchemes ? t('schema.yes') : t('schema.no')}
               </span></td>
             </tr>
             <tr>
               <th><span>{t('schema.canUpgradeController')}</span></th>
               <td><span>
-                {scheme.canUpgradeController ? "Yes" : "No"}
+                {scheme.canUpgradeController ? t('schema.yes') : t('schema.no')}
               </span></td>
             </tr>
             <tr>
               <th><span>{t('schema.canManageGlobal')}</span></th>
               <td><span>
-                {scheme.canDelegateCall ? "Yes" : "No"}
+                {scheme.canDelegateCall ? t('schema.yes') : t('schema.no')}
               </span></td>
             </tr>
             <tr>
               <th><span>{t('schema.canDelegateCall')}</span></th>
               <td><span>
-                {scheme.canManageGlobalConstraints ? "Yes" : "No"}
+                {scheme.canManageGlobalConstraints ? t('schema.yes') : t('schema.no')}
               </span></td>
             </tr>
             <tr>
               <th><span>{t('schema.canMintOrBurn')}</span></th>
-              <td><span>Yes</span></td>
+          <td><span>{t('schema.yes')}</span></td>
             </tr>
           </tbody>
         </table>

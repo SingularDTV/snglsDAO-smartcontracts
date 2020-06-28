@@ -13,7 +13,8 @@
         "sngls": "snglsDAO",
         "rep": "REP",
         "buySgt": "$ Buy SGT",
-        "buyGen": "$ Buy GEN"
+        "buyGen": "$ Buy GEN",
+        "protocolParams": "Protocol Parameters"
     },
     "header": {
         "git": " GitHub",
@@ -22,7 +23,7 @@
         "consumerProtection": {
             "tokenEconomics": "Token Economics",
             "roadmap": "Roadmap",
-            "consumer": "Consumer Protection",
+            "consumer": "Consumer Protections",
             "code": {
                 "code": "Source Code",
                 "SNGLS": "SNGLS",
@@ -83,7 +84,7 @@
         "transFee": "Transaction Fee: %",
         "transFeeDescription": "The % of the transaction that the protocol puts into the treasury.",
         "comingSoon": "COMING SOON",
-        "validationFee": "Validation Fee: SNGLS",
+        "validationFee": "Validation Fee",
         "minimumAmount": "Minimum amount paid to validators.",
         "boostedProposals": "Boosted proposals (3)",
         "notPassedProposals": "This DAO hasn&apos;t passed any proposals yet. Checkout the {{notPassedProposalsLink}}  for any open proposals.",
@@ -107,6 +108,7 @@
         "haveAmountStaked": "The amount you have staked will be your reputation in the DAO",
         "holding": "Holdings 0.00% Rep.",
         "getRep": "GET REPUTATION",
+        "removeRep": "REMOVE REPUTATION",
         "cancel": "Cancel",
         "max": "max",
         "sgtTokens": "SGT Tokens: ",
@@ -479,7 +481,7 @@
         "delist": "Delist",
         "unknown": "Unknown function call",
         "toContractAt": "to contract at",
-        "withCallData": "with callData:", 
+        "withCallData": "with callData:",
         "onContract": "on contract at",
         "mintOrBurn": "Mint or burn reputation",
         "callGenericCall": "Call genericCall on behalf of",
@@ -552,7 +554,7 @@
         "editApp": "Edit Application",
         "rmApp": "Remove Application"
     },
-    "cookieStart": "snglsDAO stores cookies on your device to enhance platform experience and analyze platform usage. Please read the&nbsp;",
+    "cookieStart": "snglsDAO stores cookies on your device to enhance platform experience and analyze platform usage. Please read the ",
     "cookieLinkPolicy": "Cookie Policy",
     "cookieMoreInformation": " for more information.",
     "disclaimer": "DISCLAIMER",
@@ -562,5 +564,7 @@
     "yourReputation": "your reputation: ",
     "en": "ENG",
     "tchin": "繁體中文",
-    "schin": "简体中文"
+    "schin": "简体中文",
+    "protocolParameters": "Protocol Parameters",
+    "limit150": "Limit 150 characters"
 }

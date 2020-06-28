@@ -133,7 +133,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 }></span>
                 <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_parameters.svg" />
-                { "Protocol Parameters" }
+                { t('sidebar.protocolParams') }
 
                 </span>
               </Link>

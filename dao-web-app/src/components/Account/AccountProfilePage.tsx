@@ -175,7 +175,7 @@ class AccountProfilePage extends React.Component<IProps, IState> {
           : ""}
 
         <div className={profileContainerClass} data-test-id="profile-container">
-          { editing && (!accountProfile || !accountProfile.name) ? <div className={css.setupProfile}>In order to evoke a sense of trust and reduce risk of scams, we invite you to create a user profile which will be associated with your current Ethereum address.<br/><br/></div> : ""}
+          { editing && (!accountProfile || !accountProfile.name) ? <div className={css.setupProfile}>{t("account.inOrderToEvoke")}<br/><br/></div> : ""}
           { typeof(accountProfile) === "undefined" ? "Loading..." :
             <Formik
               enableReinitialize
@@ -191,7 +191,7 @@ class AccountProfilePage extends React.Component<IProps, IState> {
 
                 const require = (name: string): any => {
                   if (!(values as any)[name]) {
-                    errors[name] = "Required";
+                    errors[name] = t("errors.required");
                   }
                 };
 
@@ -258,7 +258,7 @@ class AccountProfilePage extends React.Component<IProps, IState> {
                               rows="7"
                               className={touched.description && errors.description ? css.error : null}
                             />
-                            <div className={css.charLimit}>Limit 150 characters</div>
+                            <div className={css.charLimit}>{t("limit150")}</div>
                           </div>
                           <div className={css.saveProfile}>
                             <button className={css.submitButton} type="submit" disabled={isSubmitting}>

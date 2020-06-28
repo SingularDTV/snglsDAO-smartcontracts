@@ -71,12 +71,12 @@ class DaoContainer extends React.Component<IProps, null> {
     this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
 
-  // private daoJoinRoute = (routeProps: any) => <DaoJoinPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
+  private daoJoinRoute = (routeProps: any) => <DaoJoinPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembershipRoute = (routeProps: any) => <DaoMembershipPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoHistoryRoute = (routeProps: any) => <DaoHistoryPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} />;
   private threeBoxTreadPage = (routeProps: any) => <ThreeBoxTreadPage {...routeProps} dao={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} currentAccountProfile={this.props.currentAccountProfile} />;
-  private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} daoState={this.props.data[0]} />;
+  private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress}/>;
   private daoProposalRoute = (routeProps: any) =>
     <ProposalDetailsPage {...routeProps}
       currentAccountAddress={this.props.currentAccountAddress}
@@ -157,7 +157,7 @@ class DaoContainer extends React.Component<IProps, null> {
           <ModalRoute
             path="/dao/dashboard/join"
             parentPath={this.daoJoinModalRoute}
-            component={DaoJoinPage}
+            component={this.daoJoinRoute}
           />
 
           <ModalRoute

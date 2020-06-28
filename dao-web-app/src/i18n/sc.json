@@ -6,7 +6,7 @@
         "applications": "应用程序",
         "members": "DAO会员中心",
         "history": "过往记录",
-        "wall": "DAO Wall",
+        "wall": "DAO讨论区",
         "treasury": "DAO储备资金",
         "stakes": "DAO质押",
         "buy": "$ 购买 SNGLS",
@@ -78,8 +78,8 @@
         "listingRate": "上架费用：SNGLS",
         "amountToTreasury": "需注入储备资金池的SNGLS数量",
         "toAddToProtocol": "将内容上架到协定上。",
-        "transFee": "Transaction Fee: %",
-        "transFeeDescription": "协定会将内容交易所产生的交易费用的某个百份比置入于<br/>储备资金。",
+        "transFee": "交易费用：%",
+        "transFeeDescription": "协定会将内容交易所产生的交易费用的某个百份比置入于储备资金。",
         "comingSoon": "敬请期待",
         "validationFee": "验证费用：SNGLS",
         "minimumAmount": "给付验证者的最低收费。",
@@ -105,6 +105,7 @@
         "haveAmountStaked": "您质押的金额将成为您在DAO中的声誉值",
         "holding": "持有 0.00% 声誉值",
         "getRep": "增加声誉值",
+        "removeRep": "Remove REPUTATION",
         "cancel": "取消"
     },
     "loading": "加载中...",
@@ -121,7 +122,9 @@
         "name": "名称",
         "address": "钱包地址",
         "reputation": "声誉值",
-        "socVerification": "通过验证的社交帐户"
+        "socVerification": "通过验证的社交帐户",
+        "alreadyStaked": "已质押",
+        "balance": "结余:"
     },
     "schemas": {
         "noSchemas": "没有已套用方案",
@@ -171,7 +174,6 @@
         "spaceDesignated": "指定的讨论空间用于发表一般问题、陈述和评论",
         "viewYourPersonalFeed": "查看您的资讯页面",
         "showHide": "选择显示或隐藏悬浮小提示"
-
     },
     "account": {
        "rep": "声誉值",
@@ -389,7 +391,9 @@
         "reputationRewardToSplit": "声誉值奖励拆分",
         "externalTokenRewardSplit": "其他代币奖励拆分",
         "daoTokenRewardToSplit": "DAO 代币({{tokenSymbol}}) 奖励拆分",
-        "submitProposal": "提交提案"
+        "submitProposal": "提交提案",
+        "backToDashboard": "返回概要页面",
+        "proposal": "提案"
     },
     "proposal": {
         "forStaking": "质押于提案，您可获得：",
@@ -467,7 +471,7 @@
         "delist": "下架",
         "unknown": "未知函数调用",
         "toContractAt": "给合约：",
-        "withCallData": "callData：", 
+        "withCallData": "callData：",
         "onContract": "于合约",
         "mintOrBurn": "创造或销毁声誉值",
         "callGenericCall": "代表调用 genericCall",
@@ -536,6 +540,17 @@
     },
     "cookieStart": "Alchemy在您的设备上存储Cookie，以增强平台体验并分析平台使用情况。请阅读",
     "cookieLinkPolicy": "Cookie政策",
-    "cookieMoreInformation": "以获得更多信息。"
-    
+    "cookieMoreInformation": "以获得更多信息。",
+    "disclaimer": "DISCLAIMER",
+    "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
+    "iAccept": "我同意",
+    "fullProfile": "Full Profile",
+    "yourReputation": "your reputation: ",
+    "en": "ENG",
+    "tchin": "繁體中文",
+    "schin": "简体中文",
+    "protocolParameters": "Protocol Parameters",
+    "limit150": "字数上限150个字符"
+
+
 }
