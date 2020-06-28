@@ -274,31 +274,31 @@ class Header extends React.Component<IProps, null> {
     <li className={css.submenu}><span>{t('header.consumerProtection.code.code')}</span>
                         <ul>
                           <li><a href="https://etherscan.io/address/0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009#code" target="_blank">{t('header.consumerProtection.code.SNGLS')}</a></li>
-                          <li><a href="https://snglsdao.io/" target="_blank">{t('header.consumerProtection.code.SGT')}</a></li>
+                          <li><a href="https://etherscan.io/address/0xc4199fB6FFDb30A829614becA030f9042f1c3992#code" target="_blank">{t('header.consumerProtection.code.SGT')}</a></li>
                           <li><a href="https://github.com/SingularDTV/snglsDAO-smartcontracts" target="_blank">{t('header.consumerProtection.code.snglsDAO')}</a></li>
                         </ul>
                       </li>
     <li className={css.submenu}><span>{t('header.consumerProtection.transHistory.history')}</span>
                         <ul>
                           <li><a href="https://etherscan.io/token/0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009" target="_blank">{t('header.consumerProtection.transHistory.SNGLS')}</a></li>
-                          <li><a href="https://snglsdao.io/" target="_blank">{t('header.consumerProtection.transHistory.SGT')}</a></li>
+                          <li><a href="https://etherscan.io/token/0xc4199fB6FFDb30A829614becA030f9042f1c3992" target="_blank">{t('header.consumerProtection.transHistory.SGT')}</a></li>
                         </ul>
                       </li>
                       <li className={css.submenu}><span>{t('header.consumerProtection.historyPassTokenSales')}</span>
                         <ul>
                           <li><a href="https://etherscan.io/address/0xbdf5c4f1c1a9d7335a6a68d9aa011d5f40cf5520" target="_blank">{t('header.SNGLS')}</a></li>
-                          <li><a href="https://snglsdao.io/" target="_blank">{t('header.SGT')}</a></li>
+                          <li><a href="https://etherscan.io/address/0xe5fa2042501f5ec14cca6a8bc360131ff7dc6b8c" target="_blank">{t('header.SGT')}</a></li>
                         </ul>
                       </li>
                       <li className={css.submenu}><span>{t('header.consumerProtection.tokenHolder')}</span>
                         <ul>
                           <li><a href="https://etherscan.io/token/0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009#balances" target="_blank">{t('header.SNGLS')}</a></li>
-                          <li><a href="https://snglsdao.io/" target="_blank">{t('header.SGT')}</a></li>
+                          <li><a href="https://etherscan.io/token/0xc4199fB6FFDb30A829614becA030f9042f1c3992#balances" target="_blank">{t('header.SGT')}</a></li>
                         </ul>
                       </li>
                       <li className={css.submenu}><span>{t('header.consumerProtection.appSec')}</span>
                         <ul>
-                          <li><a href="https://snglsdao.io/" target="_blank">{t('header.snglsDAO')}</a></li>
+                          <li><a href="https://github.com/SingularDTV/snglsDAO-smartcontracts/blob/master/security-audit/AUDIT.pdf" target="_blank">{t('header.snglsDAO')}</a></li>
                         </ul>
                       </li>
                     </ul>
