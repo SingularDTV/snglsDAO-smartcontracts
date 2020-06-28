@@ -1,5 +1,5 @@
 import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake /*, Member*/ } from "@daostack/client";
-import { enableWalletProvider,  getArc, getArcSettings } from "arc";
+import {enableWalletProvider, getArc, getArcSettings } from "arc";
 import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
@@ -451,7 +451,8 @@ const SubscribedGetRep = withSubscription({
       skip: 0,
     }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
     );
-    const member =  dao.member(props.currentAccountAddress)
+    //@ts-ignore
+    const member =  dao.member(props.currAddress)
     return zip(
       proposals,
       member.state(),
@@ -582,4 +583,4 @@ const SubscribedTokenBalance = withSubscription({
 //@ts-ignore
 const dashboardWithTranslation = withTranslation()(SubscribedGetRep)
 //@ts-ignore
-export default connect(null, mapDispatchToProps)(dashboardWithTranslation);
+export default connect(({web3: { currentAccountAddress: currAddress }}) => ({currAddress}), mapDispatchToProps)(dashboardWithTranslation);
