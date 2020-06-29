@@ -107,8 +107,12 @@
 }
 
 .followButton.bigButton.isFollowing {
-  color: #0071ff;
+  color: #000;
+  border-color: #ffffff2b;
+  box-shadow: none;
   background-color: white;
+  color: #ffffff2b;
+  background: transparent;
 
   .spinner {
     border-top: 2px solid #0376ff;
