@@ -5,13 +5,13 @@ import withSubscription, { ISubscriptionProps } from "../../components/Shared/wi
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import { /* baseTokenName, supportedTokens,  toBaseUnit, tokenDetails,  toWei, */ isValidUrl/*, getLocalTimezone */ } from "lib/util";
 import Loading from "components/Shared/Loading";
-import { Tabs, Checkbox } from 'antd';
+import { Tabs, Checkbox, Statistic } from 'antd';
 import * as React from "react";
 import { fromWei } from "lib/util";
 // import { RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import Select from "react-select";
-// import * as moment from "moment";
+import * as moment from "moment";
 import { History } from "history";
 import { showNotification, NotificationStatus } from "reducers/notifications";
 // import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
@@ -23,7 +23,7 @@ import { zip} from "rxjs";
 import {map} from "rxjs/operators";
 import Reputation from "../Account/Reputation";
 
-// const { Countdown } = Statistic;
+const { Countdown } = Statistic;
 const { TabPane } = Tabs;
 
 interface IExternalStateProps {
@@ -171,7 +171,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
     const { t } = this.props;
     //@ts-ignore
     const { data: { dao, member } } = this.props;
-    // const { releaseTime } = this.state;
+    const { releaseTime } = this.state;
 
     if (!dao) {
       return null;
@@ -196,16 +196,16 @@ class GetReputation extends React.Component<IProps, IStateProps> {
             </div>
           </div>
         )}
-      {/*{!!percentageBn && (*/}
-      {/*  <div className={css.releaseTime}>*/}
-      {/*    <Countdown title="Token defrosting will be available through"*/}
-      {/*        // @ts-ignore*/}
-      {/*        value={moment(releaseTime*1000).format()}*/}
-      {/*        format="DD:HH:mm:ss"*/}
-      {/*        valueStyle={{ display: 'flex',justifyContent: 'center' }}*/}
-      {/*      />*/}
-      {/*  </div>*/}
-      {/*)}*/}
+      {!!percentageBn && (
+        <div className={css.releaseTime}>
+          <Countdown title="Token defrosting will be available through"
+              // @ts-ignore
+              value={moment(releaseTime*1000).format()}
+              format="DD:HH:mm:ss"
+              valueStyle={{ display: 'flex',justifyContent: 'center' }}
+            />
+        </div>
+      )}
 
         <div className={css.contributionReward}>
           <Tabs defaultActiveKey="1">
@@ -285,9 +285,6 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                                             member.reputation}/>
                                )
                             </span>
-                            {/*<span className={css.holdings}>{t('daojoin.reputation')} <strong>{*/}
-                            {/*  //@ts-ignore*/}
-                            {/*  percentageBn / 100}% Rep.</strong></span>*/}
                           </div>
                           <span className={css.holdings}>{t("daojoin.haveAmountStaked")}</span>
                         </div>
@@ -319,7 +316,22 @@ class GetReputation extends React.Component<IProps, IStateProps> {
             </TabPane>
             <TabPane tab="Unstake" key="2">
               {/*TODO add text for TrainingTooltip and add handling*/}
-             <div style={{ display: 'flex',justifyContent: 'center' }}>
+             <div style={{ display: 'flex',justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
+              <div style={{ marginBottom: 10}}>
+                <div className={css.balances}>
+                            <span className={css.tokens}>{t('daojoin.sgtTokens')}
+                              {percentageBn}{' '}
+                              (
+                              <Reputation daoName={dao.name}
+                                //@ts-ignore
+                                          totalReputation={dao.reputationTotalSupply}
+                                          reputation={
+                                            //@ts-ignore
+                                            member.reputation}/>
+                               )
+                            </span>
+                </div>
+              </div>
                <TrainingTooltip overlay={'Text for unstake'} placement="top">
                  <button className={css.submitProposal} type="submit" onClick={() => console.log('cancel=====')}>
                    {t('daojoin.removeRep')}
