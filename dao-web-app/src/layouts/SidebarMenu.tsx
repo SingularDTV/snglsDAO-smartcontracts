@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { IDAOState, Token } from "@daostack/client";
-import { hideMenu } from "actions/uiActions";
+import { hideMenu, hideSidebar } from "actions/uiActions";
 import { getArc, getArcSettings } from "arc";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 
@@ -35,10 +35,12 @@ interface IHasNewPosts {
 
 interface IDispatchProps {
   hideMenu: typeof hideMenu;
+  hideSidebar: typeof hideSidebar;
 }
 
 const mapDispatchToProps = {
   hideMenu,
+  hideSidebar,
 };
 
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, IHasNewPosts]>;
@@ -62,6 +64,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
 
   private handleCloseMenu = (_event: any): void => {
     this.props.hideMenu();
+    this.props.hideSidebar();
   }
 
   public daoMenu() {
