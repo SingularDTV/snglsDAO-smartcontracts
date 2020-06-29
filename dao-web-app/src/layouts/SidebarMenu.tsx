@@ -143,7 +143,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             </li>
           
             <li>
-              <Link to={"/dao/scheme/" + arcSettings.grantsSchemeContractAddress} onClick={this.handleCloseMenu}>
+              <Link to={"/dao/scheme/" + arcSettings.grantsSchemeID} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
