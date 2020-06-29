@@ -11,12 +11,13 @@ import { IProfileState } from "reducers/profilesReducer";
 interface IProps {
   currentAccountAddress: string;
   threeBox?: any;
+  threeBoxTimeOutErr?: string;
   web3Provider?: any;
   chatName: string;
   currentAccountProfile: IProfileState;
 }
 
-const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName, web3Provider }: IProps) => {
+const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName, web3Provider, threeBoxTimeOutErr }: IProps) => {
 
   const [thread, setThread] = useState(null)
   const [currDID, setCurrDID] = useState(null)
@@ -55,15 +56,17 @@ const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName, web3Provider
     <div>
       {!web3Provider
         ? <h5>Please connect to wallet</h5>
-        : !threeBox
+        : !threeBox && !threeBoxTimeOutErr
           ? <Loading />
-          : (<div>
-            <ThreeBoxAddMessage profile={currProfile} thread={thread} currentAddress={currentAccountAddress} />
-            <ThreeBoxMessageList currDID={currDID} currConfig={currConfig} thread={thread}/>
-          </div>)}
+          : !threeBox && threeBoxTimeOutErr
+            ? <h5 style={{color :"red"}}>Unable to connect to 3box service </h5>
+            : threeBox && !threeBoxTimeOutErr && (<div>
+              <ThreeBoxAddMessage profile={currProfile} thread={thread} currentAddress={currentAccountAddress} />
+              <ThreeBoxMessageList currDID={currDID} currConfig={currConfig} thread={thread}/>
+            </div>)}
     </div>
   );
 }
 
 // @ts-ignore
-export default connect(({profiles: {  threeBox}} ) => ({threeBox}))(ThreeBoxTread)
+export default connect(({profiles: {  threeBox, threeBoxTimeOutErr}} ) => ({threeBox, threeBoxTimeOutErr}))(ThreeBoxTread)

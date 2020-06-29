@@ -146,9 +146,16 @@ class Header extends React.Component<IProps, null> {
     const { currentAccountAddress, updateThreeBox } = this.props;
     const web3Provider = getWeb3Provider();
     if(web3Provider) {
-      const box = await openBox(currentAccountAddress, web3Provider)
-      // await box.syncDone
-      updateThreeBox(box)
+      const boxPromise = Promise.race([
+        openBox(currentAccountAddress, web3Provider),
+        new Promise((resolve, reject) => setTimeout(() => reject(), 10000)),
+      ]);
+     try{
+       const box = await boxPromise
+       updateThreeBox({threeBox:box})
+     }catch(err){
+       updateThreeBox({boxTimeout: true})
+     }
     }
   }
 
@@ -179,7 +186,7 @@ class Header extends React.Component<IProps, null> {
   public handleClickLogout = async (_event: any): Promise<void> => {
     await logout(this.props.showNotification);
     await this.props.threeBoxLogout();
-    updateThreeBox()
+    updateThreeBox({ threeBox: null })
   }
 
   private handleToggleMenu = (_event: any): void => {
