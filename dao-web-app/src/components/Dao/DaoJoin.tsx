@@ -5,7 +5,7 @@ import withSubscription, { ISubscriptionProps } from "../../components/Shared/wi
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import { /* baseTokenName, supportedTokens,  toBaseUnit, tokenDetails,  toWei, */ isValidUrl/*, getLocalTimezone */ } from "lib/util";
 import Loading from "components/Shared/Loading";
-import { Tabs } from 'antd';
+import { Tabs, Checkbox } from 'antd';
 import * as React from "react";
 import { fromWei } from "lib/util";
 // import { RouteComponentProps } from "react-router-dom";
@@ -240,6 +240,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                 render={({
                            errors,
                            touched,
+                           values,
                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
                            handleSubmit,
                            isSubmitting,
@@ -291,7 +292,13 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                           <span className={css.holdings}>{t("daojoin.haveAmountStaked")}</span>
                         </div>
                       </div>
-
+                      <Field
+                        value={values?.term}
+                        onChange={(e: any) => setFieldValue('term', e.target.checked)}
+                        component={Checkbox}
+                      >
+                        By checking this you agree to our Participation Agreement
+                      </Field>
                       {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)
                       && touched.reputationReward && errors.rewards &&
                       <span className={css.errorMessage + " " + css.someReward}><br/> {errors.rewards}</span>
@@ -299,7 +306,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                       <div className={css.createProposalActions}>
                         <div>
                           <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
-                            <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
+                            <button className={css.submitProposal} type="submit" disabled={isSubmitting || !values?.term}>
                               {t('daojoin.getRep')}
                             </button>
                           </TrainingTooltip>
