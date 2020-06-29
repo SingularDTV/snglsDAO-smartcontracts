@@ -29,23 +29,35 @@ contract Fee is Ownable {
         uint256 indexed newValue
     );
 
+    modifier isInteger(uint256 _value) {
+        require(
+            _value % 1 ether == 0,
+            "Passed non-integer value. It must be integer, given the decimals."
+        );
+        _;
+    }
+
+    /**
+     * @dev the constructor takes initial fees values
+     */
     constructor(
         uint256 _listingFee,
         uint256 _transactionFee,
         uint256 _validationFee,
         uint256 _membershipFee
     ) public {
-        listingFee = _listingFee;
-        transactionFee = _transactionFee;
-        validationFee = _validationFee;
-        membershipFee = _membershipFee;
+        setFees(_listingFee, _transactionFee, _validationFee, _membershipFee);
     }
 
     /**
      * @dev set new listing fee value.
      * @param _listingFee new listing fee value
      */
-    function setListingFee(uint256 _listingFee) public onlyOwner {
+    function setListingFee(uint256 _listingFee)
+        public
+        isInteger(_listingFee)
+        onlyOwner
+    {
         listingFee = _listingFee;
         emit UpdateListingFee(now, _listingFee);
     }
@@ -63,7 +75,11 @@ contract Fee is Ownable {
      * @dev set new validation fee value.
      * @param _validationFee new validation fee value
      */
-    function setValidationFee(uint256 _validationFee) public onlyOwner {
+    function setValidationFee(uint256 _validationFee)
+        public
+        isInteger(_validationFee)
+        onlyOwner
+    {
         validationFee = _validationFee;
         emit UpdateValidationFee(now, _validationFee);
     }
@@ -72,11 +88,11 @@ contract Fee is Ownable {
      * @dev set new membership fee value.
      * @param _membershipFee new membership fee value, can't be non-integer, given the decimals
      */
-    function setMembershipFee(uint256 _membershipFee) public onlyOwner {
-        require(
-            _membershipFee % 1 ether == 0,
-            "Passed non-integer value to membership fee. It must be integer, given the decimals."
-        );
+    function setMembershipFee(uint256 _membershipFee)
+        public
+        isInteger(_membershipFee)
+        onlyOwner
+    {
         membershipFee = _membershipFee;
         emit UpdateMembershipFee(now, _membershipFee);
     }
@@ -94,17 +110,9 @@ contract Fee is Ownable {
         uint256 _validationFee,
         uint256 _membershipFee
     ) public onlyOwner {
-        require(
-            _membershipFee % 1 ether == 0,
-            "Passed non-integer value to membership fee. It must be integer, given the decimals."
-        );
-        listingFee = _listingFee;
-        transactionFee = _transactionFee;
-        validationFee = _validationFee;
-        membershipFee = _membershipFee;
-        emit UpdateListingFee(now, _listingFee);
-        emit UpdateTransactionFee(now, _transactionFee);
-        emit UpdateValidationFee(now, _validationFee);
-        emit UpdateMembershipFee(now, _membershipFee);
+        setListingFee(_listingFee);
+        setTransactionFee(_transactionFee);
+        setValidationFee(_validationFee);
+        setMembershipFee(_membershipFee);
     }
 }
