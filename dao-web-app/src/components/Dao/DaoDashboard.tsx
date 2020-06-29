@@ -183,6 +183,9 @@ class DaoDashboard extends React.Component<IProps, IState> {
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
               > {t("daojoin.getRep")} </a>
+            {
+              //@ts-ignore
+              data.member && (
               <span className={css.reputationBalance}>{t("yourReputation")}
                 (<Reputation daoName={daoState.name}
                              totalReputation={daoState.reputationTotalSupply}
@@ -190,6 +193,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
                                //@ts-ignore
                                data.member.reputation}/>)
               </span>
+            )}
           </div>
         </div>
          {/* Key parameters div */}
@@ -452,12 +456,17 @@ const SubscribedGetRep = withSubscription({
     }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
     );
     //@ts-ignore
-    const member =  dao.member(props.currentAddress)
-    return zip(
+    const member = props.currentAddress && dao.member(props.currentAddress)
+    //@ts-ignore
+    return member ? zip(
       proposals,
       member.state(),
     ).pipe(
       map(([proposals, member]) => ({proposals, member}))
+    ) : zip(
+      proposals
+    ).pipe(
+      map(([proposals]) => ({proposals}))
     )
   },
 
@@ -481,18 +490,17 @@ const SubscribedGetRep = withSubscription({
     );
 
     //@ts-ignore
-    const member =  dao.member(props.currentAddress)
-    // const members = dao.members({
-    //   orderBy: "balance",
-    //   orderDirection: "desc",
-    //   first: PAGE_SIZE,
-    //   skip: data.members.length,
-    // });
-    return zip(
+    const member = props.currentAddress && dao.member(props.currentAddress)
+    //@ts-ignore
+    return member ? zip(
       proposals,
       member.state(),
     ).pipe(
       map(([proposals, member]) => ({proposals, member}))
+    ) : zip(
+      proposals
+    ).pipe(
+      map(([proposals]) => ({proposals}))
     )
   },
 });
