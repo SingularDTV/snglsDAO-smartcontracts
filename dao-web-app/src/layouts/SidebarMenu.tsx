@@ -238,8 +238,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             </a>
           </span>
           <ul>
+            <SubscribedTotalStakedBalance stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} />
             <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.membershipFeeStakingContractAddress} tokenAddress={arcSettings.snglsTokenContractAddress} key={"staked_token_" + arcSettings.snglsTokenContractAddress} />
-            <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} />
           </ul>
         </div>
 
@@ -284,13 +284,13 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </ul>
               </li>
               <li>
-                <a>{t("sidebar.buySgt")}</a>
-                <ul>
+                <a href="https://uniswap.exchange/swap?inputCurrency=0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009&outputCurrency=0xc4199fb6ffdb30a829614beca030f9042f1c3992">{t("sidebar.buySgt")}</a>
+                {/* <ul>
                   <div className={css.diamond}></div>
                   <span className={css.soon}>{
                     "  Comming soon!"
                   }</span>
-                </ul>
+                </ul> */}
               </li>
               <li>
                 <a>{t("sidebar.buyGen")}</a>
