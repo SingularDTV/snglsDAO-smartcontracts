@@ -59,7 +59,7 @@ const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName, web3Provider
         : !threeBox && !threeBoxTimeOutErr
           ? <Loading />
           : !threeBox && threeBoxTimeOutErr
-            ? <h5 style={{color :"red"}}>Enable 3 box failed</h5>
+            ? <h5 style={{color :"red"}}>Unable to connect to 3box service </h5>
             : threeBox && !threeBoxTimeOutErr && (<div>
               <ThreeBoxAddMessage profile={currProfile} thread={thread} currentAddress={currentAccountAddress} />
               <ThreeBoxMessageList currDID={currDID} currConfig={currConfig} thread={thread}/>
