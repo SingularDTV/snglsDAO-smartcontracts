@@ -11,7 +11,9 @@
         "stakes": "DAO质押",
         "buy": "$ 购买 SNGLS",
         "sngls": "snglsDAO",
-        "rep": "声誉值"
+        "rep": "声誉值",
+        "protocolParams": "协定参数",
+        "grants": "补助金"
     },
     "header": {
         "git": " GitHub",
@@ -112,7 +114,7 @@
     "noProfile": "没有个人资料",
     "membership": {
         "memFee": "会员费用",
-        "amountNeedToStake": "所需的SNGLS数量质押在DAO中，<br/>用以豁免交易费用。",
+        "amountNeedToStake": "所需的SNGLS数量质押在DAO中，用以豁免交易费用。",
         "minAmountRequired": "最小所需数量： ",
         "confAuto": "确定自动化执行",
         "orEnterManually": " 或自行设置数值：",

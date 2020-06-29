@@ -14,7 +14,8 @@
         "buyGEN": "$ 购买 GEN",
         "sngls": "snglsDAO",
         "rep": "聲譽值",
-        "protocolParams": "DAO討論區"
+        "protocolParams": "協定參數",
+        "grants": "補助金"
     },
     "header": {
         "git": " GitHub",
@@ -82,7 +83,7 @@
         "amountToTreasury": "需注入儲備資金池的SNGLS數量",
         "toAddToProtocol": "將內容上架到協定上。",
         "transFee": "交易費用：%",
-        "transFeeDescription": "協定會將內容交易所產生的交易費用的某個百份比置入於<br/>儲備資金。",
+        "transFeeDescription": "協定會將內容交易所產生的交易費用的某個百份比置入於儲備資金。",
         "comingSoon": "敬請期待",
         "validationFee": "驗証費用：SNGLS",
         "minimumAmount": "給付驗証者的最低收費。",
@@ -115,7 +116,7 @@
     "noProfile": "沒有個人資料",
     "membership": {
         "memFee": "會員費用",
-        "amountNeedToStake": "所需的SNGLS數量質押在DAO中，<br/>用以豁免交易費用。",
+        "amountNeedToStake": "所需的SNGLS數量質押在DAO中，用以豁免交易費用。",
         "minAmountRequired": "最小所需數量： ",
         "confAuto": "確定自動化執行",
         "orEnterManually": " 或自行設置數值：",

@@ -452,7 +452,7 @@ const SubscribedGetRep = withSubscription({
     }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
     );
     //@ts-ignore
-    const member =  dao.member(props.currAddress)
+    const member =  dao.member(props.currentAddress)
     return zip(
       proposals,
       member.state(),
@@ -479,8 +479,9 @@ const SubscribedGetRep = withSubscription({
       skip: data.length,
     }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
     );
+
     //@ts-ignore
-    const member =  dao.member(props.currAddress)
+    const member =  dao.member(props.currentAddress)
     // const members = dao.members({
     //   orderBy: "balance",
     //   orderDirection: "desc",
@@ -590,4 +591,4 @@ const SubscribedTokenBalance = withSubscription({
 //@ts-ignore
 const dashboardWithTranslation = withTranslation()(SubscribedGetRep)
 //@ts-ignore
-export default connect(({web3: { currentAccountAddress: currAddress }}) => ({currAddress}), mapDispatchToProps)(dashboardWithTranslation);
+export default connect(null, mapDispatchToProps)(dashboardWithTranslation);
