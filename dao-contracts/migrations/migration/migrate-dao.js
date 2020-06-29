@@ -80,7 +80,7 @@ async function migrateDAO({
   } = base[arcVersion]
 
   const daoCreator = new web3.eth.Contract(
-    utils.importAbi(`./../../../dao-creator/build/contracts/DaoCreator.json `).abi,
+    utils.importAbi(`./../../../dao-creator/build/contracts/DaoCreator.json`).abi,
     migrationParams.daoCreatorAddr,
     opts
   )
