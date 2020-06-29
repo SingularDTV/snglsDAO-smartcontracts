@@ -42,7 +42,7 @@ class ErrorUncaught extends React.PureComponent<IExternalProps> {
           <div className={css.title}>Something went wrong…</div>
           <div className={css.description}>{this.props.errorMessage}</div>
           <div>
-            { this.props.sentryEventId ? <a className={css.report} onClick={this.handleReport}>Report</a> : "" }
+            {/* { this.props.sentryEventId ? <a className={css.report} onClick={this.handleReport}>Report</a> : "" } */}
             { this.props.goHome ? <Link to="/"><button onClick={this.props.goHome} className={css.home}>Home</button></Link> : "" }
           </div>
         </div>
