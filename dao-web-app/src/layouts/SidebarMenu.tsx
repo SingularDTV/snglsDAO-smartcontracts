@@ -136,7 +136,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </span>
               </Link>
             </li>
-          
+
             <li>
               <Link to={"/dao/scheme/" + arcSettings.grantsSchemeContractAddress} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
@@ -279,13 +279,13 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </ul>
               </li>
               <li>
-                <a href="https://uniswap.exchange/swap?inputCurrency=0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009&outputCurrency=0xc4199fb6ffdb30a829614beca030f9042f1c3992">{t("sidebar.buySgt")}</a>
-                {/* <ul>
+                <a target="_blank" rel="noopener noreferrer" href="https://uniswap.exchange/swap?inputCurrency=0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009&outputCurrency=0xc4199fb6ffdb30a829614beca030f9042f1c3992">{t("sidebar.buySgt")}</a>
+                <ul>
                   <div className={css.diamond}></div>
                   <span className={css.soon}>{
-                    "  Comming soon!"
+                    "  Uniswap"
                   }</span>
-                </ul> */}
+                </ul>
               </li>
               <li>
                 <a>{t("sidebar.buyGen")}</a>
