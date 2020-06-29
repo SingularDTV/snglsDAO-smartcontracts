@@ -40,7 +40,7 @@ export class App extends React.Component<{}, {
   }
 
   private PrivacyPolicy = () => {
-    return this.getPdfHtml("privacy_policy.pdf");
+    return this.getPdfHtml("Privacy_Policy_with_Final_1_14_20.pdf");
   }
 
   public async componentDidMount (): Promise<void> {
