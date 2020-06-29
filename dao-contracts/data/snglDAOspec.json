@@ -34,7 +34,8 @@
             "isUniversal": false,
             "params": [
                 "TokenAddress",
-                "0"
+                "0",
+                "0x0"
             ],
             "permissions": "0x00000010",
             "alias": "LockingSGT4Reputation",
