@@ -114,6 +114,20 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
     this.fetchBalances();
   }
 
+
+  public handleUnstake = async (): Promise<void> => {
+    if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
+      return;
+    }
+    const arc = getArc();
+    const settings = getArcSettings();
+    const currentAccountAddress = this.props.currentAccountAddress;
+
+    const memFeeStakingContract = new arc.web3.eth.Contract(settings.membershipFeeStakingContractABI, settings.membershipFeeStakingContractAddress);
+
+    await memFeeStakingContract.methods.release().send({from: currentAccountAddress})
+  }
+
   public handleSubmit = async (values: IFormValues, { _setSubmitting }: any ): Promise<void> => {
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
       return;
@@ -244,7 +258,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                     <hr />
                     <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>
                     <hr />
-                    <button type="button" className={css.unstake}>{t("membership.unstake")}</button>
+                    <button type="button" onClick={ this.handleUnstake } className={css.unstake}>{t("membership.unstake")}</button>
                   </Form>
                 </div>
                 }

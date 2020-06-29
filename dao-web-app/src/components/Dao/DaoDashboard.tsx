@@ -1,5 +1,5 @@
 import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake /*, Member*/ } from "@daostack/client";
-import {enableWalletProvider, getArc, getArcSettings } from "arc";
+import { enableWalletProvider,  getArc, getArcSettings } from "arc";
 import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
@@ -10,7 +10,7 @@ import * as InfiniteScroll from "react-infinite-scroll-component";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { showNotification } from "reducers/notifications";
 // import * as Sticky from "react-stickynode";
-import {first, map} from "rxjs/operators";
+import { first, map } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
 import classNames from "classnames";
@@ -22,10 +22,8 @@ import { baseTokenName, ethErrorHandler, formatTokens, genName, supportedTokens/
 //   // stringToUint8Array
 //  } from './utils'
 //  import { map } from 'rxjs/operators'
-
-import BN = require("bn.js");
 import {zip} from "rxjs";
-// import {zip} from "rxjs";
+import BN = require("bn.js");
 import Reputation from "../Account/Reputation";
 
 // import { IProfilesState } from "reducers/profilesReducer";
@@ -183,6 +181,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
               > {t("daojoin.getRep")} </a>
+              <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
             {
               //@ts-ignore
               data.member && (
@@ -346,9 +345,9 @@ class DaoDashboard extends React.Component<IProps, IState> {
         </InfiniteScroll>
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
-          <h4>
+          <div className={css.daoHistoryHeader}>
             {t('sidebar.history')}
-          </h4>
+          </div>
         {/* </Sticky> */}
 
         <InfiniteScroll
@@ -569,7 +568,7 @@ interface ITokenProps extends ISubscriptionProps<any> {
 const TokenBalance = (props: ITokenProps) => {
   const { data, error, isLoading, tokenAddress } = props;
   const tokenData = supportedTokens()[tokenAddress];
-  if (isLoading || error || ((data === null || isNaN(data)) && tokenData.symbol !== genName())) {
+  if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
     return null;
   }
 

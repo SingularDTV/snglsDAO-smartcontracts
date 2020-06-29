@@ -176,11 +176,11 @@ export function genName() {
 
 export function supportedTokens() {
   return { 
-  //   [getArc().GENToken().address]:  {
-  //   decimals: 18,
-  //   name: "DAOstack GEN",
-  //   symbol: genName(),
-  // }, 
+    [getArc().GENToken().address]:  {
+    decimals: 18,
+    name: "DAOstack GEN",
+    symbol: genName(),
+  }, 
   ...tokens[targetedNetwork()]["tokens"]};
 }
 
