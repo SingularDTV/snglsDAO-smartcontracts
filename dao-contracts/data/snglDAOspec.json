@@ -35,7 +35,7 @@
             "params": [
                 "TokenAddress",
                 "0",
-                "0x0"
+                "0xd50373474f1f6052760750fcc31bb3ed681c5c1edb8d7ecda12eb637af61220f"
             ],
             "permissions": "0x00000010",
             "alias": "LockingSGT4Reputation",
