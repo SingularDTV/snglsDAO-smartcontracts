@@ -145,13 +145,13 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
                 ?
                 <Link to={"/dao/dashboard"}>
                   <img className={css.relax} src="/assets/images/lt.svg"/> {t("schema.backToDashboard")}
-                </Link>                
+                </Link>
                 :
                 <Link to={"/dao/applications"}>
                   <img className={css.relax} src="/assets/images/lt.svg"/>{t("schema.backToApp")}
                 </Link>
               }
-              
+
               <a className={classNames({
                 [css.redButton]: true,
                 [css.disabled]: !isActive,
