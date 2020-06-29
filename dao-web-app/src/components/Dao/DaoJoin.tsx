@@ -17,11 +17,13 @@ import { showNotification, NotificationStatus } from "reducers/notifications";
 // import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "../../components/Shared/TrainingTooltip";
 import * as css from "./DaoJoin.scss";
+import "./ant.global.scss";
 import { withTranslation } from 'react-i18next';
 import { IRootState } from "reducers";
 import { zip} from "rxjs";
 import {map} from "rxjs/operators";
 import Reputation from "../Account/Reputation";
+
 
 const { Countdown } = Statistic;
 const { TabPane } = Tabs;
