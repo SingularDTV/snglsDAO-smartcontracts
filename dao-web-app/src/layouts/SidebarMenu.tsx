@@ -153,7 +153,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 }></span>
                 <span className={css.menuIcon}>
                   <img src="/assets/images/Icon/menu/_membership.svg" />
-                  {"Grants"}
+                  { t("sidebar.grants") }
 
                 </span>
               </Link>

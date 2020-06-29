@@ -14,7 +14,8 @@
         "rep": "REP",
         "buySgt": "$ Buy SGT",
         "buyGen": "$ Buy GEN",
-        "protocolParams": "Protocol Parameters"
+        "protocolParams": "Protocol Parameters",
+        "grants": "Grants"
     },
     "header": {
         "git": " GitHub",

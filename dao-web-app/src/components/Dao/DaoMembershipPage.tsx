@@ -238,7 +238,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                       </button>
                     </div>
                     <div className={css.bigInputFoot}>
-                      <span>{t("membership.alreadyStaked")}  {parseInt(this.state.alreadyStaked)} </span>
+                      <span>{t("membership.alreadyStaked")}  {parseInt(this.state.alreadyStaked)} {"SNGLS"}</span>
                       <span>{t("membership.balance")}  {parseInt(this.state.snglsBalance)} {"SNGLS"}</span>
                     </div>
                     <hr />
