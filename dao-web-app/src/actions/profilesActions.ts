@@ -107,12 +107,20 @@ export function threeBoxLogout() {
   };
 }
 
-export function updateThreeBox(threeBox: any = null, threeBoxSpace: any = null) {
+export function updateThreeBox({threeBox, boxTimeout}: any) {
+  if(boxTimeout) {
+    return async (dispatch: any) => {
+      dispatch({
+        type: ActionTypes.SAVE_THREEBOX,
+        sequence: AsyncActionSequence.Failure,
+      });
+    };
+  }
   return async (dispatch: any) => {
     dispatch({
       type: ActionTypes.SAVE_THREEBOX,
       sequence: AsyncActionSequence.Success,
-      payload: { threeBox, threeBoxSpace },
+      payload: { threeBox },
     });
   };
 }
