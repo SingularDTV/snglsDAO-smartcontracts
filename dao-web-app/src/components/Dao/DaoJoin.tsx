@@ -274,12 +274,15 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                           </div>
                           <div className={css.balances}>
                             <span className={css.tokens}>{t('daojoin.sgtTokens')}
+                              {percentageBn}{' '}
+                              (
                               <Reputation daoName={dao.name}
                                 //@ts-ignore
                                           totalReputation={dao.reputationTotalSupply}
                                           reputation={
                                             //@ts-ignore
                                             member.reputation}/>
+                               )
                             </span>
                             {/*<span className={css.holdings}>{t('daojoin.reputation')} <strong>{*/}
                             {/*  //@ts-ignore*/}
