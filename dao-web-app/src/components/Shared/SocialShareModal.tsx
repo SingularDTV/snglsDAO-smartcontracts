@@ -72,8 +72,12 @@ class SocialShareModal extends React.Component<IProps, IState> {
         width={318}
         closeHandler={this.props.closeHandler}
         header={<React.Fragment>
-          <div className={css.icon}><img src={"/assets/images/Icon//share-blue.svg"} /></div>
-          <div className={css.headerTitle}>Share</div>
+          <div className={css.head}>
+            <div>
+              <div className={css.icon}><img src={"/assets/images/Icon//share-blue.svg"} /></div>
+              <div className={css.headerTitle}>Share</div>
+            </div>
+          </div>
           <Tooltip overlay="Close" placement="left">
             <div className={css.closeButton} onClick={this.props.closeHandler}><img src={"/assets/images/Icon/close-grey.svg"} /></div>
           </Tooltip>
@@ -95,7 +99,7 @@ class SocialShareModal extends React.Component<IProps, IState> {
           <div onClick={this.selectTwitter} className={css.socialSite}><div className={css.icon}><img src={"/assets/images/Icon/social/twitter.svg"}/></div><div className={css.name}>Twitter</div></div>
           <div onClick={this.selectReddit} className={css.socialSite}><div className={css.icon}><img src={"/assets/images/Icon/social/reddit.svg"}/></div><div className={css.name}>Reddit</div></div>
           <div onClick={this.selectFacebook} className={css.socialSite}><div className={css.icon}><img src={"/assets/images/Icon/social/facebook.svg"}/></div><div className={css.name}>Facebook</div></div>
-          <div onClick={this.selectTelegram} className={css.socialSite}><div className={css.icon}><img src={"/assets/images/Icon/social/telegram.svg"}/></div><div className={css.name}>Telegram</div></div>
+          {/* <div onClick={this.selectTelegram} className={css.socialSite}><div className={css.icon}><img src={"/assets/images/Icon/social/telegram.svg"}/></div><div className={css.name}>Telegram</div></div> */}
         </div>}
       />
     );

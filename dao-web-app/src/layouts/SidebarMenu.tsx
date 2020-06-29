@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { IDAOState, Token } from "@daostack/client";
-import { hideMenu } from "actions/uiActions";
+import { hideMenu, hideSidebar } from "actions/uiActions";
 import { getArc, getArcSettings } from "arc";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 
@@ -35,10 +35,12 @@ interface IHasNewPosts {
 
 interface IDispatchProps {
   hideMenu: typeof hideMenu;
+  hideSidebar: typeof hideSidebar;
 }
 
 const mapDispatchToProps = {
   hideMenu,
+  hideSidebar,
 };
 
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, IHasNewPosts]>;
@@ -62,6 +64,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
 
   private handleCloseMenu = (_event: any): void => {
     this.props.hideMenu();
+    this.props.hideSidebar();
   }
 
   public daoMenu() {
@@ -108,7 +111,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               </Link>
             </li>
             <li>
-              <Link to={ "/dao/scheme/" + arcSettings.grantsSchemeContractAddress } onClick={this.handleCloseMenu}>
+              <Link to={"/dao/applications/"} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -117,9 +120,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   })
                 }></span>
                 <span className={css.menuIcon}>
-                <img src="/assets/images/Icon/menu/_membership.svg" />
-                { "Grants" }
-
+                  <img src="/assets/images/Icon/menu/_apps.svg" />
+                  {t('sidebar.applications')}
                 </span>
               </Link>
             </li>
@@ -139,8 +141,9 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </span>
               </Link>
             </li>
+          
             <li>
-              <Link to={"/dao/applications/"} onClick={this.handleCloseMenu}>
+              <Link to={"/dao/scheme/" + arcSettings.grantsSchemeContractAddress} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -149,8 +152,9 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   })
                 }></span>
                 <span className={css.menuIcon}>
-                <img src="/assets/images/Icon/menu/_apps.svg" />
-                {t('sidebar.applications')}
+                  <img src="/assets/images/Icon/menu/_membership.svg" />
+                  {"Grants"}
+
                 </span>
               </Link>
             </li>
@@ -234,8 +238,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             </a>
           </span>
           <ul>
+            <SubscribedTotalStakedBalance stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} />
             <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.membershipFeeStakingContractAddress} tokenAddress={arcSettings.snglsTokenContractAddress} key={"staked_token_" + arcSettings.snglsTokenContractAddress} />
-            <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} />
           </ul>
         </div>
 
@@ -280,13 +284,13 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </ul>
               </li>
               <li>
-                <a>{t("sidebar.buySgt")}</a>
-                <ul>
+                <a href="https://uniswap.exchange/swap?inputCurrency=0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009&outputCurrency=0xc4199fb6ffdb30a829614beca030f9042f1c3992">{t("sidebar.buySgt")}</a>
+                {/* <ul>
                   <div className={css.diamond}></div>
                   <span className={css.soon}>{
                     "  Comming soon!"
                   }</span>
-                </ul>
+                </ul> */}
               </li>
               <li>
                 <a>{t("sidebar.buyGen")}</a>
