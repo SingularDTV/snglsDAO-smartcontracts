@@ -1,5 +1,5 @@
 import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake /*, Member*/ } from "@daostack/client";
-import {enableWalletProvider, getArc, getArcSettings } from "arc";
+import { enableWalletProvider,  getArc, getArcSettings } from "arc";
 import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
@@ -10,7 +10,7 @@ import * as InfiniteScroll from "react-infinite-scroll-component";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { showNotification } from "reducers/notifications";
 // import * as Sticky from "react-stickynode";
-import {first, map} from "rxjs/operators";
+import { first } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
 import classNames from "classnames";
@@ -24,9 +24,6 @@ import { baseTokenName, ethErrorHandler, formatTokens, genName, supportedTokens/
 //  import { map } from 'rxjs/operators'
 
 import BN = require("bn.js");
-import {zip} from "rxjs";
-// import {zip} from "rxjs";
-import Reputation from "../Account/Reputation";
 
 // import { IProfilesState } from "reducers/profilesReducer";
 
@@ -66,7 +63,7 @@ interface IState {
 }
 
 // const getUserRep = (daoAddress: string, userAddress: string, context: any) => {
-
+  
 //   let options: any = {
 //     where: {
 
@@ -141,8 +138,8 @@ class DaoDashboard extends React.Component<IProps, IState> {
 
     const feesContract = new arc.web3.eth.Contract(getArcSettings().feesContractABI, getArcSettings().feesContractAddress);
 
-    this.setState(
-      {
+    this.setState( 
+      { 
         transactionFee: arc.web3.utils.fromWei(await feesContract.methods.transactionFee().call()),
         listingFee: arc.web3.utils.fromWei(await feesContract.methods.listingFee().call()),
         validationFee: arc.web3.utils.fromWei(await feesContract.methods.validationFee().call()),
@@ -155,8 +152,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
   public render(): RenderOutput {
     //@ts-ignore
     const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress, t } = this.props;
-    //@ts-ignore
-    const proposals = data.proposals;
+    const proposals = data;
     const arcSettings = getArcSettings();
 
     const proposalsHTML = proposals.map((proposal: Proposal) => {
@@ -171,7 +167,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
     return(
        <div className={css.membersContainer}>
          <BreadcrumbsItem to={"/dao/members"}>{t("yourReputation")}</BreadcrumbsItem>
-
+        
          <div className={css.pageHead}>
     <h1>{t("sidebar.dashboard")}</h1>
           <div>
@@ -183,17 +179,11 @@ class DaoDashboard extends React.Component<IProps, IState> {
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
               > {t("daojoin.getRep")} </a>
-              <span className={css.reputationBalance}>{t("yourReputation")}
-                (<Reputation daoName={daoState.name}
-                             totalReputation={daoState.reputationTotalSupply}
-                             reputation={
-                               //@ts-ignore
-                               data.member.reputation}/>)
-              </span>
+              <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
           </div>
         </div>
          {/* Key parameters div */}
-           <div>
+           <div> 
             <h3>{t('dashboard.keyParams')}</h3>
 
 
@@ -216,7 +206,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
 
              {/* <p className={css.description}>These proposals might change the rate</p> */}
 
-
+            
              <div className={css.dashBlock}>
                  <div className={css.icon}>
                          <img src="/assets/images/Icon/dash_transaction.png" />
@@ -265,7 +255,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
 
                         {Object.keys(supportedTokens()).map((tokenAddress) => {
                           return  <li key={ supportedTokens()[tokenAddress]["symbol"] + "_balance" }>
-                                    <span>
+                                    <span> 
                                       {  supportedTokens()[tokenAddress]["symbol"] } :
                                     </span>
                                     <p>
@@ -289,7 +279,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
                          <li>
                             <span>SGT:</span>
                             <p>
-                              <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} />
+                              <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} /> 
                             </p>
                           </li>
                          <li>
@@ -342,9 +332,9 @@ class DaoDashboard extends React.Component<IProps, IState> {
         </InfiniteScroll>
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
-          <h4>
+          <div className={css.daoHistoryHeader}>
             {t('sidebar.history')}
-          </h4>
+          </div>
         {/* </Sticky> */}
 
         <InfiniteScroll
@@ -386,13 +376,12 @@ class DaoDashboard extends React.Component<IProps, IState> {
 }
 
 const SubscribedGetRep = withSubscription({
-  //@ts-ignore
   wrappedComponent: DaoDashboard,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
 
   checkForUpdate: [],
-//@ts-ignore
+
   createObservable: async (props: IExternalProps) => {
     const arc = getArc();
     const dao = props.daoState.dao;
@@ -451,19 +440,18 @@ const SubscribedGetRep = withSubscription({
       skip: 0,
     }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
     );
-    //@ts-ignore
-    const member =  dao.member(props.currentAddress)
-    return zip(
-      proposals,
-      member.state(),
-    ).pipe(
-      map(([proposals, member]) => ({proposals, member}))
-    )
+    // const members = dao.members({
+    //   orderBy: "balance",
+    //   orderDirection: "desc",
+    //   first: PAGE_SIZE,
+    //   skip: 0,
+    // });
+    return proposals
   },
 
   // used for hacky pagination tracking
   pageSize: PAGE_SIZE,
-  //@ts-ignore
+
   getFetchMoreObservable: (props: IExternalProps, data: SubscriptionData) => {
     const dao = props.daoState.dao;
     const proposals = dao.proposals({
@@ -479,21 +467,13 @@ const SubscribedGetRep = withSubscription({
       skip: data.length,
     }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
     );
-
-    //@ts-ignore
-    const member =  dao.member(props.currentAddress)
     // const members = dao.members({
     //   orderBy: "balance",
     //   orderDirection: "desc",
     //   first: PAGE_SIZE,
     //   skip: data.members.length,
     // });
-    return zip(
-      proposals,
-      member.state(),
-    ).pipe(
-      map(([proposals, member]) => ({proposals, member}))
-    )
+    return proposals
   },
 });
 
@@ -561,7 +541,7 @@ interface ITokenProps extends ISubscriptionProps<any> {
 const TokenBalance = (props: ITokenProps) => {
   const { data, error, isLoading, tokenAddress } = props;
   const tokenData = supportedTokens()[tokenAddress];
-  if (isLoading || error || ((data === null || isNaN(data)) && tokenData.symbol !== genName())) {
+  if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
     return null;
   }
 
@@ -590,5 +570,4 @@ const SubscribedTokenBalance = withSubscription({
 
 //@ts-ignore
 const dashboardWithTranslation = withTranslation()(SubscribedGetRep)
-//@ts-ignore
 export default connect(null, mapDispatchToProps)(dashboardWithTranslation);

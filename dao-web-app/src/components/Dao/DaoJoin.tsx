@@ -109,6 +109,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleUnstake = this.handleUnstake.bind(this);
     this.state = {
       releaseTime: null
     };
@@ -125,6 +126,20 @@ class GetReputation extends React.Component<IProps, IStateProps> {
     const lockingSGT4ReputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
     const staked = await lockingSGT4ReputationContract.methods.lockers(this.props.currentAccountAddress).call()
     this.setState({ releaseTime: staked?.releaseTime})
+  }
+
+  public handleUnstake = async (): Promise<void> => {
+    if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
+      return;
+    }
+    const arc = getArc();
+    const settings = getArcSettings();
+    const currentAccountAddress = this.props.currentAccountAddress;
+
+    const reputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
+
+    await reputationContract.methods.release().send({from: currentAccountAddress})
+    this.handleClose({});
   }
 
   public handleSubmit = async (values: IFormValues, { _setSubmitting }: any ): Promise<void> => {
@@ -335,7 +350,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                 </div>
               </div>
                <TrainingTooltip overlay={'Text for unstake'} placement="top">
-                 <button className={css.submitProposal} type="submit" onClick={() => console.log('cancel=====')}>
+                 <button className={css.submitProposal} type="submit" onClick={this.handleUnstake}>
                    {t('daojoin.removeRep')}
                  </button>
                </TrainingTooltip>

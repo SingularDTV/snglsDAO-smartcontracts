@@ -1,4 +1,3 @@
-import axios, { AxiosResponse } from "axios";
 import { IDAOState, Token } from "@daostack/client";
 import { hideMenu, hideSidebar } from "actions/uiActions";
 import { getArc, getArcSettings } from "arc";
@@ -16,7 +15,7 @@ import { /* matchPath,*/ Link, RouteComponentProps } from "react-router-dom";
 import { first } from "rxjs/operators";
 import { IRootState } from "reducers";
 import { connect } from "react-redux";
-import { combineLatest, of, from } from "rxjs";
+import { combineLatest, of } from "rxjs";
 import { withTranslation } from 'react-i18next';
 
 // import Tooltip from "rc-tooltip";
@@ -29,10 +28,6 @@ interface IStateProps {
   sidebarOpen: boolean;
 }
 
-interface IHasNewPosts {
-  hasNewPosts: boolean;
-}
-
 interface IDispatchProps {
   hideMenu: typeof hideMenu;
   hideSidebar: typeof hideSidebar;
@@ -43,7 +38,7 @@ const mapDispatchToProps = {
   hideSidebar,
 };
 
-type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, IHasNewPosts]>;
+type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
   return {
@@ -70,7 +65,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
   public daoMenu() {
     //@ts-ignore
     const { t } = this.props;
-    const [ dao, { hasNewPosts } ] = this.props.data ;
+    const [ dao ] = this.props.data ;
     const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
     const arcSettings = getArcSettings();
 
@@ -143,7 +138,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
             </li>
           
             <li>
-              <Link to={"/dao/scheme/" + arcSettings.grantsSchemeID} onClick={this.handleCloseMenu}>
+              <Link to={"/dao/scheme/" + arcSettings.grantsSchemeContractAddress} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -196,7 +191,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   <span className={
                     classNames({
                       [css.menuDot]: true,
-                      [css.red]: hasNewPosts,
+                      [css.red]: false,
                     })} />
                   <span className={
                     classNames({
@@ -424,27 +419,27 @@ const SubscribedSidebarMenu = withSubscription({
   loadingComponent: <div></div>,
   createObservable: (props: IProps) => {
     if (props.daoAvatarAddress) {
-      const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + props.daoAvatarAddress) || "0";
+      // const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + props.daoAvatarAddress) || "0";
 
-      const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
-        .then((response: AxiosResponse<any>): IHasNewPosts => {
-          if (response.status) {
-            const posts = response.data.response;
-            return { hasNewPosts : posts && posts.length };
-          } else {
-            // eslint-disable-next-line no-console
-            console.error(`request for disqus posts failed: ${response.statusText}`);
-            return { hasNewPosts : false };
-          }
-        })
-        .catch((error: Error): IHasNewPosts => {
-          // eslint-disable-next-line no-console
-          console.error(`request for disqus posts failed: ${error.message}`);
-          return { hasNewPosts : false };
-        });
+      // const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
+      //   .then((response: AxiosResponse<any>): IHasNewPosts => {
+      //     if (response.status) {
+      //       const posts = response.data.response;
+      //       return { hasNewPosts : posts && posts.length };
+      //     } else {
+      //       // eslint-disable-next-line no-console
+      //       console.error(`request for disqus posts failed: ${response.statusText}`);
+      //       return { hasNewPosts : false };
+      //     }
+      //   })
+      //   .catch((error: Error): IHasNewPosts => {
+      //     // eslint-disable-next-line no-console
+      //     console.error(`request for disqus posts failed: ${error.message}`);
+      //     return { hasNewPosts : false };
+      //   });
 
       const arc = getArc();
-      return combineLatest(arc.dao(props.daoAvatarAddress).state({ subscribe: true }), from(promise));
+      return combineLatest(arc.dao(props.daoAvatarAddress).state({ subscribe: true }));
     } else {
       return of(null);
     }
