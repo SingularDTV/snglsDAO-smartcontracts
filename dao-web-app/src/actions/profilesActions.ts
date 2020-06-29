@@ -202,14 +202,7 @@ export function toggleFollow(accountAddress: string, type: FollowType, id: strin
         console.log('toggleFollow openBox====')
         threeBox = await Box.openBox(accountAddress, web3Provider);
       }
-
-      await threeBox.syncDone;
-
-      if (state.profiles.threeBoxSpace) {
-        threeBoxSpace = state.profiles.threeBoxSpace;
-      } else {
-        threeBoxSpace = await threeBox.openSpace("snglsDAO") ;
-      }
+      threeBoxSpace = await threeBox.openSpace("snglsDAO")
       await threeBoxSpace.syncDone;
     } catch (e) {
       dispatch(showNotification(NotificationStatus.Failure, `Failed to connect to 3box: ${e.message}`));
