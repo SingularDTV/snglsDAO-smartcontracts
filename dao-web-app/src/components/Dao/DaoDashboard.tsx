@@ -181,10 +181,9 @@ class DaoDashboard extends React.Component<IProps, IState> {
               onClick={/*isActive*/ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
               > {t("daojoin.getRep")} </a>
-              <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
             {
               //@ts-ignore
-              data.member && (
+              data.member ? (
               <span className={css.reputationBalance}>{t("yourReputation")}
                 (<Reputation daoName={daoState.name}
                              totalReputation={daoState.reputationTotalSupply}
@@ -192,7 +191,9 @@ class DaoDashboard extends React.Component<IProps, IState> {
                                //@ts-ignore
                                data.member.reputation}/>)
               </span>
-            )}
+            ) : (
+                <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
+              )}
           </div>
         </div>
          {/* Key parameters div */}
