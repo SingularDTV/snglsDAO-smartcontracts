@@ -311,7 +311,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                         onChange={(e: any) => setFieldValue('term', e.target.checked)}
                         component={Checkbox}
                       >
-                        By checking this you agree to our <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf"> Participation Agreement </a>
+                        By checking this you agree to our <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf"> Participation Agreement and tokens will be locked for 5 days </a>
                       </Field>
                       {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)
                       && touched.reputationReward && errors.rewards &&
