@@ -1,0 +1,38 @@
+:global(.ant-statistic) {
+  line-height: normal;
+  color: #fff;
+}
+
+:global(.ant-statistic-title) {
+  color: #fff;
+}
+
+:global(.ant-statistic-content) {
+  color: #fff;
+}
+
+:global(.ant-tabs) {
+    overflow: visible;
+}
+
+:global(.ant-tabs-tab.ant-tabs-tab-active) {
+    color: #010b2b;
+}
+
+:global(.ant-tabs-ink-bar) {
+    background: #010b2b;
+}
+
+:global(.ant-tabs-tab:hover) {
+    color: #010b2b;
+}
+
+:global(.ant-tabs-tab) {
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 0 0 12px 0;
+}
+
+:global(.ant-checkbox-wrapper) {
+    margin-top: 10px;
+}
