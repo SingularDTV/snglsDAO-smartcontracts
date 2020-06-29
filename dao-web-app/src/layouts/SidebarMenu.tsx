@@ -111,7 +111,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
               </Link>
             </li>
             <li>
-              <Link to={ "/dao/scheme/" + arcSettings.grantsSchemeContractAddress } onClick={this.handleCloseMenu}>
+              <Link to={"/dao/applications/"} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -120,9 +120,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   })
                 }></span>
                 <span className={css.menuIcon}>
-                <img src="/assets/images/Icon/menu/_membership.svg" />
-                { "Grants" }
-
+                  <img src="/assets/images/Icon/menu/_apps.svg" />
+                  {t('sidebar.applications')}
                 </span>
               </Link>
             </li>
@@ -142,8 +141,9 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </span>
               </Link>
             </li>
+          
             <li>
-              <Link to={"/dao/applications/"} onClick={this.handleCloseMenu}>
+              <Link to={"/dao/scheme/" + arcSettings.grantsSchemeContractAddress} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
                   classNames({
@@ -152,8 +152,9 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                   })
                 }></span>
                 <span className={css.menuIcon}>
-                <img src="/assets/images/Icon/menu/_apps.svg" />
-                {t('sidebar.applications')}
+                  <img src="/assets/images/Icon/menu/_membership.svg" />
+                  {"Grants"}
+
                 </span>
               </Link>
             </li>
