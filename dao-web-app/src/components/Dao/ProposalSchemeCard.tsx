@@ -33,7 +33,7 @@ const ProposalSchemeCard = (props: IProps) => {
   const proposals = boostedProposals.slice(0, 3);
 
   const proposalsHTML = proposals.map((proposal: Proposal) => <SubscribedProposalDetail key={proposal.id} proposal={proposal} dao={dao} />);
-  const headerHtml = <h2>{schemeName(schemeState, "[Unknown]")}</h2>;
+  const headerHtml = <button className={css.redButton}>{schemeName(schemeState, "[Unknown]")}</button>;
 
   let trainingTooltipMessage: string;
 
