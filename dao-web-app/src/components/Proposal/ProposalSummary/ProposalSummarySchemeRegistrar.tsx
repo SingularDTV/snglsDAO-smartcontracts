@@ -51,7 +51,7 @@ class ProposalSummary extends React.Component<IProps, IState> {
     });
 
     const schemeRegistrar = proposal.schemeRegistrar;
-    const permissions = parseInt(schemeRegistrar.schemeToRegisterPermission, 16);
+    // const permissions = parseInt(schemeRegistrar.schemeToRegisterPermission, 16);
 
     return (
       <div className={proposalSummaryClass}>
@@ -113,7 +113,7 @@ class ProposalSummary extends React.Component<IProps, IState> {
                           </div>
                         </td>
                       </tr>
-                      <tr>
+                      {/* <tr>
                         <th>{t("proposal.permissions")}</th>
                         <td className={css.description}>
                           {
@@ -136,7 +136,7 @@ class ProposalSummary extends React.Component<IProps, IState> {
                             <div>{t("proposal.mintOrBurnRep")}</div>
                           }
                         </td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>

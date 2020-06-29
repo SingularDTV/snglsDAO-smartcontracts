@@ -233,7 +233,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                         type="number"
                         className={touched.snglsToSend && errors.nativeTokenReward ? errCss.error : null}
                       />
-                      <button type="button" className={css.auto} onClick= { () => { setFieldValue("snglsToSend", parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked)) } } >
+                      <button type="button" className={css.auto} onClick= { () => { setFieldValue("snglsToSend",  (parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) < 0 ? 0 : parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked))) }} >
                         auto
                       </button>
                     </div>
