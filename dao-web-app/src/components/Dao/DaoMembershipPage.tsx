@@ -13,11 +13,13 @@ import { first } from "rxjs/operators";
 // import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import { /*ErrorMessage, */ Field, Form, Formik, FormikProps } from "formik";
 import * as css from "./Dao.scss";
+import * as moment from "moment";
 import * as errCss from "./DaoJoin.scss"
 import { IRootState } from "reducers";
 import { connect } from "react-redux";
 import { withTranslation } from 'react-i18next';
-
+import { Statistic, Popconfirm} from "antd";
+const { Countdown } = Statistic;
 
 const PAGE_SIZE = 50;
 
@@ -34,7 +36,8 @@ interface IState {
   membershipFee: string;
   alreadyStaked: string;
   snglsBalance: string;
-  fieldValue: number
+  fieldValue: number;
+  releaseTime?: number;
 }
 
 interface IFormValues {
@@ -73,7 +76,8 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
       membershipFee: "0.00",
       alreadyStaked: "0.00",
       snglsBalance: "0.00",
-      fieldValue: 0.00
+      fieldValue: 0.00,
+      releaseTime: null
     };
   }
 
@@ -100,8 +104,8 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
     const snglsTokenContract = new arc.web3.eth.Contract(settings.snglsTokenContractABI, settings.snglsTokenContractAddress);
 
     const staked = await memFeeStakingContract.methods.lockers(this.props.currentAccountAddress).call()
-    this.setState( 
-      { 
+    this.setState(
+      {
         membershipFee:  arc.web3.utils.fromWei(await feeContract.methods.membershipFee().call(), 'ether'),
         alreadyStaked: arc.web3.utils.fromWei(staked.amount, 'ether'),
         snglsBalance: arc.web3.utils.fromWei(await snglsTokenContract.methods.balanceOf(this.props.currentAccountAddress).call(), 'ether'),
@@ -111,6 +115,11 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
   }
 
   public async componentDidMount() {
+    const arc = getArc();
+    const settings = getArcSettings();
+    const lockingSGT4ReputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
+    const staked = await lockingSGT4ReputationContract.methods.lockers(this.props.currentAccountAddress).call()
+    this.setState({ releaseTime: staked?.releaseTime})
     this.fetchBalances();
   }
 
@@ -157,6 +166,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
   public render(): RenderOutput {
     //@ts-ignore
     const { t } = this.props;
+    const { releaseTime } = this.state;
     // const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
 
     // console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
@@ -168,6 +178,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
     //   return (<ProposalHistoryRow key={"proposal_" + proposal.id} history={this.props.history} proposal={proposal} daoState={daoState} currentAccountAddress={currentAccountAddress} />);
     // });
 
+    // @ts-ignore
     return(
       <div className={css.Membership}>
         {/* <Sticky enabled top={50} innerZ={10000}> */}
@@ -197,9 +208,22 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
             <hr/>
 
             <div className={css.content}>
-              <p>{t("membership.confAuto")} <strong>( { parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) < 0 ? 0 : parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) } )</strong> {t("membership.orEnterManually")}</p>
+              {!!parseInt(this.state.alreadyStaked) ? (
+                <div className={css.releaseTime}>
+                  <Countdown title="Token defrosting will be available through"
+                    // @ts-ignore
+                             value={moment(releaseTime*1000).format()}
+                             format="DD:HH:mm:ss"
+                             valueStyle={{ display: 'flex',justifyContent: 'center' }}
+                  />
+                </div>
+              )
+              : (
+                  <p>{t("membership.confAuto")} <strong>( { parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) < 0 ? 0 : parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) } )</strong> {t("membership.orEnterManually")}</p>
+                )}
+
               <Formik
-                
+
                 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                 initialValues={{
                   snglsToSend: 0,
@@ -212,12 +236,12 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                       errors[name] = t("errors.nonNegative");
                     }
                   };
-   
+
                   nonNegative("ethReward");
                   if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.snglsToSend) {
                     errors.rewards = t("proposal.pleaseSelectAtLeastSomeReward");
                   }
-      
+
                   // return errors;
                 }}
                 */
@@ -227,6 +251,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                 render={({
                   errors,
                   touched,
+                  values,
                   // eslint-disable-next-line @typescript-eslint/no-unused-vars
                   handleSubmit,
                   isSubmitting,
@@ -256,7 +281,11 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                       <span>{t("membership.balance")}  {parseInt(this.state.snglsBalance)} {"SNGLS"}</span>
                     </div>
                     <hr />
-                    <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>
+                    <Popconfirm title={`Do you agree to freeze your tokens for a seven days?`}
+                      //@ts-ignore
+                                onConfirm={handleSubmit} okText="Yes" cancelText="No">
+                      <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>
+                    </Popconfirm>
                     <hr />
                     <button type="button" onClick={ this.handleUnstake } className={css.unstake}>{t("membership.unstake")}</button>
                   </Form>
