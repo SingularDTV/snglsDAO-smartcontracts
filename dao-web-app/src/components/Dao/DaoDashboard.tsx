@@ -153,7 +153,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
             ) : (
                 <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
               )}
-          </div>`
+          </div>
         </div>
          {/* Key parameters div */}
            <div>
