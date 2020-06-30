@@ -46,6 +46,7 @@ interface IExternalProps {
 interface IStateProps {
   // currentAccountAddress: String;
   releaseTime?: string;
+  balance?: string;
 }
 
 interface IDispatchProps {
@@ -127,6 +128,22 @@ class GetReputation extends React.Component<IProps, IStateProps> {
     const staked = await lockingSGT4ReputationContract.methods.lockers(this.props.currentAccountAddress).call()
     this.setState({ releaseTime: staked?.releaseTime})
   }
+
+  public async fetchBalances() {
+    const arc = getArc();
+    const settings = getArcSettings();
+  
+    // Create contract object
+    const sgtTokenContract = new arc.web3.eth.Contract(settings.sgtTokenContractABI, settings.sgtTokenContractAddress);
+  
+    const staked = await sgtTokenContract.methods.balanceOf(this.props.currentAccountAddress).call()
+    this.setState( 
+      { 
+        balance: arc.web3.utils.fromWei(staked, 'ether'),
+      }
+    );  
+  }
+
 
   public handleUnstake = async (): Promise<void> => {
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
