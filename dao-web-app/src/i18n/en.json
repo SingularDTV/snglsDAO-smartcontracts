@@ -567,5 +567,6 @@
     "tchin": "繁體中文",
     "schin": "简体中文",
     "protocolParameters": "Protocol Parameters",
-    "limit150": "Limit 150 characters"
+    "limit150": "Limit 150 characters",
+    "doUAgree": "Do you agree to freeze your tokens for a seven days?"
 }

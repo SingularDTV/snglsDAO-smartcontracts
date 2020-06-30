@@ -281,7 +281,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                       <span>{t("membership.balance")}  {parseInt(this.state.snglsBalance)} {"SNGLS"}</span>
                     </div>
                     <hr />
-                    <Popconfirm title={`Do you agree to freeze your tokens for a seven days?`}
+                    <Popconfirm title={t('doUAgree')}
                       //@ts-ignore
                                 onConfirm={handleSubmit} okText="Yes" cancelText="No">
                       <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>

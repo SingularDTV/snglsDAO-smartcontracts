@@ -555,6 +555,6 @@
     "tchin": "繁體中文",
     "schin": "简体中文",
     "protocolParameters": "Protocol Parameters",
-    "limit150": "告訴DAO關於你的簡介"
-
+    "limit150": "告訴DAO關於你的簡介",
+    "doUAgree": "您是否同意將令牌凍結7天？"
 }

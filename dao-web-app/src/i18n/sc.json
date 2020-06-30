@@ -554,7 +554,8 @@
     "tchin": "繁體中文",
     "schin": "简体中文",
     "protocolParameters": "Protocol Parameters",
-    "limit150": "字数上限150个字符"
+    "limit150": "字数上限150个字符",
+    "doUAgree": "您是否同意将令牌冻结7天？"
 
 
 }
