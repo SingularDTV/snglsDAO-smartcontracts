@@ -45,7 +45,7 @@ pipeline {
         }
       }
     }
-    stage('webpack main master branch') {
+    stage('webpack main production branch') {
       when {
         branch 'production'
       }
