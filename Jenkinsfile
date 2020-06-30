@@ -51,7 +51,7 @@ pipeline {
       }
       steps {
         nodejs('nodejs-10') {
-          sh 'cd dao-web-app/ && npm run build-rinkeby'
+          sh 'cd dao-web-app/ && npm run build'
           archiveArtifacts(artifacts: 'dao-web-app/dist/', onlyIfSuccessful: true)
         }
       }
