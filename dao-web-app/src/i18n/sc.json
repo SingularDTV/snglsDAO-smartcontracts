@@ -10,6 +10,8 @@
         "treasury": "DAO储备资金",
         "stakes": "DAO质押",
         "buy": "$ 购买 SNGLS",
+        "buySgt": "$ 购买 SGT",
+        "buyGen": "$ 购买 GEN",
         "sngls": "snglsDAO",
         "rep": "声誉值",
         "protocolParams": "协定参数",
