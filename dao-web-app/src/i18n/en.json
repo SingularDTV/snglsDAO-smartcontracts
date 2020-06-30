@@ -112,7 +112,7 @@
         "removeRep": "REMOVE REPUTATION",
         "cancel": "Cancel",
         "max": "max",
-        "sgtTokens": "SGT Tokens: ",
+        "sgtTokens": "SGT Tokens Staked: ",
         "reputation": "Reputation:"
     },
     "loading": "Loading...",

@@ -155,7 +155,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
     tokenContract.methods.approve(settings.membershipFeeStakingContractAddress, calculatedApproveValue).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
       if (error) throw error;
     }).then(function () {
-      memFeeStakingContract.methods.lock(calculatedApproveValue, settings.minLockingPeriod).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
+      memFeeStakingContract.methods.lock(calculatedApproveValue, settings.snglsLockingPeriod).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
         console.log(error);
         if (error) throw error;
          this.fetchBalances();

@@ -23,6 +23,7 @@ import { IRootState } from "reducers";
 import { zip} from "rxjs";
 import {map} from "rxjs/operators";
 import Reputation from "../Account/Reputation";
+// import { any } from "prop-types";
 
 
 const { Countdown } = Statistic;
@@ -33,6 +34,7 @@ interface IExternalStateProps {
   member: Member;
   daoState?: IDAOState;
   currentAccountAddress: string;
+  agreementHash: any;
   history: History;
 }
 
@@ -41,12 +43,14 @@ interface IExternalProps {
   scheme: ISchemeState;
   daoAvatarAddress: string;
   history: History;
+  agreementHash: any;
 }
 
 interface IStateProps {
   // currentAccountAddress: String;
   releaseTime?: string;
   balance?: string;
+  agreementHash: any;
 }
 
 interface IDispatchProps {
@@ -112,7 +116,8 @@ class GetReputation extends React.Component<IProps, IStateProps> {
     this.handleClose = this.handleClose.bind(this);
     this.handleUnstake = this.handleUnstake.bind(this);
     this.state = {
-      releaseTime: null
+      releaseTime: null,
+      agreementHash: "",
     };
   }
 
@@ -126,7 +131,13 @@ class GetReputation extends React.Component<IProps, IStateProps> {
     const settings = getArcSettings();
     const lockingSGT4ReputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
     const staked = await lockingSGT4ReputationContract.methods.lockers(this.props.currentAccountAddress).call()
-    this.setState({ releaseTime: staked?.releaseTime})
+    console.log("dfd ", await lockingSGT4ReputationContract.methods.getAgreementHash().call())
+    this.setState(
+      {
+         releaseTime: staked?.releaseTime,
+         agreementHash: await lockingSGT4ReputationContract.methods.getAgreementHash().call()
+      });
+    this.fetchBalances();
   }
 
   public async fetchBalances() {
@@ -134,7 +145,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
     const settings = getArcSettings();
   
     // Create contract object
-    const sgtTokenContract = new arc.web3.eth.Contract(settings.sgtTokenContractABI, settings.sgtTokenContractAddress);
+    const sgtTokenContract = new arc.web3.eth.Contract(settings.erc20TokenContractABI, settings.sgtTokenContractAddress);
   
     const staked = await sgtTokenContract.methods.balanceOf(this.props.currentAccountAddress).call()
     this.setState( 
@@ -143,7 +154,6 @@ class GetReputation extends React.Component<IProps, IStateProps> {
       }
     );  
   }
-
 
   public handleUnstake = async (): Promise<void> => {
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
@@ -174,7 +184,9 @@ class GetReputation extends React.Component<IProps, IStateProps> {
     const calculatedApproveValue = arc.web3.utils.toHex(tokenAmountToApprove.mul(arc.web3.utils.toBN(10).pow(tokenDecimals)));
 
     const currentAccountAddress = this.props.currentAccountAddress;
+    const agreementHash = this.state.agreementHash;
 
+    console.log("agreementHash ", this.state.agreementHash);
     //todo move methods to store
     let txDescription: string;
     let msg;
@@ -189,7 +201,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
       this.props.showNotification(NotificationStatus.Success, msg);
 
       txDescription = 'Get reputation lock'
-      await reputationContract.methods.lock(calculatedApproveValue, settings.minLockingPeriod).send({from: currentAccountAddress})
+      await reputationContract.methods.lock(calculatedApproveValue, settings.sgtLockingPeriod, agreementHash).send({from: currentAccountAddress})
       msg = `${txDescription} transaction confirmed`;
       this.props.showNotification(NotificationStatus.Success, msg);
     } catch (error) {
@@ -286,6 +298,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
 
                     <div className={css.content}>
                       <p>{t("daojoin.haveAmountStaked")}</p>
+                      <p> Your current balance: {this.state.balance }</p>
                       <div className={css.rewards}>
                         <div className={css.reward}>
                           <div className={css.bigInput}>
@@ -304,7 +317,9 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                               className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
                             />
                             <div className={css.btnMax}>
-                              <button type="button">{t('daojoin.max')}</button>
+                              <button type="button" onClick={ () => { setFieldValue("nativeTokenReward",  this.state.balance) }}>
+                                {t('daojoin.max')}
+                              </button>
                             </div>
                           </div>
                           <div className={css.balances}>
@@ -328,7 +343,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                         onChange={(e: any) => setFieldValue('term', e.target.checked)}
                         component={Checkbox}
                       >
-                        By checking this you agree to our <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf"> Participation Agreement and tokens will be locked for 5 days </a>
+                        By checking this you agree to our <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf"> Participation Agreement</a> and tokens will be locked for 30 days 
                       </Field>
                       {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)
                       && touched.reputationReward && errors.rewards &&
