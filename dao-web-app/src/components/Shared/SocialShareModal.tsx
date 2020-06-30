@@ -40,8 +40,8 @@ class SocialShareModal extends React.Component<IProps, IState> {
     this.setState({ showCopiedFeedback: false });
   }
 
-  private sharingMsgTwitter = "@snglsDAO";
-  private sharingMsg = "snglsDAO";
+  private sharingMsgTwitter = "Check out this awesome @snglsDAO proposal!";
+  private sharingMsg = "Check out this awesome snglsDAO proposal!";
 
   private selectTwitter(_event: any): void {
     const sharingUrl = `https://twitter.com/intent/tweet/?text=${this.sharingMsgTwitter}&url=${this.props.url}`;
