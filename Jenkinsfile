@@ -34,24 +34,24 @@ pipeline {
         }
       }
     }
-    stage('webpack rinkeby master branch') {
+    stage('webpack main master branch') {
       when {
         branch 'master'
       }
       steps {
         nodejs('nodejs-10') {
-          sh 'cd dao-web-app/ && npm run build-rinkeby'
+          sh 'cd dao-web-app/ && npm run build'
           archiveArtifacts(artifacts: 'dao-web-app/dist/', onlyIfSuccessful: true)
         }
       }
     }
-    stage('webpack main master branch') {
+    stage('webpack main production branch') {
       when {
         branch 'production'
       }
       steps {
         nodejs('nodejs-10') {
-          sh 'cd dao-web-app/ && npm run build-rinkeby'
+          sh 'cd dao-web-app/ && npm run build'
           archiveArtifacts(artifacts: 'dao-web-app/dist/', onlyIfSuccessful: true)
         }
       }
