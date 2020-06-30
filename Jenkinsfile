@@ -16,13 +16,13 @@ pipeline {
         }
       }
     }
-    stage('BUILD') {
-      steps {
-        nodejs('nodejs-10') {
-          sh 'cd dao-web-app/ && npm run build-dev'
-        }
-      }
-    }
+//     stage('BUILD') {
+//       steps {
+//         nodejs('nodejs-10') {
+//           sh 'cd dao-web-app/ && npm run build-dev'
+//         }
+//       }
+//     }
     stage('webpack rinkeby develop branch') {
       when {
         branch 'develop'
@@ -34,13 +34,26 @@ pipeline {
         }
       }
     }
-    stage('webpack main master branch') {
+    stage('webpack rinkeby master branch') {
       when {
         branch 'master'
       }
       steps {
-        sh 'cd dao-web-app/ && npm run build'
-        archiveArtifacts(artifacts: 'dao-web-app/dist/', onlyIfSuccessful: true)
+        nodejs('nodejs-10') {
+          sh 'cd dao-web-app/ && npm run build-rinkeby'
+          archiveArtifacts(artifacts: 'dao-web-app/dist/', onlyIfSuccessful: true)
+        }
+      }
+    }
+    stage('webpack main master branch') {
+      when {
+        branch 'production'
+      }
+      steps {
+        nodejs('nodejs-10') {
+          sh 'cd dao-web-app/ && npm run build-rinkeby'
+          archiveArtifacts(artifacts: 'dao-web-app/dist/', onlyIfSuccessful: true)
+        }
       }
     }
   }
