@@ -271,12 +271,12 @@ class DaoDashboard extends React.Component<IProps, IState> {
                         {Object.keys(supportedTok).reduce((ac: any, it: any): any => {
               if(supportedTok[it].symbol === "ETH") {
                 ac[0] = it;
-              } else if(supportedTok[it].symbol === "SGT") {
-                ac[3] = it;
-              } else if (supportedTok[it].symbol === "SNGLS") {
+              } else if(supportedTok[it].symbol === "SNGLS") {
+                ac[1] = it;
+              } else if (supportedTok[it].symbol === "SGT") {
                 ac[2] = it;
               } else if (supportedTok[it].symbol === "GEN") {
-                ac[1] = it;
+                ac[3] = it;
               } else if (supportedTok[it].symbol === "DAI") {
                 ac[4] = it;
               } else if (supportedTok[it].symbol === "USDC") {
