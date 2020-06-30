@@ -117,8 +117,8 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
   public async componentDidMount() {
     const arc = getArc();
     const settings = getArcSettings();
-    const lockingSGT4ReputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
-    const staked = await lockingSGT4ReputationContract.methods.lockers(this.props.currentAccountAddress).call()
+    const memFeeStakingContract = new arc.web3.eth.Contract(settings.membershipFeeStakingContractABI, settings.membershipFeeStakingContractAddress);
+    const staked = await memFeeStakingContract.methods.lockers(this.props.currentAccountAddress).call()
     this.setState({ releaseTime: staked?.releaseTime})
     this.fetchBalances();
   }

@@ -101,12 +101,8 @@ class DaoContainer extends React.Component<IProps, null> {
     //@ts-ignore
     const { t } = this.props;
 
-
-    // const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
-
-    // console.log("MEMEME ", foundDaos);
-
     const daoState = this.props.data[0];
+    console.log("sngls DAO state object ", daoState);
 
     return (
       <div className={css.outer}>
