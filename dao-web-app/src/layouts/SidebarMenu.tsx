@@ -145,9 +145,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </span>
                             </Link>
                         </li>
-                        {
-                            /*`<li>
-                              <Link to={"/dao/scheme/" + arcSettings.grantsSchemeContractAddress} onClick={this.handleCloseMenu}>
+                            <li>
+                              <Link to={"/dao/scheme/" + arcSettings.grantsSchemeID} onClick={this.handleCloseMenu}>
                                 <span className={css.menuDot} />
                                 <span className={
                                   classNames({
@@ -161,8 +160,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
 
                                 </span>
                               </Link>
-                            </li>`*/
-                        }
+                            </li>
                         <li>
                             <TrainingTooltip placement="right" overlay={t("tooltips.listOfEntities")}>
                                 <Link to={"/dao/members/"} onClick={this.handleCloseMenu}>

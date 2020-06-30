@@ -127,7 +127,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
                 <div className={css.pageHead}>
                     <h1>{t("sidebar.dashboard")}</h1>
                     
-          `<div>
+          <div>
             <a className={classNames({
                 [css.redButton]: true,
                 // [css.disabled]: !isActive,
@@ -149,7 +149,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
             ) : (
                 <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
               )}
-          </div>`
+          </div>
                 </div>
                 {/* Key parameters div */}
                 <div>
