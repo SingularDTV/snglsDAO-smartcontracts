@@ -8,7 +8,16 @@ import classNames from "classnames";
 // import FollowButton from "components/Shared/FollowButton";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 // import { generate } from "geopattern";
-import { baseTokenName, ethErrorHandler, formatTokens, genName, getExchangesList, getExchangesListSNGLS, supportedTokens/*, fromWei*/ } from "lib/util";
+import {
+    baseTokenName,
+    ethErrorHandler,
+    formatTokens,
+    genName,
+    getExchangesList,
+    getExchangesListSGT,
+    getExchangesListSNGLS,
+    supportedTokens/*, fromWei*/
+} from "lib/util";
 // import { parse } from "query-string";
 import * as React from "react";
 import { /* matchPath,*/ Link, RouteComponentProps } from "react-router-dom";
@@ -279,7 +288,21 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </ul>
               </li>
               <li>
-                <a href="https://uniswap.exchange/swap?inputCurrency=0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009&outputCurrency=0xc4199fb6ffdb30a829614beca030f9042f1c3992">{t("sidebar.buySgt")}</a>
+                  <ul>
+                      <div className={css.diamond}></div>
+                      {
+                          getExchangesListSGT().map((item: any) => {
+                              return (
+                                  <li key={item.name}>
+                                      <a href={item.url} target="_blank" rel="noopener noreferrer" className="buyGenLink">
+                                          <b><img src={item.logo} /></b>
+                                          <span>{item.name}</span>
+                                      </a>
+                                  </li>
+                              );
+                          })
+                      }
+                  </ul>
                 {/* <ul>
                   <div className={css.diamond}></div>
                   <span className={css.soon}>{
