@@ -192,7 +192,7 @@ export const settings = {
     controllerContractAddress: "0xFAeF7004B772B60c4a37e43a6f61558f370b3817",
     lockingSGT4ReputationContractAddress: "0xbF3d2c2FfB85031D1107ad5396681BCc379b8E05",
     contributionRewardContractAddress: "0xbc612A7e4f92AE75588fF91E646d922E49f0d8fD",
-    feesContractAddress: "0xd79a243cf3cACA497e1828dB26769B1DE0912b9c",
+    feesContractAddress: "0x4a74e57be27d995912450992b2006513b500a601",
     membershipFeeStakingContractAddress: "0xd79a243cf3cACA497e1828dB26769B1DE0912b9c",
     snglsTokenContractAddress: "0xc9948Da1c72e4d4CdED0BaFB42CebfE9E5fE1818",
 
