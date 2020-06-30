@@ -1,5 +1,5 @@
-import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake/*, Member*/ } from "@daostack/client";
-import { enableWalletProvider,  getArc } from "arc";
+import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake /*, Member*/ } from "@daostack/client";
+import {/* enableWalletProvider, */ getArc, getArcSettings } from "arc";
 import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
@@ -10,11 +10,21 @@ import * as InfiniteScroll from "react-infinite-scroll-component";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { showNotification } from "reducers/notifications";
 // import * as Sticky from "react-stickynode";
-import { first } from "rxjs/operators";
+import { first, map } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
-import classNames from "classnames";
+//import classNames from "classnames";
+import { withTranslation } from 'react-i18next';
+
 import { connect } from "react-redux";
+import { baseTokenName, ethErrorHandler, formatTokens, genName, supportedTokens/*, fromWei*/ } from "lib/util";
+// import { createGraphQlQuery, isAddress
+//   // stringToUint8Array
+//  } from './utils'
+//  import { map } from 'rxjs/operators'
+import {zip} from "rxjs";
+import BN = require("bn.js");
+//import Reputation from "../Account/Reputation";
 
 // import { IProfilesState } from "reducers/profilesReducer";
 
@@ -24,18 +34,18 @@ import { connect } from "react-redux";
 const PAGE_SIZE = 50;
 
 interface IExternalProps extends RouteComponentProps<any> {
-  currentAccountAddress: Address;
-  daoState: IDAOState;
+    currentAccountAddress: Address;
+    daoState: IDAOState;
 }
 
 interface IDispatchProps {
-  createProposal: typeof arcActions.createProposal;
-  showNotification: typeof showNotification;
+    createProposal: typeof arcActions.createProposal;
+    showNotification: typeof showNotification;
 }
 
 const mapDispatchToProps = {
-  createProposal: arcActions.createProposal,
-  showNotification,
+    createProposal: arcActions.createProposal,
+    showNotification,
 };
 
 type SubscriptionData = Proposal[];
@@ -43,293 +53,380 @@ type SubscriptionData = Proposal[];
 type IProps = IExternalProps & IDispatchProps & ISubscriptionProps<SubscriptionData>;
 
 interface IState {
-  transactionFee: string;
-  listingFee: string;
-  validationFee: string;
-  membershipFee: string;
+    transactionFee: string;
+    listingFee: string;
+    validationFee: string;
+    membershipFee: string;
+    stakedSGT: string;
+    stakedSNGLS: string;
 
-  // snglsBalance: string;
-  // sgtBalance: string;
-  // ethBalance: string;
-  // genBalance: string;
-  // usdcBalance: string;
-  // daiBalance: string;
+    userReputation: string;
 }
 
-class DaoHistoryPage extends React.Component<IProps, IState> {
+// const getUserRep = (daoAddress: string, userAddress: string, context: any) => {
 
-  constructor(props: IProps) {
-    super(props);
+//   let options: any = {
+//     where: {
 
-    this.state = {
-      transactionFee: "0",
-      listingFee: "0",
-      validationFee: "0",
-      membershipFee: "0"
-    };
-  }
+//     }
+//   }
+//     if (options.where.id) {
+//       return new Member(options.where.id, context).state().pipe(map((r: any) => [r]))
+//     } else {
+//       let where = ''
+//       for (const key of Object.keys(options.where)) {
+//         if (options.where[key] === undefined) {
+//           continue
+//         }
 
-  private async handleNewProposal(): Promise<void> {
-    if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
+//         if (key === 'address' || key === 'dao') {
+//           const option = options.where[key] as string
+//           isAddress(option)
+//           options.where[key] = option.toLowerCase()
+//         }
 
-    this.props.history.push(`/dao/dashboard/join/`);
-    // this.props.history.push(`/dao/dashboard/join`);
-  }
+//         where += `${key}: "${options.where[key] as string}"\n`
+//       }
+//       where += ' dao_not: null\n'
 
-  private _handleNewProposal = (e: any): void => {
-    this.handleNewProposal();
-    e.preventDefault();
-  };
+//       const query = gql`
+//         query ReputationHolderSearch {
+//           reputationHolders ${createGraphQlQuery(options, where)} {
+//             ...ReputationHolderFields
+//           }
+//         }
+//         ${Member.fragments.ReputationHolderFields}
+//       `
 
-  public async componentDidMount() {
-    const arc = getArc();
-    const feeContract = new arc.web3.eth.Contract([ { "constant": true, "inputs": [], "name": "listingFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "membershipFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "transactionFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "validationFee", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" } ],
-      "0xc7F243ccEEC5d8bD325cF159dbe7ad7a2B9384D9"
-    );
-    
-    this.setState( 
-      { 
-        transactionFee: arc.web3.utils.fromWei(await feeContract.methods.transactionFee().call()),
-        listingFee: arc.web3.utils.fromWei(await feeContract.methods.listingFee().call()),
-        validationFee: arc.web3.utils.fromWei(await feeContract.methods.validationFee().call()),
-        membershipFee:  arc.web3.utils.fromWei(await feeContract.methods.membershipFee().call())
-      }
-    );
-  }
+//       return context.getObservableList(
+//           query,
+//           (r: any) => new Member({ id: r.id, address: r.address, dao: r.dao.id, contract: r.contract}, context),
+//           apolloQueryOptions
+//         )
+// }
 
-  public render(): RenderOutput {
-    const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
+class DaoDashboard extends React.Component<IProps, IState> {
 
-    console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
-    
-    // const members = data.members;
+    constructor(props: IProps) {
+        super(props);
 
-    const proposals = data;
+        this.state = {
+            transactionFee: "0",
+            listingFee: "0",
+            validationFee: "0",
+            membershipFee: "0",
 
-    const proposalsHTML = proposals.map((proposal: Proposal) => {
-      return (<ProposalHistoryRow key={"proposal_" + proposal.id} history={this.props.history} proposal={proposal} daoState={daoState} currentAccountAddress={currentAccountAddress} />);
-    });
-    
-    // const daoTotalRseputation = this.props.daoState.reputationTotalSupply;
+            stakedSGT: "0.00",
+            stakedSNGLS: "0",
 
-    // const membersHTML = members.map((member) =>
-    //   <DaoMember key={member.staticState.address} dao={daoState} daoTotalReputation={daoTotalReputation} member={member} profile={profiles[member.staticState.address]} />);
+            userReputation: "0",
+        };
+    }
 
-    return(
-       <div className={css.membersContainer}>
-         <BreadcrumbsItem to={"/dao/members"}>DAO Members</BreadcrumbsItem>
-        
-         <div className={css.pageHead}>
-          <h1>DASHBOARD</h1>
-          <div>
+    /* private async handleNewProposal(): Promise<void> {
+       if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
+
+       this.props.history.push(`/dao/dashboard/join/`);
+     }*/
+
+    /*private _handleNewProposal = (e: any): void => {
+      this.handleNewProposal();
+      e.preventDefault();
+    };*/
+
+    public async componentDidMount() {
+        const arc = getArc();
+
+        const feesContract = new arc.web3.eth.Contract(getArcSettings().feesContractABI, getArcSettings().feesContractAddress);
+
+        this.setState(
+            {
+                transactionFee: arc.web3.utils.fromWei(await feesContract.methods.transactionFee().call()),
+                listingFee: arc.web3.utils.fromWei(await feesContract.methods.listingFee().call()),
+                validationFee: arc.web3.utils.fromWei(await feesContract.methods.validationFee().call()),
+                membershipFee:  arc.web3.utils.fromWei(await feesContract.methods.membershipFee().call()),
+
+            }
+        );
+    }
+
+    public render(): RenderOutput {
+        //@ts-ignore
+        const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress, t } = this.props;
+        //@ts-ignore
+        const proposals = data.proposals;
+        const arcSettings = getArcSettings();
+        const supportedTok = supportedTokens();
+        const proposalsHTML = proposals.map((proposal: Proposal) => {
+            return (<ProposalHistoryRow key={"proposal_" + proposal.id} history={this.props.history} proposal={proposal} daoState={daoState} currentAccountAddress={currentAccountAddress} />);
+        });
+
+        // const daoTotalRseputation = this.props.daoState.reputationTotalSupply;
+
+        // const membersHTML = members.map((member) =>
+        //   <DaoMember key={member.staticState.address} dao={daoState} daoTotalReputation={daoTotalReputation} member={member} profile={profiles[member.staticState.address]} />);
+
+        return(
+            <div className={css.membersContainer}>
+                <BreadcrumbsItem to={"/dao/members"}>{t("yourReputation")}</BreadcrumbsItem>
+
+                <div className={css.pageHead}>
+                    <h1>{t("sidebar.dashboard")}</h1>
+                    {/*
+          `<div>
             <a className={classNames({
                 [css.redButton]: true,
                 // [css.disabled]: !isActive,
               })}
               href="#!"
-              onClick={/*isActive*/ true ? this._handleNewProposal : null}
+              onClick={ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
-              > Get reputation </a>
-          </div>
-        </div>
-         {/* Key parameters div */}
-           <div> 
-             <h3>KEY PARAMETERS</h3>
+              > {t("daojoin.getRep")} </a>
+            {
+              //@ts-ignore
+              data.member ? (
+              <span className={css.reputationBalance}>{t("yourReputation")}
+                (<Reputation daoName={daoState.name}
+                             totalReputation={daoState.reputationTotalSupply}
+                             reputation={
+                               //@ts-ignore
+                               data.member.reputation}/>)
+              </span>
+            ) : (
+                <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
+              )}
+          </div>`*/}
+                </div>
+                {/* Key parameters div */}
+                <div>
+                    <h3>{t('dashboard.keyParams')}</h3>
 
 
 
 
-           <div className={css.keyParametrs}>
+                    <div className={css.keyParametrs}>
 
-             <div className={css.dashBlock}>
-                 <div className={css.icon}>
-                         <img src="/assets/images/Icon/dash_listing_rate.png" />
-                 </div>
-                 <div className={css.count}>
-                     { this.state.listingFee }
-                 </div>
-                 <div className={css.cont}>
-                     <h4>Listing Rate: SNGLS</h4>
-                     <p>The amount of SNGLS needed to be paid to the treasury <br/>to add content to the protocol.</p>
-                 </div>
-             </div>
+                        <div className={css.dashBlock}>
+                            <div className={css.icon}>
+                                <img src="/assets/images/Icon/dash_listing_rate.png" />
+                            </div>
+                            <div className={css.count}>
+                                { this.state.listingFee }
+                            </div>
+                            <div className={css.cont}>
+                                <h4>{t('dashboard.listingRate')}</h4>
+                                <p>{t('dashboard.amountToTreasury')} <br/>{t('dashboard.toAddToProtocol')}</p>
+                            </div>
+                        </div>
 
-             {/* <p className={css.description}>These proposals might change the rate</p> */}
-
-            
-             <div className={css.dashBlock}>
-                 <div className={css.icon}>
-                         <img src="/assets/images/Icon/dash_transaction.png" />
-                 </div>
-                 <div className={css.count}>
-                     { this.state.transactionFee }
-                 </div>
-                 <div className={css.cont}>
-                     <h4>Transaction Fee: %</h4>
-                     <p>The % of the transaction that the protocol puts into the <br/>treasury.</p>
-                 </div>
-             </div>
-
-           </div>
+                        {/* <p className={css.description}>These proposals might change the rate</p> */}
 
 
-         <div className={css.comingSoon}>
-             <h3>COMING SOON</h3>
-             <div className={css.dashBlock}>
-                 <div className={css.icon}>
-                     <img src="/assets/images/Icon/dash_validation.png" />
-                 </div>
-                 <div className={css.count}>
-                     { this.state.validationFee }
-                 </div>
-                 <div className={css.cont}>
-                     <h4>Validation Fee: SNGLS</h4>
-                     <p>Minimum amount paid to validators.</p>
-                 </div>
-             </div>
-         </div>
+                        <div className={css.dashBlock}>
+                            <div className={css.icon}>
+                                <img src="/assets/images/Icon/dash_transaction.png" />
+                            </div>
+                            <div className={css.count}>
+                                { this.state.transactionFee }
+                            </div>
+                            <div className={css.cont}>
+                                <h4>{t('dashboard.transFee')}</h4>
+                                <p>{t('dashboard.transFeeDescription')}</p>
+                            </div>
+                        </div>
+
+                    </div>
 
 
-         <div className={css.columnsTwo}>
+                    <div className={css.comingSoon}>
+                        <h3>{t('dashboard.comingSoon')}</h3>
+                        <div className={css.dashBlock}>
+                            <div className={css.icon}>
+                                <img src="/assets/images/Icon/dash_validation.png" />
+                            </div>
+                            <div className={css.count}>
+                                { this.state.validationFee }
+                            </div>
+                            <div className={css.cont}>
+                                <h4>{t('dashboard.validationFee')}</h4>
+                                <p>{t('dashboard.minimumAmount')}</p>
+                            </div>
+                        </div>
+                    </div>
 
-             <div className={css.dashBlock}>
-                 <div className={css.icon}>
-                     <img src="/assets/images/Icon/dash_treasury.png" />
-                 </div>
-                 <div className={css.cont}>
-                     <h4>DAO Treasury</h4>
-                 </div>
-                 <div className={css.count}>
-                     <ul>
-                         <li><span>Sngls:</span><p>2960</p></li>
-                         <li><span>SGT:</span><p>543</p></li>
-                         <li><span>ETH:</span><p>0</p></li>
-                         <li><span>GEN:</span><p>0</p></li>
-                         <li><span>USDC:</span><p>103</p></li>
-                         <li><span>DAI:</span><p>0</p></li>
-                     </ul>
-                 </div>
-             </div>
 
-             <div className={css.dashBlock}>
-                 <div className={css.icon}>
-                     <img src="/assets/images/Icon/dash_holdings.png" />
-                 </div>
-                 <div className={css.cont}>
-                     <h4>DAO Stakes</h4>
-                 </div>
-                 <div className={css.count}>
-                     <ul>
-                         <li><span>SGT:</span><p>2960</p></li>
-                         <li><span>Sngls:</span><p>140000</p></li>
-                     </ul>
-                 </div>
-             </div>
+                    <div className={css.columnsTwo}>
 
-         </div>
+                        <div className={css.dashBlock}>
+                            <div className={css.icon}>
+                                <img src="/assets/images/Icon/dash_treasury.png" />
+                            </div>
+                            <div className={css.cont}>
+                                <h4>{t('sidebar.treasury')}</h4>
+                            </div>
+                            <div className={css.count}>
+                                <ul>
+                                    <li key={ "ETH_balance" }><span>ETH:</span><p><SubscribedEthBalance dao={daoState} /></p></li>
 
-           </div>
-           <br/>
-           <h4>Boosted proposals (3)</h4>
-           <InfiniteScroll
-          dataLength={proposals.length} //This is important field to render the next data
-          next={fetchMore}
-          hasMore={hasMoreToLoad}
-          loader=""
-          style={{overflow: "visible"}}
-          endMessage={
-            <p style={{textAlign: "center"}}>
-              <b>&mdash;</b>
-            </p>
-          }
-        >
-          { proposals.length === 0 ?
-            <span>This DAO hasn&apos;t passed any proposals yet. Checkout the <Link to={"/dao/proposal/"}>DAO&apos;s installed schemes</Link> for any open proposals.</span> :
-            <table className={css.proposalHistoryTable}>
-              <thead>
-                <tr className={css.proposalHistoryTableHeader}>
-                  <th>Proposed by</th>
-                  <th>End date</th>
-                  <th>Plugin</th>
-                  <th>Title</th>
-                  <th>Votes</th>
-                  <th>Predictions</th>
-                  <th>Status</th>
-                  <th>My actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {proposalsHTML}
-              </tbody>
-            </table>
-          }
-        </InfiniteScroll>
+                                    {Object.keys(supportedTok).reduce((ac: any, it: any): any => {
+                                        if(supportedTok[it].symbol === "ETH") {
+                                            ac[0] = it;
+                                        } else if(supportedTok[it].symbol === "SGT") {
+                                            ac[2] = it;
+                                        } else if (supportedTok[it].symbol === "SNGLS") {
+                                            ac[1] = it;
+                                        } else if (supportedTok[it].symbol === "GEN") {
+                                            ac[3] = it;
+                                        } else if (supportedTok[it].symbol === "DAI") {
+                                            ac[4] = it;
+                                        } else if (supportedTok[it].symbol === "USDC") {
+                                            ac[5] = it;
+                                        }
+                                        return ac;
+                                    }, []).map((tokenAddress: any) => {
+                                        return  <li key={ supportedTokens()[tokenAddress]["symbol"] + "_balance" }>
+                                    <span>
+                                      {  supportedTokens()[tokenAddress]["symbol"] } :
+                                    </span>
+                                            <p>
+                                                <SubscribedTokenBalance tokenAddress={tokenAddress} dao={daoState} key={"token_" + tokenAddress} />
+                                            </p>
+                                        </li>;
+                                    })}
+                                </ul>
+                            </div>
+                        </div>
 
-        {/* <Sticky enabled top={50} innerZ={10000}> */}
-          <div className={css.daoHistoryHeader}>
-            History
-          </div>
-        {/* </Sticky> */}
+                        <div className={css.dashBlock}>
+                            <div className={css.icon}>
+                                <img src="/assets/images/Icon/dash_holdings.png" />
+                            </div>
+                            <div className={css.cont}>
+                                <h4>{t('sidebar.stakes')}</h4>
+                            </div>
+                            <div className={css.count}>
+                                <ul>
+                                    <li>
+                                        <span>SGT:</span>
+                                        <p>
+                                            <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} />
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <span>Sngls:</span>
+                                        <p>
+                                            <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.membershipFeeStakingContractAddress} tokenAddress={arcSettings.snglsTokenContractAddress} key={"staked_token_" + arcSettings.snglsTokenContractAddress} />
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-        <InfiniteScroll
-          dataLength={proposals.length} //This is important field to render the next data
-          next={fetchMore}
-          hasMore={hasMoreToLoad}
-          loader=""
-          style={{overflow: "visible"}}
-          endMessage={
-            <p style={{textAlign: "center"}}>
-              <b>&mdash;</b>
-            </p>
-          }
-        >
-          { proposals.length === 0 ?
-            <span>This DAO hasn&apos;t passed any proposals yet. Checkout the <Link to={"/dao/proposal/"}>DAO&apos;s installed schemes</Link> for any open proposals.</span> :
-            <table className={css.proposalHistoryTable}>
-              <thead>
-                <tr className={css.proposalHistoryTableHeader}>
-                  <th>Proposed by</th>
-                  <th>End date</th>
-                  <th>Plugin</th>
-                  <th>Title</th>
-                  <th>Votes</th>
-                  <th>Predictions</th>
-                  <th>Status</th>
-                  <th>My actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {proposalsHTML}
-              </tbody>
-            </table>
-          }
-        </InfiniteScroll>
-      </div>
-    );
-  }
+                    </div>
+
+                </div>
+                <br/>
+                <h4>{t('dashboard.boostedProposals')}</h4>
+                <InfiniteScroll
+                    dataLength={proposals.length} //This is important field to render the next data
+                    next={fetchMore}
+                    hasMore={hasMoreToLoad}
+                    loader=""
+                    style={{overflow: "visible"}}
+                    endMessage={
+                        <p style={{textAlign: "center"}}>
+                            <b>&mdash;</b>
+                        </p>
+                    }
+                >
+                    { proposals.length === 0 ?
+                        <span>{t('dashboard.notPassedProposals')}<Link to={"/dao/proposal/"}></Link></span> :
+                        <table className={css.proposalHistoryTable}>
+                            <thead>
+                            <tr className={css.proposalHistoryTableHeader}>
+                                <th>{t('dashboard.proposedBy')}</th>
+                                <th>{t('dashboard.endDate')}</th>
+                                <th>{t('dashboard.plugin')}</th>
+                                <th>{t('dashboard.title')}</th>
+                                <th>{t('dashboard.votes')}</th>
+                                <th>{t('dashboard.predictions')}</th>
+                                <th>{t('dashboard.status')}</th>
+                                <th>{t('dashboard.actions')}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {proposalsHTML}
+                            </tbody>
+                        </table>
+                    }
+                </InfiniteScroll>
+
+                {/* <Sticky enabled top={50} innerZ={10000}> */}
+                <div className={css.daoHistoryHeader}>
+                    {t('sidebar.history')}
+                </div>
+                {/* </Sticky> */}
+
+                <InfiniteScroll
+                    dataLength={proposals.length} //This is important field to render the next data
+                    next={fetchMore}
+                    hasMore={hasMoreToLoad}
+                    loader=""
+                    style={{overflow: "visible"}}
+                    endMessage={
+                        <p style={{textAlign: "center"}}>
+                            <b>&mdash;</b>
+                        </p>
+                    }
+                >
+                    { proposals.length === 0 ?
+                        <span>This DAO hasn&apos;t passed any proposals yet. Checkout the <Link to={"/dao/proposal/"}>DAO&apos;s installed schemes</Link> for any open proposals.</span> :
+                        <table className={css.proposalHistoryTable}>
+                            <thead>
+                            <tr className={css.proposalHistoryTableHeader}>
+                                <th>{t('dashboard.proposedBy')}</th>
+                                <th>{t('dashboard.endDate')}</th>
+                                <th>{t('dashboard.plugin')}</th>
+                                <th>{t('dashboard.title')}</th>
+                                <th>{t('dashboard.votes')}</th>
+                                <th>{t('dashboard.predictions')}</th>
+                                <th>{t('dashboard.status')}</th>
+                                <th>{t('dashboard.actions')}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {proposalsHTML}
+                            </tbody>
+                        </table>
+                    }
+                </InfiniteScroll>
+            </div>
+        );
+    }
 }
 
 const SubscribedGetRep = withSubscription({
-  wrappedComponent: DaoHistoryPage,
-  loadingComponent: <Loading/>,
-  errorComponent: (props) => <div>{ props.error.message }</div>,
+    //@ts-ignore
+    wrappedComponent: DaoDashboard,
+    loadingComponent: <Loading/>,
+    errorComponent: (props) => <div>{ props.error.message }</div>,
 
-  checkForUpdate: [],
+    checkForUpdate: [],
+//@ts-ignore
+    createObservable: async (props: IExternalProps) => {
+        const arc = getArc();
+        const dao = props.daoState.dao;
 
-  createObservable: async (props: IExternalProps) => {
-    const arc = getArc();
-    const dao = props.daoState.dao;
+        // this query will fetch al data we need before rendering the page, so we avoid hitting the server
+        // with all separate queries for votes and stakes and stuff...
+        let voterClause = "";
+        let stakerClause = "";
+        if (props.currentAccountAddress) {
+            voterClause = `(where: { voter: "${props.currentAccountAddress}"})`;
+            stakerClause = `(where: { staker: "${props.currentAccountAddress}"})`;
 
-    // this query will fetch al data we need before rendering the page, so we avoid hitting the server
-    // with all separate queries for votes and stakes and stuff...
-    let voterClause = "";
-    let stakerClause = "";
-    if (props.currentAccountAddress) {
-      voterClause = `(where: { voter: "${props.currentAccountAddress}"})`;
-      stakerClause = `(where: { staker: "${props.currentAccountAddress}"})`;
-
-    }
-    const prefetchQuery = gql`
+        }
+        const prefetchQuery = gql`
       query prefetchProposalDataForDAOHistory {
         proposals (
           first: ${PAGE_SIZE}
@@ -337,7 +434,7 @@ const SubscribedGetRep = withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f"}"
+            dao: "${props.daoState.address}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",
@@ -360,55 +457,161 @@ const SubscribedGetRep = withSubscription({
       ${Stake.fragments.StakeFields}
       ${Scheme.fragments.SchemeFields}
     `;
-    await arc.getObservable(prefetchQuery, { subscribe: true }).pipe(first()).toPromise();
-    const proposals = dao.proposals({
-      where: {
-        // eslint-disable-next-line @typescript-eslint/camelcase
-        stage_in: [IProposalStage.ExpiredInQueue, IProposalStage.Executed, IProposalStage.Queued],
-        // eslint-disable-next-line @typescript-eslint/camelcase
-        closingAt_lte: Math.floor(new Date().getTime() / 1000),
-      },
-      orderBy: "closingAt",
-      orderDirection: "desc",
-      first: PAGE_SIZE,
-      skip: 0,
-    }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
-    );
-    // const members = dao.members({
-    //   orderBy: "balance",
-    //   orderDirection: "desc",
-    //   first: PAGE_SIZE,
-    //   skip: 0,
-    // });
-    return proposals
-  },
+        await arc.getObservable(prefetchQuery, { subscribe: true }).pipe(first()).toPromise();
+        const proposals = dao.proposals({
+                where: {
+                    // eslint-disable-next-line @typescript-eslint/camelcase
+                    stage_in: [IProposalStage.ExpiredInQueue, IProposalStage.Executed, IProposalStage.Queued],
+                    // eslint-disable-next-line @typescript-eslint/camelcase
+                    closingAt_lte: Math.floor(new Date().getTime() / 1000),
+                },
+                orderBy: "closingAt",
+                orderDirection: "desc",
+                first: PAGE_SIZE,
+                skip: 0,
+            }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
+        );
+        //@ts-ignore
+        const member = props.currentAddress && dao.member(props.currentAddress)
+        //@ts-ignore
+        return member ? zip(
+            proposals,
+            member.state(),
+        ).pipe(
+            map(([proposals, member]) => ({proposals, member}))
+        ) : zip(
+            proposals
+        ).pipe(
+            map(([proposals]) => ({proposals}))
+        )
+    },
 
-  // used for hacky pagination tracking
-  pageSize: PAGE_SIZE,
+    // used for hacky pagination tracking
+    pageSize: PAGE_SIZE,
+    //@ts-ignore
+    getFetchMoreObservable: (props: IExternalProps, data: SubscriptionData) => {
+        const dao = props.daoState.dao;
+        const proposals = dao.proposals({
+                where: {
+                    // eslint-disable-next-line @typescript-eslint/camelcase
+                    stage_in: [IProposalStage.ExpiredInQueue, IProposalStage.Executed, IProposalStage.Queued],
+                    // eslint-disable-next-line @typescript-eslint/camelcase
+                    closingAt_lte: Math.floor(new Date().getTime() / 1000),
+                },
+                orderBy: "closingAt",
+                orderDirection: "desc",
+                first: PAGE_SIZE,
+                skip: data.length,
+            }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
+        );
 
-  getFetchMoreObservable: (props: IExternalProps, data: SubscriptionData) => {
-    const dao = props.daoState.dao;
-    const proposals = dao.proposals({
-      where: {
-        // eslint-disable-next-line @typescript-eslint/camelcase
-        stage_in: [IProposalStage.ExpiredInQueue, IProposalStage.Executed, IProposalStage.Queued],
-        // eslint-disable-next-line @typescript-eslint/camelcase
-        closingAt_lte: Math.floor(new Date().getTime() / 1000),
-      },
-      orderBy: "closingAt",
-      orderDirection: "desc",
-      first: PAGE_SIZE,
-      skip: data.length,
-    }, { fetchAllData: true } // get and subscribe to all data, so that subcomponents do nto have to send separate queries
-    );
-    // const members = dao.members({
-    //   orderBy: "balance",
-    //   orderDirection: "desc",
-    //   first: PAGE_SIZE,
-    //   skip: data.members.length,
-    // });
-    return proposals
-  },
+        //@ts-ignore
+        const member = props.currentAddress && dao.member(props.currentAddress)
+        //@ts-ignore
+        return member ? zip(
+            proposals,
+            member.state(),
+        ).pipe(
+            map(([proposals, member]) => ({proposals, member}))
+        ) : zip(
+            proposals
+        ).pipe(
+            map(([proposals]) => ({proposals}))
+        )
+    },
 });
 
-export default connect(null, mapDispatchToProps)(SubscribedGetRep);
+
+/***** DAO ETH Balance *****/
+interface IEthProps extends ISubscriptionProps<BN|null> {
+    dao: IDAOState;
+}
+
+const ETHBalance = (props: IEthProps) => {
+    const { data } = props;
+    return <strong>{formatTokens(data)}</strong>;
+};
+
+const SubscribedEthBalance = withSubscription({
+    wrappedComponent: ETHBalance,
+    loadingComponent: <strong>... {baseTokenName()}</strong>,
+    errorComponent: null,
+    checkForUpdate: (oldProps: IEthProps, newProps: IEthProps) => {
+        return oldProps.dao.address !== newProps.dao.address;
+    },
+    createObservable: (props: IEthProps) => {
+        const arc = getArc();
+        return arc.dao(props.dao.address).ethBalance().pipe(ethErrorHandler());
+    },
+});
+
+/***** Total Staked Balance *****/
+interface IStakedProps extends ISubscriptionProps<any> {
+    stakingContractAddress: string;
+    tokenAddress: string;
+}
+const TotalStakedBalance = (props: IStakedProps) => {
+    const { data, error, isLoading, tokenAddress } = props;
+
+    const tokenData = supportedTokens()[tokenAddress];
+
+    if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
+        return null;
+    }
+    return (
+        <strong>{formatTokens(data, tokenData["symbol"], tokenData["decimals"])}</strong>
+    );
+};
+
+const SubscribedTotalStakedBalance = withSubscription({
+    wrappedComponent: TotalStakedBalance,
+    checkForUpdate: (oldProps: IStakedProps, newProps: IStakedProps) => {
+        return oldProps.stakingContractAddress !== newProps.stakingContractAddress;
+    },
+    createObservable: async (props: IStakedProps) => {
+        const arc = getArc();
+        const token = new Token(props.tokenAddress, arc);
+
+        return token.balanceOf((props.stakingContractAddress)).pipe(ethErrorHandler());
+    },
+});
+
+
+/***** Token Balance *****/
+interface ITokenProps extends ISubscriptionProps<any> {
+    dao: IDAOState;
+    tokenAddress: string;
+}
+const TokenBalance = (props: ITokenProps) => {
+    const { data, error, isLoading, tokenAddress } = props;
+    const tokenData = supportedTokens()[tokenAddress];
+    if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
+        return <strong>0</strong>;
+    }
+    return (
+        <strong>{ (formatTokens(data, tokenData["symbol"], tokenData["decimals"])).split(' ')[0] }</strong>
+    );
+};
+
+const SubscribedTokenBalance = withSubscription({
+    wrappedComponent: TokenBalance,
+    checkForUpdate: (oldProps: ITokenProps, newProps: ITokenProps) => {
+        return oldProps.dao.address !== newProps.dao.address || oldProps.tokenAddress !== newProps.tokenAddress;
+    },
+    createObservable: async (props: ITokenProps) => {
+        // General cache priming for the DAO we do here
+        // prime the cache: get all members fo this DAO -
+        const daoState = props.dao;
+
+        await daoState.dao.members({ first: 1000, skip: 0 }).pipe(first()).toPromise();
+
+        const arc = getArc();
+        const token = new Token(props.tokenAddress, arc);
+        return token.balanceOf(props.dao.address).pipe(ethErrorHandler())
+    },
+});
+
+//@ts-ignore
+const dashboardWithTranslation = withTranslation()(SubscribedGetRep)
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(dashboardWithTranslation);

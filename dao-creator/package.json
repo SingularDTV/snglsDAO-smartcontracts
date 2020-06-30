@@ -1,0 +1,17 @@
+{
+  "name": "dao-creator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "truffle migrate",
+    "start-rinkeby": "truffle migrate --network rinkeby"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@daostack/infra": "0.0.1-rc.17",
+    "@truffle/hdwallet-provider": "^1.0.36"
+  }
+}

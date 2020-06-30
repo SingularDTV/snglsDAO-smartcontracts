@@ -17,6 +17,8 @@ import { DiscussionEmbed } from "disqus-react";
 import { RouteComponentProps } from "react-router-dom";
 import { getSubmission, getSubmissionVoterHasVoted, getCompetitionVotes, CompetitionStatus } from "./utils";
 import * as css from "./Competitions.scss";
+import { withTranslation } from 'react-i18next';
+
 
 const ReactMarkdown = require("react-markdown");
 
@@ -59,7 +61,8 @@ class SubmissionDetails extends React.Component<IProps, null> {
   private disqusConfig = { url: "", identifier: "", title: "" };
 
   public render(): RenderOutput {
-
+    //@ts-ignore
+    const { t } = this.props;
     const competition = this.props.proposalState.competition;
     const submission = this.props.data[0];
     const currentAccountVotedForIt = this.props.data[1];
@@ -92,7 +95,7 @@ class SubmissionDetails extends React.Component<IProps, null> {
               { 
                 canRedeem ? 
                   <Tooltip overlay={!hasRedeemedProposal ? "Proposal has not yet been redeemed" : "Redeem for your winning submission"}>
-                    <a className={classNames({[css.blueButton]: true, [css.redeemButton]: true, [css.disabled]: !hasRedeemedProposal})}
+                    <a className={classNames({[css.redButton]: true, [css.redeemButton]: true, [css.disabled]: !hasRedeemedProposal})}
                       href="#!"
                       onClick={hasRedeemedProposal ? this.handleRedeem : undefined}
                       data-test-id="redeemSuggestion"
@@ -102,7 +105,7 @@ class SubmissionDetails extends React.Component<IProps, null> {
                     <Tooltip overlay={!inVotingPeriod ? "Voting has not yet begun" :
                       currentAccountVotedForIt ? "You have already voted" :
                         maxNumVotesReached ? "You have already voted the maximum number of times" : "Vote for this submission"}>
-                      <a className={classNames({[css.blueButton]: true, [css.voteButton]: true, [css.disabled]: !canVote})}
+                      <a className={classNames({[css.redButton]: true, [css.voteButton]: true, [css.disabled]: !canVote})}
                         href="#!"
                         onClick={canVote ? this.handleVote : undefined}
                         data-test-id="voteSuggestion"
@@ -179,5 +182,5 @@ const SubmissionDetailsSubscription = withSubscription({
     );
   },
 });
-
-export default connect(mapStateToProps)(SubmissionDetailsSubscription);
+//@ts-ignore
+export default connect(mapStateToProps)(withTranslation()(SubmissionDetailsSubscription));

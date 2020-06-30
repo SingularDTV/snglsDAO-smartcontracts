@@ -14,6 +14,8 @@ import { combineLatest, of } from "rxjs";
 import StakeGraph from "./Staking/StakeGraph";
 import VoteBreakdown from "./Voting/VoteBreakdown";
 import * as css from "./ProposalHistoryRow.scss";
+import { withTranslation } from 'react-i18next';
+
 
 import BN = require("bn.js");
 
@@ -80,6 +82,8 @@ class ProposalHistoryRow extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       creatorProfile,
       currentAccountAddress,
@@ -125,16 +129,15 @@ class ProposalHistoryRow extends React.Component<IProps, IState> {
       [css.decisionPassed]: proposalPassed(proposalState),
       [css.decisionFailed]: proposalFailed(proposalState),
     });
-
-    let closeReason = "Time out";
+    let closeReason = t('proposal.closeReasonTimout');
     switch (proposalState.executionState) {
       case IExecutionState.BoostedBarCrossed:
       case IExecutionState.QueueBarCrossed:
       case IExecutionState.PreBoostedBarCrossed:
-        closeReason = "Absolute Majority";
+        closeReason = t('proposal.closeReasonAbsMaj');
         break;
       case IExecutionState.BoostedTimeOut:
-        closeReason = "Relative Majority";
+        closeReason = t('proposal.closeReasonRelative');
         break;
     }
 
@@ -176,14 +179,14 @@ class ProposalHistoryRow extends React.Component<IProps, IState> {
         <td onClick={this.gotoProposal} className={closeReasonClass}>
           <div className={css.decisionPassed}>
             <img src="/assets/images/Icon/vote/for.svg"/>
-            <span>Passed</span>
+            <span>{t('proposal.passed')}</span>
             <div className={css.decisionReason}>
               <span>{closeReason}</span>
             </div>
           </div>
           <div className={css.decisionFailed}>
             <img src="/assets/images/Icon/vote/against.svg"/>
-            <span>Failed</span>
+            <span>{t('proposal.failed')}</span>
             <div className={css.decisionReason}>
               <span>{closeReason}</span>
             </div>
@@ -209,7 +212,7 @@ class ProposalHistoryRow extends React.Component<IProps, IState> {
 const ConnectedProposalHistoryRow = connect(mapStateToProps)(ProposalHistoryRow);
 
 // In this case we wrap the Connected component because mapStateToProps requires the subscribed proposal state
-export default withSubscription({
+const ConnectedProposalHistoryRowWithSub = withSubscription({
   wrappedComponent: ConnectedProposalHistoryRow,
   loadingComponent: (props) => <tr><td>Loading proposal {props.proposal.id.substr(0, 6)}...</td></tr>,
   errorComponent: (props) => <tr><td>{ props.error.message }</td></tr>,
@@ -234,3 +237,5 @@ export default withSubscription({
     }
   },
 });
+//@ts-ignore
+export default withTranslation()(ConnectedProposalHistoryRowWithSub)

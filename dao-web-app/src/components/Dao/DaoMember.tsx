@@ -10,6 +10,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { IProfileState } from "reducers/profilesReducer";
 import * as css from "./Dao.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps extends ISubscriptionProps<IMemberState> {
   dao: IDAOState;
@@ -28,6 +30,8 @@ class DaoMember extends React.Component<IProps, null> {
   public render(): RenderOutput {
     const { dao, daoTotalReputation, profile } = this.props;
     const memberState = this.props.data;
+    //@ts-ignore
+    const { t } = this.props;
 
     return (
       <div className={css.member + " clearfix"}
@@ -86,10 +90,13 @@ class DaoMember extends React.Component<IProps, null> {
   }
 }
 
-export default withSubscription({
+const DaoMemberWithSubscription = withSubscription({
   wrappedComponent: DaoMember,
   loadingComponent: <div>Loading...</div>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
   checkForUpdate: (oldProps, newProps) => { return oldProps.member.id !== newProps.member.id; },
   createObservable: (props: IProps) => props.member.state(),
 });
+//@ts-ignore
+export default withTranslation()(DaoMemberWithSubscription)
+

@@ -16,6 +16,9 @@ import withSubscription, { ISubscriptionProps } from "components/Shared/withSubs
 import { of, combineLatest, Observable } from "rxjs";
 import * as css from "./ActionButton.scss";
 import RedemptionsTip from "./RedemptionsTip";
+import { withTranslation } from 'react-i18next';
+
+
 
 import BN = require("bn.js");
 
@@ -107,6 +110,8 @@ class ActionButton extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       beneficiaryProfile,
       currentAccountAddress,
@@ -121,6 +126,7 @@ class ActionButton extends React.Component<IProps, IState> {
        * unredeemed GP rewards owed to the current account
        */
       rewards,
+      ...other
     } = this.props;
 
     const daoBalances: {[key: string]: BN} = {
@@ -192,8 +198,9 @@ class ActionButton extends React.Component<IProps, IState> {
     const displayRedeemButton = proposalState.executedAt &&
                         ((currentAccountNumUnredeemedGpRewards > 0) ||
                         ((proposalState.winningOutcome === IProposalOutcome.Pass) && (beneficiaryNumUnredeemedCrRewards > 0)));
-
+//@ts-ignore
     const redemptionsTip = RedemptionsTip({
+      ...other,
       canRewardNone,
       canRewardOnlySome: canRewardSomeNotAll,
       contributionRewards,
@@ -201,7 +208,7 @@ class ActionButton extends React.Component<IProps, IState> {
       dao: daoState,
       gpRewards,
       id: rewards ? rewards.id : "0",
-      proposal: proposalState,
+      proposal: proposalState
     });
 
     const redeemButtonClass = classNames({
@@ -218,6 +225,7 @@ class ActionButton extends React.Component<IProps, IState> {
       <div className={wrapperClass}>
         {this.state.preRedeemModalOpen ?
           <PreTransactionModal
+          //@ts-ignore
             actionType={ActionTypes.Redeem}
             action={this.handleRedeemProposal(contributionRewards, gpRewards)}
             beneficiaryProfile={beneficiaryProfile}
@@ -344,4 +352,5 @@ const SubscribedActionButton = withSubscription({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedActionButton);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedActionButton));

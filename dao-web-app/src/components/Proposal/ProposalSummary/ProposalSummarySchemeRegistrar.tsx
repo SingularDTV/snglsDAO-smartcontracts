@@ -5,6 +5,8 @@ import { schemeNameAndAddress } from "lib/schemeUtils";
 import * as React from "react";
 import { IProfileState } from "reducers/profilesReducer";
 import * as css from "./ProposalSummary.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   beneficiaryProfile?: IProfileState;
@@ -19,7 +21,7 @@ interface IState {
 
 }
 
-export default class ProposalSummary extends React.Component<IProps, IState> {
+class ProposalSummary extends React.Component<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
@@ -37,6 +39,8 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
   private copySchemeParamsHashOnClick = (schemeRegistrar: ISchemeRegistrar) => (): void => copyToClipboard(schemeRegistrar.schemeToRegisterParamsHash);
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { proposal, detailView, transactionModal } = this.props;
 
     const proposalSummaryClass = classNames({
@@ -47,7 +51,7 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
     });
 
     const schemeRegistrar = proposal.schemeRegistrar;
-    const permissions = parseInt(schemeRegistrar.schemeToRegisterPermission, 16);
+    // const permissions = parseInt(schemeRegistrar.schemeToRegisterPermission, 16);
 
     return (
       <div className={proposalSummaryClass}>
@@ -55,7 +59,7 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
           <div>
             <span className={css.summaryTitle}>
               <img src="/assets/images/Icon/delete.svg"/>&nbsp;
-                  Remove Scheme&nbsp;
+              {t("proposal.removeScheme")}
               <a href={linkToEtherScan(schemeRegistrar.schemeToRemove)} target="_blank" rel="noopener noreferrer">{schemeNameAndAddress(schemeRegistrar.schemeToRemove)}</a>
             </span>
             { detailView ?
@@ -63,7 +67,7 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
                 <table><tbody>
                   <tr>
                     <th>
-                          Address:
+                    {t("membership.address")}:
                       <a href={linkToEtherScan(schemeRegistrar.schemeToRemove)} target="_blank" rel="noopener noreferrer">
                         <img src="/assets/images/Icon/Link-blue.svg"/>
                       </a>
@@ -79,7 +83,7 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
             <div>
               <span className={css.summaryTitle}>
                 <b className={css.schemeRegisterIcon}>{proposal.type === IProposalType.SchemeRegistrarEdit ? <img src="/assets/images/Icon/edit-sm.svg"/> : "+"}</b>&nbsp;
-                {proposal.type === IProposalType.SchemeRegistrarEdit ? "Edit" : "Add"} Scheme&nbsp;
+          {proposal.type === IProposalType.SchemeRegistrarEdit ? t("proposal.edit") : t("proposal.add") } {t('proposal.scheme')}&nbsp;
                 <a href={linkToEtherScan(schemeRegistrar.schemeToRegister)} target="_blank" rel="noopener noreferrer">{schemeNameAndAddress(schemeRegistrar.schemeToRegister)}</a>
               </span>
               { detailView ?
@@ -88,47 +92,51 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
                     <tbody>
                       <tr>
                         <th>
-                          Address:
+                        {t("membership.address")}:
                           <a href={linkToEtherScan(schemeRegistrar.schemeToRegister)} target="_blank" rel="noopener noreferrer">
                             <img src="/assets/images/Icon/Link-blue.svg"/>
                           </a>
                         </th>
                         <td>
-                          <span>{schemeRegistrar.schemeToRegister}</span>
+                          <div className={css.hashCopy}>
+                            <div className={css.hash}><span>{schemeRegistrar.schemeToRegister}</span></div>
                           <img src="/assets/images/Icon/Copy-white_nobg.svg" onClick={this.copySchemeAddressOnClick(schemeRegistrar)} />
+                          </div>
                         </td>
                       </tr>
                       <tr>
-                        <th>Param Hash:</th>
+                        <th>{t("schema.paramHash")}:</th>
                         <td>
-                          <span>{schemeRegistrar.schemeToRegisterParamsHash.slice(0, 43)}</span>
+                          <div className={css.hashCopy}>
+                          <div className={css.hash}><span>{schemeRegistrar.schemeToRegisterParamsHash.slice(0, 43)}</span></div>
                           <img src="/assets/images/Icon/Copy-white_nobg.svg" onClick={this.copySchemeParamsHashOnClick(schemeRegistrar)} />
+                          </div>
                         </td>
                       </tr>
-                      <tr>
-                        <th>Permissions:</th>
-                        <td>
+                      {/* <tr>
+                        <th>{t("proposal.permissions")}</th>
+                        <td className={css.description}>
                           {
                             // eslint-disable-next-line no-bitwise
-                            permissions & 2 ? <div>Register other schemes</div> : ""
+                          permissions & 2 ? <div>{t("proposal.registerOtherSchemes")}</div> : ""
                           }
                           {
                             // eslint-disable-next-line no-bitwise
-                            permissions & 4 ? <div>Change constraints</div> : ""
+                            permissions & 4 ? <div>{t("proposal.changeConstraints")}</div> : ""
                           }
                           {
                             // eslint-disable-next-line no-bitwise
-                            permissions & 8 ? <div>Upgrade the controller</div> : ""
+                            permissions & 8 ? <div>{t("proposal.upgradeTheController")}</div> : ""
                           }
                           {
                             // eslint-disable-next-line no-bitwise
-                            permissions & 16 ? <div>Call genericCall on behalf of</div> : ""
+                            permissions & 16 ? <div>{t("proposal.callGenericCall")}</div> : ""
                           }
                           {
-                            <div>Mint or burn reputation</div>
+                            <div>{t("proposal.mintOrBurnRep")}</div>
                           }
                         </td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>
@@ -152,3 +160,5 @@ export default class ProposalSummary extends React.Component<IProps, IState> {
     // }
   }
 }
+//@ts-ignore
+export default withTranslation()(ProposalSummary)

@@ -1,9 +1,15 @@
 const migration = require("../data/migration.json");
-module.exports = async function getDeployedAddress(contractName) {
+const assert = require("assert").strict;
+module.exports = async function getDeployedAddress(contractName, optionalWeb3) {
+    if (!global.web3) {
+        global.web3 = optionalWeb3;
+    }
     let chainId = await web3.eth.net.getId();
     let network;
+    if (chainId === 1) network = "mainnet";
     if (chainId === 4) network = "rinkeby";
-    else network = "private";
+    else if (chainId.toString().length > 2) network = "private";
+    assert(network);
     //"0.0.1-rc.32" - this property can be changed in future
     const singularMigration = migration[network].dao["0.0.1-rc.32"];
     if (singularMigration.hasOwnProperty(contractName)) return singularMigration[contractName];

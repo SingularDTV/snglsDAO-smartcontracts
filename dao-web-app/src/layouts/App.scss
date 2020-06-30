@@ -1,6 +1,6 @@
 $header-height: 100px;
 
-
+//@import '~antd/dist/antd.css';
 // Add google fonts
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -51,8 +51,8 @@ body {
 
 h2 {
     font-family: TransatBold;
-    font-size: 50px;
-    line-height: 60px;
+    font-size: 42px;
+    line-height: 52px;
     letter-spacing: 0.2px;
     text-transform: uppercase;
     margin: 0;
@@ -93,7 +93,7 @@ h4 {
   z-index: 100;
   position: relative;
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .sidebarWrapper {
@@ -159,7 +159,7 @@ h4 {
   img {
     height: 12px;
     position: relative;
-    top: 2px;
+    top: -2px;
     padding-left: 8px;
   }
 }
@@ -174,7 +174,7 @@ h4 {
 }
 
 .header {
-  width: calc(100% - 140px);
+  width: 100%;
   position: fixed;
   vertical-align: middle;
   background-color: $navy;
@@ -218,7 +218,7 @@ h4 {
             z-index: 100;
             height: 46px;
             transition: all 0.25s ease;
-            
+
             &.desktop {
                 display: block;
             }
@@ -771,6 +771,8 @@ h4 {
     &.navigation {
         text-align: left;
         display: inline-block;
+        position: relative;
+        top: 3px;
         ul {
             list-style: none;
             padding: 0;
@@ -841,7 +843,7 @@ h4 {
                         &:hover {
                           color: #fff9;
                         }
-                        
+
                         & > ul {
                           position: absolute;
                           display: none;
@@ -864,6 +866,7 @@ h4 {
                             background: none;
                             width: auto;
                             height: auto;
+                            color: #fff;
                           }
                         }
 
@@ -891,6 +894,9 @@ h4 {
                   & > a, & > span {
                     position: relative;
                     padding-right: 18px;
+                    color: #fff;
+                    opacity: 1;
+                    padding-left: 0;
 
                     &:before {
                       position: absolute;
@@ -910,6 +916,33 @@ h4 {
                     }
                   }
                 }
+
+              &.langSelector {
+                min-width: 96px;
+                position: relative;
+                transform: translateY(11px);
+                padding: 0;
+
+                .menu__link {
+                  display: block;
+                  background: #D40D26;
+                  box-shadow: 0 0 20px #e4112a;
+                  border-radius: 30px;
+                  padding: 6px 18px;
+                  top: -6px;
+
+
+                  &:before {
+                    right: 18px;
+                  }
+                }
+
+                & > ul {
+                  max-width: 84px;
+                }
+              }
+
+
             }
         }
     }
@@ -974,7 +1007,6 @@ h4 {
 @media (max-width: 1580px) {
   .header {
     padding: 0 48px;
-    width: calc(100% - 96px);
   }
 }
 
@@ -987,6 +1019,10 @@ h4 {
                     ul {
                         li {
                             padding: 10px 15px;
+
+                            &.langSelector {
+                              padding: 0;
+                            }
                         }
                     }
                 }
@@ -1039,7 +1075,7 @@ h4 {
     .header {
         .topInfo {
               position: initial;
-            
+
               & > div {
                 &.navigation {
                   position: absolute;
@@ -1130,6 +1166,8 @@ h4 {
   bottom: 0px;
   z-index: 999999;
   display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
 
   .cookieDisclaimer {
     padding: 25px;
@@ -1167,19 +1205,21 @@ h4 {
       display: inline-block;
       white-space: nowrap;
 
-      a.blueButton {
+      a.redButton {
         position: relative;
         top: 12px;
         height: 30px;
         line-height: 30px;
         font-size: 13px;
         color: white;
-        background-color: rgba(5, 118, 255, 1);
+        background-color: #D40D26;
         transition: all 0.25s ease;
         border-radius: 15px;
         display: inline-block;
         padding: 0 30px;
-        font-weight: bold;
+        text-transform: uppercase; 
+        letter-spacing: 1.61455px;
+        box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7); 
         cursor: pointer;
 
         img {
@@ -1205,6 +1245,13 @@ h4 {
 
 
 @media (max-width: 992px) {
+  .sidebarWrapper {
+    .sticky-outer-wrapper {
+      .sticky-inner-wrapper {
+        transform: none;
+      }
+    }
+  }
     .sidebarToggle {
         display: block;
 
@@ -1239,9 +1286,7 @@ h4 {
 
     .withDAO .sidebarWrapper {
         z-index: 1000;
-        // height: 100%;
         width: 100%;
-        // position: fixed;
     }
 
 
@@ -1296,7 +1341,7 @@ h4 {
     .header {
         height: 64px;
         padding: 0 15px;
-        width: calc(100% - 30px);
+        // width: calc(100% - 30px);
         grid-gap: 15px;
 
         .accountInfo {

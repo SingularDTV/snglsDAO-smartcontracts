@@ -42,8 +42,8 @@ contract SingularDTVToken is StandardToken {
         uint256 value
     ) public returns (bool) {
         // Both parties withdraw their reward first
-        singularDTVFund.softWithdrawRewardFor(from);
-        singularDTVFund.softWithdrawRewardFor(to);
+        // singularDTVFund.softWithdrawRewardFor(from);
+        // singularDTVFund.softWithdrawRewardFor(to);
         return super.transferFrom(from, to, value);
     }
 

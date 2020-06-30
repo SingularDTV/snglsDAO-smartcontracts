@@ -9,6 +9,8 @@ import { getArc } from "arc";
 import AccountImage from "components/Account/AccountImage";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./UserSearchField.scss";
 
@@ -111,6 +113,8 @@ class UserSearchField extends React.Component<IProps, IState> {
   public getSuggestionValue = (suggestion: IProfileState) => suggestion.ethereumAccountAddress;
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { value, suggestions } = this.state;
 
     // Autosuggest will pass through all these props to the input.
@@ -149,5 +153,5 @@ const SubscribedUserSearchField = withSubscription({
     return arc.dao(props.daoAvatarAddress).members();
   },
 });
-
-export default connect(mapStateToProps)(SubscribedUserSearchField);
+//@ts-ignore
+export default connect(mapStateToProps)(withTranslation()(SubscribedUserSearchField));

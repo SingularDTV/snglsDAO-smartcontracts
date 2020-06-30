@@ -288,13 +288,12 @@ a.accountName {
       content: '';
       height: 100%;
       width: 100%;
-      // background: rgba(255, 255, 255, 0.05);
       opacity: 0.8;
       border: 1px solid rgba(255, 255, 255, 0.05);
       box-sizing: border-box;
-      // backdrop-filter: blur(40px);
       background: url(/assets/images/bg_blur.png) repeat;
       background-size: cover;
+      display: block !important;
     }
   }
 
@@ -365,7 +364,8 @@ a.accountName {
   }
 
   .otherInfoContainer {
-    width: 100%;
+    // width: 100%;
+    max-width: 100%;
     background: #010b2b7a;
     position: relative;
     padding: 40px;
@@ -415,7 +415,7 @@ a.accountName {
     display: block;
     border: 1px solid #ffffff0d;
     padding: 15px;
-    width: 95%;
+    width: 100%;
     font-size: 14px;
     background: #ffffff0a;
     color: #fff;
@@ -492,30 +492,32 @@ input {
 }
 
 .errorMessage {
-  position: relative;
+  position: absolute;
   color: red;
 }
 
 .submitButton {
-  height: 30px;
-  display: inline-block;
-  line-height: 30px;
-  font-weight: bold;
-  color: $white;
-  transition: all 0.25s ease;
-  background-color: rgba(3, 118, 255, 1);
-  border-radius: 30px;
-  border: none;
-  font-size: 14px;
-  padding: 0 15px;
-  outline: none;
-  // margin-right: 45px;
-  // margin-top: 30px;
+            color: #fff;
+            font-family: Montserrat;
+            font-weight: 500;
+            line-height: 24px;
+            letter-spacing: 1.61455px;
+            text-transform: uppercase; 
+            padding: 14px 70px;
+            border: 1px solid #D40D26;
+            border-radius: 50px;
+            background: #D40D26;
+            outline: none;
+            position: relative;
+            transition: 0.1s all;
+            display: inline-block;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7); 
 
-  &:hover {
-    cursor: pointer;
-  }
-
+            &:hover {
+                box-shadow: none;
+            }
   .loading {
     width: 18px;
     display: none;
@@ -555,7 +557,33 @@ input {
   }
 }
 
+@media (max-width: 992px) {
+.profileContainer {
+  // max-width: 700px;
+  width: 100%;
+  padding: 0;
+}
+}
+
 @media (max-width: 768px) {
+  .profileContainer {
+    form {
+      padding: 0 !important;
+      width: calc(100% - 30px);
+      left: 15px;
+      position: relative;
+      grid-template-columns: 1fr;
+      margin-bottom: 30px;
+
+      .profileContent {
+        padding: 20px;
+      }
+    }
+
+    .otherInfoContainer {
+      padding: 20px;
+    }
+  }
     .targetAccount:hover {
     .avatar {
         width: 80px;

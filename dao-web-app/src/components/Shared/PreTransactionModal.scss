@@ -515,7 +515,7 @@ input[type=number] {
 
       h3 {
         position: absolute;
-        top: -27px;
+        top: -23px;
         background-color: $white;
         padding: 5px;
         left: 15px;
@@ -631,6 +631,7 @@ input[type=number] {
           display: inline;
           color: $gray-1;
           opacity: .7;
+          padding-left: 7px;
 
           strong {
             font-weight: normal;

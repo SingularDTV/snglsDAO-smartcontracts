@@ -4,6 +4,7 @@
   padding-bottom: 15px;
 
   img {
+    margin-bottom: 10px;
     width: 40px;
   }
 
@@ -15,10 +16,37 @@
   }
 }
 
+button {
+    &.redButton {
+      color: #fff;
+      font-family: Montserrat;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: 1.61455px;
+      text-transform: uppercase;
+      padding: 14px 70px;
+      border: 1px solid #D40D26;
+      border-radius: 50px;
+      background: #D40D26;
+      outline: none;
+      position: relative;
+      transition: 0.1s all;
+      display: block;
+      font-size: 14px;
+      text-align: center;
+      box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
+      margin-bottom: 20px;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+}
+
 .wrapper {
   // background: white;
-  width: 47.5%;
-  margin: 0 2.5% 40px 0;
+  width: 100%;
+  margin: 0 0 40px 0;
   position: relative;
   float: left;
   // border-radius: 20px 20px 0 0;
@@ -30,11 +58,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    // background: rgba(255, 255, 255, 0.05);
     opacity: 0.8;
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-sizing: border-box;
-    // backdrop-filter: blur(40px);
     background: url(/assets/images/bg_blur.png) repeat;
       background-size: cover;
   }
@@ -49,8 +75,6 @@
     position: relative;
     padding: 25px;
     display: block;
-    // color: rgba(0, 29, 52, 1);
-    // border: 1px solid $white;
     border-radius: 20px 20px 0 0;
     transition: all 0.25s ease;
 
@@ -58,10 +82,11 @@
       color: #fff;
       text-transform: uppercase;
       line-height: normal;
+      margin-bottom: 10px;
     }
 
     div {
-      padding-top: 10px;
+      // padding-top: 10px;
       font-size: 16px;
       font-family: $body-font;
       text-transform: uppercase;
@@ -69,8 +94,13 @@
 
       &.headerItems {
         line-height: normal;
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
 
         & > div {
+          flex-basis: auto;
+          flex-grow: 1;
           display: inline-block;
           font-size: 15px;
           color: #fff;
@@ -185,11 +215,29 @@ a.proposalTitle {
   }
 }
 
+@media (max-width: 992px) {
+  .wrapper {
+    a.headerLink {
+      div {
+        &.headerItems {
+          display: grid;
+          justify-content: normal;
+          text-align: left;
+          grid-gap: 10px;
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 425px) {
+
   .wrapper {
     border-radius: 0;
     width: 100%;
   }
+
+
 
   .numProposals {
     padding-left: 10px;

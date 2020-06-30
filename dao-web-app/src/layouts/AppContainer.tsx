@@ -1,7 +1,6 @@
 import { threeBoxLogout } from "actions/profilesActions";
 import { setCurrentAccount } from "actions/web3Actions";
 import AccountProfilePage from "components/Account/AccountProfilePage";
-import DaosPage from "components/Daos/DaosPage";
 import Notification, { NotificationViewStatus } from "components/Notification/Notification";
 // import DaoCreator from "components/DaoCreator";
 import DaoContainer from "components/Dao/DaoContainer";
@@ -13,11 +12,11 @@ import { IRootState } from "reducers";
 import { dismissNotification, INotificationsState, NotificationStatus, showNotification, INotification } from "reducers/notifications";
 import { getCachedAccount, cacheWeb3Info, logout, pollForAccountChanges, getArcSettings } from "arc";
 import ErrorUncaught from "components/Errors/ErrorUncaught";
-import { parse } from "query-string";
+// import { parse } from "query-string";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
-import { matchPath, Link, Route, RouteComponentProps, Switch, Redirect } from "react-router-dom";
+import { /*matchPath,*/ Link, Route, RouteComponentProps, Switch, Redirect } from "react-router-dom";
 import { ModalContainer } from "react-router-modal";
 import { History } from "history";
 import classNames from "classnames";
@@ -26,6 +25,8 @@ import { Address } from "@daostack/client";
 import { sortedNotifications } from "../selectors/notifications";
 import * as css from "./App.scss";
 import * as Sticky from "react-stickynode";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps extends RouteComponentProps<any> {
   history: History;
@@ -39,15 +40,15 @@ interface IStateProps {
 }
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IStateProps & IExternalProps => {
-  const match = matchPath(ownProps.location.pathname, {
-    path: "/",
-    strict: false,
-  });
-  const queryValues = parse(ownProps.location.search);
-  console.log("lalala: ", ownProps, match, queryValues)
-  console.log("==========================>><><>K<><><>><>< ", getArcSettings().daoAvatarContractAddress)
+  // const match = matchPath(ownProps.location.pathname, {
+  //   path: "/",
+  //   strict: false,
+  // });
+  // const queryValues = parse(ownProps.location.search);
+  // console.log("lalala: ", ownProps, match, queryValues)
+  // console.log("==========================>><><>K<><><>><>< ", getArcSettings().daoAvatarContractAddress)
 
-  console.log("map state to props: ", state.web3.currentAccountAddress)
+  // console.log("map state to props: ", state.web3.currentAccountAddress)
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
@@ -179,7 +180,8 @@ class AppContainer extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
-    console.log("APP CONTANER: ", this.props);
+    //@ts-ignore
+    const  { t } = this.props;
     const {
       /*daoAvatarAddress,*/
       sortedNotifications,
@@ -212,7 +214,6 @@ class AppContainer extends React.Component<IProps, IState> {
 
               <div className={css.contentWrapper}>
                 <Switch>
-                  <Route path="/daos/create" component={DaosPage} />
                   {/* <Route path="/dao/:daoAvatarAddress" component={DaoContainer} /> */}
                   <Route path="/profile/:accountAddress" component={AccountProfilePage} />
                   <Route path="/redemptions" component={RedemptionsPage} />
@@ -232,8 +233,8 @@ class AppContainer extends React.Component<IProps, IState> {
 
           <div id="footer" className={css.footer}>
             <div className={css.footerDescr}>
-              <h4>DISCLAIMER</h4>
-              <p>This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.</p>
+              <h4>{t('disclaimer')}</h4>
+              <p>{t('disclaimerDescription')}</p>
             </div>
             <div className={css.footerImg}>
               <img src="/assets/images/foot_img.png" alt=""/>
@@ -260,9 +261,9 @@ class AppContainer extends React.Component<IProps, IState> {
           { hasAcceptedCookies ? "" :
             <div className={css.cookieDisclaimerContainer}>
               <div className={css.cookieDisclaimer}>
-                <div className={css.body}>Alchemy stores cookies on your device to enhance platform experience and analyze platform usage. Please read the&nbsp;
-                  <Link to="/cookie-policy" target="_blank" rel="noopener noreferrer">Cookie Policy</Link> for more information.</div>
-                <div className={css.accept}><a href="#" onClick={this.handleAccept} className={css.blueButton} data-test-id="acceptCookiesButton"><img src="/assets/images/Icon/v-white-thick.svg"></img>I Accept</a></div>
+                <div className={css.body}>{t("cookieStart")}
+                  <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">{t("cookieLinkPolicy")}</Link>{t("cookieMoreInformation")}</div>
+      <div className={css.accept}><a href="#" onClick={this.handleAccept} className={css.redButton} data-test-id="acceptCookiesButton"><img src="/assets/images/Icon/v-white-thick.svg"></img>{t("iAccept")}</a></div>
               </div>
             </div>
           }
@@ -275,5 +276,5 @@ class AppContainer extends React.Component<IProps, IState> {
     localStorage.setItem(AppContainer.hasAcceptedCookiesKey, "1");
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(AppContainer));

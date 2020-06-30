@@ -14,6 +14,8 @@ import { connect } from "react-redux";
 import { Modal } from "react-router-modal";
 import { showNotification } from "reducers/notifications";
 import { IProfileState } from "reducers/profilesReducer";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./StakeButtons.scss";
 
@@ -99,7 +101,8 @@ class StakeButtons extends React.Component<IProps, IState> {
   private getStakeProposalAction = (proposal: IProposalState, dao: IDAOState, pendingPrediction: number) =>
     (amount: number) => {
       this.props.stakeProposal(proposal.dao.id, proposal.id, pendingPrediction, amount);
-
+      //@ts-ignore
+      const { t } = this.propos;
       Analytics.track("Stake", {
         "DAO Address": proposal.dao.id,
         "DAO Name": dao.name,
@@ -108,11 +111,13 @@ class StakeButtons extends React.Component<IProps, IState> {
         "Proposal TItle": proposal.title,
         "Scheme Address": proposal.scheme.address,
         "Scheme Name": proposal.scheme.name,
-        "Stake Type": pendingPrediction === IProposalOutcome.Fail ? "Fail" : pendingPrediction === IProposalOutcome.Pass ? "Pass" : "None",
+        "Stake Type": pendingPrediction === IProposalOutcome.Fail ? t('proposal.fail') : pendingPrediction === IProposalOutcome.Pass ? t('proposal.pass') : t('proposal.none'),
       });
     };
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       beneficiaryProfile,
       contextMenu,
@@ -148,12 +153,9 @@ class StakeButtons extends React.Component<IProps, IState> {
         <Modal onBackdropClick={this.closeApprovalModal}>
           <div className={css.preApproval}>
             <div className={css.preapproveWrapper}>
-              <h3>Activate predictions</h3>
+      <h3>{t('proposal.activatePredictions')}</h3>
               <p>
-                In order to activate predictions, you must authorize our smart
-                contract to receive GENs from you. Upon activation, the smart contract
-                will be authorized to receive up to 100000 GENs. This transaction will not
-                cost you GEN or commit you in any way to spending your GENs in the future.
+              {t('proposal.inOrderToActivate')}
               </p>
               <div className={css.preapproveButtonsWrapper}>
                 <button onClick={this.handleCancelPreApprove} data-test-id="button-cancel">Cancel</button>
@@ -177,9 +179,9 @@ class StakeButtons extends React.Component<IProps, IState> {
       (proposal.stage === IProposalStage.PreBoosted);
 
     const disabledMessage =
-      (proposal.stage === IProposalStage.Queued && expired) || proposal.stage === IProposalStage.ExpiredInQueue ? "Can't predict on expired proposals" :
-        (proposal.stage === IProposalStage.Boosted || proposal.stage === IProposalStage.QuietEndingPeriod) ? "Can't predict on boosted proposals" :
-          (proposal.stage === IProposalStage.Executed) ? `Can't predict on ${proposal.winningOutcome === IProposalOutcome.Pass ? "passed" : "failed"} proposals` : "";
+      (proposal.stage === IProposalStage.Queued && expired) || proposal.stage === IProposalStage.ExpiredInQueue ? t("proposal.cantPredict") :
+        (proposal.stage === IProposalStage.Boosted || proposal.stage === IProposalStage.QuietEndingPeriod) ? t("proposal.cantPredictOnBoosted") :
+          (proposal.stage === IProposalStage.Executed) ? t('proposal.cantPredictOnPassedFailded', {status: proposal.winningOutcome === IProposalOutcome.Pass ? t("proposal.passed") : t("proposal.failed")}) : "";
 
     const hasGens = currentAccountGens && currentAccountGens.gt(new BN(0));
 
@@ -206,13 +208,13 @@ class StakeButtons extends React.Component<IProps, IState> {
 
     const passButton = (
       <button className={passButtonClass} onClick={disableStakePass ? null : this.showPreStakeModal(1)} data-test-id="stakePass">
-        <img className={css.stakeIcon} src="/assets/images/Icon/v.svg"/> Pass
+        <img className={css.stakeIcon} src="/assets/images/Icon/v.svg"/> {t('proposal.pass')}
       </button>
     );
 
     const failButton = (
       <button className={failButtonClass} onClick={disableStakeFail ? null : this.showPreStakeModal(2)}>
-        <img className={css.stakeIcon} src="/assets/images/Icon/x.svg"/> Fail
+        <img className={css.stakeIcon} src="/assets/images/Icon/x.svg"/> {t('proposal.fail')}
       </button>
     );
 
@@ -226,7 +228,7 @@ class StakeButtons extends React.Component<IProps, IState> {
             <div className={css.contextTitle}>
               <div>
                 <span>
-                  Predict
+                {t('proposal.predict')}
                 </span>
               </div>
             </div>
@@ -234,7 +236,7 @@ class StakeButtons extends React.Component<IProps, IState> {
           }
 
           <div className={css.enablePredictions}>
-            <button onClick={this.showApprovalModal} data-test-id="button-enable-predicting">Enable Predictions</button>
+        <button onClick={this.showApprovalModal} data-test-id="button-enable-predicting">{t('proposal.enablePredictions')}</button>
           </div>
         </div>
       );
@@ -244,6 +246,7 @@ class StakeButtons extends React.Component<IProps, IState> {
       <div className={wrapperClass}>
         {showPreStakeModal ?
           <PreTransactionModal
+            //@ts-ignore
             actionType={pendingPrediction === IProposalOutcome.Pass ? ActionTypes.StakePass : ActionTypes.StakeFail}
             action={this.getStakeProposalAction(proposal, dao, pendingPrediction)}
             beneficiaryProfile={beneficiaryProfile}
@@ -260,7 +263,7 @@ class StakeButtons extends React.Component<IProps, IState> {
           <div className={css.contextTitle}>
             <div>
               <span>
-                Predict
+              {t('proposal.predict')}
               </span>
             </div>
           </div>
@@ -278,7 +281,7 @@ class StakeButtons extends React.Component<IProps, IState> {
                   passButton
               }
               {parentPage !== Page.ProposalDetails && proposal.stage === IProposalStage.Queued && !expired && proposal.upstakeNeededToPreBoost.gten(0) ?
-                <div className={css.toBoostMessage}>&gt; {formatTokens(proposal.upstakeNeededToPreBoost, "GEN to boost")}</div>
+                <div className={css.toBoostMessage}>&gt; {formatTokens(proposal.upstakeNeededToPreBoost, t('proposal.genToBoost'))}</div>
                 : ""}
               {
                 (currentAccountAddress && tip(IProposalOutcome.Pass) !== "") ?
@@ -288,7 +291,7 @@ class StakeButtons extends React.Component<IProps, IState> {
                   failButton
               }
               {parentPage !== Page.ProposalDetails && proposal.stage === IProposalStage.PreBoosted && !expired && proposal.downStakeNeededToQueue.gtn(0) ?
-                <div className={css.toBoostMessage}>&gt;= {formatTokens(proposal.downStakeNeededToQueue, " GEN to un-boost")}</div>
+                <div className={css.toBoostMessage}>&gt;= {formatTokens(proposal.downStakeNeededToQueue, t('proposal.genTOUnBoost'))}</div>
                 : ""}
             </div>
             : <span className={css.disabledPredictions}>
@@ -300,5 +303,5 @@ class StakeButtons extends React.Component<IProps, IState> {
     );
   }
 }
-
-export default connect(null, mapDispatchToProps)(StakeButtons);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(StakeButtons));

@@ -12,6 +12,8 @@ import * as React from "react";
 import { competitionStatus, CompetitionStatus } from "./utils";
 import * as css from "./Competitions.scss";
 import StatusBlob from "./StatusBlob";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalStateProps {
   creatorProfile: IProfileState;
@@ -67,7 +69,8 @@ class CompetitionCard extends React.Component<IProps, IStateProps> {
 
   public render(): RenderOutput {
     const status = this.state.status;
-
+    //@ts-ignore
+    const { t } = this.props;
     const {
       creatorProfile,
       daoState,
@@ -114,5 +117,5 @@ class CompetitionCard extends React.Component<IProps, IStateProps> {
     </div>;
   }
 }
-
-export default connect(mapStateToProps)(CompetitionCard);
+//@ts-ignore
+export default connect(mapStateToProps)(withTranslation()(CompetitionCard));

@@ -13,6 +13,8 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import * as css from "./DaoSchemesPage.scss";
 import ProposalSchemeCard from "./ProposalSchemeCard";
 import SimpleSchemeCard from "./SimpleSchemeCard";
+import { withTranslation } from 'react-i18next';
+
 
 const Fade = ({ children, ...props }: any) => (
   <CSSTransition
@@ -46,16 +48,16 @@ class DaoSchemesPage extends React.Component<IProps, null> {
   }
 
   public render() {
+    //@ts-ignore
+    const { t } = this.props;
     const { data } = this.props;
     const dao = this.props.daoState;
     const allSchemes = data;
-    const contributionReward = allSchemes.filter((scheme: Scheme) => scheme.staticState.name === "ContributionReward");
-    const knownSchemes = allSchemes.filter((scheme: Scheme) => scheme.staticState.name !== "ContributionReward" && KNOWN_SCHEME_NAMES.indexOf(scheme.staticState.name) >= 0);
+    console.log("SCHEMES DATA: ", data)
+    // const contributionReward = allSchemes.filter((scheme: Scheme) => scheme.staticState.name === "ContributionReward");
+    const knownSchemes = allSchemes.filter((scheme: Scheme) => scheme.staticState.name !== "UGenericScheme" && scheme.staticState.name !== "ContributionReward" && KNOWN_SCHEME_NAMES.indexOf(scheme.staticState.name) >= 0);
     const unknownSchemes = allSchemes.filter((scheme: Scheme) =>  KNOWN_SCHEME_NAMES.indexOf(scheme.staticState.name) === -1 );
-    const allKnownSchemes = [...contributionReward, ...knownSchemes];
-
-    console.log("SHEMES PAGE ================++> ", allKnownSchemes, this.props);
-
+    const allKnownSchemes = [/* ...contributionReward,*/ ...knownSchemes];
     const schemeCardsHTML = (
       <TransitionGroup>
         { allKnownSchemes.map((scheme: Scheme) => (
@@ -68,10 +70,14 @@ class DaoSchemesPage extends React.Component<IProps, null> {
           </Fade>
         ))
         }
-
-        {!unknownSchemes ? "" :
+  
+        {
+          //@ts-ignore
+        !unknownSchemes ? "" :
           <Fade key={"schemes unknown"}>
-            <UnknownSchemeCard schemes={unknownSchemes} />
+            <UnknownSchemeCard
+            //@ts-ignore
+             schemes={unknownSchemes} />
           </Fade>
         }
       </TransitionGroup>
@@ -80,15 +86,14 @@ class DaoSchemesPage extends React.Component<IProps, null> {
     return (
       <div className={css.wrapper}>
         <BreadcrumbsItem to={"/dao/" + dao.address}>{dao.name}</BreadcrumbsItem>
-
         {/* <Sticky enabled top={50} innerZ={10000}> */}
-        <h2>Applications</h2>
+         <h2>{t("sidebar.applications")}</h2>
         {/* </Sticky> */}
         {(allKnownSchemes.length + unknownSchemes.length) === 0
           ? <div>
             <img src="/assets/images/meditate.svg" />
             <div>
-              No schemes registered
+              {t('schemas.noSchemas')}
             </div>
           </div>
           :
@@ -98,9 +103,11 @@ class DaoSchemesPage extends React.Component<IProps, null> {
     );
   }
 }
+//@ts-ignore
+const DaoSchemaWithTranslation = withTranslation()(DaoSchemesPage)
 
-export default withSubscription({
-  wrappedComponent: DaoSchemesPage,
+const DaoSchemesPageWithSub = withSubscription({
+  wrappedComponent: DaoSchemaWithTranslation,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <span>{props.error.message}</span>,
   checkForUpdate: [],
@@ -109,3 +116,5 @@ export default withSubscription({
     return dao.schemes({ where: { isRegistered: true } }, { fetchAllData: true, subscribe: true });
   },
 });
+//@ts-ignore
+export default DaoSchemesPageWithSub

@@ -7,7 +7,20 @@
 
 
 
+.releaseTime {
+  display: flex;
+  justify-content: center;
+  background: #010B2B;
+  padding: 37px 57px;
+  color: #D8D8D8 !important;
+  font-size: 18px;
+  line-height: 27px;
+  font-family: Montserrat;
+  display: grid;
+  grid-gap: 50px;
+  align-items: center;
 
+}
 
 
 
@@ -25,6 +38,13 @@
     z-index: 99999;
     // height: calc(100% - 100px);
         padding-bottom: 1px;
+
+
+    .ant-statistic {
+      line-height: normal;
+    }
+
+
 
     .header {
         line-height: normal;
@@ -71,7 +91,7 @@
         grid-template-columns: 1fr auto;
         grid-gap: 50px;
         align-items: center;
-        
+
         .description {
           font-size: 18px;
         }
@@ -116,7 +136,7 @@
     }
 
     .content {
-        padding: 47px 57px;
+        padding: 10px 0px;
 
         & > p {
           padding-top: 0;
@@ -125,6 +145,7 @@
           text-align: center;
           max-width: 420px;
           margin: 0 auto 20px auto;
+          font-weight: normal;
         }
 
         .bigInput {
@@ -134,6 +155,7 @@
                 align-items: center;
                 background: #fff;
                 margin-bottom: 15px;
+                position: relative;
 
                 label {
                     background: #E6E7EA;
@@ -155,32 +177,70 @@
                     font-family: Montserrat;
                     font-style: normal;
                     font-weight: 500;
-                    font-size: 44px;
-                    line-height: 54px;
-                    padding: 46px 45px;
+                    font-size: 34px;
+                    line-height: 44px;
+                    padding: 46px 35px;
                     background: #fff;
                     border: 0;
                     width: 100%;
                     box-sizing: border-box;
+
+                    &::placeholder {
+                      font-size: 18px;
+                      // line-height: 44px;
+                      text-transform: none;
+                    }
                 }
+
+                .btnMax {
+                  position: absolute;
+                  right: 35px;
+                  top: 50%;
+                  transform: translateY(-50%);
+
+                  button {
+                    color: #4E5469;
+                    background: none;
+                    border: 1px solid #4E5469;
+                    font-weight: 300;
+                    font-size: 16px;
+                    line-height: 24px;
+                    letter-spacing: 1.61455px;
+                    text-transform: uppercase;
+                    padding: 6px 12px;
+                    border-radius: 50px;
+                    outline: none;
+                  }
+                }
+
         }
 
-        span {
+        .balances {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          grid-gap: 20px;
+          color: #000;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 24px;
+
+          span {
+            &.tokens {
+              line-height: normal;
+            }
             &.holdings {
                 text-align: right;
-                color: #969696;
-                font-weight: 500;
-                font-size: 20px;
-                line-height: 24px;
                 display: block;
 
                 strong {
                     font-weight: bold;
                     color: #000;
-                    padding-left: 14px;
+                    // padding-left: 7px;
                 }
             }
           }
+
+        }
 
       .newInput {
                 display: grid;
@@ -231,7 +291,7 @@
                 font-weight: 500;
                 line-height: 24px;
                 letter-spacing: 1.61455px;
-                text-transform: uppercase; 
+                text-transform: uppercase;
                 padding: 20px 70px;
                 border: 1px solid #4E5469;
                 border-radius: 50px;
@@ -375,6 +435,7 @@
     }
 
     .contributionReward {
+      padding: 20px;
       width: 110px;
       display: inline-block;
       height: calc(100% - 40px);
@@ -471,7 +532,7 @@
     }
 
     label {
-      color: rgba(80, 97, 118, 1);
+      // color: rgba(80, 97, 118, 1);
       display: block;
       width: fit-content;
       font-size: 13px;
@@ -609,11 +670,12 @@
   }
 
   .submitProposal {
+    max-width: 300px;
     // height: 30px;
-    border: none;
+    //border: none;
     display: inline-block;
     margin: 0 5px;
-    font-weight: normal;
+    //font-weight: normal;
     font-size: 13px;
     // padding: 0 25px 2px 25px;
     padding: 16px 50px;
@@ -674,6 +736,7 @@
 }
 
 .contributionReward {
+  padding: 20px;
   // width: 562px;
   overflow-y: auto;
   height: calc(100% - 100px);
@@ -931,7 +994,9 @@ div.description {
 @media(max-width: 768px) {
 
   .createProposalWrapper {
-    width: calc(100% - 30px);
+// width: calc(100% - 30px);
+    width: 100%;
+    max-width: calc(100% - 30px);
     box-shadow: none;
     top: calc(50% - 64px);
     // left: 15px;
@@ -971,6 +1036,15 @@ div.description {
           font-size: 18px;
               padding: 20px 15px;
         }
+
+        .btnMax {
+          right: 15px;
+
+          button {
+                padding: 3px 8px;
+                font-size: 14px;
+          }
+        }
       }
 
       .newInput {
@@ -981,6 +1055,11 @@ div.description {
           font-size: 18px;
               padding: 20px 15px;
         }
+      }
+
+      .balances {
+        font-size: 16px;
+        margin-bottom: 10px;;
       }
     }
   }
@@ -1042,6 +1121,7 @@ div.description {
   }
 
   .contributionReward {
+    padding: 20px;
     width: auto;
   }
 

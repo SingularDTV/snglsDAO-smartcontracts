@@ -13,6 +13,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { showNotification } from "reducers/notifications";
 import * as css from "./VoteButtons.scss";
+import { withTranslation } from 'react-i18next'
 
 interface IExternalProps {
   altStyle?: boolean;
@@ -67,7 +68,8 @@ class VoteButtons extends React.Component<IProps, IState> {
   private closePreVoteModal = (_event: any): void => { this.setState({ showPreVoteModal: false }); }
 
   private handleVoteOnProposal = (): void => {
-    const { currentAccountState, dao, proposal } = this.props;
+    //@ts-ignore
+    const { currentAccountState, dao, proposal, t } = this.props;
 
     this.props.voteOnProposal(dao.address, proposal.id, this.state.currentVote);
 
@@ -79,7 +81,7 @@ class VoteButtons extends React.Component<IProps, IState> {
       "Reputation Voted": fromWei(currentAccountState.reputation),
       "Scheme Address": proposal.scheme.address,
       "Scheme Name": proposal.scheme.name,
-      "Vote Type": this.state.currentVote === IProposalOutcome.Fail ? "Fail" : this.state.currentVote === IProposalOutcome.Pass ? "Pass" : "None",
+      "Vote Type": this.state.currentVote === IProposalOutcome.Fail ? t('proposal.fail') : this.state.currentVote === IProposalOutcome.Pass ? t('proposal.pass') : t('proposal.none') ,
     });
   };
 
@@ -93,6 +95,9 @@ class VoteButtons extends React.Component<IProps, IState> {
       proposal,
       dao,
       expired,
+          //@ts-ignore
+
+      t
     } = this.props;
 
     const votingDisabled = proposal.stage === IProposalStage.ExpiredInQueue ||
@@ -110,16 +115,16 @@ class VoteButtons extends React.Component<IProps, IState> {
      */
     const disabledMessage =
       ((currentVote === IProposalOutcome.Pass) || (currentVote === IProposalOutcome.Fail)) ?
-        "Can't change your vote" :
+        t('proposal.cantChangeYourVOte') :
         (currentAccountState && currentAccountState.reputation.eq(new BN(0))) ?
-          "Requires reputation in this DAO" :
+        t('proposal.requiresReputation')  :
           proposal.stage === IProposalStage.ExpiredInQueue ||
               (proposal.stage === IProposalStage.Boosted && expired) ||
               (proposal.stage === IProposalStage.QuietEndingPeriod && expired)  ||
               (proposal.stage === IProposalStage.Queued && expired) ?
-            "Can't vote on expired proposals" :
+              t('proposal.cantVoteOnExpired')  :
             proposal.stage === IProposalStage.Executed ?
-              `Can't vote on ${proposal.winningOutcome === IProposalOutcome.Pass ? "passed" : "failed"} proposals` : "";
+            t('proposal.cannotVote', {status: proposal.winningOutcome === IProposalOutcome.Pass ? t("proposal.passed") : t("proposal.failed") }) : "";
 
     const voteUpButtonClass = classNames({
       [css.votedFor]: currentVote === IProposalOutcome.Pass,
@@ -144,12 +149,13 @@ class VoteButtons extends React.Component<IProps, IState> {
       <div className={wrapperClass}>
         {this.state.showPreVoteModal ?
           <PreTransactionModal
+          //@ts-ignore
             actionType={this.state.currentVote === IProposalOutcome.Pass ? ActionTypes.VoteUp : ActionTypes.VoteDown}
             action={this.handleVoteOnProposal}
             closeAction={this.closePreVoteModal}
             currentAccount={currentAccountState}
             dao={dao}
-            effectText={<span>Your influence: <strong><Reputation daoName={dao.name} totalReputation={dao.reputationTotalSupply} reputation={currentAccountState.reputation} /></strong></span>}
+            effectText={<span>{t('proposal.yourInfluence')} <strong><Reputation daoName={dao.name} totalReputation={dao.reputationTotalSupply} reputation={currentAccountState.reputation} /></strong></span>}
             parentPage={parentPage}
             proposal={proposal}
           /> : ""
@@ -159,10 +165,10 @@ class VoteButtons extends React.Component<IProps, IState> {
             <div className={css.contextTitle}>
               <div>
                 <span className={css.hasVoted}>
-                You voted
+                {t('proposal.uVoted')}
                 </span>
                 <span className={css.hasNotVoted}>
-                Vote
+                {t('notifications.vote')}
                 </span>
               </div>
             </div>
@@ -172,12 +178,12 @@ class VoteButtons extends React.Component<IProps, IState> {
                   <span className={css.castVoteFor} data-test-id="youVotedFor">
                     <img src="/assets/images/Icon/vote/for-fill-green.svg"/>
                     <br/>
-                 For
+                 {t('proposal.for')}
                   </span>
                   <span className={css.castVoteAgainst}>
                     <img src="/assets/images/Icon/vote/against-btn-fill-red.svg"/>
                     <br/>
-                 Against
+                    {t('proposal.against')}
                   </span>
                 </div>
               </div>
@@ -187,12 +193,12 @@ class VoteButtons extends React.Component<IProps, IState> {
                     <button onClick={this.handleClickVote(1)} className={voteUpButtonClass} data-test-id="voteFor">
                       <img src={`/assets/images/Icon/vote/for-btn-selected${altStyle ? "-w" : ""}.svg`} />
                       <img className={css.buttonLoadingImg} src="/assets/images/Icon/buttonLoadingBlue.gif"/>
-                      <span> For</span>
+                      <span> {t('proposal.for')}</span>
                     </button>
                     <button onClick={this.handleClickVote(2)} className={voteDownButtonClass}>
                       <img src={`/assets/images/Icon/vote/against-btn-selected${altStyle ? "-w" : ""}.svg`}/>
                       <img className={css.buttonLoadingImg} src="/assets/images/Icon/buttonLoadingBlue.gif"/>
-                      <span> Against</span>
+                      <span> {t('proposal.against')}</span>
                     </button>
                   </div>
                   :
@@ -211,12 +217,12 @@ class VoteButtons extends React.Component<IProps, IState> {
                   <button onClick={this.handleClickVote(1)} className={voteUpButtonClass} data-test-id="voteFor">
                     <img src={`/assets/images/Icon/vote/for-btn-selected${altStyle ? "-w" : ""}.svg`} />
                     <img className={css.buttonLoadingImg} src="/assets/images/Icon/buttonLoadingBlue.gif"/>
-                    <span> For</span>
+                    <span> {t('proposal.for')}</span>
                   </button>
                   <button onClick={this.handleClickVote(2)} className={voteDownButtonClass}>
                     <img src={`/assets/images/Icon/vote/against-btn-selected${altStyle ? "-w" : ""}.svg`}/>
                     <img className={css.buttonLoadingImg} src="/assets/images/Icon/buttonLoadingBlue.gif"/>
-                    <span> Against</span>
+                    <span> {t('proposal.against')}</span>
                   </button>
                 </div>
                 :
@@ -227,12 +233,12 @@ class VoteButtons extends React.Component<IProps, IState> {
             </div>
 
             <div className={css.voteRecord}>
-            You voted
+            {t('proposal.uVoted')}
               <span className={css.castVoteFor} data-test-id="youVotedFor">
-              - For
+              - {t('proposal.for')}
               </span>
               <span className={css.castVoteAgainst}>
-              - Against
+              - {t('proposal.against')}
               </span>
             </div>
           </div>
@@ -241,5 +247,5 @@ class VoteButtons extends React.Component<IProps, IState> {
     );
   }
 }
-
-export default connect(null, mapDispatchToProps)(VoteButtons);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(VoteButtons));
