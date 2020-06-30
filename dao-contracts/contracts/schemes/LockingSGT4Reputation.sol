@@ -3,13 +3,13 @@ pragma solidity 0.5.13;
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "../controller/Controller.sol";
-
+import "./Agreement.sol";
 
 /**
  * @title A locker contract
  */
 
-contract MembershipFeeStaking {
+contract LockingSGT4Reputation is Agreement{
     using SafeMath for uint256;
 
     event Release(address indexed _beneficiary, uint256 _amount);
@@ -30,7 +30,7 @@ contract MembershipFeeStaking {
 
     /**
      * @dev release function
-     * @return bool
+     * @return uint256 amount of released tokens/burned reputation
      */
     function release() public returns (uint256 amount) {
         Locker storage locker = lockers[msg.sender];
@@ -47,7 +47,7 @@ contract MembershipFeeStaking {
 
         amount = locker.amount;
         locker.amount = 0;
-
+        totalLocked = totalLocked.sub(amount);
         require(
             Controller(avatar.owner()).burnReputation(
                 amount,
@@ -68,9 +68,11 @@ contract MembershipFeeStaking {
      * @dev lock function
      * @param _amount the amount to lock
      * @param _period the locking period
-     * @return bool
+     * @param _agreementHash is a hash of agreement required to be added to the TX by participants
      */
-    function lock(uint256 _amount, uint256 _period) public {
+    function lock(uint256 _amount, uint256 _period,bytes32 _agreementHash)
+    public
+    onlyAgree(_agreementHash) {
         require(
             _amount > 0,
             "LockingSGT4Reputation: locking amount should be > 0"
@@ -115,18 +117,21 @@ contract MembershipFeeStaking {
 
     /**
      * @dev initialize
+     * @param _avatar the DAO's avatar
      * @param _sgtToken the SGT token address to stake on
      * @param _minLockingPeriod minimum locking period allowed.
      */
     function initialize(
         Avatar _avatar,
         IERC20 _sgtToken,
-        uint256 _minLockingPeriod
+        uint256 _minLockingPeriod,
+        bytes32 _agreementHash
     ) public {
         require(sgtToken == IERC20(0), "can be called only one time");
         require(_sgtToken != IERC20(0), "token cannot be zero");
         avatar = _avatar;
         minLockingPeriod = _minLockingPeriod;
         sgtToken = _sgtToken;
+        super.setAgreementHash(_agreementHash);
     }
 }

@@ -2,6 +2,8 @@ import BN = require("bn.js");
 import { formatTokens } from "lib/util";
 import * as React from "react";
 import * as css from "./Account.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IProps {
   accountAddress: string;
@@ -9,7 +11,7 @@ interface IProps {
   tokenSymbol: string;
 }
 
-export default class Balance extends React.Component<IProps, null>  {
+class Balance extends React.Component<IProps, null>  {
 
   constructor(props: IProps) {
     super(props);
@@ -25,3 +27,5 @@ export default class Balance extends React.Component<IProps, null>  {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(Balance)

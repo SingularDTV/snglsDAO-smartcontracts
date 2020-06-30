@@ -7,6 +7,7 @@ import { Address, ISchemeState } from "@daostack/client";
 import { schemeName } from "lib/schemeUtils";
 import { getNetworkName } from "lib/util";
 import * as css from "./SchemeInfo.scss";
+import { withTranslation } from 'react-i18next';
 
 const ReactMarkdown = require("react-markdown");
 
@@ -21,7 +22,7 @@ interface IState {
   totalResults: number;
 }
 
-export default class SchemeOpenBounty extends React.Component<IProps, IState> {
+class SchemeOpenBounty extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
@@ -79,6 +80,8 @@ export default class SchemeOpenBounty extends React.Component<IProps, IState> {
   }
 
   public render() {
+    //@ts-ignore
+    const { t } = this.props;
     const { /*daoAvatarAddress,*/ scheme } = this.props;
     const createCard = () => {
 
@@ -129,5 +132,7 @@ export default class SchemeOpenBounty extends React.Component<IProps, IState> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(SchemeOpenBounty)
 
 

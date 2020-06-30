@@ -4,6 +4,8 @@ import { GenericSchemeInfo } from "genericSchemeRegistry";
 import { linkToEtherScan } from "lib/util";
 import * as React from "react";
 import * as css from "./ProposalSummary.scss";
+import { withTranslation } from 'react-i18next';
+
 
 const web3 = require("web3");
 
@@ -14,9 +16,11 @@ interface IProps {
   transactionModal?: boolean;
 }
 
-export default class ProposalSummaryStandardBounties extends React.Component<IProps, null> {
+class ProposalSummaryStandardBounties extends React.Component<IProps, null> {
   
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
 
     const { proposal, detailView, genericSchemeInfo, transactionModal } = this.props;
     let decodedCallData: any;
@@ -358,3 +362,5 @@ export default class ProposalSummaryStandardBounties extends React.Component<IPr
     }
   }
 }
+//@ts-ignore
+export default withTranslation()(ProposalSummaryStandardBounties)

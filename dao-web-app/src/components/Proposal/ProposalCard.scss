@@ -35,7 +35,7 @@
 
 .proposal {
   // width: 418px;
-  width: calc(100% - 40px);
+  // width: calc(100% - 40px);
   // border-radius: 15px;
   // background-color: $white;
   margin: 20px;
@@ -47,6 +47,10 @@
   z-index: 0;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.05);
+
+  a {
+    color: #fff;
+  }
 
   // &:before {
   // position: absolute;
@@ -92,7 +96,8 @@
     display: block;
     font-weight: $normal;
     font-size: 11px;
-    color: $black-halftone;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
 
@@ -212,6 +217,10 @@
     float: right;
     text-align: center;
 
+    .votingDisabled {
+      color: #000;
+    }
+
     .menuIcon {
       width: 18px;
       height: 18px;
@@ -245,6 +254,7 @@
       transition: all .25s ease;
       z-index: 100;
       visibility: hidden;
+      color: #000;
 
       button {
         &.FollowButton {
@@ -255,6 +265,14 @@
       &.leftMenu {
         left: -240px;
       }
+
+      .followButton {
+        button {
+          width: 100%;
+          padding: 14px 0;
+        }
+      }
+
     }
 
     &:hover {
@@ -293,7 +311,7 @@
 .createdBy {
   font-size: $small;
   color: $black-thirdtone;
-  margin: 15px 10px 5px 13px;
+  margin: 24px 10px 5px 13px;
   position: relative;
   left: 7px;
 }
@@ -303,9 +321,15 @@
   padding-bottom: 12px;
 }
 
+@media (min-width: 992px) {
+  .proposal {
+    width: calc(100% - 40px);
+  }
+}
+
 @media only screen and (max-width: 425px) {
   .proposal {
-    width: 100%;
+   width: calc(100% - 40px);
   }
 
   .cardTop .contextMenu {

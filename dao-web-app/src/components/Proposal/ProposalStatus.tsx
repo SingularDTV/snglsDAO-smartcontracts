@@ -3,14 +3,18 @@ import classNames from "classnames";
 import * as React from "react";
 import { proposalExpired, proposalFailed, proposalPassed } from "lib/proposalHelpers";
 import * as css from "./ProposalStatus.scss";
+import { withTranslation } from 'react-i18next';
 
-export default class ProposalStatus extends React.Component<IProps, null> {
+
+class ProposalStatus extends React.Component<IProps, null> {
 
   constructor(props: IProps) {
     super(props);
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       proposalState,
     } = this.props;
@@ -42,7 +46,7 @@ export default class ProposalStatus extends React.Component<IProps, null> {
                 <div className={classNames({
                   [css.status]: true,
                   [css.passed]: true,
-                })}><img src="/assets/images/Icon/vote/for-fill-green.svg" />Passed</div> :
+                })}><img src="/assets/images/Icon/vote/for-fill-green.svg" />{t("proposa.pass")}</div> :
 
                 (failedByVote) ?
                   <div className={classNames({
@@ -82,3 +86,5 @@ export default class ProposalStatus extends React.Component<IProps, null> {
 interface IProps {
   proposalState: IProposalState;
 }
+//@ts-ignore
+export default withTranslation()(ProposalStatus)

@@ -5,6 +5,7 @@ import { IProviderInfo } from "web3modal/lib/helpers/types";
 import { RetryLink } from "apollo-link-retry";
 import { Address, Arc } from "@daostack/client";
 import Web3Modal, { getProviderInfo } from "web3modal";
+
 import { Observable } from "rxjs";
 
 const Web3 = require("web3");
@@ -144,6 +145,7 @@ export async function initializeArc(provider?: any): Promise<boolean> {
     let contractInfos;
     if (USE_CONTRACTINFOS_CACHE) {
       contractInfos = require(`data/contractInfos-${targetedNetwork()}.json`);
+      console.log("contractInfos: ", contractInfos)
       arc.setContractInfos(contractInfos);
     } else {
       try {
@@ -153,6 +155,7 @@ export async function initializeArc(provider?: any): Promise<boolean> {
         console.error(`Error fetching contractinfos: ${err.message}`);
       }
     }
+    console.log("Contracts info: ", contractInfos)
     success = !!contractInfos;
 
     if (success) {
@@ -256,6 +259,7 @@ export function getCachedAccount(): Address | null {
 export interface IEnableWalletProviderParams {
   suppressNotifyOnSuccess?: boolean;
   showNotification: any;
+  onSuccess?: () => void;
 }
 
 function inTesting(): boolean {
@@ -450,6 +454,7 @@ export function getAccountIsEnabled(): boolean {
  * @returns Promise of true on success
  */
 export async function enableWalletProvider(options: IEnableWalletProviderParams): Promise<boolean> {
+  const { onSuccess } = options;
   try {
 
     if (inTesting()) {
@@ -461,8 +466,9 @@ export async function enableWalletProvider(options: IEnableWalletProviderParams)
       selectedProvider = new Web3(settings.ganache.web3Provider);
       return true;
     }
-
+    console.log('test=======')
     if (!selectedProvider) {
+      console.log('if')
       await enableWeb3Provider();
       if (!selectedProvider) {
         // something went wrong somewhere
@@ -473,9 +479,11 @@ export async function enableWalletProvider(options: IEnableWalletProviderParams)
        */
       if (!options.suppressNotifyOnSuccess && options.showNotification) {
         const web3ProviderInfo = getWeb3ProviderInfo();
+        console.log('asdasdasdasd scdasdcqwecqsdacdc')
         options.showNotification(NotificationStatus.Success, `Connected to ${web3ProviderInfo.name}`);
       }
     } else {
+      console.log('else')
       /**
        * Bail if provider is not correct for the current platform. The user might have redirected
        * Metamask to a different network without us knowing.  Just in that case, check here.
@@ -491,8 +499,9 @@ export async function enableWalletProvider(options: IEnableWalletProviderParams)
         throw new Error(ex);
       }
     }
-
+    onSuccess && onSuccess()
   } catch(err) {
+    console.log('catch')
     let msg: string;
     msg = err ? err.message : "Unable to connect to the ethereum provider";
     if (msg.match(/response has no error or result for request/g)) {

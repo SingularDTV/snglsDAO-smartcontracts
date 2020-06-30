@@ -1,6 +1,6 @@
 import { IDAOState, Member } from "@daostack/client";
 import { getProfilesForAddresses } from "actions/profilesActions";
-import { getArc } from "arc";
+import { getArc, getArcSettings } from "arc";
 import CreateProposalPage from "components/Proposal/Create/CreateProposalPage";
 import ProposalDetailsPage from "components/Proposal/ProposalDetailsPage";
 import SchemeContainer from "components/Scheme/SchemeContainer";
@@ -18,7 +18,8 @@ import { showNotification } from "reducers/notifications";
 import { IProfileState } from "reducers/profilesReducer";
 import DetailsPageRouter from "components/Scheme/ContributionRewardExtRewarders/DetailsPageRouter";
 import { combineLatest, Subscription } from "rxjs";
-import DaoDiscussionPage from "./DaoDiscussionPage";
+// import DaoDiscussionPage from "./DaoDiscussionPage";
+import ThreeBoxTreadPage from "./ThreeBoxTreadPage";
 import DaoSchemesPage from "./DaoSchemesPage";
 import DaoHistoryPage from "./DaoHistoryPage";
 import DaoMembersPage from "./DaoMembersPage";
@@ -26,6 +27,8 @@ import DaoDashboard from "./DaoDashboard";
 import DaoMembershipPage from "./DaoMembershipPage"
 import DaoJoinPage from "./DaoJoin"
 import * as css from "./Dao.scss";
+import { withTranslation } from 'react-i18next';
+
 
 type IExternalProps = RouteComponentProps<any>;
 
@@ -43,13 +46,11 @@ interface IDispatchProps {
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState, Member[]]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
-  console.log('ffeeffee', ownProps, state);
-  
   return {
     ...ownProps,
     currentAccountAddress: state.web3.currentAccountAddress,
     currentAccountProfile: state.profiles[state.web3.currentAccountAddress],
-    daoAvatarAddress: "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", // ownProps.match.params.daoAvatarAddress, //"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d", //
+    daoAvatarAddress: getArcSettings().daoAvatarContractAddress
   };
 };
 
@@ -63,97 +64,19 @@ class DaoContainer extends React.Component<IProps, null> {
   public subscription: Subscription;
 
   public async componentDidMount() {
-    const { data } = this.props;
+    // const { data } = this.props;
     // const search = this.state.search.length > 2 ? this.state.search.toLowerCase() : "";
-    console.log("daos render func  ", data);
-    let allDAOs = data[0];
-
-    const arc = getArc();
-    const feeContract = new arc.web3.eth.Contract(
-        [
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "listingFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "membershipFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "transactionFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          },
-          {
-            "constant": true,
-            "inputs": [],
-            "name": "validationFee",
-            "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-              }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-          }
-        ],
-      "0x0fbc1939BFF4550b8596c668cb2B8fdcA1C73305"
-    );
-
-    console.log("Hallo niggas")
-
-    console.log("oooooooooooooooooooooo: ", await feeContract.methods.transactionFee().call());
-    console.log("oooooooooooooooooooooo: ", await feeContract.methods.listingFee().call());
-    console.log("oooooooooooooooooooooo: ", await feeContract.methods.transactionFee().call());
-    console.log("oooooooooooooooooooooo: ", await feeContract.methods.validationFee().call());
-    
-
-    console.log(allDAOs)
+    // let allDAOs = data[0];
     // TODO: use this once 3box fixes Box.getProfiles
-    //this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
+    this.props.getProfilesForAddresses(this.props.data[1].map((member) => member.staticState.address));
   }
-  
+
   private daoJoinRoute = (routeProps: any) => <DaoJoinPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembershipRoute = (routeProps: any) => <DaoMembershipPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoHistoryRoute = (routeProps: any) => <DaoHistoryPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} />;
-  private daoDiscussionRoute = (routeProps: any) => <DaoDiscussionPage {...routeProps} dao={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} currentAccountProfile={this.props.currentAccountProfile} />;
-  private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} daoState={this.props.data[0]} />;
+  private threeBoxTreadPage = (routeProps: any) => <ThreeBoxTreadPage {...routeProps} dao={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} currentAccountProfile={this.props.currentAccountProfile} />;
+  private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} daoState={this.props.data[0]} currentAddress={this.props.currentAccountAddress}/>;
   private daoProposalRoute = (routeProps: any) =>
     <ProposalDetailsPage {...routeProps}
       currentAccountAddress={this.props.currentAccountAddress}
@@ -169,25 +92,21 @@ class DaoContainer extends React.Component<IProps, null> {
 
   private schemeRoute = (routeProps: any) => <SchemeContainer {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoSchemesRoute = (routeProps: any) => <DaoSchemesPage {...routeProps} daoState={this.props.data[0]} />;
-  
+
   private createProposalModalRoute = (route: any) => `/dao/scheme/${route.params.schemeId}/`;
   private daoJoinModalRoute = (route: any) => `/dao/dashboard/`;
 
 
   public render(): RenderOutput {
-    let searchString = "";    
-    const arc = getArc();
+    //@ts-ignore
+    const { t } = this.props;
 
-    const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
-    
-    // const snglsDao = [foundDaos.find(element => element.id = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d")];
 
-    console.log("MEMEME ", foundDaos);
+    // const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
+
+    // console.log("MEMEME ", foundDaos);
 
     const daoState = this.props.data[0];
-
-    console.log(daoState.name)
-    console.log("DaoContainer render: ", this.createProposalModalRoute, this.props);
 
     return (
       <div className={css.outer}>
@@ -206,7 +125,7 @@ class DaoContainer extends React.Component<IProps, null> {
             <Route exact path="/dao/members"
               render={this.daoMembersRoute} />
             <Route exact path="/dao/discussion"
-              render={this.daoDiscussionRoute} />
+              render={this.threeBoxTreadPage} />
 
             <Route exact path="/dao/proposal/:proposalId"
               render={this.daoProposalRoute}
@@ -219,17 +138,17 @@ class DaoContainer extends React.Component<IProps, null> {
               render={this.schemeRoute} />
 
 
-            <Route exact path="/dao/plugins" 
+            <Route exact path="/dao/applications"
               render={this.daoSchemesRoute} />
-            
+
             <Route exact path="/dao/dashboard"
               render={this.daoDashboardRoute} />
 
             <Route exact path="/dao/membership"
               render={this.daoMembershipRoute} />
 
-            <Route exact path="/dao/dashboard/join"
-              render={this.daoJoinRoute} />
+            {/* <Route exact path="/dao/dashboard/join"
+              render={this.daoJoinRoute} /> */}
 
             <Redirect exact from="/dao" to="/dao/dashboard"></Redirect>
 
@@ -238,7 +157,7 @@ class DaoContainer extends React.Component<IProps, null> {
           <ModalRoute
             path="/dao/dashboard/join"
             parentPath={this.daoJoinModalRoute}
-            component={DaoJoinPage}
+            component={this.daoJoinRoute}
           />
 
           <ModalRoute
@@ -260,7 +179,7 @@ const SubscribedDaoContainer = withSubscription({
   checkForUpdate: ["daoAvatarAddress"],
   createObservable: (props: IExternalProps) => {
     const arc = getArc();
-    const daoAddress = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";//props.match.params.daoAvatarAddress; // "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"; // 
+    const daoAddress = getArcSettings().daoAvatarContractAddress;
     const dao =  arc.dao(daoAddress);
     const observable = combineLatest(
       dao.state({ subscribe: true, fetchAllData: true }), // DAO state
@@ -269,5 +188,5 @@ const SubscribedDaoContainer = withSubscription({
     return observable;
   },
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedDaoContainer);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedDaoContainer));

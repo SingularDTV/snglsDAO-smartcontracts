@@ -12,6 +12,8 @@ import { closingTime } from "lib/proposalHelpers";
 import { IProfileState } from "reducers/profilesReducer";
 import { combineLatest, concat, of, Observable } from "rxjs";
 import { map, mergeMap } from "rxjs/operators";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./ProposalCard.scss";
 
@@ -89,6 +91,8 @@ class ProposalData extends React.Component<IProps, IState> {
   }
 
   render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const [proposal, votes, stakes, rewards, member, daoEthBalance, currentAccountGenBalance, currentAccountGenAllowance] = this.props.data;
     const { beneficiaryProfile, creatorProfile } = this.props;
 
@@ -110,7 +114,7 @@ class ProposalData extends React.Component<IProps, IState> {
 
 const ConnectedProposalData = connect(mapStateToProps, null)(ProposalData);
 
-export default withSubscription({
+const ConnectedProposalDataWithSub = withSubscription({
   wrappedComponent: ConnectedProposalData,
   // TODO: we might want a different one for each child component, how to pass in to here?
   loadingComponent: (props) => <div className={css.loading}>Loading proposal {props.proposalId.substr(0, 6)} ...</div>,
@@ -164,3 +168,5 @@ export default withSubscription({
     }
   },
 });
+//@ts-ignore
+export default withTranslation()(ConnectedProposalDataWithSub)

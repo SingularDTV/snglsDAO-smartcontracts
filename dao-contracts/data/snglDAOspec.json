@@ -1,68 +1,41 @@
 {
-    "orgName": "Singularity DAO",
-    "tokenName": "Singularity governance token",
+    "orgName": "snglsDAO",
+    "tokenName": "snglsDAO Governance Token",
     "tokenSymbol": "SGT",
+    "tokenAddress": "0x15A9b43067719376115242B347d2B35aF4aaf386",
+    "daoCreatorAddr": "0xa370F508f3241a5675480A9c9924E642A74245Cb",
     "SchemeRegistrar": [
         {
             "voteRegisterParams": 1,
             "voteRemoveParams": 1
         }
     ],
-    "StandAloneContracts": [
+    "UGenericScheme": [
         {
-            "name": "Fee",
-            "fromArc": false,
-            "runFunctions": [
-                {
-                    "functionName": "transferOwnership",
-                    "params": [
-                        "AvatarAddress"
-                    ]
-                }
-            ],
-            "constructor": true,
-            "params": [
-                1,
-                1,
-                1,
-                1
-            ]
-        },
+            "targetContract": "0x2c3721F4DAb79abc020d54EC34C21a4B90287D00",
+            "voteParams": 2
+        }
+    ],
+    "StandAloneContracts": [
         {
             "name": "MembershipFeeStaking",
             "fromArc": false,
             "constructor": false,
             "params": [
-                "TokenAddress",
+                "0x83928232e2103A4790752792fa6608bf69ba72B7",
                 "0"
             ]
         }
     ],
     "CustomSchemes": [
         {
-            "name": "GenericScheme",
-            "schemeName": "GenericScheme",
-            "isUniversal": false,
-            "params": [
-                "GenesisProtocolAddress",
-                {
-                    "voteParams": 2
-                },
-                {
-                    "StandAloneContract": 0
-                }
-            ],
-            "permissions": "0x00000010",
-            "alias": "GenericSchemeFee",
-            "fromArc": false
-        },
-        {
             "name": "LockingSGT4Reputation",
             "schemeName": "LockingSGT4Reputation",
             "isUniversal": false,
             "params": [
                 "TokenAddress",
-                "0"
+                "0",
+                "0xd50373474f1f6052760750fcc31bb3ed681c5c1edb8d7ecda12eb637af61220f"
             ],
             "permissions": "0x00000010",
             "alias": "LockingSGT4Reputation",
@@ -91,7 +64,7 @@
             "queuedVotePeriodLimit": 3600,
             "queuedVoteRequiredPercentage": 50,
             "preBoostedVotePeriodLimit": 600,
-            "proposingRepReward": 5000,
+            "proposingRepReward": 0,
             "quietEndingPeriod": 1800,
             "thresholdConst": 1200,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
@@ -105,7 +78,7 @@
             "queuedVotePeriodLimit": 3600,
             "queuedVoteRequiredPercentage": 50,
             "preBoostedVotePeriodLimit": 600,
-            "proposingRepReward": 10000,
+            "proposingRepReward": 0,
             "quietEndingPeriod": 1800,
             "thresholdConst": 1300,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
@@ -119,7 +92,7 @@
             "queuedVotePeriodLimit": 3600,
             "queuedVoteRequiredPercentage": 50,
             "preBoostedVotePeriodLimit": 600,
-            "proposingRepReward": 100,
+            "proposingRepReward": 0,
             "quietEndingPeriod": 1800,
             "thresholdConst": 1200,
             "voteOnBehalf": "0x0000000000000000000000000000000000000000",
@@ -129,26 +102,11 @@
     ],
     "schemes": {
         "ContributionReward": false,
-        "SchemeRegistrar": true
+        "SchemeRegistrar": true,
+        "UGenericScheme": true
     },
     "unregisterOwner": true,
     "useDaoCreator": true,
     "useUController": false,
-    "founders": [
-        {
-            "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
-            "tokens": 1000,
-            "reputation": 0
-        },
-        {
-            "address": "0x3819a7547B9eC89B74bE1035BfE33c1fDD871EC0",
-            "tokens": 900,
-            "reputation": 0
-        },
-        {
-            "address": "0x1D21686ae41be46f34eCDC0879577FC3781EB433",
-            "tokens": 800,
-            "reputation": 0
-        }
-    ]
+    "founders": []
 }

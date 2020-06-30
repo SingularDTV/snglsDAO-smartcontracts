@@ -2,6 +2,8 @@ import { IProposalState } from "@daostack/client";
 import classNames from "classnames";
 import { formatTokens, fromWei } from "lib/util";
 import * as React from "react";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./StakeGraph.scss";
 
@@ -11,9 +13,11 @@ interface IProps {
   proposal: IProposalState;
 }
 
-export default class StakeGraph extends React.Component<IProps, null> {
+class StakeGraph extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const {
       detailView,
       historyView,
@@ -46,7 +50,7 @@ export default class StakeGraph extends React.Component<IProps, null> {
               <div className={css.stakesForTitle}>
               <img className={css.defaultIcon} src="/assets/images/Icon/v-small-line.svg"/>
               <img className={css.detailIcon} src="/assets/images/Icon/v-small.svg"/>
-                <b>{formatTokens(proposal.stakesFor)} Pass</b>
+                <b>{formatTokens(proposal.stakesFor)} {t('proposal.pass')}</b>
               </div>
               <div className={css.stakesForLine}><span style={{ width: passWidth + "%" }}></span></div>
             </div>
@@ -54,7 +58,7 @@ export default class StakeGraph extends React.Component<IProps, null> {
               <div className={css.stakesAgainstTitle}>
               <img className={css.defaultIcon} src="/assets/images/Icon/x-small-line.svg"/>
               <img className={css.detailIcon} src="/assets/images/Icon/x-small.svg"/>
-                <b>{formatTokens(proposal.stakesAgainst)} Fail</b>
+                <b>{formatTokens(proposal.stakesAgainst)} {t('proposal.fail')}</b>
               </div>
               <div className={css.stakesAgainstLine}><span style={{ width: failWidth + "%" }}></span></div>
             </div>
@@ -74,3 +78,5 @@ export default class StakeGraph extends React.Component<IProps, null> {
     );
   }
 }
+//@ts-ignore
+export default withTranslation()(StakeGraph)

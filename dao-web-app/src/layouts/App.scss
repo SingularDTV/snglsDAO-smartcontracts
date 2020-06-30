@@ -1,6 +1,6 @@
 $header-height: 100px;
 
-
+//@import '~antd/dist/antd.css';
 // Add google fonts
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -51,8 +51,8 @@ body {
 
 h2 {
     font-family: TransatBold;
-    font-size: 50px;
-    line-height: 60px;
+    font-size: 42px;
+    line-height: 52px;
     letter-spacing: 0.2px;
     text-transform: uppercase;
     margin: 0;
@@ -77,6 +77,11 @@ h4 {
     margin: 0;
 }
 
+
+.menuOpen {
+  line-height: normal;
+}
+
 .outer {
   width: 100%;
   height: 100%;
@@ -88,7 +93,7 @@ h4 {
   z-index: 100;
   position: relative;
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .sidebarWrapper {
@@ -154,7 +159,7 @@ h4 {
   img {
     height: 12px;
     position: relative;
-    top: 2px;
+    top: -2px;
     padding-left: 8px;
   }
 }
@@ -169,7 +174,7 @@ h4 {
 }
 
 .header {
-  width: calc(100% - 140px);
+  width: 100%;
   position: fixed;
   vertical-align: middle;
   background-color: $navy;
@@ -213,7 +218,7 @@ h4 {
             z-index: 100;
             height: 46px;
             transition: all 0.25s ease;
-            
+
             &.desktop {
                 display: block;
             }
@@ -329,7 +334,7 @@ h4 {
       z-index: 100;
       color: rgba(78, 97, 118, 1);
       background-color: rgba(252, 253, 255, 1);
-      border-radius: 0 0 8px 8px;
+      border-radius: 4px;
       box-shadow: 0 2px 16px 0 rgba(133, 168, 208, 0.27);
 
       .walletImage {
@@ -350,7 +355,7 @@ h4 {
         position: relative;
         padding-bottom: 5px;
         border-bottom: 1px solid rgba(229, 235, 242, 1);
-        padding: 25px;
+        padding: 15px;
 
         .walletImage {
           &.greyscale img {
@@ -363,7 +368,7 @@ h4 {
 
           a {
             padding: 5px 0 0 15px;
-            color: rgba(1, 112, 255, 1);
+            color: #010b2b;
             font-size: 11px;
             font-weight: bold;
             font-family: "Open Sans";
@@ -432,7 +437,7 @@ h4 {
       }
 
       .copyAddress {
-        padding: 2px 0 0 15px;
+        padding: 2px 0 0 18px;
         position: relative;
         overflow: hidden;
 
@@ -487,7 +492,7 @@ h4 {
 
       .logoutButtonContainer {
         padding-left: 2px;
-        padding-right: 17px;
+        padding-right: 15px;
         padding-top: 15px;
         padding-bottom: 18px;
         text-align: right;
@@ -531,7 +536,8 @@ h4 {
         display: inline-block;
 
         .text {
-          color: $accent-1;
+          // color: $accent-1;
+          color: #010b2b;
           white-space: nowrap;
           cursor: pointer;
           display: inline-block;
@@ -548,8 +554,6 @@ h4 {
   }
 
   .accountInfoContainer:hover {
-    background-color: rgba(10, 28, 61, 1);
-
     + .wallet {
       transform: scaleY(1);
     }
@@ -596,7 +600,11 @@ h4 {
 
     &.noAccount {
       margin-right: 20px;
-      opacity: 0.5;
+      opacity: 0.7;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
@@ -763,6 +771,8 @@ h4 {
     &.navigation {
         text-align: left;
         display: inline-block;
+        position: relative;
+        top: 3px;
         ul {
             list-style: none;
             padding: 0;
@@ -774,6 +784,15 @@ h4 {
                 padding: 10px 20px;
                 position: relative;
 
+                span {
+                  font-size: 16px;
+                  line-height: 24px;
+                  font-family: 'TransatBold';
+                  padding: 0px 10px;
+                  transition: 0.2s;
+                  cursor: pointer;
+                }
+
                 a {
                     // font-weight: 500;
                     font-size: 16px;
@@ -781,15 +800,29 @@ h4 {
                     font-family: 'TransatBold';
                     padding: 3px 10px;
                     transition: 0.2s;
+
+                    .gitIcon {
+                        fill: #fff;
+                        width: 16px;
+                        height: 16px;
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin-top: -2px;
+                        margin-right: 3px;
+                        -webkit-transition: 0.2s;
+                        -moz-transition: 0.2s;
+                        transition: 0.2s;
+                    }
+
                 }
 
-                ul {
+                & > ul {
                     display: none;
                     position: absolute;
                     background-color: #19264B;
                     width: 100%;
                     // min-width: 200px;
-                    max-width: 200px;
+                    max-width: 220px;
                     left: 50%;
                     transform: translateX(-50%);
                     border-radius: 5px;
@@ -805,9 +838,48 @@ h4 {
                       a {
                         color: #fff;
                         font-family: 'TransatBold';
+                        padding: 1px 7px;
 
                         &:hover {
                           color: #fff9;
+                        }
+
+                        & > ul {
+                          position: absolute;
+                          display: none;
+                        }
+
+                      }
+
+                      &.submenu {
+                        & > a, & > span {
+                          display: block;
+                          &:before {
+                            content: '';
+                            position: absolute;
+                            right: 4px;
+                            top: 14px;
+                            display: block;
+                            border-left: 4px solid #ffffffbd;
+                            border-bottom: 3px solid #fff0;
+                            border-top: 3px solid #fff0;
+                            background: none;
+                            width: auto;
+                            height: auto;
+                            color: #fff;
+                          }
+                        }
+
+                        ul {
+                          left: 100%;
+                          transform: translateX(0);
+                          top: 0;
+                          border-radius: 0 8px 8px 8px;
+                          padding: 0;
+                          background: #2e3c63;
+                          min-width: 120px;
+                          width: auto;
+                          box-shadow: none;
                         }
                       }
 
@@ -818,9 +890,13 @@ h4 {
                 }
 
                 &.submenu {
-                  & > a {
+                  position: relative;
+                  & > a, & > span {
                     position: relative;
                     padding-right: 18px;
+                    color: #fff;
+                    opacity: 1;
+                    padding-left: 0;
 
                     &:before {
                       position: absolute;
@@ -835,11 +911,38 @@ h4 {
                   }
 
                   &:hover {
-                    ul {
+                    & > ul {
                       display: grid;
                     }
                   }
                 }
+
+              &.langSelector {
+                min-width: 96px;
+                position: relative;
+                transform: translateY(11px);
+                padding: 0;
+
+                .menu__link {
+                  display: block;
+                  background: #D40D26;
+                  box-shadow: 0 0 20px #e4112a;
+                  border-radius: 30px;
+                  padding: 6px 18px;
+                  top: -6px;
+
+
+                  &:before {
+                    right: 18px;
+                  }
+                }
+
+                & > ul {
+                  max-width: 84px;
+                }
+              }
+
+
             }
         }
     }
@@ -862,6 +965,33 @@ h4 {
   display: none;
 }
 
+.sidebarToggle {
+  display: none;
+  z-index: 999999;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  color: #fff;
+  background: #101e42d6;
+  width: 42px;
+  height: 42px;
+  line-height: 42px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &.open {
+    background: #EFEFEF;
+  }
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 
 
 
@@ -877,7 +1007,6 @@ h4 {
 @media (max-width: 1580px) {
   .header {
     padding: 0 48px;
-    width: calc(100% - 96px);
   }
 }
 
@@ -890,6 +1019,10 @@ h4 {
                     ul {
                         li {
                             padding: 10px 15px;
+
+                            &.langSelector {
+                              padding: 0;
+                            }
                         }
                     }
                 }
@@ -941,11 +1074,71 @@ h4 {
 @media (max-width: 1024px) {
     .header {
         .topInfo {
-            & > div {
+              position: initial;
+
+              & > div {
                 &.navigation {
-                    display: none;
-                }
-            }
+                  position: absolute;
+                  right: 0;
+                  left: 0;
+                  top: 100%;
+                  background-color: #010B2B;
+                  padding: 15px;
+                  transform: translateX(100%);
+                  opacity: 0;
+                      transition: 0.2s;
+
+                  & > ul {
+                    & > li {
+                      float: none;
+                      padding-left: 0;
+                      padding-right: 0;
+
+                      & > a {
+                        color: #fff;
+                        padding-left: 0;
+
+                        &:hover {
+                          color: #D40D26;
+
+                          &:before {
+                              background: url(/assets/images/Icon/nav_arrow_hover.svg) no-repeat;
+                          }
+                        }
+                      }
+
+                      & > ul {
+                        position: relative;
+                        margin-top: 5px;
+                        max-width: 100%;
+
+                        & > li {
+                          &.submenu {
+                            & > a {
+                              &:before {
+                                   transform: rotate(90deg);
+                              }
+                            }
+                          }
+                          & > ul {
+                            position: relative;
+                            margin-top: 5px;
+                            max-width: 100%;
+                            left: 0;
+                            border-radius: 0;
+                            margin-bottom: -4px;
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  &.menuOpen {
+                    transform: translateX(0%);
+                    opacity: 1;
+                  }
+              }
+              }
         }
     }
   .modalBody {
@@ -973,6 +1166,8 @@ h4 {
   bottom: 0px;
   z-index: 999999;
   display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
 
   .cookieDisclaimer {
     padding: 25px;
@@ -1010,19 +1205,21 @@ h4 {
       display: inline-block;
       white-space: nowrap;
 
-      a.blueButton {
+      a.redButton {
         position: relative;
         top: 12px;
         height: 30px;
         line-height: 30px;
         font-size: 13px;
         color: white;
-        background-color: rgba(5, 118, 255, 1);
+        background-color: #D40D26;
         transition: all 0.25s ease;
         border-radius: 15px;
         display: inline-block;
         padding: 0 30px;
-        font-weight: bold;
+        text-transform: uppercase; 
+        letter-spacing: 1.61455px;
+        box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7); 
         cursor: pointer;
 
         img {
@@ -1048,6 +1245,20 @@ h4 {
 
 
 @media (max-width: 992px) {
+  .sidebarWrapper {
+    .sticky-outer-wrapper {
+      .sticky-inner-wrapper {
+        transform: none;
+      }
+    }
+  }
+    .sidebarToggle {
+        display: block;
+
+      img {
+          display: block;
+      }
+    }
     .header {
         .menuToggle {
             display: block;
@@ -1075,9 +1286,7 @@ h4 {
 
     .withDAO .sidebarWrapper {
         z-index: 1000;
-        // height: 100%;
         width: 100%;
-        // position: fixed;
     }
 
 
@@ -1132,7 +1341,7 @@ h4 {
     .header {
         height: 64px;
         padding: 0 15px;
-        width: calc(100% - 30px);
+        // width: calc(100% - 30px);
         grid-gap: 15px;
 
         .accountInfo {
@@ -1150,8 +1359,8 @@ h4 {
 
     .web3ProviderLogin {
       button {
-        padding: 0;
-        width: 30px;
+        padding: 0 11px;
+        // width: 30px;
         text-align: center;
       }
     }

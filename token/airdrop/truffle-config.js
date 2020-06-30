@@ -18,7 +18,9 @@
  *
  */
 const HDWalletProvider = require('truffle-hdwallet-provider');
-
+const Web3 = require("web3");
+const rinkebyWSSProvider = new Web3.providers.WebsocketProvider('wss://rinkeby.infura.io/ws/v3/a0bb216866fa4c4fa318eaddffc02eb6');
+const mainnetWSSProvider = new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws/v3/a0bb216866fa4c4fa318eaddffc02eb6');
 // const fs = require('fs');
 // const {
 //   mnemonic
@@ -64,9 +66,18 @@ module.exports = {
 
     rinkeby: {
       // provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/a0bb216866fa4c4fa318eaddffc02eb6`),
-      provider: () => new HDWalletProvider("dumb denial cover ski deer local chaos recipe remove old time copper", 'https://rinkeby.infura.io/v3/ef306a43234747eb9c087e5301ed9363'),
+      provider: () => new HDWalletProvider("dumb denial cover ski deer local chaos recipe remove old time copper", rinkebyWSSProvider),
       network_id: 4,
-      gas: 10000000
+      gas: 10000000,
+      networkCheckTimeout: 100000
+    },
+    mainnet: {
+      // provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/a0bb216866fa4c4fa318eaddffc02eb6`),
+      provider: () => new HDWalletProvider("dumb denial cover ski deer local chaos recipe remove old time copper", mainnetWSSProvider),
+      network_id: 1,
+      gas: 10,
+      networkCheckTimeout: 100000
+
     },
     // Useful for private networks
     // private: {
@@ -78,7 +89,8 @@ module.exports = {
 
   // Set default mocha options here, use special reporters etc.
   mocha: {
-    timeout: 2000000
+    enableTimeouts: false,
+    timeout: 20000000
   },
 
   // Configure your compilers

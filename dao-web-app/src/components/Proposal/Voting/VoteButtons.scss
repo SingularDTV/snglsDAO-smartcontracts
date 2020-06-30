@@ -9,7 +9,8 @@
 }
 
 .voteRecord {
-  border: 1px solid #bfcbd5;
+  // border: 1px solid #bfcbd5;
+  border: 0;
   border-radius: 3px;
   height: 23px;
   line-height: 23px;
@@ -23,6 +24,7 @@
 
   .castVoteAgainst {
     color: $accent-2;
+    font-weight: 600;
   }
 }
 
@@ -88,6 +90,7 @@
       position: relative;
       top: 3px;
       margin-right: 10px;
+      width: 14px;
     }
 
     span {
@@ -167,6 +170,7 @@
   // color: $gray-1;
   padding-top: 0px;
   position: relative;
+  // color: #000;
   // text-align: center;
 }
 
@@ -186,17 +190,19 @@ button.disabled {
 
 .castVote button {
   font-weight: $bold;
-  color: rgba(3, 118, 255, 1.000);
-  background-color: rgba(225, 235, 247, 1.000);
+  // border-radius: 30px;
+  color: #000;
+  background-color: #fff;
   height: 25px;
   line-height: 25px;
   transition: all .25s ease;
   position: relative;
   border: 0;
-  margin: 0 1px;
+  margin: 0 0.5px;
   display: inline-block;
-  width: 75px;
-  padding: 0 5px;
+  // width: 75px;
+
+  padding: 0 12px;
   outline: none;
 
   img {
@@ -211,8 +217,8 @@ button.disabled {
 }
 
 .castVote button:nth-child(1) {
-  border-radius: 10px 0 0 10px;
-  width: 60px;
+  border-radius: 15px 0 0 15px;
+  // width: 60px;
 
   img {
     position: relative;
@@ -226,7 +232,7 @@ button.disabled {
 }
 
 .castVote button:nth-child(2) {
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 15px 15px 0;
 
   img {
     position: relative;
@@ -250,14 +256,14 @@ button.disabled {
     width: auto;
     margin-right: 5px;
     border-radius: 30px;
-    background: #0071ff;
+    background: #fff;
     padding: 0 15px;
 
     span {
       font-weight: bold;
       font-size: 13px;
       display: inline-block;
-      color: white;
+      color: #000;
     }
   }
 }

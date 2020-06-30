@@ -18,10 +18,20 @@ import { getArc } from "../arc";
 
 const tokens = require("data/tokens.json");
 const exchangesList = require("data/exchangesList.json");
+const exchangesListSNGLS = require("data/exchangesListSNGLS.json");
+const exchangesListSGT = require("data/exchangesListSGT.json");
 const Web3 = require("web3");
 
 export function getExchangesList() {
   return exchangesList;
+}
+
+export function getExchangesListSNGLS() {
+    return exchangesListSNGLS;
+}
+
+export function getExchangesListSGT() {
+    return exchangesListSGT;
 }
 
 export function checkTotalPercent(split: any) {
@@ -170,11 +180,13 @@ export function genName() {
 }
 
 export function supportedTokens() {
-  return { [getArc().GENToken().address]:  {
+  return { 
+    [getArc().GENToken().address]:  {
     decimals: 18,
     name: "DAOstack GEN",
     symbol: genName(),
-  }, ...tokens[targetedNetwork()]["tokens"]};
+  }, 
+  ...tokens[targetedNetwork()]["tokens"]};
 }
 
 export function formatTokens(amountWei: BN|null, symbol?: string, decimals = 18): string {

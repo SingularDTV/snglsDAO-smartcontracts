@@ -128,12 +128,12 @@
       display: grid;
       grid-column-gap: 12px;
       grid-row-gap: 0;
-      grid-template-columns: 1fr 1fr;
+      // grid-template-columns: 1fr 1fr;
       align-items: end;
 
       .reward {
         .externalTokenInput {
-          display: flex;
+          display: grid;
           border: 1px solid #bfcbd5;
           border-bottom-left-radius: 2px;
           border-top-left-radius: 2px;
@@ -143,6 +143,7 @@
           margin-bottom: 5px;
           max-height: 37px;
           box-sizing: border-box;
+          grid-template-columns: 1fr minmax(100px, 120px);
 
           .amount {
             input {
@@ -394,7 +395,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     float: left;
-    padding-top: 30px;
+    padding-top: 0px;
     overflow: auto;
     z-index: 900;
 
@@ -627,6 +628,40 @@ div.description {
   margin-top: 4px;
 }
 
+      .encodedData {
+        line-height: normal;
+
+        textarea {
+          border: $gray-border-2;
+          padding: 9px 15px 12px 15px;
+        }
+
+        .labelInput {
+          display: grid;
+          grid-template-columns: 25% 1fr;
+          grid-gap: 12px;
+          align-items: center;
+          margin: 12px 0;
+
+          input {
+            margin: 0;
+          }
+        }
+
+        .radio {
+          display: grid;
+          grid-template-columns: 18px 1fr;
+          grid-gap: 16px;
+          align-items: center;
+
+          input {
+            height: 20px;
+          }
+        }
+      }
+
+
+
 @media only screen and (max-width: 475px) {
   .createWrapperWithSidebar {
     width: 100%;
@@ -665,11 +700,6 @@ div.description {
       textarea {
         border: none;
         width: 100%;
-      }
-
-      .encodedData textarea {
-        border: $gray-border-2;
-        padding: 9px 15px 12px 15px;
       }
 
       .dates {

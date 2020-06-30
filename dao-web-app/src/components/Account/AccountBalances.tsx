@@ -8,6 +8,8 @@ import withSubscription, { ISubscriptionProps } from "components/Shared/withSubs
 import * as css from "layouts/App.scss";
 import * as React from "react";
 import { combineLatest, of } from "rxjs";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps {
   dao?: IDAOState;
@@ -20,7 +22,8 @@ class AccountBalances extends React.Component<IProps, null>  {
 
   public render(): RenderOutput {
     const { dao, data } = this.props;
-
+    //@ts-ignore
+    const { t } = this.props;
     if (!data) {
       return null;
     }
@@ -54,7 +57,7 @@ class AccountBalances extends React.Component<IProps, null>  {
   }
 }
 
-export default withSubscription({
+const AccountBalanceWithSub = withSubscription({
   wrappedComponent: AccountBalances,
   loadingComponent: <div>Loading..</div>,
   errorComponent: (props) => <div>{props.error.message}</div>,
@@ -76,3 +79,5 @@ export default withSubscription({
     );
   },
 });
+//@ts-ignore
+export default withTranslation()(AccountBalanceWithSub)

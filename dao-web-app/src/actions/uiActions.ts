@@ -33,6 +33,26 @@ export function toggleMenu() {
   };
 }
 
+
+export function showSidebar() {
+  return (dispatch: Redux.Dispatch<any, any>, _getState: () => IRootState) => {
+    dispatch({ type: ActionTypes.SHOW_SIDEBAR });
+  };
+}
+
+export function hideSidebar() {
+  return (dispatch: Redux.Dispatch<any, any>, _getState: () => IRootState) => {
+    dispatch({ type: ActionTypes.HIDE_SIDEBAR });
+  };
+}
+
+
+export function toggleSidebar() {
+  return (dispatch: Redux.Dispatch<any, any>, _getState: () => IRootState) => {
+    dispatch({ type: _getState().ui.sidebarOpen ? ActionTypes.HIDE_SIDEBAR : ActionTypes.SHOW_SIDEBAR });
+  };
+}
+
 export function enableTrainingTooltipsOnHover() {
   return (dispatch: Redux.Dispatch<any, any>, _getState: () => IRootState) => {
     dispatch({ type: ActionTypes.ENABLE_TRAINING_TOOLTIPS_ON_HOVER });

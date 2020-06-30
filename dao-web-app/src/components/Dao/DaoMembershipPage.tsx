@@ -1,18 +1,25 @@
 import { Address, IDAOState, IProposalStage, Proposal, Vote, Scheme, Stake } from "@daostack/client";
-import { getArc } from "arc";
+import { getArc, enableWalletProvider, getArcSettings } from "arc";
+import * as arcActions from "../../actions/arcActions";
+import { showNotification } from "../../reducers/notifications";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";
-import Analytics from "lib/analytics";
-import { Page } from "pages";
 import * as React from "react";
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 // import * as InfiniteScroll from "react-infinite-scroll-component";
 import { /* Link, */ RouteComponentProps } from "react-router-dom";
 // import * as Sticky from "react-stickynode";
 import { first } from "rxjs/operators";
 // import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
+import { /*ErrorMessage, */ Field, Form, Formik, FormikProps } from "formik";
 import * as css from "./Dao.scss";
+import * as moment from "moment";
+import * as errCss from "./DaoJoin.scss"
+import { IRootState } from "reducers";
+import { connect } from "react-redux";
+import { withTranslation } from 'react-i18next';
+import { Statistic, Popconfirm} from "antd";
+const { Countdown } = Statistic;
 
 const PAGE_SIZE = 50;
 
@@ -21,21 +28,145 @@ interface IExternalProps extends RouteComponentProps<any> {
   daoState: IDAOState;
 }
 
+interface IStateProps {
+  currentAccountAddress: String;
+}
+
+interface IState {
+  membershipFee: string;
+  alreadyStaked: string;
+  snglsBalance: string;
+  fieldValue: number;
+  releaseTime?: number;
+}
+
+interface IFormValues {
+  snglsToSend: number;
+  [key: string]: any;
+}
+
+interface IDispatchProps {
+  createProposal: typeof arcActions.createProposal;
+  showNotification: typeof showNotification;
+}
+
 type SubscriptionData = Proposal[];
-type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
+type IProps = IExternalProps & IDispatchProps & ISubscriptionProps<SubscriptionData>;
 
-class DaoHistoryPage extends React.Component<IProps, null> {
+const mapDispatchToProps = {
+  createProposal: arcActions.createProposal,
+  showNotification,
+};
 
-  public componentDidMount() {
-    console.log("HISTORY componentDidMount <<<<<<<<<<<==============================")
-    Analytics.track("Page View", {
-      "Page Name": Page.DAOHistory,
-      "DAO Address": "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d",
-      "DAO Name": this.props.daoState.name,
+const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
+  return {...ownProps,
+    currentAccountAddress: state.web3.currentAccountAddress,
+  };
+};
+
+
+class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
+
+  constructor(props: IProps) {
+    super(props);
+    this.autoAmount = this.autoAmount.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.fetchBalances = this.fetchBalances.bind(this);
+    this.state = {
+      membershipFee: "0.00",
+      alreadyStaked: "0.00",
+      snglsBalance: "0.00",
+      fieldValue: 0.00,
+      releaseTime: null
+    };
+  }
+
+  public autoAmount() {
+    this.setState({
+      fieldValue: parseFloat(this.state.membershipFee) - parseFloat(this.state.alreadyStaked)
+    });
+  }
+
+  public onChangeHandler(e: any) {
+
+  }
+  public async fetchBalances() {
+    const arc = getArc();
+    const settings = getArcSettings();
+
+    const feeContract = new arc.web3.eth.Contract(
+      settings.feesContractABI,
+      settings.feesContractAddress
+    );
+    const memFeeStakingContract = new arc.web3.eth.Contract(settings.membershipFeeStakingContractABI, settings.membershipFeeStakingContractAddress);
+
+    // Create contract object
+    const snglsTokenContract = new arc.web3.eth.Contract(settings.snglsTokenContractABI, settings.snglsTokenContractAddress);
+
+    const staked = await memFeeStakingContract.methods.lockers(this.props.currentAccountAddress).call()
+    this.setState(
+      {
+        membershipFee:  arc.web3.utils.fromWei(await feeContract.methods.membershipFee().call(), 'ether'),
+        alreadyStaked: arc.web3.utils.fromWei(staked.amount, 'ether'),
+        snglsBalance: arc.web3.utils.fromWei(await snglsTokenContract.methods.balanceOf(this.props.currentAccountAddress).call(), 'ether'),
+        fieldValue: 0
+      }
+    );
+  }
+
+  public async componentDidMount() {
+    const arc = getArc();
+    const settings = getArcSettings();
+    const lockingSGT4ReputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
+    const staked = await lockingSGT4ReputationContract.methods.lockers(this.props.currentAccountAddress).call()
+    this.setState({ releaseTime: staked?.releaseTime})
+    this.fetchBalances();
+  }
+
+
+  public handleUnstake = async (): Promise<void> => {
+    if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
+      return;
+    }
+    const arc = getArc();
+    const settings = getArcSettings();
+    const currentAccountAddress = this.props.currentAccountAddress;
+
+    const memFeeStakingContract = new arc.web3.eth.Contract(settings.membershipFeeStakingContractABI, settings.membershipFeeStakingContractAddress);
+
+    await memFeeStakingContract.methods.release().send({from: currentAccountAddress})
+  }
+
+  public handleSubmit = async (values: IFormValues, { _setSubmitting }: any ): Promise<void> => {
+    if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
+      return;
+    }
+    const arc = getArc();
+    const settings = getArcSettings();
+
+    const memFeeStakingContract = new arc.web3.eth.Contract(settings.membershipFeeStakingContractABI, settings.membershipFeeStakingContractAddress);
+    const tokenContract = new arc.web3.eth.Contract(settings.snglsTokenContractABI, settings.snglsTokenContractAddress);
+
+    const tokenDecimals = arc.web3.utils.toBN(18);
+    const tokenAmountToApprove = arc.web3.utils.toBN(values.snglsToSend);
+    const calculatedApproveValue = arc.web3.utils.toHex(tokenAmountToApprove.mul(arc.web3.utils.toBN(10).pow(tokenDecimals)));
+
+    const currentAccountAddress = this.props.currentAccountAddress;
+    tokenContract.methods.approve(settings.membershipFeeStakingContractAddress, calculatedApproveValue).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
+      if (error) throw error;
+    }).then(function () {
+      memFeeStakingContract.methods.lock(calculatedApproveValue, settings.minLockingPeriod).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
+        console.log(error);
+        if (error) throw error;
+         this.fetchBalances();
+      });
     });
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
+    const { releaseTime } = this.state;
     // const { data, hasMoreToLoad, fetchMore, daoState, currentAccountAddress } = this.props;
 
     // console.log("HISTORY render <<<<<<<<<<<==============================", this.props)
@@ -47,10 +178,9 @@ class DaoHistoryPage extends React.Component<IProps, null> {
     //   return (<ProposalHistoryRow key={"proposal_" + proposal.id} history={this.props.history} proposal={proposal} daoState={daoState} currentAccountAddress={currentAccountAddress} />);
     // });
 
+    // @ts-ignore
     return(
       <div className={css.Membership}>
-        <BreadcrumbsItem to={"/dao/history"}>History</BreadcrumbsItem>
-
         {/* <Sticky enabled top={50} innerZ={10000}> */}
           {/* <h2 className={css.daoHistoryHeader}>
             Membership
@@ -70,81 +200,108 @@ class DaoHistoryPage extends React.Component<IProps, null> {
             <div className={css.icon}>
               <img src="/assets/images/Icon/dash_holdings.png" />
             </div>
-            <h2>Membership fee</h2>
-            <p>The amount of SNGLS needed to stake in the DAO <br/>so you don't have to pay the transaction fee.</p>
+        <h2>{t("membership.memFee")}</h2>
+            <p>{t("membership.amountNeedToStake")}</p>
 
-            <h5>Min amount required: <strong>9.85</strong></h5>
+            <h5>{t("membership.minAmountRequired")} <strong> { this.state.membershipFee.toString() } </strong></h5>
 
             <hr/>
 
             <div className={css.content}>
-              <p>Confirm auto <strong>(9.85)</strong> or enter the amount manually:</p>
-              <div className={css.bigInput}>
-                <form action="">
-                  <label>SNGLS</label>
-                  <input type="text" max="7" />
-                  <button>auto</button>
-                </form>
-                <div className={css.bigInputFoot}>
-                  <span>Already staked: 0.00</span>
-                  <span>Balance: 5.564 SNGLS</span>
+              {!!parseInt(this.state.alreadyStaked) ? (
+                <div className={css.releaseTime}>
+                  <Countdown title="Token defrosting will be available through"
+                    // @ts-ignore
+                             value={moment(releaseTime*1000).format()}
+                             format="DD:HH:mm:ss"
+                             valueStyle={{ display: 'flex',justifyContent: 'center' }}
+                  />
                 </div>
-                <hr />
-              </div>
-              <button className={css.submit}>Stake</button>
-              <button className={css.unstake}>unstake</button>
+              )
+              : (
+                  <p>{t("membership.confAuto")} <strong>( { parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) < 0 ? 0 : parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) } )</strong> {t("membership.orEnterManually")}</p>
+                )}
+
+              <Formik
+
+                // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                initialValues={{
+                  snglsToSend: 0,
+                } as IFormValues}
+                /*
+                validate={(values: IFormValues): void => {
+                  const errors: any = {};
+                  const nonNegative = (name: string): void => {
+                    if ((values as any)[name] < 0) {
+                      errors[name] = t("errors.nonNegative");
+                    }
+                  };
+
+                  nonNegative("ethReward");
+                  if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.snglsToSend) {
+                    errors.rewards = t("proposal.pleaseSelectAtLeastSomeReward");
+                  }
+
+                  // return errors;
+                }}
+                */
+                onSubmit={this.handleSubmit}
+
+                // eslint-disable-next-line react/jsx-no-bind
+                render={({
+                  errors,
+                  touched,
+                  values,
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  handleSubmit,
+                  isSubmitting,
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  setFieldTouched,
+                  setFieldValue,
+                }: FormikProps<IFormValues>) =>
+                <div className={css.bigInput}>
+                  <Form noValidate>
+                    <div className={css.formLabel}>
+
+                      <label>SNGLS</label>
+                      <Field
+                        id="snglsToSendInput"
+                        maxLength={10}
+                        placeholder=""
+                        name="snglsToSend"
+                        type="number"
+                        className={touched.snglsToSend && errors.nativeTokenReward ? errCss.error : null}
+                      />
+                      <button type="button" className={css.auto} onClick= { () => { setFieldValue("snglsToSend",  (parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked) < 0 ? 0 : parseInt(this.state.membershipFee) - parseInt(this.state.alreadyStaked))) }} >
+                        auto
+                      </button>
+                    </div>
+                    <div className={css.bigInputFoot}>
+                      <span>{t("membership.alreadyStaked")}  {parseInt(this.state.alreadyStaked)} {"SNGLS"}</span>
+                      <span>{t("membership.balance")}  {parseInt(this.state.snglsBalance)} {"SNGLS"}</span>
+                    </div>
+                    <hr />
+                    <Popconfirm title={t('doUAgree')}
+                      //@ts-ignore
+                                onConfirm={handleSubmit} okText="Yes" cancelText="No">
+                      <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>
+                    </Popconfirm>
+                    <hr />
+                    <button type="button" onClick={ this.handleUnstake } className={css.unstake}>{t("membership.unstake")}</button>
+                  </Form>
+                </div>
+                }
+              />
             </div>
-
-          </div>
-
-
-
-
-{/* v2 */}
-
-
-          <div className={css.MembershipBlock}>
-            <div className={css.MembershipBlockHead}>
-                <div className={css.icon}>
-                    <img src="/assets/images/Icon/dash_holdings.png" />
-                </div>
-                <div>
-                    <h2>Membership fee</h2>
-                    <p>The amount of SNGLS needed to stake in the DAO <br />so you don't have to pay the transaction fee.</p>
-
-                    <p>Min amount required: <strong>9.85</strong></p>
-                </div>
-            </div>
-            <hr />
-
-            <div className={css.content}>
-              <p>Confirm auto <strong>(9.85)</strong> or enter the amount manually:</p>
-              <div className={css.bigInput}>
-                <form action="">
-                  <label>SNGLS</label>
-                  <input type="text" max="7" className={css.white} />
-                    <button className={css.disable}>auto</button>
-                </form>
-                <div className={css.bigInputFoot}>
-                  <span>Already staked: 0.00</span>
-                  <span>Balance: 5.564 SNGLS</span>
-                </div>
-                <hr />
-              </div>
-              <button className={css.submit}>Stake</button>
-              <button className={css.unstake}>unstake</button>
-            </div>
-
           </div>
         </div>
-        
       </div>
     );
   }
 }
 
-export default withSubscription({
-  wrappedComponent: DaoHistoryPage,
+const SubscribedDaoMembershipFeeStakingPage = withSubscription({
+  wrappedComponent: DaoMembershipFeeStakingPage,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
 
@@ -153,7 +310,6 @@ export default withSubscription({
   createObservable: async (props: IExternalProps) => {
     const arc = getArc();
     const dao = props.daoState.dao;
-
     // this query will fetch al data we need before rendering the page, so we avoid hitting the server
     // with all separate queries for votes and stakes and stuff...
     let voterClause = "";
@@ -171,7 +327,7 @@ export default withSubscription({
           orderBy: "closingAt"
           orderDirection: "desc"
           where: {
-            dao: "${"0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d"}"
+            dao: "${props.daoState.address}"
             stage_in: [
               "${IProposalStage[IProposalStage.ExpiredInQueue]}",
               "${IProposalStage[IProposalStage.Executed]}",
@@ -230,3 +386,6 @@ export default withSubscription({
     );
   },
 });
+
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedDaoMembershipFeeStakingPage));

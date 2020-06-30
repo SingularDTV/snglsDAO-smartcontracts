@@ -6,9 +6,7 @@ import CreateUnknownGenericSchemeProposal from "components/Proposal/Create/Schem
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import { GenericSchemeRegistry } from "genericSchemeRegistry";
-import Analytics from "lib/analytics";
 import { History } from "history";
-import { Page } from "pages";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
@@ -18,6 +16,8 @@ import { CrxRewarderComponentType, getCrxRewarderComponent, rewarderContractName
 import CreateContributionRewardProposal from "components/Proposal/Create/SchemeForms/CreateContributionRewardProposal";
 import { schemeName } from "lib/schemeUtils";
 import * as css from "./CreateProposal.scss";
+import { withTranslation } from 'react-i18next';
+
 
 type IExternalProps = RouteComponentProps<any>;
 
@@ -45,7 +45,6 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
   constructor(props: IProps) {
     super(props);
-    console.log("CREATE PROPOSAL PAGE ====================================<<<<<<<<<<<<<");
 
     this.state = {
       createCrxProposalComponent: null,
@@ -64,12 +63,6 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
   public async componentDidMount() {
     document.addEventListener("keydown", this.handleKeyPress, false);
-
-    Analytics.track("Page View", {
-      "Page Name": Page.CreateProposal,
-      "DAO Address": "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d",
-      "Scheme Address": this.props.schemeId,
-    });
     const newState = {};
 
     /**
@@ -95,10 +88,15 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
-    const daoAvatarAddress = "0x5de00a6af66f8e6838e3028c7325b4bdfe5d329d";
+    //@ts-ignore
+    const { t } = this.props;
+    const daoAvatarAddress = this.props.data.dao;
     const scheme = this.props.data;
 
     let createSchemeComponent = <div />;
+    
+
+
     const props = {
       daoAvatarAddress,
       handleClose: this.doClose,
@@ -141,10 +139,10 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
     return (
       <div className={css.createProposalWrapper}>
-        <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem>
+        <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>{t('notifications.create')}</BreadcrumbsItem>
         <h2 className={css.header}>
-          <span>+ New proposal <b>| {schemeTitle}</b></span>
-          <button className={css.closeButton} aria-label="Close Create Proposal Modal" onClick={this.handleClose}>&times;</button>
+          <span>{t("schema.newProposal")} <b>| {schemeTitle}</b></span>
+          <button className={css.closeButton} aria-label={t('proposal.closeCreateModal')} onClick={this.handleClose}>&times;</button>
         </h2>
         { createSchemeComponent }
       </div>
@@ -163,5 +161,5 @@ const SubscribedCreateProposalPage = withSubscription({
     return scheme.state();
   },
 });
-
-export default connect(mapStateToProps)(SubscribedCreateProposalPage);
+//@ts-ignore
+export default connect(mapStateToProps)(withTranslation()(SubscribedCreateProposalPage));

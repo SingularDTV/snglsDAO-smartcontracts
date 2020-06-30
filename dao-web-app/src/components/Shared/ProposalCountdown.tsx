@@ -3,6 +3,8 @@ import * as classNames from "classnames";
 import * as moment from "moment";
 import * as React from "react";
 import { closingTime } from "lib/proposalHelpers";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./Countdown.scss";
 
@@ -22,7 +24,7 @@ interface IState {
   complete: boolean;
 }
 
-export default class ProposalCountdown extends React.Component<IProps, IState> {
+class ProposalCountdown extends React.Component<IProps, IState> {
   public interval: any;
 
   constructor(props: IProps) {
@@ -94,6 +96,8 @@ export default class ProposalCountdown extends React.Component<IProps, IState> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const countDown = this.state;
     const { proposal } = this.props;
 
@@ -154,3 +158,6 @@ export default class ProposalCountdown extends React.Component<IProps, IState> {
     );
   }
 }
+
+//@ts-ignore
+export default withTranslation()(ProposalCountdown)

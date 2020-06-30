@@ -26,41 +26,69 @@
 }
 
 .schemeRegisterIcon {
-  color: rgba(0, 118, 255, 1.000);
+  // color: #fff;
   font-weight: bold;
+
+  a {
+    // color: #fff !important;
+        font-weight: 600;
+  }
 }
 
 .proposalSummary.withDetails {
   margin: 0 11px;
   font-size: 14px;
   padding: 6px 15px;
+  // color: #fff !important;
+
+  a {
+    // color: #fff !important;
+    font-weight: 600;
+  }
 }
 
 .detailView.proposalSummary, .transactionModal.proposalSummary {
-  box-shadow: 0 1px 12px 0 rgba(26, 60, 88, 0.09);
-  background-color: $white;
+  // box-shadow: 0 1px 12px 0 rgba(26, 60, 88, 0.09);
+  background: rgba(196, 196, 196, 0.1);
+  border: 1px solid #ffffff12;
   font-size: 16px;
   padding: 15px 20px;
   margin: 0 0 0 0;
   // width: 100%;
   display: inline-block;
-  color: #010B2B;
+  // color: #fff;
   font-weight: bold;
   font-size: 22px;
   line-height: 32px;
   font-family: Montserrat;
+
+  a {
+    // color: #fff !important;
+  }
+}
+
+.detailView.proposalSummary {
+  a {
+    color: #fff;
+  }
 }
 
 
 .detailView.proposalSummary.withDetails {
   font-size: 13px;
   padding: 0;
+  width: 100%;
+  max-width: 580px;
+
+  table {
+    width: 100%;
+  }
 
   .summaryTitle {
     padding: 20px;
     display: block;
     font-family: "AccordBold";
-    border-bottom: 1px solid rgba(233, 238, 244, 1.000);
+    border-bottom: 1px solid #ffffff12;
 
     b {
       display: inline-block;
@@ -82,33 +110,59 @@
     margin: 0;
 
     th {
-      color: rgba(78, 97, 118, 1.000);
+      color: #fff;
       font-weight: normal;
       vertical-align: top;
 
       img {
         margin-left: 5px;
         position: relative;
-        top: 1px;
+        top: -1px;
       }
     }
 
     td {
-      color: $gray-1;
+      // color: $gray-1;
+
+      .hashCopy {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        grid-gap: 5px;
+        text-align: right;
+        padding-left: 5px;
+
+        .hash {
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+          height: 100%;
+          min-height: 32px;
+        }
+      }
+
+      &.description {
+        text-align: right;
+      }
 
       span {
-        display: inline-block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-right: 5px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
       }
 
       img {
         position: relative;
-        top: -2px;
-        left: 2px;
-        height: 14px;
+        display: block;
+        // top: -12px;
+        // left: 2px;
+        // height: 14px;
+
       }
     }
   }
@@ -125,6 +179,10 @@
 .transactionModal.proposalSummary {
   max-width: 400px;
   margin: 0 auto;
+
+  a {
+    color: #000;
+  }
 }
 
 .transferAmount {
@@ -139,7 +197,7 @@
 .transferType {
   display: inline-block;
   // color: #010B2B;
-  color: #fff;
+  // color: #fff;
 
   strong {
     // color: rgba(80, 97, 118, 1.000);
@@ -163,7 +221,29 @@
   table {
     font-size: 13px;
     border-top: 1px solid gray;
+    font-weight: normal;
+    position: relative;
   }
+}
+
+@media (min-width: 992px) and (max-width: 1320px) {
+
+.detailView.proposalSummary.withDetails {
+
+  .summaryDetails {
+    td {
+      span {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 5px;
+        max-width: 250px;
+      }
+    }
+  }
+
+}
 }
 
 @media only screen and (max-width: 425px) {

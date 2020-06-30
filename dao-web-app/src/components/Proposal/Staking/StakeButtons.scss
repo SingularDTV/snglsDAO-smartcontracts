@@ -164,14 +164,14 @@
   button {
     width: auto;
     display: block;
-    border-radius: 12.5px;
+    border-radius: 30px;
     position: relative;
     top: 3px;
     height: auto;
-    padding: 5px;
+    padding: 5px 12px;
     margin: 0 auto;
-    background-color: #0076ff;
-    color: white;
+    background-color: #fff;
+    color: #000;
     font-weight: normal;
     // font-family: LucidaGrande;
   }
@@ -186,7 +186,8 @@
 .toBoostMessage {
   font-size: 11px;
   letter-spacing: 0.2px;
-  color: #689bd6;
+  position: absolute;
+  color: #fff;
   margin-left: 2px;
   margin-right: 2px;
 }
@@ -221,11 +222,11 @@
 
   .enablePredictions {
     display: block;
-    width: 120px;
-    position: absolute;
-    top: 3px;
-    right: 18px;
-    text-align: right;
+    // width: 120px;
+    // position: absolute;
+    // top: 3px;
+    // right: 18px;
+    // text-align: right;
 
     button {
       display: inline-block;
@@ -358,6 +359,12 @@
       left: 5px;
       top: 10px;
     }
+  }
+}
+
+.contextContent {
+  .disabledPredictions {
+    color: #000;
   }
 }
 

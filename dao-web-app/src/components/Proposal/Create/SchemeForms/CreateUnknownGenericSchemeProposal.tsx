@@ -6,12 +6,15 @@ import Analytics from "lib/analytics";
 import * as React from "react";
 import { connect } from "react-redux";
 import { showNotification, NotificationStatus } from "reducers/notifications";
-import { baseTokenName, isValidUrl } from "lib/util";
+// import { baseTokenName, isValidUrl } from "lib/util";
+import { isValidUrl } from "lib/util";
 import { exportUrl, importUrlValues } from "lib/proposalUtils";
 import TagsSelector from "components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 import * as css from "../CreateProposal.scss";
 import MarkdownField from "./MarkdownField";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps {
   daoAvatarAddress: string;
@@ -98,6 +101,8 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { handleClose } = this.props;
 
     const fnDescription = () => (<span>Short description of the proposal.<ul><li>What are you proposing to do?</li><li>Why is it important?</li><li>How much will it cost the DAO?</li><li>When do you plan to deliver the work?</li></ul></span>);
@@ -125,21 +130,21 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
 
             const nonNegative = (name: string) => {
               if ((values as any)[name] < 0) {
-                errors[name] = "Please enter a non-negative value";
+                errors[name] = t('errors.nonNegative');
               }
             };
 
             if (values.title.length > 120) {
-              errors.title = "Title is too long (max 120 characters)";
+              errors.title = t('errors.isToLong');
             }
 
             if (!isValidUrl(values.url)) {
-              errors.url = "Invalid URL";
+              errors.url = t('errors.invalidUrl');
             }
 
             const bytesPattern = new RegExp("0x[0-9a-f]+", "i");
             if (values.callData && !bytesPattern.test(values.callData)) {
-              errors.callData = "Invalid encoded function call data";
+              errors.callData = t('errors.invalidEncoded');
             }
 
             require("callData");
@@ -165,10 +170,10 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
             values,
           }: FormikProps<IFormValues>) =>
             <Form noValidate>
-              <TrainingTooltip overlay="The title is the header of the proposal card and will be the first visible information about your proposal" placement="right">
+              <TrainingTooltip overlay={t("tooltips.theTitleIsTHeHeaderOfTheProposal")} placement="right">
                 <label htmlFor="titleInput">
                   <div className={css.requiredMarker}>*</div>
-                Title
+                  {t("dashboard.title")}
                   <ErrorMessage name="title">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                 </label>
               </TrainingTooltip>
@@ -176,7 +181,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                 autoFocus
                 id="titleInput"
                 maxLength={120}
-                placeholder="Summarize your proposal"
+                placeholder={t("proposal.summarizeYourProposal")}
                 name="title"
                 type="text"
                 className={touched.title && errors.title ? css.error : null}
@@ -185,7 +190,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
               <TrainingTooltip overlay={fnDescription} placement="right">
                 <label htmlFor="descriptionInput">
                   <div className={css.requiredMarker}>*</div>
-                Description
+                {t("account.description")}
                   <img className={css.infoTooltip} src="/assets/images/Icon/Info.svg"/>
                   <ErrorMessage name="description">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                 </label>
@@ -201,7 +206,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
 
               <TrainingTooltip overlay="Add some tags to give context about your proposal e.g. idea, signal, bounty, research, etc" placement="right">
                 <label className={css.tagSelectorLabel}>
-                Tags
+                {t('schema.tags')}
                 </label>
               </TrainingTooltip>
 
@@ -211,7 +216,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
 
               <TrainingTooltip overlay="Link to the fully detailed description of your proposal" placement="right">
                 <label htmlFor="urlInput">
-                URL
+                {t('schema.url')}
                   <ErrorMessage name="url">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                 </label>
               </TrainingTooltip>
@@ -228,19 +233,112 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                 <div>
                   <label htmlFor="callData">
                     <div className={css.requiredMarker}>*</div>
-                    Encoded function call data
+                    {t('proposal.paramsToChange')}
                     <ErrorMessage name="callData">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
                   </label>
+
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Transactionfee">{t('proposal.transFee')}</label>
+                    <Field
+                      id="Transactionfee"
+                      maxLength={120}
+                      placeholder="New value (%)"
+                      name="Transactionfee"
+                      type="text"
+                    />
+                  </div>
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Listingfee">{t('proposal.listingFee')}</label>
+                    <Field
+                      id="Listingfee"
+                      maxLength={120}
+                      placeholder="New value (SNGLS)"
+                      name="Listingfee"
+                      type="text"
+                    />
+                  </div>
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Validationfee">{t('dashboard.validationFee')}</label>
+                    <Field
+                      id="Validationfee"
+                      maxLength={120}
+                      placeholder="New value (SNGLS)"
+                      name="Validationfee"
+                      type="text"
+                      disabled={true}
+                    />
+                  </div>
+
+                  <div className={css.labelInput}>
+                    <label htmlFor="Membershipfee">{t('membership.memFee')}</label>
+                    <Field
+                      id="Membershipfee"
+                      maxLength={120}
+                      placeholder="New value (SNGLS)"
+                      name="Membershipfee"
+                      type="text"
+                    />
+                  </div>
+
+                  {/* <label className={css.radio}>
+                    <input
+                      type="radio"
+                      name="test"
+                      value="Transaction fee"
+                      checked={values.test === "Transactionfee"}
+                      onChange={() => setFieldValue("test", "Transactionfee")}
+                    />Transaction fee
+                  </label>
+                  <label className={css.radio}>
+                    <input
+                      type="radio"
+                      name="test"
+                      value="Listing fee"
+                      checked={values.test === "Listingfee"}
+                      onChange={() => setFieldValue("test", "Listingfee")}
+                    />Listing fee
+                  </label>
+                  <label className={css.radio}>
+                    <input
+                      type="radio"
+                      name="test"
+                      value="Validation fee"
+                      checked={values.test === "Validationfee"}
+                      onChange={() => setFieldValue("test", "Validationfee")}
+                    />Validation fee
+                  </label> */}
+
+                  {/* <label htmlFor="callDataInput">
+                    <div className={css.requiredMarker}>*</div>
+                    Enter new fee value
+                    <ErrorMessage name="callDataInput">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
+                  </label>
+
                   <Field
+                    id="callDataInput"
+                    placeholder="Value"
+                    name="callDataInput"
+                    type="number"
+                    className={touched.callData && errors.callData ? css.error : null}
+                    min={0}
+                    step={0.1}
+                  /> */}
+
+
+                  {/* <Field
                     id="callDataInput"
                     component="textarea"
                     placeholder="The encoded function call data of the contract function call"
                     name="callData"
                     className={touched.callData && errors.callData ? css.error : null}
-                  />
+                  /> */}
+
                 </div>
 
-                <div>
+                {/* <div>
                   <label htmlFor="value">
                     <div className={css.requiredMarker}>*</div>
                     {baseTokenName()} Value
@@ -255,7 +353,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                     min={0}
                     step={0.1}
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className={css.createProposalActions}>
@@ -265,11 +363,11 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                   </button>
                 </TrainingTooltip>
                 <button className={css.exitProposalCreation} type="button" onClick={handleClose}>
-                  Cancel
+                {t("schema.submitProposal")}
                 </button>
-                <TrainingTooltip overlay="Once the proposal is submitted it cannot be edited or deleted" placement="top">
+                <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
                   <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
-                  Submit proposal
+                  {t("daojoin.cancel")}
                   </button>
                 </TrainingTooltip>
               </div>
@@ -280,5 +378,5 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
     );
   }
 }
-
-export default connect(null, mapDispatchToProps)(CreateGenericScheme);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(CreateGenericScheme));

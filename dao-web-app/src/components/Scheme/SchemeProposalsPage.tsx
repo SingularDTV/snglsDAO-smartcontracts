@@ -19,6 +19,7 @@ import classNames from "classnames";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 import ProposalCard from "../Proposal/ProposalCard";
 import * as css from "./SchemeProposals.scss";
+import { withTranslation } from 'react-i18next';
 
 // For infinite scrolling
 const PAGE_SIZE = 100;
@@ -81,6 +82,8 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
   };
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { data } = this.props;
 
     const [proposalsQueued, proposalsPreBoosted, proposalsBoosted ] = data;
@@ -130,36 +133,46 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
         { proposalsQueued.length === 0 && proposalsPreBoosted.length === 0 && proposalsBoosted.length === 0
           ?
           <div className={css.noDecisions}>
-            <img className={css.relax} src="/assets/images/yogaman.svg"/>
+            <img className={css.relax} src="/assets/images/logo_white.svg"/>
             <div className={css.proposalsHeader}>
-              No upcoming proposals
+            {t("schemas.noUpcoming")}
+
             </div>
-            <p>You can be the first one to create a {schemeFriendlyName} proposal today! :)</p>
+        <p>{t("schema.firstOneToCreate", {schemeFriendlyName: schemeFriendlyName})}</p>
             <div className={css.cta}>
-              <Link to={"/dao/plugins"}>
-                <img className={css.relax} src="/assets/images/lt.svg"/> Back to schemes
-              </Link>
+              {
+                schemeFriendlyName === "Grants" || schemeFriendlyName === "Protocol Parameters"
+                ?
+                <Link to={"/dao/dashboard"}>
+                  <img className={css.relax} src="/assets/images/lt.svg"/> {t("schema.backToDashboard")}
+                </Link>
+                :
+                <Link to={"/dao/applications"}>
+                  <img className={css.relax} src="/assets/images/lt.svg"/>{t("schema.backToApp")}
+                </Link>
+              }
+
               <a className={classNames({
-                [css.blueButton]: true,
+                [css.redButton]: true,
                 [css.disabled]: !isActive,
               })}
               href="#!"
               onClick={isActive ? this._handleNewProposal : null}
               data-test-id="createProposal"
-              >+ New Proposal</a>
+              >{t("schema.newProposal")}</a>
             </div>
           </div>
           :
           <div>
             <div className={css.boostedContainer}>
               <div className={css.proposalsHeader}>
-                <TrainingTooltip placement="bottom" overlay={"Boosted proposals are passed or failed via relative majority over a configured voting period"}>
-                  <span>Boosted Proposals ({scheme.numberOfBoostedProposals})</span>
+                <TrainingTooltip placement="bottom" overlay={t("tooltips.boostedProposalPassed")}>
+                  <span>{t("schema.firstOneToCreate", {boostedProposals: scheme.numberOfBoostedProposals})}</span>
                 </TrainingTooltip>
                 {proposalsBoosted.length === 0
                   ?
                   <div>
-                    <img src="/assets/images/yoga.svg"/>
+                    <img src="/assets/images/logo_icon.svg"/>
                   </div>
                   : " "
                 }
@@ -171,13 +184,13 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
 
             <div className={css.regularContainer}>
               <div className={css.proposalsHeader}>
-                <TrainingTooltip placement="bottom" overlay={"Pending boosting proposals have reached the prediction score required for boosting and now must make it through the pending period without dipping below that threshold in order to be boosted."}>
-                  <span>Pending Boosting Proposals ({scheme.numberOfPreBoostedProposals})</span>
+                <TrainingTooltip placement="bottom" overlay={t("tooltips.pendingBoosted")}>
+                  <span>{t('schema.pendingBoostedProposals', { num: scheme.numberOfPreBoostedProposals })}</span>
                 </TrainingTooltip>
                 {proposalsPreBoosted.length === 0
                   ?
                   <div>
-                    <img src="/assets/images/yoga.svg"/>
+                    <img src="/assets/images/logo_icon.svg"/>
                   </div>
                   : " "
                 }
@@ -188,13 +201,13 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
             </div>
             <div className={css.regularContainer}>
               <div className={css.proposalsHeader}>
-                <TrainingTooltip placement="bottom" overlay={"Regular proposals are passed or failed via absolute majority over a configured voting period. If enough GEN is staked predicting they will pass, they can move to the pending and then boosted queues."}>
-                  <span>Regular Proposals ({scheme.numberOfQueuedProposals})</span>
+                <TrainingTooltip placement="bottom" overlay={t("tooltips.regProposalArePassedOrFailed")}>
+                  <span>{t("schema.regularProposals", {num: scheme.numberOfQueuedProposals})}</span>
                 </TrainingTooltip>
                 {proposalsQueued.length === 0
                   ?
                   <div>
-                    <img src="/assets/images/yoga.svg"/>
+                    <img src="/assets/images/logo_icon.svg"/>
                   </div>
                   : " "
                 }
@@ -205,7 +218,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
                   dataLength={proposalsQueued.length} //This is important field to render the next data
                   next={fetchMore}
                   hasMore={proposalsQueued.length < scheme.numberOfQueuedProposals}
-                  loader={<h4>Fetching more proposals...</h4>}
+                  loader={<h4>{t("schema.fetchingMore")}</h4>}
                   endMessage={
                     <p style={{textAlign: "center"}}>
                     </p>
@@ -335,5 +348,5 @@ const SubscribedSchemeProposalsPage = withSubscription<IProps, SubscriptionData>
     return [prevState[0].concat(newData), prevState[1], prevState[2], []];
   },
 });
-
-export default connect(null, mapDispatchToProps)(SubscribedSchemeProposalsPage);
+//@ts-ignore
+export default connect(null, mapDispatchToProps)(withTranslation()(SubscribedSchemeProposalsPage));

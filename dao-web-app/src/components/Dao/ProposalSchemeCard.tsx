@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import { combineLatest } from "rxjs";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 import * as css from "./SchemeCard.scss";
+import { withTranslation } from 'react-i18next';
+
 
 interface IExternalProps {
   dao: IDAOState;
@@ -21,6 +23,8 @@ type SubscriptionData = [ISchemeState, Proposal[]];
 type IProps = IExternalProps & ISubscriptionProps<SubscriptionData>;
 
 const ProposalSchemeCard = (props: IProps) => {
+  //@ts-ignore
+  const { t } = props;
   const { data, dao } = props;
 
   const [schemeState, boostedProposals] = data;
@@ -29,7 +33,7 @@ const ProposalSchemeCard = (props: IProps) => {
   const proposals = boostedProposals.slice(0, 3);
 
   const proposalsHTML = proposals.map((proposal: Proposal) => <SubscribedProposalDetail key={proposal.id} proposal={proposal} dao={dao} />);
-  const headerHtml = <h2>{schemeName(schemeState, "[Unknown]")}</h2>;
+  const headerHtml = <button className={css.redButton}>{schemeName(schemeState, "[Unknown]")}</button>;
 
   let trainingTooltipMessage: string;
 
@@ -52,15 +56,15 @@ const ProposalSchemeCard = (props: IProps) => {
           </TrainingTooltip> : headerHtml
         }
         <div className={css.headerItems}>
-          <div><span>Boosted</span> <b>{schemeState.numberOfBoostedProposals}</b> </div>
-          <div><span>Pending Boosting</span> <b>{schemeState.numberOfPreBoostedProposals}</b> </div>
-          <div><span>Regular</span> <b>{schemeState.numberOfQueuedProposals}</b></div>
+           <div><span>{t('schemas.boosted')}</span> <b>{schemeState.numberOfBoostedProposals}</b> </div>
+          <div><span>{t('schemas.pendingBoosting')}</span> <b>{schemeState.numberOfPreBoostedProposals}</b> </div>
+          <div><span>{t('schemas.regular')}</span> <b>{schemeState.numberOfQueuedProposals}</b></div>
         </div>
         {proposals.length === 0 ?
           <div className={css.loading}>
-            <img src="/assets/images/meditate_white.svg" />
+            <img src="/assets/images/logo_white.svg" />
             <div>
-              No upcoming proposals
+              {t("schemas.noUpcoming")}
             </div>
           </div>
           : " "
@@ -80,7 +84,7 @@ const ProposalSchemeCard = (props: IProps) => {
   );
 };
 
-export default withSubscription({
+const ProposalSchemeCardWithSub = withSubscription({
   wrappedComponent: ProposalSchemeCard,
   loadingComponent: <Loading/>,
   errorComponent: (props) => <div>{ props.error.message }</div>,
@@ -145,3 +149,6 @@ const SubscribedProposalDetail = withSubscription({
     return props.proposal.state();
   },
 });
+
+//@ts-ignore
+export default withTranslation()(ProposalSchemeCardWithSub)

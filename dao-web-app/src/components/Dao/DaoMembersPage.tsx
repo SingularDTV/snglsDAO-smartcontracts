@@ -9,9 +9,10 @@ import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as InfiniteScroll from "react-infinite-scroll-component";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import * as Sticky from "react-stickynode";
+// import * as Sticky from "react-stickynode";
 import { IRootState } from "reducers";
 import { IProfilesState } from "reducers/profilesReducer";
+import { withTranslation } from 'react-i18next';
 
 import DaoMember from "./DaoMember";
 import * as css from "./Dao.scss";
@@ -41,7 +42,7 @@ const mapDispatchToProps = {
 
 type IProps = IExternalProps & IStateProps & ISubscriptionProps<Member[]> & IDispatchProps;
 
-const PAGE_SIZE = 100; 
+const PAGE_SIZE = 100;
 
 class DaoMembersPage extends React.Component<IProps, null> {
 
@@ -60,29 +61,30 @@ class DaoMembersPage extends React.Component<IProps, null> {
   }
 
   public render(): RenderOutput {
+    //@ts-ignore
+    const { t } = this.props;
     const { data } = this.props;
-    console.log("HAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", this.props);
     const members = data;
     const daoTotalReputation = this.props.daoState.reputationTotalSupply;
     const { daoState, profiles } = this.props;
-
+    console.log("MEMBERs => ", members);
     const membersHTML = members.map((member) =>
       <DaoMember key={member.staticState.address} dao={daoState} daoTotalReputation={daoTotalReputation} member={member} profile={profiles[member.staticState.address]} />);
 
     return (
       <div className={css.membersContainer}>
-        <BreadcrumbsItem to={"/dao/" + daoState.address + "/members"}>DAO Members</BreadcrumbsItem>
-        <Sticky enabled top={50} innerZ={10000}>
-          <h2>DAO Members</h2>
-        </Sticky>
+        <BreadcrumbsItem to={"/dao/" + daoState.address + "/members"}>{t("membership.daoMembers")}</BreadcrumbsItem>
+        {/* <Sticky enabled top={50} innerZ={10000}> */}
+          <h2>{t("membership.daoMembers")}</h2>
+        {/* </Sticky> */}
         <table className={css.memberHeaderTable}>
           <tbody className={css.memberTable + " " + css.memberTableHeading}>
             <tr>
               <td className={css.memberAvatar}></td>
-              <td className={css.memberName}>Name</td>
-              <td className={css.memberAddress}>Address</td>
-              <td className={css.memberReputation}>Reputation</td>
-              <td className={css.memberSocial}>Social Verification</td>
+              <td className={css.memberName}>{t("membership.name")}</td>
+              <td className={css.memberAddress}>{t("membership.address")}</td>
+              <td className={css.memberReputation}>{t("membership.reputation")}</td>
+              <td className={css.memberSocial}>{t("membership.socVerification")}</td>
             </tr>
           </tbody>
         </table>
@@ -90,7 +92,7 @@ class DaoMembersPage extends React.Component<IProps, null> {
           dataLength={members.length} //This is important field to render the next data
           next={this.props.fetchMore}
           hasMore={members.length < this.props.daoState.memberCount}
-          loader={<h4>Loading...</h4>}
+          loader={<h4>{t("loading")}</h4>}
           endMessage={
             <p style={{textAlign: "center"}}>
               <b>&mdash;</b>
@@ -135,5 +137,5 @@ const SubscribedDaoMembersPage = withSubscription({
     });
   },
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribedDaoMembersPage);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedDaoMembersPage));

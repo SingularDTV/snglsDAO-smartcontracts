@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import { showNotification } from "reducers/notifications";
 import { IRootState } from "reducers";
 import { FollowType, IProfileState } from "reducers/profilesReducer";
+import { withTranslation } from 'react-i18next';
+
 
 import * as css from "./FollowButton.scss";
 
@@ -87,6 +89,8 @@ class FollowButton extends React.Component<IProps, IState> {
   }
 
   public render() {
+    //@ts-ignore
+    const { t } = this.props;
     const { currentAccountProfile, id, type, style } = this.props;
 
     const isFollowing = currentAccountProfile && currentAccountProfile.follows && currentAccountProfile.follows[type].includes(id);
@@ -109,12 +113,13 @@ class FollowButton extends React.Component<IProps, IState> {
         >
           <div className={css.spinner}></div>
           <span className={css.followText}>{
-            isFollowing && isPending ? "Unfollowing" :
-              isFollowing ? "Following" :
-                isPending ? "Following" : "Follow"}
+            isFollowing && isPending ? t('shared.unfollowing') :
+              isFollowing ? t('shared.following') :
+                isPending ? t('shared.following')  : t('shared.follow') }
           </span>
           <span className={css.unfollowText}>Unfollow</span>
           {this.state.showThreeboxModal ?
+          //@ts-ignore
             <ThreeboxModal action={this.doFollow} closeHandler={this.closeThreeboxModal} />
             : ""}
         </button>
@@ -123,5 +128,5 @@ class FollowButton extends React.Component<IProps, IState> {
   }
 
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(FollowButton);
+//@ts-ignore
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(FollowButton));

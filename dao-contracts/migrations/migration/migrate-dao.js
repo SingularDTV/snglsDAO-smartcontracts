@@ -80,8 +80,8 @@ async function migrateDAO({
   } = base[arcVersion]
 
   const daoCreator = new web3.eth.Contract(
-    utils.importAbi(`./${contractsDir}/${arcVersion}/DaoCreator.json`).abi,
-    DaoCreator,
+    utils.importAbi(`./../../../dao-creator/build/contracts/DaoCreator.json`).abi,
+    migrationParams.daoCreatorAddr,
     opts
   )
 
@@ -153,6 +153,8 @@ async function migrateDAO({
   }
 
   if (migrationParams.useDaoCreator === true) {
+    console.log(daoCreator.address);
+
     const [founderAddresses, tokenDist, repDist] = [
       founders.map(({
         address
@@ -171,21 +173,10 @@ async function migrateDAO({
       let foundersInitCount = founderAddresses.length < initFoundersBatchSize ? founderAddresses.length : initFoundersBatchSize
       const forgeOrg = getArcVersionNumber(arcVersion) < 34 ? daoCreator.methods.forgeOrg(
         orgName,
-        tokenName,
-        tokenSymbol,
-        founderAddresses.slice(0, foundersInitCount),
-        tokenDist.slice(0, foundersInitCount),
-        repDist.slice(0, foundersInitCount),
-        migrationParams.useUController === true ? UController : '0x0000000000000000000000000000000000000000',
-        '0'
+        migrationParams.tokenAddress
       ) : daoCreator.methods.forgeOrg(
         orgName,
-        tokenName,
-        tokenSymbol,
-        founderAddresses.slice(0, foundersInitCount),
-        tokenDist.slice(0, foundersInitCount),
-        repDist.slice(0, foundersInitCount),
-        '0'
+        migrationParams.tokenAddress
       )
 
       tx = (await sendTx(forgeOrg, 'Creating a new organization...')).receipt
@@ -247,6 +238,7 @@ async function migrateDAO({
       deploymentState.Controller = controller.options.address
     }
   } else {
+    deploymentState.DAOToken = migrationParams.tokenAddress;
     if (deploymentState.DAOToken === undefined) {
       let {
         receipt,
@@ -408,8 +400,8 @@ async function migrateDAO({
     }
 
     if (deploymentState.transferredDAOTokenOwnership !== true) {
-      tx = (await sendTx(daoToken.methods.transferOwnership(deploymentState.Controller), 'Transfer DAOToken to Controller ownership')).receipt
-      await logTx(tx, 'Finished transferring DAOToken to Controller ownership')
+      // tx = (await sendTx(daoToken.methods.transferOwnership(deploymentState.Controller), 'Transfer DAOToken to Controller ownership')).receipt
+      // await logTx(tx, 'Finished transferring DAOToken to Controller ownership')
       deploymentState.transferredDAOTokenOwnership = true
       setState(deploymentState, network)
     }
