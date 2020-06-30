@@ -33,458 +33,458 @@ import * as css from "./SidebarMenu.scss";
 type IExternalProps = RouteComponentProps<any>;
 
 interface IStateProps {
-  daoAvatarAddress: string;
-  sidebarOpen: boolean;
+    daoAvatarAddress: string;
+    sidebarOpen: boolean;
 }
 
 interface IDispatchProps {
-  hideMenu: typeof hideMenu;
-  hideSidebar: typeof hideSidebar;
+    hideMenu: typeof hideMenu;
+    hideSidebar: typeof hideSidebar;
 }
 
 const mapDispatchToProps = {
-  hideMenu,
-  hideSidebar,
+    hideMenu,
+    hideSidebar,
 };
 
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<[IDAOState]>;
 
 const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternalProps & IStateProps => {
-  return {
-    ...ownProps,
-    daoAvatarAddress: getArcSettings().daoAvatarContractAddress, // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
-    sidebarOpen: state.ui.sidebarOpen,
-  };
+    return {
+        ...ownProps,
+        daoAvatarAddress: getArcSettings().daoAvatarContractAddress, // match && match.params ? (match.params as any).daoAvatarAddress : queryValues.daoAvatarAddress,
+        sidebarOpen: state.ui.sidebarOpen,
+    };
 };
 class SidebarMenu extends React.Component<IProps, IStateProps> {
 
-  constructor(props: IProps) {
-    super(props);
-  }
+    constructor(props: IProps) {
+        super(props);
+    }
 
-  public componentDidMount() {
+    public componentDidMount() {
 
-  }
+    }
 
-  private handleCloseMenu = (_event: any): void => {
-    this.props.hideMenu();
-    this.props.hideSidebar();
-  }
+    private handleCloseMenu = (_event: any): void => {
+        this.props.hideMenu();
+        this.props.hideSidebar();
+    }
 
-  public daoMenu() {
-    //@ts-ignore
-    const { t } = this.props;
-    const [ dao ] = this.props.data ;
-    const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
-    const arcSettings = getArcSettings();
-    const supportedTok = supportedTokens();
-    return (
-      <div>
-      <div className={css.daoNavigation}>
-      <span className={css.daoNavHeading}><b>{t('sidebar.menu')}</b></span>
-          <ul>
-            <li>
-              <Link to={"/dao/dashboard/"} onClick={this.handleCloseMenu}>
-                <span className={css.menuDot} />
-                <span className={
-                  classNames({
-                    [css.notification]: true,
-                    [css.homeNotification]: true,
-                  })
-                }></span>
-                <span className={css.menuIcon}>
+    public daoMenu() {
+        //@ts-ignore
+        const { t } = this.props;
+        const [ dao ] = this.props.data ;
+        const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
+        const arcSettings = getArcSettings();
+        const supportedTok = supportedTokens();
+        return (
+            <div>
+                <div className={css.daoNavigation}>
+                    <span className={css.daoNavHeading}><b>{t('sidebar.menu')}</b></span>
+                    <ul>
+                        <li>
+                            <Link to={"/dao/dashboard/"} onClick={this.handleCloseMenu}>
+                                <span className={css.menuDot} />
+                                <span className={
+                                    classNames({
+                                        [css.notification]: true,
+                                        [css.homeNotification]: true,
+                                    })
+                                }></span>
+                                <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_home.svg" />
-                {t('sidebar.dashboard')}
+                                    {t('sidebar.dashboard')}
                 </span>
-              </Link>
-            </li>
-            <li>
-              <Link to={"/dao/membership/"} onClick={this.handleCloseMenu}>
-                <span className={css.menuDot} />
-                <span className={
-                  classNames({
-                    [css.notification]: true,
-                    [css.homeNotification]: true,
-                  })
-                }></span>
-                <span className={css.menuIcon}>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={"/dao/membership/"} onClick={this.handleCloseMenu}>
+                                <span className={css.menuDot} />
+                                <span className={
+                                    classNames({
+                                        [css.notification]: true,
+                                        [css.homeNotification]: true,
+                                    })
+                                }></span>
+                                <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_badge.svg" />
-                {t('sidebar.protocolMembership')}
+                                    {t('sidebar.protocolMembership')}
 
                 </span>
-              </Link>
-            </li>
-            <li>
-              <Link to={"/dao/applications/"} onClick={this.handleCloseMenu}>
-                <span className={css.menuDot} />
-                <span className={
-                  classNames({
-                    [css.notification]: true,
-                    [css.homeNotification]: true,
-                  })
-                }></span>
-                <span className={css.menuIcon}>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={"/dao/applications/"} onClick={this.handleCloseMenu}>
+                                <span className={css.menuDot} />
+                                <span className={
+                                    classNames({
+                                        [css.notification]: true,
+                                        [css.homeNotification]: true,
+                                    })
+                                }></span>
+                                <span className={css.menuIcon}>
                   <img src="/assets/images/Icon/menu/_apps.svg" />
-                  {t('sidebar.applications')}
+                                    {t('sidebar.applications')}
                 </span>
-              </Link>
-            </li>
-            <li>
-              <Link to={ "/dao/scheme/" + arcSettings.protocolParametersSchemeID } onClick={this.handleCloseMenu}>
-                <span className={css.menuDot} />
-                <span className={
-                  classNames({
-                    [css.notification]: true,
-                    [css.homeNotification]: true,
-                  })
-                }></span>
-                <span className={css.menuIcon}>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={ "/dao/scheme/" + arcSettings.protocolParametersSchemeID } onClick={this.handleCloseMenu}>
+                                <span className={css.menuDot} />
+                                <span className={
+                                    classNames({
+                                        [css.notification]: true,
+                                        [css.homeNotification]: true,
+                                    })
+                                }></span>
+                                <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_parameters.svg" />
-                { t('sidebar.protocolParams') }
+                                    { t('sidebar.protocolParams') }
 
                 </span>
-              </Link>
-            </li>
-{
-            /*`<li>
-              <Link to={"/dao/scheme/" + arcSettings.grantsSchemeContractAddress} onClick={this.handleCloseMenu}>
-                <span className={css.menuDot} />
-                <span className={
-                  classNames({
-                    [css.notification]: true,
-                    [css.homeNotification]: true,
-                  })
-                }></span>
-                <span className={css.menuIcon}>
-                  <img src="/assets/images/Icon/menu/_membership.svg" />
-                  { t("sidebar.grants") }
+                            </Link>
+                        </li>
+                        {
+                            /*`<li>
+                              <Link to={"/dao/scheme/" + arcSettings.grantsSchemeContractAddress} onClick={this.handleCloseMenu}>
+                                <span className={css.menuDot} />
+                                <span className={
+                                  classNames({
+                                    [css.notification]: true,
+                                    [css.homeNotification]: true,
+                                  })
+                                }></span>
+                                <span className={css.menuIcon}>
+                                  <img src="/assets/images/Icon/menu/_membership.svg" />
+                                  { t("sidebar.grants") }
 
-                </span>
-              </Link>
-            </li>`*/
-  }
-            <li>
-              <TrainingTooltip placement="right" overlay={t("tooltips.listOfEntities")}>
-                <Link to={"/dao/members/"} onClick={this.handleCloseMenu}>
-                  <span className={css.menuDot} />
-                  <span className={
-                    classNames({
-                      [css.notification]: true,
-                      [css.holdersNotification]: true,
-                    })
-                  }></span>
-                  <span className={css.menuIcon}>
+                                </span>
+                              </Link>
+                            </li>`*/
+                        }
+                        <li>
+                            <TrainingTooltip placement="right" overlay={t("tooltips.listOfEntities")}>
+                                <Link to={"/dao/members/"} onClick={this.handleCloseMenu}>
+                                    <span className={css.menuDot} />
+                                    <span className={
+                                        classNames({
+                                            [css.notification]: true,
+                                            [css.holdersNotification]: true,
+                                        })
+                                    }></span>
+                                    <span className={css.menuIcon}>
                   <img src="/assets/images/Icon/menu/_members.svg" />
-                  {t('sidebar.members')}
+                                        {t('sidebar.members')}
                   </span>
-                </Link>
-              </TrainingTooltip>
-            </li>
-            <li>
-              <Link to={"/dao/history/"} onClick={this.handleCloseMenu}>
-                <span className={css.menuDot} />
-                <span className={
-                  classNames({
-                    [css.notification]: true,
-                    [css.historyNotification]: true,
-                  })
-                }></span>
-                <span className={css.menuIcon}>
+                                </Link>
+                            </TrainingTooltip>
+                        </li>
+                        <li>
+                            <Link to={"/dao/history/"} onClick={this.handleCloseMenu}>
+                                <span className={css.menuDot} />
+                                <span className={
+                                    classNames({
+                                        [css.notification]: true,
+                                        [css.historyNotification]: true,
+                                    })
+                                }></span>
+                                <span className={css.menuIcon}>
                 <img src="/assets/images/Icon/menu/_history.svg" />
-                {t('sidebar.history')}
+                                    {t('sidebar.history')}
                 </span>
-              </Link>
-            </li>
-            <li>
-              <TrainingTooltip placement="right" overlay={t("tooltips.spaceDesignated")}>
-                <Link to={"/dao/discussion/"} onClick={this.handleCloseMenu}>
+                            </Link>
+                        </li>
+                        <li>
+                            <TrainingTooltip placement="right" overlay={t("tooltips.spaceDesignated")}>
+                                <Link to={"/dao/discussion/"} onClick={this.handleCloseMenu}>
                   <span className={
-                    classNames({
-                      [css.menuDot]: true,
-                      [css.red]: false,
-                    })} />
-                  <span className={
-                    classNames({
-                      [css.notification]: true,
-                      [css.discussionNotification]: true,
-                    })
-                  }></span>
-                  <span className={css.menuIcon}>
+                      classNames({
+                          [css.menuDot]: true,
+                          [css.red]: false,
+                      })} />
+                                    <span className={
+                                        classNames({
+                                            [css.notification]: true,
+                                            [css.discussionNotification]: true,
+                                        })
+                                    }></span>
+                                    <span className={css.menuIcon}>
                   <img src="/assets/images/Icon/menu/_wall.svg" />
-                  {t('sidebar.wall')}
+                                        {t('sidebar.wall')}
                   </span>
-                </Link>
-              </TrainingTooltip>
-            </li>
-          </ul>
-        </div>
+                                </Link>
+                            </TrainingTooltip>
+                        </li>
+                    </ul>
+                </div>
 
 
-        <div className={css.daoHoldings}>
+                <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
             <b>{t('sidebar.treasury')}</b>
             <a className="externalLink" href={daoHoldingsAddress} target="_blank">
               <img src="/assets/images/Icon/link-white.svg" />
             </a>
           </span>
-          <ul>
-            <SubscribedEthBalance dao={dao} />
+                    <ul>
+                        <SubscribedEthBalance dao={dao} />
 
-            { Object.keys(supportedTok).reduce((ac: any, it: any): any => {
-              if(supportedTok[it].symbol === "ETH") {
-                ac[0] = it;
-              } else if(supportedTok[it].symbol === "SGT") {
-                ac[3] = it;
-              } else if (supportedTok[it].symbol === "SNGLS") {
-                ac[2] = it;
-              } else if (supportedTok[it].symbol === "GEN") {
-                ac[1] = it;
-              } else if (supportedTok[it].symbol === "DAI") {
-                ac[4] = it;
-              } else if (supportedTok[it].symbol === "USDC") {
-                ac[5] = it;
-              }
-              return ac;
-            }, []).map((tokenAddress: any) => {
-              return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
-            })}
-          </ul>
-        </div>
-        <div className={css.daoHoldings}>
+                        { Object.keys(supportedTok).reduce((ac: any, it: any): any => {
+                            if(supportedTok[it].symbol === "ETH") {
+                                ac[0] = it;
+                            } else if(supportedTok[it].symbol === "SGT") {
+                                ac[2] = it;
+                            } else if (supportedTok[it].symbol === "SNGLS") {
+                                ac[1] = it;
+                            } else if (supportedTok[it].symbol === "GEN") {
+                                ac[3] = it;
+                            } else if (supportedTok[it].symbol === "DAI") {
+                                ac[4] = it;
+                            } else if (supportedTok[it].symbol === "USDC") {
+                                ac[5] = it;
+                            }
+                            return ac;
+                        }, []).map((tokenAddress: any) => {
+                            return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
+                        })}
+                    </ul>
+                </div>
+                <div className={css.daoHoldings}>
           <span className={css.daoNavHeading}>
             <b>{t('sidebar.stakes')}</b>
-            {/* <a className="externalLink" href={daoHoldingsAddress} target="_blank">
+              {/* <a className="externalLink" href={daoHoldingsAddress} target="_blank">
               <img src="/assets/images/Icon/link-white.svg" />
             </a> */}
           </span>
-          <ul>
-            <SubscribedTotalStakedBalance stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} />
-            <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.membershipFeeStakingContractAddress} tokenAddress={arcSettings.snglsTokenContractAddress} key={"staked_token_" + arcSettings.snglsTokenContractAddress} />
-          </ul>
-        </div>
+                    <ul>
+                        <SubscribedTotalStakedBalance stakingContractAddress={arcSettings.lockingSGT4ReputationContractAddress} tokenAddress={arcSettings.sgtTokenContractAddress} key={"staked_token_" + arcSettings.sgtTokenContractAddress} />
+                        <SubscribedTotalStakedBalance   stakingContractAddress={arcSettings.membershipFeeStakingContractAddress} tokenAddress={arcSettings.snglsTokenContractAddress} key={"staked_token_" + arcSettings.snglsTokenContractAddress} />
+                    </ul>
+                </div>
 
 
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 
-  public render(): RenderOutput {
-    //@ts-ignore
-    const { t } = this.props;
-    const sidebarClass = classNames({
-      [css.menuOpen]: this.props.sidebarOpen,
-      [css.sidebarWrapper]: true,
-      [css.noDAO]: !this.props.daoAvatarAddress,
-      clearfix: true,
-    });
+    public render(): RenderOutput {
+        //@ts-ignore
+        const { t } = this.props;
+        const sidebarClass = classNames({
+            [css.menuOpen]: this.props.sidebarOpen,
+            [css.sidebarWrapper]: true,
+            [css.noDAO]: !this.props.daoAvatarAddress,
+            clearfix: true,
+        });
 
-    return (
-      <div className={sidebarClass}>
-        <div className={css.menuContent}>
-          { this.props.daoAvatarAddress && this.props.data ? this.daoMenu() : ""}
+        return (
+            <div className={sidebarClass}>
+                <div className={css.menuContent}>
+                    { this.props.daoAvatarAddress && this.props.data ? this.daoMenu() : ""}
 
-          <div className={css.siteLinksWrapper}>
-            <ul>
-              <li>
-              <a>{t("sidebar.buy")}</a>
-                <ul>
-                  <div className={css.diamond}></div>
-                  {
-                    getExchangesListSNGLS().map((item: any) => {
-                      return (
-                        <li key={item.name}>
-                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="buyGenLink">
-                            <b><img src={item.logo} /></b>
-                            <span>{item.name}</span>
-                          </a>
-                        </li>
-                      );
-                    })
-                  }
-                </ul>
-              </li>
-              <li>
-              <a>{t("sidebar.buySgt")}</a>
+                    <div className={css.siteLinksWrapper}>
+                        <ul>
+                            <li>
+                                <a>{t("sidebar.buy")}</a>
+                                <ul>
+                                    <div className={css.diamond}></div>
+                                    {
+                                        getExchangesListSNGLS().map((item: any) => {
+                                            return (
+                                                <li key={item.name}>
+                                                    <a href={item.url} target="_blank" rel="noopener noreferrer" className="buyGenLink">
+                                                        <b><img src={item.logo} /></b>
+                                                        <span>{item.name}</span>
+                                                    </a>
+                                                </li>
+                                            );
+                                        })
+                                    }
+                                </ul>
+                            </li>
+                            <li>
+                                <a>{t("sidebar.buySgt")}</a>
 
-                  <ul>
-                      <div className={css.diamond}></div>
-                      {
-                          getExchangesListSGT().map((item: any) => {
-                              return (
-                                  <li key={item.name}>
-                                      <a href={item.url} target="_blank" rel="noopener noreferrer" className="buyGenLink">
-                                          <b><img src={item.logo} /></b>
-                                          <span>{item.name}</span>
-                                      </a>
-                                  </li>
-                              );
-                          })
-                      }
-                  </ul>
-                {/* <ul>
+                                <ul>
+                                    <div className={css.diamond}></div>
+                                    {
+                                        getExchangesListSGT().map((item: any) => {
+                                            return (
+                                                <li key={item.name}>
+                                                    <a href={item.url} target="_blank" rel="noopener noreferrer" className="buyGenLink">
+                                                        <b><img src={item.logo} /></b>
+                                                        <span>{item.name}</span>
+                                                    </a>
+                                                </li>
+                                            );
+                                        })
+                                    }
+                                </ul>
+                                {/* <ul>
                   <div className={css.diamond}></div>
                   <span className={css.soon}>{
                     "  Comming soon!"
                   }</span>
                 </ul> */}
-              </li>
-              <li>
-                <a>{t("sidebar.buyGen")}</a>
-                <ul>
-                  <div className={css.diamond}></div>
-                  {
-                    getExchangesList().map((item: any) => {
-                      return (
-                        <li key={item.name}>
-                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="buyGenLink">
-                            <b><img src={item.logo} /></b>
-                            <span>{item.name}</span>
-                          </a>
-                        </li>
-                      );
-                    })
-                  }
-                </ul>
-              </li>
-              <li className={css.daoStack}>
-                <a className="externalLink" href="https://snglsdao.io/" target="_blank" rel="noopener noreferrer">
-                  <img src={"/assets/images/logo_icon.svg"} /> {t("sidebar.sngls")}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    );
-  }
+                            </li>
+                            <li>
+                                <a>{t("sidebar.buyGen")}</a>
+                                <ul>
+                                    <div className={css.diamond}></div>
+                                    {
+                                        getExchangesList().map((item: any) => {
+                                            return (
+                                                <li key={item.name}>
+                                                    <a href={item.url} target="_blank" rel="noopener noreferrer" className="buyGenLink">
+                                                        <b><img src={item.logo} /></b>
+                                                        <span>{item.name}</span>
+                                                    </a>
+                                                </li>
+                                            );
+                                        })
+                                    }
+                                </ul>
+                            </li>
+                            <li className={css.daoStack}>
+                                <a className="externalLink" href="https://snglsdao.io/" target="_blank" rel="noopener noreferrer">
+                                    <img src={"/assets/images/logo_icon.svg"} /> {t("sidebar.sngls")}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
 /***** DAO ETH Balance *****/
 interface IEthProps extends ISubscriptionProps<BN|null> {
-  dao: IDAOState;
+    dao: IDAOState;
 }
 
 const ETHBalance = (props: IEthProps) => {
-  const { data } = props;
-  return <li key="ETH"><strong>{formatTokens(data)}</strong> {baseTokenName()}</li>;
+    const { data } = props;
+    return <li key="ETH"><strong>{formatTokens(data)}</strong> {baseTokenName()}</li>;
 };
 
 const SubscribedEthBalance = withSubscription({
-  wrappedComponent: ETHBalance,
-  loadingComponent: <li key="ETH">... {baseTokenName()}</li>,
-  errorComponent: null,
-  checkForUpdate: (oldProps: IEthProps, newProps: IEthProps) => {
-    return oldProps.dao.address !== newProps.dao.address;
-  },
-  createObservable: (props: IEthProps) => {
-    const arc = getArc();
-    return arc.dao(props.dao.address).ethBalance().pipe(ethErrorHandler());
-  },
+    wrappedComponent: ETHBalance,
+    loadingComponent: <li key="ETH">... {baseTokenName()}</li>,
+    errorComponent: null,
+    checkForUpdate: (oldProps: IEthProps, newProps: IEthProps) => {
+        return oldProps.dao.address !== newProps.dao.address;
+    },
+    createObservable: (props: IEthProps) => {
+        const arc = getArc();
+        return arc.dao(props.dao.address).ethBalance().pipe(ethErrorHandler());
+    },
 });
 
 /***** Total Staked Balance *****/
 
 interface IStakedProps extends ISubscriptionProps<any> {
-  stakingContractAddress: string;
-  tokenAddress: string;
+    stakingContractAddress: string;
+    tokenAddress: string;
 }
 const TotalStakedBalance = (props: IStakedProps) => {
-  const { data, error, isLoading, tokenAddress } = props;
+    const { data, error, isLoading, tokenAddress } = props;
 
-  const tokenData = supportedTokens()[tokenAddress];
+    const tokenData = supportedTokens()[tokenAddress];
 
-  if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
-    return null;
-  }
-  return (
-    <li key={tokenAddress}>
-      <strong>{formatTokens(data, tokenData["symbol"], tokenData["decimals"])}</strong>
-    </li>
-  );
+    if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
+        return null;
+    }
+    return (
+        <li key={tokenAddress}>
+            <strong>{formatTokens(data, tokenData["symbol"], tokenData["decimals"])}</strong>
+        </li>
+    );
 };
 
 const SubscribedTotalStakedBalance = withSubscription({
-  wrappedComponent: TotalStakedBalance,
-  checkForUpdate: (oldProps: IStakedProps, newProps: IStakedProps) => {
-    return oldProps.stakingContractAddress !== newProps.stakingContractAddress;
-  },
-  createObservable: async (props: IStakedProps) => {
-    const arc = getArc();
-    const token = new Token(props.tokenAddress, arc);
+    wrappedComponent: TotalStakedBalance,
+    checkForUpdate: (oldProps: IStakedProps, newProps: IStakedProps) => {
+        return oldProps.stakingContractAddress !== newProps.stakingContractAddress;
+    },
+    createObservable: async (props: IStakedProps) => {
+        const arc = getArc();
+        const token = new Token(props.tokenAddress, arc);
 
-    return token.balanceOf((props.stakingContractAddress)).pipe(ethErrorHandler());
-  },
+        return token.balanceOf((props.stakingContractAddress)).pipe(ethErrorHandler());
+    },
 });
 
 /***** Token Balance *****/
 interface ITokenProps extends ISubscriptionProps<any> {
-  dao: IDAOState;
-  tokenAddress: string;
+    dao: IDAOState;
+    tokenAddress: string;
 }
 const TokenBalance = (props: ITokenProps) => {
-  const { data, error, isLoading, tokenAddress } = props;
+    const { data, error, isLoading, tokenAddress } = props;
 
-  const tokenData = supportedTokens()[tokenAddress];
-  if (isLoading || error || ((data === null || isNaN(data)) && tokenData.symbol !== genName())) {
-    return null;
-  }
+    const tokenData = supportedTokens()[tokenAddress];
+    if (isLoading || error || ((data === null || isNaN(data)) && tokenData.symbol !== genName())) {
+        return null;
+    }
 
-  return (
-    <li key={tokenAddress}>
-      <strong>{formatTokens(data, tokenData["symbol"], tokenData["decimals"])}</strong>
-    </li>
-  );
+    return (
+        <li key={tokenAddress}>
+            <strong>{formatTokens(data, tokenData["symbol"], tokenData["decimals"])}</strong>
+        </li>
+    );
 };
 
 const SubscribedTokenBalance = withSubscription({
-  wrappedComponent: TokenBalance,
-  checkForUpdate: (oldProps: ITokenProps, newProps: ITokenProps) => {
-    return oldProps.dao.address !== newProps.dao.address || oldProps.tokenAddress !== newProps.tokenAddress;
-  },
-  createObservable: async (props: ITokenProps) => {
-    // General cache priming for the DAO we do here
-    // prime the cache: get all members fo this DAO -
-    const daoState = props.dao;
-    await daoState.dao.members({ first: 1000, skip: 0 }).pipe(first()).toPromise();
+    wrappedComponent: TokenBalance,
+    checkForUpdate: (oldProps: ITokenProps, newProps: ITokenProps) => {
+        return oldProps.dao.address !== newProps.dao.address || oldProps.tokenAddress !== newProps.tokenAddress;
+    },
+    createObservable: async (props: ITokenProps) => {
+        // General cache priming for the DAO we do here
+        // prime the cache: get all members fo this DAO -
+        const daoState = props.dao;
+        await daoState.dao.members({ first: 1000, skip: 0 }).pipe(first()).toPromise();
 
-    const arc = getArc();
-    const token = new Token(props.tokenAddress, arc);
+        const arc = getArc();
+        const token = new Token(props.tokenAddress, arc);
 
-    return token.balanceOf(props.dao.address).pipe(ethErrorHandler());
-  },
+        return token.balanceOf(props.dao.address).pipe(ethErrorHandler());
+    },
 });
 
 const SubscribedSidebarMenu = withSubscription({
-  wrappedComponent: SidebarMenu,
-  checkForUpdate: ["daoAvatarAddress"],
-  loadingComponent: <div></div>,
-  createObservable: (props: IProps) => {
-    if (props.daoAvatarAddress) {
-      // const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + props.daoAvatarAddress) || "0";
+    wrappedComponent: SidebarMenu,
+    checkForUpdate: ["daoAvatarAddress"],
+    loadingComponent: <div></div>,
+    createObservable: (props: IProps) => {
+        if (props.daoAvatarAddress) {
+            // const lastAccessDate = localStorage.getItem(`daoWallEntryDate_` + props.daoAvatarAddress) || "0";
 
-      // const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
-      //   .then((response: AxiosResponse<any>): IHasNewPosts => {
-      //     if (response.status) {
-      //       const posts = response.data.response;
-      //       return { hasNewPosts : posts && posts.length };
-      //     } else {
-      //       // eslint-disable-next-line no-console
-      //       console.error(`request for disqus posts failed: ${response.statusText}`);
-      //       return { hasNewPosts : false };
-      //     }
-      //   })
-      //   .catch((error: Error): IHasNewPosts => {
-      //     // eslint-disable-next-line no-console
-      //     console.error(`request for disqus posts failed: ${error.message}`);
-      //     return { hasNewPosts : false };
-      //   });
+            // const promise = axios.get(`https://disqus.com/api/3.0/threads/listPosts.json?api_key=KVISHbDLtTycaGw5eoR8aQpBYN8bcVixONCXifYcih5CXanTLq0PpLh2cGPBkM4v&forum=${process.env.DISQUS_SITE}&thread:ident=${props.daoAvatarAddress}&since=${lastAccessDate}&limit=1&order=asc`)
+            //   .then((response: AxiosResponse<any>): IHasNewPosts => {
+            //     if (response.status) {
+            //       const posts = response.data.response;
+            //       return { hasNewPosts : posts && posts.length };
+            //     } else {
+            //       // eslint-disable-next-line no-console
+            //       console.error(`request for disqus posts failed: ${response.statusText}`);
+            //       return { hasNewPosts : false };
+            //     }
+            //   })
+            //   .catch((error: Error): IHasNewPosts => {
+            //     // eslint-disable-next-line no-console
+            //     console.error(`request for disqus posts failed: ${error.message}`);
+            //     return { hasNewPosts : false };
+            //   });
 
-      const arc = getArc();
-      return combineLatest(arc.dao(props.daoAvatarAddress).state({ subscribe: true }));
-    } else {
-      return of(null);
-    }
-  },
+            const arc = getArc();
+            return combineLatest(arc.dao(props.daoAvatarAddress).state({ subscribe: true }));
+        } else {
+            return of(null);
+        }
+    },
 });
 //@ts-ignore
 const withTrans = withTranslation()(SubscribedSidebarMenu)
