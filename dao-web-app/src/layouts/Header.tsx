@@ -250,7 +250,6 @@ class Header extends React.Component<IProps, null> {
     return(
       <div className={css.headerContainer}>
         <nav id="header" className={css.header}>
-          <TrainingTooltip overlay={t("tooltips.viewYourPersonalFeed")} placement="bottomRight">
             <div className={css.menu}>
               <a href="https://snglsdao.io/">
                 {/* <img src="/assets/images/alchemy-logo-white.svg" /> */}
@@ -258,7 +257,6 @@ class Header extends React.Component<IProps, null> {
                 <img className={css.mobile} src="/assets/images/logo_mobile.svg" />
               </a>
             </div>
-          </TrainingTooltip>
 
 
           <div className={css.topInfo}>

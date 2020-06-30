@@ -1,5 +1,5 @@
 import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake /*, Member*/ } from "@daostack/client";
-import { enableWalletProvider,  getArc, getArcSettings } from "arc";
+import {/* enableWalletProvider, */ getArc, getArcSettings } from "arc";
 import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
@@ -13,7 +13,7 @@ import { showNotification } from "reducers/notifications";
 import { first, map } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
-import classNames from "classnames";
+//import classNames from "classnames";
 import { withTranslation } from 'react-i18next';
 
 import { connect } from "react-redux";
@@ -24,7 +24,7 @@ import { baseTokenName, ethErrorHandler, formatTokens, genName, supportedTokens/
 //  import { map } from 'rxjs/operators'
 import {zip} from "rxjs";
 import BN = require("bn.js");
-import Reputation from "../Account/Reputation";
+//import Reputation from "../Account/Reputation";
 
 // import { IProfilesState } from "reducers/profilesReducer";
 
@@ -123,16 +123,16 @@ class DaoDashboard extends React.Component<IProps, IState> {
     };
   }
 
-  private async handleNewProposal(): Promise<void> {
+ /* private async handleNewProposal(): Promise<void> {
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
 
     this.props.history.push(`/dao/dashboard/join/`);
-  }
+  }*/
 
-  private _handleNewProposal = (e: any): void => {
+  /*private _handleNewProposal = (e: any): void => {
     this.handleNewProposal();
     e.preventDefault();
-  };
+  };*/
 
   public async componentDidMount() {
     const arc = getArc();
@@ -156,7 +156,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
     //@ts-ignore
     const proposals = data.proposals;
     const arcSettings = getArcSettings();
-
+    const supportedTok = supportedTokens();
     const proposalsHTML = proposals.map((proposal: Proposal) => {
       return (<ProposalHistoryRow key={"proposal_" + proposal.id} history={this.props.history} proposal={proposal} daoState={daoState} currentAccountAddress={currentAccountAddress} />);
     });
@@ -172,13 +172,14 @@ class DaoDashboard extends React.Component<IProps, IState> {
 
          <div className={css.pageHead}>
     <h1>{t("sidebar.dashboard")}</h1>
-          <div>
+          {/*
+          `<div>
             <a className={classNames({
                 [css.redButton]: true,
                 // [css.disabled]: !isActive,
               })}
               href="#!"
-              onClick={/*isActive*/ true ? this._handleNewProposal : null}
+              onClick={ true ? this._handleNewProposal : null}
               data-test-id="openJoin"
               > {t("daojoin.getRep")} </a>
             {
@@ -194,7 +195,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
             ) : (
                 <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
               )}
-          </div>
+          </div>`*/}
         </div>
          {/* Key parameters div */}
            <div>
@@ -267,7 +268,22 @@ class DaoDashboard extends React.Component<IProps, IState> {
                      <ul>
                         <li key={ "ETH_balance" }><span>ETH:</span><p><SubscribedEthBalance dao={daoState} /></p></li>
 
-                        {Object.keys(supportedTokens()).map((tokenAddress) => {
+                        {Object.keys(supportedTok).reduce((ac: any, it: any): any => {
+              if(supportedTok[it].symbol === "ETH") {
+                ac[0] = it;
+              } else if(supportedTok[it].symbol === "SGT") {
+                ac[1] = it;
+              } else if (supportedTok[it].symbol === "SNGLS") {
+                ac[2] = it;
+              } else if (supportedTok[it].symbol === "GEN") {
+                ac[3] = it;
+              } else if (supportedTok[it].symbol === "DAI") {
+                ac[4] = it;
+              } else if (supportedTok[it].symbol === "USDC") {
+                ac[5] = it;
+              }
+              return ac;
+            }, []).map((tokenAddress: any) => {
                           return  <li key={ supportedTokens()[tokenAddress]["symbol"] + "_balance" }>
                                     <span>
                                       {  supportedTokens()[tokenAddress]["symbol"] } :
@@ -570,9 +586,8 @@ const TokenBalance = (props: ITokenProps) => {
   const { data, error, isLoading, tokenAddress } = props;
   const tokenData = supportedTokens()[tokenAddress];
   if (isLoading || error || ((data === null || isNaN(data) || data.isZero()) && tokenData.symbol !== genName())) {
-    return null;
+    return <strong>0</strong>;
   }
-
   return (
       <strong>{ (formatTokens(data, tokenData["symbol"], tokenData["decimals"])).split(' ')[0] }</strong>
   );

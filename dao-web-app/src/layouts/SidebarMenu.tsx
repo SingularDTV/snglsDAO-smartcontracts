@@ -68,7 +68,7 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
     const [ dao ] = this.props.data ;
     const daoHoldingsAddress = "https://etherscan.io/tokenholdings?a=" + dao.address;
     const arcSettings = getArcSettings();
-
+    const supportedTok = supportedTokens();
     return (
       <div>
       <div className={css.daoNavigation}>
@@ -136,8 +136,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
                 </span>
               </Link>
             </li>
-
-            <li>
+{
+            /*`<li>
               <Link to={"/dao/scheme/" + arcSettings.grantsSchemeContractAddress} onClick={this.handleCloseMenu}>
                 <span className={css.menuDot} />
                 <span className={
@@ -152,7 +152,8 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
 
                 </span>
               </Link>
-            </li>
+            </li>`*/
+  }
             <li>
               <TrainingTooltip placement="right" overlay={t("tooltips.listOfEntities")}>
                 <Link to={"/dao/members/"} onClick={this.handleCloseMenu}>
@@ -220,7 +221,22 @@ class SidebarMenu extends React.Component<IProps, IStateProps> {
           <ul>
             <SubscribedEthBalance dao={dao} />
 
-            {Object.keys(supportedTokens()).map((tokenAddress) => {
+            { Object.keys(supportedTok).reduce((ac: any, it: any): any => {
+              if(supportedTok[it].symbol === "ETH") {
+                ac[0] = it;
+              } else if(supportedTok[it].symbol === "SGT") {
+                ac[1] = it;
+              } else if (supportedTok[it].symbol === "SNGLS") {
+                ac[2] = it;
+              } else if (supportedTok[it].symbol === "GEN") {
+                ac[3] = it;
+              } else if (supportedTok[it].symbol === "DAI") {
+                ac[4] = it;
+              } else if (supportedTok[it].symbol === "USDC") {
+                ac[5] = it;
+              }
+              return ac;
+            }, []).map((tokenAddress: any) => {
               return <SubscribedTokenBalance tokenAddress={tokenAddress} dao={dao} key={"token_" + tokenAddress} />;
             })}
           </ul>
