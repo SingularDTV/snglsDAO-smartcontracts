@@ -1,8 +1,8 @@
 import { ISchemeState } from "@daostack/client";
 import { createProposal } from "actions/arcActions";
-import { enableWalletProvider } from "arc";
+// import { enableWalletProvider } from "arc";
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
-import Analytics from "lib/analytics";
+// import Analytics from "lib/analytics";
 import * as React from "react";
 import { connect } from "react-redux";
 import { showNotification, NotificationStatus } from "reducers/notifications";
@@ -69,25 +69,26 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
   }
 
   public async handleSubmit(values: IFormValues, { setSubmitting }: any ): Promise<void> {
-    if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
-
-    const proposalValues = {...values,
-      dao: this.props.daoAvatarAddress,
-      scheme: this.props.scheme.address,
-      tags: this.state.tags,
-    };
-
-    setSubmitting(false);
-    await this.props.createProposal(proposalValues);
-
-    Analytics.track("Submit Proposal", {
-      "DAO Address": this.props.daoAvatarAddress,
-      "Proposal Title": values.title,
-      "Scheme Address": this.props.scheme.address,
-      "Scheme Name": this.props.scheme.name,
-    });
-
-    this.props.handleClose();
+    console.log('Test test test')
+    // if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
+    //
+    // const proposalValues = {...values,
+    //   dao: this.props.daoAvatarAddress,
+    //   scheme: this.props.scheme.address,
+    //   tags: this.state.tags,
+    // };
+    //
+    // setSubmitting(false);
+    // await this.props.createProposal(proposalValues);
+    //
+    // Analytics.track("Submit Proposal", {
+    //   "DAO Address": this.props.daoAvatarAddress,
+    //   "Proposal Title": values.title,
+    //   "Scheme Address": this.props.scheme.address,
+    //   "Scheme Name": this.props.scheme.name,
+    // });
+    //
+    // this.props.handleClose();
   }
 
   // Exports data from form to a shareable url.
@@ -142,15 +143,15 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
               errors.url = t('errors.invalidUrl');
             }
 
-            const bytesPattern = new RegExp("0x[0-9a-f]+", "i");
-            if (values.callData && !bytesPattern.test(values.callData)) {
-              errors.callData = t('errors.invalidEncoded');
-            }
+            // const bytesPattern = new RegExp("0x[0-9a-f]+", "i");
+            // if (values.callData && !bytesPattern.test(values.callData)) {
+            //   errors.callData = t('errors.invalidEncoded');
+            // }
 
-            require("callData");
+            // require("callData");
             require("title");
             require("description");
-            require("value");
+            // require("value");
             nonEmpty("value");
             nonNegative("value");
 
@@ -168,122 +169,123 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
             setFieldTouched,
             setFieldValue,
             values,
-          }: FormikProps<IFormValues>) =>
-            <Form noValidate>
-              <TrainingTooltip overlay={t("tooltips.theTitleIsTHeHeaderOfTheProposal")} placement="right">
-                <label htmlFor="titleInput">
-                  <div className={css.requiredMarker}>*</div>
-                  {t("dashboard.title")}
-                  <ErrorMessage name="title">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
-                </label>
-              </TrainingTooltip>
-              <Field
-                autoFocus
-                id="titleInput"
-                maxLength={120}
-                placeholder={t("proposal.summarizeYourProposal")}
-                name="title"
-                type="text"
-                className={touched.title && errors.title ? css.error : null}
-              />
+          }: FormikProps<IFormValues>) =>{
+             return (
+               <Form noValidate>
+                 <TrainingTooltip overlay={t("tooltips.theTitleIsTHeHeaderOfTheProposal")} placement="right">
+                   <label htmlFor="titleInput">
+                     <div className={css.requiredMarker}>*</div>
+                     {t("dashboard.title")}
+                     <ErrorMessage name="title">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
+                   </label>
+                 </TrainingTooltip>
+                 <Field
+                   autoFocus
+                   id="titleInput"
+                   maxLength={120}
+                   placeholder={t("proposal.summarizeYourProposal")}
+                   name="title"
+                   type="text"
+                   className={touched.title && errors.title ? css.error : null}
+                 />
 
-              <TrainingTooltip overlay={fnDescription} placement="right">
-                <label htmlFor="descriptionInput">
-                  <div className={css.requiredMarker}>*</div>
-                {t("account.description")}
-                  <img className={css.infoTooltip} src="/assets/images/Icon/Info.svg"/>
-                  <ErrorMessage name="description">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
-                </label>
-              </TrainingTooltip>
-              <Field
-                component={MarkdownField}
-                onChange={(value: any) => { setFieldValue("description", value); }}
-                id="descriptionInput"
-                placeholder="Describe your proposal in greater detail"
-                name="description"
-                className={touched.description && errors.description ? css.error : null}
-              />
+                 <TrainingTooltip overlay={fnDescription} placement="right">
+                   <label htmlFor="descriptionInput">
+                     <div className={css.requiredMarker}>*</div>
+                     {t("account.description")}
+                     <img className={css.infoTooltip} src="/assets/images/Icon/Info.svg"/>
+                     <ErrorMessage name="description">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
+                   </label>
+                 </TrainingTooltip>
+                 <Field
+                   component={MarkdownField}
+                   onChange={(value: any) => { setFieldValue("description", value); }}
+                   id="descriptionInput"
+                   placeholder="Describe your proposal in greater detail"
+                   name="description"
+                   className={touched.description && errors.description ? css.error : null}
+                 />
 
-              <TrainingTooltip overlay="Add some tags to give context about your proposal e.g. idea, signal, bounty, research, etc" placement="right">
-                <label className={css.tagSelectorLabel}>
-                {t('schema.tags')}
-                </label>
-              </TrainingTooltip>
+                 <TrainingTooltip overlay="Add some tags to give context about your proposal e.g. idea, signal, bounty, research, etc" placement="right">
+                   <label className={css.tagSelectorLabel}>
+                     {t('schema.tags')}
+                   </label>
+                 </TrainingTooltip>
 
-              <div className={css.tagSelectorContainer}>
-                <TagsSelector onChange={this.onTagsChange}></TagsSelector>
-              </div>
+                 <div className={css.tagSelectorContainer}>
+                   <TagsSelector onChange={this.onTagsChange}></TagsSelector>
+                 </div>
 
-              <TrainingTooltip overlay="Link to the fully detailed description of your proposal" placement="right">
-                <label htmlFor="urlInput">
-                {t('schema.url')}
-                  <ErrorMessage name="url">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
-                </label>
-              </TrainingTooltip>
-              <Field
-                id="urlInput"
-                maxLength={120}
-                placeholder="Description URL"
-                name="url"
-                type="text"
-                className={touched.url && errors.url ? css.error : null}
-              />
+                 <TrainingTooltip overlay="Link to the fully detailed description of your proposal" placement="right">
+                   <label htmlFor="urlInput">
+                     {t('schema.url')}
+                     <ErrorMessage name="url">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
+                   </label>
+                 </TrainingTooltip>
+                 <Field
+                   id="urlInput"
+                   maxLength={120}
+                   placeholder="Description URL"
+                   name="url"
+                   type="text"
+                   className={touched.url && errors.url ? css.error : null}
+                 />
 
-              <div className={css.encodedData}>
-                <div>
-                  <label htmlFor="callData">
-                    <div className={css.requiredMarker}>*</div>
-                    {t('proposal.paramsToChange')}
-                    <ErrorMessage name="callData">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
-                  </label>
+                 <div className={css.encodedData}>
+                   <div>
+                     <label htmlFor="callData">
+                       <div className={css.requiredMarker}>*</div>
+                       {t('proposal.paramsToChange')}
+                       <ErrorMessage name="callData">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
+                     </label>
 
 
-                  <div className={css.labelInput}>
-                    <label htmlFor="Transactionfee">{t('proposal.transFee')}</label>
-                    <Field
-                      id="Transactionfee"
-                      maxLength={120}
-                      placeholder="New value (%)"
-                      name="Transactionfee"
-                      type="text"
-                    />
-                  </div>
+                     <div className={css.labelInput}>
+                       <label htmlFor="Transactionfee">{t('proposal.transFee')}</label>
+                       <Field
+                         id="Transactionfee"
+                         maxLength={120}
+                         placeholder="New value (%)"
+                         name="Transactionfee"
+                         type="text"
+                       />
+                     </div>
 
-                  <div className={css.labelInput}>
-                    <label htmlFor="Listingfee">{t('proposal.listingFee')}</label>
-                    <Field
-                      id="Listingfee"
-                      maxLength={120}
-                      placeholder="New value (SNGLS)"
-                      name="Listingfee"
-                      type="text"
-                    />
-                  </div>
+                     <div className={css.labelInput}>
+                       <label htmlFor="Listingfee">{t('proposal.listingFee')}</label>
+                       <Field
+                         id="Listingfee"
+                         maxLength={120}
+                         placeholder="New value (SNGLS)"
+                         name="Listingfee"
+                         type="text"
+                       />
+                     </div>
 
-                  <div className={css.labelInput}>
-                    <label htmlFor="Validationfee">{t('dashboard.validationFee')}</label>
-                    <Field
-                      id="Validationfee"
-                      maxLength={120}
-                      placeholder="New value (SNGLS)"
-                      name="Validationfee"
-                      type="text"
-                      disabled={true}
-                    />
-                  </div>
+                     <div className={css.labelInput}>
+                       <label htmlFor="Validationfee">{t('dashboard.validationFee')}</label>
+                       <Field
+                         id="Validationfee"
+                         maxLength={120}
+                         placeholder="New value (SNGLS)"
+                         name="Validationfee"
+                         type="text"
+                         disabled={true}
+                       />
+                     </div>
 
-                  <div className={css.labelInput}>
-                    <label htmlFor="Membershipfee">{t('membership.memFee')}</label>
-                    <Field
-                      id="Membershipfee"
-                      maxLength={120}
-                      placeholder="New value (SNGLS)"
-                      name="Membershipfee"
-                      type="text"
-                    />
-                  </div>
+                     <div className={css.labelInput}>
+                       <label htmlFor="Membershipfee">{t('membership.memFee')}</label>
+                       <Field
+                         id="Membershipfee"
+                         maxLength={120}
+                         placeholder="New value (SNGLS)"
+                         name="Membershipfee"
+                         type="text"
+                       />
+                     </div>
 
-                  {/* <label className={css.radio}>
+                     {/* <label className={css.radio}>
                     <input
                       type="radio"
                       name="test"
@@ -311,7 +313,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                     />Validation fee
                   </label> */}
 
-                  {/* <label htmlFor="callDataInput">
+                     {/* <label htmlFor="callDataInput">
                     <div className={css.requiredMarker}>*</div>
                     Enter new fee value
                     <ErrorMessage name="callDataInput">{(msg: string) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
@@ -328,7 +330,7 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                   /> */}
 
 
-                  {/* <Field
+                     {/* <Field
                     id="callDataInput"
                     component="textarea"
                     placeholder="The encoded function call data of the contract function call"
@@ -336,9 +338,9 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                     className={touched.callData && errors.callData ? css.error : null}
                   /> */}
 
-                </div>
+                   </div>
 
-                {/* <div>
+                   {/* <div>
                   <label htmlFor="value">
                     <div className={css.requiredMarker}>*</div>
                     {baseTokenName()} Value
@@ -354,24 +356,26 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                     step={0.1}
                   />
                 </div> */}
-              </div>
+                 </div>
 
-              <div className={css.createProposalActions}>
-                <TrainingTooltip overlay="Export proposal" placement="top">
-                  <button id="export-proposal" className={css.exportProposal} type="button" onClick={() => this.exportFormValues(values)}>
-                    <img src="/assets/images/Icon/share-blue.svg" />
-                  </button>
-                </TrainingTooltip>
-                <button className={css.exitProposalCreation} type="button" onClick={handleClose}>
-                {t("schema.submitProposal")}
-                </button>
-                <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
-                  <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
-                  {t("daojoin.cancel")}
-                  </button>
-                </TrainingTooltip>
-              </div>
-            </Form>
+                 <div className={css.createProposalActions}>
+                   <TrainingTooltip overlay="Export proposal" placement="top">
+                     <button id="export-proposal" className={css.exportProposal} type="button" onClick={() => this.exportFormValues(values)}>
+                       <img src="/assets/images/Icon/share-blue.svg" />
+                     </button>
+                   </TrainingTooltip>
+                   <button disabled={isSubmitting} className={css.exitProposalCreation} type="submit">
+                     {t("schema.submitProposal")}
+                   </button>
+                   <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
+                     <button className={css.submitProposal} type="button"  onClick={handleClose}>
+                       {t("daojoin.cancel")}
+                     </button>
+                   </TrainingTooltip>
+                 </div>
+               </Form>
+             )
+            }
           }
         />
       </div>
