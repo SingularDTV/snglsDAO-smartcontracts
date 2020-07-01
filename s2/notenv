@@ -1,0 +1,12 @@
+network="rinkeby"
+subgraph="obaranni-blaize/s2"
+
+# Not necessary for Docker deployment
+graph_node="https://api.thegraph.com/deploy/"
+ipfs_node="https://api.thegraph.com/ipfs/"
+access_token=bd3657fcf9d242b6b81ddf638d46a609
+
+# Not necessary for The Graph server
+postgres_password=<YOUR_PASSWORD>
+ethereum_node="https://<TARGET_NETWORK>.infura.io/<INFURA-KEY>"
+start_block=0

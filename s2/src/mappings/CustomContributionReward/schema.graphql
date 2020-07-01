@@ -1,0 +1,6 @@
+type CustomContributionReward @entity {
+  id: ID!
+  count: BigInt!
+  _avatar: Bytes! # address
+  _proposalId: Bytes! # bytes32
+}
