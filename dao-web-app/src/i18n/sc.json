@@ -561,5 +561,6 @@
     "protocolParameters": "协议参数",
     "limit150": "字数上限150个字符",
     "doUAgree": "您是否同意将令牌冻结7天？",
-    "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days": "选中此项即表示您同意我们的 <3>参与协议</3> 令牌将被锁定30天"
+    "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days": "选中此项即表示您同意我们的 <3>参与协议</3> 令牌将被锁定30天",
+    "Apps Manager": "应用程式管理员"
 }

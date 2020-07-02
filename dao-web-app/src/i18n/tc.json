@@ -562,5 +562,6 @@
     "protocolParameters": "協議參數",
     "limit150": "告訴DAO關於你的簡介",
     "doUAgree": "您是否同意將令牌凍結7天？",
-    "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days": "選中此復選框即表示您同意我們的 <3>參與協議</3> 並且令牌將被鎖定30天"
+    "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days": "選中此復選框即表示您同意我們的 <3>參與協議</3> 並且令牌將被鎖定30天",
+    "Apps Manager": "應用程式管理員"
 }

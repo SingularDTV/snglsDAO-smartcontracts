@@ -571,5 +571,6 @@
     "protocolParameters": "Protocol Parameters",
     "limit150": "Limit 150 characters",
     "doUAgree": "Do you agree to freeze your tokens for a seven days?",
-    "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days": "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days"
+    "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days": "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days",
+    "Apps Manager": "Apps Manager"
 }
