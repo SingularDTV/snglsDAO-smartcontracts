@@ -1,4 +1,4 @@
-import { Address, DAO, IContributionReward, IDAOState, IRewardState, Proposal, Reputation, Token } from "@daostack/client";
+import { Address, DAO, IContributionReward, IDAOState, IRewardState, Proposal, Reputation, Token } from "@daostack/clientc";
 import { enableWalletProvider, getArc } from "arc";
 import { redeemProposal } from "actions/arcActions";
 

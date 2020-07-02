@@ -1,4 +1,4 @@
-import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake /*, Member*/ } from "@daostack/client";
+import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake /*, Member*/ } from "@daostack/clientc";
 import { enableWalletProvider, getArc, getArcSettings } from "arc";
 import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";

@@ -1,4 +1,4 @@
-import { IDAOState, Token } from "@daostack/client";
+import { IDAOState, Token } from "@daostack/clientc";
 import { hideMenu, hideSidebar } from "actions/uiActions";
 import { getArc, getArcSettings } from "arc";
 import TrainingTooltip from "components/Shared/TrainingTooltip";

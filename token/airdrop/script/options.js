@@ -1,15 +1,15 @@
 const getDeployedAddress = require("./getDAODeployedAddress");
-const singularContractAddress = require("../../contracts/build/contracts/SingularDTVToken.json").networks[4].address
+const singularContractAddress = require("../../contracts/build/contracts/SingularDTVToken.json").networks[1512051714758].address
 module.exports = {
     oldContractAddress: singularContractAddress,
     //name of the truffle build file
     oldContractBuildFileName: './script/ERC20.json',
 
-    newContractAddress: getDeployedAddress("DAOToken", "rinkeby"),
+    newContractAddress: getDeployedAddress("DAOToken","private"),
     //name of the truffle build file
     newContractBuildFileName: './script/ERC20.json',
-    mnemonic: "dumb denial cover ski deer local chaos recipe remove old time copper",
-    providerAddress: 'https://rinkeby.infura.io/v3/ef306a43234747eb9c087e5301ed9363',
+    mnemonic: 'myth like bonus scare over problem client lizard pioneer submit female collect',
+    providerAddress: "ws://localhost:8545",
     resultFileName: "./results.json",
     eventName: "Transfer",
     oldDecimals: 18,

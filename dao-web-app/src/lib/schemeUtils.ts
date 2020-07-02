@@ -2,7 +2,7 @@
 import {
   Address,
   IContractInfo,
-  ISchemeState} from "@daostack/client";
+  ISchemeState} from "@daostack/clientc";
 import { rewarderContractName } from "components/Scheme/ContributionRewardExtRewarders/rewardersProps";
 import { GenericSchemeRegistry } from "genericSchemeRegistry";
 import { getArcSettings } from "arc";
@@ -87,7 +87,6 @@ export function isKnownScheme(address: Address) {
 
 export function schemeName(scheme: ISchemeState|IContractInfo, fallback?: string) {
   let name: string;
-  console.log("=====>  ", scheme);
   if (scheme.name === "GenericScheme" || scheme.name === "UGenericScheme") {
     if ((scheme as any).genericSchemeParams || ((scheme as any).uGenericSchemeParams)) {
       const genericSchemeRegistry = new GenericSchemeRegistry();
