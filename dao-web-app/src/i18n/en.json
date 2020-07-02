@@ -115,7 +115,8 @@
         "sgtTokens": "SGT Tokens Staked: ",
         "reputation": "Reputation:",
         "Stake": "Stake",
-        "Unstake": "Unstake"
+        "Unstake": "Unstake",
+        "yourCurrentBalance": "Your current balance: "
     },
     "loading": "Loading...",
     "noProfile": "No Profile",
