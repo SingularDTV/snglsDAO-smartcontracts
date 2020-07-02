@@ -239,7 +239,8 @@ export const settings = {
     txSenderServiceUrl: "",
     web3ConnectProviderOptions: getWeb3ConnectProviderOptions("mainnet"),
         
-    minLockingPeriod: 604800,
+    snglsLockingPeriod: 604800,
+    sgtLockingPeriod: 2592000,
 
     daoAvatarContractAddress: "0x515AEF991F262D0D098DAcfb57FccFe9852fF9c1",
     sgtTokenContractAddress: "0xc4199fB6FFDb30A829614becA030f9042f1c3992",
