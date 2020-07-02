@@ -87,6 +87,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
     const { data } = this.props;
 
     const [proposalsQueued, proposalsPreBoosted, proposalsBoosted ] = data;
+    console.log("Proposals list; ", data)
     const { currentAccountAddress, daoState, fetchMore, isActive, scheme } = this.props;
     let proposalCount=0;
 

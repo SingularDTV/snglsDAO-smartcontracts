@@ -117,8 +117,8 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
   public async componentDidMount() {
     const arc = getArc();
     const settings = getArcSettings();
-    const lockingSGT4ReputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
-    const staked = await lockingSGT4ReputationContract.methods.lockers(this.props.currentAccountAddress).call()
+    const memFeeStakingContract = new arc.web3.eth.Contract(settings.membershipFeeStakingContractABI, settings.membershipFeeStakingContractAddress);
+    const staked = await memFeeStakingContract.methods.lockers(this.props.currentAccountAddress).call()
     this.setState({ releaseTime: staked?.releaseTime})
     this.fetchBalances();
   }
@@ -155,7 +155,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
     tokenContract.methods.approve(settings.membershipFeeStakingContractAddress, calculatedApproveValue).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
       if (error) throw error;
     }).then(function () {
-      memFeeStakingContract.methods.lock(calculatedApproveValue, settings.minLockingPeriod).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
+      memFeeStakingContract.methods.lock(calculatedApproveValue, settings.snglsLockingPeriod).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
         console.log(error);
         if (error) throw error;
          this.fetchBalances();

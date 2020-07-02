@@ -1,0 +1,29 @@
+{
+  "name": "snglsDAO",
+  "Avatar": "0x88bB05a50aB34660858384f453F8373976f4709c",
+  "DAOToken": "0x4Cd11dBb479888A663804a9CA17a5dB6cad99B41",
+  "Reputation": "0x22Ee7113d92fa53899a45057469AE478be0AcAe4",
+  "Controller": "0xBd55161c7BEd71c621d2bef75bb4c937D32E5f03",
+  "Schemes": [
+    {
+      "name": "LockingSGT4Reputation",
+      "alias": "LockingSGT4Reputation",
+      "address": "0x1Cb4fAD96Cf2Ba0f98A72031836A4db13d047D32",
+      "arcVersion": "0.0.1-rc.32"
+    },
+    {
+      "name": "ContributionReward",
+      "alias": "ContributionReward",
+      "address": "0x2EA8aD628Cc329813eA8BEd5787F1A3A620fA6bE",
+      "arcVersion": "0.0.1-rc.32"
+    }
+  ],
+  "StandAloneContracts": [
+    {
+      "name": "MembershipFeeStaking",
+      "address": "0x2839b590c53371848759ef92c929f9e4Dded120a",
+      "arcVersion": "0.0.1-rc.32"
+    }
+  ],
+  "arcVersion": "0.0.1-rc.32"
+}

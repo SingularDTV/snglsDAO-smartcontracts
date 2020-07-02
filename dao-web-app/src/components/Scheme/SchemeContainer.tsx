@@ -127,14 +127,20 @@ class SchemeContainer extends React.Component<IProps, IState> {
     const { transactionFee, listingFee, validationFee, membershipFee } = this.state;
     const { schemeId, daoState } = this.props;
     const daoAvatarAddress = daoState.address;
-    const schemeState = this.props.data[0];
+    let schemeState = this.props.data[0];
     const approvedProposals = this.props.data[1];
 
     if (schemeState.name === "ReputationFromToken") {
       return <ReputationFromToken {...this.props} daoAvatarAddress={daoAvatarAddress} schemeState={schemeState} />;
     }
+    
+    let isActive = getSchemeIsActive(schemeState);
 
-    const isActive = getSchemeIsActive(schemeState);
+    if (schemeState.id === getArcSettings().grantsSchemeID) {
+      schemeState.name = "Grants";
+      isActive = true;
+    }
+
     const isProposalScheme = PROPOSAL_SCHEME_NAMES.includes(schemeState.name);
 
     const proposalsTabClass = classNames({

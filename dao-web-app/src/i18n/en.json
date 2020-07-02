@@ -112,8 +112,10 @@
         "removeRep": "REMOVE REPUTATION",
         "cancel": "Cancel",
         "max": "max",
-        "sgtTokens": "SGT Tokens: ",
-        "reputation": "Reputation:"
+        "sgtTokens": "SGT Tokens Staked: ",
+        "reputation": "Reputation:",
+        "Stake": "Stake",
+        "Unstake": "Unstake"
     },
     "loading": "Loading...",
     "noProfile": "No Profile",
@@ -568,5 +570,7 @@
     "schin": "简体中文",
     "protocolParameters": "Protocol Parameters",
     "limit150": "Limit 150 characters",
-    "doUAgree": "Do you agree to freeze your tokens for a seven days?"
+    "doUAgree": "Do you agree to freeze your tokens for a seven days?",
+    "agreementCheckbox": "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days",
+    "Apps Manager": "Apps Manager"
 }

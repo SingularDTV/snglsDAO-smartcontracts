@@ -1,0 +1,6 @@
+type LockingSGT4Reputation @entity {
+  id: ID!
+  count: BigInt!
+  sender: Bytes! # address
+  _amount: BigInt! # uint256
+}

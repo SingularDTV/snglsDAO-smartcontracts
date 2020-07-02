@@ -1,0 +1,10 @@
+entities:
+  - Lock
+  - Release
+abi:
+  - name: LockingSGT4Reputation
+eventHandlers:
+  - event: Lock(indexed address,uint256,uint256)
+    handler: handleLock
+  - event: Release(indexed address,uint256)
+    handler: handleRelease

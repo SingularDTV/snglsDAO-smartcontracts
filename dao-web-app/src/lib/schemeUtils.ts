@@ -5,7 +5,7 @@ import {
   ISchemeState} from "@daostack/client";
 import { rewarderContractName } from "components/Scheme/ContributionRewardExtRewarders/rewardersProps";
 import { GenericSchemeRegistry } from "genericSchemeRegistry";
-
+import { getArcSettings } from "arc";
 /**
  * gotta load moment in order to use moment-timezone directly
  */
@@ -52,6 +52,7 @@ export const KNOWN_SCHEME_NAMES = [
 ];
 
 export const PROPOSAL_SCHEME_NAMES = [
+  "Grants",
   "ContributionReward",
   "GenericScheme",
   "SchemeRegistrar",
@@ -108,7 +109,7 @@ export function schemeName(scheme: ISchemeState|IContractInfo, fallback?: string
       // this should never happen...
       name = "Blockchain Interaction";
     }
-  } else if (scheme.name === "ContributionReward") {
+  } else if (scheme.id === getArcSettings().grantsSchemeID) {
     name ="Grants";
   } else if (scheme.name === "SchemeRegistrar") {
     name ="Apps Manager";

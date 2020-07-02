@@ -1,5 +1,5 @@
 import { Address, IDAOState, Token, IProposalStage, Proposal, Vote, Scheme, Stake /*, Member*/ } from "@daostack/client";
-import {/* enableWalletProvider, */ getArc, getArcSettings } from "arc";
+import { enableWalletProvider, getArc, getArcSettings } from "arc";
 import * as arcActions from "../../actions/arcActions";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
@@ -13,18 +13,14 @@ import { showNotification } from "reducers/notifications";
 import { first, map } from "rxjs/operators";
 import ProposalHistoryRow from "../Proposal/ProposalHistoryRow";
 import * as css from "./Dao.scss";
-//import classNames from "classnames";
+import classNames from "classnames";
 import { withTranslation } from 'react-i18next';
 
 import { connect } from "react-redux";
 import { baseTokenName, ethErrorHandler, formatTokens, genName, supportedTokens/*, fromWei*/ } from "lib/util";
-// import { createGraphQlQuery, isAddress
-//   // stringToUint8Array
-//  } from './utils'
-//  import { map } from 'rxjs/operators'
 import {zip} from "rxjs";
 import BN = require("bn.js");
-//import Reputation from "../Account/Reputation";
+import Reputation from "../Account/Reputation";
 
 // import { IProfilesState } from "reducers/profilesReducer";
 
@@ -63,48 +59,6 @@ interface IState {
     userReputation: string;
 }
 
-// const getUserRep = (daoAddress: string, userAddress: string, context: any) => {
-
-//   let options: any = {
-//     where: {
-
-//     }
-//   }
-//     if (options.where.id) {
-//       return new Member(options.where.id, context).state().pipe(map((r: any) => [r]))
-//     } else {
-//       let where = ''
-//       for (const key of Object.keys(options.where)) {
-//         if (options.where[key] === undefined) {
-//           continue
-//         }
-
-//         if (key === 'address' || key === 'dao') {
-//           const option = options.where[key] as string
-//           isAddress(option)
-//           options.where[key] = option.toLowerCase()
-//         }
-
-//         where += `${key}: "${options.where[key] as string}"\n`
-//       }
-//       where += ' dao_not: null\n'
-
-//       const query = gql`
-//         query ReputationHolderSearch {
-//           reputationHolders ${createGraphQlQuery(options, where)} {
-//             ...ReputationHolderFields
-//           }
-//         }
-//         ${Member.fragments.ReputationHolderFields}
-//       `
-
-//       return context.getObservableList(
-//           query,
-//           (r: any) => new Member({ id: r.id, address: r.address, dao: r.dao.id, contract: r.contract}, context),
-//           apolloQueryOptions
-//         )
-// }
-
 class DaoDashboard extends React.Component<IProps, IState> {
 
     constructor(props: IProps) {
@@ -123,16 +77,16 @@ class DaoDashboard extends React.Component<IProps, IState> {
         };
     }
 
-    /* private async handleNewProposal(): Promise<void> {
+    private async handleNewProposal(): Promise<void> {
        if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
 
        this.props.history.push(`/dao/dashboard/join/`);
-     }*/
+    }
 
-    /*private _handleNewProposal = (e: any): void => {
+    private _handleNewProposal = (e: any): void => {
       this.handleNewProposal();
       e.preventDefault();
-    };*/
+    };
 
     public async componentDidMount() {
         const arc = getArc();
@@ -172,8 +126,8 @@ class DaoDashboard extends React.Component<IProps, IState> {
 
                 <div className={css.pageHead}>
                     <h1>{t("sidebar.dashboard")}</h1>
-                    {/*
-          `<div>
+                    
+          <div>
             <a className={classNames({
                 [css.redButton]: true,
                 // [css.disabled]: !isActive,
@@ -195,7 +149,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
             ) : (
                 <span className={css.reputationBalance}>{t("yourReputation")}<strong> 0.00% </strong></span>
               )}
-          </div>`*/}
+          </div>
                 </div>
                 {/* Key parameters div */}
                 <div>
