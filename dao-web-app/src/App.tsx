@@ -36,7 +36,7 @@ export class App extends React.Component<{}, {
   }
 
   private CookiePolicy = () => {
-    return this.getPdfHtml("cookie_policy.pdf");
+    return this.getPdfHtml("Privacy_Policy_with_Final_1_14_20.pdf");
   }
 
   private PrivacyPolicy = () => {
