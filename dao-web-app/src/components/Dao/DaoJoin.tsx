@@ -256,7 +256,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
 
         <div className={css.contributionReward}>
           <Tabs defaultActiveKey="1">
-            <TabPane tab="{t(daojoin.Stake)}" key="1">
+            <TabPane tab={t("daojoin.Stake")} key="1">
               <Formik
                 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                 initialValues={{
@@ -366,7 +366,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                 }
               />
             </TabPane>
-            <TabPane tab="{t(daojoin.Unstake)}" key="2">
+            <TabPane tab={t("daojoin.Unstake")} key="2">
               {/*TODO add text for TrainingTooltip and add handling*/}
              <div style={{ display: 'flex',justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
               <div style={{ marginBottom: 10}}>
