@@ -1,21 +1,25 @@
-import { BigInt, store } from "@graphprotocol/graph-ts"
+import { store, log } from "@graphprotocol/graph-ts"
 import {
   NewContributionProposal,
   ProposalExecuted,
   RedeemEther,
   RedeemExternalToken
-} from "./Contract"
-import { CustomContributionReward } from "./schema"
+} from "../../types/CustomContributionReward/CustomContributionReward"
+import { CustomContributionReward } from "../../types/schema"
 import { eventId } from '../../utils';
 
 
 export function handleNewContributionProposal(
   event: NewContributionProposal
 ): void {
+  log.info('handleNewContributionProposal start: {}', [
+    'already a string'
+  ]);
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = new CustomContributionReward(eventId(event));
-  entity.count = BigInt.fromI32(0)
+
+  let ent = new CustomContributionReward(eventId(event));
+  //entity.count = BigInt.fromI32(0)
 
   //let entity = CustomContributionReward.load(event.transaction.from.toHex())
 
@@ -29,15 +33,30 @@ export function handleNewContributionProposal(
   }*/
 
   // BigInt and BigDecimal math are supported
-  entity.count = entity.count + BigInt.fromI32(1)
+  //entity.count = entity.count + BigInt.fromI32(1)
 
   // Entity fields can be set based on event parameters
-  entity._avatar = event.params._avatar
-  entity._proposalId = event.params._proposalId
-
+  ent._avatar = event.params._avatar;
+  ent._proposalId = event.params._proposalId;
+  ent._intVoteInterface = event.params._intVoteInterface;
+  ent._beneficiary = event.params._beneficiary;
+  ent._descriptionHash = event.params._descriptionHash;
+  ent.externalToken = event.params._externalToken;
+  let rewards = event.params._rewards;
+  ent.nativeTokenReward = rewards.shift(); // native tokens
+  ent.ethReward = rewards.shift(); // eth
+  ent.externalTokenReward = rewards.shift(); // external tokens
+  ent.periodLength = rewards.shift(); // period length
+  ent.periods = rewards.shift();
+ // number of periods
+  /*log.info('handleNewContributionProposal start: {}, {}, {}', [
+    'already a string',
+    entity._avatar,
+    entity._proposalId
+  ])*/
   // Entities can be written to the store with `.save()`
   //entity.save()
-  store.set('CustomContributionReward', entity.id, entity)
+  store.set('CustomContributionReward', ent.id, ent);
   // Note: If a handler doesn't require existing field values, it is faster
   // _not_ to load the entity from the store. Instead, create it fresh with
   // `new Entity(...)`, set the fields that should be updated and save the

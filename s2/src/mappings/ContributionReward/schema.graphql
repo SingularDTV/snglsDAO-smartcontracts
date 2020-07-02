@@ -44,7 +44,7 @@ type ContributionRewardProposalResolved @entity {
 	contract: Bytes!
 	avatar: Bytes!
 	proposalId: Bytes!
-	passed: Boolean
+	passed: Boolean!
 }
 
 type ContributionRewardNewContributionProposal @entity {
@@ -74,7 +74,7 @@ type ContributionRewardProposal @entity {
 	descriptionHash: String!
 	externalToken: Bytes!
 	votingMachine: Bytes!
-	reputationReward: BigInt!
+	reputationReward: BigInt
 	nativeTokenReward: BigInt!
 	ethReward: BigInt!
 	externalTokenReward: BigInt!
@@ -89,4 +89,11 @@ type ContributionRewardProposal @entity {
 	nativeTokenRewardLeft: BigInt
 	ethRewardLeft: BigInt
 	externalTokenRewardLeft: BigInt
+}
+
+type ProposalExecuted @entity {
+	id: ID!
+	avatar: Bytes!
+	proposalId: Bytes!
+	param: BigInt!
 }

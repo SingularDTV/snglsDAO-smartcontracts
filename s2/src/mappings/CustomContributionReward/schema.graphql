@@ -1,6 +1,14 @@
 type CustomContributionReward @entity {
   id: ID!
-  count: BigInt!
-  _avatar: Bytes! # address
-  _proposalId: Bytes! # bytes32
+  _avatar: Bytes!
+  _proposalId: Bytes!
+  _intVoteInterface: Bytes!
+  _descriptionHash: String!
+  _beneficiary: Bytes!
+  externalToken: Bytes!
+  nativeTokenReward: BigInt!
+  ethReward: BigInt!
+  externalTokenReward: BigInt!
+  periodLength: BigInt
+  periods: BigInt!
 }

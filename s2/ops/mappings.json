@@ -144,13 +144,6 @@
         "dao": "base",
         "mapping": "ContributionReward",
         "arcVersion": "0.0.1-rc.32"
-      },
-      {
-        "name": "CustomContributionReward",
-        "contractName": "CustomContributionReward",
-        "dao": "base",
-        "mapping": "CustomContributionReward",
-        "arcVersion": "0.0.1-rc.32"
       }
     ]
   },
