@@ -344,7 +344,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                         onChange={(e: any) => setFieldValue('term', e.target.checked)}
                         component={Checkbox}
                       >
-                        <Trans>
+                        <Trans i18nKey="agreementCheckbox">
                           By checking this you agree to our <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf">Participation Agreement</a> and tokens will be locked for 30 days
                         </Trans>
                       </Field>
