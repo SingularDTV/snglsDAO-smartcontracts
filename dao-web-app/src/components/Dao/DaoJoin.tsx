@@ -1,4 +1,4 @@
-import { IDAOState, ISchemeState, Member /*, IProposalCreateOptionsCompetition */ } from "@daostack/clientc";
+import { IDAOState, ISchemeState, Member /*, IProposalCreateOptionsCompetition */ } from "@daostack/client";
 import * as arcActions from "../../actions/arcActions";
 import { enableWalletProvider, getArc, getArcSettings } from "../../arc";
 import withSubscription, { ISubscriptionProps } from "../../components/Shared/withSubscription";

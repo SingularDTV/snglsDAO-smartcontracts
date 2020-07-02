@@ -1,1 +1,1 @@
-import { Arc } from '@daostack/clientcc'
+import { Arc } from '@daostack/clientc'

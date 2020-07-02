@@ -1,4 +1,4 @@
-import { IDAOState, IProposalState, Address, ICompetitionSuggestionState, CompetitionVote } from "@daostack/clientc";
+import { IDAOState, IProposalState, Address, ICompetitionSuggestionState, CompetitionVote } from "@daostack/client";
 import * as React from "react";
 
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";

@@ -1,4 +1,4 @@
-import { IProposalState } from "@daostack/clientc";
+import { IProposalState } from "@daostack/client";
 
 import classNames from "classnames";
 import { GenericSchemeInfo } from "genericSchemeRegistry";

@@ -1,7 +1,7 @@
 import * as React from "react";
 // import { useEffect} from "react";
 // import { connect } from "redux"
-import { IDAOState } from "@daostack/clientc";
+import { IDAOState } from "@daostack/client";
 // import { DiscussionEmbed } from "disqus-react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 // import * as Sticky from "react-stickynode";

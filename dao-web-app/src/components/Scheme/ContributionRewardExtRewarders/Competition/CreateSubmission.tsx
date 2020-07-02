@@ -1,4 +1,4 @@
-import { IDAOState, IProposalState } from "@daostack/clientc";
+import { IDAOState, IProposalState } from "@daostack/client";
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import { isValidUrl } from "lib/util";
 import * as React from "react";

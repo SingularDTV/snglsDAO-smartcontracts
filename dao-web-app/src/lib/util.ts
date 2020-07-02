@@ -3,7 +3,7 @@ import {
   Address,
   IProposalStage,
   IProposalState,
-  IRewardState} from "@daostack/clientc";
+  IRewardState} from "@daostack/client";
 import { of } from "rxjs";
 import { catchError } from "rxjs/operators";
 

@@ -1,4 +1,4 @@
-import { Address } from "@daostack/clientc";
+import { Address } from "@daostack/client";
 import { getArc } from "arc";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import gql from "graphql-tag";

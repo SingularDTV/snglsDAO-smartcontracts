@@ -1,4 +1,4 @@
-import { Address, IDAOState, IProposalOutcome, IProposalStage, IProposalState, IRewardState, Token } from "@daostack/clientc";
+import { Address, IDAOState, IProposalOutcome, IProposalStage, IProposalState, IRewardState, Token } from "@daostack/client";
 import { executeProposal, redeemProposal } from "actions/arcActions";
 import { enableWalletProvider, getArc } from "arc";
 import classNames from "classnames";
@@ -136,6 +136,8 @@ class ActionButton extends React.Component<IProps, IState> {
       nativeToken: undefined,
       rep: undefined,
     };
+
+    console.log("=REWARDS=> ", rewards, this.props)
     /**
      * unredeemed by the current account
      */
