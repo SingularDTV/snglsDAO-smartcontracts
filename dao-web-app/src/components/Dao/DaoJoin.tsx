@@ -299,7 +299,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
 
                     <div className={css.content}>
                       <p>{t("daojoin.haveAmountStaked")}</p>
-                      <p> {t("daojoin.yourCurrentBalance")} {this.state.balance } SNGLS</p>
+                      <p> {t("daojoin.yourCurrentBalance")} {this.state.balance } {t("header.SGT")}</p>
                       <div className={css.rewards}>
                         <div className={css.reward}>
                           <div className={css.bigInput}>
