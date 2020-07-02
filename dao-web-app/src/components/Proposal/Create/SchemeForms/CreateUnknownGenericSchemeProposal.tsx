@@ -1,8 +1,8 @@
 import { ISchemeState } from "@daostack/client";
 import { createProposal } from "actions/arcActions";
-// import { enableWalletProvider } from "arc";
+import { enableWalletProvider,getArc, getArcSettings } from "arc";
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
-// import Analytics from "lib/analytics";
+import Analytics from "lib/analytics";
 import * as React from "react";
 import { connect } from "react-redux";
 import { showNotification, NotificationStatus } from "reducers/notifications";
@@ -68,27 +68,119 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
     };
   }
 
-  public async handleSubmit(values: IFormValues, { setSubmitting }: any ): Promise<void> {
-    console.log('Test test test')
-    // if (!await enableWalletProvider({ showNotification: this.props.showNotification })) { return; }
-    //
-    // const proposalValues = {...values,
-    //   dao: this.props.daoAvatarAddress,
-    //   scheme: this.props.scheme.address,
-    //   tags: this.state.tags,
-    // };
-    //
-    // setSubmitting(false);
-    // await this.props.createProposal(proposalValues);
-    //
-    // Analytics.track("Submit Proposal", {
-    //   "DAO Address": this.props.daoAvatarAddress,
-    //   "Proposal Title": values.title,
-    //   "Scheme Address": this.props.scheme.address,
-    //   "Scheme Name": this.props.scheme.name,
-    // });
-    //
-    // this.props.handleClose();
+  public async handleSubmit(
+    values: IFormValues,
+    { setSubmitting }: any
+  ): Promise<void> {
+        if (
+      !(await enableWalletProvider({
+        showNotification: this.props.showNotification,
+      }))
+    ) {
+      return;
+    }
+    // await GenericSchemeInstance.proposeCall.call(avatarAddress, encodeFeeChangeCall(fee, testValue), 0, ``);
+
+    // listingFee: "456"
+    // membershipFee: "789"
+    // transactionFee: "123.5"
+    // callData: ""
+    // dao: "0x88bb05a50ab34660858384f453f8373976f4709c"
+    // description: "test description"
+    // scheme: "0x67883470ae73347a6742376d3db8bf13bc9358a8"
+    // tags: ["test"]
+    // title: "Test"
+    // url: "https://snglsdao.io/"
+    // value: 0
+    
+    console.log(`Values:`);
+    console.dir(values);
+    
+    setSubmitting(false);
+    
+    const arc = getArc();
+    const settings = getArcSettings();
+    const FeeContract = new arc.web3.eth.Contract(
+      settings.feesContractABI,
+      settings.feesContractAddress
+    );
+    const fees = [
+      "listingFee",
+      "transactionFee",
+      "validationFee",
+      "membershipFee",
+    ];
+    // Get fee values from chain if not defined and parse them all, given the decimals
+    const feesValues = {};
+    for (let i = 0; i < fees.length; i++) {
+      const fee = fees[i];
+      //@ts-ignore
+      let feeValue = values[fee];
+      if (
+        !!feeValue &&
+        !(typeof feeValue === "string" && feeValue.trim() === "") &&
+        isFinite(feeValue)
+        ) {
+        
+        //@ts-ignore
+        feesValues[fee] = arc.web3.utils.toWei(feeValue);
+        //@ts-ignore
+        
+      } else {
+        
+        feeValue = await FeeContract.methods[fee]().call();
+        
+        //@ts-ignore
+        feesValues[fee]=feeValue;
+        //@ts-ignore
+        
+      }
+    }
+    
+   
+   const callData = arc.web3.eth.abi.encodeFunctionCall({
+     name: `setFees`,
+     type: 'function',
+     inputs: [{
+             type: 'uint256',
+             name: `_listingFee`
+           },
+         {
+             type: 'uint256',
+             name: `_transactionFee`
+         }, {
+             type: 'uint256',
+             name: `_validationFee `
+           }, {
+           type: 'uint256',
+           name: `_membershipFee`
+         },
+       ]
+       //@ts-ignore
+     }, [feesValues["listingFee"], feesValues["transactionFee"], feesValues["validationFee"], feesValues["membershipFee"]]);
+    
+        
+    values.callData = callData;
+    const proposalValues = {
+      ...values,
+      dao: this.props.daoAvatarAddress,
+      scheme: this.props.scheme.address,
+      tags: this.state.tags
+    };
+  
+    
+    
+    
+    await this.props.createProposal(proposalValues);
+    
+    Analytics.track("Submit Proposal", {
+      "DAO Address": this.props.daoAvatarAddress,
+      "Proposal Title": values.title,
+      "Scheme Address": this.props.scheme.address,
+      "Scheme Name": this.props.scheme.name,
+    });
+
+    this.props.handleClose();
   }
 
   // Exports data from form to a shareable url.
@@ -241,46 +333,46 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
 
 
                      <div className={css.labelInput}>
-                       <label htmlFor="Transactionfee">{t('proposal.transFee')}</label>
+                       <label htmlFor="transactionFee">{t('proposal.transFee')}</label>
                        <Field
-                         id="Transactionfee"
+                         id="transactionFee"
                          maxLength={120}
                          placeholder="New value (%)"
-                         name="Transactionfee"
+                         name="transactionFee"
                          type="text"
                        />
                      </div>
 
                      <div className={css.labelInput}>
-                       <label htmlFor="Listingfee">{t('proposal.listingFee')}</label>
+                       <label htmlFor="listingFee">{t('proposal.listingFee')}</label>
                        <Field
-                         id="Listingfee"
+                         id="listingFee"
                          maxLength={120}
                          placeholder="New value (SNGLS)"
-                         name="Listingfee"
+                         name="listingFee"
                          type="text"
                        />
                      </div>
 
                      <div className={css.labelInput}>
-                       <label htmlFor="Validationfee">{t('dashboard.validationFee')}</label>
+                       <label htmlFor="validationFee">{t('dashboard.validationFee')}</label>
                        <Field
-                         id="Validationfee"
+                         id="validationFee"
                          maxLength={120}
                          placeholder="New value (SNGLS)"
-                         name="Validationfee"
+                         name="validationFee"
                          type="text"
                          disabled={true}
                        />
                      </div>
 
                      <div className={css.labelInput}>
-                       <label htmlFor="Membershipfee">{t('membership.memFee')}</label>
+                       <label htmlFor="membershipFee">{t('membership.memFee')}</label>
                        <Field
-                         id="Membershipfee"
+                         id="membershipFee"
                          maxLength={120}
                          placeholder="New value (SNGLS)"
-                         name="Membershipfee"
+                         name="membershipFee"
                          type="text"
                        />
                      </div>
@@ -290,8 +382,8 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                       type="radio"
                       name="test"
                       value="Transaction fee"
-                      checked={values.test === "Transactionfee"}
-                      onChange={() => setFieldValue("test", "Transactionfee")}
+                      checked={values.test === "transactionFee"}
+                      onChange={() => setFieldValue("test", "transactionFee")}
                     />Transaction fee
                   </label>
                   <label className={css.radio}>
@@ -299,8 +391,8 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                       type="radio"
                       name="test"
                       value="Listing fee"
-                      checked={values.test === "Listingfee"}
-                      onChange={() => setFieldValue("test", "Listingfee")}
+                      checked={values.test === "listingFee"}
+                      onChange={() => setFieldValue("test", "listingFee")}
                     />Listing fee
                   </label>
                   <label className={css.radio}>
@@ -308,8 +400,8 @@ class CreateGenericScheme extends React.Component<IProps, IStateProps> {
                       type="radio"
                       name="test"
                       value="Validation fee"
-                      checked={values.test === "Validationfee"}
-                      onChange={() => setFieldValue("test", "Validationfee")}
+                      checked={values.test === "validationFee"}
+                      onChange={() => setFieldValue("test", "validationFee")}
                     />Validation fee
                   </label> */}
 
