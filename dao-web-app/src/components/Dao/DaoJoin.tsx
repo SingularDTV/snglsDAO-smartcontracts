@@ -8,6 +8,7 @@ import Loading from "components/Shared/Loading";
 import { Tabs, Checkbox, Statistic } from 'antd';
 import * as React from "react";
 import { fromWei } from "lib/util";
+import { Trans } from 'react-i18next';
 // import { RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import Select from "react-select";
@@ -143,16 +144,16 @@ class GetReputation extends React.Component<IProps, IStateProps> {
   public async fetchBalances() {
     const arc = getArc();
     const settings = getArcSettings();
-  
+
     // Create contract object
     const sgtTokenContract = new arc.web3.eth.Contract(settings.erc20TokenContractABI, settings.sgtTokenContractAddress);
-  
+
     const staked = await sgtTokenContract.methods.balanceOf(this.props.currentAccountAddress).call()
-    this.setState( 
-      { 
+    this.setState(
+      {
         balance: arc.web3.utils.fromWei(staked, 'ether'),
       }
-    );  
+    );
   }
 
   public handleUnstake = async (): Promise<void> => {
@@ -343,7 +344,9 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                         onChange={(e: any) => setFieldValue('term', e.target.checked)}
                         component={Checkbox}
                       >
-                        By checking this you agree to our <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf"> Participation Agreement</a> and tokens will be locked for 30 days 
+                        <Trans>
+                          By checking this you agree to our <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf">Participation Agreement</a> and tokens will be locked for 30 days
+                        </Trans>
                       </Field>
                       {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)
                       && touched.reputationReward && errors.rewards &&

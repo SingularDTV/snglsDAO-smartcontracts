@@ -110,7 +110,11 @@
         "holding": "持有 0.00% 聲譽值",
         "getRep": "增加聲譽值",
         "removeRep": "Remove REPUTATION",
-        "cancel": "取消"
+        "cancel": "取消",
+        "max": "最高",
+        "sgtTokens": "貼有SGT代幣：",
+        "reputation": "聲譽:",
+        "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days": "選中此復選框即表示您同意我們的 <3>參與協議</3> 並且令牌將被鎖定30天"
     },
     "loading": "加載中...",
     "noProfile": "沒有個人資料",
