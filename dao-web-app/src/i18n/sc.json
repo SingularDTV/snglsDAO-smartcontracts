@@ -115,7 +115,8 @@
         "sgtTokens": "贴有SGT代币：",
         "reputation": "声誉:",
         "Stake": "赌注",
-        "Unstake": "放心"
+        "Unstake": "放心",
+        "yourCurrentBalance": "您当前的余额: "
     },
     "loading": "加载中...",
     "noProfile": "没有个人资料",
