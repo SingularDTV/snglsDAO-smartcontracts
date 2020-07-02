@@ -109,12 +109,13 @@
         "haveAmountStaked": "您質押的金額將成為您在sDAO中的聲譽值",
         "holding": "持有 0.00% 聲譽值",
         "getRep": "增加聲譽值",
-        "removeRep": "Remove REPUTATION",
+        "removeRep": "刪除信譽",
         "cancel": "取消",
         "max": "最高",
         "sgtTokens": "貼有SGT代幣：",
         "reputation": "聲譽:",
-        "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days": "選中此復選框即表示您同意我們的 <3>參與協議</3> 並且令牌將被鎖定30天"
+        "Stake": "赌注",
+        "Unstake": "放心"
     },
     "loading": "加載中...",
     "noProfile": "沒有個人資料",
@@ -550,15 +551,16 @@
     "cookieStart": "Alchemy在您的設備上存儲Cookie，以增強平台體驗並分析平台使用情況。 請閱讀",
     "cookieLinkPolicy": "Cookie政策",
     "cookieMoreInformation": "以獲得更多信息。",
-    "disclaimer": "DISCLAIMER",
+    "disclaimer": "免責聲明",
     "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
     "iAccept": "我同意",
-    "fullProfile": "Full Profile",
-    "yourReputation": "your reputation: ",
+    "fullProfile": "完整檔案",
+    "yourReputation": "您的聲譽：",
     "en": "ENG",
     "tchin": "繁體中文",
     "schin": "简体中文",
-    "protocolParameters": "Protocol Parameters",
+    "protocolParameters": "協議參數",
     "limit150": "告訴DAO關於你的簡介",
-    "doUAgree": "您是否同意將令牌凍結7天？"
+    "doUAgree": "您是否同意將令牌凍結7天？",
+    "By checking this you agree to our <3>Participation Agreement</3> and tokens will be locked for 30 days": "選中此復選框即表示您同意我們的 <3>參與協議</3> 並且令牌將被鎖定30天"
 }
