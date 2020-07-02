@@ -345,7 +345,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                         component={Checkbox}
                       >
                         <Trans i18nKey="agreementCheckbox">
-                          By checking this you agree to our <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf">Participation Agreement</a> and tokens will be locked for 30 days
+                          By checking this you agree to our <a target="_blank" rel="noopener noreferrer" href="/assets/Privacy_Policy_with_Final_1_14_20.pdf">Participation Agreement</a> and tokens will be locked for 30 days
                         </Trans>
                       </Field>
                       {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)
