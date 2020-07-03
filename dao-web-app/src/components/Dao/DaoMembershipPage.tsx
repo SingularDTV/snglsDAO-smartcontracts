@@ -210,7 +210,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
             <div className={css.content}>
               {!!parseInt(this.state.alreadyStaked) ? (
                 <div className={css.releaseTime}>
-                  <Countdown title="Token defrosting will be available through"
+                  <Countdown title="Token defrosting will be available in"
                     // @ts-ignore
                              value={moment(releaseTime*1000).format()}
                              format="DD:HH:mm:ss"
@@ -287,7 +287,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                       <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>
                     </Popconfirm>
                     <hr />
-                    <button type="button" onClick={ this.handleUnstake } className={css.unstake}>{t("membership.unstake")}</button>
+                    <button type="button" disabled={Math.round((new Date()).getTime() / 1000) < releaseTime} onClick={ this.handleUnstake } className={css.unstake}>{t("membership.unstake")} </button>
                   </Form>
                 </div>
                 }

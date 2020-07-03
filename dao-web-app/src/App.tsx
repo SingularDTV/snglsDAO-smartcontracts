@@ -36,7 +36,7 @@ export class App extends React.Component<{}, {
   }
 
   private CookiePolicy = () => {
-    return this.getPdfHtml("cookie_policy.pdf");
+    return this.getPdfHtml("Privacy_Policy_with_Final_1_14_20.pdf");
   }
 
   private PrivacyPolicy = () => {
@@ -80,7 +80,6 @@ export class App extends React.Component<{}, {
       }
     }
 
-    console.log("-0000000000000000000--------------0000000000000000---------------", process.env);
     let GOOGLE_ANALYTICS_ID: string;
     switch (process.env.NODE_ENV) {
       case "production": {
@@ -120,7 +119,7 @@ export class App extends React.Component<{}, {
             <ConnectedRouter history={history}>
               <Switch>
                 <Route path="/cookie-policy" component={this.CookiePolicy}/>
-                <Route path="/privacy-policy" component={this.PrivacyPolicy}/>
+                <Route path="/dao/privacy-policy" component={this.PrivacyPolicy}/>
                 <Route path="/" component={AppContainer}/>
                 <Route component={Error404} />
                 <Redirect from="/*" to="/Error404" />

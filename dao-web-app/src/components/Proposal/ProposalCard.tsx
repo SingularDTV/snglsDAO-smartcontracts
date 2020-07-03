@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { closingTime } from "lib/proposalHelpers";
 import TagsSelector from "components/Proposal/Create/SchemeForms/TagsSelector";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
-import ActionButton from "./ActionButton";
+// import ActionButton from "./ActionButton";
 import BoostAmount from "./Staking/BoostAmount";
 import StakeButtons from "./Staking/StakeButtons";
 import StakeGraph from "./Staking/StakeGraph";
@@ -61,11 +61,11 @@ class ProposalCard extends React.Component<IProps, null> {
           creatorProfile,
           currentAccountGenBalance,
           currentAccountGenAllowance,
-          daoEthBalance,
+          // daoEthBalance,
           expired,
           member,
           proposal,
-          rewards,
+          // rewards,
           stakes,
           votes,
         } = props;
@@ -168,7 +168,7 @@ class ProposalCard extends React.Component<IProps, null> {
               </Link>
 
               <div className={css.actionButton}>
-                <ActionButton
+                {/* <ActionButton
                   currentAccountAddress={currentAccountAddress}
                   daoState={daoState}
                   daoEthBalance={daoEthBalance}
@@ -176,7 +176,7 @@ class ProposalCard extends React.Component<IProps, null> {
                   rewards={rewards}
                   expired={expired}
                   parentPage={Page.SchemeProposals}
-                />
+                /> */}
 
                 <div onClick={this.stopClick} className={css.contextMenu} data-test-id="proposalContextMenu">
                   <div className={css.menuIcon}>

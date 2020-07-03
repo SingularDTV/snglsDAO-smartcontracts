@@ -693,7 +693,7 @@
     // margin-bottom: 20px;
 
 
-    &:hover {
+    &:hover:not([disabled]) {
       cursor: pointer;
       background: #D40D26;
       border-color: #D40D26;

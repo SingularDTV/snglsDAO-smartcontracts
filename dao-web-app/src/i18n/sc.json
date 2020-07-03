@@ -109,8 +109,14 @@
         "haveAmountStaked": "您质押的金额将成为您在DAO中的声誉值",
         "holding": "持有 0.00% 声誉值",
         "getRep": "增加声誉值",
-        "removeRep": "Remove REPUTATION",
-        "cancel": "取消"
+        "removeRep": "删除信誉",
+        "cancel": "取消",
+        "max": "最高",
+        "sgtTokens": "贴有SGT代币：",
+        "reputation": "声誉:",
+        "Stake": "赌注",
+        "Unstake": "放心",
+        "yourCurrentBalance": "您当前的余额: "
     },
     "loading": "加载中...",
     "noProfile": "没有个人资料",
@@ -545,17 +551,17 @@
     "cookieStart": "Alchemy在您的设备上存储Cookie，以增强平台体验并分析平台使用情况。请阅读",
     "cookieLinkPolicy": "Cookie政策",
     "cookieMoreInformation": "以获得更多信息。",
-    "disclaimer": "DISCLAIMER",
+    "disclaimer": "免责声明",
     "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
     "iAccept": "我同意",
-    "fullProfile": "Full Profile",
-    "yourReputation": "your reputation: ",
+    "fullProfile": "完整档案",
+    "yourReputation": "您的声誉：",
     "en": "ENG",
     "tchin": "繁體中文",
     "schin": "简体中文",
-    "protocolParameters": "Protocol Parameters",
+    "protocolParameters": "协议参数",
     "limit150": "字数上限150个字符",
-    "doUAgree": "您是否同意将令牌冻结7天？"
-
-
+    "doUAgree": "您是否同意将令牌冻结7天？",
+    "agreementCheckbox": "选中此项即表示您同意我们的 <1>参与协议</1> 令牌将被锁定30天",
+    "Apps Manager": "应用程式管理员"
 }

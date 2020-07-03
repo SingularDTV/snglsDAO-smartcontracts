@@ -136,6 +136,8 @@ class ActionButton extends React.Component<IProps, IState> {
       nativeToken: undefined,
       rep: undefined,
     };
+
+    console.log("=REWARDS=> ", rewards, this.props)
     /**
      * unredeemed by the current account
      */
