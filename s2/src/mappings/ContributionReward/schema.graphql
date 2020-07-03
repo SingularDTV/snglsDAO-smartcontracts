@@ -57,7 +57,7 @@ type ContributionRewardNewContributionProposal @entity {
 	externalToken: Bytes!
 	votingMachine: Bytes!
 	proposalId: Bytes!
-	reputationReward: BigInt!
+	reputationReward: BigInt
 	nativeTokenReward: BigInt!
 	ethReward: BigInt!
 	externalTokenReward: BigInt!

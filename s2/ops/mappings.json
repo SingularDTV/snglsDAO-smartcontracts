@@ -211,6 +211,20 @@
         "dao": "base",
         "mapping": "Redeemer",
         "arcVersion": "0.0.1-rc.32"
+      },
+      {
+        "name": "LockingSGT4Reputation",
+        "contractName": "LockingSGT4Reputation",
+        "dao": "base",
+        "mapping": "LockingSGT4Reputation",
+        "arcVersion": "0.0.1-rc.32"
+      },
+      {
+        "name": "ContributionReward",
+        "contractName": "ContributionReward",
+        "dao": "base",
+        "mapping": "ContributionReward",
+        "arcVersion": "0.0.1-rc.32"
       }
     ]
   }
