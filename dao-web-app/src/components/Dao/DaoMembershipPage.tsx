@@ -287,7 +287,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                       <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>
                     </Popconfirm>
                     <hr />
-                    <button type="button" onClick={ this.handleUnstake } className={css.unstake}>{t("membership.unstake")}</button>
+                    <button type="button" disabled={Math.round((new Date()).getTime() / 1000) < releaseTime} onClick={ this.handleUnstake } className={css.unstake}>{t("membership.unstake")} </button>
                   </Form>
                 </div>
                 }

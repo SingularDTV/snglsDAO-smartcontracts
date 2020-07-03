@@ -385,7 +385,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                 </div>
               </div>
                <TrainingTooltip overlay={'Text for unstake'} placement="top">
-                 <button className={css.submitProposal} type="submit" onClick={this.handleUnstake}>
+                 <button className={css.submitProposal} type="submit"  onClick={this.handleUnstake} disabled={Math.round((new Date()).getTime() / 1000) < parseInt(releaseTime)}>
                    {t('daojoin.removeRep')}
                  </button>
                </TrainingTooltip>
