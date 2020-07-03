@@ -17,6 +17,10 @@
   color: $black;
 }
 
+:global(strong) {
+  font-weight: 600;
+}
+
 :global(.clearfix:after) {
   content: "";
   display: table;
