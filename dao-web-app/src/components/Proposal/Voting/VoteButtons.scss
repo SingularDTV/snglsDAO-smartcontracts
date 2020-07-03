@@ -222,7 +222,7 @@ button.disabled {
 
   img {
     position: relative;
-    top: 4px;
+    top: 1px;
     height: 14px;
   }
 
@@ -236,12 +236,12 @@ button.disabled {
 
   img {
     position: relative;
-    top: 2px;
+    top: -1px;
     height: 14px;
   }
 
   img.buttonLoadingImg {
-    top: 1px;
+    top: -1px;
   }
 }
 
@@ -265,21 +265,29 @@ button.disabled {
       display: inline-block;
       color: #000;
     }
+
+    &:nth-child(2) {
+      line-height: normal;
+
+      img {
+        top: -1px;
+      }
+    }
   }
 }
 
 .altStyle .castVote button img {
   position: relative;
-  top: 4px;
+  top: 1px;
 }
 
 .altStyle .castVote button img.buttonLoadingImg {
   position: relative;
-  top: 3px;
+  top: -1px;
 }
 
 .altStyle .castVote button:nth-child(2) img.buttonLoadingImg {
-  top: 3px;
+  top: -1px;
   position: relative;
 }
 

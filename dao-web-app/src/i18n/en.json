@@ -121,7 +121,7 @@
     "loading": "Loading...",
     "noProfile": "No Profile",
     "membership": {
-        "memFee": "Membership fee",
+        "memFee": "Membership Fee",
         "amountNeedToStake": "The amount of SNGLS needed to stake in the DAO so you don't have to pay the transaction fee.",
         "minAmountRequired": "Min amount required: ",
         "confAuto": "Confirm auto ",
@@ -133,7 +133,7 @@
         "address": "Address",
         "reputation": "Reputation",
         "socVerification": "Social Verification",
-        "alreadyStaked": "Already staked:",
+        "alreadyStaked": "Already Staked:",
         "balance": "Balance:"
     },
     "schemas": {
@@ -195,7 +195,7 @@
        "edit3BoxProfile": "Edit 3Box Profile",
        "set3Box": "Set 3Box Profile",
        "view3Box": "View 3Box Profile",
-       "description": "description",
+       "description": "Description",
        "profileOnAlchemy": " Profile on Alchemy by DAOstack",
        "inOrderToEvoke": "In order to evoke a sense of trust and reduce risk of scams, we invite you to create a user profile which will be associated with your current Ethereum address.",
        "name": "Name:",
