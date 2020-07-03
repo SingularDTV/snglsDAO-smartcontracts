@@ -133,7 +133,7 @@
         "address": "Address",
         "reputation": "Reputation",
         "socVerification": "Social Verification",
-        "alreadyStaked": "Already staked:",
+        "alreadyStaked": "Already Staked:",
         "balance": "Balance:"
     },
     "schemas": {
