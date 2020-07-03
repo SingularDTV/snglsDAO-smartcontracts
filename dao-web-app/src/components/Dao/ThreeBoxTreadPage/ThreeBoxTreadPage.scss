@@ -18,7 +18,7 @@
     display: block !important;
     z-index: -1;
   }
-  
+
   h5 {
     color: #fff;
     text-transform: none;
@@ -78,41 +78,41 @@
       box-shadow: none;
     }
   }
-  
-  .antFormButton {
-    color: #fff;
-    font-family: Montserrat;
-    font-weight: 500;
-    letter-spacing: 1.61455px;
-    text-transform: uppercase;
-    padding: 14px 44px;
-    border: 1px solid #D40D26;
-    border-radius: 50px;
-    background: #D40D26;
-    outline: none;
-    position: relative;
-    transition: 0.1s all;
-    display: block;
-    font-size: 14px;
-    text-align: center;
-    height: auto;
-    box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
-
-    &:disabled {
-      opacity: 0.7;
-    }
-
-    &:hover {
-      background: #D40D26;
-      box-shadow: none;
-      border: 1px solid #D40D26;
-      color: #fff;
-    }
-  }
   .photo {
     img {
       border-radius: 0;;
     }
+  }
+}
+
+.antFormButton {
+  color: #fff;
+  font-family: Montserrat;
+  font-weight: 500;
+  letter-spacing: 1.61455px;
+  text-transform: uppercase;
+  padding: 14px 44px;
+  border: 1px solid #D40D26;
+  border-radius: 50px;
+  background: #D40D26;
+  outline: none;
+  position: relative;
+  transition: 0.1s all;
+  display: block;
+  font-size: 14px;
+  text-align: center;
+  height: auto;
+  box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
+
+  &:disabled {
+    opacity: 0.7;
+  }
+
+  &:hover {
+    background: #D40D26;
+    box-shadow: none;
+    border: 1px solid #D40D26;
+    color: #fff;
   }
 }
 
