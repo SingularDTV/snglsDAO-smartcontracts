@@ -257,7 +257,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                   isSubmitting,
                   // eslint-disable-next-line @typescript-eslint/no-unused-vars
                   setFieldTouched,
-                  setFieldValue,
+                  setFieldValue
                 }: FormikProps<IFormValues>) =>
                 <div className={css.bigInput}>
                   <Form noValidate>
@@ -277,7 +277,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                       </button>
                     </div>
                     <div className={css.bigInputFoot}>
-                      <span>{t("membership.alreadyStaked")}  {parseInt(this.state.alreadyStaked)} {"SNGLS"}</span>
+                      <span onClick={()=> setFieldValue("snglsToSend", this.state.alreadyStaked)}>{t("membership.alreadyStaked")}  {parseInt(this.state.alreadyStaked)} {"SNGLS"}</span>
                       <span>{t("membership.balance")}  {parseInt(this.state.snglsBalance)} {"SNGLS"}</span>
                     </div>
                     <hr />
