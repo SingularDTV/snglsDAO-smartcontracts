@@ -12,6 +12,7 @@ import { combineLatest } from "rxjs";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 import * as css from "./SchemeCard.scss";
 import { withTranslation } from 'react-i18next';
+import i18next from "i18next";
 
 
 interface IExternalProps {
@@ -40,10 +41,10 @@ const ProposalSchemeCard = (props: IProps) => {
   switch(schemeState.name) {
     case "ContributionReward":
     case "ContributionRewardExt":
-      trainingTooltipMessage = "Use this scheme to reward users (rep and/or funds) for their contributions to the DAO";
+      trainingTooltipMessage = i18next.t('tooltips.useSchemaToRewardUsers');
       break;
     case "SchemeRegistrar":
-      trainingTooltipMessage = "Use this manager to install, remove, or edit an application of the DAO";
+      trainingTooltipMessage = i18next.t('tooltips.useToInstallEditRemove');
       break;
   }
 

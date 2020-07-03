@@ -9,9 +9,9 @@
         "wall": "DAO討論區",
         "treasury": "DAO儲備資金",
         "stakes": "DAO質押",
-        "buy": "$ 购买 SNGLS",
-        "buySgt": "$ 购买 SGT",
-        "buyGen": "$ 购买 GEN",
+        "buy": "$ 購買 SNGLS",
+        "buySgt": "$ 購買 SGT",
+        "buyGen": "$ 購買 GEN",
         "sngls": "snglsDAO",
         "rep": "聲譽值",
         "protocolParams": "協定參數",
@@ -151,7 +151,7 @@
     },
     "tooltips": {
         "useSchemaToRewardUsers": "使用此方案獎勵（聲譽值和/或資金）對snglsDAO有貢獻的用戶",
-        "useToInstallEditRemove": "使用此方案可以安裝，刪除或編輯DAO的方案",
+        "useToInstallEditRemove": "使用此方案管理可以安裝，刪除或編輯DAO的方案",
         "enterPositive": "請輸入正數",
         "insufficient": "沒有足夠的GEN",
         "copyLink":"複製鏈接",
@@ -184,7 +184,6 @@
         "spaceDesignated": "指定的討論空間用於發表一般問題、陳述和評論",
         "viewYourPersonalFeed": "查看您的資訊頁面",
         "showHide": "選擇顯示或隱藏懸浮小提示"
-
     },
     "account": {
        "rep": "聲譽值",
@@ -553,7 +552,7 @@
     "cookieLinkPolicy": "Cookie政策",
     "cookieMoreInformation": "以獲得更多信息。",
     "disclaimer": "免責聲明",
-    "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
+    "disclaimerDescription": "本網頁所載信息以摘要形式提供，並不構成完整信息。在對任何信息採取行動之前，您應考慮這些事項的任何相關文件、要約、及信息的適當性，並應尋求獨立意見（例如法律、法規、稅務等）的建議。",
     "iAccept": "我同意",
     "fullProfile": "完整檔案",
     "yourReputation": "您的聲譽：",
@@ -564,5 +563,5 @@
     "limit150": "告訴DAO關於你的簡介",
     "doUAgree": "您是否同意將令牌凍結7天？",
     "agreementCheckbox": "選中此復選框即表示您同意我們的 <1>參與協議</1> 並且令牌將被鎖定30天",
-    "Apps Manager": "應用程式管理員"
+    "appsManager": "應用管理"
 }

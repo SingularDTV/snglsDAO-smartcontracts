@@ -9,9 +9,9 @@
         "wall": "DAO Wall",
         "treasury": "DAO Treasury",
         "stakes": "DAO Stakes",
-        "buy": "$ Buy SNGLS",
         "sngls": "snglsDAO",
         "rep": "REP",
+        "buy": "$ Buy SNGLS",
         "buySgt": "$ Buy SGT",
         "buyGen": "$ Buy GEN",
         "protocolParams": "Protocol Parameters",
@@ -122,7 +122,7 @@
     "noProfile": "No Profile",
     "membership": {
         "memFee": "Membership Fee",
-        "amountNeedToStake": "The amount of SNGLS needed to stake in the DAO so you don't have to pay the transaction fee.",
+        "amountNeedToStake": "The amount of SNGLS needed to stake in the DAO so you don't have to pay the SNGLS Media Distribution Protocol transaction fee.",
         "minAmountRequired": "Min amount required: ",
         "confAuto": "Confirm auto ",
         "orEnterManually": " or enter the amount manually:",
@@ -151,7 +151,7 @@
     },
     "tooltips": {
         "useSchemaToRewardUsers": "Use this scheme to reward users (rep and/or funds) for their contributions to the DAO",
-        "useToInstallEditRemove": "Use this scheme to install, remove or edit the schemes of the DAO",
+        "useToInstallEditRemove": "Use this manager to install, remove or edit the schemes of the DAO",
         "enterPositive": "Please enter a positive amount",
         "insufficient": "Insufficient GENs",
         "copyLink":"Copy Link",
@@ -571,7 +571,7 @@
     "schin": "简体中文",
     "protocolParameters": "Protocol Parameters",
     "limit150": "Limit 150 characters",
-    "doUAgree": "Do you agree to freeze your tokens for a seven days?",
+    "doUAgree": "Do you agree to freeze your tokens for at least seven days?",
     "agreementCheckbox": "By checking this you agree to our <1>Participation Agreement</1> and tokens will be locked for 30 days",
-    "Apps Manager": "Apps Manager"
+    "appsManager": "Apps Manager"
 }

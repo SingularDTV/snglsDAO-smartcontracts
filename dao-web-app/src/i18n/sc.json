@@ -149,9 +149,9 @@
         "unknown": "不明",
         "unsuported": "不支援的应用"
     },
-    "toolTips": {
+    "tooltips": {
         "useSchemaToRewardUsers": "使用此方案奖励（声誉值和/或资金）对snglsDAO有贡献的用户",
-        "useToInstallEditRemove": "使用此方案可以安装，删除或编辑DAO的方案",
+        "useToInstallEditRemove": "使用此方案管理可以安装，删除或编辑DAO的方案",
         "enterPositive": "请输入正数",
         "insufficient": "没有足够的GEN",
         "copyLink":"复制链接",
@@ -552,7 +552,7 @@
     "cookieLinkPolicy": "Cookie政策",
     "cookieMoreInformation": "以获得更多信息。",
     "disclaimer": "免责声明",
-    "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
+    "disclaimerDescription": "本网页所载信息以摘要形式提供，并不构成完整信息。在对任何信息采取行动之前，您应考虑这些事项的任何相关文件、要约、及信息的适当性，并应寻求独立意见（例如法律、法规、税务等）的建议。",
     "iAccept": "我同意",
     "fullProfile": "完整档案",
     "yourReputation": "您的声誉：",
@@ -563,5 +563,5 @@
     "limit150": "字数上限150个字符",
     "doUAgree": "您是否同意将令牌冻结7天？",
     "agreementCheckbox": "选中此项即表示您同意我们的 <1>参与协议</1> 令牌将被锁定30天",
-    "Apps Manager": "应用程式管理员"
+    "appsManager": "应用管理"
 }
