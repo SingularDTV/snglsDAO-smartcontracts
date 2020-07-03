@@ -127,14 +127,20 @@ class SchemeContainer extends React.Component<IProps, IState> {
     const { transactionFee, listingFee, validationFee, membershipFee } = this.state;
     const { schemeId, daoState } = this.props;
     const daoAvatarAddress = daoState.address;
-    const schemeState = this.props.data[0];
+    let schemeState = this.props.data[0];
     const approvedProposals = this.props.data[1];
 
     if (schemeState.name === "ReputationFromToken") {
       return <ReputationFromToken {...this.props} daoAvatarAddress={daoAvatarAddress} schemeState={schemeState} />;
     }
+    
+    let isActive = getSchemeIsActive(schemeState);
 
-    const isActive = getSchemeIsActive(schemeState);
+    if (schemeState.id === getArcSettings().grantsSchemeID) {
+      schemeState.name = "Grants";
+      isActive = true;
+    }
+
     const isProposalScheme = PROPOSAL_SCHEME_NAMES.includes(schemeState.name);
 
     const proposalsTabClass = classNames({
@@ -160,6 +166,13 @@ class SchemeContainer extends React.Component<IProps, IState> {
     return (
       <div className={css.schemeContainer}>
 
+        <div className={css.grantsOffer}>
+          <img src="/assets/images/under_construction.webp" />
+          <p>Sorry we are working on geting the grants scheme operational.</p>
+          <p>Once the offical snglsDAO subgraph is synced it will launch.</p>
+          <p>Follow along here: <a href="https://thegraph.com/explorer/subgraph/singulardtv/sngls-dao">https://thegraph.com/explorer/subgraph/singulardtv/sngls-dao</a></p>
+        </div>
+
         <BreadcrumbsItem to={`/dao/scheme/${schemeId}`}>{schemeFriendlyName}</BreadcrumbsItem>
         <Helmet>
           <meta name="description" content={daoState.name + " | " + schemeState.name + " proposals | Managed on Alchemy by DAOstack"} />
@@ -169,26 +182,26 @@ class SchemeContainer extends React.Component<IProps, IState> {
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
           <h2 className={css.schemeName}>
-            {schemeFriendlyName}
+              {t(schemeFriendlyName)}
           </h2>
           {
             schemeFriendlyName === "Protocol Parameters" &&
             <div className={css.schemeTop}>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
-                <div>{t('membership.memFee')}: SNGLS {membershipFee}</div>
+                <div>{t('membership.memFee')}: {membershipFee} SNGLS</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_listing_rate.png" /></div>
-                <div>{t('proposal.listingFee')}: SNGLS {listingFee}</div>
+                <div>{t('proposal.listingFee')}: {listingFee} SNGLS</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_transaction.png" /></div>
-                <div>{t('proposal.transFee')}: % {transactionFee}</div>
+                <div>{t('proposal.transFee')}: {transactionFee} %</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
-                <div>{t('dashboard.validationFee')}: SNGLS {validationFee}</div>
+                <div>{t('dashboard.validationFee')}: {validationFee} SNGLS</div>
               </div>
             </div>
           }

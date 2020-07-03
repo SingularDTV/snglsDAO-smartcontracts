@@ -62,7 +62,7 @@ class Reputation extends React.Component<IExternalProps, null> {
           <>
             <span>{repFormatted} Rep.</span>
             <br/>
-            <span>{totalRepFormatted} {daoName || ""} Reputation in total</span>
+            <span>{totalRepFormatted} {daoName || ""} {t("totalRep")}</span>
           </>
         }
         trigger={hideTooltip ? [] : ["hover"]}

@@ -117,8 +117,8 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
   public async componentDidMount() {
     const arc = getArc();
     const settings = getArcSettings();
-    const lockingSGT4ReputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
-    const staked = await lockingSGT4ReputationContract.methods.lockers(this.props.currentAccountAddress).call()
+    const memFeeStakingContract = new arc.web3.eth.Contract(settings.membershipFeeStakingContractABI, settings.membershipFeeStakingContractAddress);
+    const staked = await memFeeStakingContract.methods.lockers(this.props.currentAccountAddress).call()
     this.setState({ releaseTime: staked?.releaseTime})
     this.fetchBalances();
   }
@@ -155,7 +155,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
     tokenContract.methods.approve(settings.membershipFeeStakingContractAddress, calculatedApproveValue).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
       if (error) throw error;
     }).then(function () {
-      memFeeStakingContract.methods.lock(calculatedApproveValue, settings.minLockingPeriod).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
+      memFeeStakingContract.methods.lock(calculatedApproveValue, settings.snglsLockingPeriod).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
         console.log(error);
         if (error) throw error;
          this.fetchBalances();
@@ -210,7 +210,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
             <div className={css.content}>
               {!!parseInt(this.state.alreadyStaked) ? (
                 <div className={css.releaseTime}>
-                  <Countdown title="Token defrosting will be available through"
+                  <Countdown title="Token defrosting will be available in"
                     // @ts-ignore
                              value={moment(releaseTime*1000).format()}
                              format="DD:HH:mm:ss"
@@ -257,7 +257,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                   isSubmitting,
                   // eslint-disable-next-line @typescript-eslint/no-unused-vars
                   setFieldTouched,
-                  setFieldValue,
+                  setFieldValue
                 }: FormikProps<IFormValues>) =>
                 <div className={css.bigInput}>
                   <Form noValidate>
@@ -277,7 +277,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                       </button>
                     </div>
                     <div className={css.bigInputFoot}>
-                      <span>{t("membership.alreadyStaked")}  {parseInt(this.state.alreadyStaked)} {"SNGLS"}</span>
+                      <span onClick={()=> setFieldValue("snglsToSend", this.state.alreadyStaked)}>{t("membership.alreadyStaked")}  {parseInt(this.state.alreadyStaked)} {"SNGLS"}</span>
                       <span>{t("membership.balance")}  {parseInt(this.state.snglsBalance)} {"SNGLS"}</span>
                     </div>
                     <hr />
@@ -287,7 +287,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
                       <button type="submit" className={css.stakeSubmit}>{t("membership.stake")}</button>
                     </Popconfirm>
                     <hr />
-                    <button type="button" onClick={ this.handleUnstake } className={css.unstake}>{t("membership.unstake")}</button>
+                    <button type="button" disabled={Math.round((new Date()).getTime() / 1000) < releaseTime} onClick={ this.handleUnstake } className={css.unstake}>{t("membership.unstake")} </button>
                   </Form>
                 </div>
                 }

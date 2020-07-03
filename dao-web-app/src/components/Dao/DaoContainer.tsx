@@ -74,7 +74,7 @@ class DaoContainer extends React.Component<IProps, null> {
   private daoJoinRoute = (routeProps: any) => <DaoJoinPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoMembershipRoute = (routeProps: any) => <DaoMembershipPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoHistoryRoute = (routeProps: any) => <DaoHistoryPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
-  private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} />;
+  private daoMembersRoute = (routeProps: any) => <DaoMembersPage {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private threeBoxTreadPage = (routeProps: any) => <ThreeBoxTreadPage {...routeProps} dao={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} currentAccountProfile={this.props.currentAccountProfile} />;
   private daoDashboardRoute = (routeProps: any) => <DaoDashboard {...routeProps} daoState={this.props.data[0]} currentAddress={this.props.currentAccountAddress}/>;
   private daoProposalRoute = (routeProps: any) =>
@@ -101,12 +101,8 @@ class DaoContainer extends React.Component<IProps, null> {
     //@ts-ignore
     const { t } = this.props;
 
-
-    // const foundDaos = arc.daos({ orderBy: "name", orderDirection: "asc", where: { name_contains: searchString } }, { fetchAllData: true });
-
-    // console.log("MEMEME ", foundDaos);
-
     const daoState = this.props.data[0];
+    console.log("sngls DAO state object ", daoState);
 
     return (
       <div className={css.outer}>

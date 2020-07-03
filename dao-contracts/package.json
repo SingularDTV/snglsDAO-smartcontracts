@@ -49,6 +49,7 @@
     "@daostack/migration": "0.0.1-rc.39-v3",
     "@daostack/subgraph": "0.0.37-3",
     "@openzeppelin/contracts": "^3.0.2",
+    "@poanet/solidity-flattener": "^3.0.2",
     "@truffle/hdwallet-provider": "^1.0.34",
     "dotenv": "^8.2.0",
     "node": "^8.10.0",

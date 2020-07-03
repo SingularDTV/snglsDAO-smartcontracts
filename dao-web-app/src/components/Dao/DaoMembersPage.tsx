@@ -62,14 +62,13 @@ class DaoMembersPage extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
     //@ts-ignore
-    const { t } = this.props;
-    const { data } = this.props;
+    const { t, data, currentAccountAddress  } = this.props;
     const members = data;
     const daoTotalReputation = this.props.daoState.reputationTotalSupply;
     const { daoState, profiles } = this.props;
-    console.log("MEMBERs => ", members);
+    // console.log("MEMBERs => ", members);
     const membersHTML = members.map((member) =>
-      <DaoMember key={member.staticState.address} dao={daoState} daoTotalReputation={daoTotalReputation} member={member} profile={profiles[member.staticState.address]} />);
+      <DaoMember key={member.staticState.address} currentAccountAddress={currentAccountAddress} dao={daoState} daoTotalReputation={daoTotalReputation} member={member} profile={profiles[member.staticState.address]} />);
 
     return (
       <div className={css.membersContainer}>

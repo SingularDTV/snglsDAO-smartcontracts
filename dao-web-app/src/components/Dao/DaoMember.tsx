@@ -17,6 +17,7 @@ interface IProps extends ISubscriptionProps<IMemberState> {
   dao: IDAOState;
   member: Member;
   daoTotalReputation: BN;
+  currentAccountAddress: string;
   profile: IProfileState;
 }
 
@@ -28,16 +29,17 @@ class DaoMember extends React.Component<IProps, null> {
   }
 
   public render(): RenderOutput {
-    const { dao, daoTotalReputation, profile } = this.props;
+    const { dao, daoTotalReputation, profile, currentAccountAddress } = this.props;
     const memberState = this.props.data;
     //@ts-ignore
     const { t } = this.props;
-
     return (
       <div className={css.member + " clearfix"}
         key={"member_" + memberState.address}
         data-test-id={"member_" + memberState.address}>
-        <Link to={"/profile/" + memberState.address + (dao ? "?daoAvatarAddress=" + dao.address : "")}>
+        <Link to={memberState.address === currentAccountAddress
+          ? "/profile/" + currentAccountAddress
+          : "/profile/" + memberState.address + (dao ? "?daoAvatarAddress=" + dao.address : "")}>
           <table className={css.memberTable}>
             <tbody>
               <tr>
@@ -51,7 +53,7 @@ class DaoMember extends React.Component<IProps, null> {
                 <td className={css.memberName}>
                   { profile ?
                     <div>
-                      <AccountProfileName accountAddress={memberState.address} accountProfile={profile} daoAvatarAddress={dao.address} />
+                      <AccountProfileName currentAccountAddress={memberState.address === currentAccountAddress && currentAccountAddress} accountAddress={memberState.address} accountProfile={profile} daoAvatarAddress={dao.address} />
                       <br/>
                     </div>
                     : <div className={css.noProfile}>No Profile</div>

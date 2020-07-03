@@ -9,9 +9,9 @@
         "wall": "DAO Wall",
         "treasury": "DAO Treasury",
         "stakes": "DAO Stakes",
-        "buy": "$ Buy SNGLS",
         "sngls": "snglsDAO",
         "rep": "REP",
+        "buy": "$ Buy SNGLS",
         "buySgt": "$ Buy SGT",
         "buyGen": "$ Buy GEN",
         "protocolParams": "Protocol Parameters",
@@ -88,7 +88,7 @@
         "validationFee": "Validation Fee",
         "minimumAmount": "Minimum amount paid to validators.",
         "boostedProposals": "Boosted proposals (3)",
-        "notPassedProposals": "This DAO hasn&apos;t passed any proposals yet. Checkout the {{notPassedProposalsLink}}  for any open proposals.",
+        "notPassedProposals": "This DAO has not passed any proposals yet.",
         "notPassedProposalsLink": "DAO&apos;s installed schemes",
         "proposedBy": "Proposed by",
         "endDate": "End date",
@@ -112,14 +112,17 @@
         "removeRep": "REMOVE REPUTATION",
         "cancel": "Cancel",
         "max": "max",
-        "sgtTokens": "SGT Tokens: ",
-        "reputation": "Reputation:"
+        "sgtTokens": "SGT Tokens Staked: ",
+        "reputation": "Reputation:",
+        "Stake": "Stake",
+        "Unstake": "Unstake",
+        "yourCurrentBalance": "Your current balance: "
     },
     "loading": "Loading...",
     "noProfile": "No Profile",
     "membership": {
-        "memFee": "Membership fee",
-        "amountNeedToStake": "The amount of SNGLS needed to stake in the DAO so you don't have to pay the transaction fee.",
+        "memFee": "Membership Fee",
+        "amountNeedToStake": "The amount of SNGLS needed to stake in the DAO so you don't have to pay the SNGLS Media Distribution Protocol transaction fee.",
         "minAmountRequired": "Min amount required: ",
         "confAuto": "Confirm auto ",
         "orEnterManually": " or enter the amount manually:",
@@ -130,7 +133,7 @@
         "address": "Address",
         "reputation": "Reputation",
         "socVerification": "Social Verification",
-        "alreadyStaked": "Already staked:",
+        "alreadyStaked": "Already Staked:",
         "balance": "Balance:"
     },
     "schemas": {
@@ -148,7 +151,7 @@
     },
     "tooltips": {
         "useSchemaToRewardUsers": "Use this scheme to reward users (rep and/or funds) for their contributions to the DAO",
-        "useToInstallEditRemove": "Use this scheme to install, remove or edit the schemes of the DAO",
+        "useToInstallEditRemove": "Use this manager to install, remove or edit the schemes of the DAO",
         "enterPositive": "Please enter a positive amount",
         "insufficient": "Insufficient GENs",
         "copyLink":"Copy Link",
@@ -182,7 +185,6 @@
         "viewYourPersonalFeed": "View your personal feed",
         "showHide": "Show / hide tooltips on hover",
         "regProposalArePassedOrFailed": "Regular proposals are passed or failed via absolute majority over a configured voting period. If enough GEN is staked predicting they will pass, they can move to the pending and then boosted queues."
-
     },
     "account": {
        "rep": "Reputation",
@@ -192,7 +194,7 @@
        "edit3BoxProfile": "Edit 3Box Profile",
        "set3Box": "Set 3Box Profile",
        "view3Box": "View 3Box Profile",
-       "description": "description",
+       "description": "Description",
        "profileOnAlchemy": " Profile on Alchemy by DAOstack",
        "inOrderToEvoke": "In order to evoke a sense of trust and reduce risk of scams, we invite you to create a user profile which will be associated with your current Ethereum address.",
        "name": "Name:",
@@ -362,7 +364,7 @@
         "redeemSubmission": "Redeem Submission",
         "created": "Created:",
         "discussion": "Discussion",
-        "attachmend": "Attachment&nbsp;&gt;",
+        "attachmend": "Attachment",
         "competition": "Competitions",
         "noWinners": "No Winners",
         "noneOfCompSubmissionReceivedAnyVotes": "None of the competition submissions received any votes. Competition rewards will be returned to the DAO.",
@@ -566,7 +568,18 @@
     "en": "ENG",
     "tchin": "繁體中文",
     "schin": "简体中文",
-    "protocolParameters": "Protocol Parameters",
+    "Protocol Parameters": "Protocol Parameters",
+    "Grants": "Grants",
     "limit150": "Limit 150 characters",
-    "doUAgree": "Do you agree to freeze your tokens for a seven days?"
+    "doUAgree": "Do you agree to freeze your tokens for at least seven days?",
+    "agreementCheckbox": "By checking this you agree to our <1>Participation Agreement</1> and tokens will be locked for 30 days",
+    "appsManager": "Apps Manager",
+
+    "3box": {
+        "commonDiscussion": "Common Discussion",
+        "connectWarning": "Please connect to wallet",
+        "discussion": "Discussion",
+        "connectButton": "Connect to 3box",
+        "errorConnection": "3Box handler can be unstable. If discussions don't load please try to connect again"
+    }
 }

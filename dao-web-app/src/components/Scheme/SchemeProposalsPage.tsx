@@ -87,6 +87,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
     const { data } = this.props;
 
     const [proposalsQueued, proposalsPreBoosted, proposalsBoosted ] = data;
+    console.log("Proposals list; ", data)
     const { currentAccountAddress, daoState, fetchMore, isActive, scheme } = this.props;
     let proposalCount=0;
 
@@ -136,7 +137,6 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
             <img className={css.relax} src="/assets/images/logo_white.svg"/>
             <div className={css.proposalsHeader}>
             {t("schemas.noUpcoming")}
-
             </div>
         <p>{t("schema.firstOneToCreate", {schemeFriendlyName: schemeFriendlyName})}</p>
             <div className={css.cta}>

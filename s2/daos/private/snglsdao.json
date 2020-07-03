@@ -1,0 +1,16 @@
+{
+    "name": "snglsDAO",
+    "Avatar": "0xF0E5421A2c75E00C3F8363c574D18eEC5048078F",
+    "DAOToken": "0x15A9b43067719376115242B347d2B35aF4aaf386",
+    "Reputation": "0x454893777CeD31e6c80Eb31de2894A9Cb6be1879",
+    "Controller": "0xEFc33c4616DB3FfaEe888534A526892763Af8d26",
+    "Schemes": [
+      {
+        "name": "GenericScheme",
+        "alias": "GenericSchemeAlias",
+        "address": "0x14ce646a6719efB982B54189C3661BA1d8b825cA",
+        "arcVersion": "0.0.1-rc.32"
+      }
+    ],
+    "arcVersion": "0.0.1-rc.32"
+  }

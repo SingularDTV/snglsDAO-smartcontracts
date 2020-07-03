@@ -12,6 +12,7 @@ import { combineLatest } from "rxjs";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 import * as css from "./SchemeCard.scss";
 import { withTranslation } from 'react-i18next';
+import i18next from "i18next";
 
 
 interface IExternalProps {
@@ -33,17 +34,17 @@ const ProposalSchemeCard = (props: IProps) => {
   const proposals = boostedProposals.slice(0, 3);
 
   const proposalsHTML = proposals.map((proposal: Proposal) => <SubscribedProposalDetail key={proposal.id} proposal={proposal} dao={dao} />);
-  const headerHtml = <button className={css.redButton}>{schemeName(schemeState, "[Unknown]")}</button>;
+  const headerHtml = <button className={css.redButton}>{t(schemeName(schemeState, "[Unknown]"))}</button>;
 
   let trainingTooltipMessage: string;
 
   switch(schemeState.name) {
     case "ContributionReward":
     case "ContributionRewardExt":
-      trainingTooltipMessage = "Use this scheme to reward users (rep and/or funds) for their contributions to the DAO";
+      trainingTooltipMessage = i18next.t('tooltips.useSchemaToRewardUsers');
       break;
     case "SchemeRegistrar":
-      trainingTooltipMessage = "Use this scheme to install, remove or edit the schemes of the DAO";
+      trainingTooltipMessage = i18next.t('tooltips.useToInstallEditRemove');
       break;
   }
 
