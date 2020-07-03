@@ -43,7 +43,7 @@ const ProposalSchemeCard = (props: IProps) => {
       trainingTooltipMessage = "Use this scheme to reward users (rep and/or funds) for their contributions to the DAO";
       break;
     case "SchemeRegistrar":
-      trainingTooltipMessage = "Use this manager to install, remove, or edit application of the DAO";
+      trainingTooltipMessage = "Use this manager to install, remove, or edit an application of the DAO";
       break;
   }
 
