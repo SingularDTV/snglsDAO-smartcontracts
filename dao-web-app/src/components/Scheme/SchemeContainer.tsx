@@ -175,7 +175,7 @@ class SchemeContainer extends React.Component<IProps, IState> {
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
           <h2 className={css.schemeName}>
-            {schemeFriendlyName}
+              {t(schemeFriendlyName)}
           </h2>
           {
             schemeFriendlyName === "Protocol Parameters" &&

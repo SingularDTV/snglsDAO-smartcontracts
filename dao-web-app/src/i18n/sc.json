@@ -560,9 +560,19 @@
     "en": "ENG",
     "tchin": "繁體中文",
     "schin": "简体中文",
-    "protocolParameters": "协议参数",
+    "Protocol Parameters": "协定参数",
+    "Grants": "补助金",
     "limit150": "字数上限150个字符",
     "doUAgree": "您是否同意将令牌冻结7天？",
     "agreementCheckbox": "选中此项即表示您同意我们的 <1>参与协议</1> 令牌将被锁定30天",
-    "appsManager": "应用管理"
+    "appsManager": "应用管理",
+    "commonDiscussion": "讨论区",
+
+    "3box": {
+        "commonDiscussion": "讨论区",
+        "connectWarning": "请连接到电子钱包",
+        "discussion": "Discussion",
+        "connectButton": "连接到3box",
+        "errorConnection": "3Box处理程序不稳定，如讨论区无法开启，请重试连接"
+    }
 }

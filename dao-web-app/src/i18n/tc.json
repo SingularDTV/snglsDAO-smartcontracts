@@ -257,8 +257,8 @@
         "follow": "關注",
         "following": "正在關注",
         "unfollowing": "取消關注",
-        "stopFollowing": "停止關注與此相關的更新",
-        "followUpdatesFromThis": "關注與此相關的更新",
+        "stopFollowing": "停止關注與此相關的更新 ",
+        "followUpdatesFromThis": "關注與此相關的更新 ",
         "whenUVoteRegProposal": "當您對提案進行投票時，您的聲譽值的1%會被鎖定。如果您的投票與最後結果一致（例如，投贊成票而提案最後結果為通過，或投反對票而提案最後結果為否決），您將可取回投票時被鎖定的1%聲譽值以及獲取額外的聲譽獎勵。如果您投票的方案超時，您亦可取回投票時被鎖定的1%聲譽值。",
         "ifUVoteForAndPasses": "如果您投贊成票而提案最後結果為通過，您將獲得質押在該提案的GEN的某個數量作為獎勵。",
         "ifUVoteAgainstAndPasses":"如果您投反對票而提案最後結果為否決，您將獲得質押在該提案的GEN的某個數量作為獎勵。",
@@ -560,9 +560,19 @@
     "en": "ENG",
     "tchin": "繁體中文",
     "schin": "简体中文",
-    "protocolParameters": "協議參數",
+    "Protocol Parameters": "協定參數",
+    "Grants": "補助金",
     "limit150": "告訴DAO關於你的簡介",
     "doUAgree": "您是否同意將令牌凍結7天？",
     "agreementCheckbox": "選中此復選框即表示您同意我們的 <1>參與協議</1> 並且令牌將被鎖定30天",
-    "appsManager": "應用管理"
+    "appsManager": "應用管理",
+    "commonDiscussion": "討論區",
+
+    "3box": {
+        "commonDiscussion": "討論區",
+        "connectWarning": "請連接電子錢包",
+        "discussion": "Discussion",
+        "connectButton": "連接到3box",
+        "errorConnection": "3Box處理程序不穩定，如討論區無法開啟，請重試連接"
+    }
 }

@@ -568,9 +568,18 @@
     "en": "ENG",
     "tchin": "繁體中文",
     "schin": "简体中文",
-    "protocolParameters": "Protocol Parameters",
+    "Protocol Parameters": "Protocol Parameters",
+    "Grants": "Grants",
     "limit150": "Limit 150 characters",
     "doUAgree": "Do you agree to freeze your tokens for at least seven days?",
     "agreementCheckbox": "By checking this you agree to our <1>Participation Agreement</1> and tokens will be locked for 30 days",
-    "appsManager": "Apps Manager"
+    "appsManager": "Apps Manager",
+
+    "3box": {
+        "commonDiscussion": "Common Discussion",
+        "connectWarning": "Please connect to wallet",
+        "discussion": "Discussion",
+        "connectButton": "Connect to 3box",
+        "errorConnection": "3Box handler can be unstable. If discussions don't load please try to connect again"
+    }
 }

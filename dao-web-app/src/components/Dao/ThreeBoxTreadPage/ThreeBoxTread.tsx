@@ -10,6 +10,7 @@ import ThreeBoxMessageList from "./ThreeBoxMessageList"
 import ThreeBoxAddMessage from "./ThreeBoxAddMessage"
 import { IProfileState } from "reducers/profilesReducer";
 import * as style from "./ThreeBoxTreadPage.scss";
+import { useTranslation} from "react-i18next";
 
 interface IProps {
   currentAccountAddress: string;
@@ -23,12 +24,13 @@ interface IProps {
 
 const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName, web3Provider, threeBoxTimeOutErr, updateThreeBox: onUpdateThreeBox }: IProps) => {
 
-  const [loading, setLoading] = useState(false)
-  const [isConnect, setIsConnect] = useState(false)
-  const [thread, setThread] = useState(null)
-  const [currDID, setCurrDID] = useState(null)
-  const [currProfile, setCurrProfile] = useState(null)
-  const [currConfig, setCurrConfig] = useState(null)
+  const [loading, setLoading] = useState(false);
+  const [isConnect, setIsConnect] = useState(false);
+  const [thread, setThread] = useState(null);
+  const [currDID, setCurrDID] = useState(null);
+  const [currProfile, setCurrProfile] = useState(null);
+  const [currConfig, setCurrConfig] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     onGetCurrUser()
@@ -83,7 +85,7 @@ const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName, web3Provider
 
   if(!web3Provider) {
     return (<div>
-      <h5>Please connect to wallet</h5>
+      <h5>{t("3box.connectWarning")}</h5>
     </div>)
   }
 
@@ -96,8 +98,8 @@ const ThreeBoxTread = ({ currentAccountAddress, threeBox, chatName, web3Provider
 
   return(
     <div>
-      {!isConnect && <Button onClick={handleConnect} className={style.antFormButton}>Connect to 3box</Button>}
-      {threeBoxTimeOutErr && <h5 style={{color :"red"}}>3Box handler can be unstable if discussions don't load please try again connect</h5>}
+      {!isConnect && <Button onClick={handleConnect} className={style.antFormButton}>{t("3box.connectButton")}</Button>}
+      {threeBoxTimeOutErr && <h5 style={{color :"red"}}>{t("3box.errorConnection")}</h5>}
     </div>
   );
 }
