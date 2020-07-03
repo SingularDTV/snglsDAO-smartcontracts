@@ -51,7 +51,7 @@ function getWeb3ConnectProviderOptions(network: string) {
         portis: {
           package: Portis,
           options: {
-            id: "aae9cff5-6e61-4b68-82dc-31a5a46c4a86",
+            id: "7e71b670-e2db-4575-926e-1cad8dd4db4b",
           },
         },
         fortmatic: {
