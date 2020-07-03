@@ -16,7 +16,6 @@ import * as moment from "moment";
 import { History } from "history";
 import { showNotification, NotificationStatus } from "reducers/notifications";
 // import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
-import TrainingTooltip from "../../components/Shared/TrainingTooltip";
 import * as css from "./DaoJoin.scss";
 import "./ant.global.scss";
 import { withTranslation } from 'react-i18next';
