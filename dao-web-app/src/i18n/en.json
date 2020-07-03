@@ -185,7 +185,6 @@
         "viewYourPersonalFeed": "View your personal feed",
         "showHide": "Show / hide tooltips on hover",
         "regProposalArePassedOrFailed": "Regular proposals are passed or failed via absolute majority over a configured voting period. If enough GEN is staked predicting they will pass, they can move to the pending and then boosted queues."
-
     },
     "account": {
        "rep": "Reputation",

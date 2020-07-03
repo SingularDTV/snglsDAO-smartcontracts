@@ -183,7 +183,8 @@
         "listOfEntities":"在DAO中具有投票权的实体的列表（DAO和个人）",
         "spaceDesignated": "指定的讨论空间用于发表一般问题、陈述和评论",
         "viewYourPersonalFeed": "查看您的资讯页面",
-        "showHide": "选择显示或隐藏悬浮小提示"
+        "showHide": "选择显示或隐藏悬浮小提示",
+        "regProposalArePassedOrFailed": "一般提案通过与否取决于在设定时间内获取绝大多数的投票。如果有足够GEN代币质押及预计提案将会通过， 提案将会进入助推等候期，等候期过后会进入助推列队中"
     },
     "account": {
        "rep": "声誉值",
