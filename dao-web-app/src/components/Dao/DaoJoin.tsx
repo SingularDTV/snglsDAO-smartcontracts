@@ -233,16 +233,6 @@ class GetReputation extends React.Component<IProps, IStateProps> {
         <h2><span> {t("daojoin.rep")} </span></h2>
         <button className={css.closeButton} aria-label="Close Create Proposal Modal"  onClick={this.handleClose}  ><img src="/assets/images/close.svg" alt=""/></button>
       </div>
-        {!percentageBn && (
-          <div className={css.subhead}>
-            <div className={css.description}>
-              <p>{t("daojoin.needStake")}</p>
-            </div>
-            <div>
-              <a href="#" className={css.btn}>{t("daojoin.cancel")}</a>
-            </div>
-          </div>
-        )}
       {!!percentageBn && (
         <div className={css.releaseTime}>
           <Countdown title="Token defrosting will be available in"
