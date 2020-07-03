@@ -182,19 +182,19 @@ class SchemeContainer extends React.Component<IProps, IState> {
             <div className={css.schemeTop}>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
-                <div>{t('membership.memFee')}: SNGLS {membershipFee}</div>
+                <div>{t('membership.memFee')}: {membershipFee} SNGLS</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_listing_rate.png" /></div>
-                <div>{t('proposal.listingFee')}: SNGLS {listingFee}</div>
+                <div>{t('proposal.listingFee')}: {listingFee} SNGLS</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_transaction.png" /></div>
-                <div>{t('proposal.transFee')}: % {transactionFee}</div>
+                <div>{t('proposal.transFee')}: {transactionFee} %</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
-                <div>{t('dashboard.validationFee')}: SNGLS {validationFee}</div>
+                <div>{t('dashboard.validationFee')}: {validationFee} SNGLS</div>
               </div>
             </div>
           }
