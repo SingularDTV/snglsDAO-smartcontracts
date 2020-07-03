@@ -87,7 +87,7 @@ export function isKnownScheme(address: Address) {
 
 export function schemeName(scheme: ISchemeState|IContractInfo, fallback?: string) {
   let name: string;
-  console.log("SCHEME NAME FUNCTION: ", scheme);
+  // console.log("SCHEME NAME FUNCTION: ", scheme);
   if (scheme.name === "GenericScheme" || scheme.name === "UGenericScheme") {
     if ((scheme as any).genericSchemeParams || ((scheme as any).uGenericSchemeParams)) {
       const genericSchemeRegistry = new GenericSchemeRegistry();
