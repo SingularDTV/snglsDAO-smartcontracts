@@ -16,7 +16,6 @@ import * as moment from "moment";
 import { History } from "history";
 import { showNotification, NotificationStatus } from "reducers/notifications";
 // import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
-import TrainingTooltip from "../../components/Shared/TrainingTooltip";
 import * as css from "./DaoJoin.scss";
 import "./ant.global.scss";
 import { withTranslation } from 'react-i18next';
@@ -233,19 +232,9 @@ class GetReputation extends React.Component<IProps, IStateProps> {
         <h2><span> {t("daojoin.rep")} </span></h2>
         <button className={css.closeButton} aria-label="Close Create Proposal Modal"  onClick={this.handleClose}  ><img src="/assets/images/close.svg" alt=""/></button>
       </div>
-        {!percentageBn && (
-          <div className={css.subhead}>
-            <div className={css.description}>
-              <p>{t("daojoin.needStake")}</p>
-            </div>
-            <div>
-              <a href="#" className={css.btn}>{t("daojoin.cancel")}</a>
-            </div>
-          </div>
-        )}
       {!!percentageBn && (
         <div className={css.releaseTime}>
-          <Countdown title="Token defrosting will be available through"
+          <Countdown title="Token defrosting will be available in"
               // @ts-ignore
               value={moment(releaseTime*1000).format()}
               format="DD:HH:mm:ss"
@@ -299,7 +288,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
 
                     <div className={css.content}>
                       <p>{t("daojoin.haveAmountStaked")}</p>
-                      <p> Your current balance: {this.state.balance } SNGLS</p>
+                      <p> {t("daojoin.yourCurrentBalance")} {this.state.balance } {t("header.SGT")}</p>
                       <div className={css.rewards}>
                         <div className={css.reward}>
                           <div className={css.bigInput}>
@@ -345,7 +334,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                         component={Checkbox}
                       >
                         <Trans i18nKey="agreementCheckbox">
-                          By checking this you agree to our <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf">Participation Agreement</a> and tokens will be locked for 30 days
+                          By checking this you agree to our <a target="_blank" rel="noopener noreferrer" href="https://ipfs.io/ipfs/QmVixgD9gSkWt8tN3Uk93D3KHUCB1UT47WBJqXfo6bcZ6U">Participation Agreement</a> and tokens will be locked for 30 days
                         </Trans>
                       </Field>
                       {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)
@@ -354,11 +343,9 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                       }
                       <div className={css.createProposalActions}>
                         <div>
-                          <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
                             <button className={css.submitProposal} type="submit" disabled={isSubmitting || !values?.term}>
                               {t('daojoin.getRep')}
                             </button>
-                          </TrainingTooltip>
                         </div>
                       </div>
                     </div>
@@ -384,11 +371,9 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                             </span>
                 </div>
               </div>
-               <TrainingTooltip overlay={'Text for unstake'} placement="top">
                  <button className={css.submitProposal} type="submit"  onClick={this.handleUnstake} disabled={Math.round((new Date()).getTime() / 1000) < parseInt(releaseTime)}>
                    {t('daojoin.removeRep')}
                  </button>
-               </TrainingTooltip>
              </div>
             </TabPane>
           </Tabs>

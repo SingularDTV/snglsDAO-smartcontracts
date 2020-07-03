@@ -88,7 +88,7 @@
         "validationFee": "Validation Fee",
         "minimumAmount": "Minimum amount paid to validators.",
         "boostedProposals": "Boosted proposals (3)",
-        "notPassedProposals": "This DAO hasn&apos;t passed any proposals yet. Checkout the {{notPassedProposalsLink}}  for any open proposals.",
+        "notPassedProposals": "This DAO has not passed any proposals yet. Checkout the {{notPassedProposalsLink}}  for any open proposals.",
         "notPassedProposalsLink": "DAO&apos;s installed schemes",
         "proposedBy": "Proposed by",
         "endDate": "End date",
@@ -115,7 +115,8 @@
         "sgtTokens": "SGT Tokens Staked: ",
         "reputation": "Reputation:",
         "Stake": "Stake",
-        "Unstake": "Unstake"
+        "Unstake": "Unstake",
+        "yourCurrentBalance": "Your current balance: "
     },
     "loading": "Loading...",
     "noProfile": "No Profile",

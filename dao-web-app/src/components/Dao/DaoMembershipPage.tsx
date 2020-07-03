@@ -210,7 +210,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
             <div className={css.content}>
               {!!parseInt(this.state.alreadyStaked) ? (
                 <div className={css.releaseTime}>
-                  <Countdown title="Token defrosting will be available through"
+                  <Countdown title="Token defrosting will be available in"
                     // @ts-ignore
                              value={moment(releaseTime*1000).format()}
                              format="DD:HH:mm:ss"
