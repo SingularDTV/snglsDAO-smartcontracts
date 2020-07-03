@@ -354,11 +354,9 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                       }
                       <div className={css.createProposalActions}>
                         <div>
-                          <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
                             <button className={css.submitProposal} type="submit" disabled={isSubmitting || !values?.term}>
                               {t('daojoin.getRep')}
                             </button>
-                          </TrainingTooltip>
                         </div>
                       </div>
                     </div>
@@ -384,11 +382,9 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                             </span>
                 </div>
               </div>
-               <TrainingTooltip overlay={'Text for unstake'} placement="top">
                  <button className={css.submitProposal} type="submit" onClick={this.handleUnstake}>
                    {t('daojoin.removeRep')}
                  </button>
-               </TrainingTooltip>
              </div>
             </TabPane>
           </Tabs>
