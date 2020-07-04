@@ -119,7 +119,7 @@ export class App extends React.Component<{}, {
             <ConnectedRouter history={history}>
               <Switch>
                 <Route path="/cookie-policy" component={this.CookiePolicy}/>
-                <Route path="/dao/privacy-policy" component={this.PrivacyPolicy}/>
+                <Route path="/privacy-policy" component={this.PrivacyPolicy}/>
                 <Route path="/" component={AppContainer}/>
                 <Route component={Error404} />
                 <Redirect from="/*" to="/Error404" />
