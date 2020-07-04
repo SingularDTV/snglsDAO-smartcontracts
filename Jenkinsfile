@@ -23,7 +23,7 @@ pipeline {
 //         }
 //       }
 //     }
-    stage('webpack rinkeby develop branch') {
+    stage('develop(rinkeby) -> https://snglsdao.blaize.tech') {
       when {
         branch 'develop'
       }
@@ -36,18 +36,21 @@ pipeline {
         }
       }
     }
-    stage('webpack main master branch') {
+    stage('pre-production(main) -> https://stageapp.snglsdao.io/') {
       when {
-        branch 'master'
+        branch 'pre-production'
       }
       steps {
         nodejs('nodejs-10') {
           sh 'cd dao-web-app/ && npm run build'
           archiveArtifacts(artifacts: 'dao-web-app/dist/', onlyIfSuccessful: true)
         }
+        sshagent(['snglsdao-www']) {
+          sh 'rsync -a --verbose --delete -e "ssh -o StrictHostKeyChecking=no" dao-web-app/dist/ snglsdao-www@stageapp.snglsdao.io:/var/www/stageapp/'
+        }
       }
     }
-    stage('webpack main production branch') {
+    stage('production(main) -> https://app.snglsdao.io/') {
       when {
         branch 'production'
       }
@@ -55,6 +58,8 @@ pipeline {
         nodejs('nodejs-10') {
           sh 'cd dao-web-app/ && npm run build'
           archiveArtifacts(artifacts: 'dao-web-app/dist/', onlyIfSuccessful: true)
+          // the installation controlled by separate job in jenkins
+          // https://jenkins.blaize.tech/view/snglsdao/job/prod-snglsdao-deploy-app.snglsdao.io/
         }
       }
     }
