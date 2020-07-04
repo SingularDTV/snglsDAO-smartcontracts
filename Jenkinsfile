@@ -32,7 +32,7 @@ pipeline {
           sh 'cd dao-web-app/ && npm run build-rinkeby'
         }
         sshagent(['snglsdao-www']) {
-          sh 'rsync -a --verbose --delete -e "ssh -o StrictHostKeyChecking=no" dao-web-app/dist/ snglsdao-www@test.blaize.tech:/var/www/snglsdao/'
+          sh 'rsync -a --verbose --delete -e "ssh -o StrictHostKeyChecking=no" dao-web-app/dist/ snglsdao-www@test.blaize.tech:/var/www/snglsdao.blaize.tech/'
         }
       }
     }
@@ -43,10 +43,11 @@ pipeline {
       steps {
         nodejs('nodejs-10') {
           sh 'cd dao-web-app/ && npm run build'
+          // we archive as we can actually use this for deploy on prod without the build of production branch
           archiveArtifacts(artifacts: 'dao-web-app/dist/', onlyIfSuccessful: true)
         }
         sshagent(['snglsdao-www']) {
-          sh 'rsync -a --verbose --delete -e "ssh -o StrictHostKeyChecking=no" dao-web-app/dist/ snglsdao-www@stageapp.snglsdao.io:/var/www/stageapp/'
+          sh 'rsync -a --verbose --delete -e "ssh -o StrictHostKeyChecking=no" dao-web-app/dist/ snglsdao-www@stageapp.snglsdao.io:/var/www/stageapp.snglsdao.io/'
         }
       }
     }
