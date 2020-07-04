@@ -53,8 +53,8 @@
   },
   "scripts": {
     "analyze": "cross-env NODE_ENV=production NETWORK=main ANALYZE=1 node --max_old_space_size=4096 node_modules/.bin/webpack --config webpack.prod.config.js --progress --colors",
-    "build": "cross-env NODE_ENV=production NETWORK=main node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js",
-    "build-rinkeby": "cross-env NODE_ENV=production NETWORK=rinkeby node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js",
+    "build": "rm -rf dist/ && cross-env NODE_ENV=production NETWORK=main node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js",
+    "build-rinkeby": "rm -rf dist/ && cross-env NODE_ENV=production NETWORK=rinkeby node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js",
     "test-prod-rinkeby": "cd ../ && docker-compose up --build -d",
     "build-dev": "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.dev.config.js",
     "build-travis": "cross-env NODE_ENV=production NETWORK=main node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js",
