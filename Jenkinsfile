@@ -32,7 +32,7 @@ pipeline {
           sh 'cd dao-web-app/ && npm run build-rinkeby'
         }
         sshagent(['snglsdao-www']) {
-           sh 'rsync -a --delete -e "ssh -o StrictHostKeyChecking=no" dao-web-app/dist/ snglsdao-www@test.blaize.tech:/var/www/snglsdao/'
+          sh 'rsync -a --verbose --delete -e "ssh -o StrictHostKeyChecking=no" dao-web-app/dist/ snglsdao-www@test.blaize.tech:/var/www/snglsdao/'
         }
       }
     }
