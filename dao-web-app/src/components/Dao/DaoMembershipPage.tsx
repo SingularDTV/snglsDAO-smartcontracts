@@ -103,12 +103,13 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
     // Create contract object
     const snglsTokenContract = new arc.web3.eth.Contract(settings.snglsTokenContractABI, settings.snglsTokenContractAddress);
 
+    console.log("SNGLS BALANCE: ", await snglsTokenContract.methods.balanceOf(this.props.currentAccountAddress).call());
     const staked = await memFeeStakingContract.methods.lockers(this.props.currentAccountAddress).call()
     this.setState(
       {
         membershipFee:  arc.web3.utils.fromWei(await feeContract.methods.membershipFee().call(), 'ether'),
         alreadyStaked: arc.web3.utils.fromWei(staked.amount, 'ether'),
-        snglsBalance: arc.web3.utils.fromWei(await snglsTokenContract.methods.balanceOf(this.props.currentAccountAddress).call(), 'ether'),
+        snglsBalance: await snglsTokenContract.methods.balanceOf(this.props.currentAccountAddress).call(),
         fieldValue: 0
       }
     );
