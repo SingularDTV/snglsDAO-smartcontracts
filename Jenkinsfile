@@ -32,6 +32,9 @@ pipeline {
           sh 'cd dao-web-app/ && npm run build-rinkeby'
           archiveArtifacts(artifacts: 'dao-web-app/dist/', onlyIfSuccessful: true)
         }
+        sshagent(['snglsdao-www']) {
+           sh 'rsync -a --delete -e "ssh -o StrictHostKeyChecking=no" dao-web-app/dist/ snglsdao-www@test.blaize.tech:/var/www/snglsdao/'
+        }
       }
     }
     stage('webpack main master branch') {
