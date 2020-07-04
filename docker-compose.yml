@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  web:
+    image: nginx
+    container_name: snglsdao-prod-web
+    restart: always
+    volumes:
+      - ./dao-web-app/dist:/usr/share/nginx/html:ro
+    ports:
+      - '3050:80'
+#    command: /bin/bash -c "exec nginx -g 'daemon off;'"
