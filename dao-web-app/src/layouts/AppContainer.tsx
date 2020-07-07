@@ -10,7 +10,7 @@ import Header from "layouts/Header";
 import SidebarMenu from "layouts/SidebarMenu";
 import { IRootState } from "reducers";
 import { dismissNotification, INotificationsState, NotificationStatus, showNotification, INotification } from "reducers/notifications";
-import { getCachedAccount, cacheWeb3Info, logout, pollForAccountChanges, getArcSettings } from "arc";
+import { getCachedAccount, cacheWeb3Info, logout, pollForAccountChanges, getArcSettings, getArc } from "arc";
 import ErrorUncaught from "components/Errors/ErrorUncaught";
 // import { parse } from "query-string";
 import * as React from "react";
@@ -144,6 +144,8 @@ class AppContainer extends React.Component<IProps, IState> {
           this.props.threeBoxLogout();
         }
       });
+      const arc = getArc();
+      arc.lockingSgt4Reputation((data: any) => console.log("data from subscription: ", data));
   }
 
   private clearError = () => {
