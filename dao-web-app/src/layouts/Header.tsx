@@ -270,7 +270,7 @@ class Header extends React.Component<IProps, null> {
             </div>
             <div className={navigationClass}>
               <ul>
-                <li><a href="https://snglsdao.io/">{t("header.dao")}</a></li>
+                <li><a href="https://app.snglsdao.io/">{t("header.dao")}</a></li>
                 <li><a href="https://forum.snglsdao.io/" target="_blank">{t('header.forum')}</a></li>
                 <li className={css.submenu}><span>{t('header.consumerProtection.consumer')}</span>
                     <ul>

@@ -13,6 +13,7 @@ import "moment";
 import * as moment from "moment-timezone";
 
 import { getArc } from "../arc";
+import i18next from "i18next";
 
 export enum SchemePermissions {
   None = 0,
@@ -87,7 +88,7 @@ export function isKnownScheme(address: Address) {
 
 export function schemeName(scheme: ISchemeState|IContractInfo, fallback?: string) {
   let name: string;
-  console.log("SCHEME NAME FUNCTION: ", scheme);
+  // console.log("SCHEME NAME FUNCTION: ", scheme);
   if (scheme.name === "GenericScheme" || scheme.name === "UGenericScheme") {
     if ((scheme as any).genericSchemeParams || ((scheme as any).uGenericSchemeParams)) {
       const genericSchemeRegistry = new GenericSchemeRegistry();
@@ -113,7 +114,7 @@ export function schemeName(scheme: ISchemeState|IContractInfo, fallback?: string
   } else if (scheme.id === getArcSettings().grantsSchemeID) {
     name ="Grants";
   } else if (scheme.name === "SchemeRegistrar") {
-    name ="Apps Manager";
+    name = i18next.t("appsManager");
   } else if (scheme.name) {
     if (scheme.name === "ContributionRewardExt") {
       name = rewarderContractName(scheme as ISchemeState);

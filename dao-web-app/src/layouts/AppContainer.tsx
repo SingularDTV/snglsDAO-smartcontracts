@@ -264,7 +264,8 @@ class AppContainer extends React.Component<IProps, IState> {
             <div className={css.cookieDisclaimerContainer}>
               <div className={css.cookieDisclaimer}>
                 <div className={css.body}>{t("cookieStart")}
-                  <Link to="dao/privacy-policy" target="_blank" rel="noopener noreferrer">{t("cookieLinkPolicy")}</Link>{t("cookieMoreInformation")}</div>
+                    <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf" target="_blank" rel="noopener noreferrer">{t("cookieLinkPolicy")}</a>{t("cookieMoreInformation")}</div>
+                  {/*<Link to="dao/privacy-policy" target="_blank" rel="noopener noreferrer">{t("cookieLinkPolicy")}</Link>{t("cookieMoreInformation")}</div>*/}
       <div className={css.accept}><a href="#" onClick={this.handleAccept} className={css.redButton} data-test-id="acceptCookiesButton"><img src="/assets/images/Icon/v-white-thick.svg"></img>{t("iAccept")}</a></div>
               </div>
             </div>

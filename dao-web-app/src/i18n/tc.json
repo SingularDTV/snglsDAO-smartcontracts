@@ -9,9 +9,9 @@
         "wall": "DAO討論區",
         "treasury": "DAO儲備資金",
         "stakes": "DAO質押",
-        "buy": "$ 购买 SNGLS",
-        "buySgt": "$ 购买 SGT",
-        "buyGen": "$ 购买 GEN",
+        "buy": "$ 購買 SNGLS",
+        "buySgt": "$ 購買 SGT",
+        "buyGen": "$ 購買 GEN",
         "sngls": "snglsDAO",
         "rep": "聲譽值",
         "protocolParams": "協定參數",
@@ -88,7 +88,7 @@
         "validationFee": "驗証費用：SNGLS",
         "minimumAmount": "給付驗証者的最低收費。",
         "boostedProposals": "助推提案 (3)",
-        "notPassedProposals": "目前未有通過任何提案。請到 {{notPassedProposalsLink}}  查看正在公開的提案。",
+        "notPassedProposals": "目前未有通過任何提案。",
         "notPassedProposalsLink": "DAO現已安裝的方案(Scheme)",
         "proposedBy": "發起者",
         "endDate": "結束時間",
@@ -151,7 +151,7 @@
     },
     "tooltips": {
         "useSchemaToRewardUsers": "使用此方案獎勵（聲譽值和/或資金）對snglsDAO有貢獻的用戶",
-        "useToInstallEditRemove": "使用此方案可以安裝，刪除或編輯DAO的方案",
+        "useToInstallEditRemove": "使用此方案管理可以安裝，刪除或編輯DAO的方案",
         "enterPositive": "請輸入正數",
         "insufficient": "沒有足夠的GEN",
         "copyLink":"複製鏈接",
@@ -183,8 +183,8 @@
         "listOfEntities":"在DAO中具有投票權的實體的列表（DAO和個人）",
         "spaceDesignated": "指定的討論空間用於發表一般問題、陳述和評論",
         "viewYourPersonalFeed": "查看您的資訊頁面",
-        "showHide": "選擇顯示或隱藏懸浮小提示"
-
+        "showHide": "選擇顯示或隱藏懸浮小提示",
+        "regProposalArePassedOrFailed": "一般提案通過與否取決於在設定時間內獲取絕大多數的投票。如果有足夠GEN代幣質押及預計提案將會通過， 提案將會進入助推等候期，等候期過後會進入助推列隊中"
     },
     "account": {
        "rep": "聲譽值",
@@ -257,8 +257,8 @@
         "follow": "關注",
         "following": "正在關注",
         "unfollowing": "取消關注",
-        "stopFollowing": "停止關注與此相關的更新",
-        "followUpdatesFromThis": "關注與此相關的更新",
+        "stopFollowing": "停止關注與此相關的更新 ",
+        "followUpdatesFromThis": "關注與此相關的更新 ",
         "whenUVoteRegProposal": "當您對提案進行投票時，您的聲譽值的1%會被鎖定。如果您的投票與最後結果一致（例如，投贊成票而提案最後結果為通過，或投反對票而提案最後結果為否決），您將可取回投票時被鎖定的1%聲譽值以及獲取額外的聲譽獎勵。如果您投票的方案超時，您亦可取回投票時被鎖定的1%聲譽值。",
         "ifUVoteForAndPasses": "如果您投贊成票而提案最後結果為通過，您將獲得質押在該提案的GEN的某個數量作為獎勵。",
         "ifUVoteAgainstAndPasses":"如果您投反對票而提案最後結果為否決，您將獲得質押在該提案的GEN的某個數量作為獎勵。",
@@ -553,16 +553,26 @@
     "cookieLinkPolicy": "Cookie政策",
     "cookieMoreInformation": "以獲得更多信息。",
     "disclaimer": "免責聲明",
-    "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
+    "disclaimerDescription": "本網頁所載信息以摘要形式提供，並不構成完整信息。在對任何信息採取行動之前，您應考慮這些事項的任何相關文件、要約、及信息的適當性，並應尋求獨立意見（例如法律、法規、稅務等）的建議。",
     "iAccept": "我同意",
     "fullProfile": "完整檔案",
     "yourReputation": "您的聲譽：",
     "en": "ENG",
     "tchin": "繁體中文",
     "schin": "简体中文",
-    "protocolParameters": "協議參數",
+    "Protocol Parameters": "協定參數",
+    "Grants": "補助金",
     "limit150": "告訴DAO關於你的簡介",
     "doUAgree": "您是否同意將令牌凍結7天？",
     "agreementCheckbox": "選中此復選框即表示您同意我們的 <1>參與協議</1> 並且令牌將被鎖定30天",
-    "Apps Manager": "應用程式管理員"
+    "appsManager": "應用管理",
+    "commonDiscussion": "討論區",
+
+    "3box": {
+        "commonDiscussion": "討論區",
+        "connectWarning": "請連接電子錢包",
+        "discussion": "Discussion",
+        "connectButton": "連接到3box",
+        "errorConnection": "3Box處理程序不穩定，如討論區無法開啟，請重試連接"
+    }
 }

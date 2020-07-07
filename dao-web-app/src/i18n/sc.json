@@ -88,7 +88,7 @@
         "validationFee": "验证费用：SNGLS",
         "minimumAmount": "给付验证者的最低收费。",
         "boostedProposals": "助推提案 (3)",
-        "notPassedProposals": "目前未有通过任何提案。请到 {{notPassedProposalsLink}}  查看正在公开的提案。",
+        "notPassedProposals": "目前未有通过任何提案。",
         "notPassedProposalsLink": "DAO现已安装的方案(Scheme)",
         "proposedBy": "发起者",
         "endDate": "结束时间",
@@ -149,9 +149,9 @@
         "unknown": "不明",
         "unsuported": "不支援的应用"
     },
-    "toolTips": {
+    "tooltips": {
         "useSchemaToRewardUsers": "使用此方案奖励（声誉值和/或资金）对snglsDAO有贡献的用户",
-        "useToInstallEditRemove": "使用此方案可以安装，删除或编辑DAO的方案",
+        "useToInstallEditRemove": "使用此方案管理可以安装，删除或编辑DAO的方案",
         "enterPositive": "请输入正数",
         "insufficient": "没有足够的GEN",
         "copyLink":"复制链接",
@@ -183,7 +183,8 @@
         "listOfEntities":"在DAO中具有投票权的实体的列表（DAO和个人）",
         "spaceDesignated": "指定的讨论空间用于发表一般问题、陈述和评论",
         "viewYourPersonalFeed": "查看您的资讯页面",
-        "showHide": "选择显示或隐藏悬浮小提示"
+        "showHide": "选择显示或隐藏悬浮小提示",
+        "regProposalArePassedOrFailed": "一般提案通过与否取决于在设定时间内获取绝大多数的投票。如果有足够GEN代币质押及预计提案将会通过， 提案将会进入助推等候期，等候期过后会进入助推列队中"
     },
     "account": {
        "rep": "声誉值",
@@ -552,16 +553,26 @@
     "cookieLinkPolicy": "Cookie政策",
     "cookieMoreInformation": "以获得更多信息。",
     "disclaimer": "免责声明",
-    "disclaimerDescription": "This information is given in summary form and does not purport to be complete. Before acting on any information you should consider the appropriateness of the information having regard to these matters,any relevant offer document and in particular, you should seek independent(e.g.legal,regulatory and tax) advice.",
+    "disclaimerDescription": "本网页所载信息以摘要形式提供，并不构成完整信息。在对任何信息采取行动之前，您应考虑这些事项的任何相关文件、要约、及信息的适当性，并应寻求独立意见（例如法律、法规、税务等）的建议。",
     "iAccept": "我同意",
     "fullProfile": "完整档案",
     "yourReputation": "您的声誉：",
     "en": "ENG",
     "tchin": "繁體中文",
     "schin": "简体中文",
-    "protocolParameters": "协议参数",
+    "Protocol Parameters": "协定参数",
+    "Grants": "补助金",
     "limit150": "字数上限150个字符",
     "doUAgree": "您是否同意将令牌冻结7天？",
     "agreementCheckbox": "选中此项即表示您同意我们的 <1>参与协议</1> 令牌将被锁定30天",
-    "Apps Manager": "应用程式管理员"
+    "appsManager": "应用管理",
+    "commonDiscussion": "讨论区",
+
+    "3box": {
+        "commonDiscussion": "讨论区",
+        "connectWarning": "请连接到电子钱包",
+        "discussion": "Discussion",
+        "connectButton": "连接到3box",
+        "errorConnection": "3Box处理程序不稳定，如讨论区无法开启，请重试连接"
+    }
 }

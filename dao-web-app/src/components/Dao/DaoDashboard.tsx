@@ -334,7 +334,8 @@ class DaoDashboard extends React.Component<IProps, IState> {
                     }
                 >
                     { proposals.length === 0 ?
-                        <span>This DAO hasn&apos;t passed any proposals yet. Checkout the <Link to={"/dao/proposal/"}>DAO&apos;s installed schemes</Link> for any open proposals.</span> :
+                        <span>
+                            {t("dashboard.notPassedProposals")}</span> :
                         <table className={css.proposalHistoryTable}>
                             <thead>
                             <tr className={css.proposalHistoryTableHeader}>

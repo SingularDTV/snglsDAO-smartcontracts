@@ -162,9 +162,23 @@ class SchemeContainer extends React.Component<IProps, IState> {
     });
     const schemeFriendlyName = schemeName(schemeState, schemeState.address);
 
+    // if (schemeFriendlyName == "Grants") {
+    //   return (
+    //     <div className={css.schemeContainer}>
 
+    //     <div className={css.grantsOffer}>
+    //     <img src="/assets/images/under_construction.webp" />
+    //     <p>Sorry we are working on geting the grants scheme operational.</p>
+    //     <p>Once the offical snglsDAO subgraph is synced it will launch.</p>
+    //     <p>Follow along here: <a href="https://thegraph.com/explorer/subgraph/singulardtv/sngls-dao">https://thegraph.com/explorer/subgraph/singulardtv/sngls-dao</a></p>
+    //   </div>
+    //   </div>
+    //   );
+    // }
     return (
       <div className={css.schemeContainer}>
+
+
 
         <BreadcrumbsItem to={`/dao/scheme/${schemeId}`}>{schemeFriendlyName}</BreadcrumbsItem>
         <Helmet>
@@ -175,7 +189,7 @@ class SchemeContainer extends React.Component<IProps, IState> {
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
           <h2 className={css.schemeName}>
-            {schemeFriendlyName}
+              {t(schemeFriendlyName)}
           </h2>
           {
             schemeFriendlyName === "Protocol Parameters" &&
