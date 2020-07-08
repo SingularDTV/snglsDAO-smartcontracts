@@ -993,12 +993,17 @@ div.description {
 
 @media(max-width: 768px) {
 
+
   .createProposalWrapper {
 // width: calc(100% - 30px);
     width: 100%;
     max-width: calc(100% - 30px);
     box-shadow: none;
-    top: calc(50% - 64px);
+    // top: calc(50% - 64px);
+    top: 0;
+    transform: translate(-50%, 0%);
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
     // left: 15px;
 
     .header {

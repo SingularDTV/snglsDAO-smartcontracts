@@ -685,17 +685,31 @@ div.description {
   }
 
   .createProposalWrapper {
+    // top: 0;
+    // left: 0;
+    // transform: translate(0, 0);
+    // height: 100%;
+
     top: 0;
-    left: 0;
-    transform: translate(0, 0);
-    height: 100%;
+    transform: translate(-50%, 0%);
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    width: calc(100% - 30px);
+    overflow-x: hidden;
+
 
     .header {
       border-radius: 0 0 0 0;
+
+      span {
+        b {
+          display: none;
+        }
+      }
     }
 
     form {
-      padding: 15px 15px 155px 15px;
+      padding: 15px;
 
       textarea {
         border: none;

@@ -145,6 +145,7 @@ class AppContainer extends React.Component<IProps, IState> {
         }
       });
       const arc = getArc();
+    //@ts-ignore
       arc.lockingSgt4Reputation((data: any) => console.log("data from subscription: ", data));
   }
 
