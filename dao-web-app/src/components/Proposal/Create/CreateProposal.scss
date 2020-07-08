@@ -17,6 +17,13 @@
   box-shadow: $shadow-3;
   // height: calc(100% - 100px);
   z-index: 99999;
+  // top: 0;
+  transform: translate(-50%, -50%);
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  // width: calc(100% - 30px);
+  overflow-x: hidden;
+
 
   .header {
     background-color: $navy;
