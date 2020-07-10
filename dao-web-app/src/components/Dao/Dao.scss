@@ -142,6 +142,11 @@ a {
         width: 24px;
         height: 24px;
       }
+
+      svg {
+        max-width: 24px;
+        margin: 0 5px;
+      }
     }
   }
 }
@@ -164,6 +169,10 @@ a {
 
     .memberSocial {
       min-width: 110px;
+
+      svg {
+        max-width: 24px;
+      }
     }
   }
 }
@@ -265,6 +274,7 @@ a {
 
   table {
     width: 100%;
+    position: relative;
   }
 
   h1 {
