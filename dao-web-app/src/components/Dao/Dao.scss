@@ -141,6 +141,17 @@ a {
       .icon {
         width: 24px;
         height: 24px;
+
+        &:hover {
+          color: #d40d26;
+          cursor: pointer;
+
+          svg {
+            path {
+              fill: #d40d26;
+            }
+          }
+        }
       }
 
       svg {

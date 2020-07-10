@@ -41,7 +41,12 @@
         transform: translate(-50%, -50%);
         max-height: calc(100vh - 80px);
         overflow-y: auto;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
 
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
 
     .ant-statistic {
