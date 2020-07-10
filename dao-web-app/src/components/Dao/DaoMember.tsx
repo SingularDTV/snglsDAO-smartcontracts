@@ -37,20 +37,25 @@ class DaoMember extends React.Component<IProps, null> {
       <div className={css.member + " clearfix"}
         key={"member_" + memberState.address}
         data-test-id={"member_" + memberState.address}>
-        <Link to={memberState.address === currentAccountAddress
-          ? "/profile/" + currentAccountAddress
-          : "/profile/" + memberState.address + (dao ? "?daoAvatarAddress=" + dao.address : "")}>
+
           <table className={css.memberTable}>
             <tbody>
               <tr>
                 <td className={css.memberAvatar}>
-                  <AccountImage
-                    accountAddress={memberState.address}
-                    profile={profile}
-                    width={40}
-                  />
+                  <Link to={memberState.address === currentAccountAddress
+            ? "/profile/" + currentAccountAddress
+            : "/profile/" + memberState.address + (dao ? "?daoAvatarAddress=" + dao.address : "")}>
+                    <AccountImage
+                      accountAddress={memberState.address}
+                      profile={profile}
+                      width={40}
+                    />
+                  </Link>
                 </td>
                 <td className={css.memberName}>
+                <Link to={memberState.address === currentAccountAddress
+            ? "/profile/" + currentAccountAddress
+            : "/profile/" + memberState.address + (dao ? "?daoAvatarAddress=" + dao.address : "")}>
                   { profile ?
                     <div>
                       <AccountProfileName currentAccountAddress={memberState.address === currentAccountAddress && currentAccountAddress} accountAddress={memberState.address} accountProfile={profile} daoAvatarAddress={dao.address} />
@@ -58,6 +63,7 @@ class DaoMember extends React.Component<IProps, null> {
                     </div>
                     : <div className={css.noProfile}>No Profile</div>
                   }
+                  </Link>
                 </td>
                 <td className={css.memberAddress}>
                   {memberState.address}
@@ -86,7 +92,7 @@ class DaoMember extends React.Component<IProps, null> {
               </tr>
             </tbody>
           </table>
-        </Link>
+
       </div>
     );
   }
