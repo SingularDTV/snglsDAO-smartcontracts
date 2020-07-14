@@ -179,10 +179,8 @@ class GetReputation extends React.Component<IProps, IStateProps> {
     const reputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
     const sgtTokenContract = new arc.web3.eth.Contract(settings.erc20TokenContractABI, settings.sgtTokenContractAddress);
 
-    const tokenDecimals = arc.web3.utils.toBN(18);
-    const tokenAmountToApprove = arc.web3.utils.toBN(values.nativeTokenReward);
-    const calculatedApproveValue = arc.web3.utils.toHex(tokenAmountToApprove.mul(arc.web3.utils.toBN(10).pow(tokenDecimals)));
-
+    const tokenAmountToApprove = arc.web3.utils.toBN(arc.web3.utils.toWei(`${values.nativeTokenReward}`));
+    const calculatedApproveValue = arc.web3.utils.toHex(tokenAmountToApprove);
     const currentAccountAddress = this.props.currentAccountAddress;
     const agreementHash = this.state.agreementHash;
 
