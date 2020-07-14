@@ -103,9 +103,12 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
       scheme,
     };
     const schemeTitle = this.state.createCrxProposalComponent ? rewarderContractName(scheme) : schemeName(scheme);
-    scheme.name = schemeName(scheme);
+    
+    if (scheme.name === null) {
+      scheme.name = schemeName(scheme);
+    }
 
-    console.log("Proposals page: ", props, scheme)
+    console.log("Proposals page: ", props, this.state, scheme)
 
     if (this.state.createCrxProposalComponent) {
       createSchemeComponent = <this.state.createCrxProposalComponent {...props} />;
