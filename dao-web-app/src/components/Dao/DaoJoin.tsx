@@ -303,6 +303,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
                               maxLength={10}
                               placeholder="How many SGT to stake"
                               name="nativeTokenReward"
+                              step="0.01"
                               type="number"
                               className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
                             />
