@@ -91,7 +91,7 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
     //@ts-ignore
     const { t } = this.props;
     const daoAvatarAddress = this.props.data.dao;
-    const scheme = this.props.data;
+    let scheme = this.props.data;
 
     let createSchemeComponent = <div />;
     
@@ -103,10 +103,16 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
       scheme,
     };
     const schemeTitle = this.state.createCrxProposalComponent ? rewarderContractName(scheme) : schemeName(scheme);
-    console.log("Proposals page: ", props, scheme)
+    
+    if (scheme.name === null) {
+      scheme.name = schemeName(scheme);
+    }
+
+    console.log("Proposals page: ", props, this.state, scheme)
+
     if (this.state.createCrxProposalComponent) {
       createSchemeComponent = <this.state.createCrxProposalComponent {...props} />;
-    } else if (scheme.name === "ContributionReward") {
+    } else if (scheme.name === "ContributionReward" || scheme.name === "Grants") {
       createSchemeComponent = <CreateContributionRewardProposal {...props}  />;
     } else if (scheme.name === "SchemeRegistrar") {
       createSchemeComponent = <CreateSchemeRegistrarProposal {...props} />;
