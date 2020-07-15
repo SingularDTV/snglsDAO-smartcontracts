@@ -32,12 +32,21 @@
     max-width: 620px;
     // margin: 0 auto;
     position: fixed;
-    top: 50%;
+    top: 40px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    // transform: translate(-50%, -50%);
     z-index: 99999;
     // height: calc(100% - 100px);
         padding-bottom: 1px;
+        transform: translate(-50%, 0px);
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
 
     .ant-statistic {
@@ -993,12 +1002,17 @@ div.description {
 
 @media(max-width: 768px) {
 
+
   .createProposalWrapper {
 // width: calc(100% - 30px);
     width: 100%;
     max-width: calc(100% - 30px);
     box-shadow: none;
-    top: calc(50% - 64px);
+    // top: calc(50% - 64px);
+    top: 0;
+    transform: translate(-50%, 0%);
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
     // left: 15px;
 
     .header {

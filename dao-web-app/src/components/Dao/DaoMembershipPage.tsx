@@ -108,7 +108,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
     this.setState(
       {
         membershipFee:  arc.web3.utils.fromWei(await feeContract.methods.membershipFee().call(), 'ether'),
-        alreadyStaked: arc.web3.utils.fromWei(staked.amount, 'ether'),
+        alreadyStaked: staked.amount,
         snglsBalance: await snglsTokenContract.methods.balanceOf(this.props.currentAccountAddress).call(),
         fieldValue: 0
       }
@@ -148,7 +148,7 @@ class DaoMembershipFeeStakingPage extends React.Component<IProps, IState> {
     const memFeeStakingContract = new arc.web3.eth.Contract(settings.membershipFeeStakingContractABI, settings.membershipFeeStakingContractAddress);
     const tokenContract = new arc.web3.eth.Contract(settings.snglsTokenContractABI, settings.snglsTokenContractAddress);
 
-    const tokenDecimals = arc.web3.utils.toBN(18);
+    const tokenDecimals = arc.web3.utils.toBN(0);
     const tokenAmountToApprove = arc.web3.utils.toBN(values.snglsToSend);
     const calculatedApproveValue = arc.web3.utils.toHex(tokenAmountToApprove.mul(arc.web3.utils.toBN(10).pow(tokenDecimals)));
 
