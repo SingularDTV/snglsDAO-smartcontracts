@@ -1,9 +1,9 @@
 ![Image description](https://github.com/SingularDTV/snglsDAO-whitepaper/blob/master/images/logo.png?raw=true)
 
-# snglsDao contracts
+# snglsDAO contracts
 
-## [snglsDao contracts readme](dao-contracts/README.md)
+## [snglsDAO contracts readme](dao-contracts/README.md)
 
-# snglsDao web-app
+# snglsDAO web-app
 
-## [snglsDao web-apps readme](dao-web-app/README.md)
+## [snglsDAO web-apps readme](dao-web-app/README.md)
