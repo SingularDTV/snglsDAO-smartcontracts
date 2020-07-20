@@ -51,7 +51,7 @@ class ProposalSummary extends React.Component<IProps, IState> {
     });
 
     const schemeRegistrar = proposal.schemeRegistrar;
-    const permissions = parseInt(schemeRegistrar.schemeToRegisterPermission, 16);
+    // const permissions = parseInt(schemeRegistrar.schemeToRegisterPermission, 16);
 
     return (
       <div className={proposalSummaryClass}>
@@ -98,20 +98,24 @@ class ProposalSummary extends React.Component<IProps, IState> {
                           </a>
                         </th>
                         <td>
-                          <span>{schemeRegistrar.schemeToRegister}</span>
+                          <div className={css.hashCopy}>
+                            <div className={css.hash}><span>{schemeRegistrar.schemeToRegister}</span></div>
                           <img src="/assets/images/Icon/Copy-white_nobg.svg" onClick={this.copySchemeAddressOnClick(schemeRegistrar)} />
+                          </div>
                         </td>
                       </tr>
                       <tr>
                         <th>{t("schema.paramHash")}:</th>
                         <td>
-                          <span>{schemeRegistrar.schemeToRegisterParamsHash.slice(0, 43)}</span>
+                          <div className={css.hashCopy}>
+                          <div className={css.hash}><span>{schemeRegistrar.schemeToRegisterParamsHash.slice(0, 43)}</span></div>
                           <img src="/assets/images/Icon/Copy-white_nobg.svg" onClick={this.copySchemeParamsHashOnClick(schemeRegistrar)} />
+                          </div>
                         </td>
                       </tr>
-                      <tr>
+                      {/* <tr>
                         <th>{t("proposal.permissions")}</th>
-                        <td>
+                        <td className={css.description}>
                           {
                             // eslint-disable-next-line no-bitwise
                           permissions & 2 ? <div>{t("proposal.registerOtherSchemes")}</div> : ""
@@ -132,7 +136,7 @@ class ProposalSummary extends React.Component<IProps, IState> {
                             <div>{t("proposal.mintOrBurnRep")}</div>
                           }
                         </td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>

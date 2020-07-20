@@ -1,7 +1,7 @@
 import { History } from "history";
 import { first, filter, toArray, mergeMap } from "rxjs/operators";
 import { Address, IProposalStage, IDAOState, ISchemeState, IProposalState, IProposalOutcome } from "@daostack/client";
-import { enableWalletProvider, getArc } from "arc";
+import {enableWalletProvider, getArc, getArcSettings} from "arc";
 import classNames from "classnames";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
@@ -42,6 +42,10 @@ interface IExternalState {
 interface IState {
   crxListComponent: any;
   crxRewarderProps: ICrxRewarderProps;
+  transactionFee: number;
+  listingFee: number;
+  validationFee: number;
+  membershipFee: number;
 }
 
 type IProps = IExternalProps & IDispatchProps & IExternalState & ISubscriptionProps<[ISchemeState, Array<IProposalState>]>;
@@ -66,6 +70,11 @@ class SchemeContainer extends React.Component<IProps, IState> {
     this.state = {
       crxListComponent: null,
       crxRewarderProps: null,
+
+      transactionFee: 0,
+      listingFee: 0,
+      validationFee: 0,
+      membershipFee: 0,
     };
   }
 
@@ -89,33 +98,49 @@ class SchemeContainer extends React.Component<IProps, IState> {
   };
 
   public async componentDidMount() {
+    const arc = getArc();
 
-    const newState = {};
+    const feesContract = new arc.web3.eth.Contract(getArcSettings().feesContractABI, getArcSettings().feesContractAddress);
+
+    this.setState(
+      {
+        transactionFee: arc.web3.utils.fromWei(await feesContract.methods.transactionFee().call()),
+        listingFee: arc.web3.utils.fromWei(await feesContract.methods.listingFee().call()),
+        validationFee: arc.web3.utils.fromWei(await feesContract.methods.validationFee().call()),
+        membershipFee:  arc.web3.utils.fromWei(await feesContract.methods.membershipFee().call()),
+
+      }
+    );
 
     if (!this.state.crxRewarderProps) {
-      Object.assign(newState, { crxRewarderProps: await getCrxRewarderProps(this.props.data[0]) } );
+      this.setState({ crxRewarderProps: await getCrxRewarderProps(this.props.data[0]) })
     }
 
     if (!this.state.crxListComponent) {
-      Object.assign(newState, { crxListComponent: await getCrxRewarderComponent(this.props.data[0], CrxRewarderComponentType.List) });
+      this.setState({ crxListComponent: await getCrxRewarderComponent(this.props.data[0], CrxRewarderComponentType.List) })
     }
-
-    this.setState(newState);
   }
 
   public render(): RenderOutput {
     //@ts-ignore
     const { t } = this.props;
+    const { transactionFee, listingFee, validationFee, membershipFee } = this.state;
     const { schemeId, daoState } = this.props;
     const daoAvatarAddress = daoState.address;
-    const schemeState = this.props.data[0];
+    let schemeState = this.props.data[0];
     const approvedProposals = this.props.data[1];
 
     if (schemeState.name === "ReputationFromToken") {
       return <ReputationFromToken {...this.props} daoAvatarAddress={daoAvatarAddress} schemeState={schemeState} />;
     }
+    
+    let isActive = getSchemeIsActive(schemeState);
 
-    const isActive = getSchemeIsActive(schemeState);
+    if (schemeState.id === getArcSettings().grantsSchemeID) {
+      schemeState.name = "Grants";
+      isActive = true;
+    }
+
     const isProposalScheme = PROPOSAL_SCHEME_NAMES.includes(schemeState.name);
 
     const proposalsTabClass = classNames({
@@ -137,9 +162,23 @@ class SchemeContainer extends React.Component<IProps, IState> {
     });
     const schemeFriendlyName = schemeName(schemeState, schemeState.address);
 
+    // if (schemeFriendlyName == "Grants") {
+    //   return (
+    //     <div className={css.schemeContainer}>
 
+    //     <div className={css.grantsOffer}>
+    //     <img src="/assets/images/under_construction.webp" />
+    //     <p>Sorry we are working on geting the grants scheme operational.</p>
+    //     <p>Once the offical snglsDAO subgraph is synced it will launch.</p>
+    //     <p>Follow along here: <a href="https://thegraph.com/explorer/subgraph/singulardtv/sngls-dao">https://thegraph.com/explorer/subgraph/singulardtv/sngls-dao</a></p>
+    //   </div>
+    //   </div>
+    //   );
+    // }
     return (
       <div className={css.schemeContainer}>
+
+
 
         <BreadcrumbsItem to={`/dao/scheme/${schemeId}`}>{schemeFriendlyName}</BreadcrumbsItem>
         <Helmet>
@@ -150,26 +189,26 @@ class SchemeContainer extends React.Component<IProps, IState> {
 
         {/* <Sticky enabled top={50} innerZ={10000}> */}
           <h2 className={css.schemeName}>
-            {schemeFriendlyName}
+              {t(schemeFriendlyName)}
           </h2>
           {
             schemeFriendlyName === "Protocol Parameters" &&
             <div className={css.schemeTop}>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
-                <div>{t('membership.memFee')}: SNGLS 0</div>
+                <div>{t('membership.memFee')}: {membershipFee} SNGLS</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_listing_rate.png" /></div>
-                <div>{t('proposal.listingFee')}: SNGLS 0</div>
+                <div>{t('proposal.listingFee')}: {listingFee} SNGLS</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_transaction.png" /></div>
-                <div>{t('proposal.transFee')}: % 0</div>
+                <div>{t('proposal.transFee')}: {transactionFee} %</div>
               </div>
               <div className={css.Item}>
                 <div className={css.icon}><img src="/assets/images/Icon/dash_validation.png" /></div>
-                <div>{t('dashboard.validationFee')}: SNGLS 0</div>
+                <div>{t('dashboard.validationFee')}: {validationFee} SNGLS</div>
               </div>
             </div>
           }
@@ -183,7 +222,7 @@ class SchemeContainer extends React.Component<IProps, IState> {
               <Link className={openBountiesTabClass} to={`/dao/scheme/${schemeId}/openbounties/`}>{t("schema.openBounties")}</Link>
             }
 
-            <TrainingTooltip placement="top" overlay={"Learn about the protocol parameters for this scheme"}>
+            <TrainingTooltip placement="top" overlay={t("tooltips.learnAboutSchemaProtParams")}>
               <Link className={infoTabClass} to={`/dao/scheme/${schemeId}/info/`}>{t("schema.Information")}</Link>
             </TrainingTooltip>
             {
@@ -196,18 +235,17 @@ class SchemeContainer extends React.Component<IProps, IState> {
 
           {isProposalScheme ?
             <div className={css.createProposal}>
-              <TrainingTooltip placement="topRight" overlay={"A small amount of ETH is necessary to submit a proposal in order to pay gas costs"}>
-                <a className={
-                  classNames({
-                    [css.createProposal]: true,
-                    [css.disabled]: !isActive,
-                  })}
-                  data-test-id="createProposal"
-                  href="#!"
-                  onClick={isActive ? this.handleNewProposal : null}
-                >
-                  {t('schema.newProposal', { proposal: this.state.crxRewarderProps ? this.state.crxRewarderProps.contractName : schemeFriendlyName })} </a>
-              </TrainingTooltip>
+              <a className={
+                classNames({
+                  [css.createProposal]: true,
+                  [css.disabled]: !isActive,
+                })}
+                 data-test-id="createProposal"
+                 href="#!"
+                 onClick={isActive ? this.handleNewProposal : null}
+              >
+                {t('schema.newProposal', { proposal: this.state.crxRewarderProps ? this.state.crxRewarderProps.contractName : schemeFriendlyName })}
+              </a>
             </div>
             : ""}
 

@@ -6,9 +6,7 @@ import CreateUnknownGenericSchemeProposal from "components/Proposal/Create/Schem
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import { GenericSchemeRegistry } from "genericSchemeRegistry";
-import Analytics from "lib/analytics";
 import { History } from "history";
-import { Page } from "pages";
 import * as React from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
@@ -65,12 +63,6 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
 
   public async componentDidMount() {
     document.addEventListener("keydown", this.handleKeyPress, false);
-
-    Analytics.track("Page View", {
-      "Page Name": Page.CreateProposal,
-      "DAO Address": "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f",
-      "Scheme Address": this.props.schemeId,
-    });
     const newState = {};
 
     /**
@@ -98,8 +90,8 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
   public render(): RenderOutput {
     //@ts-ignore
     const { t } = this.props;
-    const daoAvatarAddress = "0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f";
-    const scheme = this.props.data;
+    const daoAvatarAddress = this.props.data.dao;
+    let scheme = this.props.data;
 
     let createSchemeComponent = <div />;
     
@@ -111,10 +103,16 @@ class CreateProposalPage extends React.Component<IProps, IStateProps> {
       scheme,
     };
     const schemeTitle = this.state.createCrxProposalComponent ? rewarderContractName(scheme) : schemeName(scheme);
+    
+    if (scheme.name === null) {
+      scheme.name = schemeName(scheme);
+    }
+
+    console.log("Proposals page: ", props, this.state, scheme)
 
     if (this.state.createCrxProposalComponent) {
       createSchemeComponent = <this.state.createCrxProposalComponent {...props} />;
-    } else if (scheme.name === "ContributionReward") {
+    } else if (scheme.name === "ContributionReward" || scheme.name === "Grants") {
       createSchemeComponent = <CreateContributionRewardProposal {...props}  />;
     } else if (scheme.name === "SchemeRegistrar") {
       createSchemeComponent = <CreateSchemeRegistrarProposal {...props} />;

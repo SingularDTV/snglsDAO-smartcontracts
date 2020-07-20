@@ -1,37 +1,42 @@
 [
-    {
-      "name": "Binance",
-      "url": "https://www.binance.com/",
-      "logo": "/assets/images/Exchanges/Binance.png"
-    },
-    {
-      "name": "CoinDCX",
-      "url": "https://coindcx.com/",
-      "logo": "/assets/images/Exchanges/CoinDCX.png"
-    },
-    {
-      "name": "Bitfinex",
-      "url": "https://www.bitfinex.com/",
-      "logo": "/assets/images/Exchanges/bitfinex.png"
-    },
-    {
-      "name": "Livecoin",
-      "url": "https://www.livecoin.net/",
-      "logo": "/assets/images/Exchanges/Livecoin.png"
-    },
-    {
-      "name": "HitBTC",
-      "url": "https://hitbtc.com/",
-      "logo": "/assets/images/Exchanges/HitBTC.png"
-    },
-    {
-      "name": "CHAOEX",
-      "url": "https://www.chaoex.com",
-      "logo": "/assets/images/Exchanges/CHAOEX.png"
-    },
-    {
-      "name": "Braziliex",
-      "url": "https://braziliex.com",
-      "logo": "/assets/images/Exchanges/Braziliex.png"
-    }
+  {
+    "name": "Binance",
+    "url": "https://www.binance.com/",
+    "logo": "/assets/images/Exchanges/Binance.png"
+  },
+  {
+    "name": "CoinDCX",
+    "url": "https://coindcx.com/",
+    "logo": "/assets/images/Exchanges/CoinDCX.png"
+  },
+  {
+    "name": "Bitfinex",
+    "url": "https://www.bitfinex.com/",
+    "logo": "/assets/images/Exchanges/bitfinex.png"
+  },
+  {
+    "name": "Livecoin",
+    "url": "https://www.livecoin.net/",
+    "logo": "/assets/images/Exchanges/Livecoin.png"
+  },
+  {
+    "name": "HitBTC",
+    "url": "https://hitbtc.com/",
+    "logo": "/assets/images/Exchanges/HitBTC.png"
+  },
+  {
+    "name": "CHAOEX",
+    "url": "https://www.chaoex.com",
+    "logo": "/assets/images/Exchanges/CHAOEX.png"
+  },
+  {
+    "name": "Braziliex",
+    "url": "https://braziliex.com",
+    "logo": "/assets/images/Exchanges/Braziliex.png"
+  },
+  {
+    "name": "Uniswap",
+    "url": "https://app.uniswap.org/#/swap?inputCurrency=0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009&outputCurrency=0xc4199fb6ffdb30a829614beca030f9042f1c3992",
+    "logo": "/assets/images/Exchanges/uniswap.png"
+  }
 ]

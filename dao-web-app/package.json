@@ -52,8 +52,10 @@
     ]
   },
   "scripts": {
-    "analyze": "NODE_ENV=production NETWORK=main ANALYZE=1 node --max_old_space_size=4096 node_modules/.bin/webpack --config webpack.prod.config.js --progress --colors",
-    "build": "webpack --config webpack.prod.config.js",
+    "analyze": "cross-env NODE_ENV=production NETWORK=main ANALYZE=1 node --max_old_space_size=4096 node_modules/.bin/webpack --config webpack.prod.config.js --progress --colors",
+    "build": "rm -rf dist/ && cross-env NODE_ENV=production NETWORK=main node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js",
+    "build-rinkeby": "rm -rf dist/ && cross-env NODE_ENV=production NETWORK=rinkeby node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js",
+    "test-prod-rinkeby": "cd ../ && docker-compose up --build -d",
     "build-dev": "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.dev.config.js",
     "build-travis": "cross-env NODE_ENV=production NETWORK=main node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js",
     "fetch-contracts": "cross-env NODE_ENV=production ./node_modules/.bin/ts-node scripts/fetchContracts.ts",
@@ -77,9 +79,10 @@
     "test:unit": "jest"
   },
   "dependencies": {
-    "3box": "1.16.1",
+    "3box": "^1.20.2",
+    "@ant-design/icons": "^4.2.1",
     "@burner-wallet/burner-connect-provider": "^0.1.1",
-    "@daostack/client": "0.2.66",
+    "@daostack/client": "git+https://github.com/gofsd/arc.js.git#develop",
     "@dorgtech/daocreator-ui": "^1.0.8",
     "@fortawesome/fontawesome-svg-core": "^1.2.10",
     "@fortawesome/free-brands-svg-icons": "^5.6.1",
@@ -88,6 +91,7 @@
     "@sentry/browser": "^5.0.8",
     "@toruslabs/torus-embed": "^1.2.3",
     "@walletconnect/web3-provider": "^1.0.0-beta.37",
+    "antd": "^4.3.5",
     "axios": "^0.19.0",
     "bn.js": "^4.11.8",
     "classnames": "^2.2.5",
@@ -132,7 +136,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-modal": "^1.5.2",
     "react-router-redux": "^5.0.0-alpha.9",
-    "react-select": "^3.0.4",
+    "react-select": "^3.1.0",
     "react-stickynode": "^2.1.1",
     "react-tag-input": "^6.4.1",
     "react-through": "^1.1.1",

@@ -132,8 +132,8 @@ class CreateContributionReward extends React.Component<IProps, IStateProps> {
       dao: this.props.daoAvatarAddress,
       ethReward: toWei(Number(values.ethReward)),
       externalTokenReward,
-      nativeTokenReward: toWei(Number(values.nativeTokenReward)),
-      reputationReward: toWei(Number(values.reputationReward)),
+      nativeTokenReward: toWei(Number(0)),
+      reputationReward: toWei(Number(0)),
       tags: this.state.tags,
     };
 

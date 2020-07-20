@@ -1,31 +1,40 @@
-import { IDAOState, ISchemeState /*, IProposalCreateOptionsCompetition */ } from "@daostack/client";
+import { IDAOState, ISchemeState, Member /*, IProposalCreateOptionsCompetition */ } from "@daostack/client";
 import * as arcActions from "../../actions/arcActions";
-import { enableWalletProvider, getArc } from "../../arc";
+import { enableWalletProvider, getArc, getArcSettings } from "../../arc";
 import withSubscription, { ISubscriptionProps } from "../../components/Shared/withSubscription";
 import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import { /* baseTokenName, supportedTokens,  toBaseUnit, tokenDetails,  toWei, */ isValidUrl/*, getLocalTimezone */ } from "lib/util";
+import Loading from "components/Shared/Loading";
+import { Tabs, Checkbox, Statistic } from 'antd';
 import * as React from "react";
+import { fromWei } from "lib/util";
+import { Trans } from 'react-i18next';
+// import { RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import Select from "react-select";
+import * as moment from "moment";
 import { History } from "history";
-import { showNotification } from "../../reducers/notifications";
+import { showNotification, NotificationStatus } from "reducers/notifications";
 // import TagsSelector from "../../components/Proposal/Create/SchemeForms/TagsSelector";
-import TrainingTooltip from "../../components/Shared/TrainingTooltip";
 import * as css from "./DaoJoin.scss";
+import "./ant.global.scss";
 import { withTranslation } from 'react-i18next';
-
-
 import { IRootState } from "reducers";
+import { zip} from "rxjs";
+import {map} from "rxjs/operators";
+import Reputation from "../Account/Reputation";
+// import { any } from "prop-types";
 
 
-// import MarkdownField from "../../components/Proposal/Create/SchemeForms/MarkdownField";
-// import { checkTotalPercent } from "../../lib/util";
-// import * as Datetime from "react-datetime";
-
-// imporsst moment = require("moment");
-// import BN = require("bn.js");
+const { Countdown } = Statistic;
+const { TabPane } = Tabs;
 
 interface IExternalStateProps {
+  daoAvatarAddress: string;
+  member: Member;
+  daoState?: IDAOState;
+  currentAccountAddress: string;
+  agreementHash: any;
   history: History;
 }
 
@@ -34,10 +43,14 @@ interface IExternalProps {
   scheme: ISchemeState;
   daoAvatarAddress: string;
   history: History;
+  agreementHash: any;
 }
 
 interface IStateProps {
-  currentAccountAddress: String;
+  // currentAccountAddress: String;
+  releaseTime?: string;
+  balance?: string;
+  agreementHash: any;
 }
 
 interface IDispatchProps {
@@ -50,7 +63,7 @@ const mapDispatchToProps = {
   showNotification,
 };
 
-type IProps = IExternalProps & IDispatchProps & ISubscriptionProps<IDAOState> & IExternalStateProps;
+type IProps = IExternalProps & IDispatchProps & ISubscriptionProps<Member> & IExternalStateProps;
 
 interface IFormValues {
   nativeTokenReward: number;
@@ -92,13 +105,20 @@ const mapStateToProps = (state: IRootState, ownProps: IExternalProps): IExternal
   };
 };
 
-class CreateProposal extends React.Component<IProps, IStateProps> {
-  
+
+
+class GetReputation extends React.Component<IProps, IStateProps> {
+
 
   constructor(props: IProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleUnstake = this.handleUnstake.bind(this);
+    this.state = {
+      releaseTime: null,
+      agreementHash: "",
+    };
   }
 
   public handleClose = (e: any) => {
@@ -106,37 +126,86 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
     history.push("/dao/dashboard/");
   }
 
+  public async componentDidMount() {
+    const arc = getArc();
+    const settings = getArcSettings();
+    const lockingSGT4ReputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
+    const staked = await lockingSGT4ReputationContract.methods.lockers(this.props.currentAccountAddress).call()
+    console.log("dfd ", await lockingSGT4ReputationContract.methods.getAgreementHash().call())
+    this.setState(
+      {
+         releaseTime: staked?.releaseTime,
+         agreementHash: await lockingSGT4ReputationContract.methods.getAgreementHash().call()
+      });
+    this.fetchBalances();
+  }
+
+  public async fetchBalances() {
+    const arc = getArc();
+    const settings = getArcSettings();
+
+    // Create contract object
+    const sgtTokenContract = new arc.web3.eth.Contract(settings.erc20TokenContractABI, settings.sgtTokenContractAddress);
+
+    const staked = await sgtTokenContract.methods.balanceOf(this.props.currentAccountAddress).call()
+    this.setState(
+      {
+        balance: arc.web3.utils.fromWei(staked, 'ether'),
+      }
+    );
+  }
+
+  public handleUnstake = async (): Promise<void> => {
+    if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
+      return;
+    }
+    const arc = getArc();
+    const settings = getArcSettings();
+    const currentAccountAddress = this.props.currentAccountAddress;
+
+    const reputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
+
+    await reputationContract.methods.release().send({from: currentAccountAddress})
+    this.handleClose({});
+  }
+
   public handleSubmit = async (values: IFormValues, { _setSubmitting }: any ): Promise<void> => {
     if (!await enableWalletProvider({ showNotification: this.props.showNotification })) {
       return;
     }
     const arc = getArc();
-    const reputationContractAbi = [ { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "Lock", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "_beneficiary", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "Release", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "", "type": "address" } ], "name": "lockers", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "releaseTime", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "minLockingPeriod", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "sgtToken", "outputs": [ { "internalType": "contract IERC20", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalLocked", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "release", "outputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_period", "type": "uint256" } ], "name": "lock", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "contract IERC20", "name": "_sgtToken", "type": "address" }, { "internalType": "uint256", "name": "_minLockingPeriod", "type": "uint256" } ], "name": "initialize", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
-    const reputationStakingContractAddress = "0x1E44072256F56527F22134604C9c633eC4cEc86B";
+    const settings = getArcSettings();
 
-    const reputationContract = new arc.web3.eth.Contract(reputationContractAbi, reputationStakingContractAddress);
-    // Get the contract ABI from compiled smart contract json
-    const sgtTokenContractAbi = [ { "inputs": [ { "internalType": "string", "name": "_name", "type": "string" }, { "internalType": "string", "name": "_symbol", "type": "string" }, { "internalType": "uint256", "name": "_cap", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "spender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" } ], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "Transfer", "type": "event" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "spender", "type": "address" } ], "name": "allowance", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "approve", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "account", "type": "address" } ], "name": "balanceOf", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "burn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "account", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "burnFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "cap", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [ { "internalType": "uint8", "name": "", "type": "uint8" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "subtractedValue", "type": "uint256" } ], "name": "decreaseAllowance", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "addedValue", "type": "uint256" } ], "name": "increaseAllowance", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "isOwner", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "renounceOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "transfer", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "transferFrom", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "newOwner", "type": "address" } ], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "_amount", "type": "uint256" } ], "name": "mint", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" } ];
-    const sgtTokenContractAddress = '0x498EE93981A2453a3F8b8939458977DF86dCce42'
+    const reputationContract = new arc.web3.eth.Contract(settings.lockingSGT4ReputationContractABI, settings.lockingSGT4ReputationContractAddress);
+    const sgtTokenContract = new arc.web3.eth.Contract(settings.erc20TokenContractABI, settings.sgtTokenContractAddress);
 
-    // Create contract object
-    const sgtTokenContract = new arc.web3.eth.Contract(sgtTokenContractAbi, sgtTokenContractAddress);
-
-    // Calculate contract compatible value for approve with proper decimal points using BigNumber
-    const tokenDecimals = arc.web3.utils.toBN(18);
-    const tokenAmountToApprove = arc.web3.utils.toBN(values.nativeTokenReward);
-    const calculatedApproveValue = arc.web3.utils.toHex(tokenAmountToApprove.mul(arc.web3.utils.toBN(10).pow(tokenDecimals)));
-
+    const tokenAmountToApprove = arc.web3.utils.toBN(arc.web3.utils.toWei(`${values.nativeTokenReward}`));
+    const calculatedApproveValue = arc.web3.utils.toHex(tokenAmountToApprove);
     const currentAccountAddress = this.props.currentAccountAddress;
+    const agreementHash = this.state.agreementHash;
 
-    // Get user account wallet address first
-    sgtTokenContract.methods.approve(reputationStakingContractAddress, calculatedApproveValue).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
-      if (error) throw error;
-    }).then(function () {
-      reputationContract.methods.lock(calculatedApproveValue, /* min locking period */ 700000).send({from: currentAccountAddress}, function(error: any, txnHash: any) {
-        if (error) throw error;
-      });
-    });
+    console.log("agreementHash ", this.state.agreementHash);
+    //todo move methods to store
+    let txDescription: string;
+    let msg;
+
+    try{
+      txDescription = 'Get reputation approve'
+      msg = `${txDescription} transaction sent! Please wait for it to be processed`;
+
+      this.props.showNotification(NotificationStatus.Success, msg)
+      await sgtTokenContract.methods.approve(settings.lockingSGT4ReputationContractAddress, calculatedApproveValue).send({from: currentAccountAddress})
+      msg = `${txDescription} transaction confirmed`;
+      this.props.showNotification(NotificationStatus.Success, msg);
+
+      txDescription = 'Get reputation lock'
+      await reputationContract.methods.lock(calculatedApproveValue, settings.sgtLockingPeriod, agreementHash).send({from: currentAccountAddress})
+      msg = `${txDescription} transaction confirmed`;
+      this.props.showNotification(NotificationStatus.Success, msg);
+    } catch (error) {
+      const msg = `${txDescription}: transaction failed :-( - ${error.message}`;
+      this.props.showNotification(NotificationStatus.Failure, msg)
+    }
 
     this.handleClose({});
   }
@@ -144,15 +213,16 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
   public render(): RenderOutput {
     //@ts-ignore
     const { t } = this.props;
-    const { data } = this.props;
+    //@ts-ignore
+    const { data: { dao, member } } = this.props;
+    const { releaseTime } = this.state;
 
-    if (!data) {
+    if (!dao) {
       return null;
     }
-    const dao = data;
-    // const arc = getArc();
-    // const localTimezone = getLocalTimezone();
-    // const now = moment();
+    // console.log('this.state', this.state)
+    const percentageBn = fromWei(member.reputation)
+
     return (
       <div className={css.createProposalWrapper}>
       {/* <BreadcrumbsItem to={`/dao/scheme/${scheme.id}/proposals/create`}>Create {schemeTitle} Proposal</BreadcrumbsItem> */}
@@ -160,120 +230,175 @@ class CreateProposal extends React.Component<IProps, IStateProps> {
         <h2><span> {t("daojoin.rep")} </span></h2>
         <button className={css.closeButton} aria-label="Close Create Proposal Modal"  onClick={this.handleClose}  ><img src="/assets/images/close.svg" alt=""/></button>
       </div>
-      <div className={css.contributionReward}>
-        <Formik
-          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-          initialValues={{
-            nativeTokenReward: 0,
-          } as IFormValues}
-          // eslint-disable-next-line react/jsx-no-bind
-          validate={(values: IFormValues): void => {
-            const errors: any = {};
-            const nonNegative = (name: string): void => {
-              if ((values as any)[name] < 0) {
-                errors[name] = t("errors.nonNegative");
-              }
-            };
+      {!!percentageBn && (
+        <div className={css.releaseTime}>
+          <Countdown title="Token defrosting will be available in"
+              // @ts-ignore
+              value={moment(releaseTime*1000).format()}
+              format="DD:HH:mm:ss"
+              valueStyle={{ display: 'flex',justifyContent: 'center' }}
+            />
+        </div>
+      )}
 
-            if (!isValidUrl(values.url)) {
-              errors.url = t("errors.invalidUrl");
-            }
+        <div className={css.contributionReward}>
+          <Tabs defaultActiveKey="1">
+            <TabPane tab={t("daojoin.Stake")} key="1">
+              <Formik
+                // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                initialValues={{
+                  nativeTokenReward: 0,
+                } as IFormValues}
+                // eslint-disable-next-line react/jsx-no-bind
+                validate={(values: IFormValues): void => {
+                  const errors: any = {};
+                  const nonNegative = (name: string): void => {
+                    if ((values as any)[name] < 0) {
+                      errors[name] = t("errors.nonNegative");
+                    }
+                  };
 
-            nonNegative("ethReward");
-            if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.nativeTokenReward) {
-              errors.rewards = t("proposal.pleaseSelectAtLeastSomeReward");
-            }
+                  if (!isValidUrl(values.url)) {
+                    errors.url = t("errors.invalidUrl");
+                  }
 
-            return errors;
-          }}
-          onSubmit={this.handleSubmit}
-          // eslint-disable-next-line react/jsx-no-bind
-          render={({
-            errors,
-            touched,
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            handleSubmit,
-            isSubmitting,
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            setFieldTouched,
-            setFieldValue,
-          }: FormikProps<IFormValues>) =>
-            <Form noValidate>
-              <div className={css.subhead}>
-                <div className={css.description}>
-                    <p>{t("daojoin.needStake")}</p>
-                </div>
-                  <div>
-                  <a href="#" className={css.btn}>{t("daojoin.cancel")}</a>
-                  </div>
-              </div>
+                  nonNegative("ethReward");
+                  if (!values.ethReward && !values.reputationReward && !values.externalTokenReward && !values.nativeTokenReward) {
+                    errors.rewards = t("proposal.pleaseSelectAtLeastSomeReward");
+                  }
 
-              <div className={css.content}>
-                <p>{t("daojoin.haveAmountStaked")}</p>
-              <div className={css.rewards}>
-                <div className={css.reward}>
-                  <div className={css.bigInput}>
-                    <label htmlFor="nativeTokenRewardInput">{dao.tokenSymbol}
-                      <ErrorMessage name="nativeTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
-                    </label>
-                    <Field
-                      id="nativeTokenRewardInput"
-                      maxLength={10}
-                      placeholder="How many SGT to stake"
-                      name="nativeTokenReward"
-                      type="number"
-                      className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
-                    />
-                    <div className={css.btnMax}>
-                      <button type="button">{t('daojoin.max')}</button>
+                  return errors;
+                }}
+                onSubmit={this.handleSubmit}
+                // eslint-disable-next-line react/jsx-no-bind
+                render={({
+                           errors,
+                           touched,
+                           values,
+                           // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                           handleSubmit,
+                           isSubmitting,
+                           // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                           setFieldTouched,
+                           setFieldValue,
+                         }: FormikProps<IFormValues>) =>
+                  <Form noValidate>
+
+                    <div className={css.content}>
+                      <p>{t("daojoin.haveAmountStaked")}</p>
+                      <p> {t("daojoin.yourCurrentBalance")} {this.state.balance } {t("header.SGT")}</p>
+                      <div className={css.rewards}>
+                        <div className={css.reward}>
+                          <div className={css.bigInput}>
+                            <label htmlFor="nativeTokenRewardInput">
+                              {
+                                //@ts-ignore
+                                dao.tokenSymbol}
+                              <ErrorMessage name="nativeTokenReward">{(msg) => <span className={css.errorMessage}>{msg}</span>}</ErrorMessage>
+                            </label>
+                            <Field
+                              id="nativeTokenRewardInput"
+                              maxLength={10}
+                              placeholder="How many SGT to stake"
+                              name="nativeTokenReward"
+                              step="0.01"
+                              type="number"
+                              className={touched.nativeTokenReward && errors.nativeTokenReward ? css.error : null}
+                            />
+                            <div className={css.btnMax}>
+                              <button type="button" onClick={ () => { setFieldValue("nativeTokenReward",  this.state.balance) }}>
+                                {t('daojoin.max')}
+                              </button>
+                            </div>
+                          </div>
+                          <div className={css.balances}>
+                            <span className={css.tokens}>{t('daojoin.sgtTokens')}
+                              {percentageBn}{' '}
+                              (
+                              <Reputation daoName={dao.name}
+                                //@ts-ignore
+                                          totalReputation={dao.reputationTotalSupply}
+                                          reputation={
+                                            //@ts-ignore
+                                            member.reputation}/>
+                               )
+                            </span>
+                          </div>
+                          <span className={css.holdings}>{t("daojoin.haveAmountStaked")}</span>
+                        </div>
+                      </div>
+                      <Field
+                        value={values?.term}
+                        onChange={(e: any) => setFieldValue('term', e.target.checked)}
+                        component={Checkbox}
+                      >
+                        <Trans i18nKey="agreementCheckbox">
+                          By checking this you agree to our <a target="_blank" rel="noopener noreferrer" href="https://ipfs.io/ipfs/QmVixgD9gSkWt8tN3Uk93D3KHUCB1UT47WBJqXfo6bcZ6U">Participation Agreement</a> and tokens will be locked for 30 days
+                        </Trans>
+                      </Field>
+                      {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)
+                      && touched.reputationReward && errors.rewards &&
+                      <span className={css.errorMessage + " " + css.someReward}><br/> {errors.rewards}</span>
+                      }
+                      <div className={css.createProposalActions}>
+                        <div>
+                            <button className={css.submitProposal} type="submit" disabled={isSubmitting || !values?.term}>
+                              {t('daojoin.getRep')}
+                            </button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className={css.balances}>
-                    <span className={css.tokens}>{t('daojoin.sgtTokens')}<strong>0.00</strong></span>
-                    <span className={css.holdings}>{t('daojoin.reputation')} <strong>0.00% Rep.</strong></span>
-                  </div>
-                  <span className={css.holdings}>{t("daojoin.haveAmountStaked")}</span>
+                  </Form>
+                }
+              />
+            </TabPane>
+            <TabPane tab={t("daojoin.Unstake")} key="2">
+              {/*TODO add text for TrainingTooltip and add handling*/}
+             <div style={{ display: 'flex',justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
+              <div style={{ marginBottom: 10}}>
+                <div className={css.balances}>
+                            <span className={css.tokens}>{t('daojoin.sgtTokens')}
+                              {percentageBn}{' '}
+                              (
+                              <Reputation daoName={dao.name}
+                                //@ts-ignore
+                                          totalReputation={dao.reputationTotalSupply}
+                                          reputation={
+                                            //@ts-ignore
+                                            member.reputation}/>
+                               )
+                            </span>
                 </div>
               </div>
-
-              {(touched.ethReward || touched.externalTokenReward || touched.reputationReward || touched.nativeTokenReward)
-                    && touched.reputationReward && errors.rewards &&
-                <span className={css.errorMessage + " " + css.someReward}><br/> {errors.rewards}</span>
-              }
-              <div className={css.createProposalActions}>
-                <div>
-                <TrainingTooltip overlay={t('tooltips.onceTheProposalSubmitted')} placement="top">
-                  <button className={css.submitProposal} type="submit" disabled={isSubmitting}>
-                  {t('daojoin.getRep')}
-                  </button>
-                </TrainingTooltip>
-                </div>
-                <div>
-                  <button className={css.exitProposalCreation} type="button" onClick={this.handleClose}>
-                  {t('daojoin.cancel')}
-                  </button>
-                </div>
-              </div>
-
-            </div>
-
-            </Form>
-          }
-        />
-      </div>
+                 <button className={css.submitProposal} type="submit"  onClick={this.handleUnstake} disabled={Math.round((new Date()).getTime() / 1000) < parseInt(releaseTime)}>
+                   {t('daojoin.removeRep')}
+                 </button>
+             </div>
+            </TabPane>
+          </Tabs>
+        </div>
       </div>
 
     );
   }
 }
 
-const SubscribedCreateContributionRewardExProposal = withSubscription({
-  wrappedComponent: CreateProposal,
-  checkForUpdate: ["daoAvatarAddress"],
-  createObservable: (props: IExternalProps) => {
+const SubscribedGetReputation = withSubscription({
+  //@ts-ignore
+  wrappedComponent: GetReputation,
+  checkForUpdate: [],
+  loadingComponent: <Loading/>,
+  createObservable: async (props: IExternalStateProps) => {
+    const dao = props.daoState.dao;
+    const member =  dao.member(props.currentAccountAddress)
     const arc = getArc();
-    return arc.dao("0xBAc15F5E55c0f0eddd2270BbC3c9b977A985797f").state();
+    return zip(
+      member.state(),
+      arc.dao(getArcSettings().daoAvatarContractAddress).state()
+    ).pipe(
+      map(([member, dao]) => ({member, dao}))
+    )
   },
 });
 //@ts-ignore
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedCreateContributionRewardExProposal));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(SubscribedGetReputation));

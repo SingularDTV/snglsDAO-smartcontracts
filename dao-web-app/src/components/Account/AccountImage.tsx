@@ -16,7 +16,7 @@ export default class AccountImage extends React.Component<IProps, null> {
     const { accountAddress, profile, width } = this.props;
 
     let url;
-    if (profile && profile.image && profile.image[0] && profile.image[0].contentUrl) {
+    if (profile?.image?.[0]?.contentUrl) {
       url = "https://ipfs.infura.io/ipfs/" + profile.image[0].contentUrl["/"];
     }
     if (!url) {

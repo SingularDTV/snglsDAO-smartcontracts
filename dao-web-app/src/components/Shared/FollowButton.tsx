@@ -105,7 +105,7 @@ class FollowButton extends React.Component<IProps, IState> {
     });
 
     return (
-      <Tooltip placement="bottom" trigger={["hover"]} overlay={isFollowing ? "Stop following updates from this " + type.slice(0, -1) : "Follow updates from this " + type.slice(0, -1)}>
+      <Tooltip placement="bottom" trigger={["hover"]} overlay={isFollowing ? t("stopFollowing") + type.slice(0, -1) : t("followUpdatesFromThis") + type.slice(0, -1)}>
         <button
           onClick={this.openThreeboxModal}
           className={buttonClass}

@@ -23,9 +23,9 @@ class Error404 extends React.PureComponent {
         <nav className={appCss.header}>
           <div>
             <div className={appCss.menu}>
-              <Link to="/"><img src="/assets/images/alchemy-logo-white.svg"/></Link>
+              <Link to="/"><img src="/assets/images/logo.svg"/></Link>
             </div>
-            <div className={appCss.topInfo}>Alchemy</div>
+            {/* <div className={appCss.topInfo}>Alchemy</div> */}
           </div>
         </nav>
         <div className={css.content}>

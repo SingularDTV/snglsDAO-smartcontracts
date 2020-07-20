@@ -1,14 +1,36 @@
 .schemeContainer {
   // padding-bottom: 50px;
   position: relative;
+
+
+
+
+
+
+.grantsOffer {
+  color: #fff;
+  text-align: center;
+      padding: 150px 0;
+
+  img {
+    max-width: 400px;
+    margin-bottom: 1em;
+  }
+  
 }
 
+
+
+}
+
+
 .schemeName {
-  font-size: 28px;
+  // font-size: 28px;
   color: #fff;
   padding: 0;
   margin: 0;
-  padding-bottom: 15px;
+  // padding-bottom: 15px;
+  margin-bottom: 20px;
   // background-color: #e5ebf2;
   // padding-top: 10px;
 }
@@ -90,6 +112,7 @@
       line-height: 42px;
       letter-spacing: 0.02em;
       padding: 20px 35px;
+      color: #fff;
     }
 
   }
@@ -290,6 +313,17 @@
     grid-gap: 20px;
     margin: 0 0 20px 0;
   }
+
+  .schemeMenu {
+    a {
+      font-size: 18px;
+      text-transform: none;
+    }
+
+    .proposals, .info {
+      padding: 15px 30px;
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -355,5 +389,6 @@
   :global .sticky-inner-wrapper {
     // background-color: #e5ebf2 !important;
     padding-bottom: 0px;
+    transform: none !important;
   }
 }

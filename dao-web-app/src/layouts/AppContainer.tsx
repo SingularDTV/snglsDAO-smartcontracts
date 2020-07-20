@@ -1,7 +1,6 @@
 import { threeBoxLogout } from "actions/profilesActions";
 import { setCurrentAccount } from "actions/web3Actions";
 import AccountProfilePage from "components/Account/AccountProfilePage";
-import DaosPage from "components/Daos/DaosPage";
 import Notification, { NotificationViewStatus } from "components/Notification/Notification";
 // import DaoCreator from "components/DaoCreator";
 import DaoContainer from "components/Dao/DaoContainer";
@@ -11,7 +10,7 @@ import Header from "layouts/Header";
 import SidebarMenu from "layouts/SidebarMenu";
 import { IRootState } from "reducers";
 import { dismissNotification, INotificationsState, NotificationStatus, showNotification, INotification } from "reducers/notifications";
-import { getCachedAccount, cacheWeb3Info, logout, pollForAccountChanges, getArcSettings } from "arc";
+import { getCachedAccount, cacheWeb3Info, logout, pollForAccountChanges, getArcSettings, getArc } from "arc";
 import ErrorUncaught from "components/Errors/ErrorUncaught";
 // import { parse } from "query-string";
 import * as React from "react";
@@ -145,6 +144,9 @@ class AppContainer extends React.Component<IProps, IState> {
           this.props.threeBoxLogout();
         }
       });
+      const arc = getArc();
+    //@ts-ignore
+      arc.lockingSgt4Reputation((data: any) => console.log("data from subscription: ", data));
   }
 
   private clearError = () => {
@@ -215,7 +217,6 @@ class AppContainer extends React.Component<IProps, IState> {
 
               <div className={css.contentWrapper}>
                 <Switch>
-                  <Route path="/daos/create" component={DaosPage} />
                   {/* <Route path="/dao/:daoAvatarAddress" component={DaoContainer} /> */}
                   <Route path="/profile/:accountAddress" component={AccountProfilePage} />
                   <Route path="/redemptions" component={RedemptionsPage} />
@@ -264,8 +265,9 @@ class AppContainer extends React.Component<IProps, IState> {
             <div className={css.cookieDisclaimerContainer}>
               <div className={css.cookieDisclaimer}>
                 <div className={css.body}>{t("cookieStart")}
-                  <Link to="/cookie-policy" target="_blank" rel="noopener noreferrer">{t("cookieLinkPolicy")}</Link>{t("cookieMoreInformation")}</div>
-      <div className={css.accept}><a href="#" onClick={this.handleAccept} className={css.blueButton} data-test-id="acceptCookiesButton"><img src="/assets/images/Icon/v-white-thick.svg"></img>{t("iAccept")}</a></div>
+                    <a href="/assets/Privacy_Policy_with_Final_1_14_20.pdf" target="_blank" rel="noopener noreferrer">{t("cookieLinkPolicy")}</a>{t("cookieMoreInformation")}</div>
+                  {/*<Link to="dao/privacy-policy" target="_blank" rel="noopener noreferrer">{t("cookieLinkPolicy")}</Link>{t("cookieMoreInformation")}</div>*/}
+      <div className={css.accept}><a href="#" onClick={this.handleAccept} className={css.redButton} data-test-id="acceptCookiesButton"><img src="/assets/images/Icon/v-white-thick.svg"></img>{t("iAccept")}</a></div>
               </div>
             </div>
           }

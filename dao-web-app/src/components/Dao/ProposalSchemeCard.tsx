@@ -12,6 +12,7 @@ import { combineLatest } from "rxjs";
 import TrainingTooltip from "components/Shared/TrainingTooltip";
 import * as css from "./SchemeCard.scss";
 import { withTranslation } from 'react-i18next';
+import i18next from "i18next";
 
 
 interface IExternalProps {
@@ -33,17 +34,17 @@ const ProposalSchemeCard = (props: IProps) => {
   const proposals = boostedProposals.slice(0, 3);
 
   const proposalsHTML = proposals.map((proposal: Proposal) => <SubscribedProposalDetail key={proposal.id} proposal={proposal} dao={dao} />);
-  const headerHtml = <h2>{schemeName(schemeState, "[Unknown]")}</h2>;
+  const headerHtml = <button className={css.redButton}>{t(schemeName(schemeState, "[Unknown]"))}</button>;
 
   let trainingTooltipMessage: string;
 
   switch(schemeState.name) {
     case "ContributionReward":
     case "ContributionRewardExt":
-      trainingTooltipMessage = "Use this scheme to reward users (rep and/or funds) for their contributions to the DAO";
+      trainingTooltipMessage = i18next.t('tooltips.useSchemaToRewardUsers');
       break;
     case "SchemeRegistrar":
-      trainingTooltipMessage = "Use this scheme to install, remove or edit the schemes of the DAO";
+      trainingTooltipMessage = i18next.t('tooltips.useToInstallEditRemove');
       break;
   }
 
@@ -56,9 +57,9 @@ const ProposalSchemeCard = (props: IProps) => {
           </TrainingTooltip> : headerHtml
         }
         <div className={css.headerItems}>
-          <div><span>Boosted</span> <b>{schemeState.numberOfBoostedProposals}</b> </div>
-          <div><span>Pending Boosting</span> <b>{schemeState.numberOfPreBoostedProposals}</b> </div>
-          <div><span>Regular</span> <b>{schemeState.numberOfQueuedProposals}</b></div>
+           <div><span>{t('schemas.boosted')}</span> <b>{schemeState.numberOfBoostedProposals}</b> </div>
+          <div><span>{t('schemas.pendingBoosting')}</span> <b>{schemeState.numberOfPreBoostedProposals}</b> </div>
+          <div><span>{t('schemas.regular')}</span> <b>{schemeState.numberOfQueuedProposals}</b></div>
         </div>
         {proposals.length === 0 ?
           <div className={css.loading}>

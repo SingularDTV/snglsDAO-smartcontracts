@@ -1,10 +1,11 @@
 import * as uiActions from "actions/uiActions";
-import { threeBoxLogout } from "actions/profilesActions";
+import { threeBoxLogout, updateThreeBox } from "actions/profilesActions";
 import { enableWalletProvider, getAccountIsEnabled, getArc, logout, getWeb3ProviderInfo, getWeb3Provider, providerHasConfigUi } from "arc";
 import AccountBalances from "components/Account/AccountBalances";
 import AccountImage from "components/Account/AccountImage";
 import AccountProfileName from "components/Account/AccountProfileName";
 import RedemptionsButton from "components/Redemptions/RedemptionsButton";
+import { openBox } from "3box";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
 import { copyToClipboard } from "lib/util";
 import { IRootState } from "reducers";
@@ -47,7 +48,7 @@ const mapStateToProps = (state: IRootState & IStateProps, ownProps: IExternalPro
   });
   const queryValues = parse(ownProps.location.search);
 
-  // TODO: this is a temporary hack to send less requests during the ethDenver conference: 
+  // TODO: this is a temporary hack to send less requests during the ethDenver conference:
   // we hide the demptionsbutton when the URL contains "crx". Should probably be disabled at later date..
   let showRedemptionsButton;
   if (ETHDENVER_OPTIMIZATION) {
@@ -78,6 +79,7 @@ interface IDispatchProps {
   enableTrainingTooltipsShowAll: typeof  uiActions.enableTrainingTooltipsShowAll;
   disableTrainingTooltipsShowAll: typeof uiActions.disableTrainingTooltipsShowAll;
   threeBoxLogout: typeof threeBoxLogout;
+  updateThreeBox: typeof updateThreeBox;
 }
 
 const mapDispatchToProps = {
@@ -90,22 +92,32 @@ const mapDispatchToProps = {
   enableTrainingTooltipsShowAll: uiActions.enableTrainingTooltipsShowAll,
   disableTrainingTooltipsShowAll: uiActions.disableTrainingTooltipsShowAll,
   threeBoxLogout,
+  updateThreeBox,
 };
 
 type IProps = IExternalProps & IStateProps & IDispatchProps & ISubscriptionProps<IDAOState>;
 
 function LangSwitcher() {
   const { i18n } = useTranslation();
-
+  const [lang, setLang] = React.useState(i18n.t("en"))
+  const langs = [{ title: i18n.t("en"), key: "en" }, {title: i18n.t("tchin"), key: "tchin" }, { title: i18n.t("schin"), key: "schin"  } ]
   const changeLanguage = (lng: any) => {
     i18n.changeLanguage(lng);
   };
+  const setLanguage = (it: any) => {
+    changeLanguage(it.key);
+    setLang(it.title);
+  }
 
   return (
-    <select onChange={event => changeLanguage(event.target.value)}>
-      <option value={'en'}>Eng</option>
-      <option value={'chin'}>Chin</option>
-    </select>
+      <li className={css.submenu + ' ' + css.langSelector}>
+          <span className={css.menu__link}>{lang}</span>
+          <ul>
+            {langs.filter((it: any)=> it.title !== lang).map((it: any)=> (
+              <li onClick={() => setLanguage(it)}><a href="#">{it.title}</a></li>
+            ))}
+          </ul>
+      </li>
   );
 }
 
@@ -130,6 +142,23 @@ class Header extends React.Component<IProps, null> {
     };
   }
 
+  public openTreeBox = async(): Promise<void> => {
+    const { currentAccountAddress, updateThreeBox } = this.props;
+    const web3Provider = getWeb3Provider();
+    if(web3Provider) {
+      const boxPromise = Promise.race([
+        openBox(currentAccountAddress, web3Provider),
+        new Promise((resolve, reject) => setTimeout(() => reject(), 10000)),
+      ]);
+     try{
+       const box = await boxPromise
+       updateThreeBox({threeBox:box})
+     }catch(err){
+       updateThreeBox({boxTimeout: true})
+     }
+    }
+  }
+
   public copyAddress(e: any): void {
     const { showNotification, currentAccountAddress } = this.props;
     copyToClipboard(currentAccountAddress);
@@ -141,19 +170,23 @@ class Header extends React.Component<IProps, null> {
     enableWalletProvider({
       suppressNotifyOnSuccess: true,
       showNotification: this.props.showNotification,
+      onSuccess: (): Promise<void> => this.openTreeBox()
     });
+
   }
 
   public handleConnect = async (_event: any): Promise<void> => {
     enableWalletProvider({
       suppressNotifyOnSuccess: true,
       showNotification: this.props.showNotification,
+      onSuccess: (): Promise<void> => this.openTreeBox()
     });
   }
 
   public handleClickLogout = async (_event: any): Promise<void> => {
     await logout(this.props.showNotification);
     await this.props.threeBoxLogout();
+    updateThreeBox({ threeBox: null })
   }
 
   private handleToggleMenu = (_event: any): void => {
@@ -217,17 +250,15 @@ class Header extends React.Component<IProps, null> {
     return(
       <div className={css.headerContainer}>
         <nav id="header" className={css.header}>
-          <TrainingTooltip overlay={t("tooltips.viewYourPersonalFeed")} placement="bottomRight">
             <div className={css.menu}>
-              <Link to="/">
+              <a href="https://snglsdao.io/">
                 {/* <img src="/assets/images/alchemy-logo-white.svg" /> */}
                 <img className={css.desktop} src="/assets/images/logo.svg" />
                 <img className={css.mobile} src="/assets/images/logo_mobile.svg" />
-              </Link>
+              </a>
             </div>
-          </TrainingTooltip>
 
-          
+
           <div className={css.topInfo}>
             <div className={css.breadcrumbs}>
               <Breadcrumbs
@@ -239,40 +270,40 @@ class Header extends React.Component<IProps, null> {
             </div>
             <div className={navigationClass}>
               <ul>
-    <li><a href="https://snglsdao.io/">{t("header.dao")}</a></li>
+                <li><a href="https://app.snglsdao.io/">{t("header.dao")}</a></li>
                 <li><a href="https://forum.snglsdao.io/" target="_blank">{t('header.forum')}</a></li>
                 <li className={css.submenu}><span>{t('header.consumerProtection.consumer')}</span>
                     <ul>
                       <li><a href="https://github.com/SingularDTV/snglsdao-whitepaper" target="_blank">{t('header.consumerProtection.tokenEconomics')}</a></li>
-    <li><a href="https://snglsdao.io/#roadmap" target="_blank">{t('header.consumerProtection.roadmap')}</a></li>
-    <li className={css.submenu}><span>{t('header.consumerProtection.code.code')}</span>
+                      <li><a href="https://snglsdao.io/#roadmap" target="_blank">{t('header.consumerProtection.roadmap')}</a></li>
+                        <li className={css.submenu}><span>{t('header.consumerProtection.code.code')}</span>
                         <ul>
                           <li><a href="https://etherscan.io/address/0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009#code" target="_blank">{t('header.consumerProtection.code.SNGLS')}</a></li>
-                          <li><a href="https://snglsdao.io/" target="_blank">{t('header.consumerProtection.code.SGT')}</a></li>
+                          <li><a href="https://etherscan.io/address/0xc4199fB6FFDb30A829614becA030f9042f1c3992#code" target="_blank">{t('header.consumerProtection.code.SGT')}</a></li>
                           <li><a href="https://github.com/SingularDTV/snglsDAO-smartcontracts" target="_blank">{t('header.consumerProtection.code.snglsDAO')}</a></li>
                         </ul>
                       </li>
-    <li className={css.submenu}><span>{t('header.consumerProtection.transHistory.history')}</span>
+                        <li className={css.submenu}><span>{t('header.consumerProtection.transHistory.history')}</span>
                         <ul>
                           <li><a href="https://etherscan.io/token/0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009" target="_blank">{t('header.consumerProtection.transHistory.SNGLS')}</a></li>
-                          <li><a href="https://snglsdao.io/" target="_blank">{t('header.consumerProtection.transHistory.SGT')}</a></li>
+                          <li><a href="https://etherscan.io/token/0xc4199fB6FFDb30A829614becA030f9042f1c3992" target="_blank">{t('header.consumerProtection.transHistory.SGT')}</a></li>
                         </ul>
                       </li>
                       <li className={css.submenu}><span>{t('header.consumerProtection.historyPassTokenSales')}</span>
                         <ul>
                           <li><a href="https://etherscan.io/address/0xbdf5c4f1c1a9d7335a6a68d9aa011d5f40cf5520" target="_blank">{t('header.SNGLS')}</a></li>
-                          <li><a href="https://snglsdao.io/" target="_blank">{t('header.SGT')}</a></li>
+                          <li><a href="https://etherscan.io/address/0xe5fa2042501f5ec14cca6a8bc360131ff7dc6b8c" target="_blank">{t('header.SGT')}</a></li>
                         </ul>
                       </li>
                       <li className={css.submenu}><span>{t('header.consumerProtection.tokenHolder')}</span>
                         <ul>
                           <li><a href="https://etherscan.io/token/0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009#balances" target="_blank">{t('header.SNGLS')}</a></li>
-                          <li><a href="https://snglsdao.io/" target="_blank">{t('header.SGT')}</a></li>
+                          <li><a href="https://etherscan.io/token/0xc4199fB6FFDb30A829614becA030f9042f1c3992#balances" target="_blank">{t('header.SGT')}</a></li>
                         </ul>
                       </li>
                       <li className={css.submenu}><span>{t('header.consumerProtection.appSec')}</span>
                         <ul>
-                          <li><a href="https://snglsdao.io/" target="_blank">{t('header.snglsDAO')}</a></li>
+                          <li><a href="https://github.com/SingularDTV/snglsDAO-smartcontracts/blob/master/security-audit/AUDIT.pdf" target="_blank">{t('header.snglsDAO')}</a></li>
                         </ul>
                       </li>
                     </ul>
@@ -289,14 +320,8 @@ class Header extends React.Component<IProps, null> {
                 </svg>{t('header.git')}</a></li>
                 <LangSwitcher/>
 
-                <li className={css.submenu + ' ' + css.langSelector}>
-                    <span className={css.menu__link}>ENG</span>
-                    <ul>
-                        <li><a href="#">Eng</a></li>
-                        <li><a href="#">Chin</a></li>
-                    </ul>
-                </li>
-                
+
+
               </ul>
             </div>
           </div>

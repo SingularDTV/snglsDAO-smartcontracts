@@ -129,16 +129,15 @@ class ProposalHistoryRow extends React.Component<IProps, IState> {
       [css.decisionPassed]: proposalPassed(proposalState),
       [css.decisionFailed]: proposalFailed(proposalState),
     });
-
-    let closeReason = "Time out";
+    let closeReason = t('proposal.closeReasonTimout');
     switch (proposalState.executionState) {
       case IExecutionState.BoostedBarCrossed:
       case IExecutionState.QueueBarCrossed:
       case IExecutionState.PreBoostedBarCrossed:
-        closeReason = "Absolute Majority";
+        closeReason = t('proposal.closeReasonAbsMaj');
         break;
       case IExecutionState.BoostedTimeOut:
-        closeReason = "Relative Majority";
+        closeReason = t('proposal.closeReasonRelative');
         break;
     }
 
@@ -180,14 +179,14 @@ class ProposalHistoryRow extends React.Component<IProps, IState> {
         <td onClick={this.gotoProposal} className={closeReasonClass}>
           <div className={css.decisionPassed}>
             <img src="/assets/images/Icon/vote/for.svg"/>
-            <span>Passed</span>
+            <span>{t('proposal.passed')}</span>
             <div className={css.decisionReason}>
               <span>{closeReason}</span>
             </div>
           </div>
           <div className={css.decisionFailed}>
             <img src="/assets/images/Icon/vote/against.svg"/>
-            <span>Failed</span>
+            <span>{t('proposal.failed')}</span>
             <div className={css.decisionReason}>
               <span>{closeReason}</span>
             </div>

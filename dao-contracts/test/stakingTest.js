@@ -30,20 +30,29 @@ contract("LockingSGT4Reputation", async accounts => {
         await SGTContractInstance.approve(LT4RInstance.address, amount);
 
         const reputationBeforeLock = await ReputationInstance.balanceOf.call(masterAccount);
-
+        let totalLockedBefore = await LT4RInstance.totalLocked();
         await LT4RInstance.lock(amount, 0);
+        let totalLockedAfter = await LT4RInstance.totalLocked();
 
         const tokensAfterLock = await SGTContractInstance.balanceOf.call(masterAccount);
         const reputationAfterLock = await ReputationInstance.balanceOf.call(masterAccount);
-
+        assert.strictEqual(
+            totalLockedAfter.toString(),
+            totalLockedBefore.addn(amount).toString(),
+            "Bad total lock"
+        );
         assert.strictEqual(tokensAfterLock.sub(tokensBeforeLock).toNumber(), -amount, "Wrong tokens balance after locking.")
         assert.strictEqual(reputationAfterLock.sub(reputationBeforeLock).toNumber(), amount, "Wrong reputation balance after locking.")
-
-        await LT4RInstance.release(masterAccount);
-
+        totalLockedBefore = totalLockedAfter;
+        await LT4RInstance.release();
+        totalLockedAfter = await LT4RInstance.totalLocked();
         const tokensAfterRelease = await SGTContractInstance.balanceOf.call(masterAccount);
         const reputationAfterRelease = await ReputationInstance.balanceOf.call(masterAccount);
-
+        assert.strictEqual(
+            totalLockedAfter.toString(),
+            totalLockedBefore.subn(amount).toString(),
+            "Bad total lock"
+        );
         assert(tokensAfterRelease.eq(tokensBeforeLock), "Wrong tokens balance after release");
         assert(reputationAfterRelease.eq(reputationBeforeLock), "Wrong reputation balance after release");
 
@@ -58,10 +67,15 @@ contract("LockingSGT4Reputation", async accounts => {
             sgtTokenAddress,
             "Wrong SGT token address"
         );
+        let totalLocked = await LT4RInstance.totalLocked();
+        assert.strictEqual(
+            totalLocked.toNumber(),
+            0,
+            "Wrong totalLocked"
+        );
     });
 
     it("initialize twice test", async () => {
-
         let errorRaised = undefined;
 
         try {
@@ -90,6 +104,12 @@ contract("LockingSGT4Reputation", async accounts => {
             MinPeriod.toNumber(),
             minPeriod.toNumber(),
             `Min period rewrote`
+        );
+        let totalLocked = await LT4RInstance.totalLocked();
+        assert.strictEqual(
+            totalLocked.toNumber(),
+            0,
+            "Wrong totalLocked"
         );
     });
 
@@ -125,7 +145,7 @@ contract("LockingSGT4Reputation", async accounts => {
         assert.strictEqual(
             lockerAfterLock.releaseTime.toNumber(),
             stakingTime + currentTime,
-            "Bad release time"
+            "Bad release time, but it's ok if it differs only by one-two seconds"
         );
         assert.strictEqual(
             reputationAfterLock.sub(reputationBeforeLock).toNumber(),
@@ -171,7 +191,7 @@ contract("LockingSGT4Reputation", async accounts => {
         assert.strictEqual(
             lockerAfterLock.releaseTime.toNumber(),
             stakingTime + currentTime,
-            "Bad release time"
+            "Bad release time, but it's ok if it differs only by one-two seconds"
         );
         assert.strictEqual(
             reputationAfterLock.sub(reputationBeforeLock).toNumber(),

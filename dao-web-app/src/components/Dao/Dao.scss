@@ -3,7 +3,25 @@ button:hover {
 }
 
 
+.clearfix::before {
+  display: none;
+}
 
+
+.releaseTime {
+  display: flex;
+  justify-content: center;
+  background: #010B2B;
+  padding: 37px 57px;
+  color: #D8D8D8 !important;
+  font-size: 18px;
+  line-height: 27px;
+  font-family: Montserrat;
+  display: grid;
+  grid-gap: 50px;
+  align-items: center;
+
+}
 
 a {
         &.redButton {
@@ -12,7 +30,7 @@ a {
             font-weight: 500;
             line-height: 24px;
             letter-spacing: 1.61455px;
-            text-transform: uppercase; 
+            text-transform: uppercase;
             padding: 14px 70px;
             border: 1px solid #D40D26;
             border-radius: 50px;
@@ -23,7 +41,7 @@ a {
             display: block;
             font-size: 14px;
             text-align: center;
-            box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7); 
+            box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
 
             &:hover {
                 box-shadow: none;
@@ -123,6 +141,22 @@ a {
       .icon {
         width: 24px;
         height: 24px;
+
+        &:hover {
+          color: #d40d26;
+          cursor: pointer;
+
+          svg {
+            path {
+              fill: #d40d26;
+            }
+          }
+        }
+      }
+
+      svg {
+        max-width: 24px;
+        margin: 0 5px;
       }
     }
   }
@@ -146,6 +180,10 @@ a {
 
     .memberSocial {
       min-width: 110px;
+
+      svg {
+        max-width: 24px;
+      }
     }
   }
 }
@@ -216,8 +254,8 @@ a {
 }
 
 .membersContainer {
-  margin: 10px auto;
-  max-width: 1230px;
+  // margin: 10px auto;
+  // max-width: 1230px;
 
   span {
     &.reputationBalance {
@@ -239,14 +277,15 @@ a {
   .pageHead {
       display: grid;
       grid-template-columns: 1fr auto;
-      align-items: center;
+      // align-items: center;
       grid-gap: 50px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
   }
 
 
   table {
     width: 100%;
+    position: relative;
   }
 
   h1 {
@@ -261,10 +300,10 @@ a {
     padding: 0;
     margin: 0;
     // border-bottom: 1px solid rgba(195, 212, 231, 1);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding-bottom: 3px;
     // background-color: rgba(229, 235, 242, 1);
-    padding-top: 10px;
+    // padding-top: 10px;
     text-transform: uppercase;
   }
 
@@ -390,13 +429,12 @@ a {
             width: 100%;
             height: 100%;
             content: '';
-            // background: rgba(255, 255, 255, 0.05);
             opacity: 0.8;
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-sizing: border-box;
-            // backdrop-filter: blur(40px);
             background: url(/assets/images/bg_blur.png) repeat;
             background-size: cover;
+            display: block !important;
           }
 
           .icon {
@@ -419,7 +457,7 @@ a {
             position: relative;
               h4 {
                 font-weight: bold;
-                font-size: 32px;  
+                font-size: 32px;
                 line-height: 34px;
                 letter-spacing: 0.04em;
                 text-transform: uppercase;
@@ -432,6 +470,7 @@ a {
                 line-height: 28px;
                 color: #D8D8D8;
                 font-family: Montserrat;
+                margin-top: 15px;
               }
           }
       }
@@ -495,7 +534,7 @@ a {
         display: grid;
         grid-template-columns: 1fr auto;
         grid-gap: 50px;
-        align-items: center; 
+        align-items: center;
 
         a {
             &.btn {
@@ -592,7 +631,7 @@ a {
                 font-weight: 500;
                 line-height: 24px;
                 letter-spacing: 1.61455px;
-                text-transform: uppercase; 
+                text-transform: uppercase;
                 padding: 20px 70px;
                 border: 1px solid #4E5469;
                 border-radius: 50px;
@@ -678,12 +717,11 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    // background: rgba(255, 255, 255, 0.05);
-    // backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     opacity: 0.8;
     background: url(/assets/images/bg_blur.png) repeat;
       background-size: cover;
+      display: block !important;
   }
 
   & > a {
@@ -770,11 +808,9 @@ a {
             left: 0;
             width: 100%;
             height: 100%;
-            // background: rgba(255, 255, 255, 0.05);
             opacity: 0.8;
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-sizing: border-box;
-            // backdrop-filter: blur(40px);
             z-index: -1;
             background: url(/assets/images/bg_blur.png) repeat;
             background-size: cover;
@@ -884,11 +920,9 @@ a {
                         display: grid;
                         height: 100%;
                         align-items: center;
-                        // background: rgba(255, 255, 255, 0.05);
                         opacity: 0.8;
                         border-right: 1px solid rgba(255, 255, 255, 0.5);
                         box-sizing: border-box;
-                        // backdrop-filter: blur(40px);
                         background: url(/assets/images/bg_blur.png) repeat;
                         background-size: cover;
                     }
@@ -992,7 +1026,7 @@ a {
                     font-weight: 500;
                     line-height: 24px;
                     letter-spacing: 1.61455px;
-                    text-transform: uppercase; 
+                    text-transform: uppercase;
                     padding: 20px 70px;
                     border-radius: 50px;
                     background: transparent;
@@ -1051,18 +1085,31 @@ a {
 
 
 
-
-
-
-
-.daoHistoryHeader {
-  font-size: 28px;
-  color: #fff;
-  padding-bottom: 5px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
+h2 {
+  &.daoHistoryHeader {
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 30px;
+    padding-bottom: 3px;
+    // padding-top: 10px;
+    text-transform: uppercase;
+  }
 }
+
+
+
+// .daoHistoryHeader {
+//   &h2 {
+//     color: #fff;
+//     padding: 0;
+//     margin: 0;
+//     margin-bottom: 30px;
+//     padding-bottom: 3px;
+//     padding-top: 10px;
+//     text-transform: uppercase;
+//   }
+// }
 
 
 @media only screen and (max-width: 1580px) {
@@ -1197,13 +1244,15 @@ a {
 
   .wrapper {
     padding: 30px 15px 30px 15px;
-    width: calc(100% - 30px);
+    // width: calc(100% - 30px);
+    width: 100%;
   }
 
     .Membership {
         .MembershipBlock{
             padding: 30px;
-            width: calc(100% - 60px);
+            // width: calc(100% - 60px);
+            width: 100%;
 
             hr {
                 margin-bottom: 20px;
@@ -1265,10 +1314,28 @@ a {
 
 
 @media only screen and (max-width: 425px) {
-  .membersContainer {
-    table {
-      position: relative;
+  // .membersContainer {
+  //   table {
+  //     position: relative;
 
+  //     &:before {
+  //       position: absolute;
+  //       top: 0;
+  //       left: 0;
+  //       width: 100%;
+  //       height: 100%;
+  //       content: '';
+  //       opacity: 0.8;
+  //       border: 1px solid rgba(255, 255, 255, 0.05);
+  //       box-sizing: border-box;
+  //       background: url(/assets/images/bg_blur.png) repeat;
+  //       background-size: cover;
+  //     }
+  //   }
+  // }
+
+  .proposalHistoryTable {
+    position: relative;
       &:before {
         position: absolute;
         top: 0;
@@ -1276,15 +1343,12 @@ a {
         width: 100%;
         height: 100%;
         content: '';
-        // background: rgba(255, 255, 255, 0.05);
         opacity: 0.8;
         border: 1px solid rgba(255, 255, 255, 0.05);
         box-sizing: border-box;
-        // backdrop-filter: blur(40px);
         background: url(/assets/images/bg_blur.png) repeat;
         background-size: cover;
       }
-    }
   }
   .outer {
     display: block;
@@ -1419,7 +1483,7 @@ a {
 }
 
 :global .infinite-scroll-component {
-  overflow: visible !important; 
+  overflow: visible !important;
   color: #fff;
 }
 
@@ -1447,20 +1511,22 @@ a {
     }
   }
 
-  a.blueButton {
+  a.redButton {
     height: 30px;
     line-height: 30px;
     font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.61455px;
     color: white;
-    background-color: rgba(5, 118, 255, 1);
+    background-color: #D40D26;
     transition: all 0.25s ease;
     border-radius: 15px;
     display: inline-block;
     padding: 0 30px;
+    box-shadow: 0px 0px 30px rgba(225, 41, 66, 0.7);
 
     &:hover {
-      background-color: rgba(19, 46, 91, 1);
-      color: $white;
+      box-shadow: none;
     }
 
     &.disabled,

@@ -27,12 +27,12 @@ class ErrorUncaught extends React.PureComponent<IExternalProps> {
           <div>
             <div className={appCss.menu}>
               { this.props.goHome ?
-                <Link to="/"><img onClick={this.props.goHome} src="/assets/images/alchemy-logo-white.svg"/></Link>
+                <Link to="/"><img onClick={this.props.goHome} src="/assets/images/logo.svg"/></Link>
                 :
-                <img src="/assets/images/alchemy-logo-white.svg"/>
+                <img src="/assets/images/logo.svg"/>
               }
             </div>
-            <div className={appCss.topInfo}>Alchemy</div>
+            {/* <div className={appCss.topInfo}>Alchemy</div> */}
           </div>
         </nav>
         <div className={css.content}>
@@ -42,7 +42,7 @@ class ErrorUncaught extends React.PureComponent<IExternalProps> {
           <div className={css.title}>Something went wrong…</div>
           <div className={css.description}>{this.props.errorMessage}</div>
           <div>
-            { this.props.sentryEventId ? <a className={css.report} onClick={this.handleReport}>Report</a> : "" }
+            {/* { this.props.sentryEventId ? <a className={css.report} onClick={this.handleReport}>Report</a> : "" } */}
             { this.props.goHome ? <Link to="/"><button onClick={this.props.goHome} className={css.home}>Home</button></Link> : "" }
           </div>
         </div>

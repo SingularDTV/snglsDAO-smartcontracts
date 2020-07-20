@@ -54,7 +54,7 @@ class ThreeboxModal extends React.Component<IProps, IState> {
           <div className={css.body}>
             <h1>We&apos;re using 3Box to save your personal data</h1>
             <div className={css.images}>
-              <img src="/assets/images/alchemy-logo-blue.svg" />
+              <img src="/assets/images/logo_mobile.svg" />
               <span>+</span>
               <img src="/assets/images/narwhal-blue.svg" />
             </div>

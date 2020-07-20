@@ -35,7 +35,7 @@ module.exports = {
    * $ truffle test --network <network-name>
    */
   contracts_build_directory: "./build/contracts/",
-
+  migrations_directory: "./migrateFee",
   networks: {
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
@@ -53,7 +53,7 @@ module.exports = {
     rinkeby: {
       provider: () => new HDWalletProvider("dumb denial cover ski deer local chaos recipe remove old time copper", 'https://rinkeby.infura.io/v3/ef306a43234747eb9c087e5301ed9363'),
       network_id: 4,
-      gas: 10000000
+      gas: 20000000
     },
     // Another network with more advanced options...
     // advanced: {
@@ -86,7 +86,7 @@ module.exports = {
 
   // Set default mocha options here, use special reporters etc.
   mocha: {
-    // timeout: 100000
+    timeout: 1000000
   },
 
   // Configure your compilers

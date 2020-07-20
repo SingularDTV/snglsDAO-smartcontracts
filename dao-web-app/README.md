@@ -38,3 +38,5 @@ npm run start
 At this point you should be able to access snglsDAO web-app on http://127.0.0.1:3000.
 
 See [working with docker](./docs/docker.md) for details and troubleshooting.
+
+## subscription for lockingSgt4Reputation is located on the file src/layouts/AppContainer.tsx

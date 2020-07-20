@@ -68,7 +68,8 @@ class VoteButtons extends React.Component<IProps, IState> {
   private closePreVoteModal = (_event: any): void => { this.setState({ showPreVoteModal: false }); }
 
   private handleVoteOnProposal = (): void => {
-    const { currentAccountState, dao, proposal } = this.props;
+    //@ts-ignore
+    const { currentAccountState, dao, proposal, t } = this.props;
 
     this.props.voteOnProposal(dao.address, proposal.id, this.state.currentVote);
 
@@ -80,7 +81,7 @@ class VoteButtons extends React.Component<IProps, IState> {
       "Reputation Voted": fromWei(currentAccountState.reputation),
       "Scheme Address": proposal.scheme.address,
       "Scheme Name": proposal.scheme.name,
-      "Vote Type": this.state.currentVote === IProposalOutcome.Fail ? "Fail" : this.state.currentVote === IProposalOutcome.Pass ? "Pass" : "None",
+      "Vote Type": this.state.currentVote === IProposalOutcome.Fail ? t('proposal.fail') : this.state.currentVote === IProposalOutcome.Pass ? t('proposal.pass') : t('proposal.none') ,
     });
   };
 

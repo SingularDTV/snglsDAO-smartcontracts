@@ -87,6 +87,7 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
     const { data } = this.props;
 
     const [proposalsQueued, proposalsPreBoosted, proposalsBoosted ] = data;
+    console.log("Proposals list; ", data)
     const { currentAccountAddress, daoState, fetchMore, isActive, scheme } = this.props;
     let proposalCount=0;
 
@@ -136,7 +137,6 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
             <img className={css.relax} src="/assets/images/logo_white.svg"/>
             <div className={css.proposalsHeader}>
             {t("schemas.noUpcoming")}
-
             </div>
         <p>{t("schema.firstOneToCreate", {schemeFriendlyName: schemeFriendlyName})}</p>
             <div className={css.cta}>
@@ -145,15 +145,15 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
                 ?
                 <Link to={"/dao/dashboard"}>
                   <img className={css.relax} src="/assets/images/lt.svg"/> {t("schema.backToDashboard")}
-                </Link>                
+                </Link>
                 :
                 <Link to={"/dao/applications"}>
                   <img className={css.relax} src="/assets/images/lt.svg"/>{t("schema.backToApp")}
                 </Link>
               }
-              
+
               <a className={classNames({
-                [css.blueButton]: true,
+                [css.redButton]: true,
                 [css.disabled]: !isActive,
               })}
               href="#!"

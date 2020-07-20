@@ -9,7 +9,7 @@ import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import * as InfiniteScroll from "react-infinite-scroll-component";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import * as Sticky from "react-stickynode";
+// import * as Sticky from "react-stickynode";
 import { IRootState } from "reducers";
 import { IProfilesState } from "reducers/profilesReducer";
 import { withTranslation } from 'react-i18next';
@@ -42,7 +42,7 @@ const mapDispatchToProps = {
 
 type IProps = IExternalProps & IStateProps & ISubscriptionProps<Member[]> & IDispatchProps;
 
-const PAGE_SIZE = 100; 
+const PAGE_SIZE = 100;
 
 class DaoMembersPage extends React.Component<IProps, null> {
 
@@ -62,21 +62,20 @@ class DaoMembersPage extends React.Component<IProps, null> {
 
   public render(): RenderOutput {
     //@ts-ignore
-    const { t } = this.props;
-    const { data } = this.props;
+    const { t, data, currentAccountAddress  } = this.props;
     const members = data;
     const daoTotalReputation = this.props.daoState.reputationTotalSupply;
     const { daoState, profiles } = this.props;
-    console.log("MEMBERs => ", members);
+    // console.log("MEMBERs => ", members);
     const membersHTML = members.map((member) =>
-      <DaoMember key={member.staticState.address} dao={daoState} daoTotalReputation={daoTotalReputation} member={member} profile={profiles[member.staticState.address]} />);
+      <DaoMember key={member.staticState.address} currentAccountAddress={currentAccountAddress} dao={daoState} daoTotalReputation={daoTotalReputation} member={member} profile={profiles[member.staticState.address]} />);
 
     return (
       <div className={css.membersContainer}>
         <BreadcrumbsItem to={"/dao/" + daoState.address + "/members"}>{t("membership.daoMembers")}</BreadcrumbsItem>
-        <Sticky enabled top={50} innerZ={10000}>
+        {/* <Sticky enabled top={50} innerZ={10000}> */}
           <h2>{t("membership.daoMembers")}</h2>
-        </Sticky>
+        {/* </Sticky> */}
         <table className={css.memberHeaderTable}>
           <tbody className={css.memberTable + " " + css.memberTableHeading}>
             <tr>

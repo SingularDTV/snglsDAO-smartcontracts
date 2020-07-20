@@ -30,13 +30,17 @@ const erc20contract = new web3.eth.Contract(erc20abi, contractAddress);
 
     let balancesFromChain = {};
     bar.start(addresses.length, 0);
-    let counter = 0;
-    // for (let i = 0; i < 200; i++) {
+    let divider = 60;
+    let n = 1;
     for (let i = 0; i < addresses.length; i++) {
         const addr = addresses[i];
         // const balanceFromChain = await erc20contract.methods.balanceOf(addr).call({}, toBlock);
         const balanceFromChain = await erc20contract.methods.balanceOf(addr).call();
         balancesFromChain[addr] = balanceFromChain;
+        if (i >= Math.floor(addresses.length / divider * n)) {
+            fs.writeFileSync("./balancesFromChain.json", `Last address - ${i.toString()}\n` + JSON.stringify(balancesFromChain, null, 4));
+            n++;
+        }
         bar.increment();
     }
     bar.stop();
