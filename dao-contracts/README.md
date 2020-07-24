@@ -2,6 +2,8 @@
 
 # snglsDao
 
+## [Contracts description](Contracts-description.md) 
+
 ## Pre Requirements
 
 Use Node.js [10.16.0](https://itnext.io/nvm-the-easiest-way-to-switch-node-js-environments-on-your-machine-in-a-flash-17babb7d5f1b)
