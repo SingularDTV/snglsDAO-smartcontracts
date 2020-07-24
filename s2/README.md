@@ -1,17 +1,15 @@
-# DAOstack Subgraph
+## snglsDAO Subgraph
 
-DAOstack subgraph for [TheGraph](https://thegraph.com/) project. A feature article is available [here](https://thegraph.com/blog/daostack-alchemy). 
+snglsDAO subgraph for [TheGraph](https://thegraph.com/) project.
 
-![image](https://github.com/pat-daostack/subgraph/blob/master/images/arcgraph.jpg)
+Our latest subgraph (https://thegraph.com/explorer/subgraph/singulardtv/sngls-dao).
 
-Our latest gratest [master branch subgraph](https://thegraph.com/explorer/subgraph/daostack/master).
+### Getting started
 
-## Getting started
-
-1. `git clone https://github.com/daostack/subgraph.git && cd subgraph`
+1. `git clone https://github.com/blaize-tech/snglsDAO-smartcontracts.git && cd s2`
 2. `npm install`
 
-## Testing
+### Testing
 
 Run the tests in the host container:
 
@@ -28,7 +26,7 @@ npm run test -- --watch # re-run the tests after each change
 npm run test -- test/integration/Avatar.spec.js # run a single test file
 ```
 
-## Commands
+### Commands
 
 1. `migrate` - migrate contracts to ganache and write result to `migration.json`.
 2. `codegen` - (requires `migration.json`) automatically generate abi, subgraph, schema and type definitions for
@@ -47,7 +45,7 @@ Docker commands (requires installing [`docker`](https://docs.docker.com/v17.12/i
 4. `docker:logs <subgraph|graph-node|ganache|ipfs|postgres>` - display logs from a running docker service.
 5. `docker:run` - run all services in detached mode (i.e. in the background).
 
-## Exposed endpoints
+### Exposed endpoints
 
 After running a command with docker-compose, the following endpoints will be exposed on your local machine:
 
@@ -59,7 +57,7 @@ After running a command with docker-compose, the following endpoints will be exp
 - (if using development) `http://localhost:8545` - ganache RPC endpoint.
 - `http://localhost:5432` - postgresql connection endpoint.
 
-## Add a new contract tracker
+### Add a new contract tracker
 
 In order to add support for a new contract follow these steps:
 
@@ -87,7 +85,7 @@ In order to add support for a new contract follow these steps:
          "dao": "<section label where contract is defined in migration.json file (base/ dao/ test/ organs)>",
          "mapping": "<contract name from step 2>",
          "arcVersion": "<contract arc version>"
-      },
+      }
       ```
 
    2. If your contract does not appear in the migration file:
@@ -99,16 +97,16 @@ In order to add support for a new contract follow these steps:
          "mapping": "<contract name from step 2>",
          "arcVersion": "<contract arc version under which the abi is located in the `abis` folder>",
          "address": "<the contract address>"
-      },
+      }
       ```
 
 4. (Optionally) add a deployment step for your contract in `ops/migrate.js` that will run before testing.
 
-## Add a new dao tracker
+### Add a new dao tracker
 
 To index a DAO please follow the instructions here: [https://github.com/daostack/subgraph/blob/master/documentations/Deployment.md#indexing-a-new-dao](https://github.com/daostack/subgraph/blob/master/documentations/Deployment.md#indexing-a-new-dao)
 
-## Add a new datasource template
+### Add a new datasource template
 
 Datasource templates allow you to index blockchain data from addresses the subgraph finds out about at runtime. This is used to dynamically index newly deployed DAOs. To add a new contract ABI that can be used as a template within your mappings, modify the `ops/templates.json` file like so:
 
@@ -126,7 +124,7 @@ Datasource templates allow you to index blockchain data from addresses the subgr
 }
 ```
 
-## Deploy Subgraph
+### Deploy Subgraph
 
 To deploy the subgraph, please follow the instructions below:
 
@@ -156,7 +154,7 @@ Then follow this by logging into your Graph Explorer account using:
 
 3. Run: ``npm run deploy``
 
-## Release subgraph images on docker hub
+### Release subgraph images on docker hub
 
 The repository provides a `release.sh` script that will:
 
@@ -168,7 +166,7 @@ The docker images are available as:
 `daostack/subgraph-postgres:${network}-${migration-version}-${subgraph-version}`
 `daostack/subgraph-ipfs:${network}-${migration-version}-${subgraph-version}`
 
-## Blacklist a malicious DAO
+### Blacklist a malicious DAO
 Add the DAO's Avatar address to the `ops/blacklist.json` file in the proper network array. For example, blacklisting `0xF7074b67B4B7830694a6f58Df06375F00365d2c2` on mainnet would look like:
 ```json
 {

@@ -116,6 +116,7 @@
         "reputation": "Reputation:",
         "Stake": "Stake",
         "Unstake": "Unstake",
+        "defrostingAvailability":"Token defrosting will be available in",
         "yourCurrentBalance": "Your current balance: "
     },
     "loading": "Loading...",
