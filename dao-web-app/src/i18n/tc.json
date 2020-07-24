@@ -106,7 +106,7 @@
     "daojoin": {
         "rep": "聲譽值",
         "needStake": "您需要質押代幣才能成為DAO的會員",
-        "haveAmountStaked": "您質押的金額將成為您在sDAO中的聲譽值",
+        "haveAmountStaked": "您質押的金額將成為您在DAO中的聲譽值",
         "holding": "持有 0.00% 聲譽值",
         "getRep": "增加聲譽值",
         "removeRep": "刪除信譽",
@@ -114,8 +114,9 @@
         "max": "最高",
         "sgtTokens": "貼有SGT代幣：",
         "reputation": "聲譽:",
-        "Stake": "赌注",
-        "Unstake": "放心",
+        "Stake": "質押",
+        "Unstake": "解除質押",
+        "defrostingAvailability":"解除代幣質押時間",
         "yourCurrentBalance": "您當前的餘額："
     },
     "loading": "加載中...",

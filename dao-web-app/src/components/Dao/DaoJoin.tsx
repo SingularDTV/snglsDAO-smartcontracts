@@ -232,7 +232,7 @@ class GetReputation extends React.Component<IProps, IStateProps> {
       </div>
       {!!percentageBn && (
         <div className={css.releaseTime}>
-          <Countdown title="Token defrosting will be available in"
+          <Countdown title={t("daojoin.defrostingAvailability")}
               // @ts-ignore
               value={moment(releaseTime*1000).format()}
               format="DD:HH:mm:ss"
