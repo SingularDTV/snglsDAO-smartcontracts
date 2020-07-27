@@ -1,6 +1,6 @@
 ![Image description](https://github.com/SingularDTV/snglsDAO-whitepaper/blob/master/images/logo.png?raw=true)
 
-# snglsDao
+# snglsDAO
 
 ## [Contracts description](Contracts-description.md) 
 
@@ -23,7 +23,7 @@ npm install --global @daostack/migration
 ## Download
 
 ```sh
-git clone https://github.com/blaize-tech/snglsDAO-smartcontracts.git
+git clone https://github.com/SingularDTV/snglsDAO-smartcontracts.git
 ```
 
 ## Install
