@@ -21,7 +21,7 @@
     },
     {
       "name": "Uniswap",
-      "url": "https://uniswap.exchange/swap",
+      "url": "https://app.uniswap.org/#/swap?outputCurrency=0x543ff227f64aa17ea132bf9886cab5db55dcaddf",
       "logo": "/assets/images/Exchanges/uniswap.png"
     },
     {
