@@ -1,4 +1,4 @@
-﻿# Contracts description
+﻿# Contracts Description
 ## DAO core
 | Contract name | Description |
 |--|--|
