@@ -2,13 +2,13 @@
 
 # snglsDAO contracts
 
-### [snglsDAO contracts readme](dao-contracts/README.md)
+### [HERE](dao-contracts/README.md)
 
 # snglsDAO contracts description
 
-### [snglsDAO contracts description](https://github.com/SingularDTV/snglsDAO-smartcontracts/blob/production/dao-contracts/Contracts-description.md)
+### [HERE](https://github.com/SingularDTV/snglsDAO-smartcontracts/blob/production/dao-contracts/Contracts-description.md)
 
 # snglsDAO web-app
 
-### [snglsDAO web-apps readme](dao-web-app/README.md)
+### [HERE](dao-web-app/README.md)
 
