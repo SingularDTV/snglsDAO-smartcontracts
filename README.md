@@ -12,6 +12,3 @@
 
 ## [snglsDAO web-apps readme](dao-web-app/README.md)
 
-# snglsDAO contracts breakdown
-
-## [snglsDAO web-apps readme](dao-web-app/README.md)
