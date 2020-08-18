@@ -43,8 +43,8 @@
         "SNGLS": "SNGLS",
         "SGT": "SGT",
         "snglsDAO": "snglsDAO",
-        "news": {
-            "news": "社群动向",
+        "resources": {
+            "resources": "社群动向",
             "twitter": "Twitter",
             "medium": "Medium",
             "weibo": "微博"

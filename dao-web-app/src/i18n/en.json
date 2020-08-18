@@ -43,8 +43,8 @@
         "SNGLS": "SNGLS",
         "SGT": "SGT",
         "snglsDAO": "snglsDAO",
-        "news": {
-            "news": "News",
+        "resources": {
+            "resources": "Resources",
             "twitter": "Twitter",
             "medium": "Medium",
             "weibo": "WeiBo"
@@ -566,7 +566,7 @@
     "iAccept": "I Accept",
     "fullProfile": "Full Profile",
     "yourReputation": "your reputation: ",
-    "en": "ENG",
+    "en": "English",
     "tchin": "繁體中文",
     "schin": "简体中文",
     "Protocol Parameters": "Protocol Parameters",
