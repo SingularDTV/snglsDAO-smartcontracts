@@ -917,28 +917,19 @@ h4 {
                   }
                 }
 
-              &.langSelector {
-                min-width: 96px;
+              &.redSelector {
                 position: relative;
-                transform: translateY(11px);
-                padding: 0;
+                padding: 4px 7px !important;
 
                 .menu__link {
+                  min-width: 84px;
+                  min-height: 36px;
                   display: block;
                   background: #D40D26;
                   box-shadow: 0 0 20px #e4112a;
                   border-radius: 30px;
-                  padding: 6px 18px;
-                  top: -6px;
-
-
-                  &:before {
-                    right: 18px;
-                  }
-                }
-
-                & > ul {
-                  max-width: 84px;
+                  padding: 6px 10px !important;
+                  text-align: center;
                 }
               }
 
@@ -1019,10 +1010,6 @@ h4 {
                     ul {
                         li {
                             padding: 10px 15px;
-
-                            &.langSelector {
-                              padding: 0;
-                            }
                         }
                     }
                 }

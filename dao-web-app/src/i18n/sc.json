@@ -43,8 +43,8 @@
         "SNGLS": "SNGLS",
         "SGT": "SGT",
         "snglsDAO": "snglsDAO",
-        "news": {
-            "news": "社群动向",
+        "resources": {
+            "resources": "社群动向",
             "twitter": "Twitter",
             "medium": "Medium",
             "weibo": "微博"
@@ -87,7 +87,7 @@
         "comingSoon": "敬请期待",
         "validationFee": "验证费用：SNGLS",
         "minimumAmount": "给付验证者的最低收费。",
-        "boostedProposals": "助推提案 (3)",
+        "boostedProposals": "提案",
         "notPassedProposals": "目前未有通过任何提案。",
         "notPassedProposalsLink": "DAO现已安装的方案(Scheme)",
         "proposedBy": "发起者",
