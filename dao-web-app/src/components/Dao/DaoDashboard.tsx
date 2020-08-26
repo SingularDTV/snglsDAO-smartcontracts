@@ -126,7 +126,7 @@ class DaoDashboard extends React.Component<IProps, IState> {
 
                 <div className={css.pageHead}>
                     <h1>{t("sidebar.dashboard")}</h1>
-                    
+
           <div>
             <a className={classNames({
                 [css.redButton]: true,
@@ -316,45 +316,45 @@ class DaoDashboard extends React.Component<IProps, IState> {
                 </InfiniteScroll>
 
                 {/* <Sticky enabled top={50} innerZ={10000}> */}
-                <div className={css.daoHistoryHeader}>
-                    {t('sidebar.history')}
-                </div>
+                {/*<div className={css.daoHistoryHeader}>*/}
+                {/*    {t('sidebar.history')}*/}
+                {/*</div>*/}
                 {/* </Sticky> */}
 
-                <InfiniteScroll
-                    dataLength={proposals.length} //This is important field to render the next data
-                    next={fetchMore}
-                    hasMore={hasMoreToLoad}
-                    loader=""
-                    style={{overflow: "visible"}}
-                    endMessage={
-                        <p style={{textAlign: "center"}}>
-                            <b>&mdash;</b>
-                        </p>
-                    }
-                >
-                    { proposals.length === 0 ?
-                        <span>
-                            {t("dashboard.notPassedProposals")}</span> :
-                        <table className={css.proposalHistoryTable}>
-                            <thead>
-                            <tr className={css.proposalHistoryTableHeader}>
-                                <th>{t('dashboard.proposedBy')}</th>
-                                <th>{t('dashboard.endDate')}</th>
-                                <th>{t('dashboard.plugin')}</th>
-                                <th>{t('dashboard.title')}</th>
-                                <th>{t('dashboard.votes')}</th>
-                                <th>{t('dashboard.predictions')}</th>
-                                <th>{t('dashboard.status')}</th>
-                                <th>{t('dashboard.actions')}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {proposalsHTML}
-                            </tbody>
-                        </table>
-                    }
-                </InfiniteScroll>
+                {/*<InfiniteScroll*/}
+                {/*    dataLength={proposals.length} //This is important field to render the next data*/}
+                {/*    next={fetchMore}*/}
+                {/*    hasMore={hasMoreToLoad}*/}
+                {/*    loader=""*/}
+                {/*    style={{overflow: "visible"}}*/}
+                {/*    endMessage={*/}
+                {/*        <p style={{textAlign: "center"}}>*/}
+                {/*            <b>&mdash;</b>*/}
+                {/*        </p>*/}
+                {/*    }*/}
+                {/*>*/}
+                {/*    { proposals.length === 0 ?*/}
+                {/*        <span>*/}
+                {/*            {t("dashboard.notPassedProposals")}</span> :*/}
+                {/*        <table className={css.proposalHistoryTable}>*/}
+                {/*            <thead>*/}
+                {/*            <tr className={css.proposalHistoryTableHeader}>*/}
+                {/*                <th>{t('dashboard.proposedBy')}</th>*/}
+                {/*                <th>{t('dashboard.endDate')}</th>*/}
+                {/*                <th>{t('dashboard.plugin')}</th>*/}
+                {/*                <th>{t('dashboard.title')}</th>*/}
+                {/*                <th>{t('dashboard.votes')}</th>*/}
+                {/*                <th>{t('dashboard.predictions')}</th>*/}
+                {/*                <th>{t('dashboard.status')}</th>*/}
+                {/*                <th>{t('dashboard.actions')}</th>*/}
+                {/*            </tr>*/}
+                {/*            </thead>*/}
+                {/*            <tbody>*/}
+                {/*            {proposalsHTML}*/}
+                {/*            </tbody>*/}
+                {/*        </table>*/}
+                {/*    }*/}
+                {/*</InfiniteScroll>*/}
             </div>
         );
     }
